@@ -236,7 +236,7 @@
 	background: #9f2772;
 	height: 70px;
 }
-#footer-header{
+#footer{
 		border-top: 1px dashed #FFFFFF;
 	    display: inline-block;
 	    margin: 4px 0 0;
@@ -266,7 +266,7 @@
 			float: right;
 		 	li{
 			list-style: none;
-			background: url('/sites/all/themes/sasson/kaveret/images/csg-4fd078facf347.png') no-repeat top left;
+			background: url('../images/csg-4fd078facf347.png') no-repeat top left;
 			margin: 7px;
 			float: right;
 			width: 19px;
@@ -288,7 +288,7 @@
 			float: left;
 			height: 31px;
 			border-radius: 10px;
-			background: url('/sites/all/themes/sasson/kaveret/images/likeabee-en.png') no-repeat white center;
+			background: url('../images/likeabee-en.png') no-repeat white center;
 			background-size: 96px;
 		}
 }
