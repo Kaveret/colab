@@ -82,7 +82,7 @@
 
 }
 #block-menu-menu-community-space{
-	left: 89px;
+	right: 48px;
 }
 #block-menu-menu-individual-space,#block-menu-menu-community-space
 {
@@ -236,61 +236,62 @@
 	background: #9f2772;
 	height: 70px;
 }
-#block-menu-menu-footer{
-		li{
-			list-style: none;
-			font-size: 13px;
-		   	float: left;
-		   	margin: 11px 0 0;
-			a{
-			   color: #ffd4ff;
-			   padding: 0 7px;
-			   border-right: 1px solid #ffd4ff;
-			   text-decoration: none;
-			}
-		}
-		li:nth-child(7) a{
-		  	border-right: 0px solid #ffd4ff;
-			}	
-}
 #footer-header{
 		border-top: 1px dashed #FFFFFF;
 	    display: inline-block;
 	    margin: 4px 0 0;
 	    width: 100%;
-		#small-icons{
+		#block-menu-menu-footer{
+				top: -50px;
+				width: 610px;
+				left: 190px;
+				li{
+					list-style: none;
+					font-size: 13px;
+				   	float: left;
+				   	margin: 11px 0 0;
+					a{
+					   color: #ffd4ff;
+					   padding: 0 7px;
+					   border-right: 1px solid #ffd4ff;
+					   text-decoration: none;
+					}
+				}
+				li:nth-child(7) a{
+				  	border-right: 0px solid #ffd4ff;
+				}
+		}	
+		#block-menu-menu-footer-icons{
+			width: 238px;
+			top: -59px;
+			float: right;
 		 	li{
 			list-style: none;
-			background: url('../images/csg-4fd078facf347.png') no-repeat top left;
-			margin: 7px 7px 0;
+			background: url('/sites/all/themes/sasson/kaveret/images/csg-4fd078facf347.png') no-repeat top left;
+			margin: 7px;
 			float: right;
-			width: 24px;
-			height: 24px;
+			width: 19px;
+			height: 22px;
 				a{
-				padding: 2px 1px 4px 23px;
+				width: 6px;
+				padding: 0px;
 				}
 			}
-		.sprite-fotter-community{ background-position: 0 0px;} 
-		.sprite-fotter-dream{ background-position: 0 -24px;} 
-		.sprite-fotter-education_center{ background-position: 0 -49px; } 
-		.sprite-fottet-resource_exchange{ background-position: 0 -74px; } 
-	}
-	#name{
-		width: 253px;
-		background-color: white;
-		border-radius: 10px;
-		#img{
-		background: url('../images/kaveret.png') no-repeat;
-		background-size: 81px;
+			li:nth-child(1){ background-position: 0 0px;} 
+			li:nth-child(2){ background-position: 0 -24px;} 
+			li:nth-child(3){ background-position: 0 -49px; } 
+			li:nth-child(4){ background-position: 0 -74px; } 
 		}
-		p{		
-		margin: 17px 85px 0px 0px;
-		color: #FFA3C5;
-		font-size: 16px;
-		font-weight: bold;
-		padding: 7px 0 0;
-	 	}
-	}
+		#logo-footer{
+			margin-left: 10px;
+			margin-top: 4px;
+			width: 116px;
+			float: left;
+			height: 31px;
+			border-radius: 10px;
+			background: url('/sites/all/themes/sasson/kaveret/images/likeabee-en.png') no-repeat white center;
+			background-size: 96px;
+		}
 }
 /*************************  home page  *******************************/
 /*home image*/
@@ -308,8 +309,9 @@
 	width: 243px;
 	ul
 	{
-	margin: -1px -12px 0px 0px;
-	margin: -1px -12px 0px 0px;
+	width: 227px;
+	padding: 0;
+	margin: 20px 0px 38px -17px;
 	}	
 	li{
 	    margin-left: 10px;
@@ -319,26 +321,27 @@
 	    width: 95px;
 	    list-style: none;
 	    background: url('../images/big-icons.png') no-repeat 50% 0;
+		a{
+			margin-right: 6px;
+			margin-left: 6px;
+	   	    text-decoration: none;
+			display: inline-block;
+			font-size: 13px;
+			font-weight: bold;
+			padding: 81px 0 0;
+			text-align: center;
+			width: 100%; 
+		}
 	}
 	li:nth-child(1){background-position: 50% 18px; } 
 	li:nth-child(2){ background-position: 50% -69px;  } 
 	li:nth-child(3){ background-position: 50% -155px;  } 
 	li:nth-child(4){ background-position: 50% -241px;  } 
-	a{
-	    margin-right: 6px;
-	    margin-left: 6px;
-   	    text-decoration: none;
-	    display: inline-block;
-	    font-size: 13px;
-	    font-weight: bold;
-	    padding: 81px 0 0;
-	    text-align: center;
-	    width: 100%; 
-	}
+
 }
 #share_icons{
 	width: 198px;
-	margin-left: 1px;
+	margin-left: -16px;
 	li{
 	  list-style: none;
 	  height: 30px;
@@ -361,14 +364,6 @@
 	a#twiter{ background-position: 50% -64px;  } 
 	a#rss{ background-position: 50% -33px;  } 
 	a#youtube{ background-position: 50% -96px;  } 
-	a#likeabee_logo {
-	    margin-left: 7px;
-	    float: left;
-	    height: 30px;
-	    width: 60px;
-	    list-style: none;
-	    background: url('../images/likeabee_logo.png') no-repeat 50% 0;
-	}
 }
 /*******************  Learning Center page **************************/
 #block-menu-menu-menu-tags ul li
@@ -388,7 +383,7 @@
 	  /**/padding-left: 59px;
 	  ul li
 		{ 
-	    background-image: url(/sites/all/themes/blueprint/hakaveret_new_theme/images/big-icons.png);
+	    background-image: url('../images/big-icons.png');
 	    background-repeat: no-repeat;
 	    background-size: 42px;
 	    background-position: -2px 2px;
