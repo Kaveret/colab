@@ -104,7 +104,7 @@
 	}
 	li a {
 	 color: #fff;
-	 width: 74px;
+	 width: 113px;
 	 text-align: center;
 	 text-decoration: none;
 	 padding: 3px;
@@ -252,7 +252,7 @@ border-top: 0px;
 		.sprite-fotter-education_center{ background-position: 0 -49px; } 
 		.sprite-fottet-resource_exchange{ background-position: 0 -74px; } 
 	}
-	#fotter-menu{
+	#block-menu-menu-footer{
 		li{
 			list-style: none;
 			font-size: 13px;
@@ -274,7 +274,7 @@ border-top: 0px;
 		background-color: white;
 		border-radius: 10px;
 		#img{
-		background: url('/kaveret-drupal-7/sites/all/themes/sasson/kaveret/images/kaveret.png') no-repeat;
+		background: url('../images/kaveret.png') no-repeat;
 		background-size: 81px;
 		}
 		p{		
@@ -325,10 +325,17 @@ border-top: 0px;
 }
 #share_icons{
 	width: 198px;
-	margin-top: 226px;
 	margin-left: 1px;
 	li{
-	    list-style: none;
+	list-style: none;
+	height: 32px;
+	width: 36px;
+	margin-left: 5px;
+	float: left;
+	border-right: 1px solid #DBDBDB;
+	}
+	li:nth-child(4){
+	border-right: 0px;
 	}
 	a{
 	    float: left;
@@ -368,7 +375,7 @@ border-top: 0px;
 	 /**/padding-left: 59px;
 	 ul li
 	{ 
-	    background-image: url(/sites/all/themes/blueprint/hakaveret_new_theme/images/big-icons.png);
+	    background-image: url('../images/big-icons.png');
 	    background-repeat: no-repeat;
 	    background-size: 42px;
 	    background-position: -2px 2px;
