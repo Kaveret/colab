@@ -1,0 +1,110 @@
+$grid-width: 960px !default;
+
+$columns: 16 !default;
+
+$gutter-width: 20px !default;
+
+$flow: left !default;
+
+$opos: opposite-position($flow);
+
+$box-sizing: border-box;
+
+$box-sizing-polyfill-path: "" !default;
+
+$ie7-support: false !default;
+
+@mixin clear {
+  &:before, &:after {
+    content: "\0020";
+    display: table;
+  }
+  &:after { clear: both; }
+  & { zoom: 1; }
+}
+
+@mixin container {
+  width: $grid-width;
+  margin: {
+    left: auto;
+    right: auto;
+  }
+  @include clear;
+}
+
+@mixin nested-container {
+  padding: {
+    left: 0;
+    right: 0;
+  }
+  @include clear;
+}
+
+@mixin row {
+  clear: $flow;
+}
+
+@mixin unrow {
+  clear: none;
+}
+
+@mixin grid-cell {
+  padding: {
+    left: $gutter-width / 2;
+    right: $gutter-width / 2;
+  }
+  @if $box-sizing == border-box {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  @if $box-sizing-polyfill-path != "" and $ie7-support {
+    behavior: url($box-sizing-polyfill-path);
+  }
+}
+
+@mixin grid($column-span, $column-position: false, $parent-columns: false) {
+  @include grid-cell;
+  float: $flow;
+  @if $column-position == 0 {
+    margin: {
+      #{$opos}: -100%;
+      #{$flow}: 0;
+    }
+  }
+  @else if $column-position {
+    margin: {
+      #{$opos}: -100%;
+      @if $parent-columns {
+        #{$flow}: $column-position * 100% / $parent-columns;
+      }
+      @if unitless($column-position) {
+        #{$flow}: $column-position * 100% / $columns;
+      }
+      @else {
+        #{$flow}: $column-position;        
+      }
+    }
+  }
+  @if $parent-columns {
+    width: 100% / $parent-columns * $column-span;
+  }
+  @else if unitless($column-span) {
+    width: 100% / $columns * $column-span;
+  }
+  @else {
+    width: $column-span;
+  }
+}
+
+@mixin gridy-background {
+  $space : $gutter-width / 2;
+  $column: $grid-width / $columns;
+  @include background(linear-gradient(right, #e6ffa8 $space, transparent $space, transparent), linear-gradient(left, #e6ffa8 $space, transparent $space, transparent), linear-gradient(left, #ccea7e, #bbd673 $column));
+  background-size: (100% / $columns) 0;
+  background-repeat: repeat-x;
+  @include transition(background-size 0.5s);
+  .grid-visible & {
+    background-size: (100% / $columns) 100%;
+  }
+}
