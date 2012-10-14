@@ -151,8 +151,8 @@
 }
 /***********************  second-Header  ***************************/
 #featured{
-border:1px #FAD07C solid;
-border-top: 0px;
+		 border:1px #FAD07C solid;
+	 	 border-top: 0px;
 		 height: 61px;
 		 background: -moz-linear-gradient(top, rgba(253,246,230,1) 0%, rgba(255,255,255,1) 49%, rgba(253,246,230,1) 100%);
 		 /* Chrome,Safari4+ */
@@ -167,68 +167,68 @@ border-top: 0px;
 		 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdf6e6', endColorstr='#fdf6e6',GradientType=0 );
 		 /* IE6-9 */
 		#block-menu-menu-sub-header-menu .menu{
-		float: left;
-		height: 100%;
-		margin: 0 auto;
-		width: 177px;
-		li{
-		float: left;
-		width: 53px;
+			float: left;
+			height: 100%;
+			margin: 0 auto;
+			width: 177px;
+			li{
+			float: left;
+			width: 53px;
+			}
+			h3{
+			display: none;
+			}
+			ul{
+			  height: 61px;
+			}
+			ul li{
+			margin-left: -4px;
+			float: left;
+			}
+			a{
+			text-decoration: none;
+			position: relative;
+			top: 19px;
+			padding: 21px;
+			color: #024883;
+			}
+			ul.menu li ul {
+			margin: 38px 3px 0;
+			display: none;
+			position: absolute;
+			z-index: 100;
+			}
+			ul.menu li:hover ul {
+			  display: block;
+			}
+			li li {
+			float: none;
+			margin: 0;
+			background-image: none;
+			background: white;
+			height: 20px;
+			margin-bottom: 0px;
+			width: 100px;
+			}
 		}
-		h3{
-		display: none;
+		#block-block-4{
+		 display: none;
 		}
-		ul{
-		  height: 61px;
-		}
-		ul li{
-		margin-left: -4px;
-		float: left;
-		}
-		a{
-		text-decoration: none;
-		position: relative;
-		top: 19px;
-		padding: 21px;
-		color: #024883;
-		}
-		ul.menu li ul {
-		margin: 38px 3px 0;
-		display: none;
-		position: absolute;
-		z-index: 100;
-		}
-		ul.menu li:hover ul {
-		  display: block;
-		}
-		li li {
-		float: none;
-		margin: 0;
-		background-image: none;
-		background: white;
-		height: 20px;
-		margin-bottom: 0px;
-		width: 100px;
-		}
-	}
-	#block-block-4{
-	 display: none;
-	}
 		#sub-header-bottoms{
-		width: 192px;
-		text-align: center;
-		color: #02489D;
-		margin-top: 7px;
-		div{
-		float: left;
-		margin-right: 5px;
+			width: 192px;
+			text-align: center;
+			color: #02489D;
+			margin-top: 7px;
+			div{
+			float: left;
+			margin-right: 5px;
+			}
+		    a{
+			padding: 13px 32px 34px 26px;
+			color: #7E0404;
+			text-decoration: none;
+			}
 		}
-                a{
-		padding: 13px 32px 34px 26px;
-		color: #7E0404;
-		text-decoration: none;
-		}
-	}
 }
 /**************************  footer  ******************************/
 #footer
@@ -258,18 +258,18 @@ border-top: 0px;
 	    display: inline-block;
 	    margin: 4px 0 0;
 	    width: 100%;
-	#small-icons{
-	 	li{
-		list-style: none;
-		background: url('../images/csg-4fd078facf347.png') no-repeat top left;
-		margin: 7px 7px 0;
-		float: right;
-		width: 24px;
-		height: 24px;
-			a{
-			padding: 2px 1px 4px 23px;
+		#small-icons{
+		 	li{
+			list-style: none;
+			background: url('../images/csg-4fd078facf347.png') no-repeat top left;
+			margin: 7px 7px 0;
+			float: right;
+			width: 24px;
+			height: 24px;
+				a{
+				padding: 2px 1px 4px 23px;
+				}
 			}
-		}
 		.sprite-fotter-community{ background-position: 0 0px;} 
 		.sprite-fotter-dream{ background-position: 0 -24px;} 
 		.sprite-fotter-education_center{ background-position: 0 -49px; } 
@@ -292,7 +292,6 @@ border-top: 0px;
 	 	}
 	}
 }
-
 /*************************  home page  *******************************/
 /*home image*/
 #block-block-2 img
@@ -384,18 +383,18 @@ border-top: 0px;
 	  float: left;
 	  list-style: none;
 	  text-align: left;
-	 /*text-align: center;*/
-	 box-shadow: 0px 0px 8px #555353;
-	 /**/padding-left: 59px;
-	 ul li
-	{ 
-	    background-image: url('../images/big-icons.png');
+	  /*text-align: center;*/
+	  box-shadow: 0px 0px 8px #555353;
+	  /**/padding-left: 59px;
+	  ul li
+		{ 
+	    background-image: url(/sites/all/themes/blueprint/hakaveret_new_theme/images/big-icons.png);
 	    background-repeat: no-repeat;
 	    background-size: 42px;
 	    background-position: -2px 2px;
-	}
-	a
-	{ 
+		}
+	 a
+	 { 
 	  display: inline-block;
 	  padding-top: 15px;
 	  color: white;
@@ -410,9 +409,7 @@ border-top: 0px;
 	    margin: 6px 0 0;   
 	    display: none;
 	    position: absolute; 
-	    z-index: 100;
-
-	    
+	    z-index: 100;    
 	}
 	ul.menu li:hover ul {
 	  display: block;
