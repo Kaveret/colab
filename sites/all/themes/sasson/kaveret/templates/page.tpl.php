@@ -68,8 +68,6 @@
  * @see template_process()
  */
 ?>
-
-<div id="page">
   
   <?php if ($logo || $site_name || $site_slogan || $page['header']): ?>
     <header id="header" role="banner">
@@ -92,7 +90,14 @@
       <?php print render($page['header']); ?>
     </header><!-- /#header -->
   <?php endif; ?>
-  
+
+<?php if ($page['featured']): ?>
+    <div id="featured">
+      <?php print render($page['featured']); ?>
+    </div><!-- /#featured -->
+  <?php endif; ?>
+
+<div id="page">
   <?php if ($main_menu_links): ?>
     <nav id="main-menu" role="navigation">
       <?php print $main_menu_links; ?>
@@ -105,13 +110,7 @@
     </nav> <!-- /#secondary-menu -->
   <?php endif; ?>
 
-  <?php if ($page['featured']): ?>
-    <div id="featured">
-      <?php print render($page['featured']); ?>
-    </div><!-- /#featured -->
-  <?php endif; ?>
-
-  <div id="main">
+ <div id="main">
     <?php if ($page['highlighted']): ?>
       <div id="highlighted">
         <?php print render($page['highlighted']); ?>
@@ -151,11 +150,10 @@
       <?php print render($page['sidebar_second']); ?>
     </aside><!-- /#sidebar-second -->
   <?php endif; ?>
+</div><!-- /#page -->
 
   <?php if ($page['footer']): ?>
     <footer id="footer" role="contentinfo">
       <?php print render($page['footer']); ?>
     </footer><!-- /#footer -->
   <?php endif; ?>
-
-</div><!-- /#page -->

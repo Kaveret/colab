@@ -246,6 +246,12 @@
 {
 	background: #9f2772;
 	height: 70px;
+
+	/*position: absolute;
+	width: 100%;
+	top: 66px;
+	left: 0px;
+	margin: 0;*/
 }
 #footer{
 		border-top: 1px dashed #FFFFFF;
@@ -393,7 +399,7 @@
 		list-style: none;
 		box-shadow: 0px 0px 8px #555353;
 		padding-left: 25px
-		background: url('/sites/all/themes/sasson/kaveret/images/big-icons.png') no-repeat #F0AC00;
+		background: url('../images/big-icons.png') no-repeat #F0AC00;
 	    background-size: 42px;
 	}
 	a
