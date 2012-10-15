@@ -34,7 +34,16 @@
           General Sitewide Styles
 -----------------------------------------------*/
 /* -----  Layout  ----- */
-
+#page, #header ,.region-featured,.region-footer{
+	margin-left: auto;
+	margin-right: auto;
+	width: 960px;
+	}
+#featured,footer
+	{
+	width: 100%;
+	margin: 0;
+	}
 /* -----  General Styles (Colors, Backgrounds etc.)  ----- */
 
 /* -----  Typography  ----- */
