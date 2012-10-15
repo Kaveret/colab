@@ -60,6 +60,11 @@
                    Forms
 -----------------------------------------------*/
 /**************************  Header  ******************************/
+#header
+{
+	margin: 0 auto;
+	width: 100%;
+}
 #site-name,#main-menu,#secondary-menu{
 	display: none;
 }
@@ -87,8 +92,10 @@
 #block-menu-menu-individual-space,#block-menu-menu-community-space
 {
 	float: right;
-	width: 93px;
-	li {
+	ul{
+	   padding: 0;
+	}
+	li{
 	  list-style: none;
 	  float: left;
 	  background: url("../images/primary-links-with-down-arrow.gif") no-repeat 50% 21px #f9ab17;
@@ -144,8 +151,8 @@
 	    text-decoration: none;
 	    color:#5a6b98;
 	    font-weight: normal;
-	    text-align: right;
-	    padding-right: 12px;
+	    text-align: left;
+	    padding-left: 12px;
 	    font-size: 13px;
 	}
 }
@@ -166,42 +173,45 @@
 		 /* W3C *  /
 		 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdf6e6', endColorstr='#fdf6e6',GradientType=0 );
 		 /* IE6-9 */
-		#block-menu-menu-sub-header-menu .menu{
-			float: left;
-			height: 100%;
-			margin: 0 auto;
-			width: 177px;
-			li{
-			float: left;
-			width: 53px;
+  #block-menu-menu-general-sub-header{
+	width: 244px;
+	height: 62px;
+	float: right;
+	margin: -6px 67px 0px 5px;
+	ul
+	{
+		margin: 0 auto;
+		padding: 0;
+	}
+	li{
+		float: left;
+		width: 53px;
+		margin-left: 27px;
+		list-style: none;
 			}
-			h3{
-			display: none;
-			}
-			ul{
+	ul{
 			  height: 61px;
 			}
-			ul li{
-			margin-left: -4px;
-			float: left;
+	ul li{
+		margin-left: 27px;
 			}
-			a{
+	a{
 			text-decoration: none;
 			position: relative;
-			top: 19px;
+			top: 18px;
 			padding: 21px;
 			color: #024883;
 			}
-			ul.menu li ul {
+	ul.menu li ul {
 			margin: 38px 3px 0;
 			display: none;
 			position: absolute;
 			z-index: 100;
 			}
-			ul.menu li:hover ul {
+	ul.menu li:hover ul {
 			  display: block;
 			}
-			li li {
+	li li {
 			float: none;
 			margin: 0;
 			background-image: none;
@@ -210,20 +220,21 @@
 			margin-bottom: 0px;
 			width: 100px;
 			}
-		}
-		#block-block-4{
+	}
+
+	#block-block-4{
 		 display: none;
 		}
-		#sub-header-bottoms{
+	#block-menu-menu-likeabee-eng{
 			width: 192px;
 			text-align: center;
 			color: #02489D;
 			margin-top: 7px;
-			div{
+		div{
 			float: left;
 			margin-right: 5px;
 			}
-		    a{
+		a{
 			padding: 13px 32px 34px 26px;
 			color: #7E0404;
 			text-decoration: none;
@@ -236,7 +247,7 @@
 	background: #9f2772;
 	height: 70px;
 }
-#footer-header{
+#footer{
 		border-top: 1px dashed #FFFFFF;
 	    display: inline-block;
 	    margin: 4px 0 0;
@@ -294,13 +305,17 @@
 }
 /*************************  home page  *******************************/
 /*home image*/
-#block-block-2 img
-{
+#block-block-2{
+	p{
+	margin: 0;
+	}
+	img{
 	width:722;
 	height:267;
 	float: right;
 	margin: -2em 0 0.5em 1.5em;
 	margin-right: 25px;
+	}
 }
 #block-menu-menu-main-icons{
 	width: 256px;
@@ -365,35 +380,31 @@
 	a#youtube{ background-position: 50% -96px;  } 
 }
 /*******************  Learning Center page **************************/
-#block-menu-menu-menu-tags ul li
-{ 
-	  background-color:f0ac00;
-	  width: 129px;
-	  height: 44px;
-	  z-index: 23;
-	  margin-bottom: 10px;
-	  border-top-left-radius: 26px;
-	  border-bottom-left-radius: 26px;
-	  float: left;
-	  list-style: none;
-	  text-align: left;
-	  /*text-align: center;*/
-	  box-shadow: 0px 0px 8px #555353;
-	  /**/padding-left: 59px;
-	  ul li
-		{ 
-	    background-image: url('../images/big-icons.png');
-	    background-repeat: no-repeat;
+#block-menu-menu-tabs{
+	ul li
+	{
+		width: 172px;
+		height: 44px;
+		z-index: 23;
+		margin-bottom: 10px;
+		border-top-right-radius: 26px;
+		border-bottom-right-radius: 26px;
+		float: right;
+		list-style: none;
+		box-shadow: 0px 0px 8px #555353;
+		padding-left: 25px
+		background: url('/sites/all/themes/sasson/kaveret/images/big-icons.png') no-repeat #F0AC00;
 	    background-size: 42px;
-	    background-position: -2px 2px;
-		}
-	 a
-	 { 
-	  display: inline-block;
-	  padding-top: 15px;
-	  color: white;
-	  font-size: small; 
-	  font-weight: bolder;
+	}
+	a
+	{ 
+	width: 94px;
+	text-decoration: none;
+	display: inline-block;
+	padding-top: 2px;
+	color: white;
+	font-size: small;
+	font-weight: bolder;
 	 }
 	li:nth-child(1) { background-position: 1% 101%; } 
 	li:nth-child(2) { background-position:1% 33.5%;  } 
@@ -429,7 +440,7 @@
 	color: #888;
 	}
 }
-#block-menu-menu-learning-center{
+#block-menu-menu-learning-center-eng{
 	.block-title{
 	background: url('../images/lernningCenter_icons.png') no-repeat 157% -12%;
 	padding-right: 28px;
@@ -448,7 +459,7 @@
 	text-decoration: none;
 	color: black;
 	background: url('../images/lernningCenter_icons.png') no-repeat;
-	padding-right: 25px;
+	padding-left: 25px;
 	}
 	li a{ background-position: 499% 53%; } 
 	/*li a:nth-child(1){ background-position: 499% 53%; } 
@@ -458,22 +469,22 @@
 	li a:nth-child(5){ background-position: 50% -155px;  } 
 	li a:nth-child(6){ background-position: 50% -241px;  }*/
 
-	ul.menu li ul {
-	top: 193px;
-	display: none;
-	position: absolute;
-	z-index: 100;
-	}
-	ul.menu li:hover ul {
-	  display: block;
-	}
-	li li a {
-	background-image: none;
-	padding: 6px 0 0;
-	text-decoration: none;
-	color: #5A6B98;
-	text-align: right;
-	}
+		ul.menu li ul {
+		top: 193px;
+		display: none;
+		position: absolute;
+		z-index: 100;
+		}
+		ul.menu li:hover ul {
+		display: block;
+		}
+		li li a {
+		background-image: none;
+		padding: 6px 0 0;
+		text-decoration: none;
+		color: #5A6B98;
+		text-align: left;
+		}
 }
 #block-quicktabs-new_articles{
 	width: 708px;
