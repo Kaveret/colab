@@ -35,10 +35,13 @@
 -----------------------------------------------*/
 /* -----  Layout  ----- */
 #page, #header ,.region-featured,.region-footer{
-	margin-left: auto;
+	margin-left:  auto;
 	margin-right: auto;
 	width: 960px;
 	}
+#header{
+margin-left: 25%;
+}
 #featured,footer
 	{
 	width: 100%;
