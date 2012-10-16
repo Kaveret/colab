@@ -35,7 +35,7 @@
 -----------------------------------------------*/
 /* -----  Layout  ----- */
 #page, #header ,.region-featured,.region-footer{
-	margin-left:  auto;
+	margin-left:  25%;
 	margin-right: auto;
 	width: 960px;
 	}
@@ -91,7 +91,7 @@
 
 }
 #block-menu-menu-community-space{
-	right: 48px;
+	right: 10px;
 }
 #block-menu-menu-individual-space,#block-menu-menu-community-space
 {
@@ -107,10 +107,6 @@
 	  font-size: 12px;
 	  position: relative;
 	}
-	li.first {
-	 margin-right: 6px;
- 	 box-shadow: 0 0 2px;
-	}
 	li li.first {
 	  margin-top: 6px;
 	  margin-right: 0;
@@ -121,7 +117,8 @@
 	}
 	li a {
 	 color: #fff;
-	 width: 113px;
+	font-weight: bolder;
+	width: 113px;
 	 text-align: center;
 	 text-decoration: none;
 	 padding: 3px;
@@ -141,11 +138,12 @@
 	li li {
 	float: none;
 	margin: 0;
+	padding-right: 16px;
 	background-image: none;
 	background: white;
 	height: 20px;
 	margin-bottom: 0px;
-	width: 100px;
+	width: auto;
 	}
 	li li a {
 	    display: inline-block;
@@ -317,7 +315,8 @@
 /*home image*/
 #block-block-2{
 	p{
-	margin: 0;
+	padding: 0;
+	margin: 0px 0px 0px -10px;
 	}
 	img{
 	width:722;
@@ -576,4 +575,22 @@
 	clear: both;
 }
 
-
+/*******************  Add/Edit page **************************/
+.node-article-form{
+ul.tips, div.description, .form-item div.description {
+	color: #014A81;
+	}
+	.form-item{
+	background-color: #FCF0D8;
+	border: 1px solid #F9AB17;
+	padding: 1px 1px;
+	}
+	input[type="text"]{
+	box-shadow: 0px 0px 0px 9px #FCF0D8;
+	margin: 8px 8px;
+	}
+input.form-autocomplete, input.form-text, input.form-file, textarea.form-textarea, select.form-select {
+	border: 1px solid #FACE77;
+	border-bottom-color: #FACE77;
+	}
+}
