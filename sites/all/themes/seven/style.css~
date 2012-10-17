@@ -1073,3 +1073,10 @@ label[for="edit-body-und-0-value"]
 .filter-wrapper {
 margin-top: -19px;
 }
+
+
+#edit-search{
+background-color:#FCF0D8;
+padding: 0px 13px 8px 1px;
+margin: 0px 20px 17px 0px;
+}
