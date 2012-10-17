@@ -691,8 +691,8 @@ input.form-file,
 textarea.form-textarea,
 select.form-select {
   padding: 2px;
-  border: 1px solid #ccc;
-  border-top-color: #999;
+  border: 1px solid  #FACE77;
+  border-top-color: #FACE77;
   background: #fff;
   color: #333;
 }
@@ -987,4 +987,89 @@ div.add-or-remove-shortcuts {
   -webkit-border-radius: 8px;
   border-radius: 8px;
 }
-
+/*//////////////////////////////////////////////////////////////////////////////////////*/
+/*.form-item label.option,*/
+.node-form .form-item,
+.vertical-tabs-list,
+.resizable-textarea .grippie{
+	background-color: #FCF0D8;
+	}
+.form-item,fieldset,
+div.vertical-tabs,
+div.vertical-tabs .form-item,
+.resizable-textarea .grippie{
+	border: 1px solid #FACE77;
+	}
+.form-item,
+ ul.tips,
+ div.description,
+.form-item div.description,
+ input.form-file,
+fieldset .fieldset-legend{
+	color: #014A81;
+}
+.node-form .form-type-textarea,.node-form  .form-type-textfield{
+	border-top: 1px solid #F9AB17;
+	padding: 1px 1px;
+	margin: 0 0 19px;
+}
+input[type="text"]{
+	box-shadow: 0px 0px 0px 9px #FCF0D8;
+	margin: 8px 8px;
+	width: 98%;
+	}
+input[type="submit"],input[type="button"]{
+	background-image: none;
+	border-radius: 0;
+	background-color: #FAAC18;
+	color: white;
+	font-weight: bolder;
+	border-color: #FAAC18;
+	}
+.form-type-textarea{
+	background-color: white;
+	border: 0px ;
+	border-top: 1px solid #F9AB17;
+	}
+label[for="edit-title"],
+label[for="edit-field-tags-und"],
+label[for="edit-body-und-0-value"]
+{
+	background-color: white;
+	border-bottom: 1px solid #FACE77;
+	margin: -1px -2px 3px -2px;
+	padding: 15px 0px 5px 3px;
+	}
+.form-type-textarea label{
+	border-bottom:0px
+	}
+.image-widget{
+	border-bottom: 1px solid #FACE77;
+	padding: 12px 9px;
+	}
+.form-type-managed-file div.description{
+	margin-left: 7px;
+	}
+.vertical-tabs .form-type-textfield input {
+	width: 98%;
+	}
+.exposed-filters .form-item{
+	padding: 3px;
+	background-color: #FCF0D8;
+	margin: 0 0 7px 0;
+	}
+.form-type-select{
+	padding: 11px 3px;
+	margin-right: 8px;
+	background-color: #FCF0D8;
+	}
+.sticky-table .form-type-select{
+	background-color: transparent;
+	}
+.sticky-table select.form-select {
+	  border: 1px solid #ccc;
+	  border-top-color: #999;
+	}
+.filter-wrapper {
+margin-top: -19px;
+}
