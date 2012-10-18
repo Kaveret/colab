@@ -293,8 +293,9 @@ input.form-autocomplete, input.form-text, input.form-file, textarea.form-textare
 	    border-top: 1px dashed #FFFFFF;
 	    display: inline-block;
 	    margin: 4px 0 0;
-	    width: 100%;
+	    width: 100%;	
 		#block-menu-menu-footer{
+			position: relative;	
 			width: 725px;
 			left: 82px;
 			z-index: 2;
@@ -315,17 +316,18 @@ input.form-autocomplete, input.form-text, input.form-file, textarea.form-textare
 				}
 		}	
 		#block-menu-menu-footer-icons{
+			position: relative;			
 			width: 238px;
 			top: -65px;
 			float: right;
-			.content li{
-			list-style: none;
-			background: url('../images/big-icons.png') no-repeat top left;
-			margin: 7px;
-			float: right;
-			width: 19px;
-			height: 22px;
-			background-size: 22px;
+			.menu li{
+				list-style: none;
+				background: url('../images/big-icons.png') no-repeat top left;
+				margin: 7px;
+				float: right;
+				width: 19px;
+				height: 22px;
+				background-size: 22px;
 				a{
 				font-size: 0px;
 				padding: 20px 0px 3px 23px;
