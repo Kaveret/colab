@@ -124,13 +124,10 @@ input.form-autocomplete, input.form-text, input.form-file, textarea.form-textare
 	}
 }
 /**** individual-space / community-space ****/
-#block-menu-menu-individual-space{
-
-}
 #block-menu-menu-community-space{
 	right: 10px;
 }
-#block-menu-menu-individual-space,#block-menu-menu-community-space
+#block-menu-menu-individual-space .content,#block-menu-menu-community-space .content
 {
 	float: right;
 	ul{
@@ -293,14 +290,15 @@ input.form-autocomplete, input.form-text, input.form-file, textarea.form-textare
 	margin: 0;*/
 }
 #footer{
-		border-top: 1px dashed #FFFFFF;
+	    border-top: 1px dashed #FFFFFF;
 	    display: inline-block;
 	    margin: 4px 0 0;
 	    width: 100%;
 		#block-menu-menu-footer{
 			width: 725px;
-			left: 49px;
-				li{
+			left: 82px;
+			z-index: 2;
+				.content li{
 					list-style: none;
 					font-size: 13px;
 				   	float: left;
@@ -312,34 +310,35 @@ input.form-autocomplete, input.form-text, input.form-file, textarea.form-textare
 					   text-decoration: none;
 					}
 				}
-				li:nth-child(7) a{
+				 .content li:nth-child(7) a{
 				  	border-right: 0px solid #ffd4ff;
 				}
 		}	
 		#block-menu-menu-footer-icons{
 			width: 238px;
-			top: -59px;
+			top: -65px;
 			float: right;
-		 	li{
+			.content li{
 			list-style: none;
-			background: url('../images/csg-4fd078facf347.png') no-repeat top left;
+			background: url('../images/big-icons.png') no-repeat top left;
 			margin: 7px;
 			float: right;
 			width: 19px;
 			height: 22px;
+			background-size: 22px;
 				a{
-				width: 6px;
-				padding: 0px;
+				font-size: 0px;
+				padding: 20px 0px 3px 23px;
 				}
 			}
-			li:nth-child(1){ background-position: 0 0px;} 
-			li:nth-child(2){ background-position: 0 -24px;} 
-			li:nth-child(3){ background-position: 0 -49px; } 
-			li:nth-child(4){ background-position: 0 -74px; } 
+			li:nth-child(1){ background-position: 50% -90px;  } 
+			li:nth-child(2){background-position: 50% 2px; } 
+			li:nth-child(3){ background-position: 50% -60px;  } 
+			li:nth-child(4){ background-position: 50% -29px;  } 
 		}
 		#logo-footer{
 			margin-left: 10px;
-			margin-top: 4px;
+			margin-top: 7px;
 			width: 116px;
 			float: left;
 			height: 31px;
@@ -353,9 +352,8 @@ input.form-autocomplete, input.form-text, input.form-file, textarea.form-textare
 	margin: 9px 0px 0px -11px;
 	}
 #block-menu-menu-main-icons .menu{
-	width: 256px;
-	margin-top: -18px;
-	margin-left: -11px;
+	padding: 0px;
+	margin: -9px 0px 33px -27px;
 	width: 243px;
 	ul
 	{
@@ -383,15 +381,15 @@ input.form-autocomplete, input.form-text, input.form-file, textarea.form-textare
 			width: 100%; 
 		}
 	}
-    li:nth-child(4){ background-position: 50% -241px;  } 
-	li:nth-child(1){background-position: 50% 18px; } 
-	li:nth-child(2){ background-position: 50% -69px;  } 
-
+        li:nth-child(1){ background-position: 50% -241px;  } 
+	li:nth-child(2){background-position: 50% 18px; } 
 	li:nth-child(3){ background-position: 50% -155px;  } 
-	
-
+	li:nth-child(4){ background-position: 50% -69px;  } 
 }
-#share_icons .menu{
+#block-block-6{
+	height: 31px;
+	}
+#share_icons {
 	width: 198px;
 	margin-left: -30px;
 	li{
