@@ -24,7 +24,7 @@ styles[styles/kaveret.scss][options][media] = all
 ; Theme Script Files ------------------------------------------------------
 
 scripts[] = scripts/kaveret.js
-
+scripts[] = scripts/kaveret-jquery.js
 
 ; Regions -----------------------------------------------------------------
 ; these content regions are available for block placement.

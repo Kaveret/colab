@@ -1,8 +1,8 @@
 ; Theme Info --------------------------------------------------------------
 
-name = Starterkit
+name = kaveret
 description = Starterkit, sub-theme for Sasson, <strong>you shouldn't enable this starterkit</strong>. instead, use <em>drush sns</em> or manually copy it to create a new sub-theme, check out the <a href="http://www.linnovate.net/blog/sasson-smart-drupal-theming">docs</a> or the README.txt for more info.
-screenshot = images/SUBTHEME.png
+screenshot = images/kaveret.png
 core = 7.x
 base theme = sasson
 
@@ -18,13 +18,13 @@ base theme = sasson
 ;   Recompile - to force the file to be recompiled on every page load
 ; styles[styles/filename.scss][options][recompile] = true
 
-styles[styles/SUBTHEME.scss][options][media] = all
+styles[styles/kaveret.scss][options][media] = all
 
 
 ; Theme Script Files ------------------------------------------------------
 
-scripts[] = scripts/SUBTHEME.js
-
+scripts[] = scripts/kaveret.js
+scripts[] = scripts/kaveret-jquery.js
 
 ; Regions -----------------------------------------------------------------
 ; these content regions are available for block placement.
@@ -89,7 +89,7 @@ settings[sasson_ie_comments] = 1
 settings[sasson_prompt_cf] = 'IE 7'
 
 settings[sasson_watcher] = 0
-settings[sasson_watch_file] = 'sites/all/themes/SUBTHEME/styles/SUBTHEME.scss'
+settings[sasson_watch_file] = 'sites/all/themes/kaveret/styles/kaveret.scss'
 settings[sasson_instant_watcher] = 1
 settings[sasson_overlay] = 0
 settings[sasson_overlay_url] = ''

@@ -69,7 +69,7 @@
                    Forms
 -----------------------------------------------*/
 /*******************  Add/Edit page **************************/	
-#article-node-form{
+/*#article-node-form{
  .form-item, ul.tips, div.description, .form-item div.description,form-file {
 	color: #014A81;
 	}
@@ -104,7 +104,7 @@ input.form-autocomplete, input.form-text, input.form-file, textarea.form-textare
 	border-color: #FAAC18;
 	}
 
-}
+}*/
 /**************************  Header  ******************************/
 #site-name,#main-menu,#secondary-menu{
 	display: none;
@@ -418,25 +418,24 @@ input.form-autocomplete, input.form-text, input.form-file, textarea.form-textare
 	a#youtube{ background-position: 50% -96px;  } 
 }
 /*******************  Learning Center page **************************/
-#block-menu-menu-tabs{
+#block-menu-menu-tabs .content{
 	ul li
 	{
 		width: 172px;
-		height: 44px;
+		height: 39px;
 		z-index: 23;
 		margin-bottom: 10px;
 		border-top-right-radius: 26px;
 		border-bottom-right-radius: 26px;
 		float: right;
 		list-style: none;
-		box-shadow: 0px 0px 8px #555353;
-		padding-left: 25px
+		box-shadow: 0px 0px 7px -1px #555353;
+		padding-left: 25px;
 		background: url('../images/big-icons.png') no-repeat #F0AC00;
-	    background-size: 42px;
+	        background-size: 40px;
 	}
-	a
-	{ 
-	width: 94px;
+	a{ 
+	width: 103px;
 	text-decoration: none;
 	display: inline-block;
 	padding-top: 2px;
@@ -444,36 +443,49 @@ input.form-autocomplete, input.form-text, input.form-file, textarea.form-textare
 	font-size: small;
 	font-weight: bolder;
 	 }
-	li:nth-child(1) { background-position: 1% 101%; } 
-	li:nth-child(2) { background-position:1% 33.5%;  } 
-	li:nth-child(3) { background-position: 1% 67%;  } 
-	li:nth-child(4) { background-position: 2% -1%;  }
+	li:nth-child(1) { background-position: 98% 101%; } 
+	li:nth-child(2) { background-position: 98% -1%;  }	
+	li:nth-child(3) { background-position: 98% 67%;  } 
+	li:nth-child(4) { background-position: 99% 32.5%;  } 
 	ul.menu li ul {
-	    margin: 6px 0 0;   
-	    display: none;
-	    position: absolute; 
-	    z-index: 100;    
+	   margin: 0px -26px 0;
+	   padding: 0px;
+	   display: none;
+	   position: absolute; 
+	   z-index: 100;    
 	}
 	ul.menu li:hover ul {
 	  display: block;
 	}
-	li li {
+	li li{
 	float: none;
+	height: auto;
 	padding: 0;
 	margin: 0;
-	background-image: none;
-	border-top-left-radius: 0px;
-	border-bottom-left-radius: 0px;
 	background: white;
-	width: 115px;
-	text-align: right;
-	padding-right: 16px;
+	width: 170px;
+	text-align: left;
+	padding-left: 16px;
 	box-shadow: 0px 0px 2px 1.5px #C5BFAF;
 	border-radius: 2px;
 	}
+	li:nth-child(3) ul{
+		li{
+		background: url('../images/points.png') no-repeat 3% 0%;
+		background-color: white;	
+		}
+		li:nth-child(1) { background-position: 1% 1%; } 
+		li:nth-child(2) { background-position: 1% 21%;  }	
+		li:nth-child(3) { background-position: 1% 40%;  } 
+		li:nth-child(4) { background-position: 1% 60%;  } 
+		li:nth-child(5) { background-position: 1% 80%;  } 
+		li:nth-child(6) { background-position: 1% 100%;  } 
+	}
 	li li  a {
-	padding-top: 12px;
-	padding-bottom: 12px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 19px;
+	margin-left: -9px;
 	text-decoration: none;
 	color: #888;
 	}
