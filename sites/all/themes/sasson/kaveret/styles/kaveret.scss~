@@ -250,6 +250,9 @@ margin-top: 10px;
 		}
 }
 /*************************  tabs  *****************************/
+#block-menu-menu-tabs .contextual-links-region{
+position: static;
+}
 #block-menu-menu-tabs .content{
 	position: absolute;
 	top: 141px;
@@ -276,7 +279,7 @@ margin-top: 10px;
 		background-size: 40px;
 		a{	
 			position: static;
-			width: 118px;
+			width: 147px;
 			color: white;
 			font-weight: bold;
 			font-size: 14px;
@@ -485,15 +488,13 @@ margin-top: 10px;
 #block-views-tags-block,
 #block-views-groups-block{
 	.block-title{
-		color:  #014a81;
+		color: #014A81;
 		font-size: 17px;
-
+		margin-left: -28px;
 	}
 	ul{
 		list-style: none;
 		color: black;
-		position: relative;
-		left: -27px;
         }
 	li{
 	margin: 0;
@@ -505,9 +506,17 @@ margin-top: 10px;
 }
 #block-views-tags-block .block-title,
 #block-views-groups-block .block-title{
-	padding-left: 32px;
-	background: url('../images/lernningCenter.png') no-repeat 50% 0;
+	padding-left: 19px;
+	background: url('../images/lernningCenter_icons.png') no-repeat;
+	}
+#block-views-tags-block .block-title,  {
+  background-position:-130% 14%;
+			}
+
+#block-views-groups-block .block-title{
+  background-position:-130% 26%;
 }
+
 /*******************  Learning Center page **************************/
 #block-menu-menu-learning-center-eng{
 	.block-title{
