@@ -34,7 +34,7 @@
           General Sitewide Styles
 -----------------------------------------------*/
 /* -----  Layout  ----- */
-#page, #header ,.region-featured,.region-footer{
+#page, #header ,.region-featured,.region-footer,#page-title{
 	margin-left:  25%;
 	margin-right: auto;
 	width: 960px;
@@ -73,6 +73,11 @@
 #site-name,#main-menu,#secondary-menu{
 	display: none;
 }
+#page-title{
+	width: 165px;
+	float: left;
+	}
+
 #header{
 	margin-top: 10px;
 	}
@@ -181,45 +186,6 @@
 		 /* W3C *  /
 		 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdf6e6', endColorstr='#fdf6e6',GradientType=0 );
 		 /* IE6-9 */
-/*-------------------------* /
-	#block-views-current-group-block div{
-		width: 204px;
-		text-align: left
-		}
-	#block-views-current-group-block .field-content{
-		font-size: 30px;
-		color:#014a81;
-		}
-	.views-field{
-		width: 100px;
-		text-align: center;
-		float: left;
-		margin: 0px -1px 0px 0px;
-		border-left: 1px solid #fcf0d8;
-		border-right: 1px solid #fcf0d8;
-		padding: 11px 3px 0px 3px;
-		height: 50px;
-		line-height: 16px;
-		}*/
-	.block-views .field-content a,
-	.block-views .field-content a,
-	.block-views .field-content a{
-		color:#B01919;
-		text-decoration: none;
-		width: 107px;
-		border-left: 2px solid red;
-		border-right: 2px solid red;
-		text-align: center;
-		padding: 9px 0px 34px 0px;
-		}
-	.block-views .field-content a div,
-	.block-views .field-content a div,
-	.block-views .field-content a div{
-		color:#014a81;
-		background: url("../images/home-icons.png") no-repeat 60px 25px;
-		font-size: 13px;
-		}
-/*-------------------------*/
 #block-menu-menu-general-sub-header{
 	width: 244px;
 	height: 62px;
@@ -289,9 +255,15 @@
 		}
 }
 /*************************  tabs  *****************************/
-#block-menu-menu-tabs .contextual-links-region{
+/*#block-menu-menu-tabs .block-even{
 position: static;
 }
+#block-menu-menu-tabs div.contextual-links-wrapper {
+position: relative;
+width: 123px;
+left: -466px;
+top: 45px;
+}*/
 #block-menu-menu-tabs .content{
 	position: absolute;
 	top: 141px;
@@ -523,6 +495,75 @@ position: static;
 }
 
 /*******************  Groups page **************************/
+#featured{
+	#block-views-current-group-block{
+		div{
+		width: 204px;
+		text-align: left;
+		}
+		.field-content{
+		font-size: 30px;
+		color:#014a81;
+		}
+		.views-field{
+		background: none;
+		}
+	}
+	.views-field{
+		width: 100px;
+		text-align: center;
+		float: left;
+		margin: 0px -1px 0px 0px;
+		border-left: 1px solid #fcf0d8;
+		border-right: 1px solid #fcf0d8;
+		padding: 11px 3px 0px 3px;
+		height: 50px;
+		line-height: 16px;
+		background: url("../images/home-icons.png") no-repeat 48px 36px;
+		}
+	.block-views .field-content a{
+		color:#B01919;
+		text-decoration: none;
+		width: 107px;
+		text-align: center;
+		padding: 9px 0px 17px 0px;
+		}
+	.block-views .field-content a::selection {
+		background:#fff;
+		}
+	.block-views .field-content a div{
+		color:#014a81;	
+		font-size: 13px;
+		padding-bottom: 19px;
+		}
+}
+#block-views-latest-updates-block-1{
+float: right;
+}
+#block-views-group-s-events-block-1{
+margin-bottom: 26px;
+}
+#block-views-group-members-block,
+#block-views-group-s-events-block-1,
+#block-views-latest-updates-block-1{
+	border: 1px solid #FACE77;
+	border-radius: 6px;
+	box-shadow: 0px 0px 0px 4px #FCF0D8;
+	width: 322px;
+	h2{
+	color:#014a81;	
+	background-color: #FCF0D8;
+	padding: 9px 19px;
+	margin: 0;
+	font-size: 19px;
+	font-weight: normal;
+	}
+	img{
+	float: left;
+	margin-right: 10px;
+	}
+}
+/*-------------------------*/
 #block-views-my-groups-block,
 #block-views-tags-block,
 #block-views-groups-block{
@@ -681,16 +722,38 @@ position: static;
 	clear: both;
 }
 /***************************/
-.node-type-group-s-avtivity #logo{
+.not-front
+{
+	#logo{
 	float: right;
 	margin-left: 14px;
 	}
-.node-type-group-s-avtivity #logo img{
+	#logo img{
 	height: 29px;
 	}
-#block-views-group-logo-block{
+	#block-views-group-logo-block{
 	width: 165px;
 	float: left;
 	}
-
+	#page-title{
+	display: none;
+	}
+}
+.node-type-page
+{
+	#logo{
+	float: left;
+	margin-right: 14px;
+	}
+	#logo img{
+	height: auto;
+	}
+	#page-title{
+	display: block;
+		width: 204px;
+		text-align: left;
+		font-size: 25px;
+		color:#014a81;
+	}
+}
 
