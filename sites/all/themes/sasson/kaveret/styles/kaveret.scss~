@@ -110,7 +110,7 @@
 	li{
 	  list-style: none;
 	  float: left;
-	  background: url("../images/home-icons.png") no-repeat 60px 25px #f9ab17;
+	  background: url("../images/primary-links-with-down-arrow.gif") no-repeat 60px 25px #f9ab17;
 	  height: 30px;
 	  font-size: 12px;
 	  position: relative;
@@ -427,8 +427,11 @@ top: 45px;
 }
 /*************************  home page  *******************************/
 #home-img{
-	margin: 9px 0px 0px -11px;
+	margin: 6px 0px 18px -11px;
 	}
+#block-menu-menu-main-icons{
+  float: left;
+}
 #block-menu-menu-main-icons .menu{
 	padding: 0px;
 	margin: -9px 0px 33px -27px;
@@ -464,9 +467,6 @@ top: 45px;
 	li:nth-child(3){ background-position: 50% -155px;  } 
 	li:nth-child(4){ background-position: 50% -69px;  } 
 }
-#block-block-6{
-	height: 31px;
-	}
 #share_icons {
 	width: 198px;
 	margin-left: -30px;
@@ -519,7 +519,7 @@ top: 45px;
 		padding: 11px 3px 0px 3px;
 		height: 50px;
 		line-height: 16px;
-		background: url("../images/home-icons.png") no-repeat 48px 36px;
+		background: url("../images/arrow-header.png") no-repeat 52px 46px;
 		}
 	.block-views .field-content a{
 		color:#B01919;
@@ -562,6 +562,28 @@ margin-bottom: 26px;
 	float: left;
 	margin-right: 10px;
 	}
+	.content{
+	margin: 14px;
+	}
+	a{
+	text-decoration: none;
+	color: #A3001E;
+	}
+	.views-field-created,
+	.views-label-name,
+	.views-label-name a.username{
+	color:#686868;
+	}
+	.views-field-body{
+	margin-left: 113px;
+	color:#014a81;
+	}
+	.views-row{
+	border-bottom: 1px solid #FACE77;
+	}
+	.pager a{
+	color:#014a81;
+	}
 }
 /*-------------------------*/
 #block-views-my-groups-block,
@@ -585,16 +607,111 @@ margin-bottom: 26px;
 #block-views-tags-block .block-title,
 #block-views-groups-block .block-title{
 	padding-left: 19px;
-	background: url('../images/lernningCenter.png') no-repeat;
+	background: url('../images/home-icons.png') no-repeat;
 	}
 #block-views-tags-block .block-title,  {
-  background-position:-130% 14%;
+  background-position:-3% 101.5%;
 			}
 
 #block-views-groups-block .block-title{
-  background-position:-130% 26%;
+  background-position:-3% -0.5%;
 }
-
+/*-------------------*/
+/*.odd*/ 
+#block-quicktabs-group-s-events{
+  clear: both;
+ background: #fcf0d8;
+}
+.field-name-field-image-groop div div{
+	/*box-shadow: -21px 16px 36px 0px red;
+	width: 698px;*/
+	float: right;
+	margin-bottom: 19px;
+	img{
+	float: right;
+	}
+}
+.block-quicktabs{
+	h2{
+	    color: #B01919;
+	    float: left;
+	    font-size: 24px;
+	    padding: 0 29px 0 0;
+	    margin: 0 0 5px;
+		font-weight: normal;
+	}
+	li{
+	    float: right;  
+	    list-style: none;
+	}
+	ul.quicktabs-tabs{
+		float: right;
+		li{
+		float: left;
+		 	a{
+			    font-size: 14px;
+			    text-decoration: none;
+			    color: #B01919;
+			    padding: 0 25px 0 0;
+			}
+		}
+	}
+	.quicktabs_main{
+	    clear: both;
+	width: 30%;
+	}
+	.views-field-title{
+			background: #9f2772;
+			a{
+				text-decoration: none;
+				color:#fff;
+			}
+		}
+	.views-field p{
+		color: #014a81;
+		background-color: rgba(255, 255, 255, 0.34);
+		padding: 0;
+		margin: 0;
+	}
+	/*.quicktabs_main  ul li {
+	    margin: 0 16px 0 0;
+	}
+	ul.quicktabs-style-nostyle li {
+	    margin: 13px 0 0;
+	}
+	.views-field-last-updated{
+	   background: #9f2772;
+	   color: #fff;
+	   height: 25px;
+	}
+	.views-field-last-updated .field-content{
+	  float: right;
+	  margin: 4px 10px;
+	}
+	.views-field-last-updated-1 span {
+	  float: left; 
+	  margin: -20px  0 0 9px;
+	  color: #fff;
+	}
+	.views-field-title {
+	 background: #9f2772;
+	}
+	.views-field-title a {
+	  color: #fff;
+	}
+	#content-content {
+	  background: #fff;
+	  padding: 5px 7px;
+	}
+	.views-field-title span {
+	 margin: 2px 10px;
+	 font-weight: bold;
+	 display: inline-block;
+	}
+	.view td {
+	  overflow: hidden;
+	}*/
+}
 /*******************  Learning Center page **************************/
 #block-menu-menu-learning-center-eng{
 	.block-title{
