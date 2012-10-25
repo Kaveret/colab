@@ -24,7 +24,6 @@ styles[styles/kaveret.scss][options][media] = all
 ; Theme Script Files ------------------------------------------------------
 
 scripts[] = scripts/kaveret.js
-scripts[] = scripts/kaveret-jquery.js
 
 ; Regions -----------------------------------------------------------------
 ; these content regions are available for block placement.
@@ -32,6 +31,7 @@ scripts[] = scripts/kaveret-jquery.js
 ; sub-themes must re-declare regions.
 
 ; these are the stock regions
+
 regions[header] = Header
 regions[help] = Help
 regions[page_top] = Page top
@@ -46,8 +46,10 @@ regions[content_bottom] = Content bottom
 regions[sidebar_first] = Sidebar first
 regions[sidebar_second] = Sidebar second
 
+regions[quicktabs] = Quicktabs
 regions[footer] = Footer
 
+regions[floating] = Floating
 
 ; Theme Settings ----------------------------------------------------------
 ; these are the defaults for the theme settings configuration.
