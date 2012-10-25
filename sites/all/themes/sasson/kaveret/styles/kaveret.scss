@@ -890,24 +890,28 @@ margin-bottom: 26px;
 	width: 165px;
 	float: left;
 	}
-	#page-title{
-	display: none;
-	}
 }
-.node-type-page,.node-type-groups-event{
+.node-type-group,.node-type-group-s-avtivity,.node-type-group-members{
+	#page-title{
+		display: none;
+		}
+}
+.node-type-groups-event,.node-type-page{
+	#page-title{
+			display: block;
+			width: 204px;
+			text-align: left;
+			font-size: 25px;
+			color:#014a81;
+		}
+}
+.node-type-page{
 	#logo{
 	float: left;
 	margin-right: 14px;
 	}
 	#logo img{
 	height: auto;
-	}
-	#page-title{
-	display: block;
-		width: 204px;
-		text-align: left;
-		font-size: 25px;
-		color:#014a81;
 	}
 }
 
