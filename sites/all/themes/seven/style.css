@@ -1079,3 +1079,20 @@ padding: 0px 13px 8px 1px;
 margin: 0px 20px 17px 0px;
 }
 
+
+/*/////////////////////////*/
+/*/////////////////////////*/
+.group-time-event{
+width: 40%;
+float: left;
+}
+
+.description,
+.form-item-field-location-of-event-und-0-locpick-user-latitude,
+.form-item-field-location-of-event-und-0-locpick-user-longitude,
+.form-item-field-location-of-event-und-0-country{
+display: none;
+}
+.field-add-more-submit{
+
+}

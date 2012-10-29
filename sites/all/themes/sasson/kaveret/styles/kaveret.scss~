@@ -533,7 +533,7 @@
 		width: 204px;
 		text-align: left;
 		}
-		.field-content{
+		.field-content,a{
 		font-size: 30px;
 		color:#014a81;
 		}
@@ -541,7 +541,15 @@
 		background: none;
 		}
 	}
-	.views-field{
+#block-views-496829e4ed0eb890c08a769ebd3a80e3,
+#block-views-link-to-activity-block-1,
+#block-og-extras-node-links,
+#block-views-link-to-group-members-block-1
+{
+width: 107px;
+float: left;
+}
+	.views-field,.block-title{
 		width: 100px;
 		text-align: center;
 		float: left;
@@ -553,7 +561,7 @@
 		line-height: 16px;
 		background: url("../images/arrow-header.png") no-repeat 52px 46px;
 		}
-	.block-views .field-content a{
+	.block-views .field-content a,.block-title{
 		color:#B01919;
 		text-decoration: none;
 		width: 107px;
@@ -568,6 +576,56 @@
 		font-size: 13px;
 		padding-bottom: 19px;
 		}
+	#block-og-extras-node-links{
+			.block-title:first-line{
+					color:#B01919;
+					text-decoration: none;
+					width: 107px;
+					text-align: center;
+					font-size: 16px;
+			}
+			.block-title{
+					cursor: pointer;
+					color:#014a81;	
+					font-size: 13px;
+					font-weight: normal;
+					padding: 12px 0px 0px 0px;
+			}
+			ul{
+				background: white;
+				margin: 62px 0 0;
+				display: none;
+				position: absolute;
+				z-index: 100;
+				box-shadow: 0px 0px 5px 0px #C5B88E;
+					li {
+					list-style: none;
+					float: none;
+					margin: 0;
+					padding-right: 16px;
+					background-image: none;
+					background: white;
+					height: 20px;
+					margin-bottom: 0px;
+					width: auto;
+					}
+					a{
+						display: inline-block;
+						width: 80px;
+						border: 0px;
+						padding: 6px 0 0;
+						text-decoration: none;
+						color:#5a6b98;
+						font-weight: normal;
+						text-align: left;
+						padding-left: 12px;
+						font-size: 13px;
+					}
+			}
+			.block-title:hover ul{
+				display: block;
+			}		
+	}	
 }
 #block-views-latest-updates-block-1{
 float: right;
@@ -577,7 +635,8 @@ margin-bottom: 26px;
 }
 #block-views-group-members-block,
 #block-views-group-s-events-block-1,
-#block-views-latest-updates-block-1{
+#block-views-latest-updates-block-1
+{
 	border: 1px solid #FACE77;
 	border-radius: 6px;
 	box-shadow: 0px 0px 0px 4px #FCF0D8;
@@ -622,8 +681,10 @@ margin-bottom: 26px;
 #block-views-tags-block,
 #block-views-groups-block{
 	.block-title{
+		margin: 0;
 		color: #014A81;
 		font-size: 17px;
+
 	}
 	ul{
 		list-style: none;		
@@ -898,8 +959,9 @@ margin-bottom: 26px;
 }
 .node-type-groups-event,.node-type-page{
 	#page-title{
+			width: auto;
+			margin-right: 12px;
 			display: block;
-			width: 204px;
 			text-align: left;
 			font-size: 25px;
 			color:#014a81;
@@ -915,3 +977,100 @@ margin-bottom: 26px;
 	}
 }
 
+
+
+
+/*/////////////////////////*/
+.group-time-event{
+width: 40%;
+float: left;
+}
+
+.description,
+.form-item-field-location-of-event-und-0-locpick-user-latitude,
+.form-item-field-location-of-event-und-0-locpick-user-longitude{
+display: none;
+}
+
+
+
+/********************** Event Page *********************/
+#node_groups_event_full_group_where_event{
+			margin-right: 0;
+			float: right;
+			width: 340px;
+		}
+.field-group-fieldset{
+	width: 284px;
+	height: 184px;
+	float: left;
+	font-size: 22px;
+	background: #fcf0d8;
+	padding-left: 14px;
+	margin-top: -60px;
+	margin-right: 43px;
+		.fieldset-legend{
+			background-color: #f8db95;
+			padding: 7px 214px 7px 14px;
+			margin-left: -12px;
+		}
+		.fieldset-wrapper{
+			margin-top: 10px;
+		}
+		.date-display-single{
+			padding-top: 12px;
+			width: 120px;
+			text-align: center;
+			float: left;
+			margin-right: 20px;
+			height: 118px;
+			padding-right: 24px;
+			border-right: 1px solid black;
+			background: url('../images/day-img.png') no-repeat 36% 2%;
+		}
+		.field-name-field-location-of-event{
+			float: right;
+			margin-top: -44px;
+		}
+		.field-name-field-location-of-event-text{
+			border-bottom: 1px dashed black;
+			margin-bottom: 3px;
+			padding-bottom: 6px;
+			width: 182px;
+		}
+		.field-name-field-start-event,
+		.field-name-field-end-event{
+			text-align: right;
+			margin-right: 26px;
+			.field-label{font-weight:normal;}
+			.field-items{font-weight: 700;}
+		}
+}
+.date-display-single:first-line{
+	font-size: 36px;
+	line-height: 39px;
+	font-weight: bold;
+	}
+.node-groups-event .field-name-body{
+		clear: both;
+		padding: 25px 40px;
+}
+#block-views-group-logo-event-block{
+		width: 257px;
+		img{
+			border: 19px solid #FCF0D8;
+			width: 275px;
+		}
+}
+#block-views-event-members-block-1{
+		background: #FCF0D8;
+		width: 258px;
+		padding: 0px 27px;
+  		.block-title{
+			width: 211px;
+			margin: 0px 0px 8px 0px;
+			padding: 24px 48px 0px 0px;
+			color:#B01919 ;
+			border-bottom: 1px solid #B01919;
+		}
+}
