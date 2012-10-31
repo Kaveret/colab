@@ -502,10 +502,13 @@ bblock-menu-menu-community-space{
 	li:nth-child(3){ background-position: 55% -154px;  } 
 	li:nth-child(4){ background-position: 63% -69px;  } 
 }
+#block-menu-menu-share-icons{
+	float: left;
+	margin: -15px 0px 0px;
+	}
 #block-menu-menu-share-icons .menu{
-	width: 198px;
-	margin-left: -12px;
-	padding: 5px 0px 0px 38px;
+	width: 173px;
+	margin-left: -23px;
 	li{
 		list-style: none;
 		height: 30px;
@@ -837,10 +840,12 @@ height: 421px;
 		clear: both;
 		.views-field-title,header h2{
 				background: #9f2772;
-				a{
- 					font-size: 14px;	
+				a,span.field-content{
+ 					font-size: 14px;
 					text-decoration: none;
-					color:#fff;
+					color: white;
+					font-weight: bolder;
+					padding-left: 8px;
 				}
 			}
 		.views-field p{
@@ -864,19 +869,29 @@ margin: 0;
 }
 /*******************  All Groups **************************/
 #quicktabs-list_of_groups{
+	width: 753px;
 	td{
 	float: right;
+	padding: 0;
 	margin:0px 0px 31px 24px;
-	width: 215px;
+	width: 218px;
 	height: 373px;
 	border-radius: 4px;
 	border: 2px solid #FBD38B;
 	box-shadow: 0px 0px 0px 3px #FAE8C7;
 	}
-	.views-field-title {
+	.views-field-title,
+	.views-field-field-description-group{
+		margin: 0px 13px;
+	}
+	.views-field-title, {
+		border-bottom: 1px solid #FACE77;
+		margin-top: 6px;
+		padding-bottom: 6px;
+		margin-bottom: 5px;
 		background: white;
 		a{
-			background: white;
+		
 			color: #B01919;
 			font-weight: bold;
 			font-size: 16px;
@@ -887,9 +902,17 @@ margin: 0;
 	.views-field-group-group{
 	color: #014a81;
 	}
-	
+	.views-field-field-group-logo{
+	height: 143px;
+	}
 	.views-field-field-description-group{
-		margin-bottom: 137px;
+		height: 123px;
+		font-weight: bold;
+		margin-bottom: 16px;
+	}
+	.views-field-group-group{
+		background: #fcf0d8;
+		height: 51px;
 	}
 	.views-field-name{
 		float: right;
