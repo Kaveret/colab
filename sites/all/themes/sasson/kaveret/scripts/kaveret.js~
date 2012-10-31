@@ -12,10 +12,6 @@
  					function () {$("#block-menu-menu-tabs ul li a").addClass("hover-tats");},
 					function () {$("#block-menu-menu-tabs ul li a").removeClass("hover-tats");}
 				);
-$("#block-menu-menu-tabs ul li a").hover(
- 					function () {$("#block-menu-menu-tabs ul li ul").addClass("hover-tats");},
-					function () {$("#block-menu-menu-tabs ul li ul").removeClass("hover-tats");}
-				);
 			}
 	}
 })(jQuery);
