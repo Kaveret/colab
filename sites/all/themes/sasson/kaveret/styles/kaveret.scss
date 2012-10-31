@@ -78,7 +78,10 @@
 	display: none;
 }
 #page-title{
-	width: 165px;
+	min-width: 204px;
+	text-align: left;
+	font-size: 25px;
+	color:#014a81;
 	float: left;
 	}
 
@@ -536,22 +539,43 @@ bblock-menu-menu-community-space{
 }
 
 /*******************  Groups page **************************/
-.section-group #block-views-496829e4ed0eb890c08a769ebd3a80e3{background: white;}
-.section-activity #block-views-link-to-activity-block-1{background: white;}
+.page-activities{
+ 	#main .region-content{
+		width: 743px;
+		margin-left: -22px;
+		margin-top: 10px;
+	}
+	.region-sidebar-second{
+	margin-left: 19px;
+	margin-top: 10px;
+	}
+}
+
+.section-group #block-views-496829e4ed0eb890c08a769ebd3a80e3,
+.section-activity #block-views-link-to-activity-block-1{
+background: white;
+border-left: 1px solid #FCF0D8;
+border-right: 1px solid #FCF0D8;
+}
 /*.section-activity #block-og-extras-node-links{background: white;}
 .section-activity #block-views-link-to-group-members-block-1{background: white;}*/
 #featured{
 	#block-views-current-group-block{
-		div{
-		width: 204px;
-		text-align: left;
-		}
-		.field-content,a{
-		font-size: 30px;
-		color:#014a81;
-		}
-		.views-field{
-		background: none;
+	margin-left: -5px;
+		.content{
+			div{
+			width: 204px;
+			text-align: left;
+			}
+			.field-content,a{
+			font-size: 22.5px;
+			color:#014a81;
+			}
+			.views-field{
+			padding-top: 24px;
+			background: none;
+			height: 37px;
+			}
 		}
 	}
 	#block-views-496829e4ed0eb890c08a769ebd3a80e3,
@@ -559,21 +583,21 @@ bblock-menu-menu-community-space{
 	#block-og-extras-node-links,
 	#block-views-link-to-group-members-block-1
 	{
-height: 62px;
-	width: 107px;
+	height: 62px;
+	width: 89px;
 	float: left;
 	}
 	.views-field,.block-title{
-		width: 100px;
+		width: 83px;
 		text-align: center;
 		float: left;
 		margin: 0px -1px 0px 0px;
 		border-left: 1px solid #fcf0d8;
 		border-right: 1px solid #fcf0d8;
-		padding: 11px 3px 0px 3px;
-		height: 50px;
-		line-height: 16px;
-		background: url("../images/arrow-header.png") no-repeat 52px 46px;
+		padding: 17px 3px 0px 3px;
+		height: 45px;
+		line-height: 14px;
+		background: url("../images/arrow-header.png") no-repeat 41px 49px;
 		}
 	.block-views .field-content a,.block-title{
 		color:#B01919;
@@ -587,23 +611,24 @@ height: 62px;
 		}
 	.block-views .field-content a div{
 		color:#014a81;	
-		font-size: 13px;
+		font-size: 11px;
 		padding-bottom: 19px;
 		}
 	#block-og-extras-node-links{
 			.block-title:first-line{
 					color:#B01919;
 					text-decoration: none;
-					width: 107px;
+					width: 83px;
 					text-align: center;
 					font-size: 16px;
 			}
 			.block-title{
 					cursor: pointer;
 					color:#014a81;	
-					font-size: 13px;
+					width: 89px;
+					font-size: 11px;
 					font-weight: normal;
-					padding: 12px 0px 0px 0px;
+					padding: 17px 0px 0px 0px;
 			}
 			.content ul{
 				background: white;
@@ -621,7 +646,7 @@ height: 62px;
 					background: white;
 					height: 20px;
 					margin-bottom: 0px;
-					width: auto;
+					width: 95px;
 					}
 					a{
 						display: inline-block;
@@ -654,6 +679,8 @@ margin-bottom: 26px;
 	.block-odd{float: left;}
 	.block-even{float: right;}
 }
+.page-activities #main section:last-child .region-content{float:  left;}
+
 #block-views-group-members-block,
 #block-views-group-s-events-block-1,
 #block-views-latest-updates-block-1,
@@ -661,11 +688,11 @@ margin-bottom: 26px;
 #block-views-group-s-video-block-1,
 #block-views-group-s-discussion-block-1
 {
-	margin: 12px;
+	margin: 11px;
 	border: 1px solid #FACE77;
 	border-radius: 6px;
 	box-shadow: 0px 0px 0px 4px #FCF0D8;
-	width: 322px;
+	width: 341px;
 	h2{
 	color:#014a81;	
 	background-color: #FCF0D8;
@@ -1069,6 +1096,8 @@ margin: 0;
 	#block-views-group-logo-block{
 	width: 165px;
 	float: left;
+	margin-bottom: 9px;
+	margin-top: -3px;
 	}
 }
 .node-type-group,.node-type-group-s-avtivity,.node-type-group-members{
@@ -1076,10 +1105,12 @@ margin: 0;
 		display: none;
 		}
 }
-.node-type-groups-event,.node-type-page{
+.node-type-groups-event,
+.node-type-page{
 	#page-title{
 			display: block;
-			width: 204px;
+			min-width: 204px;
+
 			text-align: left;
 			font-size: 25px;
 			color:#014a81;
