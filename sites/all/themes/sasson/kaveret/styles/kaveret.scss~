@@ -863,8 +863,10 @@ height: 421px;
 .field-name-field-image-groop div div{
 	/*box-shadow: -21px 16px 36px 0px red;*/
 	width: 700px;
+	height: 270px;
 	float: right;
 	margin-bottom: 19px;
+	background: url('../images/shadow-img.jpg') no-repeat -20px 258px;
 	img{
 	float: right;
 	}
