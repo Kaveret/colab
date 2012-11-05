@@ -759,9 +759,16 @@ margin-bottom: 26px;
 	.views-label-name a.username{
 	color:#686868;
 	}
-	.views-field-body{
-	margin-left: 113px;
-	color:#014a81;
+	.views-field-created{
+	margin-top: -5px;
+	}
+	div.views-field-body{
+
+		margin-left: 113px;
+		color:#014a81;
+		.field-content p{
+		margin: 0px;
+		}
 	}
 	.views-row{
 	border-bottom: 1px solid #FACE77;
@@ -1198,7 +1205,7 @@ margin: 0;
 	margin-top: -3px;
 	}
 }
-.node-type-group,.node-type-group-s-avtivity,.node-type-group-members{
+.node-type-group,.node-type-group-s-avtivity,.node-type-group-members,.page-events-161{
 	#page-title{
 		display: none;
 		}
@@ -1272,23 +1279,14 @@ float: left;
 .form-item-field-location-of-event-und-0-locpick-user-longitude{
 display: none;
 }
-
 /********************** Event Page *********************/
+#block-system-main{
+clear: both;
+}
 #node_groups_event_full_group_where_event{
-			margin-right: 0;
-			float: right;
-			width: 340px;
-			padding-left: 101px;
-				.fieldset-legend{
-					padding: 9px 286px 5px 13px;
-					margin:-100px;
-				}
-				.fieldset-wrapper{
-					margin-left: -93px;
-				}
-		}
+	float: right;
+}
 .field-group-fieldset{
-	width: 220px;
 	height: 146px;
 	float: left;
 	font-size: 19px;
@@ -1319,7 +1317,7 @@ display: none;
 		.field-name-field-location-of-event{
 			float: right;
 			margin-top: -44px;
-			margin-right: 73px;
+			margin-right: 0px;
 		}
 		.field-name-field-location-of-event-text{
 			border-bottom: 1px dashed black;
@@ -1342,28 +1340,51 @@ display: none;
 	}
 .node-groups-event .field-name-body{
 		clear: both;
-		padding: 25px 40px;
+		padding: 25px 94px;		
 }
-#block-views-group-logo-event-block{
-		width: 257px;
-		img{
-			border: 19px solid #FCF0D8;
-			width: 275px;
+#block-views-group-logo-event-block img{
+			margin: 9px;
 		}
-}
-#block-views-event-members-block-1{
-		background: #FCF0D8;
-		width: 258px;
-		padding: 0px 27px;
-  		.block-title{
-			width: 211px;
-			margin: 0px 0px 8px 0px;
-			padding: 24px 48px 0px 0px;
-			color:#B01919 ;
-			border-bottom: 1px solid #B01919;
+#block-views-event-members-block-1,#block-views-group-s-events-block-3{
+  		color: #B01919;
+		.block-title{
+			font-size: 17px;
+			margin: 10px 0px 8px 0px;
+			border-bottom: 1.5px solid rgba(176, 25, 25, 0.17);
 		}
-}
+		a{
+			color: #B01919;
+			font-weight: bold;
+			text-decoration: none;
+		}
+		.views-field-field-location-of-event-text{
+		border-right: 1.8px solid #B01919;
+		margin-right: 9px;
+		padding-right: 5px;
+		}
+		.views-field-title{
+			margin-bottom: -4px;
+		}
+		.views-row{
+			margin-bottom: 7px;
+		}
 
+}
+.page-node-33,.node-type-groups-event{
+        .region-sidebar-second{
+		padding: 16px;
+		margin-top: 33px;
+		background: #FCF0D8;
+		width: 239px;
+	}
+	.flag-join-event a {
+		background: #F9AB17;
+		color: white;
+		padding: 4px 0px 14px 0px;
+		text-decoration: none;
+		font-size: 19px;
+		}
+}
 /********************** Event Page *********************b/
 #node_groups_event_full_group_where_event{
 			margin-right: 0;
@@ -1601,7 +1622,7 @@ display: none;
 		padding-left: 11px;
 		padding-top: 10px;
 		}
-	.views-field-body	{
+	.views-field-body{
 		clear: both;
 	}
 	.views-field-field-description-group,
