@@ -48,6 +48,7 @@
 #floating{
 	position: absolute;
 	}
+
 /* -----  General Styles (Colors, Backgrounds etc.)  ----- */
 
 /* -----  Typography  ----- */
@@ -286,13 +287,24 @@ bblock-menu-menu-community-space{
 			}
 		}
 }
-#main{
-margin-top: 9px;
-	/*a:first-child{
+#breadcrumb{
+	margin-top: 9px;
+	.mafrid{
+		font-size: 0px;
+		padding: 9px 8px;
+		margin-top: 2px;
+		float: left;
+		background: url('../images/arrow-adress.jpg') no-repeat 1px;
+	}
+}
+#breadcrumb a ,#breadcrumb{
+	float: left;
 	color: #303030;
 	text-decoration: none;
 	font-size: 15px;
-	}*/
+	}
+#breadcrumb::after{
+    clear: both;
 }
 /*************************  tabs  *****************************/
 #block-menu-menu-tabs{
@@ -569,6 +581,7 @@ margin-top: 9px;
 /*******************  Groups page **************************/
 .section-activities{
  	#main .region-content{
+		clear: both;
 		width: 742px;
 		margin-left: -22px;
 	}
@@ -657,7 +670,8 @@ border-right: 1px solid #FCF0D8;
 			.block-title{
 					cursor: pointer;
 					color:#014a81;	
-					width: 89px;
+					width: 87px;
+					margin-left: 1px;
 					font-size: 11px;
 					font-weight: normal;
 					padding: 17px 0px 0px 0px;
@@ -755,9 +769,12 @@ margin-bottom: 26px;
 	.views-row{
 	border-bottom: 1px solid #FACE77;
 	margin-top: 13px;
+	padding-bottom: 8px;
 	}
 	.pager{
 		text-align: right;
+		text-align: right;
+		margin: 6px 0px -8px 0px;
 		a{
 		color:#014a81;
 		}
@@ -956,16 +973,15 @@ height: 421px;
 width: 260px;
 padding: 0px 14px;
 margin: 0;
-
 }
 
 /*******************  All Groups **************************/
 #quicktabs-list_of_groups{
 	width: 753px;
 	td{
-	float: right;
+	float: left;
 	padding: 0;
-	margin:0px 0px 31px 24px;
+	margin: 0px 24px 31px 0px;
 	width: 218px;
 	height: 373px;
 	border-radius: 4px;
@@ -1260,9 +1276,98 @@ float: left;
 display: none;
 }
 
-
-
 /********************** Event Page *********************/
+#node_groups_event_full_group_where_event{
+			margin-right: 0;
+			float: right;
+			width: 340px;
+			padding-left: 101px;
+				.fieldset-legend{
+					padding: 9px 286px 5px 13px;
+					margin:-100px;
+				}
+				.fieldset-wrapper{
+					margin-left: -93px;
+				}
+		}
+.field-group-fieldset{
+	width: 220px;
+	height: 146px;
+	float: left;
+	font-size: 19px;
+	background: #fcf0d8;
+	padding-left: 14px;
+	margin-top: 0px;
+	margin-right: 0px;
+		.fieldset-legend{
+			background-color: #f8db95;
+			padding: 9px 156px 5px 14px;
+			margin-left: -12px;
+		}
+		.fieldset-wrapper{
+			margin-top: 10px;
+		}
+		.date-display-single{
+			padding-top: 12px;
+			width: 93px;
+			text-align: center;
+			float: left;
+			margin-right: 0px;
+			height: 89px;
+			padding-right: 15px;
+			border-right: 1px solid black;
+			background: url('../images/day-img.png') no-repeat 36% 6%;
+			line-height: 23px;
+		}
+		.field-name-field-location-of-event{
+			float: right;
+			margin-top: -44px;
+			margin-right: 73px;
+		}
+		.field-name-field-location-of-event-text{
+			border-bottom: 1px dashed black;
+			margin-bottom: 3px;
+			padding-bottom: 6px;
+			width: 182px;
+		}
+		.field-name-field-start-event,
+		.field-name-field-end-event{
+			text-align: right;
+			margin-right: 26px;
+			.field-label{font-weight:normal;}
+			.field-items{font-weight: 700; line-height: 20.5px}
+		}
+}
+.date-display-single:first-line{
+	font-size: 36px;
+	line-height: 46px;
+	font-weight: bold;
+	}
+.node-groups-event .field-name-body{
+		clear: both;
+		padding: 25px 40px;
+}
+#block-views-group-logo-event-block{
+		width: 257px;
+		img{
+			border: 19px solid #FCF0D8;
+			width: 275px;
+		}
+}
+#block-views-event-members-block-1{
+		background: #FCF0D8;
+		width: 258px;
+		padding: 0px 27px;
+  		.block-title{
+			width: 211px;
+			margin: 0px 0px 8px 0px;
+			padding: 24px 48px 0px 0px;
+			color:#B01919 ;
+			border-bottom: 1px solid #B01919;
+		}
+}
+
+/********************** Event Page *********************b/
 #node_groups_event_full_group_where_event{
 			margin-right: 0;
 			float: right;
@@ -1341,7 +1446,7 @@ display: none;
 			color:#B01919 ;
 			border-bottom: 1px solid #B01919;
 		}
-}
+}*/
 /****************************Creat Event ****** Creat content**************/
 .field-type-entityreference{
 	.field-multiple-drag,label[for="edit-og-group-ref-und-0-default-0-target-id"],.tabledrag-toggle-weight-wrapper{
@@ -1460,7 +1565,7 @@ display: none;
 
 }*/
 
-/*******************   ****all events gruop**********************/
+/*******************  ****all events gruop**********************/
 #block-views-group-s-events-block-2{
 	width: 753px;
 	margin-top: 52px;
@@ -1552,3 +1657,5 @@ display: none;
 		}
 	}
 }
+
+
