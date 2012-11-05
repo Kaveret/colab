@@ -49,6 +49,9 @@
 	position: absolute;
 	}
 
+.region-content-top{
+clear: both;
+}
 /* -----  General Styles (Colors, Backgrounds etc.)  ----- */
 
 /* -----  Typography  ----- */
@@ -1280,9 +1283,9 @@ float: left;
 display: none;
 }
 /********************** Event Page *********************/
-#block-system-main{
+/*#block-system-main{
 clear: both;
-}
+}*/
 #node_groups_event_full_group_where_event{
 	float: right;
 }
@@ -1292,11 +1295,9 @@ clear: both;
 	font-size: 19px;
 	background: #fcf0d8;
 	padding-left: 14px;
-	margin-top: 0px;
-	margin-right: 0px;
 		.fieldset-legend{
 			background-color: #f8db95;
-			padding: 9px 156px 5px 14px;
+			padding: 9px 152px 5px 14px;
 			margin-left: -12px;
 		}
 		.fieldset-wrapper{
@@ -1323,7 +1324,7 @@ clear: both;
 			border-bottom: 1px dashed black;
 			margin-bottom: 3px;
 			padding-bottom: 6px;
-			width: 182px;
+			width: 192px;
 		}
 		.field-name-field-start-event,
 		.field-name-field-end-event{
@@ -1340,12 +1341,13 @@ clear: both;
 	}
 .node-groups-event .field-name-body{
 		clear: both;
-		padding: 25px 94px;		
+		padding: 25px 74px;		
 }
 #block-views-group-logo-event-block img{
 			margin: 9px;
 		}
-#block-views-event-members-block-1,#block-views-group-s-events-block-3{
+#block-views-event-members-block-1,
+#block-views-group-s-events-block-3{
   		color: #B01919;
 		.block-title{
 			font-size: 17px;
@@ -1370,20 +1372,50 @@ clear: both;
 		}
 
 }
+#block-views-join-the-event-block-1{
+		background: #F9AB17;
+		border: 1px solid rgba(176, 25, 25, 0.17);
+		padding: 1px;
+		text-align: center;
+		font-size: 12px;
+		font-weight: bolder;
+		width: 63px;
+		.flag-join-event a{
+		padding: 2px 0px 4px 1px;
+		color: white;
+		text-decoration: none;
+		}
+}
+.field-name-field-join-to-event{
+	margin-bottom: 35px;
+	.flag-join-event a{
+			background: #F9AB17;
+			border: 1px solid rgba(176, 25, 25, 0.17);
+			font-size: 17px;
+			font-weight: bolder;
+			padding: 10px;
+			color: white;
+			text-decoration: none;
+	}
+}
+#node-33 {
+	border-left: 1px solid #E7E1E1;
+	border-right: 1px solid #E7E1E1;
+	.content{
+		margin: 0px 25px;
+	}
+}
 .page-node-33,.node-type-groups-event{
+	#block-system-main{
+	clear: both;
+	}
         .region-sidebar-second{
 		padding: 16px;
 		margin-top: 33px;
 		background: #FCF0D8;
 		width: 239px;
 	}
-	.flag-join-event a {
-		background: #F9AB17;
-		color: white;
-		padding: 4px 0px 14px 0px;
-		text-decoration: none;
-		font-size: 19px;
-		}
+
 }
 /********************** Event Page *********************b/
 #node_groups_event_full_group_where_event{
