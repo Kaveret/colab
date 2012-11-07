@@ -101,8 +101,11 @@
 <?php if ($page['featured']): ?>
     <div id="featured">
 <?php if ($title): ?>
+<div class="layout-page-title">
       <h1 class="title" id="page-title"><?php print $title; ?></h1>
+</div>
     <?php endif; ?>
+
       <?php print render($page['featured']); ?>
     </div><!-- /#featured -->
   <?php endif; ?>

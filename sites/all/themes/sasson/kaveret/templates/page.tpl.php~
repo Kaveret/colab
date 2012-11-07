@@ -74,6 +74,8 @@
  <?php print render($page['floating']); ?>
  </div><!-- /#floating -->
  <?php endif; ?> 
+
+
   <?php if ($logo || $site_name || $site_slogan || $page['header']): ?>
     <header id="header" role="banner">
       <?php if ($logo): ?>
@@ -98,6 +100,9 @@
 
 <?php if ($page['featured']): ?>
     <div id="featured">
+<?php if ($title): ?>
+      <h1 class="title" id="page-title"><?php print $title; ?></h1>
+    <?php endif; ?>
       <?php print render($page['featured']); ?>
     </div><!-- /#featured -->
   <?php endif; ?>
@@ -108,11 +113,15 @@
       <?php print $main_menu_links; ?>
     </nav><!-- /#main-menu -->
   <?php endif; ?>
+
   <?php if ($secondary_menu_links): ?>
     <nav id="secondary-menu" role="navigation">
       <?php print $secondary_menu_links ?>
     </nav> <!-- /#secondary-menu -->
   <?php endif; ?>
+
+  
+
 
  <div id="main">
     <?php if ($page['highlighted']): ?>
@@ -120,10 +129,9 @@
         <?php print render($page['highlighted']); ?>
       </div><!-- /#highlighted -->
     <?php endif; ?>
-     <?php if ($title): ?>
-      <h1 class="title" id="page-title"><?php print $title; ?></h1>
-    <?php endif; ?>
+     <div id="breadcrumb">
     <?php print $breadcrumb; ?>
+	</div>
     <?php print render($title_prefix); ?>
     <?php print render($title_suffix); ?>
     <?php if ($tabs): ?>
