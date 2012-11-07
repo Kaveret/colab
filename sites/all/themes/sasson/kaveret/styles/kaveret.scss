@@ -34,10 +34,15 @@
           General Sitewide Styles
 -----------------------------------------------*/
 /* -----  Layout  ----- */
-#page, #header,.region-featured,.region-footer,
+#page, #header,
+.region-featured,
+.region-footer,
 #page-title,
+#quicktabs .block-title, 
 #quicktabs .content{
-	margin-left:  25%;
+	float: none;
+	display: block;
+	margin-left: auto;
 	margin-right: auto;
 	width: 960px;
 	}
@@ -86,7 +91,6 @@ clear: both;
 	text-align: left;
 	font-size: 25px;
 	color:#014a81;
-	float: left;
 	}
 
 #header{
@@ -505,7 +509,7 @@ bblock-menu-menu-community-space{
 }
 #block-menu-menu-main-icons .menu{
 	padding: 10px 10px 0px 12px;
-	margin: -9px 0px 33px -30px;
+	margin: -9px 0px 33px -43px;
 	width: 243px;
 	ul
 	{
@@ -738,20 +742,38 @@ margin-bottom: 26px;
 	border-radius: 6px;
 	box-shadow: 0px 0px 0px 4px #FCF0D8;
 	width: 341px;
+
 	h2{
+    	float: left;
 	color:#014a81;	
 	background-color: #FCF0D8;
+border-bottom: 1px solid #FACE77;
 	padding: 9px 19px;
 	margin: 0;
 	font-size: 19px;
 	font-weight: normal;
+	width: 303px;
 	}
+	.view-header{
+	position: absolute;
+	right: 13px;
+	margin-top: -7px;
+		a{color:#014a81; font-size: 19px;}	
+	}
+	.view-content{
+	clear: both;
+	padding-top: 5px;
+	}
+.view-footer{
+ clear: both;
+}
+header h2{width:auto;  clear: both;}
 	img{
 	float: left;
 	margin-right: 10px;
 	}
 	.content{
-	margin: 14px;
+	margin:0px 14px 14px 14px;
 	}
 	a{
 	text-decoration: none;
@@ -795,12 +817,13 @@ padding-bottom: 17px;
 	font-weight: bolder;
 	width: 95px;
 	text-align: center;
-	font-size: 15px;
+	
 	line-height: 13px;
 	padding: 3px 0px;
-	a{
-	color: white;
-	}
+		a{
+		color: white;
+		font-size: 15px;
+		}
 	}
 }
 #block-views-group-members-block .content{
@@ -918,23 +941,10 @@ height: 421px;
 	float: right;
 	}
 }
-.block-quicktabs{
-	.block-title{
-	    color: #B01919;
-	    float: left;
-	    font-size: 24px;
-	    padding: 0 29px 0 0;
-	    margin: 0 0 5px;
-	    font-weight: normal;
-	margin-left:  25%;
-	margin-right: auto;
-	}
-	li{
-	    float: right;  
-	    list-style: none;
-	}
-	ul.quicktabs-tabs{
+ul.quicktabs-tabs{
 		float: right;
+		margin-top: -30px;
+		margin-bottom: 0;
 		li{
 		float: left;
 		 	a{
@@ -944,6 +954,18 @@ height: 421px;
 			    padding: 0 25px 0 0;
 			}
 		}
+}
+#quicktabs{
+	.block-title{
+	    color: #B01919;
+	    font-size: 24px;
+	   margin-top: 5px;
+	margin-bottom: 0px;
+	    font-weight: normal;
+	}
+	li{
+	    float: right;  
+	    list-style: none;
 	}
 	.quicktabs_main{
 		clear: both;
