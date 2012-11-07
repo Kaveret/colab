@@ -304,12 +304,18 @@ bblock-menu-menu-community-space{
 		background: url('../images/arrow-adress.jpg') no-repeat 1px;
 	}
 }
+.mafrid:nth-child(2){opacity: 1;}
+.mafrid:nth-child(4){opacity: 0.8;}
+.mafrid:nth-child(6){opacity: 0.6;}
+.mafrid:nth-child(8){opacity: 0.4;}
+.mafrid:nth-child(10){opacity: 0.2;}
+
 #breadcrumb a ,#breadcrumb{
 	float: left;
 	color: #303030;
 	text-decoration: none;
 	font-size: 15px;
-	}
+}
 /*************************  tabs  *****************************/
 #block-menu-menu-tabs{
 	position: static;
@@ -583,10 +589,10 @@ bblock-menu-menu-community-space{
 }
 
 /*******************  Groups page **************************/
-.section-activities{
+.section-activities,.section-users{
  	#main .region-content{
 		clear: both;
-		width: 747px;
+		width: 106.2%;/*width: 747px;*/
 		margin-left: -22px;
 	}
 	.region-sidebar-second{
@@ -594,13 +600,14 @@ bblock-menu-menu-community-space{
 	margin-top: 40px;
 	}
 }
-.section-activities #main .region-content{
+.section-activities #main .region-content,.section-users #main .region-content{
 	.block-odd{float: left;}
 	.block-even{float: right;}
 }
 .section-group #block-views-496829e4ed0eb890c08a769ebd3a80e3,
 .section-activities #block-views-link-to-activity-block-1,
-.section-node-add #block-og-extras-node-links{
+.section-node-add #block-og-extras-node-links,
+.section-members #block-views-link-to-group-members-block-1{
 background: white;
 border-left: 1px solid #FCF0D8;
 border-right: 1px solid #FCF0D8;
@@ -735,8 +742,13 @@ margin-bottom: 26px;
 #block-views-latest-updates-block-1,
 #block-views-group-s-poll-block-1,
 #block-views-group-s-video-block-1,
-#block-views-group-s-discussion-block-1
+#block-views-group-s-discussion-block-1,
+#block-views-activity-user-block,
+#block-views-activity-user-block-1,
+#block-views-activity-user-block-2,
+#block-views-activity-user-block-3
 {
+	position: relative;
 	margin: 11px 14px;
 	border: 1px solid #FACE77;
 	border-radius: 6px;
@@ -778,6 +790,8 @@ border-bottom: 1px solid #FACE77;
 	header h2{
 	width:auto; 
 	clear: both;
+	background-color:#fff;
+	padding: 0;
 	}
 	img,.views-field-field-video-group{
 	float: left;
@@ -799,9 +813,9 @@ border-bottom: 1px solid #FACE77;
 	margin-top: -5px;
 	}
 	div.views-field-body{
-
 		margin-left: 113px;
 		color:#014a81;
+		font-size: 14px;
 		.field-content p{
 		margin: 0px;
 		}
@@ -810,6 +824,7 @@ border-bottom: 1px solid #FACE77;
 	border-bottom: 1px solid #FACE77;
 	margin-top: 13px;
 	padding-bottom: 8px;
+	min-height: 77px;
 	}
 	.pager{
 		text-align: right;
@@ -850,6 +865,8 @@ padding-bottom: 7px;
 			border-bottom: 0px;
 			float: left;
 			margin: 0px 3.5px;
+			width: 55px;
+			height: 55px;
 		}
 		img{
 		/*clear: both;	*/
@@ -1013,7 +1030,11 @@ ul.quicktabs-tabs{
 width: 260px;
 padding: 0px 14px;
 margin: 0;
-
+	.form-item.form-type-radio {
+	float: left;
+	width: 120px;
+	margin: 5px 4px;
+	}
 }
 
 /*******************  All Groups **************************/
@@ -1041,7 +1062,7 @@ margin: 0;
 		background: white;
 		a{
 			padding: 0;
-			margin-left: -8px;
+			text-decoration: none;
 			color: #B01919;
 			font-weight: bold;
 			font-size: 16px;
@@ -1078,13 +1099,14 @@ margin: 0;
 		font-weight: bolder;
 		border-color: #FAAC18;
 		text-decoration: none;
-		padding: 8px;	
+		padding: 5px 10px;
 		}
 		.group{
 		float: right;
-		font-size: 7px;
-		margin-top: -13px;
+		font-size: 11px;
+		margin-top: -17px;
 		margin-right: 6px;
+
 		}
 		.number{
 		float: left;
@@ -1648,7 +1670,7 @@ display: none;
 
 }*/
 
-/*******************  ****all events gruop**********************/
+/******************* ****all events gruop**********************/
 #block-views-group-s-events-block-2{
 	width: 753px;
 	margin-top: 52px;
@@ -1663,7 +1685,7 @@ display: none;
 	box-shadow: 0px 0px 0px 3px #FAE8C7;
 	}
 	.views-field-title,
-	.views-field-field-description-group,{
+	.views-field-field-description-group{
 		margin: 0px 10px;
 		padding-left: 10px;
 	}
