@@ -319,6 +319,9 @@ bblock-menu-menu-community-space{
 	text-decoration: none;
 	font-size: 15px;
 }
+div #breadcrumb:after{
+clear: both;
+}
 /*************************  tabs  *****************************/
 #block-menu-menu-tabs{
 	position: static;
@@ -590,6 +593,7 @@ bblock-menu-menu-community-space{
 }
 
 /*******************  Groups page **************************/
+.region-content{clear: both;}
 .section-activities,.section-users{
  	#main .region-content{
 		clear: both;
@@ -608,6 +612,7 @@ bblock-menu-menu-community-space{
 .section-group #block-views-496829e4ed0eb890c08a769ebd3a80e3,
 .section-activities #block-views-link-to-activity-block-1,
 .section-event #block-views-link-to-activity-block-1,
+.section-events  #block-views-link-to-activity-block-1,
 .section-node-add #block-og-extras-node-links,
 .section-members #block-views-link-to-group-members-block-1{
 background: white;
@@ -989,6 +994,7 @@ ul.quicktabs-tabs{
 			    padding: 0 25px 0 0;
 			}
 		}
+
 }
 #quicktabs{
 	.block-title{
@@ -1046,9 +1052,13 @@ margin: 0;
 }
 
 /*******************  All Groups **************************/
-#quicktabs-list_of_groups{
+.page-groups .region-content{
+clear: both;
+}
+#quicktabs-list_of_groups,
+#block-views-4cf7ecc831800e49c7e8e4d4e5fa3265{
 	width: 753px;
-	td{
+	td, .views-row{
 	float: left;
 	padding: 0;
 	margin: 0px 24px 31px 0px;
@@ -1062,7 +1072,7 @@ margin: 0;
 	.views-field-field-description-group{
 		margin: 0px 10px;
 	}
-	.views-field-title{
+	.views-field-title,.views-field-name{
 		border-bottom: 1px solid #FACE77;
 		margin-top: 6px;
 		padding-bottom: 6px;
@@ -1081,7 +1091,8 @@ margin: 0;
 	.views-field-group-group{
 	color: #014a81;
 	}
-	.views-field-field-group-logo{
+	.views-field-field-group-logo,
+ 	.views-field-field-user-picture{
 	height: 143px;
 	}
 	.views-field-field-description-group{
@@ -1276,7 +1287,8 @@ margin: 0;
 .node-type-group-s-avtivity,
 .node-type-group-members,
 .node-type-groups-event,
-.page-node-add{
+.page-node-add,
+.section-events{
 	#page-title{
 		display: none;
 		}
