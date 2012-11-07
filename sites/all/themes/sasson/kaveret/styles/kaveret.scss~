@@ -91,7 +91,6 @@ clear: both;
 	text-align: left;
 	font-size: 25px;
 	color:#014a81;
-	float: left;
 	}
 
 #header{
@@ -555,8 +554,8 @@ bblock-menu-menu-community-space{
 	margin: -15px 0px 0px;
 	}
 #block-menu-menu-share-icons .menu{
-	width: 173px;
-	margin-left: -23px;
+	margin-left: 4px;
+	padding: 0;
 	li{
 		list-style: none;
 		height: 30px;
@@ -587,7 +586,7 @@ bblock-menu-menu-community-space{
 .section-activities{
  	#main .region-content{
 		clear: both;
-		width: 742px;
+		width: 747px;
 		margin-left: -22px;
 	}
 	.region-sidebar-second{
@@ -609,7 +608,7 @@ border-right: 1px solid #FCF0D8;
 /*.section-activity #block-og-extras-node-links{background: white;}
 .section-activity #block-views-link-to-group-members-block-1{background: white;}*/
 #featured{
-	#block-views-current-group-block{
+	#block-views-current-group-block,#block-block-7{
 	cursor: default;
 	margin-left: -5px;
 		.content{
@@ -759,17 +758,28 @@ border-bottom: 1px solid #FACE77;
 	position: absolute;
 	right: 13px;
 	margin-top: -7px;
-		a{color:#014a81; font-size: 19px;}	
+	a{color:#014a81; font-size: 19px;}	
 	}
 	.view-content{
 	clear: both;
 	padding-top: 5px;
 	}
-.view-footer{
- clear: both;
-}
-header h2{width:auto;  clear: both;}
-	img{
+	.view-footer{
+	margin-top: 10px;
+	float: right;
+	clear: both;
+	text-align: right;
+	width: 100%;
+	padding-top: 7px;
+	border-top: 1px solid #FACE77;
+		p{margin: 0px;}
+		a{color:#014a81;font-size: 19px;}
+	}
+	header h2{
+	width:auto; 
+	clear: both;
+	}
+	img,.views-field-field-video-group{
 	float: left;
 	margin-right: 10px;
 	}
@@ -810,15 +820,19 @@ header h2{width:auto;  clear: both;}
 		}
 	}
 }
+#block-views-group-s-poll-block-1 .views-row .content{
+	clear: both;
+	padding-top: 1px;
+}
 #block-views-group-members-block {
-padding-bottom: 17px;
+padding-bottom: 7px;
 	.view-header p{
 	background: #f0ae11;
 	color: white;
 	font-weight: bolder;
 	width: 95px;
 	text-align: center;
-	
+	margin-top: 14px;
 	line-height: 13px;
 	padding: 3px 0px;
 		a{
@@ -826,12 +840,16 @@ padding-bottom: 17px;
 		font-size: 15px;
 		}
 	}
+	.view-content{
+	padding-top: 14px;
+	}
+
 }
 #block-views-group-members-block .content{
 		.views-row{
 			border-bottom: 0px;
 			float: left;
-		margin: 1px 1px;
+			margin: 1px 1px;
 		}
 		img{
 		/*clear: both;	*/
@@ -847,7 +865,7 @@ padding-bottom: 17px;
 		font-size: 9px;
 		font-weight: bolder;
 		text-align: center;
-		background: url("../images/shadow-munber-post.png") no-repeat;
+		background: url("../images/shadow-number-post.png") no-repeat;
 		}
 		div.img-biger{
 			position: absolute;
@@ -876,19 +894,10 @@ padding-bottom: 17px;
 	.field-content:hover div.img-biger{
 	display: block;
 	}
-	/*
-height: 421px;
-		.field-content{
-		position: absolute;
-		}
-		
-		.views-row a{
-			display: block;
-		}
-		
-		.field-content{
-		width: auto;
-		}*/
+}
+div.img-biger .number[value^="0"],
+.numbers-visible[value^="0"]{
+	display:none;
 }
 /*-------------------------*/
 #block-views-my-groups-block,
@@ -973,6 +982,7 @@ ul.quicktabs-tabs{
 		.views-field-title,header h2{
 				background: #9f2772;
 				margin: 0;
+				font-size: 14px;
 				a,span.field-content{
  					font-size: 14px;
 					text-decoration: none;
@@ -1003,6 +1013,7 @@ ul.quicktabs-tabs{
 width: 260px;
 padding: 0px 14px;
 margin: 0;
+
 }
 
 /*******************  All Groups **************************/
@@ -1317,7 +1328,7 @@ clear: both;
 	float: left;
 	font-size: 19px;
 	background: #fcf0d8;
-	padding-left: 14px;
+	padding-left: 12px;
 		.fieldset-legend{
 			background-color: #f8db95;
 			padding: 9px 152px 5px 14px;
@@ -1338,24 +1349,23 @@ clear: both;
 			background: url('../images/day-img.png') no-repeat 36% 6%;
 			line-height: 23px;
 		}
-		.field-name-field-location-of-event{
-			float: right;
-			margin-top: -44px;
-			margin-right: 0px;
-		}
 		.field-name-field-location-of-event-text{
 			border-bottom: 1px dashed black;
 			margin-bottom: 3px;
 			padding-bottom: 6px;
 			width: 192px;
 		}
-		.field-name-field-start-event,
-		.field-name-field-end-event{
+		.group_start,
+		.group_end{
 			text-align: right;
 			margin-right: 26px;
-			.field-label{font-weight:normal;}
+			h3{font-weight:normal; margin: 0;}
 			.field-items{font-weight: 700; line-height: 20.5px}
 		}
+}
+.field-name-field-location-of-event{
+			float: right;
+			margin-top: -7px;
 }
 .date-display-single:first-line{
 	font-size: 36px;
