@@ -1058,6 +1058,12 @@ clear: both;
 #quicktabs-list_of_groups,
 #block-views-4cf7ecc831800e49c7e8e4d4e5fa3265{
 	width: 753px;
+	ul .quicktabs-tabs{
+	margin-top: 0px
+	}
+	#quicktabs-container-list_of_groups{
+	clear: both;
+	}
 	td, .views-row{
 	float: left;
 	padding: 0;
