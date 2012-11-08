@@ -874,6 +874,11 @@ padding-bottom: 7px;
 	}
 
 }
+#block-views-group-s-deccument-block-1{
+	.views-field-field-doccument{
+	color: #014A81;
+	}
+}
 #block-views-group-members-block .content{
 		.views-row{
 			border-bottom: 0px;
@@ -1051,15 +1056,14 @@ width: 260px;
 padding: 0px 14px;
 margin: 0;
 	.form-item.form-type-radio {
-	float: left;
-	width: 120px;
-	margin: 5px 4px;
 	}
 }
-#block-quicktabs-group-s-events .views-field-body{
+#block-quicktabs-group-s-events .views-field-body,#block-quicktabs-group-s-events .views-field-body-1,.video-embed-description{
 		position: absolute;
 		z-index: 5;
 		width: 303px;
+		height: 44px;
+		background-color: rgba(255, 255, 255, 0.34);
 }
 #block-quicktabs-group-s-discussion-{
 	.views-field-body{
