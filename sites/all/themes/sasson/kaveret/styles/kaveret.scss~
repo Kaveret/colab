@@ -753,6 +753,7 @@ margin-bottom: 26px;
 #block-views-group-s-poll-block-1,
 #block-views-group-s-video-block-1,
 #block-views-group-s-discussion-block-1,
+#block-views-group-s-deccument-block-1,
 #block-views-activity-user-block,
 #block-views-activity-user-block-1,
 #block-views-activity-user-block-2,
@@ -834,7 +835,7 @@ border-bottom: 1px solid #FACE77;
 	border-bottom: 1px solid #FACE77;
 	margin-top: 13px;
 	padding-bottom: 8px;
-	min-height: 77px;
+	/*min-height: 77px;*/
 	}
 	.pager{
 		text-align: right;
@@ -991,7 +992,7 @@ ul.quicktabs-tabs{
 			    font-size: 14px;
 			    text-decoration: none;
 			    color: #B01919;
-			    padding: 0 25px 0 0;
+			    padding: 0 8px 0 0;
 			}
 		}
 
@@ -1005,7 +1006,7 @@ ul.quicktabs-tabs{
 	    font-weight: normal;
 	}
 	li{
-	    float: right;  
+
 	    list-style: none;
 	}
 	.quicktabs_main{
@@ -1029,12 +1030,17 @@ ul.quicktabs-tabs{
 			margin: 0;
 		}
 		td,.views-row{
-			width: 288px;
+			width: 303px;
 			height: 202px;
-			margin-right: 31px;
+			margin-right: 17px;
 			margin-bottom: 18px;
 			float: left;
-		}	
+		}
+
+		td:nth-child(3)	{margin-right: 0px;}
+		td:nth-child(6)	{margin-right: 0px;}
+		td:nth-child(9)	{margin-right: 0px;}
+		
 	}
 }
 .section-group td,.section-group .views-row{
@@ -1050,6 +1056,19 @@ margin: 0;
 	margin: 5px 4px;
 	}
 }
+#block-quicktabs-group-s-events .views-field-body{
+		position: absolute;
+		z-index: 5;
+		width: 303px;
+}
+#block-quicktabs-group-s-discussion-{
+	.views-field-body{
+	margin: 12px;
+	}
+	.views-field views-field-comment-count{
+	margin-left: 14px;
+	}
+}
 
 /*******************  All Groups **************************/
 .page-groups .region-content{
@@ -1058,7 +1077,7 @@ clear: both;
 #quicktabs-list_of_groups,
 #block-views-4cf7ecc831800e49c7e8e4d4e5fa3265{
 	width: 753px;
-	ul .quicktabs-tabs{
+	ul.quicktabs-tabs{
 	margin-top: 0px
 	}
 	#quicktabs-container-list_of_groups{
