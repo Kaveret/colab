@@ -931,8 +931,8 @@ padding-bottom: 7px;
 	display: block;
 	}
 }
-div.img-biger .number[value^="0"],
-.numbers-visible[value^="0"]{
+div.img-biger .number[class*=" 0 "],
+.numbers-visible[class*=" 0 "]{
 	display:none;
 }
 /*-------------------------*/
