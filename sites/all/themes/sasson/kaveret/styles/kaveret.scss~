@@ -825,7 +825,7 @@ border-bottom: 1px solid #FACE77;
 	}
 	.views-field-created{
 	margin-top: -5px;
-	font-size: 11px;
+	font-size: 12px;
 	}
 	div.views-field-body{
 		margin-left: 0px;
@@ -965,12 +965,13 @@ div.img-biger .number[class*=" 0 "],
 /*-------------------------*/
 #block-views-my-groups-block,
 #block-views-tags-block,
-#block-views-groups-block{
+#block-views-groups-block,
+#block-views-my-groups-block-1{
 	margin-top: -4px;
 	.block-title{
 		margin: 0;
 		font-size: 14px;
-
+		color: #014A81
 	}
 	ul{
 		list-style: none;		
@@ -1086,17 +1087,19 @@ ul.quicktabs-tabs{
 width: 260px;
 padding: 0px 14px;
 margin: 0;
-	.views-field-body{
-	margin: 8px 10px;
-	}
-	.views-field-view-node a{
+}
+#block-quicktabs-group-s-poll .views-field-body{
+	margin: 8px 20px;
+	color: #014A81;
+}
+#block-quicktabs-group-s-poll .views-field-view-node a{
 	text-decoration: none;
 	margin-left: 10px;
-	}
 }
+
 #block-quicktabs-group-s-events .views-field-body,
-#block-quicktabs-group-s-events .views-field-body-1,
-.video-embed-description{
+#block-quicktabs-group-s-video .views-field-body-1,
+#block-quicktabs-group-s-video .video-embed-description{
 		position: absolute;
 		z-index: 5;
 		width: 303px;
@@ -1381,7 +1384,7 @@ clear: both;
 	height: 22px;
 	margin: -28px 11px -51px 0px;
 	}
-	#block-views-group-logo-block{
+	#block-views-group-logo-block,#block-views-individual-space-block{
 	width: 165px;
 	float: left;
 	margin-bottom: 9px;
@@ -1394,7 +1397,10 @@ clear: both;
 .node-type-groups-event,
 .page-node-add,
 .section-events,
-.section-doccuments{
+.section-doccuments,
+.section-discussions,
+.section-videos,
+.section-polls{
 	#page-title{
 		display: none;
 		}
@@ -1800,7 +1806,10 @@ display: none;
 }*/
 
 /******************* ****all events gruop**********************/
-#block-views-group-s-events-block-2,#block-views-group-s-discussion-block-2,#block-views-group-s-deccument-block-4{
+#block-views-group-s-events-block-2,
+#block-views-group-s-discussion-block-2,
+#block-views-group-s-deccument-block-4,
+#block-views-group-s-video-block-2{
 	width: 753px;
 	margin-top: 52px;
 	td{
@@ -1836,7 +1845,7 @@ display: none;
 	.views-field-name,
 	.views-field-created,
 	.views-field-body{
-		padding-left: 11px;
+		padding:0px 12px;
 		color:black;
 	}
 	.views-field-body{
@@ -1898,5 +1907,25 @@ display: none;
 		}
 	}
 }
+#block-views-group-s-discussion-block-2{
+	.views-field-body{
+	    height: 237px;
+	}
+	.views-field views-field-comment-count{
+	padding-left: 12px;
+	}
+}
 
+#block-views-group-s-deccument-block-4 .view-group-s-deccument{
+	li {
+	height: 35px;
+	overflow: hidden;
+	line-height: 19px;
+	margin: 8px 10px;
+	}
+}
+#block-views-group-s-poll-block-2{
+.views-label-name{
 
+}
+}
