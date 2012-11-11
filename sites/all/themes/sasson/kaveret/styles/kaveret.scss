@@ -538,7 +538,7 @@ clear: both;
 	    list-style: none;
 	    background: url('../images/big-icons.png') no-repeat 50% 0;
 		a{
-			color: #551A8B;
+			color:#014a81;
 			margin-right: 6px;
 			margin-left: 15px;
 	   	    	text-decoration: none;
@@ -551,6 +551,7 @@ clear: both;
 			letter-spacing: 0px;
 			line-height: 12px;
 			word-spacing: 1px;
+			font-weight: bold;
 		}
 		
 	}
@@ -641,6 +642,9 @@ border-right: 1px solid #FCF0D8;
 			padding-top: 24px;
 			background: none;
 			height: 37px;
+			}
+			.views-field-title{
+`			border-left: 0px;
 			}
 		}
 	}
@@ -744,9 +748,6 @@ border-right: 1px solid #FCF0D8;
 #block-views-latest-updates-block-1{
 float: right;
 }
-#block-views-group-s-events-block-1{
-margin-bottom: 26px;
-}
 #block-views-group-members-block,
 #block-views-group-s-events-block-1,
 #block-views-latest-updates-block-1,
@@ -814,17 +815,20 @@ border-bottom: 1px solid #FACE77;
 	a{
 	text-decoration: none;
 	color: #A3001E;
+	font-size: 14px;
 	}
 	.views-field-created,
 	.views-label-name,
 	.views-label-name a.username{
 	color:#686868;
+	font-size: 14px;
 	}
 	.views-field-created{
 	margin-top: -5px;
+	font-size: 11px;
 	}
 	div.views-field-body{
-		margin-left: 113px;
+		margin-left: 0px;
 		color:#014a81;
 		font-size: 14px;
 		.field-content p{
@@ -876,9 +880,30 @@ padding-bottom: 7px;
 	}
 
 }
+#block-views-group-s-video-block-1{
+	.video-embed-description{
+	display: none;
+	}
+background-color:none;
+	.views-row{
+	padding-bottom: 22px;
+	}
+}
 #block-views-group-s-deccument-block-1{
-	.views-field-field-doccument{
+	li{
+	height: 35px;
+	overflow: hidden;
+	line-height: 19px;
+	margin: 8px 10px;
+	}
+	.views-field-field-doccument a{
 	color: #014A81;
+	}
+}
+#block-views-group-s-events-block-1{
+	margin-bottom: 26px;
+	div.views-field-body{
+	margin-left:110px;
 	}
 }
 #block-views-group-members-block .content{
@@ -941,10 +966,10 @@ div.img-biger .number[class*=" 0 "],
 #block-views-my-groups-block,
 #block-views-tags-block,
 #block-views-groups-block{
+	margin-top: -4px;
 	.block-title{
 		margin: 0;
-		color: #014A81;
-		font-size: 17px;
+		font-size: 14px;
 
 	}
 	ul{
@@ -952,10 +977,13 @@ div.img-biger .number[class*=" 0 "],
         }
 	li{
 	margin: 0;
+	color: #4E4E4E;
+	font-size: 13.5px;
 	}
         a{
-       		color: black;
+       		color: #4E4E4E;
        		text-decoration: none;
+		font-size: 13.5px;
         }
 }
 #block-views-tags-block .block-title,
@@ -1022,6 +1050,7 @@ ul.quicktabs-tabs{
 				background: #9f2772;
 				margin: 0;
 				font-size: 14px;
+				padding: 2px 0px;
 				a,span.field-content{
  					font-size: 14px;
 					text-decoration: none;
@@ -1057,19 +1086,28 @@ ul.quicktabs-tabs{
 width: 260px;
 padding: 0px 14px;
 margin: 0;
-	.form-item.form-type-radio {
+	.views-field-body{
+	margin: 8px 10px;
+	}
+	.views-field-view-node a{
+	text-decoration: none;
+	margin-left: 10px;
 	}
 }
-#block-quicktabs-group-s-events .views-field-body,#block-quicktabs-group-s-events .views-field-body-1,.video-embed-description{
+#block-quicktabs-group-s-events .views-field-body,
+#block-quicktabs-group-s-events .views-field-body-1,
+.video-embed-description{
 		position: absolute;
 		z-index: 5;
 		width: 303px;
 		height: 44px;
+		overflow: hidden;
 		background-color: rgba(255, 255, 255, 0.34);
 }
 #block-quicktabs-group-s-discussion-{
 	.views-field-body{
 	margin: 12px;
+	height: 115px;
 	a{text-decoration: none;}
 	}
 
@@ -1084,6 +1122,15 @@ margin: 0;
 	margin-bottom: 7px;
 	}
 	a{text-decoration: none;}
+}
+
+#block-quicktabs-group-s-doccuments .view-content{
+	li{
+	height: 35px;
+	overflow: hidden;
+	line-height: 19px;
+	margin: 8px 10px;
+	}
 }
 /*******************  All Groups **************************/
 .page-groups .region-content{
@@ -1752,7 +1799,7 @@ display: none;
 }*/
 
 /******************* ****all events gruop**********************/
-#block-views-group-s-events-block-2{
+#block-views-group-s-events-block-2,#block-views-group-s-discussion-block-2{
 	width: 753px;
 	margin-top: 52px;
 	td{
@@ -1777,6 +1824,7 @@ display: none;
 		margin-bottom: 5px;
 		background: white;
 		a{
+			text-decoration: none;
 			padding: 0;
 			margin-left: -8px;
 			color: #B01919;
@@ -1788,10 +1836,11 @@ display: none;
 	.views-field-created,
 	.views-field-body{
 		padding-left: 11px;
-		padding-top: 10px;
-		}
+		color:black;
+	}
 	.views-field-body{
 		clear: both;
+		color: #014A81;
 	}
 	.views-field-field-description-group,
 	.views-field-name,
