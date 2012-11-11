@@ -1393,7 +1393,8 @@ clear: both;
 .node-type-group-members,
 .node-type-groups-event,
 .page-node-add,
-.section-events{
+.section-events,
+.section-doccuments{
 	#page-title{
 		display: none;
 		}
@@ -1799,7 +1800,7 @@ display: none;
 }*/
 
 /******************* ****all events gruop**********************/
-#block-views-group-s-events-block-2,#block-views-group-s-discussion-block-2{
+#block-views-group-s-events-block-2,#block-views-group-s-discussion-block-2,#block-views-group-s-deccument-block-4{
 	width: 753px;
 	margin-top: 52px;
 	td{
