@@ -971,7 +971,7 @@ div.img-biger .number[class*=" 0 "],
 	.block-title{
 		margin: 0;
 		font-size: 14px;
-		color: #014A81
+		color: #014A81;
 	}
 	ul{
 		list-style: none;		
@@ -1099,13 +1099,17 @@ margin: 0;
 
 #block-quicktabs-group-s-events .views-field-body,
 #block-quicktabs-group-s-video .views-field-body-1,
-#block-quicktabs-group-s-video .video-embed-description{
+#block-quicktabs-group-s-video  .video-embed-description{
 		position: absolute;
 		z-index: 5;
-		width: 303px;
+		width: 274px;
 		height: 44px;
 		overflow: hidden;
 		background-color: rgba(255, 255, 255, 0.34);
+		padding: 0px 14px;
+}
+#block-quicktabs-group-s-video .video-embed-description{
+top: 24px;
 }
 #block-quicktabs-group-s-discussion-{
 	.views-field-body{
@@ -1194,7 +1198,7 @@ clear: both;
 		height: 123px;
 		font-weight: bold;
 		margin-bottom: 16px;
-		padding-right: 62px;
+		padding-right: 40px;
 	}
 	.field-content{
 		font-weight: normal;
@@ -1237,6 +1241,11 @@ clear: both;
 		.members{
 		font-size: 15px;
 		float: left;
+		}
+		.picture{
+		float: left;
+		margin: 0px 0px 0px 6px;
+
 		}
 	}
 }
@@ -1823,9 +1832,14 @@ display: none;
 	box-shadow: 0px 0px 0px 3px #FAE8C7;
 	}
 	.views-field-title,
-	.views-field-field-description-group{
+	.views-field-field-description-group,
+	.views-field-field-user-description{
 		margin: 0px 10px;
 		padding-left: 10px;
+	}
+	.views-field-field-description-group,
+	.views-field-field-user-description{
+	height: 141px;
 	}
 	.views-field-title{
 		border-bottom: 1px solid #FACE77;
@@ -1890,11 +1904,6 @@ display: none;
 		font-size: 7px;
 		margin-top: -13px;
 		margin-right: 6px;
-		}
-		.picture{
-		float: left;
-		margin: 0px 0px 0px 6px;
-
 		}
 		.number{
 		float: left;
