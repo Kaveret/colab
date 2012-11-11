@@ -993,11 +993,11 @@ div.img-biger .number[class*=" 0 "],
 	background: url('../images/home-icons.png') no-repeat;
 	}
 #block-views-tags-block .block-title{
-  background-position:-3% 101.5%;
+  background-position:-4% 100%;
 			}
 
 #block-views-groups-block .block-title{
-  background-position:-3% -0.5%;
+  background-position:-4% -0.5%;
 }
 /*-------------------*/
 /*.odd*/ 
