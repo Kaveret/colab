@@ -837,8 +837,10 @@ border-bottom: 1px solid #FACE77;
 	padding-bottom: 8px;
 	/*min-height: 77px;*/
 	}
+.views-row-last{border-bottom:0}
 	.pager{
-		text-align: right;
+		border-top: 1px solid #FACE77;
+		padding-top: 7px;
 		text-align: right;
 		margin: 6px 0px -8px 0px;
 		a{
@@ -873,6 +875,11 @@ padding-bottom: 7px;
 	padding-top: 14px;
 	}
 
+}
+#block-views-group-s-deccument-block-1{
+	.views-field-field-doccument{
+	color: #014A81;
+	}
 }
 #block-views-group-members-block .content{
 		.views-row{
@@ -1051,12 +1058,9 @@ width: 260px;
 padding: 0px 14px;
 margin: 0;
 	.form-item.form-type-radio {
-	float: left;
-	width: 120px;
-	margin: 5px 4px;
 	}
 }
-#block-quicktabs-group-s-events .views-field-body,#block-quicktabs-group-s-events .views-field-body-1{
+#block-quicktabs-group-s-events .views-field-body,#block-quicktabs-group-s-events .views-field-body-1,.video-embed-description{
 		position: absolute;
 		z-index: 5;
 		width: 303px;
@@ -1066,12 +1070,21 @@ margin: 0;
 #block-quicktabs-group-s-discussion-{
 	.views-field-body{
 	margin: 12px;
+	a{text-decoration: none;}
 	}
-	.views-field views-field-comment-count{
+
+	.views-field-comment-count{
 	margin-left: 14px;
 	}
 }
-
+ .views-field-field-doccument{
+	margin: 10px 10px;
+	li{
+	margin: 0;
+	margin-bottom: 7px;
+	}
+	a{text-decoration: none;}
+}
 /*******************  All Groups **************************/
 .page-groups .region-content{
 clear: both;
@@ -1091,7 +1104,7 @@ clear: both;
 	float: left;
 	padding: 0;
 	margin: 0px 24px 31px 0px;
-	width: 218px;
+	width: 215px;
 	height: 373px;
 	border-radius: 4px;
 	border: 2px solid #FBD38B;
@@ -1100,6 +1113,8 @@ clear: both;
 	.views-field-title,
 	.views-field-field-description-group{
 		margin: 0px 10px;
+		width: 186px;
+
 	}
 	.views-field-title,.views-field-name{
 		border-bottom: 1px solid #FACE77;
@@ -1122,12 +1137,17 @@ clear: both;
 	}
 	.views-field-field-group-logo,
  	.views-field-field-user-picture{
-	height: 143px;
+	height: 141px;
 	}
-	.views-field-field-description-group{
+	.views-label-field-description-group,
+.views-label-field-user-description{
 		height: 123px;
 		font-weight: bold;
 		margin-bottom: 16px;
+		padding-right: 62px;
+	}
+	.field-content{
+		font-weight: normal;
 	}
 	.views-field-group-group{
 		background: #fcf0d8;
@@ -1142,7 +1162,7 @@ clear: both;
 	.views-field-group-group .field-content{
 		padding-top: 16px;
 		a{
-		background-color: #FAAC18;
+		
 		color: white;
 		font-weight: bolder;
 		border-color: #FAAC18;
@@ -1151,10 +1171,12 @@ clear: both;
 		}
 		.group{
 		float: right;
-		font-size: 11px;
-		margin-top: -17px;
+		font-size: 13px;
+		padding-top: 3px;
 		margin-right: 6px;
-
+		background-color: #FAAC18;
+		width: 53px;
+		height: 22px;
 		}
 		.number{
 		float: left;
@@ -1164,7 +1186,14 @@ clear: both;
 		}
 		.members{
 		font-size: 15px;
+		float: left;
 		}
+	}
+}
+#block-views-4cf7ecc831800e49c7e8e4d4e5fa3265{
+	.views-field-name{
+	float: none;
+	margin: 1px 10px;
 	}
 }
 /*******************  Learning Center page **************************/
@@ -1797,11 +1826,16 @@ display: none;
 		text-decoration: none;
 		padding: 8px;	
 		}
-		.group{
+		.group{	
 		float: right;
 		font-size: 7px;
 		margin-top: -13px;
 		margin-right: 6px;
+		}
+		.picture{
+		float: left;
+		margin: 0px 0px 0px 6px;
+
 		}
 		.number{
 		float: left;
