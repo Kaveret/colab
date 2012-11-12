@@ -1,0 +1,18 @@
+; $Id: 
+name = Limit balances
+description = Min and max balance limits per user and per currency
+package = Community Accounting
+core = 7.x
+php 5.3
+
+dependencies[] = mcapi
+
+files[] = views/mcapi_limits_views.inc
+files[] = views/views_handler_field_mcapi_limits.inc
+
+; Information added by drupal.org packaging script on 2012-10-25
+version = "7.x-3.0-rc2"
+core = "7.x"
+project = "mutual_credit"
+datestamp = "1351128419"
+

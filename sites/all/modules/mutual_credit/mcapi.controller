@@ -1,0 +1,251 @@
+<?php
+// $Id:
+/*
+ * This file is included using the function mcapi_controller();
+ * Each function supports the choice of database connections.
+ * the class should be named thus:
+ * MODULENAME_EntityController
+ */
+/*
+ * The transaction entity has its own CRUD operations
+ */
+class mcapi_EntityController extends DrupalDefaultEntityController {
+  /*
+   * This controller test writes the transaction during validation
+   * mostly copied from the node controller
+   * need to see what the entity module has to offer
+   * no support for revisions
+   * returns an error if the transaction id is invalid
+   */
+  public function load($ids = array(), $conditions = array()) {
+    $entities = array();
+    $passed_ids = !empty($ids) ? array_flip($ids) : FALSE;
+
+    //get from cache where available
+    if ($this->cache) {
+      $entities += $this->cacheGet($ids, $conditions);
+      // If any entities were loaded, remove them from the ids still to load.
+      if ($passed_ids) {
+        $ids = array_keys(array_diff_key($passed_ids, $entities));
+      }
+    }
+
+    if ($ids === FALSE || $ids || ($conditions && !$passed_ids)) {
+      db_set_active(variable_get('mcapi_db_read', 'default'));
+      $query = db_select('mcapi_transactions');
+      db_set_active();
+      $query->fields('mcapi_transactions', $this->entityInfo['schema_fields_sql']['base table']);
+      // Build the query.
+      if ($ids) {
+        $query->condition("mcapi_transactions.xid", $ids);
+      }
+      foreach ($conditions as $field => $value) {
+        $query->condition('mcapi_transactions.' . $field, $value);
+      }
+      $query->orderBy('xid', 'ASC'); //this ensures that the primary transaction in a cluster is first
+      $queried_entities = $query->execute()->fetchAllAssoc('xid');
+      //extract the serialized data into 'extra' property
+      //there isn't acutally a use for the extra property at the moment.
+      foreach ($queried_entities as $entity) {
+        $entity->extra = unserialize($entity->data);
+        unset($entity->data);
+      }
+    }
+    if (!empty($queried_entities)) {
+      $this->attachLoad($queried_entities);
+      $entities += $queried_entities;
+    }
+    if ($this->cache) {
+      if (!empty($queried_entities)) {
+        $this->cacheSet($queried_entities);
+      }
+    }
+    return $entities;
+  }
+  
+
+  /*
+   * put an array of transactions in the database
+   * any transactions without a serial number will be assumed to be part of a new cluster
+   * and saved with the SAME serial number
+   */
+  public function insert(array &$transactions, $really = FALSE) {
+    //we need to ensure the schema is cached before calling mcapi_write_record
+    //Otherwise it may try to retrieve the schema from the wrong database
+    drupal_get_schema('mcapi_transactions');
+    //for now only the controller knows how to generate and serial numbers for its own
+    //this subsystem system will need reworking if this module expands
+    $serial = $this->next_serial(current($transactions));
+    foreach ($transactions as $transaction) {
+      $transaction->temp = isset($transaction->xid) ? $transaction->xid : 0;
+      $transaction->creator = $GLOBALS['user']->uid;
+      if (empty($transaction->created)) $transaction->created = REQUEST_TIME;
+      //do the best we can in case a serial number isn't yet provided
+      if (empty($transaction->serial)) {
+        $transaction->serial = $serial;
+      }
+      $transaction->data = (isset($transaction->extra)) ? $transaction->extra : array();
+    }
+    //remember transaction might be written to more than one db
+    foreach (array_filter(variable_get('mcapi_db_write', array('default'))) as $connection) {
+      db_set_active($connection);
+      try{
+        $ts[] = db_transaction();
+        foreach ($transactions as $transaction) {
+          if(drupal_write_record('mcapi_transactions', $transaction) != SAVED_NEW) {
+            throw new Exception(
+              t('Failed to insert into table @tablename of database @database',
+              array('@tablename' => 'mcapi_transactions', '@database' => $connection)
+            ));
+          }
+        }
+      }
+      catch (Exception $e) {
+        foreach ($ts as $db_transaction) $db_transaction->rollback();
+        db_set_active();
+        throw $e;
+      }
+    }
+    if (!$really) {
+      foreach ($ts as $db_transaction) $db_transaction->rollback();
+      foreach ($transactions as $transaction) {
+        $transaction->xid = $transaction->temp;
+      }
+    }
+    db_set_active();
+  }
+
+  /*
+   * there is no error checking on this.
+   * note that field_attach_delete must be called separately
+   */
+  public function undo(array $serials, $hard = FALSE) {
+    variable_del('change_undo_mode');
+    if ($hard) {
+      db_delete("mcapi_transactions")->condition('serial', $serials)->execute();
+    }
+    else {
+      $transactions = $this->load(NULL, array('serial' => $serials));
+      foreach($transactions as $transaction) {
+        $reversed = clone $transaction;
+        $reversed->serial = $transaction->serial;
+        $reversed->xid = NULL;
+        $reversed->payer = $transaction->payee;
+        $reversed->payee = $transaction->payer;
+        $reversed->type = 'reversal';
+        $reversed->data['original'] = $transaction->serial;
+        if ($field = variable_get('transaction_description_field', '')) {
+          $entity = entity_get_info('transaction');
+          $reversed->{$field}[LANGUAGE_NONE][0]['value'] = t('Reversal of @label', array('@label' => $entity['label callback']($transaction)));
+        }
+        $reverseds[] = $reversed;
+      }
+      try{
+        transactions_insert($reverseds, TRUE);
+      }
+      catch (Exception $e){
+        drupal_set_message(t('Failed to reverse transaction: @message', array('@message' => $e->getMessage())));
+      }
+    }
+  }
+  
+  /*
+   * change the state of a transaction and its dependents
+   * This does not count as updating it, which is subject to different permissions
+   */
+  public function state(array $serials, $new_state) {
+    db_update('mcapi_transactions')
+      ->fields(array('state' => $new_state))
+      ->condition('serial', $serials)
+      ->execute();
+
+    $this->resetCache();
+  }
+
+  /*
+   * get some stats by adding up the transactions for a given user
+   * this is currently used for the limits module and for the views handler per-row
+   * caching running balances is dangerous because they would all need recalculating any time a transaction changed state
+   */
+  public function sums($uid, $currcode, $conditions) {
+    //this COALESCE is only tested for mysql.
+    //when we join the tables like this, half of all values will be NULL, and NULL values do not add
+    //so these NULL values need to be selected as 0 before adding
+    //there may well be a more elegant way
+
+    $query = "SELECT
+      COALESCE(SUM(COALESCE(w2.worth_quantity, 0)), 0) as gross_in,
+      COALESCE(SUM(COALESCE(w1.worth_quantity, 0)), 0) as gross_out,
+      COALESCE(SUM(COALESCE(w2.worth_quantity, 0)) - SUM(COALESCE(w1.worth_quantity, 0)), 0) as balance,
+      COUNT(w1.worth_quantity) as count
+      FROM {mcapi_transactions} t
+      LEFT JOIN {field_data_worth} w1 ON t.xid = w1.entity_id AND w1.worth_currcode = '$currcode' AND t.payer = $uid
+      LEFT JOIN {field_data_worth} w2 ON t.xid = w2.entity_id AND w2.worth_currcode = '$currcode' AND t.payee = $uid
+      WHERE (t.payer = $uid OR t.payee = $uid)";
+    if ($result = db_query($query . mcapi_parse_conditions($conditions))->fetchAssoc()) {
+      return $result;
+    }
+    return array('gross_in' => 0, 'gross_out' => 0, 'balance' => 0, 'count' => 0);
+  }
+
+  /*
+   * alternative to using views
+   * Get a list of transactions for a user, between unixtimes
+   * arguments, in any order can be
+   * from // unixtime
+   * to //unixtime
+   * states array, defaults to array(0) which is completed transactions only
+   * no pager is provided in this function
+   * views is much better
+   */
+  public function get_period($uid, $variables) {
+    $variables += array(
+      'from' => 0,
+      'to' => REQUEST_TIME + 1,
+      'states' => array(TRANSACTION_STATE_FINISHED),
+      'currcode' => NULL
+    );
+    extract($variables);
+    db_set_active(variable_get('mcapi_db_read', 'default'));
+    $query = db_select('mcapi_transactions', 'x')->fields('x');
+    db_set_active();
+    $query->condition(db_or()
+      ->condition('payer', $uid)
+      ->condition('payee', $uid)
+    )
+    ->condition('state', $states)
+    ->condition('created', $from, '>')
+    ->condition('created', $to,  '<')
+    ->orderby('created');
+    if ($currcode) {
+      $query->condition('currcode', $currcode);
+    }
+    return $query->execute()->fetchAll();
+  }
+
+  //this function is not 100% robust against creating simultaneous transactions
+  public function next_serial() {
+    return db_query("SELECT MAX(serial) FROM {mcapi_transactions}")->fetchField() + 1;
+  }
+}
+
+function mcapi_parse_conditions($conditions) {
+  if (empty($conditions)) return '';
+  $where = array();
+  foreach ($conditions as $condition) {
+    if (is_array($condition)) {
+      $condition[] = '=';
+      list($field, $value, $operator) = $condition;
+      if (empty($operator)) $operator = ' = ';
+      if (is_array($value)) {
+        $value = '('.implode(', ', $value) .')';
+        $operator = ' IN ';
+      }
+      $where[] = " ( t.$field $operator $value ) ";
+    }
+    else {//the condition is already provided as a string
+      $where[] = " $condition ";
+    }
+  }
+  return ' AND '. implode(' AND ', $where);
+}

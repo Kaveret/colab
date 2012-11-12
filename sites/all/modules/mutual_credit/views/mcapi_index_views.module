@@ -1,0 +1,89 @@
+<?php
+//$Id
+
+/*
+ * Module keeps a cache of transactions which is optimised for views to interrogate
+ */
+
+/*
+ * implements hook_requirements
+ * tests that the transaction controller is default. i.e. using drupal
+ */
+function mcapi_index_views_requirements() {
+  $controller = variable_get('mcapi_controller', 'mcapi');
+  $requirements['transaction_controller'] = array(
+    'title' => 'Transaction controller',
+    'value' => 'mcapi_index_views module only works with controller: '.$controller,
+    'severity' => $controller == 'mcapi' ? REQUIREMENT_INFO : REQUIREMENT_ERROR,
+  );
+  return $requirements;
+}
+
+/*
+ * Implements views hook_views_api
+ */
+function mcapi_index_views_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'mcapi_index_views'),
+  );
+}
+
+/*
+ * implements hook_views_query_alter
+ * adds the currency code field to queries which is necessary for theming
+ */
+function mcapi_index_views_views_query_alter($view, &$query) {
+  if (in_array('mcapi_index', array_keys($query->table_queue))) {
+    //this index table needs to have the currency code field put in automatically
+    $query->add_field('mcapi_index', 'currcode', 'currcode');
+  }
+}
+//views access control callback
+function views_plugin_access_user_arg_check() {
+  return $GLOBALS['user']->uid == arg(1) || user_access('manage all transactions');
+}
+
+function mcapi_index_views_theme() {
+  return array(
+    'balance_history' => array(
+      'template' => 'balance_history',
+      'variables' => array(
+        'account' => NULL,
+        'histories' => array(),
+      )
+    )
+  );
+}
+
+
+function show_balance_history($uid, $currcodes = array(), $since = NULL) {
+  db_query("SET @csum := 0");
+  $account = user_load($uid);
+  if (empty($currcodes)) {
+    $currcodes = array_keys(currencies_load($account));
+  }
+  foreach ($currcodes as $currcode) {
+    //make a starting point, before the first transaction
+    //zero means the moment the account was created
+    $histories[$currcode] = array(0 => 0) +
+    db_query("SELECT created - :born, (@csum := @csum + diff) as balance
+      FROM {mcapi_index}
+      WHERE currcode = :currcode AND uid1 = $uid
+      ORDER BY created",
+      array(':currcode' => $currcode, ':born' => $account->created)
+    )->fetchAllKeyed(0);
+    
+    //make an end point now with the balance the same as the last point
+    $histories[$currcode][REQUEST_TIME - $account->created] = end($histories[$currcode]);
+    //now we need to curtail the history using $since
+    //couldn't be bothered now
+  }
+
+  return array(
+    '#theme' => 'balance_history',
+    '#account' => user_load($uid),
+    '#histories' => $histories
+  );
+
+}

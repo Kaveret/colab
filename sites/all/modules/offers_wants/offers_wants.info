@@ -1,0 +1,20 @@
+name = Offers & Wants
+description = A simple marketplace with 2 dimenstions of categories. For moree options, install date, date popup, image, and hierarchical select taxonomy
+package = Local communities
+core = 7.x
+configure = admin/config/ow
+
+files[] = offers_wants.install
+files[] = views/offers_wants.views.inc
+files[] = views/offers_wants.views_default.inc
+files[] = views/views_handler_field_want.inc
+
+dependencies[] = taxonomy
+dependencies[] = text
+dependencies[] = jquerymenu
+dependencies[] = views
+dependencies[] = date_popup
+dependencies[] = image
+dependencies[] = date
+dependencies[] = hierarchical_select
+;dependencies[] = hs_taxonomy

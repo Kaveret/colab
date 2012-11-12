@@ -1,0 +1,7 @@
+name = Mutual Credit Commerce Payment
+description = Pay the owners of of the shopping cart items from your mutual credit account
+package = Community Accounting
+core = 7.x
+
+dependencies[] = mcapi
+

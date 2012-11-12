@@ -1,0 +1,387 @@
+<?php
+//http://www.drupalcommerce.org.
+
+/*
+ * implements commerce hook_commerce_payment_method_info
+ */
+function mutual_credit_commerce_payment_commerce_payment_method_info() {
+  $payment_methods['mcapi_commerce'] = array(
+    'method_id' => 'mcapi_commerce',
+    'title' => t('Mutual credit'),
+    'short_title' => t('Mutual credit'),
+    'description' => t("Pay owners of products with this site's currency"),
+  );
+  return $payment_methods;
+}
+
+/*
+ * implements hook_currency_innerform_alter
+ * add some fields to the mutual_credit currency definition to make it work with commerce hook_currency_info
+ */
+function mutual_credit_commerce_payment_currency_innerform_alter(&$form, $form_state) {
+  $form['commerce'] = array(
+    '#title' => t('Commerce settings'),
+    '#type' => 'fieldset',
+    'symbol' => array(
+      '#title' => t('Symbol'),
+      '#description' => t('ideally 3 chars, capitalised'),
+      '#type' => 'textfield',
+      '#default_value' => isset($form['#currency']->commerce['symbol']) ? $form['#currency']->commerce['symbol'] : ''
+    ),
+    'symbol_placement' => array(
+      '#title' => t('Symbol placement'),
+      '#type' => 'radios',
+      '#options' => array('before' => t('Before'), 'after' => t('After')),
+      '#default_value' => isset($form['#currency']->commerce['symbol_placement']) ? $form['#currency']->commerce['symbol_placement'] : 'before'
+    )
+  );
+}
+
+/*
+ * implements mcapi hook_form_mcapi_currency_form_alter
+ */
+function mutual_credit_commerce_payment_commerce_currency_info() {
+  $currencies = array();
+  //need to implement hook_
+  foreach (currencies_load() as $currcode => $currency) {
+    if (isset($currency->commerce['symbol']) && isset($currency->commerce['symbol_placement'])) {
+      $currencies[$currcode] = array(
+        'code' => $currcode,
+        'symbol' => $currency->commerce['symbol'],
+        'name' => $currency->name,
+        'symbol_placement' => $currency->commerce['symbol_placement'],
+        'code_placement' => $currency->commerce['symbol_placement'],
+        'major_unit' => $currency->name,
+      );
+    }
+    else {
+      drupal_set_message(t("Mutual credit currency '@name' needs more info to be included in this list", array('@name' => $currency->name)));
+      $link = module_exists('mcapi_currencies') ? 'blah' : 'admin/accounting/currency';
+      drupal_set_message(l(t('Edit @name', array('@name' => $currency->name)), $link));
+    }
+  }
+  return $currencies;
+}
+
+/*
+ * implements hook_commerce_payment_methods
+ * determine what payment method to use
+ * should not return any information but update the order object's data array just like the payment method enabling action.
+ */
+function mutual_credit_commerce_payment_commerce_payment_methods($order) {
+  //NOT BEING CALLED!
+  print_r($order);die();
+}
+
+function mutual_credit_commerce_payment_commerce_payment_transaction_presave($transaction) {
+  print_r($transaction);die();
+}
+
+
+
+/*
+ * commerce_method_payment_info_callback
+ * determines where the price comes from
+ */
+function mcapi_commerce_settings_form($settings = NULL) {
+  debug('mcapi_commerce_settings_form');
+  debug(func_get_args());
+}
+
+/*
+ * commerce_method_payment_info_callback
+ * shows in the 'payment' method chooser ajaxy box
+ */
+function mcapi_commerce_submit_form($payment_method, $pane_values, $checkout_pane, $order) {
+  //print_r(func_get_args());
+
+}
+
+/*
+ * commerce_method_payment_info_callback
+Array(
+    //payment method
+    [0] => Array()
+    //pane form
+    [1] => Array
+        (
+            [#prefix] => <div id="payment-details">
+            [#suffix] => </div>
+            [#tree] => 1
+            [#parents] => Array
+                (
+                    [0] => commerce_payment
+                    [1] => payment_details
+                )
+
+            [#array_parents] => Array
+                (
+                    [0] => commerce_payment
+                    [1] => payment_details
+                )
+
+            [#weight] => 0.002
+            [#processed] =>
+            [#required] =>
+            [#attributes] => Array
+                (
+                )
+
+            [#title_display] => before
+            [#id] => edit-commerce-payment-payment-details
+            [#sorted] => 1
+            [#validated] => 1
+        )
+    //pane values
+    [2] =>
+    //order
+    [3] => stdClass Object
+        (
+            [order_number] => 6
+            [revision_id] => 27
+            [revision_uid] => 1
+            [mail] => matslats@gmail.com
+            [status] => checkout_review
+            [log] => Customer continued to the next checkout page via a submit button.
+            [revision_timestamp] => 1331317414
+            [revision_hostname] => 127.0.0.1
+            [data] => Array
+                (
+                )
+
+            [order_id] => 6
+            [type] => commerce_order
+            [uid] => 1
+            [created] => 1331317399
+            [changed] => 1331317414
+            [hostname] => 127.0.0.1
+            [commerce_line_items] => Array
+                (
+                    [und] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [line_item_id] => 6
+                                )
+
+                        )
+
+                )
+
+            [commerce_order_total] => Array
+                (
+                    [und] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [amount] => 1000
+                                    [currency_code] => def_clie
+                                    [data] => Array
+                                        (
+                                            [components] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [name] => base_price
+                                                            [price] => Array
+                                                                (
+                                                                    [amount] => 1000
+                                                                    [currency_code] => def_clie
+                                                                    [data] => Array
+                                                                        (
+                                                                        )
+
+                                                                )
+
+                                                            [included] => 1
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+            [commerce_customer_billing] => Array
+                (
+                    [und] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [profile_id] => 6
+                                )
+
+                        )
+
+                )
+
+        )
+    //form parents
+    [4] => Array
+        (
+            [0] => commerce_payment
+            [1] => payment_details
+        )
+
+)
+ */
+
+function mcapi_commerce_submit_form_validate($payment_method, $pane_form, $pane_values, $order, $form_parents = array()) {
+  $payments = mcapi_split_payments($order);
+
+  //get the products, their owners and the prices of each
+
+}
+
+
+
+function mcapi_split_payments($order) {
+  $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+  foreach ($order_wrapper->commerce_line_items as $delta => $line_item_wrapper) {
+    // Extract the product like so...
+    $product = $line_item_wrapper->commerce_product->value();
+    debug($product);
+  }
+  //add up the prices of the products for each node owner
+}
+
+/*
+ * process the payment
+ * Array(
+   //payment method
+   [0] => Array ()
+    //pane form
+    [1] => Array
+        (
+            [#prefix] => <div id="payment-details">
+            [#suffix] => </div>
+            [#tree] => 1
+            [#parents] => Array
+                (
+                    [0] => commerce_payment
+                    [1] => payment_details
+                )
+
+            [#array_parents] => Array
+                (
+                    [0] => commerce_payment
+                    [1] => payment_details
+                )
+
+            [#weight] => 0.002
+            [#processed] =>
+            [#required] =>
+            [#attributes] => Array
+                (
+                )
+
+            [#title_display] => before
+            [#id] => edit-commerce-payment-payment-details
+            [#sorted] => 1
+            [#validated] => 1
+        )
+    //pane values
+    [2] =>
+    //order
+    [3] => stdClass Object
+        (
+            [order_number] => 6
+            [revision_id] => 27
+            [revision_uid] => 1
+            [mail] => matslats@gmail.com
+            [status] => checkout_review
+            [log] => Customer continued to the next checkout page via a submit button.
+            [revision_timestamp] => 1331317414
+            [revision_hostname] => 127.0.0.1
+            [data] => Array
+                (
+                    [payment_method] => mcapi_commerce|commerce_payment_mcapi_commerce
+                )
+
+            [order_id] => 6
+            [type] => commerce_order
+            [uid] => 1
+            [created] => 1331317399
+            [changed] => 1331317414
+            [hostname] => 127.0.0.1
+            [commerce_line_items] => Array
+                (
+                    [und] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [line_item_id] => 6
+                                )
+
+                        )
+
+                )
+
+            [commerce_order_total] => Array
+                (
+                    [und] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [amount] => 1000
+                                    [currency_code] => def_clie
+                                    [data] => Array
+                                        (
+                                            [components] => Array
+                                                (
+                                                    [0] => Array
+                                                        (
+                                                            [name] => base_price
+                                                            [price] => Array
+                                                                (
+                                                                    [amount] => 1000
+                                                                    [currency_code] => def_clie
+                                                                    [data] => Array
+                                                                        (
+                                                                        )
+
+                                                                )
+
+                                                            [included] => 1
+                                                        )
+
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                )
+
+            [commerce_customer_billing] => Array
+                (
+                    [und] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [profile_id] => 6
+                                )
+
+                        )
+
+                )
+
+        )
+    //charge
+    [4] => Array
+        (
+            [amount] => 1000
+            [currency_code] => def_clie
+        )
+
+)
+*/
+function mcapi_commerce_submit_form_submit($payment_method, $pane_form, $pane_values, $order, $charge) {
+  $payments = mcapi_split_payments($order);
+}

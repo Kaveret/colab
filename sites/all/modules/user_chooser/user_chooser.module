@@ -1,0 +1,115 @@
+<?php
+// $Id:
+
+/*
+ * User chooser module
+ *
+ * Just a special form field at the moment, no configuration pages
+ * Use it like this:
+ * $form['fieldname'] = array(
+ *   '#title' => t('Blah blah'),
+ *   '#type' => 'user_chooser', // or user_chooser_roles, user_chooser_permissions, user_chooser_callback, user_chooser_preselect
+ *   '#args' => array('callback_function') // or the role ids or the permission key or the view and display ids
+ *   '#allow_me => boolean  defaults to FALSE //Why would a user want to select themselves?
+ *   '#allow_blocked' defaults to FALSE
+ *   //etc.
+ * );
+ * where $callback is 'permission', 'role', or your own callback
+ * your own callback should return a list of usernames, with uid keys
+ *
+ * This module will modify $form_state[values][fieldname] to be the uid, regardless of what was selected
+ */
+
+function user_chooser_menu() {
+  $items['system/ajax/uchoo'] = array(
+    'page callback' => 'uchoo_autocomplete',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'uchoo.inc'
+  );
+  $items['admin/config/people/user_chooser'] = array(
+    'title' => 'User Chooser Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('uchoo_config_form'),
+    'access arguments' => array('administer modules'),
+    'file' => 'uchoo.inc',
+    'weight' => 5
+  );
+  return $items;
+}
+
+function user_chooser_hook_info() {
+  return array(
+    //implementations of this hook return a array of $callback => description
+    //where the callback returns a list of account numbers
+    'user_chooser_preselect' => array()
+  );
+}
+
+/*
+ * implements hook_element_info
+ * the three elements we are offer are essentially the same
+ */
+function user_chooser_element_info() {
+  $fields = array(
+    '#input' => TRUE,
+    '#process' => array('process_uchoo'),
+    '#args' => array(),
+    '#theme_wrappers' => array('form_element'),
+    '#element_validate' => array('user_chooser_validate'),
+    '#multiple' => FALSE,
+    '#allow_me' => FALSE,
+  );
+  foreach (uchoo_types() as $type) {
+    $info[$type] = $fields;
+  }
+  return $info;
+}
+function uchoo_types() {
+  return array(
+    'user_chooser_callback',
+    'user_chooser_preselect',
+    'user_chooser_roles',
+    'user_chooser_permissions'
+  );
+}
+
+/*
+ * Callback function to process the form element
+ * provides all the other metadata for the form element
+ */
+function process_uchoo($element, &$form_state) {
+  form_load_include($form_state, 'inc', 'user_chooser', 'uchoo');
+  return _process_uchoo($element, $form_state);
+}
+
+/*
+ * implements hook_form_alter
+ * if the $element[type] is changed during hook_form_FORM_ID_alter
+ * then we can't guarantee to catch it so this
+ * adds the form level validation on every form
+ */
+function user_chooser_form_alter(&$form, &$form_state) {
+  $form['#validate'][] = 'uchoo_reset_field_defaults';
+}
+
+
+function uchoo_reset_field_defaults(&$element, &$form_state) {
+  if (count(form_get_errors())) {
+    //iterate through the form, setting the uchoo autocomplete fields back to text
+    $children = element_children($element);
+    if (count($children)) {
+      foreach (element_children($element) as $key) {
+        uchoo_reset_field_defaults($element[$key], $form_state);
+      }
+    }
+    else {
+      if (isset($element['#type']) && in_array($element['#type'], uchoo_types()) && !isset($element['#options'])) {
+        //repopulate the autocomplete values with the original text
+        if (is_numeric($element['#value'])) {
+          $element['#value'] = user_load($element['#value'])->name;
+        }
+      }
+    }
+  }
+}
