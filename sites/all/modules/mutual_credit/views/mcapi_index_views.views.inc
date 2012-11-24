@@ -18,8 +18,8 @@ function mcapi_index_views_views_data() {
 
   $data['mcapi_index']['xid'] = array(
     'title' => t('Transaction ID'), // The item it appears as on the UI,
+    'help' => t('The Unique database key of the transaction'),
     'field' => array(
-      'help' => t('The Unique database key of the transaction'),
       'handler' => 'views_handler_field',
     ),
     'sort' => array(
@@ -43,6 +43,9 @@ function mcapi_index_views_views_data() {
     'field' => array(
       'handler' => 'views_handler_field',
     ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_numeric'
+    ),
     'argument' => array(
       'handler' => 'views_handler_argument_numeric',
       'click sortable' => TRUE,
@@ -60,6 +63,7 @@ function mcapi_index_views_views_data() {
     'field' => array(
       'handler' => 'views_handler_field',
     ),
+    //can't 'think of a use case for a filter here
     'argument' => array(
       'handler' => 'views_handler_argument_numeric',
       'click sortable' => TRUE,
@@ -69,6 +73,17 @@ function mcapi_index_views_views_data() {
       'base' => 'users',
       'field' => 'uid2',
       'label' => t('2nd user'),
+    ),
+  );
+  $data['mcapi_index']['type'] = array(
+    'title' => t('Type'),
+    'help' => t('Which form or module which created the transaction'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+      'click sortable' => TRUE
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_mcapi_types',
     ),
   );
   $data['mcapi_index']['income'] = array(
@@ -102,14 +117,14 @@ function mcapi_index_views_views_data() {
     )
   );
   $data['mcapi_index']['diff'] = array(
-    'title' => t('Value'), // The item it appears as on the UI,
+    'title' => t('Change in balance'), // The item it appears as on the UI,
     'help' => t("Change in the users balance"),
     'field' => array(
       'handler' => 'views_handler_field_mcapi_index_quantity',
       'click sortable' => TRUE,
     ),
     'filter' => array(
-      'handler' => 'views_handler_filter_numeric'
+      'handler' => 'views_handler_filter_mcapi_index_diff'
     ),
     'sort' => array(
       'handler' => 'views_handler_sort',
@@ -138,6 +153,7 @@ function mcapi_index_views_views_data() {
   );
   $data['mcapi_index']['created'] = array(
     'title' => t('Created moment'),
+    'help' => t('The moment the transaction was registered'),
     'field' => array(
       'handler' => 'views_handler_field_date',
       'click sortable' => TRUE,
@@ -149,26 +165,38 @@ function mcapi_index_views_views_data() {
       'handler' => 'views_handler_filter_date',
     ),
     'argument' => array(
-      'handler' => 'views_handler_argument_mcapi_date',
-      'help' => t('Limit the date range'),
+      'help' => t('Better to use the handler from date_views module'),
+      'handler' => 'views_handler_argument_date',
       'fieldname' => 'created'
     ),
   );
-  $data['mcapi_index']['currcode'] = array(
-    'title' => t('Currency'),
-    'help' => t("The currency ID"),
+
+  $data['mcapi_index']['view'] = array(
+    'title' => t('View'),
+    'help' => t("Link to transaction"),
     'field' => array(
-      //this needs a custom handler
-      'handler' => 'views_handler_field_mcapi_index_currcode',
-      'click sortable' => TRUE,
-    ),
-    'filter' => array(
-       'handler' => 'views_handler_filter_mcapi_currency'
-    ),
-    'argument' => array(
-      'handler' => 'views_handler_argument',
-    ),
+      'handler' => 'views_handler_field_transaction',
+    )
   );
+  currencies_load();//because mcapi_init hasn't run yet
+  $currencies = &drupal_static('currencies');
+  if (count($currencies) > 1) {
+    $data['mcapi_index']['currcode'] = array(
+      'title' => t('Currency'),
+      'help' => t("The currency ID"),
+      'field' => array(
+        //this needs a custom handler
+        'handler' => 'views_handler_field_mcapi_index_currcode',
+        'click sortable' => TRUE,
+      ),
+      'filter' => array(
+         'handler' => 'views_handler_filter_mcapi_currency'
+      ),
+      'argument' => array(
+        'handler' => 'views_handler_argument',
+      ),
+    );
+  }
   $data['mcapi_index']['links'] = array(
     'title' => t('Transaction links'),
     'help' => t("View and undo links"),
@@ -232,7 +260,7 @@ function mcapi_index_views_views_plugins() {
     'access' => array(
       'arg1user' => array(
         'title' => t('Arg 1 user'),
-        'help' => t('Access will be granted to only if the user is in arg 1'),
+        'help' => t('Access will be granted only to users is on their own profile pages - user/%'),
         'handler' => 'views_plugin_access_user_arg1',
         'uses options' => FALSE,
       ),

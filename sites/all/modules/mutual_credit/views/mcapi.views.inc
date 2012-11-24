@@ -95,8 +95,8 @@ function mcapi_views_data() {
     ),
   );
   $data['mcapi_transactions']['created'] = array(
-    'title' => t('created'),
-    'help' => t("the second the transaction was created"),
+    'title' => t('Created'),
+    'help' => t("The second the transaction was created."),
     'field' => array(
       'handler' => 'views_handler_field_date',
       'click sortable' => TRUE,
@@ -108,18 +108,11 @@ function mcapi_views_data() {
       'handler' => 'views_handler_filter_date',
     ),
     'argument' => array(
+      'help' => t('Better to use the handler from date_views module'),
+      'handler' => 'views_handler_argument_date',
       'field' => 'created',
-      'handler' => 'views_handler_argument_mcapi_date',
     )
   );
-  if (module_exists('date_views')) {
-    $data['mcapi_transactions']['created']['argument'] = array(
-      'help' => t('Filter by month'),
-      'handler' => 'views_handler_argument_mcapi_date',
-      'fieldname' => 'created'//for some reason this wasn't showing in $view->real_field
-    );
-  }
-
   $data['mcapi_transactions']['view'] = array(
     'title' => t('View'),
     'help' => t("Link to transaction"),
@@ -151,8 +144,12 @@ function mcapi_views_data_alter(&$data) {
       'click sortable' => TRUE
     )
   );
-  //override the default text handler put there for fieldAPI fields, so the filter shows a dropdown
-  $data['field_data_worth']['worth_currcode']['filter']['handler'] = 'views_handler_filter_mcapi_currency';
+
+  $currencies = &drupal_static('currencies');
+  if (count($currencies) > 1) {
+    //override the default text handler put there for fieldAPI fields, so the filter shows a dropdown
+    $data['field_data_worth']['worth_currcode']['filter']['handler'] = 'views_handler_filter_mcapi_currency';
+  }
 }
 
 /**
@@ -184,17 +181,6 @@ function mcapi_form_views_exposed_form_alter(&$form, $form_state) {
   $description = t('Comma separated usernames');
   $form['payee']['#description'] = $description;
   $form['payer']['#description'] = $description;
-}
-
-
-function transaction_access_participants_views($state) {
-  $condition = db_and();
-  $condition->condition('mcapi_transactions.state', $state);
-  $subcondition = db_or();
-  $subcondition->condition('mcapi_transactions.payee', $GLOBALS['user']->uid);
-  $subcondition->condition('mcapi_transactions.payer', $GLOBALS['user']->uid);
-  $condition->condition($subcondition);
-  return $condition;
 }
 
 //returns conditions that $state = state && the current user ID  > 0

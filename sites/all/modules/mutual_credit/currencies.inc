@@ -1,7 +1,6 @@
 <?php
 
 function _mcapi_currency_form(&$form, &$form_state, $currency){
-  //in case this is an ajax reload, set the currency object, used for defaults, with the form_state
   $form['#tree'] = TRUE;
   $form['info']['currcode']['#maxlength'] = 8;
   $form['human_name'] = array(
@@ -60,7 +59,6 @@ function _mcapi_currency_form(&$form, &$form_state, $currency){
   $user_segments = module_invoke_all('user_segments');
   $form['currency_access'] = array(
     '#title' => 'Currency access',
-    '#description' => t('Module developers: use @hook to add more options', array('@hook' => 'hook_user_segments')),
     '#type' => 'fieldset',
     '#group' => 'additional_settings',
     'membership' => array(
@@ -96,6 +94,10 @@ function _mcapi_currency_form(&$form, &$form_state, $currency){
     ),
     '#weight' => -1
   );
+  if ($GLOBALS['user']->uid == 1) {
+    $form['currency_access']['#description'] = t('Module developers: use @hook to add more options', array('@hook' => 'hook_user_segments'));
+  }
+
   static $i = 0;
   static $j = 0;
   $form['transaction_access'] = array(
@@ -115,22 +117,14 @@ function _mcapi_currency_form(&$form, &$form_state, $currency){
       '#weight' => $j++,
     );
   }
-  $form['zero'] = array(
-    '#title' => t('Allow zero value transactions'),
-    '#description' => t('Some projects may want to record an acknowledgement without recording a transfer of value. Also if a transaction has multiple currencies, some of them may be zero for some transactions.'),
-    '#type' => 'checkbox',
-    '#default_value' => $currency->zero,
-    '#weight' => 15,
-  );
   $form['uid'] = array(
-    '#type' => 'textfield',
     '#title' => t('Declared by'),
-    '#maxlength' => 60,
-    '#autocomplete_path' => 'user/autocomplete',
+    '#type' => 'user_chooser_permissions',
+    '#args' => array('transact'),
     '#default_value' => $currency->uid ? user_load($currency->uid)->name : $GLOBALS['user']->name,
-    '#element_validate' => array('mcapi_validate_usernames'),
+    '#allow_me' => TRUE,
     '#required' => TRUE,
-    '#weight' => 4
+    '#weight' => 4,
   );
 
   if (isset($currency->currcode)) {
@@ -138,10 +132,6 @@ function _mcapi_currency_form(&$form, &$form_state, $currency){
   }
 }
 
-
-function currency_form_ajax(&$form, &$form_state) {
-  return $form;
-}
 
 function mcapi_currency_validate_format(&$element, $form_state) {
   if (!strpos($element['#value'], '@integer')) {
@@ -242,7 +232,7 @@ function default_cur() {
  * set the $form_state['item'] for ctools to save
  */
 function mcapi_currency_form_validate(){
-  
+
 }
 /*
  * Submit callback for mcapi_currency_form

@@ -11,11 +11,11 @@ function _process_uchoo($element, $form_state) {
     $element['#theme'] = 'select';
   }
   //before anything, we have to work out how many users are valid
-  elseif ($users = uchoo_get_users($element)) {
+  elseif ($uids = uchoo_get_valid_uids($element)) {
     //then we build the widget according to the valid user threshhold.
-    if (count($users) < variable_get('user_chooser_threshhold', 50)) {
+    if (count($uids) < variable_get('user_chooser_threshhold', 50)) {
       $element['#theme'] = 'select';
-      $element['#options'] = uchoo_display_all($users, TRUE);
+      $element['#options'] = uchoo_display_all($uids);
       if (!$element['#multiple']) {
         $element['#options'] = array('' => t('Please choose...')) + $element['#options'];
       }
@@ -23,19 +23,17 @@ function _process_uchoo($element, $form_state) {
       if (empty($element['#default_value']) && !empty($form_state['values'][$element['#name']])) {
         $element['#default_value'] = $form_state['values'][$element['#name']];
       }
-      if (empty($element['#allow_me'])) unset($element['#options'][$GLOBALS['user']->uid]);
+      if (empty($element['#allow_me'])) {
+        unset($element['#options'][$GLOBALS['user']->uid]);
+      }
     }
     else {
       $element['#theme'] = 'textfield';
-      $path = array_merge(
-        array('system', 'ajax', 'uchoo'), //the menu callback
-        array($form_state['build_info']['form_id']),
-        $form_state['build_info']['args'] //we don't know how many of these there are
-      );
-      if ($element['#parents']) {
-        $path[] = implode('][', $element['#parents']);
+      $element['#autocomplete_path'] = 'system/ajax/uchoo/'.current_path() .'/'.$element['#name'];
+
+      if (!empty($form_state['values'][$element['#name']])) {
+        $element['#value'] = $form_state['values'][$element['#name']];
       }
-      $element['#autocomplete_path'] = implode('/', $path);
       if (empty($element['#description'])) {
          if (in_array('uid', $element['#accepts'])) $accepts[] = t('user ID');
          if (in_array('username', $element['#accepts'])) $accepts[] = t('username');
@@ -50,32 +48,16 @@ function _process_uchoo($element, $form_state) {
     }
   }
   else {
-    form_error($element, t("No users available to widget type '@type' with param @params", array(
+    drupal_set_message($element, t("No users available to widget type '@type' with param @params", array(
       '@type' => $element['#type'],
       '@params' => implode(',', $element['#args'])
-    )));
-    return;
+    )), 'warning');
+    $element = array();
   }
   return $element;
 }
 
-//ajax menu callback
-//first arg is the widget type, last arg is the string entered
-function uchoo_autocomplete($form_id, $elementname) {
-  $args = func_get_args();
 
-  $string = array_pop($args);
-  $form_id = array_shift($args);
-  $element_name = array_pop($args);
-  //that leaves only the build_info args
-  //now merge delicately coz in my situation, one arg is NULL
-  $args = array_merge(array($form_id), $args);
-  $form = call_user_func_array('drupal_get_form', $args);
-  $element = $form[$element_name];
-  $users = uchoo_get_users($element, $string, TRUE);
-  $names = uchoo_display_all($users, FALSE);
-  die(drupal_json_output($names));
-}
 
 
 /*
@@ -137,33 +119,34 @@ function user_chooser_validate(&$element, &$form_state) {
       foreach ($element['#accepts'] as $field) {
         $conditions->condition($field, $string);
       }
-      $uid = db_select('users', 'u')
+      $values[$key] = db_select('users', 'u')
         ->fields('u', array('uid'))
         ->condition('uid', 0, '!=')
         ->condition($conditions)
         ->execute()
         ->fetchField();
-      if (!$uid) {//users who don't exist
+      if (!$values[$key]) {//users who don't exist
         $invalids[] = $string;
       }
-      else{
-        $values[$key] = $uid;
+    }
+    if (empty($element['#allow_me'])) {
+      //quietly remove me if I'm not allowed
+      $key = array_search($GLOBALS['user']->uid, $values);
+      if (is_integer($key)) {
+        form_error($element, t("You can't put yourself in '@name'", array('@name' => $element['#title'])));
+        return;
       }
     }
-    $all_valid_users = uchoo_get_users($element);
-    if (empty($element['#allow_me'])) {
-      $key = array_search($GLOBALS['user']->uid, $values);
-      if (is_integer($key)) unset($values, $key);
-    }
-    foreach ($values as $uid) {
-      if (empty($all_valid_users[$uid])) {
+    $all_valid_uids = uchoo_get_valid_uids($element);
+    foreach (array_filter($values) as $uid) {
+      if (!in_array($uid, $all_valid_uids)) {
         //users who are filtered out
         $invalids[] = $uid;
       }
     }
     if (!empty($invalids)) {
       //owch I can't get the string for the invalid user here, I don't know where the element['#value'] changed
-      form_error($element, t("Invalid user for field: @name", array('@name' => $element['#name'])));
+      form_error($element, t("Invalid user for field: @name", array('@name' => implode($invalids))));
       //set the contents of the field back to the errant value ready for the form rebuilding
       $element['#value'] = $form_state['values'][$element['#name']];
       return;
@@ -179,10 +162,7 @@ function user_chooser_validate(&$element, &$form_state) {
 //note that the $args may be keyed, esp for user_chooser_conditions
 //in a perfect world, the $element would been cached perhaps in the $form_state or {cache_form} table and we would have access to it here,
 //instead, we are passing $args back and forth, and must deal with the #allow_me elsewhere.
-function uchoo_get_users($element, $string = '', $limit = FALSE) {
-  //get the relevent settings
-  $matching = variable_get('user_chooser_matching', array('u.uid', 'u.name', 'u.mail'));
-
+function uchoo_get_valid_uids($element, $string = '', $limit = FALSE) {
   //deal with the types which do their own db queries
   switch ($element['#type']) {
     case 'user_chooser_callback':
@@ -199,7 +179,7 @@ function uchoo_get_users($element, $string = '', $limit = FALSE) {
   $query = db_select('users', 'u')->condition('u.uid', 0, '!=');
   if (strlen($string)) {
     $or = db_or();
-    foreach ($matching as $field) {
+    foreach (variable_get('user_chooser_matching', array('u.uid', 'u.name', 'u.mail')) as $field) {
       $query->condition($or->condition($field, db_like($string) . '%', 'LIKE'));
     }
   }
@@ -211,8 +191,7 @@ function uchoo_get_users($element, $string = '', $limit = FALSE) {
       $rids = array();
       foreach($element['#args'] as $perm) {
         $roles = user_roles(TRUE, $perm);
-        foreach ($roles as $rid => $name);
-        $rids[] = $rid;
+        foreach ($roles as $rid => $name) $rids[] = $rid;
       }
       if (!count($element['#args'])) continue;
       $element['#args'] = array_unique($rids);
@@ -233,7 +212,8 @@ function uchoo_get_users($element, $string = '', $limit = FALSE) {
   if ($limit) {
     $query->range(0, variable_get('user_chooser_threshhold', 50));
   }
-  return $query->fields('u', array('uid', 'name', 'mail'))->execute()->fetchAllAssoc('uid');
+  //return $query->fields('u', array('uid', 'name', 'mail'))->execute()->fetchAllAssoc('uid');
+  return $query->fields('u', array('uid'))->execute()->fetchCol();
 }
 
 
@@ -258,15 +238,11 @@ function _uchoo_tokens() {
 
 
 //takes an array of pseudo users and formats them for display
-function uchoo_display_all($users, $use_uid = TRUE) {
-  $template = variable_get('user_chooser_format', '[user:name]');
-  //convert the vars in the template to token-like strings
-  //$accounts = user_load_multiple($uids);
+function uchoo_display_all($uids, $use_uid = TRUE) {
   $names = array();
-  foreach ($users as $uid => $account) {
-    $name = token_replace($template, array('user' => $account));
-    $names[$uid] = $name;
+  foreach (user_load_multiple($uids) as $account) {
+    //could use format_username, but that is very hard to match against
+    $names[$account->uid] = $account->name;
   }
-  if ($use_uid) return $names;
-  return drupal_map_assoc($names);
+  return $names;
 }

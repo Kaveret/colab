@@ -20,7 +20,7 @@ function mcapi_rules_file_info() {
  */
 function mcapi_rules_data_info() {//debug('mcapi_rules_data_info');
   return array(
-    //in fact this is just a field API field perhaps it doesn't need defining - 
+    //in fact this is just a field API field perhaps it doesn't need defining -
     'worth' => array(
       'label' => t('Value of transaction'),
       'ui class' => 'RulesDataUIWorth',
@@ -197,7 +197,6 @@ class RulesDataUIWorth extends RulesDataUI implements RulesDataDirectInputFormIn
   }
 
   public static function inputForm($name, $info, $settings, RulesPlugin $element) {
-    form_load_include($form_state, 'field.inc', 'mcapi');
     _add_rate_fields($form, 3);
     return $form;
   }

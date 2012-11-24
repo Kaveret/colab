@@ -68,6 +68,8 @@ function og_rules_action_info() {
     'access callback' => 'og_rules_integration_access',
   );
 
+
+
   $items['og_get_managers'] = array(
     'label' => t('Get group managers from group audience'),
     'group' => t('Organic groups'),
@@ -199,7 +201,95 @@ function og_rules_action_info() {
     'access callback' => 'og_rules_integration_access',
   );
 
+  $defaults = array(
+   'group' => t('Organic groups'),
+   'access callback' => 'og_rules_integration_access',
+   'parameter' => array(
+      'account' => array(
+        'type' => 'user',
+        'label' => t('User'),
+        'description' => t('The user whose group roles should be changed.'),
+      ),
+      'group' => array(
+        'type' => 'node',
+        'label' => t('Group node'),
+        'description' => t('The group where roles should be modified. NOTE: Only NODE type groups are supported!'),
+      ),
+      'roles' => array(
+        'type' => 'list<integer>',
+        'label' => t('Group roles'),
+        'options list' => 'og_rules_get_writable_bundle_roles',
+      ),
+    ),
+  );
+  $items['og_add_role'] = $defaults + array(
+    'label' => t('Add group role to user'),
+    'base' => 'og_rules_action_user_add_group_role',
+  );
+  $items['og_remove_role'] = $defaults + array(
+    'label' => t('Remove group role from user'),
+    'base' => 'og_rules_action_user_remove_group_role',
+  );
+
+
   return $items;
+}
+
+/**
+ * Gets all bundle roles minus thus we cannot modify.
+ */
+function og_rules_get_writable_bundle_roles() {
+
+  // Get all bundles (node types) that are OG groups
+  $og_bundles = og_get_all_group_bundle();
+
+  foreach($og_bundles['node'] as $bundle => $bundle_label){
+    
+    // Get all OG roles for the bundle
+    $bundle_roles = og_roles('node', $bundle);
+
+    // Remove non-writable roles
+    foreach (array(OG_ANONYMOUS_ROLE, OG_AUTHENTICATED_ROLE) as $name) {
+      $rid = array_search($name, $bundle_roles);
+      unset($bundle_roles[$rid]);
+    }
+    
+    // Modify roles labels to include bundle name
+    foreach ($bundle_roles as $rid => $label) {
+      $roles[$bundle][$rid] = $bundle_label. ': '. $label;
+    }
+
+  }
+
+  // Merge all bundle roles into single array
+  $all_roles = array();
+  foreach($roles as $bundle_roles){
+    $all_roles += $bundle_roles;
+  }
+
+  return $all_roles;
+}
+
+/**
+ * Action: Adds group roles to a particular user within a group context.
+ */
+function og_rules_action_user_add_group_role($account, $group, $roles) {
+  if ($account->uid && $account->uid != 1) {
+    foreach ($roles as $rid) {
+      og_role_grant('node', $group->nid, $account->uid, $rid);
+    }
+  }
+}
+
+/**
+ * Action: Removes group roles from a particular user within a group context.
+ */
+function og_rules_action_user_remove_group_role($account, $group, $roles) {
+  if ($account->uid && $account->uid != 1) {
+    foreach ($roles as $rid) {
+      og_role_revoke('node', $group->nid, $account->uid, $rid);
+    }
+  }
 }
 
 /**
@@ -404,7 +494,45 @@ function og_rules_condition_info() {
     'base' => 'og_rules_entity_is_group_content',
     'access callback' => 'og_rules_integration_access',
   );
+ $items['og_user_has_role'] = array(
+    'label' => t('User has group role'),
+    'group' => t('Organic groups'),
+    'parameter' => array(
+      'account' => array(
+        'type' => 'user',
+        'label' => t('User'),
+        'description' => t('The user whose group roles should be checked.'),
+      ),
+      'group' => array(
+        'type' => 'node',
+        'label' => t('Group node'),
+        'description' => t('The group where roles should be checked. NOTE: Only NODE type groups are supported!'),
+      ),
+      'roles' => array(
+        'type' => 'list<integer>',
+        'label' => t('Group roles'),
+        'options list' => 'og_rules_get_writable_bundle_roles',
+      ),
+    ),
+    'base' => 'og_rules_condition_user_has_role',
+    'access callback' => 'og_rules_integration_access',
+  );
   return $items;
+}
+
+/**
+ * Condition "User has roles".
+ */
+function og_rules_condition_user_has_role($user, $group, $roles) {
+  $user_roles = og_get_user_roles('node', $group->nid, $user->uid);
+  return count(array_diff_key($roles, $user_roles)) == 0;
+}
+
+/**
+ * Condition "User has roles" help.
+ */
+function og_rules_condition_user_has_role_help() {
+  return t('Evaluates to TRUE if the user has all of the selected og-roles in the group.');
 }
 
 /**

@@ -18,11 +18,18 @@ function mcapi_views_default_views() {
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '25';
   $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'name' => 'name',
+    'name_1' => 'name_1',
+    'transaction_description' => 'transaction_description',
+    'worth' => 'worth',
+    'view' => 'view',
+  );
   /* Relationship: Transaction: Payee */
   $handler->display->display_options['relationships']['payee']['id'] = 'payee';
   $handler->display->display_options['relationships']['payee']['table'] = 'mcapi_transactions';
@@ -77,16 +84,22 @@ function mcapi_views_default_views() {
   $handler->display->display_options['fields']['worth']['click_sort_column'] = 'currcode';
   $handler->display->display_options['fields']['worth']['type'] = 'worth_field';
   $handler->display->display_options['fields']['worth']['field_api_classes'] = 0;
+
+  if ($fieldname = variable_get('transaction_description_field')) {
+    /* Field: Transaction: Description */
+    $handler->display->display_options['fields'][$fieldname]['id'] = $fieldname;
+    $handler->display->display_options['fields'][$fieldname]['table'] = 'field_data_'.$fieldname;
+    $handler->display->display_options['fields'][$fieldname]['field'] = $fieldname;
+  }
   /* Field: Transaction: View */
   $handler->display->display_options['fields']['view']['id'] = 'view';
   $handler->display->display_options['fields']['view']['table'] = 'mcapi_transactions';
   $handler->display->display_options['fields']['view']['field'] = 'view';
   $handler->display->display_options['fields']['view']['label'] = '';
-  $handler->display->display_options['fields']['view']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['view']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['view']['hide_empty'] = 0;
   $handler->display->display_options['fields']['view']['empty_zero'] = 0;
   $handler->display->display_options['fields']['view']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['view']['link_title'] = t('View');
   /* Sort criterion: Transaction: created */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'mcapi_transactions';
@@ -97,9 +110,7 @@ function mcapi_views_default_views() {
   $handler->display->display_options['filters']['state']['id'] = 'state';
   $handler->display->display_options['filters']['state']['table'] = 'mcapi_transactions';
   $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['value'] = array(
-    1 => '1',
-  );
+  $handler->display->display_options['filters']['state']['value'] = array(1 => 1);
   /* Filter criterion: Transaction: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'mcapi_transactions';
@@ -125,45 +136,44 @@ function mcapi_views_default_views() {
   $handler->display->display_options['menu']['title'] = 'transactions';
   $handler->display->display_options['menu']['name'] = 'main-menu';
 
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Who paid whom', 'who_paid_whom');
-  $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: User: Name */
-  $handler->display->display_options['fields']['name']['id'] = 'name';
-  $handler->display->display_options['fields']['name']['table'] = 'users';
-  $handler->display->display_options['fields']['name']['field'] = 'name';
-  $handler->display->display_options['fields']['name']['relationship'] = 'payee';
-  $handler->display->display_options['fields']['name']['label'] = '';
-  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['name']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['name']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['name']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['name']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['name']['link_to_user'] = 1;
-  $handler->display->display_options['fields']['name']['overwrite_anonymous'] = 0;
-  $handler->display->display_options['fields']['name']['format_username'] = 1;
-  /* Field: User: Name */
-  $handler->display->display_options['fields']['name_1']['id'] = 'name_1';
-  $handler->display->display_options['fields']['name_1']['table'] = 'users';
-  $handler->display->display_options['fields']['name_1']['field'] = 'name';
-  $handler->display->display_options['fields']['name_1']['relationship'] = 'payer';
-  $handler->display->display_options['fields']['name_1']['label'] = '';
-  $handler->display->display_options['fields']['name_1']['alter']['alter_text'] = 1;
-  $handler->display->display_options['fields']['name_1']['alter']['text'] = '[name] paid [name_1]';
-  $handler->display->display_options['fields']['name_1']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['name_1']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['name_1']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['name_1']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['name_1']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['name_1']['link_to_user'] = 1;
-  $handler->display->display_options['fields']['name_1']['overwrite_anonymous'] = 0;
-  $handler->display->display_options['fields']['name_1']['format_username'] = 1;
-
+  if ($fieldname = variable_get('transaction_description_field')) {
+    /* Display: Who gave what */
+    $handler = $view->new_display('block', 'Who gave what', 'who_gave_what');
+    $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+    $handler->display->display_options['defaults']['pager'] = FALSE;
+    $handler->display->display_options['pager']['type'] = 'some';
+    $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+    $handler->display->display_options['pager']['options']['offset'] = '0';
+    $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+    $handler->display->display_options['style_plugin'] = 'list';
+    $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+    $handler->display->display_options['style_options']['row_class_special'] = FALSE;
+    $handler->display->display_options['defaults']['style_options'] = FALSE;
+    $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+    $handler->display->display_options['row_plugin'] = 'fields';
+    $handler->display->display_options['row_options']['inline'] = array(
+      'name' => 'name',
+      $fieldname => $fieldname,
+    );
+    $handler->display->display_options['defaults']['row_options'] = FALSE;
+    $handler->display->display_options['defaults']['fields'] = FALSE;
+    /* Field: User: Nom */
+    $handler->display->display_options['fields']['name']['id'] = 'name';
+    $handler->display->display_options['fields']['name']['table'] = 'users';
+    $handler->display->display_options['fields']['name']['field'] = 'name';
+    $handler->display->display_options['fields']['name']['relationship'] = 'payee';
+    $handler->display->display_options['fields']['name']['label'] = '';
+    $handler->display->display_options['fields']['name']['exclude'] = TRUE;
+    $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+    /* Field: Transaction: Description */
+    $handler->display->display_options['fields'][$fieldname]['id'] = 'transaction_description';
+    $handler->display->display_options['fields'][$fieldname]['table'] = 'field_data_'.$fieldname;
+    $handler->display->display_options['fields'][$fieldname]['field'] = $fieldname;
+    $handler->display->display_options['fields'][$fieldname]['label'] = '';
+    $handler->display->display_options['fields'][$fieldname]['alter']['alter_text'] = TRUE;
+    $handler->display->display_options['fields'][$fieldname]['alter']['text'] = "[name] gave [$fieldname]";
+    $handler->display->display_options['fields'][$fieldname]['element_label_colon'] = FALSE;
+  }
   $views[$view->name] = $view;
 
   if (module_exists('date_views')) {
