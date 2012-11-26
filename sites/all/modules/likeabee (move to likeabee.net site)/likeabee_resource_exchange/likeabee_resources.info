@@ -1,6 +1,0 @@
-; $Id:
-name = Likeabee resource exchange
-description = This is an emergency module because quicktabs is breaking the transaction form
-package = Likeabee
-core = "7.x"
-dependencies[] = mcapi
