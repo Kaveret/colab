@@ -42,15 +42,26 @@
 /* -----  Links  ----- */
 
 /* -----  Header  ----- */
-.language-switcher-locale-url li.active {
-  display: none;
-  visibility: hidden;
+
+#header {
+  float: none;
+  width: 960px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #block-system-main-menu {
-  float: right; /* RTL */
+  float: left; /* RTL */
   ul.menu li {
+    padding: 10px 15px;
+    font-size: 20px;
+    border-radius: 10px;
     list-style: none outside none;
+    background: -moz-linear-gradient(top, #f1f6e2 0%, #dee5c4 100%);
+    background: -webkit-linear-gradient(top, #f1f6e2 0%, #dee5c4 100%);
+    background: -o-linear-gradient(top, #f1f6e2 0%, #dee5c4 100%);
+    background: -ms-linear-gradient(top, #f1f6e2 0%, #dee5c4 100%);
   }
 }
 
@@ -58,12 +69,69 @@
   float: right; /* RTL */
   ul li {
     list-style: none outside none;
+    display: inline;
+    padding: 10px 15px;
+    font-size: 20px;
+    border-radius: 10px;
+    list-style: none outside none;
+    background: #f0f0f0;
+  }
+  li.active {
+    display: none;
+    visibility: hidden; 
   }
 }
+
+
+/* -----  Featured ----- */
+
+#featured {
+  float: none;
+  width: 960px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* -----  Sidebars  ----- */
 
 /* -----  Footer  ----- */
 
+#footer {
+  color: white;
+  background: #5aa3c4;
+
+  float: none;
+  width: 960px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.region-footer {
+  text-align: center;
+}
+
+#block-menu-menu-links-on-footer {
+  .block-title {
+    display: none;
+  }
+  
+  ul.menu {
+    text-align:center;
+    padding: 0px;
+    li {
+      list-style: none outside none;
+      display: inline;
+      a.active {
+        color: white;
+      }
+      a:visited {
+        color: white;
+      }
+    }
+  }
+}
 
 /*-----------------------------------------------
                  Front Page
