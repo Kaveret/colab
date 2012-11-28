@@ -312,14 +312,14 @@ border-right: 1px solid #FCF0D8;
 			height: 37px;
 			}
 			.views-field-title{
-`			border-left: 0px;
+			border-left: 0px;
 			}
 		}
 	}
 	#block-views-496829e4ed0eb890c08a769ebd3a80e3,
 	#block-views-link-to-activity-block-1,
 	#block-og-extras-node-links,
-`	#block-views-group-configurations-block,
+	#block-views-group-configurations-block,
 	#block-views-link-to-group-members-block-1
 	{
 	height: 62px;
@@ -344,9 +344,6 @@ border-right: 1px solid #FCF0D8;
 		width: 107px;
 		text-align: center;
 		padding: 9px 0px 17px 0px;
-		}
-	.block-views .field-content a::selection {
-		background:#fff;
 		}
 	.block-views .field-content a div{
 		color:#014a81;	
@@ -426,7 +423,7 @@ border-right: 1px solid #FCF0D8;
 		}
 		.views-row{
 				background: white;
-				margin: 62px 566px 0;
+				margin: 62px 0 0;
 				display: none;
 				position: absolute;
 				z-index: 100;
@@ -441,23 +438,22 @@ border-right: 1px solid #FCF0D8;
 				font-size: 13px;
 				float: none;		
 				background-color: white;
-				height: 22px;
-				width: 107px;
-				padding: 0;
-				padding-right: 16px;
-				padding-left: 12px;
+				height: 11px;
+				padding: 5px 0px;
+				width: 130px;
 			a{
 				color:#5a6b98;
 				font-weight: normal;
 				text-align: left;
-				padding: 0;
+				padding: 0px 12px 0px 12px;
 			}
 		}
+
 	}
 	#block-views-group-configurations-block:hover .views-row{
 		display: block;
 	}
-	#block-og-extras-node-links .views-field:hover {
+	#block-views-group-configurations-block .views-row .views-field:hover {
 		background-color:#fdf6e4;
 	}
 }
