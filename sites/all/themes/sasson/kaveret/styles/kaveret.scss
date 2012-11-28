@@ -46,6 +46,11 @@ tabs
 /*-----------------------------------------------
           General Sitewide Styles
 -----------------------------------------------*/
+
+/*  ----------   devel ---------    */
+#block-locale-language,#block-system-main footer{
+display: none;
+}
 /* -----  Layout  ----- */
 #page, #header,
 .region-featured,
@@ -274,6 +279,7 @@ clear: both;
 .section-event #block-views-link-to-activity-block-1 .views-field-title,
 .section-events  #block-views-link-to-activity-block-1 .views-field-title,
 .section-node-add #block-og-extras-node-links .views-field-title,
+.section-node-add #block-block-10 .views-field-title,
 .section-members #block-views-link-to-group-members-block-1 .views-field-title{
 background-color: white;
 border-left: 1px solid #FCF0D8;
@@ -319,6 +325,7 @@ border-right: 1px solid #FCF0D8;
 	#block-views-496829e4ed0eb890c08a769ebd3a80e3,
 	#block-views-link-to-activity-block-1,
 	#block-og-extras-node-links,
+	#block-block-10,
 	#block-views-group-configurations-block,
 	#block-views-link-to-group-members-block-1
 	{
@@ -350,7 +357,7 @@ border-right: 1px solid #FCF0D8;
 		font-size: 11px;
 		padding-bottom: 19px;
 		}
-	#block-og-extras-node-links{
+	#block-og-extras-node-links,#block-block-10{
 			.block-title:first-line{
 					color:#B01919;
 					text-decoration: none;
@@ -593,10 +600,14 @@ ul.quicktabs-tabs{
 			}
 		}
 }
+#quicktabs .block-odd{
+	background: #fcf0d8;
+}
+.admin #quicktabs{
+	.block-even{background: #fcf0d8;}
+	.block-odd{background: none;}
+}
 #quicktabs{
-	.block-even{
-		 background: #fcf0d8;
-	}
 	.block-title{
 	    color: #B01919;
 	    font-size: 24px;
@@ -615,7 +626,7 @@ ul.quicktabs-tabs{
 				font-size: 14px;
 				padding: 2px 0px;
 				a,span.field-content{
- 					font-size: 14px;
+					font-size: 14px;
 					text-decoration: none;
 					color: white;
 					font-weight: bolder;
@@ -1503,14 +1514,17 @@ div.img-biger .number[class*=" 0 "],
 		display: none;
 		line-height: 1.6;
 	}
-	ul.menu li:hover a{
+	/*ul.menu li:hover a{
 	  display: block;
 	}
 	ul.menu li:hover ul {
 		display: block;
-	}
+	}*/
 }
 .hover-tats{
 	display: block;
 }
+
+
+
 
