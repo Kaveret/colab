@@ -50,7 +50,6 @@ tabs
 #page, #header,
 .region-featured,
 .region-footer,
-#page-title,
 #quicktabs .block-title, 
 #quicktabs .content,
 .layout-page-title{
@@ -85,17 +84,13 @@ clear: both;
 	margin-top: 40px;
 	}
 }
-#site-name,#main-menu,#secondary-menu{
-	display: none;
-}
+
 /* -----  page title  ----- */
 #page-title{
-	min-width: 204px;
 	text-align: left;
 	font-size: 25px;
 	color:#014a81;
 	float: left;
-	width: 204px;
 }
 .node-type-group,
 .node-type-group-s-avtivity,
@@ -495,18 +490,17 @@ clear: both;
 	margin: 14px 0px 13px -45px;
 }
 /* -----  main icons ----- */
-#block-menu-menu-main-icons{
+.menu-name-main-menu{
   float: left;
 }
-#block-menu-menu-main-icons .menu{
+.menu-name-main-menu .menu{
 	padding: 10px 10px 0px 12px;
 	margin: -9px 0px 33px -43px;
 	width: 243px;
-	ul
-	{
-	width: 227px;
-	padding: 0;
-	margin: 20px 0px 38px -17px;
+	ul{
+	    width: 227px;
+	    padding: 0;
+	    margin: 20px 0px 38px -17px;
 	}	
 	li{
 	    margin-left: 10px;
@@ -593,6 +587,11 @@ ul.quicktabs-tabs{
 			}
 		}
 }
+
+div.menu-name-main-menu{
+  li{display:inline;}
+}
+
 #quicktabs{
 	.block-even{
 		 background: #fcf0d8;
@@ -641,7 +640,7 @@ ul.quicktabs-tabs{
 	}
 }
 /* -----   spesifik information box  ----- */
-.field-name-field-image-groop div div{
+.field-name-field-image-group div div{
 	width: 700px;
 	height: 270px;
 	float: right;
@@ -933,7 +932,7 @@ div.img-biger .number[class*=" 0 "],
 	display:none;
 }
 /*---------- all ...-----------*/
-#quicktabs-list_of_groups,
+ div.view-id-list_of_groups,
 #block-views-4cf7ecc831800e49c7e8e4d4e5fa3265,
 #block-views-group-s-poll-block-2,
 {
@@ -1410,6 +1409,7 @@ div.img-biger .number[class*=" 0 "],
 }
 /*************************  tabs  *****************************/
 #block-menu-menu-tabs{
+float:left;/*otherwise the div overlays all the way to the right, and you can't click*/
 	position: static;
 	div.contextual-links-wrapper{
 		position: relative;
