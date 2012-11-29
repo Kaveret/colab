@@ -46,16 +46,10 @@ tabs
 /*-----------------------------------------------
           General Sitewide Styles
 -----------------------------------------------*/
-
-/*  ----------   devel ---------    */
-#block-locale-language,#block-system-main footer{
-display: none;
-}
 /* -----  Layout  ----- */
 #page, #header,
 .region-featured,
 .region-footer,
-#page-title,
 #quicktabs .block-title, 
 #quicktabs .content,
 .layout-page-title{
@@ -90,17 +84,13 @@ clear: both;
 	margin-top: 40px;
 	}
 }
-#site-name,#main-menu,#secondary-menu{
-	display: none;
-}
+
 /* -----  page title  ----- */
 #page-title{
-	min-width: 204px;
 	text-align: left;
 	font-size: 25px;
 	color:#014a81;
 	float: left;
-	width: 204px;
 }
 .node-type-group,
 .node-type-group-s-avtivity,
@@ -279,7 +269,6 @@ clear: both;
 .section-event #block-views-link-to-activity-block-1 .views-field-title,
 .section-events  #block-views-link-to-activity-block-1 .views-field-title,
 .section-node-add #block-og-extras-node-links .views-field-title,
-.section-node-add #block-block-10 .views-field-title,
 .section-members #block-views-link-to-group-members-block-1 .views-field-title{
 background-color: white;
 border-left: 1px solid #FCF0D8;
@@ -325,7 +314,6 @@ border-right: 1px solid #FCF0D8;
 	#block-views-496829e4ed0eb890c08a769ebd3a80e3,
 	#block-views-link-to-activity-block-1,
 	#block-og-extras-node-links,
-	#block-block-10,
 	#block-views-group-configurations-block,
 	#block-views-link-to-group-members-block-1
 	{
@@ -357,7 +345,7 @@ border-right: 1px solid #FCF0D8;
 		font-size: 11px;
 		padding-bottom: 19px;
 		}
-	#block-og-extras-node-links,#block-block-10{
+	#block-og-extras-node-links{
 			.block-title:first-line{
 					color:#B01919;
 					text-decoration: none;
@@ -409,7 +397,7 @@ border-right: 1px solid #FCF0D8;
 						font-size: 13px;
 					}
 			}	
-	 		
+
 	}	
 	#block-og-extras-node-links ul li:hover{
 		background-color:#fdf6e4;
@@ -509,11 +497,10 @@ clear: both;
 	padding: 10px 10px 0px 12px;
 	margin: -9px 0px 33px -43px;
 	width: 243px;
-	ul
-	{
-	width: 227px;
-	padding: 0;
-	margin: 20px 0px 38px -17px;
+	ul{
+	    width: 227px;
+	    padding: 0;
+	    margin: 20px 0px 38px -17px;
 	}	
 	li{
 	    margin-left: 10px;
@@ -540,7 +527,7 @@ clear: both;
 			word-spacing: 1px;
 			font-weight: bold;
 		}
-		
+
 	}
     li:nth-child(1){ background-position: 54% -236px; } 
 	li:nth-child(2){ background-position: 56%   22px; } 
@@ -600,13 +587,15 @@ ul.quicktabs-tabs{
 			}
 		}
 }
-.admin #quicktabs .block-even{
-	background: #fcf0d8;
+
+div.menu-name-main-menu{
+  li{display:inline;}
 }
-#quicktabs .block-odd{
-	background: #fcf0d8;
-}
+
 #quicktabs{
+	.block-even{
+		 background: #fcf0d8;
+	}
 	.block-title{
 	    color: #B01919;
 	    font-size: 24px;
@@ -625,7 +614,7 @@ ul.quicktabs-tabs{
 				font-size: 14px;
 				padding: 2px 0px;
 				a,span.field-content{
-					font-size: 14px;
+ 					font-size: 14px;
 					text-decoration: none;
 					color: white;
 					font-weight: bolder;
@@ -651,7 +640,7 @@ ul.quicktabs-tabs{
 	}
 }
 /* -----   spesifik information box  ----- */
-.field-name-field-image-groop div div{
+.field-name-field-image-group div div{
 	width: 700px;
 	height: 270px;
 	float: right;
@@ -943,7 +932,7 @@ div.img-biger .number[class*=" 0 "],
 	display:none;
 }
 /*---------- all ...-----------*/
-#quicktabs-list_of_groups,
+ div.view-id-list_of_groups,
 #block-views-4cf7ecc831800e49c7e8e4d4e5fa3265,
 #block-views-group-s-poll-block-2,
 {
@@ -1015,7 +1004,7 @@ div.img-biger .number[class*=" 0 "],
 	.views-field-group-group .field-content{
 		padding-top: 16px;
 		a{
-		
+
 		color: white;
 		font-weight: bolder;
 		border-color: #FAAC18;
@@ -1420,6 +1409,7 @@ div.img-biger .number[class*=" 0 "],
 }
 /*************************  tabs  *****************************/
 #block-menu-menu-tabs{
+float:left;/*otherwise the div overlays all the way to the right, and you can't click*/
 	position: static;
 	div.contextual-links-wrapper{
 		position: relative;
@@ -1513,17 +1503,13 @@ div.img-biger .number[class*=" 0 "],
 		display: none;
 		line-height: 1.6;
 	}
-	/*ul.menu li:hover a{
+	ul.menu li:hover a{
 	  display: block;
 	}
 	ul.menu li:hover ul {
 		display: block;
-	}*/
+	}
 }
 .hover-tats{
 	display: block;
 }
-
-
-
-

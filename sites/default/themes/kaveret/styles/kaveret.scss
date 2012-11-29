@@ -46,11 +46,6 @@ tabs
 /*-----------------------------------------------
           General Sitewide Styles
 -----------------------------------------------*/
-
-/*  ----------   devel ---------    */
-#block-locale-language,#block-system-main footer{
-display: none;
-}
 /* -----  Layout  ----- */
 #page, #header,
 .region-featured,
@@ -274,7 +269,6 @@ clear: both;
 .section-event #block-views-link-to-activity-block-1 .views-field-title,
 .section-events  #block-views-link-to-activity-block-1 .views-field-title,
 .section-node-add #block-og-extras-node-links .views-field-title,
-.section-node-add #block-block-10 .views-field-title,
 .section-members #block-views-link-to-group-members-block-1 .views-field-title{
 background-color: white;
 border-left: 1px solid #FCF0D8;
@@ -320,7 +314,6 @@ border-right: 1px solid #FCF0D8;
 	#block-views-496829e4ed0eb890c08a769ebd3a80e3,
 	#block-views-link-to-activity-block-1,
 	#block-og-extras-node-links,
-	#block-block-10,
 	#block-views-group-configurations-block,
 	#block-views-link-to-group-members-block-1
 	{
@@ -352,7 +345,7 @@ border-right: 1px solid #FCF0D8;
 		font-size: 11px;
 		padding-bottom: 19px;
 		}
-	#block-og-extras-node-links,#block-block-10{
+	#block-og-extras-node-links{
 			.block-title:first-line{
 					color:#B01919;
 					text-decoration: none;
@@ -404,7 +397,7 @@ border-right: 1px solid #FCF0D8;
 						font-size: 13px;
 					}
 			}	
-	 		
+
 	}	
 	#block-og-extras-node-links ul li:hover{
 		background-color:#fdf6e4;
@@ -497,10 +490,10 @@ clear: both;
 	margin: 14px 0px 13px -45px;
 }
 /* -----  main icons ----- */
-.menu-name-main-menu{
+#block-menu-menu-main-icons{
   float: left;
 }
-.menu-name-main-menu .menu{
+#block-menu-menu-main-icons .menu{
 	padding: 10px 10px 0px 12px;
 	margin: -9px 0px 33px -43px;
 	width: 243px;
@@ -534,7 +527,7 @@ clear: both;
 			word-spacing: 1px;
 			font-weight: bold;
 		}
-		
+
 	}
     li:nth-child(1){ background-position: 54% -236px; } 
 	li:nth-child(2){ background-position: 56%   22px; } 
@@ -594,7 +587,10 @@ ul.quicktabs-tabs{
 			}
 		}
 }
-<<<<<<< HEAD:sites/all/themes/sasson/kaveret/styles/kaveret.scss
+
+div.menu-name-main-menu{
+  li{display:inline;}
+}
 #quicktabs .block-odd{
 	background: #fcf0d8;
 }
@@ -602,13 +598,6 @@ ul.quicktabs-tabs{
 	.block-even{background: #fcf0d8;}
 	.block-odd{background: none;}
 }
-=======
-
-div.menu-name-main-menu{
-  li{display:inline;}
-}
-
->>>>>>> 920fb8c8818c69d11f86dfd026302ff027a9c592:sites/default/themes/kaveret/styles/kaveret.scss
 #quicktabs{
 	.block-title{
 	    color: #B01919;
@@ -628,7 +617,7 @@ div.menu-name-main-menu{
 				font-size: 14px;
 				padding: 2px 0px;
 				a,span.field-content{
-					font-size: 14px;
+ 					font-size: 14px;
 					text-decoration: none;
 					color: white;
 					font-weight: bolder;
@@ -1018,7 +1007,7 @@ div.img-biger .number[class*=" 0 "],
 	.views-field-group-group .field-content{
 		padding-top: 16px;
 		a{
-		
+
 		color: white;
 		font-weight: bolder;
 		border-color: #FAAC18;
@@ -1517,17 +1506,13 @@ float:left;/*otherwise the div overlays all the way to the right, and you can't 
 		display: none;
 		line-height: 1.6;
 	}
-	/*ul.menu li:hover a{
+	ul.menu li:hover a{
 	  display: block;
 	}
 	ul.menu li:hover ul {
 		display: block;
-	}*/
+	}
 }
 .hover-tats{
 	display: block;
 }
-
-
-
-
