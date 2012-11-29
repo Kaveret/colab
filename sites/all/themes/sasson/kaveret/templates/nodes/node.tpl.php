@@ -75,8 +75,9 @@
  * @see template_preprocess_node()
  * @see template_process()
  */
-?>
+if ($teaser) {include(__DIR__.'/teaser-'.$node->type.'.tpl.php');return;}
 
+?>
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
     
   <?php if ($user_picture || !$page || $display_submitted): ?>

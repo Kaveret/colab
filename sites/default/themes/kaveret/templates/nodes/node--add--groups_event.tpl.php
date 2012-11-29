@@ -76,10 +76,9 @@
  * @see template_process()
  */
 ?>
-
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
     
-  <?php if ($user_picture || !$page || $display_submitted): ?>
+  <?php i f ($user_picture || !$page || $display_submitted): ?>
     <header>
       <?php print $user_picture; ?>
 

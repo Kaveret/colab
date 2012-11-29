@@ -340,9 +340,6 @@ border-right: 1px solid #FCF0D8;
 		text-align: center;
 		padding: 9px 0px 17px 0px;
 		}
-	.block-views .field-content a::selection {
-		background:#fff;
-		}
 	.block-views .field-content a div{
 		color:#014a81;	
 		font-size: 11px;
@@ -400,7 +397,7 @@ border-right: 1px solid #FCF0D8;
 						font-size: 13px;
 					}
 			}	
-
+	 		
 	}	
 	#block-og-extras-node-links ul li:hover{
 		background-color:#fdf6e4;
@@ -421,7 +418,7 @@ border-right: 1px solid #FCF0D8;
 		}
 		.views-row{
 				background: white;
-				margin: 62px 566px 0;
+				margin: 62px 0 0;
 				display: none;
 				position: absolute;
 				z-index: 100;
@@ -493,10 +490,10 @@ clear: both;
 	margin: 14px 0px 13px -45px;
 }
 /* -----  main icons ----- */
-#block-menu-menu-main-icons{
+.menu-name-main-menu{
   float: left;
 }
-#block-menu-menu-main-icons .menu{
+.menu-name-main-menu .menu{
 	padding: 10px 10px 0px 12px;
 	margin: -9px 0px 33px -43px;
 	width: 243px;
@@ -530,7 +527,7 @@ clear: both;
 			word-spacing: 1px;
 			font-weight: bold;
 		}
-
+		
 	}
     li:nth-child(1){ background-position: 54% -236px; } 
 	li:nth-child(2){ background-position: 56%   22px; } 
@@ -594,14 +591,11 @@ ul.quicktabs-tabs{
 div.menu-name-main-menu{
   li{display:inline;}
 }
-#quicktabs .block-odd{
-	background: #fcf0d8;
-}
-.admin #quicktabs{
-	.block-even{background: #fcf0d8;}
-	.block-odd{background: none;}
-}
+
 #quicktabs{
+	.block-even{
+		 background: #fcf0d8;
+	}
 	.block-title{
 	    color: #B01919;
 	    font-size: 24px;
@@ -1010,7 +1004,7 @@ div.img-biger .number[class*=" 0 "],
 	.views-field-group-group .field-content{
 		padding-top: 16px;
 		a{
-
+		
 		color: white;
 		font-weight: bolder;
 		border-color: #FAAC18;
@@ -1519,3 +1513,4 @@ float:left;/*otherwise the div overlays all the way to the right, and you can't 
 .hover-tats{
 	display: block;
 }
+
