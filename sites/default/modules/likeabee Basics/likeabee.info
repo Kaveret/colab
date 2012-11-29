@@ -1,0 +1,7 @@
+; $Id:
+name = Likeabee Basics
+description = General custom code. This will later be moved to an installation profile
+package = Likeabee
+core = "7.x"
+
+files[] = likeabee.views_default.inc
