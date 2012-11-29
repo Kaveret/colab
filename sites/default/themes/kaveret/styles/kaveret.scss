@@ -340,6 +340,9 @@ border-right: 1px solid #FCF0D8;
 		text-align: center;
 		padding: 9px 0px 17px 0px;
 		}
+	.block-views .field-content a::selection {
+		background:#fff;
+		}
 	.block-views .field-content a div{
 		color:#014a81;	
 		font-size: 11px;
@@ -418,7 +421,7 @@ border-right: 1px solid #FCF0D8;
 		}
 		.views-row{
 				background: white;
-				margin: 62px 0 0;
+				margin: 62px 566px 0;
 				display: none;
 				position: absolute;
 				z-index: 100;

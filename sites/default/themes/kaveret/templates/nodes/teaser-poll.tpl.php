@@ -64,19 +64,11 @@
  * - $logged_in: Flags true when the current user is a logged-in member.
  * - $is_admin: Flags true when the current user is an administrator.
  *
- * Field variables: for each field instance attached to the node a corresponding
- * variable is defined, e.g. $node->body becomes $body. When needing to access
- * a field's raw values, developers/themers are strongly encouraged to use these
- * variables. Otherwise they will have to explicitly specify the desired field
- * language, e.g. $node->body['en'], thus overriding any language negotiation
- * rule that was previously applied.
+ * FieldAPI variables as of Nov 28 2012
  *
- * @see template_preprocess()
- * @see template_preprocess_node()
- * @see template_process()
  */
 ?>
 <div class = "node node-poll teaser">
 <a href="/node/<?php print $nid; ?>"><?php print $title; ?></a>
-<a href="/node/<?php print $nid; ?>"><?php print $body; ?></a>
+<a href="/node/<?php print $nid; ?>"><?php print render($body); ?></a>
 </div><!-- /video poll -->

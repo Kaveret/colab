@@ -64,19 +64,17 @@
  * - $logged_in: Flags true when the current user is a logged-in member.
  * - $is_admin: Flags true when the current user is an administrator.
  *
- * Field variables: for each field instance attached to the node a corresponding
- * variable is defined, e.g. $node->body becomes $body. When needing to access
- * a field's raw values, developers/themers are strongly encouraged to use these
- * variables. Otherwise they will have to explicitly specify the desired field
- * language, e.g. $node->body['en'], thus overriding any language negotiation
- * rule that was previously applied.
- *
- * @see template_preprocess()
- * @see template_preprocess_node()
- * @see template_process()
+ * FieldAPI variables as of Nov 28 2012
+ $og_group_ref
+ $field_video_group //this is a fieldAPI $item, not a render array!!
+ $field_editor_s_choice //this appears not to be set.
+
  */
+
+//debug($field_video_group, 'field_video_group');
+//debug($field_editor_s_choice, 'field_editor_s_choice');
 ?>
 <div class = "node node-video teaser">
 <a href="/node/<?php print $nid; ?>"><?php print $title; ?></a>
-<a href="/node/<?php print $nid; ?>"><?php print $field_video_group; ?></a>
+<a href="/node/<?php print $nid; ?>"><?php print render($field_video_group); ?></a>
 </div><!-- /video teaser -->

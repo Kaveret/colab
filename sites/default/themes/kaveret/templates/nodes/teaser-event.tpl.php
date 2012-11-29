@@ -64,19 +64,35 @@
  * - $logged_in: Flags true when the current user is a logged-in member.
  * - $is_admin: Flags true when the current user is an administrator.
  *
- * Field variables: for each field instance attached to the node a corresponding
- * variable is defined, e.g. $node->body becomes $body. When needing to access
- * a field's raw values, developers/themers are strongly encouraged to use these
- * variables. Otherwise they will have to explicitly specify the desired field
- * language, e.g. $node->body['en'], thus overriding any language negotiation
- * rule that was previously applied.
- *
- * @see template_preprocess()
- * @see template_preprocess_node()
- * @see template_process()
+ * Field variables: 
+ * body
+ * field_event_image
+ * field_editor_s_choice
+ * field_location_of_event
+ * field_date_event
+ * field_start_event
+ * field_end_event
+ * field_add_tags_the_more_the_bett
+ * field_send_notification
+ * field_location_of_event_text
+ * field_adress_event
+ * field_join_to_event
+ * field_title_of_image_event
+ * field_photographer
+ * field_phone_event
+ * field_email_event
+ * field_web_site_event
+ * field_facebook_event
+ * field_the_following_courses_even
+ * field_movies_event
+ * field_articles_event
+ * field_sites_event
+ * field_more_details_event
  */
+//ddebug_backtrace();
+print_r($body);//die('teaser-event.tpl.php');
 ?>
-<div class = "node node-video teaser">
+<div class = "node node-event teaser">
 <a href="/node/<?php print $nid; ?>"><?php print $title; ?></a>
-<a href="/node/<?php print $nid; ?>"><?php print $body; ?></a>
-</div><!-- /video teaser -->
+<a href="/node/<?php print $nid; ?>"><?php print render($content['field_event_image']); ?></a>
+</div><!-- /event teaser -->

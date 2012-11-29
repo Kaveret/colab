@@ -75,8 +75,10 @@
  * @see template_preprocess_node()
  * @see template_process()
  */
-if ($teaser) {include(__DIR__.'/teaser-'.$node->type.'.tpl.php');return;}
-
+if ($teaser) {
+$filename = __DIR__.'/teaser-'.$node->type.'.tpl.php';
+include($filename);return;}
+else print_r($description_group);
 ?>
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
     
