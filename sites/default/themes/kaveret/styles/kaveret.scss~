@@ -1108,7 +1108,7 @@ section[id^="block-views-individual-space-block"],
 #node_groups_event_full_group_where_event{
 	float: right;
 }
-.field-group-fieldset{
+.node-type-groups-event .field-group-fieldset{
 	height: 146px;
 	float: left;
 	font-size: 19px;
@@ -1148,16 +1148,16 @@ section[id^="block-views-individual-space-block"],
 			.field-items{font-weight: 700; line-height: 20.5px}
 		}
 }
-.field-name-field-location-of-event{
+.node-type-groups-event .field-name-field-location-of-event{
 			float: right;
 			margin-top: -7px;
 }
-.date-display-single:first-line{
+.node-type-groups-event .date-display-single:first-line{
 	font-size: 36px;
 	line-height: 46px;
 	font-weight: bold;
 }
-.node-groups-event .field-name-body{
+.node-type-groups-event .node-groups-event .field-name-body{
 		clear: both;
 		padding: 25px 74px;		
 }
