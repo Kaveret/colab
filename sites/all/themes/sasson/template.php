@@ -589,9 +589,8 @@ function sasson_preprocess_menu_local_task(&$vars) {
 /**
  *  Duplicate of theme_menu_local_tasks() but adds clearfix to tabs.
  */
-function sasson_menu_local_tasks(&$vars) {
+function __sasson_menu_local_tasks(&$vars) {ddebug_backtrace($vars);
   $output = '';
-
   if (!empty($vars['primary'])) {
     $vars['primary']['#prefix'] = '<h2 class="element-invisible">' . t('Primary tabs') . '</h2>';
     $vars['primary']['#prefix'] .= '<ul class="tabs primary clearfix">';

@@ -68,7 +68,6 @@
  * @see template_process()
  */
 ?>
-
 <?php if ($page['floating']): ?>
     <div id="floating">
  <?php print render($page['floating']); ?>

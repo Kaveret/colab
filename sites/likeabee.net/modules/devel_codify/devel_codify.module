@@ -1,5 +1,6 @@
 <?php
 
+define('CODIFY_DIR', conf_path());//often the files directory is not under version control
 
 /*
  * implements hook_install
@@ -67,7 +68,7 @@ function devel_codify_admin_menu_output_build(&$content) {
  * menu callback
  */
 function devel_codify() {
-  $directory = 'public://devel';
+  $directory = CODIFY_DIR.'/devel';
   file_prepare_directory($directory, FILE_CREATE_DIRECTORY);
   include_once DRUPAL_ROOT . '/includes/utility.inc';
   //if (module_exists('views')) devel_codify_views();
@@ -93,7 +94,7 @@ function devel_codify() {
  */
 function devel_import() {
   foreach (devel_codify_type_info() as $type => $plural_name) {
-    $uri = 'public://devel/'.$type.'.export.php';
+    $uri = CODIFY_DIR.'/devel/'.$type.'.export.php';
     if (substr($type, 0, 6) != 'ctools') {
       $function = 'devel_import_'.$type;
       include($uri);
