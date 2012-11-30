@@ -64,35 +64,10 @@
  * - $logged_in: Flags true when the current user is a logged-in member.
  * - $is_admin: Flags true when the current user is an administrator.
  *
- * Field variables: 
- * body
- * field_event_image
- * field_editor_s_choice
- * field_location_of_event
- * field_date_event
- * field_start_event
- * field_end_event
- * field_add_tags_the_more_the_bett
- * field_send_notification
- * field_location_of_event_text
- * field_adress_event
- * field_join_to_event
- * field_title_of_image_event
- * field_photographer
- * field_phone_event
- * field_email_event
- * field_web_site_event
- * field_facebook_event
- * field_the_following_courses_even
- * field_movies_event
- * field_articles_event
- * field_sites_event
- * field_more_details_event
+ * FieldAPI variables as of Nov 2012 
+ * (must be enabled as needed on admin/structure/types/manage/%type/display/teaser)
+ *
  */
-//ddebug_backtrace();
-print_r($body);//die('teaser-event.tpl.php');
 ?>
-<div class = "node node-event teaser">
-<a href="/node/<?php print $nid; ?>"><?php print $title; ?></a>
-<a href="/node/<?php print $nid; ?>"><?php print render($content['field_event_image']); ?></a>
-</div><!-- /event teaser -->
+ 
+<a href="/node/<?php print $nid; ?>"><?php print render($content['advpoll_results']); ?></a>

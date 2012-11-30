@@ -64,12 +64,11 @@
  * - $logged_in: Flags true when the current user is a logged-in member.
  * - $is_admin: Flags true when the current user is an administrator.
  *
- * FieldAPI variables as of Nov 28 2012
-  $body
-  $field_editor_s_choice
+ * FieldAPI variables as of Nov 2012 
+ * (must be enabled as needed on admin/structure/types/manage/%type/display/teaser)
+ * $title
+ * $content['body']
+ * $content['field_editor_s_choice']
  */
 ?>
-<div class = "node node-discussion teaser">
-<a href="/node/<?php print $nid; ?>"><?php print $title; ?></a>
-<a href="/node/<?php print $nid; ?>"><?php print render($body); ?></a>
-</div><!-- /video discussion -->
+<a href="/node/<?php print $nid; ?>"><?php print render($content['body']); ?></a>

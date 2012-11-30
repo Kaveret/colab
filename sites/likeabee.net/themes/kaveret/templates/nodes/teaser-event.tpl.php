@@ -64,11 +64,32 @@
  * - $logged_in: Flags true when the current user is a logged-in member.
  * - $is_admin: Flags true when the current user is an administrator.
  *
- * FieldAPI variables as of Nov 28 2012
- *
+ * FieldAPI variables as of Nov 2012 
+ * (must be enabled as needed on admin/structure/types/manage/%type/display/teaser)
+ * $content['body']
+ * $content['field_event_image']
+ * $content['field_editor_s_choice']
+ * $content['field_location_of_event']
+ * $content['field_date_event']
+ * $content['field_start_event']
+ * $content['field_end_event']
+ * $content['field_add_tags_the_more_the_bett']
+ * $content['field_send_notification']
+ * $content['field_location_of_event_text']
+ * $content['field_adress_event']
+ * $content['field_join_to_event']
+ * $content['field_title_of_image_event']
+ * $content['field_photographer']
+ * $content['field_phone_event']
+ * $content['field_email_event']
+ * $content['field_web_site_event']
+ * $content['field_facebook_event']
+ * $content['field_the_following_courses_even
+ * $content['field_movies_event']
+ * $content['field_articles_event']
+ * $content['field_sites_event']
+ * $content['field_more_details_event']
  */
 ?>
-<div class = "node node-poll teaser">
-<a href="/node/<?php print $nid; ?>"><?php print $title; ?></a>
-<a href="/node/<?php print $nid; ?>"><?php print render($body); ?></a>
-</div><!-- /video poll -->
+<?php print render($content['body']); ?>
+<a href="/node/<?php print $nid; ?>"><?php print render($content['field_event_image']); ?></a>

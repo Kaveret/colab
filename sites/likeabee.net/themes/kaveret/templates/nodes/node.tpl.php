@@ -64,17 +64,70 @@
  * - $logged_in: Flags true when the current user is a logged-in member.
  * - $is_admin: Flags true when the current user is an administrator.
  *
- * FieldAPI variables as of Nov 28 2012
- $og_group_ref
- $field_video_group //this is a fieldAPI $item, not a render array!!
- $field_editor_s_choice //this appears not to be set.
-
+ * Field variables: for each field instance attached to the node a corresponding
+ * variable is defined, e.g. $node->body becomes $body. When needing to access
+ * a field's raw values, developers/themers are strongly encouraged to use these
+ * variables. Otherwise they will have to explicitly specify the desired field
+ * language, e.g. $node->body['en'], thus overriding any language negotiation
+ * rule that was previously applied.
+ *
+ * @see template_preprocess()
+ * @see template_preprocess_node()
+ * @see template_process()
  */
+if ($teaser) : ?>
+<div class = "node node-poll teaser">
+  <h2>
+    <a href="/node/<?php print $nid; ?>"><?php print $title; ?></a>
+  </h2>
+  <div class = "content">
+    <?php include(__DIR__.'/teaser-'.$node->type.'.tpl.php'); ?>
+  </div>
+</div><!-- end <?php print $node->type; ?> teaser-->
+<?php return; endif; ?>
 
-//debug($field_video_group, 'field_video_group');
-//debug($field_editor_s_choice, 'field_editor_s_choice');
-?>
-<div class = "node node-video teaser">
-<a href="/node/<?php print $nid; ?>"><?php print $title; ?></a>
-<a href="/node/<?php print $nid; ?>"><?php print render($field_video_group); ?></a>
-</div><!-- /video teaser -->
+<article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
+    
+  <?php if ($user_picture || !$page || $display_submitted): ?>
+    <header>
+      <?php print $user_picture; ?>
+
+      <?php print render($title_prefix); ?>
+      <?php if (!$page): ?>
+        <h2<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
+      <?php endif; ?>
+      <?php print render($title_suffix); ?>
+
+      <?php if ($display_submitted): ?>
+        
+      <p class="submitted">
+        <?php print $submitted; ?>
+        <time pubdate datetime="<?php print $submitted_pubdate; ?>">
+        <?php print $submitted_date; ?>
+        </time>
+      </p>
+        
+      <?php endif; ?>
+    </header>
+  <?php endif; ?>
+
+  <div class="content"<?php print $content_attributes; ?>>
+    <?php
+      // We hide the comments, tags and links now so that we can render them later.
+      hide($content['comments']);
+      hide($content['links']);
+      hide($content['field_tags']);
+      print render($content);
+    ?>
+  </div><!-- /.content -->
+
+  <?php if (!empty($content['field_tags']) || !empty($content['links'])): ?>
+    <footer>
+      <?php print render($content['field_tags']); ?>
+      <?php print render($content['links']); ?>
+    </footer>
+  <?php endif; ?>
+
+  <?php print render($content['comments']); ?>
+
+</article><!-- /.node -->
