@@ -38,19 +38,91 @@
 /* -----  General Styles (Colors, Backgrounds etc.)  ----- */
 
 /* -----  Typography  ----- */
+@mixin rr_homepage_a_ltr($pad) {
+            padding-left: auto; /* RTL */
+            padding-right: $pad; /* RTL */
+}
 
 /* -----  Links  ----- */
 
 /* -----  Header  ----- */
+#header { 
+  li {
+    float: left;
+    &.first {
+      border: {
+        top-right-radius: 0px; /* RTL */
+        bottom-right-radius: 0px; /* RTL */
+      }
+    }
+    &.last {
+      border: {
+        bottom-left-radius: 0px; /* RTL */
+        top-left-radius: 0px; /* RTL */
+      }
+    }
+
+    &.first {
+      border: {
+        bottom-left-radius: 10px; /* RTL */
+        top-left-radius: 10px; /* RTL */
+      }
+    }
+    &.last {
+      border: {
+        bottom-right-radius: 10px; /* RTL */
+        top-right-radius: 10px; /* RTL */
+      }
+    }
+  }
+}
+
 #block-system-main-menu {
   float: left;
 }
 
 #block-locale-language {
-  float: right; /* RTL */
+  float: left; /* RTL */
+  ul {
+    padding: 0px;
+  }
 }
 
 /* -----  Sidebars  ----- */
+  #sidebar-first {
+    div.region-sidebar-first{
+      border-right-style: none; /* RTL */
+      border-left-style: solid; /* RTL */
+      border-left-width: 2px; /* RTL */
+      border-left-color: #86BEF1; /* RTL */
+
+      div.block {
+        margin-right: 0%; /* RTL */
+        margin-left: 9%; /* RTL */
+
+        div.second-box-on-sidebar-1 {
+          .content a {
+            float: left; /* RTL */
+          }
+        }
+
+       h2 {
+          a {
+            @include rr_homepage_a_ltr(12px);
+          }
+        }
+      }
+    }
+  }
+
+
+#sidebar-second {
+  h2 {
+         a {
+            @include rr_homepage_a_ltr(12px);
+          }
+  }
+}
 
 /* -----  Footer  ----- */
 
@@ -58,11 +130,42 @@
 /*-----------------------------------------------
                  Front Page
 -----------------------------------------------*/
+#main {
+  h2 {
+    a {
+      @include rr_homepage_a_ltr(30px);
+    }	
+  }
+
+  div.region-content-bottom {
+    div.view-reshet-yeruka-homepage-low-boxes {
+      td {
+        &.col-first {
+        padding-left: 1.3%; /* RTL */
+        padding-right: 0%; /* RTL */
+        }
+        &.col-last {
+        padding-right: 1.3%; /* RTL */
+        padding-left: 0%; /* RTL */
+
+        }
+      }
+      h2 {
+        @include rr_homepage_a_ltr(10px);
+      }
+    }
+  }
+}
+
 
 /*-----------------------------------------------
                  Inner Pages
 -----------------------------------------------*/
-
+.node {
+  .field-name-field-field-image-on-homepage {
+    float: left; /* RTL */;
+  }
+}
 /*-----------------------------------------------
                    Forms
 -----------------------------------------------*/
