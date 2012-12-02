@@ -124,7 +124,7 @@ class SassScriptParser {
 			// If two literals/expessions are seperated by whitespace use the concat operator
 			if (empty($token)) {
 				if ($i > 0 && (!$tokens[$i-1] instanceof SassScriptOperation || $tokens[$i-1]->operator === SassScriptOperation::$operators[')'][0]) &&
-						(!$tokens[$i+1] instanceof SassScriptOperation || $tokens[$i+1]->operator === SassScriptOperation::$operators['('][0])) {
+						(!@$tokens[$i+1] instanceof SassScriptOperation || $tokens[$i+1]->operator === SassScriptOperation::$operators['('][0])) {
 					$token = new SassScriptOperation(SassScriptOperation::$defaultOperator, $context);
 				}
 				else {

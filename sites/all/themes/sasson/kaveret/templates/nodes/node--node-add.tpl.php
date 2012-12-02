@@ -102,10 +102,10 @@
   <?php endif; ?>
 
   <div class="content"<?php print $content_attributes; ?>>
-      <?php if ($page): ?>
-	<h2><?php print $title; ?></h2>
+      <?php i f  ($page): ?>
+	<h2><? php print $title; ?></h2>
       <?php endif; ?>
-      <?php print render($title_suffix); ?>
+      <?php pri nt render($title_suffix); ?>
     <?php
       // We hide the comments, tags and links now so that we can render them later.
       hide($content['comments']);
