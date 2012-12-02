@@ -30,18 +30,33 @@
 // @import "partials/mixins";        // Uncomment to call your own mixins partial (check your /partials directory)
 // @import "sprites/smart";          // Uncomment to call your 'smart' sprite (check your /images/sprites directory)
 
+$lightblue = #e6f3f9;
+$blue = #5aa3c4;
+$borderblue = #86BEF1;
+$green = #9ab34e;
+@mixin rr_homepage_a_ltr($pad) {
+            padding-left: 0px; /* RTL */
+            padding-right: $pad; /* RTL */
+}
+
 /*-----------------------------------------------
           General Sitewide Styles
 -----------------------------------------------*/
 /* -----  Layout  ----- */
+.one-sidebar.sidebar-first #main {
+  margin-left: 0%; /* RTL */
+  margin-right: 3%; /* RTL */
+  padding-left: 3%; /* RTL */
+  padding-right: 0%; /* RTL */
+  border-right-style: none; /* RTL */
+  border-left-color: $borderblue; /* RTL */
+  border-left-style: solid; /* RTL */
+  border-left-width: 2px; /* RTL */
+}
 
 /* -----  General Styles (Colors, Backgrounds etc.)  ----- */
 
 /* -----  Typography  ----- */
-@mixin rr_homepage_a_ltr($pad) {
-            padding-left: auto; /* RTL */
-            padding-right: $pad; /* RTL */
-}
 
 /* -----  Links  ----- */
 
@@ -88,17 +103,18 @@
   }
 }
 
+
 /* -----  Sidebars  ----- */
   #sidebar-first {
     div.region-sidebar-first{
       border-right-style: none; /* RTL */
       border-left-style: solid; /* RTL */
       border-left-width: 2px; /* RTL */
-      border-left-color: #86BEF1; /* RTL */
+      border-left-color: $borderblue; /* RTL */
 
       div.block {
         margin-right: 0%; /* RTL */
-        margin-left: 9%; /* RTL */
+        margin-left: 12%; /* RTL */
 
         div.second-box-on-sidebar-1 {
           .content a {
@@ -114,7 +130,9 @@
       }
     }
   }
-
+.one-sidebar.sidebar-first #sidebar-first {
+  right: -75%; /* RTL */
+}
 
 #sidebar-second {
   h2 {
@@ -130,6 +148,7 @@
 /*-----------------------------------------------
                  Front Page
 -----------------------------------------------*/
+
 #main {
   h2 {
     a {
@@ -157,7 +176,15 @@
   }
 }
 
-
+body.front {
+  #sidebar-first {
+    div.region-sidebar-first{
+      div.block {
+        margin-left: 9%; /* RTL */
+       }
+    }
+  }
+}
 /*-----------------------------------------------
                  Inner Pages
 -----------------------------------------------*/

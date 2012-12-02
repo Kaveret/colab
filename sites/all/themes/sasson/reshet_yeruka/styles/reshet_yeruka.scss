@@ -30,14 +30,30 @@
 // @import "partials/mixins";        // Uncomment to call your own mixins partial (check your /partials directory)
 // @import "sprites/smart";          // Uncomment to call your 'smart' sprite (check your /images/sprites directory)
 $lightblue = #e6f3f9;
+$borderblue = #86BEF1;
 $blue = #5aa3c4;
 $green = #9ab34e;
 
+@mixin rr_homepage_a($pad,$size) {
+            text-decoration: none;
+            padding-left: $pad; /* LTR */
+            font-size: $size;
+}
 /*-----------------------------------------------
           General Sitewide Styles
 -----------------------------------------------*/
 /* -----  Layout  ----- */
+.one-sidebar.sidebar-first #main {
+  margin-left: 3%; /* LTR */
+  margin-right: 0%; /* LTR */
+  margin-top: 36px;
+  padding-right: 3%; /* LTR */
+  width: 69%;
+  border-right-color: $blue; /* LTR */
+  border-right-style: solid; /* LTR */
+  border-right-width: 2px; /* LTR */
 
+}
 /* -----  General Styles (Colors, Backgrounds etc.)  ----- */
 
 /* -----  Typography  ----- */
@@ -45,14 +61,17 @@ $menu_fontsize = 18px; /* default is 16px */
 $homepage_sideboxes_fontsize = 18px;
 $homepage_bottomboxes_fontsize = 14px;
 
-@mixin rr_homepage_a($pad,$size) {
-            text-decoration: none;
-            padding-left: $pad; /* LTR */
-            font-size: $size;
-}
-
 $h2height=36px;
 $h2marginbottom=10px;
+
+  h1 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: $green;
+    line-height: 60%;
+    padding-bottom: 10px;
+    font-size: 1.4em;
+  }
 /* -----  Links  ----- */
 
 /* -----  Header  ----- */
@@ -144,12 +163,12 @@ $h2marginbottom=10px;
     div.region-sidebar-first{
       border-right-style: solid; /* LTR */
       border-right-width: 2px; /* LTR */
-      border-right-color: #86BEF1; /* LTR */
+      border-right-color: $borderblue; /* LTR */
       margin-top: 35px;
       padding-bottom: 50px;
 
       div.block {
-        margin-right: 9%; /* LTR */
+        margin-right: 12%; /* LTR */
         div.second-box-on-sidebar-1 {
           margin-top: 40px;
           .content a {
@@ -170,25 +189,31 @@ $h2marginbottom=10px;
       }
     }
   }
+  .one-sidebar.sidebar-first #sidebar-first {
+    margin: 0%;
+    left: -75%; /* LTR */
+    width: 25%;
+  }
 /* -----  Footer  ----- */
 
 #footer {
   background: #5aa3c4;
   margin-top: 50px;
-  
+
   a,p {
     font-size: 12px;
     text-decoration: none;
   }
   p {
     margin-bottom: 0px;
-  }
+
 /*  float: none;
   width: 960px;
   display: block;
   margin-left: auto;
   margin-right: auto;
 display: none;*/
+  }
 }
 	
 .region-footer {
@@ -210,15 +235,13 @@ display: none;*/
     li {
       list-style: none outside none;
       display: inline;
-      a.active {
-        color: white;
-      }
-      a:visited {
-        color: white;
+      a, a:active, a:visited {
+	color: white;
       }
     }
   }
 }
+
 
 /*-----------------------------------------------
                  Front Page
@@ -238,7 +261,7 @@ display: none;*/
     background-color: $blue;
     height: $h2height;
     margin-bottom: $h2marginbottom;
-    a {
+    a, a:active, a:visited {
       color: white;
       @include rr_homepage_a(30px, $homepage_sideboxes_fontsize);
       padding-top: 2px;
@@ -280,10 +303,14 @@ display: none;*/
   }
 }
 
+
 body.front {
   #sidebar-first {
+    width: 22.9167%;
+
     div.region-sidebar-first{
       div.block {
+        margin-right: 9%; /* LTR */
         h2 {
           background-color: $lightblue;
           a {
@@ -315,6 +342,11 @@ body.front {
   .field-name-field-field-image-on-homepage {
     float: right; /* LTR */
   }
+}
+
+/* -----  contact us ----- */
+body.section-contact {
+  
 }
 /*-----------------------------------------------
                    Forms
