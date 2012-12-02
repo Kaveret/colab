@@ -10,6 +10,7 @@
  * implements hook_menu
  */
 function likeabee_menu() {
+  /*
   $items['content/groups'] = array(
     'title' => "Groups",
     'page callback' => 'views_embed_view',
@@ -18,6 +19,9 @@ function likeabee_menu() {
     'access arguments' => array('access content'),
     'weight' => 1
   );
+*/
+  //seems a little odd that groups themselves would divided into All, popular, and editor's choice.
+  //perhaps we could drop these menu items?
   //this allows us to used views in code without modifications, but which explose blocks rather than pages
   $items['content/groups/editors_choice'] = array(
     'title' => "Editor's choice",
@@ -44,7 +48,12 @@ function likeabee_menu() {
   return $items;
 }
 
+function likeabee_menu_alter(&$items) {
+  //this link should override /groups
+  $items['content/groups']['page callback'] = 'views_embed_view';
+  $items['content/groups']['page arguments'] = array('list_of_groups', 'block');
 
+}
 function likeabee_hook_info() {
   return array(
     'likeabee_section' => array()
@@ -64,23 +73,27 @@ function likeabee_likeabee_section() {
 }
 
 function likeabee_node_view_alter(&$build, $node) {
-  $build['section_chooser'] = module_invoke('menu_block', 'block_view', 'menu_block_3');
+  if ($build['#bundle'] != 'group') return; //this is needed to prevent nesting because group summary invokes a view with nodes in
+  $build['section_chooser'] = module_invoke('menu_block', 'block_view', 'menu_block_3');//menu_block_3 should be a CONSTANT
+  $build['section_chooser']['#weight'] = -1;
   $build['events'] = group_summary(t("Group's events"), 'event');
   $build['poll'] = group_summary(t("Group's polls"), 'poll');
   $build['video'] = group_summary(t("Group's videos"), 'video');
   $build['discussion'] = group_summary(t("Group's discussions"), 'discussion');
   $build['documents'] = group_summary(t("Group's documents"), 'document');
-  //debug($node, 0, 1);
 }
 
 function group_summary($title, $type) {
   static $w = 1;
+  $view = views_embed_view('groups_content_preview', 'groups_choice', $type, 161);
+  //there's no proper way to ascertain if a view is empty after it is themed
+  if (strlen($view) < 200) return array();
   return array(
     '#theme' => 'likeabee_groups_summary',
     '#weight' => $w++,
     '#title' => $title,
     '#type' => $type,
-    '#view' => array('groups_content_preview', 'groups_choice'),
+    '#view' => $view,
     '#gid' => 161
   );
 }
@@ -98,13 +111,12 @@ function likeabee_theme() {
 }
 function theme_likeabee_groups_summary($variables) {
   static $flip = 'even';
+  $type = &$variables['type'];
   $flip = $flip == 'even' ? 'odd' : 'even';
   $output[] = "<div class = \"group-summary-$type $flip\" ><h2>".$variables['title'].'</h2>';
-  $view = $variables['view'][0];
-  $display = $variables['view'][1];
-  $output[] = '<div class = "link-all">'. l('See All', "content/group/".$variables['type'].'/'. $variables['gid']) . '</div>';//we need a consistent name for the 'all display'
-  $output[] = views_embed_view($view, $display, $variables['type']);
-  return implode("\n", $output) .'<div><!--End group summary-->';
+  $output[] = '<div class = "link-all">'. l('See All', "content/group/$type/". $variables['gid']) . '</div>';//we need a consistent name for the 'all display'
+  $output[] = $variables['view'];
+  return implode("\n", $output) .'</div><!--End group summary-->';
 }
 
 function likeabee_views_api() {
@@ -113,3 +125,5 @@ function likeabee_views_api() {
     'path' => drupal_get_path('module', 'likeabee'),
   );
 }
+
+variable_set('file_public_path', 'sites/likeabee.net/files');
