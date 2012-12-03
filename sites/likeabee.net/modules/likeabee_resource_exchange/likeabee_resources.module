@@ -12,7 +12,7 @@ function likeabee_resources_menu() {
     'access callback' => 'user_access',
     'access arguments' => array('transact'),
     'menu_name' => 'main-menu',
-    'weight' => 0
+    'weight' => 1
   );
   /*
   $items['resources/dashboard'] = array(

@@ -1,6 +1,0 @@
-; $Id:
-name = Export and import fields, blocks, views
-description = General custom code. This will later be moved to an installation profile
-package = Development
-core = "7.x"
-

@@ -92,38 +92,13 @@
       <?php if ($site_slogan): ?>
         <div id="site-slogan"><?php print $site_slogan; ?></div>
       <?php endif; ?>
+      <?php print $userpic_social; ?>
 
       <?php print render($page['header']); ?>
     </header><!-- /#header -->
   <?php endif; ?>
 
-<?php if ($page['featured']): ?>
-    <div id="featured">
-	<?php if ($title): ?>
-	<div class="layout-page-title">
-	      <h1 class="title" id="page-title"><?php print $title; ?></h1>
-	</div>
-	<?php endif; ?>
-
-      <?php print render($page['featured']); ?>
-    </div><!-- /#featured -->
-  <?php endif; ?>
-
 <div id="page">
-  <?php if ($main_menu_links): ?>
-    <nav id="main-menu" role="navigation">
-      <?php print $main_menu_links; ?>
-    </nav><!-- /#main-menu -->
-  <?php endif; ?>
-
-  <?php if ($secondary_menu_links): ?>
-    <nav id="secondary-menu" role="navigation">
-      <?php print $secondary_menu_links ?>
-    </nav> <!-- /#secondary-menu -->
-  <?php endif; ?>
-
-
-
  <div id="main">
     <?php if ($tabs): ?>
       <div class="tabs"><?php print render($tabs); ?></div>
@@ -133,9 +108,6 @@
         <?php print render($page['highlighted']); ?>
       </div><!-- /#highlighted -->
     <?php endif; ?>
-     <!--<div id="breadcrumb"><?php 
-       //print $breadcrumb;
-      ?></div>-->
     <?php print render($title_prefix); ?>
     <?php print render($title_suffix); ?>
 
@@ -145,35 +117,36 @@
       <ul class="action-links"><?php print render($action_links); ?></ul>
     <?php endif; ?>
 
-    <?php print render($page['content_top']); ?>
-    <?php print render($page['content']); ?>
-    <?php print render($page['content_bottom']); ?>
-
-    <?php print $feed_icons; ?>
-  </div><!-- /#main -->
-
   <?php if ($page['sidebar_first']): ?>
     <aside id="sidebar-first" class="sidebar" role="complementary">
       <?php print render($page['sidebar_first']); ?>
     </aside><!-- /#sidebar-first -->
   <?php endif; ?>
-
   <?php if ($page['sidebar_second']): ?>
     <aside id="sidebar-second" class="sidebar" role="complementary">
       <?php print render($page['sidebar_second']); ?>
     </aside><!-- /#sidebar-second -->
   <?php endif; ?>
+
+    <img height="267" src="<?php print path_to_theme(); ?>/images/top_img.png" width="722" />
+    <?php print render($page['content']); ?>
+    
+    <?php print $feed_icons; ?>
+  </div><!-- /#main -->
+
+
 </div><!-- /#page -->
 
-<?php if ($page['quicktabs']): ?>
-    <div id="quicktabs">
- <?php print render($page['quicktabs']); ?>
- </div><!-- /#quicktabs -->
- <?php endif; ?>
-
-  <?php if ($page['footer']): ?>
-    <footer id="footer" role="contentinfo">
-      <?php print render($page['footer']); ?>
-    </footer><!-- /#footer -->
+<footer id="footer">
+  <?php if ($secondary_menu_links): ?>
+  <nav id="secondary-menu" role="navigation">
+    <?php print $secondary_menu_links ?>
+  </nav> <!-- /#secondary-menu -->
   <?php endif; ?>
+  <?php print render($footer_icons); ?>
+  <?php print render($share_icons); ?>
+  <?php //this is the blocks in the footer region
+    print render($page['footer']); 
+  ?>
+</footer><!-- /#footer -->
 
