@@ -19,33 +19,8 @@ function likeabee_menu() {
     'access arguments' => array('access content'),
     'weight' => 1
   );
-*/
-  //seems a little odd that groups themselves would divided into All, popular, and editor's choice.
-  //perhaps we could drop these menu items?
-  //this allows us to used views in code without modifications, but which explose blocks rather than pages
-  $items['content/groups/editors_choice'] = array(
-    'title' => "Editor's choice",
-    'type' => MENU_DEFAULT_LOCAL_TASK,
-    'weight' => 1
-  );
-  $items['content/groups/popular'] = array(
-    'title' => "Popular",
-    'page callback' => 'views_embed_view',
-    'page arguments' => array('list_of_groups', 'block_1'),
-    'access callback' => TRUE,
-    'access arguments' => array('access content'),
-    'type' => MENU_LOCAL_TASK,
-    'weight' => 2
-  );
-  $items['content/groups/all'] = array(
-    'title' => "All",
-    'page callback' => 'views_embed_view',
-    'page arguments' => array('list_of_groups', 'block_2'),
-    'access arguments' => array('access content'),
-    'type' => MENU_LOCAL_TASK,
-    'weight' => 3
-  );
   return $items;
+*/
 }
 
 function likeabee_menu_alter(&$items) {
@@ -127,3 +102,45 @@ function likeabee_views_api() {
 }
 
 variable_set('file_public_path', 'sites/likeabee.net/files');
+
+function likeabee_block_info() {
+  $blocks['group_manage'] = array(
+    'info' => t('Group management')
+  );
+  return $blocks;
+}
+
+/*|
+ * groups menu isn't a real menu because it would have to contain aliases and tricky things like that.
+ * easier just to render a nested list and put it in a block.
+ */
+function get_groups_menu() {
+  //borrowed from og_extras_node_links
+  $group = og_context(); //dependency on og_context
+  $gid = $group['gid'];
+  $types = array();
+  foreach (node_type_get_types() as $type) {
+    if (og_is_group_content_type('node', $type->type)) {
+      $types[$type->type] = $type->type;
+    }
+  }
+  $options = array('query' => array('destination' => current_path()));
+
+  $items[] = l(t('Information Read and watch'), "node/$gid", $options);
+  $items[] = l(t('Activity Group Activities'), 'activity/activities-my-group', $options);
+  $items[] = l(t('Group Members'), 'members/members-my-group', $options);
+  $items[] = array(
+    'children' => array(
+      array('data' => l(t('Edit group'), "node/$gid/edit", $options)),
+      array('data' => l(t('Permissions'), "group/node/$gid/admin/permissions", $options)),
+      array('data' => l(t('Membership'), "group/node/$gid/admin/people", $options)),
+    )
+  );
+  $items[] = drupal_render(og_node_create_links($group['group_type'], $group['gid'], OG_AUDIENCE_FIELD, NULL, $types));
+  $element['og_node_create_links'] = array(
+    '#theme' => 'item_list',
+    '#title' => 'my_group',
+    '#items' => $items,
+  );
+  return $element;
+}

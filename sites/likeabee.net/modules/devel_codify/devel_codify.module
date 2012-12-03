@@ -133,8 +133,13 @@ function devel_codify_fields(&$output) {
 function devel_import_fields(&$fields) {
   //we now have an array called $fields
   foreach ($fields as $field) {
-    field_update_field($field);
-    $preserve_fields[] = $field['id'];
+    if (field_read_field($field['field_name'])) {
+      field_update_field($field);
+      $preserve_fields[] = $field['id'];
+    }
+    else {
+      drupal_set_message('field was deleted: ', print_r($field, 1), 'warning');
+    }
   }
   db_delete('field_config')->condition('id', $preserve_fields, 'NOT IN');
   return count($fields);
@@ -157,8 +162,18 @@ function devel_codify_instances(&$output) {
 function devel_import_instances(&$instances) {
   //we now have an array called $instances
   foreach ($instances as $instance) {
-    field_update_instance($instance);
-    $preserve_instances[] = $instance['id'];
+    if (field_read_field($instance['field_name'])) {
+      if (field_read_instance($instance['entity_type'], $instance['field_name'], $instance['bundle'], array('include_inactive' => TRUE))) {
+        field_update_instance($instance);
+        $preserve_instances[] = $instance['id'];
+      }
+      else {
+        drupal_set_message('instance was deleted: ', print_r($instance, 1), 'warning');
+      }
+    }
+    else {
+      drupal_set_message('field was deleted: ', print_r($instance, 1), 'warning');
+    }
   }
   db_delete('field_config_instance')->condition('id', $preserve_instances, 'NOT IN')->execute();
   return count($instances);
@@ -184,13 +199,12 @@ function devel_codify_blocks(&$output) {
 }
 function devel_import_blocks(&$blocks) {
   foreach(list_themes() as $key => $info) if ($info->status)$themes[] = $key;
-  include('public://devel/instances.export.php');
   //we now have an array called $blocks
   foreach($blocks as $block) {
     $bids[] = $block['bid'];
     drupal_write_record('block', $block, array('bid'));//not using the usual block keys
   }
-  $remove = db_select('block', 'b')->fields('b', 'bid')
+  $remove = db_select('block', 'b')->fields('b', array('bid'))
   ->condition('bid', $bids, 'NOT IN')
   ->condition('theme', $themes, 'NOT IN')
   ->execute()->fetchCol();
