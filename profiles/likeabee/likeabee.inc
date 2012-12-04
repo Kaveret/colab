@@ -5,8 +5,9 @@
  * home page contains a nice pic and the top level menu items, which are put there by a block
  */
 function likeabee_home() {
-  
-  return array();
+  $build = array();
+  _view_groups_content_summary($build);
+  return $build;
 }
 
 function _groups_pseudo_menu() {
@@ -76,7 +77,10 @@ function _groups_pseudo_menu() {
 }
 
 function _likeabee_node_view_alter(&$build) {
-  $gid = $build['#node']->nid;
+  _view_groups_content_summary($build, $build['#node']->nid);
+}
+
+function _view_groups_content_summary(&$build, $gid = NULL) {
   $build['preview_events'] = group_summary($gid, t("Group's events"), 'event');
   $build['preview_poll'] = group_summary($gid, t("Group's polls"), 'poll');
   $build['preview_video'] = group_summary($gid, t("Group's videos"), 'video');
