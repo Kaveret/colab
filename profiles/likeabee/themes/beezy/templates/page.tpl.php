@@ -144,7 +144,7 @@
     </aside><!-- /#sidebar-second -->
   <?php endif; ?>
 </div><!-- /#page -->
-;;;;;;;;;;;;;;;;;;;;;;
+
 <footer id="footer">
   <?php if ($secondary_menu_links): ?>
   <nav id="secondary-menu" role="navigation">

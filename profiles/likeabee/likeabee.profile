@@ -218,5 +218,8 @@ function likeabee_image_default_styles() {
   return array();
 }
 
-//setup Hebrew
-//l10n_update
+
+function likeabee_flag_default_flags() {
+  module_load_include('inc', 'likeabee');
+  return _likeabee_flag_default_flags();
+}

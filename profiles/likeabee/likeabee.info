@@ -5,7 +5,6 @@ package = Likeabee
 core = "7.x"
 
 files[] = likeabee.views_default.inc
-files[] = likeabee.flag_default.inc
 files[] = likeabee.install
 files[] = likeabee.inc
 

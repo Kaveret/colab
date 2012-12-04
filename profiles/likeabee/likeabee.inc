@@ -164,6 +164,7 @@ function likeabee_my_content_links($account) {
   return $render;
 }
 
+
 function _likeabee_flag_default_flags() {
   // Exported flag: "Join the event".
   $flags['join_event'] = array(
