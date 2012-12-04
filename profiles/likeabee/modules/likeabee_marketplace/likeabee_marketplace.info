@@ -1,0 +1,10 @@
+; $Id:
+name = Likeabee marketplace
+description = Ubercart settings. Created by Sakshay
+package = Likeabee
+core = "7.x"
+
+dependencies[] = ubercart_marketplace
+dependencies[] = mcapi
+
+files[] = likeabee_marketplace.views_default.inc

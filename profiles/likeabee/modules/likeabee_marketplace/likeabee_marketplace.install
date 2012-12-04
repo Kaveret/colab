@@ -1,0 +1,82 @@
+<?php
+
+function likeabee_marketplace_install() {
+  $vars = array (
+    'date_format_uc_store' => 'm/d/Y',
+    'uc_address_format_124' => '!company
+!first_name !last_name
+!street1
+!street2
+!city, !postal_code
+!zone_name, !country_name',
+    'uc_address_format_840' => '!company
+!first_name !last_name
+!street1
+!street2
+!city, !zone_code !postal_code
+!country_name_if',
+    'uc_catalog_vid' => '6',
+    'uc_check_address' => array (
+      'uc_check_mailing_company' => '',
+      'uc_check_mailing_street1' => '',
+      'uc_check_mailing_street2' => '',
+      'uc_check_mailing_city' => '',
+      'uc_check_mailing_zone' => '',
+      'uc_check_mailing_country' => '840',
+      'uc_check_mailing_postal_code' => '',
+    ),
+    'uc_check_mailing_city' => 'asas',
+    'uc_check_mailing_company' => 'sas',
+    'uc_check_mailing_country' => '840',
+    'uc_check_mailing_name' => 'asd',
+    'uc_check_mailing_postal_code' => '10023',
+    'uc_check_mailing_street1' => 'asasa',
+    'uc_check_mailing_street2' => '',
+    'uc_check_mailing_zone' => '16',
+    'uc_check_policy' => 'Personal and business checks will be held for up to 10 business days to ensure payment clears before an order is shipped.',
+    'uc_credit_accepted_types' => 'Visa
+Mastercard
+Discover
+American Express',
+    'uc_credit_amex' => 1,
+    'uc_credit_bank_enabled' => 0,
+    'uc_credit_cvv_enabled' => 1,
+    'uc_credit_discover' => 1,
+    'uc_credit_encryption_path' => './keys',
+    'uc_credit_fail_message' => 'We were unable to process your credit card payment. Please verify your details and try again.  If the problem persists, contact us to complete your order.',
+    'uc_credit_issue_enabled' => 0,
+    'uc_credit_mastercard' => 1,
+    'uc_credit_owner_enabled' => 0,
+    'uc_credit_policy' => 'Your billing information must match the billing address for the credit card entered below or we will be unable to process your payment.',
+    'uc_credit_start_enabled' => 0,
+    'uc_credit_type_enabled' => 1,
+    'uc_credit_validate_numbers' => 0,
+    'uc_credit_visa' => 1,
+    'uc_credit__active_tab' => 'edit-cc-fields',
+    'uc_image_product' => 'uc_product_image',
+    'uc_payment_credit_gateway' => 'paypal_wpp',
+    'uc_payment_method_check_checkout' => 1,
+    'uc_payment_method_check_weight' => '1',
+    'uc_payment_method_cod_checkout' => 1,
+    'uc_payment_method_cod_weight' => '1',
+    'uc_payment_method_credit_checkout' => 1,
+    'uc_payment_method_credit_weight' => '2',
+    'uc_payment_method_other_checkout' => 0,
+    'uc_payment_method_other_weight' => '10',
+    'uc_payment_method_paypal_ec_checkout' => 0,
+    'uc_payment_method_paypal_ec_weight' => '1',
+    'uc_payment_method_paypal_wps_checkout' => 1,
+    'uc_payment_method_paypal_wps_weight' => '1',
+    'uc_paypal_api_password' => 'QFZCWN5HZM8VBG7Q',
+    'uc_paypal_api_signature' => 'A.d9eRKfd1yVkRrtmMfCFLTqa6M9AyodL0SJkhYztxUi8W9pCXF6.4NI',
+    'uc_paypal_api_username' => 'sdk-three_api1.sdk.com',
+    'uc_paypal_wpp_currency' => 'USD',
+    'uc_paypal_wpp_server' => 'https://api-3t.sandbox.paypal.com/nvp',
+    'uc_paypal_wps_email' => '',
+    'uc_pg_paypal_wpp_cc_txn_type' => 'auth_capture',
+    'uc_pg_paypal_wpp_enabled' => 1,
+  );
+  foreach ($vars as $key => $val) {
+    variable_set($key, $val);
+  }
+}
