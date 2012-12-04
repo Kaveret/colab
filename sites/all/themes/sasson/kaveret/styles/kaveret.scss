@@ -111,7 +111,7 @@ clear: both;
 .node-type-group-s-avtivity,
 .node-type-group-members,
 .node-type-groups-event,
-.page-node-add,
+
 .section-events,
 .section-doccuments,
 .section-discussions,
@@ -120,6 +120,15 @@ clear: both;
 	#page-title{
 		display: none;
 		}
+}
+.page-node-add{
+	#page-title{
+			display: block;
+			text-align: left;
+			font-size: 23px;
+			color:#014a81;
+			font-family: arial;
+		}	
 }
 .node-type-page{
 	#page-title{
@@ -160,6 +169,14 @@ clear: both;
 	height: 36px;	
 	}
 }
+/* -----  Help  -----*/
+#block-system-help{
+	font-size: 14.93px;
+	color:#014a81;
+	font-family: arial;	
+	display: block;
+}
+
 /**************************  Header  ******************************/
 /* -----  search  ----- */
 #block-search-form
@@ -1060,6 +1077,74 @@ div.img-biger .number[class*=" 0 "],
 	margin: 8px 10px;
 	}
 }
+/*----------Specific page-node-add-groups-event -----------*/
+.page-node-add-groups-event{
+	.form-item,.fieldset-legend{
+		font-size: 15px;
+		color: #004a82;
+		font-family: arial;
+		font-weight: bold;
+	}
+	.form-item-title,.form-type-textfield{
+		#edit-title,#edit-field-location-of-event-text-und-0-value
+		{
+			/*box-shadow: 0 0 0 1px #fcda9a, 0 0 0 10px #fcf0d8, 0 0 0 1px #fcda9a; */
+			border: 1px solid #fcda9a; 
+			box-shadow: 0 0 0 10px #fcf0d8, 0 0 0 1px #fcda9a,0 0 0 10px #fcf0d8;
+			margin-top: 10px;
+			width:603px;
+			margin-right: 11px;
+		}
+	
+	}
+	.draggable,.group-time-event.fieldset-wrapper,.field-name-field-location-of-event{
+			background: #fcf0d8;
+			border: 1px solid #fcda9a;
+	}
+	.field-type-entityreference{		
+		.draggable{
+			height: 60px;
+		}
+		.clearfix{
+			background: #fcf0d8;
+			border: 1px solid #fcda9a;
+			width: 624px;
+			height: 50px;
+			#edit-og-group-ref-und-0-default-add-more{
+				width: 55px;
+				height: 29px;
+				background-image: url("../images/remove.png") no-repeat;
+				float: right;
+				border: 1px solid #fcda9a;
+				margin-top: 9px;
+				margin-right: 10px;
+			}
+		}
+	}
+	.group-time-event{
+		float: left;
+		.fieldset-wrapper{
+		width: 240px;
+		height: 237px;
+		#edit-field-date-event{
+			height: 98px;
+
+		}
+		
+		}
+		
+	}
+	.field-name-field-location-of-event{
+		width: 329px;
+		height: 278px;
+		border-top: 0;
+		margin-top: -6px;
+		margin-right: 85px;
+		float: right;
+	}
+
+}
+
 /*---------- sidebar-second -----------*/
 section[id^="block-views-my-groups"],
 section[id^="block-views-tags-block"],
@@ -1313,7 +1398,7 @@ section[id^="block-views-individual-space-block"],
 }
 /*************************  tabs  *****************************/
 #block-menu-menu-tabs{
-	position: relative;
+	position: fixed;
 	top: 120px;
 	.content{
 
@@ -1326,7 +1411,7 @@ section[id^="block-views-individual-space-block"],
 	.content ul li{
 		position: relative;
 		list-style: none;
-		left: -180px;
+		left: -146px;
 		width: 197px;
 		height: 17px;
 		margin: 14px 0 10px 0;
@@ -1337,13 +1422,14 @@ section[id^="block-views-individual-space-block"],
 		box-shadow: 0px 0px 6px -1px #555353;
 		background: url('../images/big-icons.png') no-repeat #F0AC00;
 		background-size: 40px;
+		margin-left: -180px;
 		a{	
 			width: 147px;
 			color: white;
 			font-weight: bold;
 			font-size: 14px;
 			padding: 3px 0px 7px 0px;
-			margin: 0px 65px 0px -15px;
+			margin-left: -17px;
 			text-decoration: none;
 		}
 	}
@@ -1360,6 +1446,9 @@ section[id^="block-views-individual-space-block"],
 		background: #fff;
 		padding: 0;
 		margin: 11px 0px 0px -34px;
+	}
+	.content ul li ul.menu:hover{
+		display: block;
 	}
 	.content ul li ul li{
 			box-shadow: 0px 0px;
