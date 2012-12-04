@@ -20,5 +20,29 @@
 				});*/
 		}
 	}
+
+
+	  $(document).ready(function(){
+	  /*$('#block-menu-menu-tabs ul li').click(
+
+     function() {
+         
+         $(this).css("margin-left","0" );
+          
+      
+     } );*/
+	  		$("#block-menu-menu-tabs ul li").click(
+					function () {
+						if ( jQuery.css( this, "margin-left" ) === "-180px" )
+							{$(this).animate({"margin-left": "+=180px"}, 500);}
+						else
+						{
+							if ( jQuery.css( this, "margin-left" ) === "0px")
+								{$(this).animate({"margin-left": "-=180px"}, 500);} 
+						}
+				});
+		 	
+     
+ });  
 })(jQuery);
 
