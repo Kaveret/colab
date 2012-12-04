@@ -4,8 +4,6 @@
 define('MENU_BLOCK_MAIN_MENU_ICONS', 3);
 define('MENU_BLOCK_SECTION', 1);
 
-variable_set('file_public_path', 'sites/likeabee.net/files');
-
 /*
  * This module is discontinued and the whole approach of defining sections with a hook
  * because the theme is all intertwined with the menu system already
@@ -75,27 +73,27 @@ function likeabee_views_api() {
 }
 
 function likeabee_block_info() {
-  $blocks[] = array(
-    'my_content' => array(
-      'info' => t('Links to views of content by type and by user'),
-      //these are default settings only. fixed settings are in likeabee_block_info_alter
-      'pages' => 'user*',
-      'visibility' => BLOCK_VISIBILITY_LISTED,
-      'status' => 1,
-      'region' => 'sidebar_second'
-    )
+  $blocks['my_content'] = array(
+    'info' => t('Links to views of content by type and by user'),
+    //these are default settings only. fixed settings are in likeabee_block_info_alter
+    'pages' => 'user*',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'status' => 1,
+    'region' => 'sidebar_second'
   );
+  return $blocks;
 }
 
 function likeabee_block_view($delta) {
   //there might be a quicker wasy to ensure this only builds for my user profile pages
-  if ($account != menu_get_object('user'))return;
-  if ($account->uid != $GLOBALS['user']->uid) return;
-  module_load_include('inc', 'likeabee');
-  return array(
-    'subject' => t('My Content'),
-    'content' => likeabee_my_content_links($account)
-  );
+  if ($account = menu_get_object('user')) {
+    if ($account->uid != $GLOBALS['user']->uid) return;
+    module_load_include('inc', 'likeabee');
+    return array(
+      'subject' => t('My Content'),
+      'content' => likeabee_my_content_links($account)
+    );
+  }
 }
 
 /*
@@ -123,7 +121,7 @@ function template_preprocess_userpic_social(&$vars) {
   $account = $vars['account'];
   //Arggggh can only apply styling to 'managed' files with schema like public://
   //the default user picture is a plain url
-    $style = 'thumbnail';//might need something even smaller
+  $style = 'thumbnail';//might need something even smaller
   if ($picture_fid = $account->picture) {
     $picture = file_load($picture_fid)->uri;
     if (file_valid_uri($picture_filepath)) {
@@ -185,8 +183,9 @@ function theme_username_description(&$vars) {
  * implements theme hook_preprocess_page
  */
 function likeabee_preprocess_page(&$vars) {
-  $vars['userpic_social'] = theme('userpic_social', array('account' => $GLOBALS['user']));
-
+  if ($GLOBALS['user']->uid) {
+    $vars['userpic_social'] = theme('userpic_social', array('account' => $GLOBALS['user']));
+  }
   //prepare footer icons
   $config = menu_block_get_config(MENU_BLOCK_MAIN_MENU_ICONS);
   $data = menu_tree_build($config);
@@ -216,5 +215,8 @@ function likeabee_image_styles_alter(&$styles) {
  *
  */
 function likeabee_image_default_styles() {
-  //return array();
+  return array();
 }
+
+//setup Hebrew
+//l10n_update

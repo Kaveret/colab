@@ -72,7 +72,7 @@
     <div id="floating">
  <?php print render($page['floating']); ?>
  </div><!-- /#floating -->
- <?php endif; ?> 
+ <?php endif; ?>
 
 
   <?php if ($logo || $site_name || $site_slogan || $page['header']): ?>
@@ -92,7 +92,7 @@
       <?php if ($site_slogan): ?>
         <div id="site-slogan"><?php print $site_slogan; ?></div>
       <?php endif; ?>
-      <?php print $userpic_social; ?>
+      <?php if ($isset($userpic_social)) print $userpic_social; ?>
 
       <?php print render($page['header']); ?>
     </header><!-- /#header -->
@@ -130,7 +130,7 @@
 
     <img height="267" src="<?php print path_to_theme(); ?>/images/top_img.png" width="722" />
     <?php print render($page['content']); ?>
-    
+
     <?php print $feed_icons; ?>
   </div><!-- /#main -->
 
@@ -146,7 +146,7 @@
   <?php print render($footer_icons); ?>
   <?php print render($share_icons); ?>
   <?php //this is the blocks in the footer region
-    print render($page['footer']); 
+    print render($page['footer']);
   ?>
 </footer><!-- /#footer -->
 
