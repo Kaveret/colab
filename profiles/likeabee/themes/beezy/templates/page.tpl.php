@@ -72,7 +72,7 @@
     <div id="floating">
  <?php print render($page['floating']); ?>
  </div><!-- /#floating -->
- <?php endif; ?> 
+ <?php endif; ?>
 
 
   <?php if ($logo || $site_name || $site_slogan || $page['header']): ?>
@@ -113,7 +113,7 @@
         <?php print render($page['highlighted']); ?>
       </div><!-- /#highlighted -->
     <?php endif; ?>
-     <!--<div id="breadcrumb"><?php 
+     <!--<div id="breadcrumb"><?php
        //print $breadcrumb;
       ?></div>-->
     <?php print render($title_prefix); ?>
@@ -154,7 +154,7 @@
   <?php print render($footer_icons); ?>
   <?php print render($share_icons); ?>
   <?php //this is the blocks in the footer region
-    print render($page['footer']); 
+    print render($page['footer']);
   ?>
 </footer><!-- /#footer -->
 

@@ -207,7 +207,6 @@ function likeabee_misc_setup() {
     'follow' => 0,
     'depth' => 1,
     'expanded' => 0,
-<<<<<<< HEAD
     'sort' => 0
   ));
   //we use menu block to provide the top level of the main-menu, which is usually represented as icons
@@ -219,8 +218,6 @@ function likeabee_misc_setup() {
     'follow' => 0,
     'depth' => 1,
     'expanded' => 0,
-=======
->>>>>>> 6741c4308aaf5c9303158bd88bd892c0f60e5f8a
     'sort' => 0
   ));
 

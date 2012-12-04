@@ -5,6 +5,7 @@
  * home page contains a nice pic and the top level menu items, which are put there by a block
  */
 function likeabee_home() {
+  
   return array();
 }
 
