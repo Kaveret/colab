@@ -5,10 +5,18 @@ package = Community Accounting
 core = 7.x
 configure = admin/accounting/forms
 
-files[] = mcapi_forms.admin.inc
 files[] = mcapi_forms.inc
+files[] = mcapi_forms.admin.inc
+files[] = mcapi_forms.i18n.inc
 files[] = mcapi_forms.mcapiforms_default.inc
 files[] = plugins/export_ui/mcapi_forms_ui.inc
 files[] = plugins/export_ui/mcapi_forms_ui.class.php
 
 dependencies[] = mcapi
+
+; Information added by drupal.org packaging script on 2012-12-03
+version = "7.x-3.0-rc3"
+core = "7.x"
+project = "mutual_credit"
+datestamp = "1354535300"
+

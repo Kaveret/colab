@@ -5,7 +5,7 @@
 /**
  * implements hook_install_tasks for the installation profile
  */
-function cforge_install_tasks() {
+function likeabee_install_tasks() {
   $tasks = array(
     'likeabee_content_types' => array(
       'display_name' => st('Import fields')
@@ -45,7 +45,7 @@ function likeabee_import_variables() {
 
 }
 function likeabee_content_types() {
-  return array (
+  $types = array (
     'advpoll' => array(
        'type' => 'advpoll',
        'name' => 'Poll',
@@ -149,9 +149,9 @@ function likeabee_content_types() {
   foreach ($types as $type) {
     $type = node_type_set_defaults($type);
     node_type_save($type);
-  }
-  foreach (array('page', 'article', 'event', 'advpoll', 'discussion', 'group') as $type) {
-    node_add_body_field($types[$type], t('Body'));
+    if (in_array($type->type, array('page', 'article', 'event', 'advpoll', 'discussion', 'group'))) {
+      node_add_body_field($type, t('Body'));
+    }
   }
 }
 
@@ -192,7 +192,7 @@ function likeabee_misc_setup() {
   }
 
   variable_set('menu_secondary_links_source', 'footer-menu');
-  variable_set('theme_default', 'likeabee');
+  variable_set('theme_default', 'beezy');
 
 
   //we use menu block to provide the top level of the main-menu, which is usually represented as icons
@@ -203,7 +203,7 @@ function likeabee_misc_setup() {
     'level' => 1,
     'follow' => 0,
     'depth' => 1,
-    'expanded', 0,
+    'expanded' => 0,
     'sort' => 0
   ));
 

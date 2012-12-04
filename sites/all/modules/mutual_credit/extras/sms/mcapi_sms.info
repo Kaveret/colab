@@ -6,3 +6,10 @@ core = "7.x"
 dependencies[] = mcapi
 dependencies[] = sms_user
 
+
+; Information added by drupal.org packaging script on 2012-12-03
+version = "7.x-3.0-rc3"
+core = "7.x"
+project = "mutual_credit"
+datestamp = "1354535300"
+

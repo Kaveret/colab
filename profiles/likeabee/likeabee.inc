@@ -74,19 +74,19 @@ function _groups_pseudo_menu() {
   );
 }
 
-function _likeabee_node_view_alter($build, $node) {
-  $build['preview_events'] = group_summary(t("Group's events"), 'event');
-  $build['preview_poll'] = group_summary(t("Group's polls"), 'poll');
-  $build['preview_video'] = group_summary(t("Group's videos"), 'video');
-  $build['preview_discussion'] = group_summary(t("Group's discussions"), 'discussion');
-  $build['preview_documents'] = group_summary(t("Group's documents"), 'document');
+function _likeabee_node_view_alter(&$build) {
+  $gid = $build['#node']->nid;
+  $build['preview_events'] = group_summary($gid, t("Group's events"), 'event');
+  $build['preview_poll'] = group_summary($gid, t("Group's polls"), 'poll');
+  $build['preview_video'] = group_summary($gid, t("Group's videos"), 'video');
+  $build['preview_discussion'] = group_summary($gid, t("Group's discussions"), 'discussion');
+  $build['preview_documents'] = group_summary($gid, t("Group's documents"), 'document');
 }
 
-
-function group_summary($title, $type) {
-  debug('neede to get the $gid from somewhere');
+//a page section including a view that shows a summary of a content type for a group
+function group_summary($gid, $title, $type) {
   static $w = 1;
-  $view = views_embed_view('groups_content_preview', 'groups_choice', $type, 161);
+  $view = views_embed_view('groups_content_preview', 'groups_choice', $type, $gid);
   //there's no proper way to ascertain if a view is empty after it is themed
   if (strlen($view) < 200) return array();
   return array(
@@ -95,11 +95,11 @@ function group_summary($title, $type) {
     '#title' => $title,
     '#type' => $type,
     '#view' => $view,
-    '#gid' => 161
+    '#gid' => $gid
   );
 }
 
-function theme_likeabee_group_summary($variables) {
+function theme_likeabee_groups_summary($variables) {
   static $flip = 'even';
   $type = &$variables['type'];
   $flip = $flip == 'even' ? 'odd' : 'even';
@@ -110,10 +110,10 @@ function theme_likeabee_group_summary($variables) {
 }
 
 
-function _likeabee_block_info_alter($blocks) {
+function _likeabee_block_info_alter(&$blocks) {
   //the secondlevel main menu
   $blocks['menu_block'][MENU_BLOCK_SECTION] = array(
-    'region' => -1,
+    'region' => 'sidebar_second',
     'status' => 1,
     'visibility' => BLOCK_VISIBILITY_LISTED,
     'pages' => "resources*\ngroups*",
@@ -127,14 +127,17 @@ function _likeabee_block_info_alter($blocks) {
     'pages' => "<front>\nresources*\ngroups*",
     'title' => '<none>',
   ) + $blocks['menu_block'][MENU_BLOCK_MAIN_MENU_ICONS];
+
   $blocks['search']['form']['region'] = 'header';
   $blocks['search']['form']['status'] = 1;
-  $blocks['menu']['menu-log-in']['region'] = 'header';
-  $blocks['menu']['menu-log-in']['status'] = 1;
+
+  return;//this block isn't made yet
   $blocks['menu']['menu-individual-space']['region'] = 'header';
   $blocks['menu']['menu-individual-space']['status'] = 1;
   $blocks['menu']['menu-community-space']['region'] = 'header';
   $blocks['menu']['menu-community-space']['status'] = 1;
+  $blocks['menu']['menu-log-in']['region'] = 'header';
+  $blocks['menu']['menu-log-in']['status'] = 1;
 }
 
 
@@ -145,7 +148,8 @@ function likeabee_my_content_links($account) {
   $render = array(
     '#theme' => 'links'
   );
-  foreach (db_query("SELECT DISTINCT type FROM {node} WHERE uid = :uid ORDER BY type", array(':uid' => $account->uid)) as $type) {
+  $types = db_query("SELECT DISTINCT type FROM {node} WHERE uid = :uid ORDER BY type", array(':uid' => $account->uid))->fetchCol();
+  foreach ($types as $type) {
     $render['#links'][] = array(
       'title' => $names[$type],
       'href' => $path.$type

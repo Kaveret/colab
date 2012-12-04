@@ -92,7 +92,7 @@
       <?php if ($site_slogan): ?>
         <div id="site-slogan"><?php print $site_slogan; ?></div>
       <?php endif; ?>
-      <?php print $userpic_social; ?>
+      <?php if (isset($userpic_social))print $userpic_social; ?>
 
       <?php print render($page['header']); ?>
     </header><!-- /#header -->
