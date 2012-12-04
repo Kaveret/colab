@@ -1,8 +1,8 @@
 ; Theme Info --------------------------------------------------------------
 
-name = kaveret
-description = Starterkit, sub-theme for Sasson, <strong>you shouldn't enable this starterkit</strong>. instead, use <em>drush sns</em> or manually copy it to create a new sub-theme, check out the <a href="http://www.linnovate.net/blog/sasson-smart-drupal-theming">docs</a> or the README.txt for more info.
-screenshot = images/kaveret.png
+name = Beezy
+description = Custom theme for Likeabee / Kaveret, based on Sasson
+screenshot = images/beezy.png
 core = 7.x
 base theme = sasson
 
@@ -18,12 +18,12 @@ base theme = sasson
 ;   Recompile - to force the file to be recompiled on every page load
 ; styles[styles/filename.scss][options][recompile] = true
 
-styles[styles/kaveret.scss][options][media] = all
+styles[styles/beezy.scss][options][media] = all
 
 
 ; Theme Script Files ------------------------------------------------------
 
-scripts[] = scripts/kaveret.js
+scripts[] = scripts/beezy.js
 
 ; Regions -----------------------------------------------------------------
 ; these content regions are available for block placement.
@@ -46,7 +46,6 @@ regions[content_bottom] = Content bottom
 regions[sidebar_first] = Sidebar first
 regions[sidebar_second] = Sidebar second
 
-regions[quicktabs] = Quicktabs
 regions[footer] = Footer
 
 regions[floating] = Floating
@@ -91,7 +90,7 @@ settings[sasson_ie_comments] = 1
 settings[sasson_prompt_cf] = 'IE 7'
 
 settings[sasson_watcher] = 0
-settings[sasson_watch_file] = 'sites/all/themes/kaveret/styles/kaveret.scss'
+settings[sasson_watch_file] = 'profiles/likeabee/themes/beezy/styles/beezy.scss'
 settings[sasson_instant_watcher] = 1
 settings[sasson_overlay] = 0
 settings[sasson_overlay_url] = ''
@@ -105,10 +104,3 @@ settings[sasson_breadcrumb_hideonlyfront] = 1
 settings[sasson_breadcrumb_showtitle] = 0
 settings[sasson_breadcrumb_separator] = '»'
 settings[sasson_feed_icons] = 0
-
-; Information added by drupal.org packaging script on 2012-08-31
-version = "7.x-2.6"
-core = "7.x"
-project = "sasson"
-datestamp = "1346448442"
-

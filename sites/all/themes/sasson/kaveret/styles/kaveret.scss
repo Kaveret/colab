@@ -974,6 +974,7 @@ div.img-biger .number[class*=" 0 "],
 #block-views-group-s-deccument-block-4{
 	td{
 		@include select-all-box;
+		position: relative;
 	}
 	.views-field-title{
 		@include select-all-title;
@@ -999,6 +1000,9 @@ div.img-biger .number[class*=" 0 "],
 	background: #fcf0d8;
 	height: 51px;
 	border: 1px solid #FBD38B;
+	position: absolute;
+	bottom: 0;
+	width: 214px;
 	.field-content{
 		padding-top: 16px;
 		a{
@@ -1006,7 +1010,7 @@ div.img-biger .number[class*=" 0 "],
 		font-weight: bolder;
 		border-color: #FAAC18;
 		text-decoration: none;
-		padding: 5px 10px;
+		
 		}
 		.group{
 		float: right;
@@ -1016,6 +1020,7 @@ div.img-biger .number[class*=" 0 "],
 		background-color: #FAAC18;
 		width: 53px;
 		height: 22px;
+		text-align: center;
 		}
 		.number{
 		float: left;
