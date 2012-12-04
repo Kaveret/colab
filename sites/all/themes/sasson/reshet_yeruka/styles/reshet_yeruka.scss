@@ -30,6 +30,7 @@
 // @import "partials/mixins";        // Uncomment to call your own mixins partial (check your /partials directory)
 // @import "sprites/smart";          // Uncomment to call your 'smart' sprite (check your /images/sprites directory)
 $lightblue = #e6f3f9;
+$middleblue = #73CFFA;
 $borderblue = #86BEF1;
 $blue = #5aa3c4;
 $green = #9ab34e;
@@ -44,7 +45,7 @@ $green = #9ab34e;
 -----------------------------------------------*/
 /* -----  Layout  ----- */
 .one-sidebar.sidebar-first #main {
-  margin-left: 3%; /* LTR */
+  margin-left: 2.7%; /* LTR */
   margin-right: 0%; /* LTR */
   margin-top: 36px;
   padding-right: 3%; /* LTR */
@@ -91,7 +92,8 @@ $h2marginbottom=10px;
     float: right;
     border-style: solid;
     border-width: 2px;
-    margin-left: 2px;
+    margin-left: 1px;
+    margin-right: 1px;
     &.first {
       border-bottom-right-radius: 10px; /* LTR */
       border-top-right-radius: 10px; /* LTR */
@@ -188,6 +190,35 @@ $h2marginbottom=10px;
         }
       }
     }
+    #block-menu-menu-menu-on-the-side {
+      h2 {
+        display: none;
+      }
+      ul {
+       padding-right: 20px; /* RTL */
+       padding-left: 0px; /* RTL */
+       li { 
+        list-style: none outside none;
+        margin-left: 0px; /* RTL */
+        
+        a {
+          text-decoration: none;
+          background-color: $lightblue;
+          color: navy;
+          display: block;
+          padding-left: 5%; /* RTL */
+        }
+        a.active {
+           color: white;
+           background: -moz-linear-gradient(top, $blue 0%, $middleblue 50%, $blue 100%);
+           background: -webkit-linear-gradient(top, $blue 0%, $middleblue 50%, $blue 100%);
+           background: -o-linear-gradient(top, $blue 0%, $middleblue 50%, $blue 100%);
+           background: -ms-linear-gradient(top, $blue 0%, $middleblue 50%, $blue 100%);
+        } 
+       } /* li */   
+      }
+    }
+    
   }
   .one-sidebar.sidebar-first #sidebar-first {
     margin: 0%;
@@ -276,16 +307,21 @@ display: none;*/
       td {
         padding-left: 1.3%;
         padding-right: 1.3%;
+        width: 34.6%;
         &.col-first {
         padding-left: 0%; /* LTR */
+        width: 32.7%
         }
         &.col-last {
         padding-right: 0%; /* LTR */
-
+        width: 32.7%
         }
       }
       a { 
         text-decoration: none;
+        img {
+          width: 100%;
+        }
       }
       h2 {
         height: $h2height;
@@ -345,8 +381,24 @@ body.front {
 }
 
 /* -----  contact us ----- */
-body.section-contact {
-  
+body.page-contact {
+  div#block-block-4 {
+    float: right; /* LTR */
+    width: 50%;   
+    img {
+      width: 100%;
+    }
+  }
+  div#block-system-main {
+    float: left; /* LTR */
+    width: 40%;
+    input {
+      width: 100%;
+    }
+    .form-item-copy {
+      display: none;
+    }
+  }
 }
 /*-----------------------------------------------
                    Forms

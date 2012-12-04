@@ -45,7 +45,7 @@ $green = #9ab34e;
 /* -----  Layout  ----- */
 .one-sidebar.sidebar-first #main {
   margin-left: 0%; /* RTL */
-  margin-right: 3%; /* RTL */
+  margin-right: 2.7%; /* RTL */
   padding-left: 3%; /* RTL */
   padding-right: 0%; /* RTL */
   border-right-style: none; /* RTL */
@@ -122,14 +122,28 @@ $green = #9ab34e;
           }
         }
 
-       h2 {
+        h2 {
           a {
             @include rr_homepage_a_ltr(12px);
           }
         }
-      }
+      } /* block */
     }
-  }
+  #block-menu-menu-menu-on-the-side {
+    ul {
+      padding-left: 20px; /* RTL */
+      padding-right: 0px; /* RTL */
+      li { 
+        margin-right: 0px; /* RTL */        
+        a {
+          padding-left: 0%; /* RTL */
+          padding-right: 5%; /* RTL */
+        }
+      }
+    } /* ul  */
+  } /* block menu on the side */
+} /* #sidebar */
+
 .one-sidebar.sidebar-first #sidebar-first {
   right: -75%; /* RTL */
 }
@@ -190,9 +204,20 @@ body.front {
 -----------------------------------------------*/
 .node {
   .field-name-field-field-image-on-homepage {
-    float: left; /* RTL */;
+    float: left; /* RTL */
   }
 }
+/* -----  contact us ----- */
+body.page-contact {
+  div#block-block-4 {
+    float: left; /* RTL */
+  }
+  div#block-system-main {
+    float: right; /* RTL */
+  }
+}
+
+
 /*-----------------------------------------------
                    Forms
 -----------------------------------------------*/
