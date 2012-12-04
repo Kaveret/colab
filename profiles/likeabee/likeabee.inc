@@ -116,14 +116,7 @@ function theme_likeabee_groups_summary($variables) {
 
 
 function _likeabee_block_info_alter(&$blocks) {
-  //the secondlevel main menu
-  $blocks['menu_block'][MENU_BLOCK_SECTION] = array(
-    'region' => 'sidebar_second',
-    'status' => 1,
-    'visibility' => BLOCK_VISIBILITY_LISTED,
-    'pages' => "resources*\ngroups*",
-    'title' => '<none>',
-  ) + $blocks['menu_block'][MENU_BLOCK_SECTION];
+
   //the menu icons block, which appears on the left (this menu_block is reused in the footer)
   $blocks['menu_block'][MENU_BLOCK_MAIN_MENU_ICONS] = array(
     'status' => '1',
@@ -238,4 +231,42 @@ function _likeabee_flag_default_flags() {
     'api_version' => 2,
   );
   return $flags;
+}
+
+
+function likeabee_resources_default_page() {
+  //on this page is the payment form, the balances and beeziest traders and pending transactions
+  $build[] = siteoverride_embed_block('mcapi', 'balances');
+  $build[] = siteoverride_embed_block('mcapi_forms', '1stparty');
+  $build[] = siteoverride_embed_block('views', 'user_rankings-block_volumes'); //Fix this
+  return $build;
+}
+//kudos to keithm
+function siteoverride_embed_block($module, $delta, $region='content') {
+  // Create block stub.
+  $block = new stdClass();
+  $block->module = $module;
+  $block->delta = $delta;
+  $block->region = $region;
+  // Load title.
+  global $theme_key;
+  drupal_theme_initialize();
+  $block1 = db_query("SELECT title FROM {block} WHERE module = :module AND delta = :delta AND theme = :theme",
+                    array(':module' => $module, ':delta' => $delta, ':theme' => $theme_key))->fetchObject();
+  if (is_object($block1) && isset($block1->title)) {
+    $block->title = $block1->title;
+  }
+  // Render the content and subject for the block.
+  $blocks = _block_render_blocks(array($block));
+  // Get an array of blocks suitable for drupal_render().
+  $array = _block_get_renderable_array($blocks);
+  return $array;
+}
+
+
+
+
+
+function likeabee_resources_marketplace() {
+  return 'Blah blah blah help and introduction';
 }

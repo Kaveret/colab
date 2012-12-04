@@ -492,12 +492,12 @@ function likeabee_views_default_views() {
   );
 
   /* Display: All */
-  $handler = $view->new_display('page', 'All', 'list_of_groups');
+  $handler = $view->new_display('page', 'All', 'all_groups');
 $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
 $handler->display->display_options['path'] = 'groups';
 $handler->display->display_options['menu']['type'] = 'normal';
 $handler->display->display_options['menu']['title'] = 'Communities and Groups';
-$handler->display->display_options['menu']['weight'] = '-1';
+$handler->display->display_options['menu']['weight'] = '-5';
 $handler->display->display_options['menu']['name'] = 'main-menu';
 $handler->display->display_options['menu']['context'] = 0;
 
