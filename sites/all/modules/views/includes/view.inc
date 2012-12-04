@@ -804,7 +804,6 @@ class view extends views_db_object {
 
       $arg = isset($this->args[$position]) ? $this->args[$position] : NULL;
       $argument->position = $position;
-
       if (isset($arg) || $argument->has_default_argument()) {
         if (!isset($arg)) {
           $arg = $argument->get_default_argument();
@@ -918,6 +917,7 @@ class view extends views_db_object {
    * Build the query for the view.
    */
   function build($display_id = NULL) {
+
     if (!empty($this->built)) {
       return;
     }
@@ -1045,7 +1045,6 @@ class view extends views_db_object {
       // Build the necessary info to execute the query.
       $this->query->build($this);
     }
-
     $this->built = TRUE;
     $this->build_time = microtime(TRUE) - $start;
 
@@ -1057,7 +1056,6 @@ class view extends views_db_object {
       $function = $module . '_views_post_build';
       $function($this);
     }
-
     return TRUE;
   }
 

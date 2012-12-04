@@ -149,8 +149,10 @@ function likeabee_content_types() {
   foreach ($types as $type) {
     $type = node_type_set_defaults($type);
     node_type_save($type);
+    //more settings for the content types which work in groups
     if (in_array($type->type, array('page', 'article', 'event', 'advpoll', 'discussion', 'group'))) {
       node_add_body_field($type, t('Body'));
+      variable_set('og_group_content_type_'.$type->type, TRUE);
     }
   }
 }
@@ -195,6 +197,7 @@ function likeabee_misc_setup() {
   variable_set('theme_default', 'beezy');
 
 
+  variable_set('menu_block_ids', array(MENU_BLOCK_MAIN_MENU_ICONS, MENU_BLOCK_SECTION));
   //we use menu block to provide the top level of the main-menu, which is usually represented as icons
   menu_block_block_save(MENU_BLOCK_MAIN_MENU_ICONS, array(
     'title_link' => 0,
@@ -204,6 +207,20 @@ function likeabee_misc_setup() {
     'follow' => 0,
     'depth' => 1,
     'expanded' => 0,
+<<<<<<< HEAD
+    'sort' => 0
+  ));
+  //we use menu block to provide the top level of the main-menu, which is usually represented as icons
+  menu_block_block_save(MENU_BLOCK_SECTION, array(
+    'title_link' => 0,
+    'admin_title' => 'subheadings for sections',
+    'parent' => 'main-menu:0',
+    'level' => 2,
+    'follow' => 0,
+    'depth' => 1,
+    'expanded' => 0,
+=======
+>>>>>>> 6741c4308aaf5c9303158bd88bd892c0f60e5f8a
     'sort' => 0
   ));
 
@@ -216,5 +233,8 @@ function likeabee_misc_setup() {
   variable_set('user_picture_style', 'medium');
   variable_set('user_register', '1');
   variable_set('user_signatures', 0);
+
+  //testing this
+  variable_set('og_group_content_type_event', TRUE);
 
 }

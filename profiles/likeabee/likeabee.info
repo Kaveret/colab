@@ -34,7 +34,7 @@ dependencies[] = entity_token
 ;dependencies[] = features
 dependencies[] = field
 dependencies[] = field_group
-dependencies[] = field_permissions
+;dependencies[] = field_permissions
 dependencies[] = field_sql_storage
 dependencies[] = file
 dependencies[] = filter
@@ -91,6 +91,7 @@ dependencies[] = devel
 dependencies[] = views_ui
 dependencies[] = field_ui
 dependencies[] = l10n_client
+dependencies[] = l10n_update
 dependencies[] = potx
 
 dependencies[] = contextual
