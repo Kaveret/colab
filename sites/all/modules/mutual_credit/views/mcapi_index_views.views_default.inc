@@ -556,7 +556,7 @@ function mcapi_getview_user_rankings($multicurrencies) {
 function mcapi_getview_balance_history($multicurrencies) {
   $view = new view;
   $view->name = 'running_balance';
-  $view->description = t('Unixtimes and running balances');
+  $view->description = t('Running balances per user');
   $view->tag = 'mcapi (index)';
   $view->base_table = 'mcapi_index';
   $view->human_name = t('Running balance');

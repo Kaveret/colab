@@ -17,3 +17,10 @@ files[] = views_handler_field_mcapi_index_quantity.inc
 files[] = views_handler_filter_mcapi_index_diff.inc
 files[] = views_handler_sort_mcapi_users_balance.inc
 files[] = views_plugin_access_user_arg1.inc
+
+; Information added by drupal.org packaging script on 2012-12-03
+version = "7.x-3.0-rc3"
+core = "7.x"
+project = "mutual_credit"
+datestamp = "1354535300"
+
