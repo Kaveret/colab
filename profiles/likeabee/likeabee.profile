@@ -4,17 +4,22 @@
 define('MENU_BLOCK_MAIN_MENU_ICONS', 3);
 define('MENU_BLOCK_SECTION', 1);
 
-/*
- * This module is discontinued and the whole approach of defining sections with a hook
- * because the theme is all intertwined with the menu system already
- * and I'm not here to re-engineer the whole site.
- */
+function likeabee_help($path, $args) {
+  if ($args[0] == 'resources') {
+    //unhide the menu tabs!!!
+    drupal_add_css('#page #main-menu{display:block;}', array('type' => 'inline'));
+  }
+  if ($path == 'resources') {
+    $help[] = t('This is the local economy section. Here you can find what you need pay in Beez or in Shekels, or advertise yourself or your needs.');
+    $help[] = t('Find out more about our currency, !beez', array('!beez' => l('Beez', 'help/beez')));
+    return implode(' ', $help);
+  }
+}
 
 /*
  * implements hook_menu
  */
 function likeabee_menu() {
-
   $items['home'] = array(
     'title' => "Welcome to Likeabee",
     'page callback' => 'likeabee_home',
@@ -23,9 +28,66 @@ function likeabee_menu() {
     'access arguments' => array(),
     'file' => 'likeabee.inc'
   );
+  //$items['groups'] is provided by default view list_of_groups
+  $items['learning'] = array(
+    'title' => 'Learning Centre',
+    'description' => 'Buy, sell, pay, swop or gift!',
+    'page callback' => 'likeabee_home',
+    'access callback' => 'user_access',
+    'access arguments' => array('transact'),
+    'menu_name' => 'main-menu',
+    'file' => 'likeabee.inc',
+    'weight' => 2
+  );
+  $items['dreams'] = array(
+    'title' => 'Dreams & Initiatives',
+    'description' => 'Buy, sell, pay, swop or gift!',
+    'page callback' => 'likeabee_home',
+    'access callback' => 'user_access',
+    'access arguments' => array('transact'),
+    'menu_name' => 'main-menu',
+    'file' => 'likeabee.inc',
+    'weight' => 3
+  );
+  $items['resources'] = array(
+    'title' => 'Resources Exchange',
+    'description' => 'Buy, sell, pay, swop or gift!',
+    'page callback' => 'likeabee_resources_default_page',
+    'access callback' => 'user_access',
+    'access arguments' => array('transact'),
+    'menu_name' => 'main-menu',
+    'file' => 'likeabee.inc',
+    'weight' => 4
+  );
+
+  $items['resources/dashboard'] = array(
+    'title' => 'Dashboard',
+    'description' => 'Buy, sell, pay, swop or gift!',
+    'page callback' => 'likeabee_resources_default_page',
+    'access callback' => 'user_access',
+    'access arguments' => array('transact'),
+    'menu_name' => 'main-menu',
+    'file' => 'likeabee.inc',
+    'weight' => -5
+  );
+  $items['resources/marketplace'] = array(
+    'title' => 'Marketplace',
+    'description' => 'Buy, sell, pay, swop or gift!',
+    'page callback' => 'likeabee_resources_marketplace',
+    'access callback' => 'user_access',
+    'access arguments' => array('transact'),
+    'menu_name' => 'main-menu',
+    'file' => 'likeabee.inc',
+    'weight' => 5
+  );
   return $items;
+}
+
+function menu_link_alter() {
 
 }
+
+
 /*
  * implements hook_node_view_alter
  * modifies the group node view
@@ -34,6 +96,14 @@ function likeabee_node_view_alter(&$build, $node) {
   if ($build['#bundle'] != 'group') return; //this is needed to prevent nesting because group summary invokes a view with nodes in
   module_load_include('inc', 'likeabee');
   return _likeabee_node_view_alter($build, $node);
+}
+
+function likeabee_menu_alter(&$items) {
+  $items['resources/statement'] = $items['statement'];
+  $items['resources/transactions'] = $items['dashboard'];
+  $items['resources/statement']['weight'] = 3;
+  $items['resources/transactions']['weight'] = 2;
+  unset($items['statement'], $items['dashboard']);
 }
 
 
@@ -187,15 +257,16 @@ function likeabee_preprocess_page(&$vars) {
     $vars['userpic_social'] = theme('userpic_social', array('account' => $GLOBALS['user']));
   }
   //prepare footer icons
-  $config = menu_block_get_config(MENU_BLOCK_MAIN_MENU_ICONS);
-  $data = menu_tree_build($config);
+  $block = menu_tree_build(menu_block_get_config(MENU_BLOCK_MAIN_MENU_ICONS));
   //carelessly designed menu_block module will only give us a full block
-  $block = menu_tree_build($config);
+  //se we pull out the content
   $vars['footer_icons'] = $block['content'];
+
 
   $vars['share_icons'] = menu_tree('share-icons');
   $vars['share_icons']['#prefix'] = '<div id = "share-icons">';
   $vars['share_icons']['#suffix'] = '</div>';
+
 }
 
 /*
@@ -223,3 +294,4 @@ function likeabee_flag_default_flags() {
   module_load_include('inc', 'likeabee');
   return _likeabee_flag_default_flags();
 }
+

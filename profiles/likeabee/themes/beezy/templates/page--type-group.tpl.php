@@ -68,11 +68,13 @@
  * @see template_process()
  */
 ?>
+
+GROUPS PAGE .tpl.php
 <?php if ($page['floating']): ?>
     <div id="floating">
  <?php print render($page['floating']); ?>
  </div><!-- /#floating -->
- <?php endif; ?>
+ <?php endif; ?> 
 
 
   <?php if ($logo || $site_name || $site_slogan || $page['header']): ?>
@@ -92,15 +94,19 @@
       <?php if ($site_slogan): ?>
         <div id="site-slogan"><?php print $site_slogan; ?></div>
       <?php endif; ?>
-      <?php print_r($userpic_social); ?>
+      <?php print $userpic_social; ?>
       <?php print render($page['header']); ?>
     </header><!-- /#header -->
   <?php endif; ?>
 
+  <div id="groups-context-menu">
+    <?php print render(groups_pseudo_menu()); ?>
+  </div><!-- /#groups -->
+
 <div id="page">
   <?php if ($main_menu_links): ?>
     <nav id="main-menu" role="navigation">
-      <?php print render($main_menu_links); ?>
+      <?php print $main_menu_links; ?>
     </nav><!-- /#main-menu -->
   <?php endif; ?>
 
@@ -113,7 +119,7 @@
         <?php print render($page['highlighted']); ?>
       </div><!-- /#highlighted -->
     <?php endif; ?>
-     <!--<div id="breadcrumb"><?php
+     <!--<div id="breadcrumb"><?php 
        //print $breadcrumb;
       ?></div>-->
     <?php print render($title_prefix); ?>
@@ -154,7 +160,9 @@
   <?php print render($footer_icons); ?>
   <?php print render($share_icons); ?>
   <?php //this is the blocks in the footer region
-    print render($page['footer']);
+    print render($page['footer']); 
   ?>
 </footer><!-- /#footer -->
+
+
 
