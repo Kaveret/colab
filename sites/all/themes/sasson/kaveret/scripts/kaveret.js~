@@ -9,16 +9,8 @@
 	Drupal.behaviors.kaveret= {
 			attach: function (context, settings) {
 				$("#block-menu-menu-tabs ul li").mouseover(
-					function () {
-						if ( jQuery.css( this, "left" ) === "-180px" )
-							{$(this).animate({"left": "+=180px"}, 500);}
-				});
-		 		$("#block-menu-menu-tabs ul li").mouseout(
-					function () {
-						if ( jQuery.css( this, "left" ) === "0px")
-							{$(this).animate({"left": "-=180px"}, 500);} 
-				});
+					function () {$("#block-menu-menu-tabs ul li a").show(500);})
+		 .mouseout(function () {$("#block-menu-menu-tabs ul li a").hide(500);});
 		}
 	}
 })(jQuery);
-

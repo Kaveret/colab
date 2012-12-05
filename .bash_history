@@ -1,184 +1,3 @@
-cd ..
-tar tvfz f.tfz 
-tar xvfz f.tfz 
-cd files/
-ls
-ls -l
-cd imagecache
-ls -l
-cd ..
-chgrp -R www-data imagecache
-ls
-cd
-ls
-cd
-ls
-gunzip kaveret6.gz 
-mysql -u commons -pbigApple commons < kaveret6 
-ls
-pwd
-cd ..
-cd kaveret
-ls
-cd sites/
-ls
-vim hakaveret.likeabee.net/
-git add sites/all/modules/
-git commit -am 'add modules to the git'
-git push
-git pull
-git pull
-drush dl mutual_credit
-ls
-drush st
-drush pm-list | grep captcha
-cd ..
-ls
-cd hakaveret.org.il/
-drush pm-list | grep captcha
-drush en captcha recaptcha
-cd .
-cd ..
-ping 6tz.co.il
-ping 6tz.co.il
-ls
-cp -r heschell.org.il hakaveret.org.il5
-cp -r hakaveret.org.il heschel.org.il
-mysql -u root
-git pull
-git pull
-git pull
-ls -lrta
-drush pm-list 
-drush pm-list | grep admin
-drush en admin_menu
-top
-QQQ
-drush pm-list | grep inter
-drush pm-list | grep l10
-drush pm-list | grep lang
-drush en i18n
-cd ../hakaveret.org.il/
-drush pm-list | grep devel
-drush en devel_themer
-drush dis devel_themer
-cd ..
-cd all/themes/
-rgrep heschel *
-cd blueprint/
-ls
-cd hakaveret_new_theme/
-ls
-cd ../../../../heschel.org.il/
-drush pm-list | grep pages
-drush pm-list | grep pane
-drush en paneles
-drush en panels
-cd files
-ls
-ls -rtla
-cd js
-le
-ls
-ls -ltra
-cd ,,
-cd ..
-cd ..
-drush pm-list | grep page
-drush dis panels
-drish en page_manager
-drush en page_manager
-ormation about this page.
-פםפג
-popd
-cd ../all/themes/blueprint/
-ls
-ls -ltra
-less blueprint
-less blueprint.make.example 
-cd heschel/
-ls
-ls -ltra
-cat heschel.info
-ls
-ls -ltra
-less page.tpl.php
-pushd ../../../../heschel.org.il/
-drush en context
-drush pm-list | grep context
-drush en context_ui context_layouts 
-git add sites/all/modules/
-git commit -am 'add modules to the git'
-git push
-cd /var/www/kaveret
-ls
-cd sites/heschel.org.il/
-ls
-cd ..
-cd all/themes/blueprint/
-cp -r heschel/ heschel_standalone
-cd heschel_standalone/
-ls
-mv heschel.info heschel_standalone.info
-vi template.php 
-vi heschel_standalone.info 
-ls -ltra
-cd aviv/
-ls
-cd ,,
-cd ..
-cd ..
-rm -rf heschel_standalone
-mv heschel heschel3
-mv heschel3 heschel
-cd ../../../heschel.org.il/
-drush cc all
-mysql -u heschel -p shigaon2012
-mysql -u heschel -p 
-grep mysql settings.php
-mysql -u heschel -p 
-cd ../all/themes/blueprint/
-cp -r heschel heschel_standalone
-cd heschel_standalone/
-ls
-mv heschel.info heschel_standalone.info
-vi heschel_standalone.info 
-ls -ltra
-cd ..
-cd hakaveret_new_theme/
-ls
-ls -ltra
-cd ..
-cd ..
-cd blueprint/
-rgrep 965 *
-cd heschel_standalone/
-vi page.tpl.php
-rgrep 965 *
-pushd ../../../../heschel.org.il/
-drush en devel_themer
-popd
-cd ../hakaveret_new_theme/
-ls
-cat Operating_instructions.txt 
-popd
-cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-cd sites/
-cd hakaveret.org.il/
-drush
-drushhelp  sql dump
-drushh elp  sql dump
-drush help  sql dump
-drush help  sql-dump 
-drush cc all
-drush sql-dump > mybackup.sql
-drush sql-dump > ../heschel.org.il/orig_kav_backup.sql
-cd ../heschel.org.il/orig_kav_backup.sql
-cd ../heschel.org.il
 vi orig_kav_backup.sql 
 stat 1$
 stat orig_kav_backup.sql 
@@ -494,6 +313,187 @@ git pull
 git pull
 git pull
 git push
+git pull
+git pull
+git pull
+git pull
+ls
+cd .git/
+ls
+cat config 
+cd /var/www/
+ls
+cd kaveret7/
+ls
+cd sites/
+ls -l
+sudo bash
+su
+cd /var/www/
+ls
+cd kaveret7/
+ls
+ls
+s
+sudo bash
+su
+cd /var/www/
+ls
+cd kaveret7
+ls
+git status
+ls kaveret6 
+ls -al 
+tail kaveret6 
+mv kaveret6 kaveret6.sql
+git status
+git pull 
+git pull 
+cd ../
+git status
+cd kaveret7/
+ls -al 
+git pull
+git status
+git add . sites/all/themes
+git commit -m 'this is going to be messy - attempting to synchronise versioned and unversioned work...'
+git pull
+sudo sites/
+cd sites/
+ls -al
+chown -r kaveret:kaveret likeabee.net
+sudo -R kaveret:kaveret likeabee.net
+git pull
+ls -al
+sudo chown -R kaveret:root likeabee.net
+chown -R kaveret:root likeabee.net
+ls
+ls a-l
+ls -al
+chmod 777 likeabee.net 
+ls -al
+cd likeabee.net/
+ls -al 
+chmod 777 files
+cd files/
+ls -al 
+cd ../../
+ls -al 
+ls default/
+ls -al default/
+mv default/files likeabee.net/
+mv -r default/files likeabee.net/
+mv -R default/files likeabee.net/
+cp -r default/files likeabee.net/
+ls -al 
+ls -al default/
+ls -al likeabee.net
+ls likeabee.net/files/
+su 
+exit
+ls
+git pull
+git pull
+git pull
+cd ~/sites/reshet-yeruka.net/files/
+ls
+cp /tmp/*.png /tmp/*.jpg .
+ls -lrta
+mysql -u reshet_yeruka -psarita2012 reshet_yeruka
+cd /tmp
+cp reshet_yeruka_2012-12-04.sql reshet_yeruka_2012-12-04.sql2 
+vi reshet_yeruka_2012-12-04.sql2
+mysql -u reshet_yeruka -psarita2012 reshet_yeruka < reshet_yeruka_2012-12-04.sql2 
+cd -
+cd ../../all/themes/sasson/
+git pull
+cd -
+drush cc all
+ls
+ls -ltra
+drush cc css+js
+ping reshet-yeruka.net
+ping hakaveret.org.il
+cd ..
+cd ..
+cd all/themes/sasson/kaveret/
+ךד
+ls
+cd templates
+ls
+git pull
+git stats
+git status
+git pull
+nano page.tpl.php
+nano page.tpl.php
+nano page.tpl.php
+pushd ../../../../../reshet-yeruka.net/
+drush cc all
+stat files
+cd files
+ls
+ls -ltra
+chmod -R 775 ctools
+cd ctools/
+ls
+stat .
+ls -ltra
+cd ..
+ls -ltra
+chmod 777 ctools/
+ls -ltra
+drush cc all
+cd css
+ls
+ls -ltra
+cd ..
+ls
+ls -ltra
+ls -ltra ../../likeabee.net/files/
+chown -R www-data www-data css
+su root
+mysql -u reshet_yeruka -psarita2012 reshet_yeruka < reshet_yeruka_2012-12-04.sql2 
+mysql -u reshet_yeruka -psarita2012 reshet_yeruka < /tmp/reshet_yeruka_2012-12-04.sql2 
+ls
+ls -ltra
+cd languages/
+ls
+cd ../styles/
+ls
+ls -lrta
+cd ,,
+cd css
+ls
+cd ../css
+ls
+ls -lrta
+drush cc all
+cd ..
+ls
+ls -ltra
+cd ..
+ls -ltra
+su root
+cd /var/www/kaveret7/
+git status
+git pull
+git add sites/all*
+git add profiles*
+git rm sites/all/modules/mutual_credit/views/views_handler_argument_mcapi_date.inc
+git rm sites/all/modules/mutual_credit/views/views_handler_filter_mcapi_role_current_user.inc
+git rm sites/all/modules/mutual_credit/views/views_handler_filter_mcapi_users_balance.inc
+git status
+git commit -m 'got the new dev site working...'
+git push
+tail /var/log/apache2/error.log
+tail /var/log/apache2/error.log
+tail /var/log/apache2/error.log
+tail /var/log/apache2/error.log
+tail /var/log/apache2/error.log
+sudo tail /var/log/apache2/error.log
+git pull
+git status
 git pull
 git pull
 git pull

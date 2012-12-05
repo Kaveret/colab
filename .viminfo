@@ -37,17 +37,22 @@ $
 	5
 
 # File marks:
-'0  20  0  /var/www/kaveret/sites/heschel.org.il/orig_kav_backup.sql
-'1  1  0  /var/www/kaveret/sites/heschel.org.il/orig_kav_backup.sql
-'2  98  30  /var/www/kaveret/sites/all/themes/blueprint/heschel_standalone/page.tpl.php
-'3  3  31  /var/www/kaveret/sites/all/themes/blueprint/heschel_standalone/heschel_standalone.info
-'4  77  0  /var/www/kaveret/sites/all/themes/blueprint/heschel_standalone/heschel_standalone.info
-'5  106  2  /var/www/kaveret/sites/all/themes/blueprint/heschel_standalone/template.php
-'6  199  0  /var/www/kaveret/sites/hakaveret.likeabee.net/settings.php
-'7  17  35  /var/www/kaveret/sites/hakaveret.likeabee.net/settings.php
-'8  208  19  ~/sites/likeabee.net/settings.php
+'0  9  0  /tmp/reshet_yeruka_2012-12-04.sql4
+'1  6  33  /tmp/reshet_yeruka_2012-12-04.sql2
+'2  20  0  /var/www/kaveret/sites/heschel.org.il/orig_kav_backup.sql
+'3  1  0  /var/www/kaveret/sites/heschel.org.il/orig_kav_backup.sql
+'4  98  30  /var/www/kaveret/sites/all/themes/blueprint/heschel_standalone/page.tpl.php
+'5  3  31  /var/www/kaveret/sites/all/themes/blueprint/heschel_standalone/heschel_standalone.info
+'6  77  0  /var/www/kaveret/sites/all/themes/blueprint/heschel_standalone/heschel_standalone.info
+'7  106  2  /var/www/kaveret/sites/all/themes/blueprint/heschel_standalone/template.php
+'8  199  0  /var/www/kaveret/sites/hakaveret.likeabee.net/settings.php
+'9  17  35  /var/www/kaveret/sites/hakaveret.likeabee.net/settings.php
 
 # Jumplist (newest first):
+-'  9  0  /tmp/reshet_yeruka_2012-12-04.sql4
+-'  1  0  /tmp/reshet_yeruka_2012-12-04.sql4
+-'  6  33  /tmp/reshet_yeruka_2012-12-04.sql2
+-'  1  0  /tmp/reshet_yeruka_2012-12-04.sql2
 -'  20  0  /var/www/kaveret/sites/heschel.org.il/orig_kav_backup.sql
 -'  1  0  /var/www/kaveret/sites/heschel.org.il/orig_kav_backup.sql
 -'  98  30  /var/www/kaveret/sites/all/themes/blueprint/heschel_standalone/page.tpl.php
@@ -143,11 +148,20 @@ $
 -'  1  0  ~/sites/likeabee.net/settings.php
 -'  208  19  ~/sites/likeabee.net/settings.php
 -'  1  0  ~/sites/likeabee.net/settings.php
--'  208  19  ~/sites/likeabee.net/settings.php
--'  1  0  ~/sites/likeabee.net/settings.php
--'  208  19  ~/sites/likeabee.net/settings.php
 
 # History of marks within files (newest to oldest):
+
+> /tmp/reshet_yeruka_2012-12-04.sql4
+	"	9	0
+	^	9	0
+	.	8	18
+	+	8	18
+
+> /tmp/reshet_yeruka_2012-12-04.sql2
+	"	6	33
+	^	6	34
+	.	6	33
+	+	6	33
 
 > /var/www/kaveret/sites/heschel.org.il/orig_kav_backup.sql
 	"	20	0
