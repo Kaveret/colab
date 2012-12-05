@@ -75,10 +75,13 @@
  * @see template_preprocess_node()
  * @see template_process()
  */
+ //dpm($node);
+if ($teaser) {include(__DIR__.'/teaser-'.$node->type.'.tpl.php');return;}
+
 ?>
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
-    <?php dpm($node);?>
-  <?php if ($user_picture || !$page || $display_submitted): ?>
+    
+  <?php i f ($user_picture || !$page || $display_submitted): ?>
     <header>
       <?php print $user_picture; ?>
 
@@ -102,10 +105,6 @@
   <?php endif; ?>
 
   <div class="content"<?php print $content_attributes; ?>>
-      <?php if ($page): ?>
-	<h2><?php print $title; ?></h2>
-      <?php endif; ?>
-      <?php print render($title_suffix); ?>
     <?php
       // We hide the comments, tags and links now so that we can render them later.
       hide($content['comments']);

@@ -68,8 +68,6 @@
  * @see template_process()
  */
 ?>
-<?php // to prevent erros on other premium sites - Baroch Oren
-  if (module_exists('kaveret')) { ?>
 <?php if ($page['floating']): ?>
     <div id="floating">
  <?php print render($page['floating']); ?>
@@ -179,4 +177,3 @@
     </footer><!-- /#footer -->
   <?php endif; ?>
 
-<?php } ?>
