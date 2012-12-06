@@ -68,7 +68,8 @@
  * @see template_process()
  */
 ?>
-<?php if ($page['floating']): ?>
+<?php if module_exists('kaveret') { ?> 
+  <?php if ($page['floating']): ?>
     <div id="floating">
  <?php print render($page['floating']); ?>
  </div><!-- /#floating -->
@@ -175,5 +176,6 @@
     <footer id="footer" role="contentinfo">
       <?php print render($page['footer']); ?>
     </footer><!-- /#footer -->
-  <?php endif; ?>
+  <?php endif; ?> 
+<?php } ?>
 
