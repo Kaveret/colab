@@ -1,0 +1,29 @@
+<!--Print the title input field-->
+<div>   
+<?php print drupal_render($form['title']); ?>
+</div>
+
+<!--Print the body input field-->
+
+<div>
+<?php print drupal_render($form['body']); ?>
+</div>
+
+<div style="clear: both;"></div>
+
+<!--Print the two taxonomy checkbox fields floated left-->
+
+<div style="float: left; padding-left: 20px;">
+<?php print drupal_render_children($form['field_elisa_type']); ?>
+</div>
+
+<div style="float: left; padding-left: 20px;">
+<?php print drupal_render_children($form['field_elisa_var']); ?>
+</div>
+
+<div style="clear: both;"></div>
+
+<!--Print the rest of the form-->
+<div>
+<?php print drupal_render_children($form); ?>
+</div>

@@ -68,6 +68,7 @@
  * @see template_process()
  */
 ?>
+<!--?php if (module_exists('kaveret')): ?-->
   <?php if ($logo || $site_name || $site_slogan || $page['header']): ?>
     <header id="header" role="banner">
       <?php if ($logo): ?>
@@ -170,3 +171,4 @@
     </footer><!-- /#footer -->
   <?php endif; ?> 
 
+<--?php endif; ?-->

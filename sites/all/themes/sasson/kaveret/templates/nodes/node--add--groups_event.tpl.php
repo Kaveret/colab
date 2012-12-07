@@ -76,22 +76,9 @@
  * @see template_process()
  */
 ?>
-<?php if (module_exists('kaveret')): ?>
-<?php if ($teaser): ?>
-<div class = "node node-poll teaser">
-  <h2>
-    <a href="/node/<?php print $nid; ?>"><?php print $title; ?></a>
-  </h2>
-  <div class = "content">
-    <?php include(__DIR__.'/teaser-'.$node->type.'.tpl.php'); ?>
-  </div>
-</div><!-- end <?php print $node->type; ?> teaser-->
-<?php return; endif; ?>
-
-
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
     
-  <?php if ($user_picture || !$page || $display_submitted): ?>
+  <?php i f ($user_picture || !$page || $display_submitted): ?>
     <header>
       <?php print $user_picture; ?>
 
@@ -134,4 +121,3 @@
   <?php print render($content['comments']); ?>
 
 </article><!-- /.node -->
-<?php endif; ?>
