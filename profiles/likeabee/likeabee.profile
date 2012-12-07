@@ -99,11 +99,12 @@ function likeabee_node_view_alter(&$build, $node) {
 }
 
 function likeabee_menu_alter(&$items) {
-  $items['resources/statement'] = $items['statement'];
-  $items['resources/transactions'] = $items['dashboard'];
-  $items['resources/statement']['weight'] = 3;
-  $items['resources/transactions']['weight'] = 2;
-  unset($items['statement'], $items['dashboard']);
+
+  unset($items['user/%/statement']); //actually should disable the view displays
+  unset($items['user/%/income_expenditure']); //actually should disable the view displays, but its not in code in this module yet
+  foreach ($items as $path => $item) {
+    if (substr($path, 0, 6) == 'user/%')debug($path);
+  }
 }
 
 
