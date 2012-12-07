@@ -68,13 +68,6 @@
  * @see template_process()
  */
 ?>
-<?php if ($page['floating']): ?>
-    <div id="floating">
- <?php print render($page['floating']); ?>
- </div><!-- /#floating -->
- <?php endif; ?> 
-
-
   <?php if ($logo || $site_name || $site_slogan || $page['header']): ?>
     <header id="header" role="banner">
       <?php if ($logo): ?>
@@ -175,5 +168,5 @@
     <footer id="footer" role="contentinfo">
       <?php print render($page['footer']); ?>
     </footer><!-- /#footer -->
-  <?php endif; ?>
+  <?php endif; ?> 
 

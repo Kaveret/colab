@@ -75,7 +75,7 @@
  * @see template_preprocess_node()
  * @see template_process()
  */
-if ($teaser) : ?>
+if ((module_exists('kaveret'))&&($teaser)) : ?>
 <div class = "node node-poll teaser">
   <h2>
     <a href="/node/<?php print $nid; ?>"><?php print $title; ?></a>
