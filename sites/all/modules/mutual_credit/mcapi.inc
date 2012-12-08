@@ -1173,8 +1173,8 @@ function theme_transaction_totals(&$variables) {
     $output = '<div class="balance">'. $balance ."</div>";
     $output .= '<div class="gross-in">'.t('Income: !quant', array('!quant' => $income)) ."</div>";
     $output .= '<div class="count">'.t('Transactions: @count', array('@count' => $totals->count)) ."</div>";
+    $output .= '<div class="participation">'.t('Participation: @count', array('@count' => $totals->count)) ."</div>";
     $outputs[] = "<div class = \"transaction-totals $currcode\">$output</div>";
   }
-  drupal_add_css(".transaction-totals .balance{font-size:2em;}", array('type' => 'inline'));
   return implode("<br />", $outputs);
 }

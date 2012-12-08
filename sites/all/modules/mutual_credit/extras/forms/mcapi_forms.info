@@ -13,10 +13,3 @@ files[] = plugins/export_ui/mcapi_forms_ui.inc
 files[] = plugins/export_ui/mcapi_forms_ui.class.php
 
 dependencies[] = mcapi
-
-; Information added by drupal.org packaging script on 2012-12-03
-version = "7.x-3.0-rc3"
-core = "7.x"
-project = "mutual_credit"
-datestamp = "1354535300"
-

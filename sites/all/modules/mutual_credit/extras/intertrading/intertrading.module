@@ -509,10 +509,11 @@ function intertrading_form_remote_incoming_form_alter(&$form, &$form_state, $for
         //request failed
         drupal_set_message($result->message, 'error');
         $form['#disabled'] = TRUE;
+        $form_state['server_params']['sites'] = array();
       }
     }
     //just ensure that the delta value is 0 (it might not be if there are multiple currencies)
-    $form['worth'][LANGUAGE_NONE][0] = array_shift($form['worth'][LANGUAGE_NONE]);
+    //$form['worth'][LANGUAGE_NONE][0] = array_shift($form['worth'][LANGUAGE_NONE]);
 
     //tweak the default form; hide the state and set the transaction type
     $form['state']['#access'] = FALSE;

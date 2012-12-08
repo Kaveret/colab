@@ -26,7 +26,6 @@ function mcapi_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = array(
     'name' => 'name',
     'name_1' => 'name_1',
-    'transaction_description' => 'transaction_description',
     'worth' => 'worth',
     'view' => 'view',
   );
@@ -261,10 +260,12 @@ function mcapi_views_default_views() {
     $handler->display->display_options['fields']['worth']['click_sort_column'] = 'currcode';
     $handler->display->display_options['fields']['worth']['type'] = 'worth_field';
     /* Field: Transaction: Description */
-    $handler->display->display_options['fields']['transaction_description']['id'] = 'transaction_description';
-    $handler->display->display_options['fields']['transaction_description']['table'] = 'field_data_transaction_description';
-    $handler->display->display_options['fields']['transaction_description']['field'] = 'transaction_description';
-    $handler->display->display_options['defaults']['arguments'] = FALSE;
+    if ($fieldname = variable_get('transaction_description_field')) {
+      $handler->display->display_options['fields'][$fieldname]['id'] = $fieldname;
+      $handler->display->display_options['fields'][$fieldname]['table'] = 'field_data_'.$fieldname;
+      $handler->display->display_options['fields'][$fieldname]['field'] = $fieldname;
+      $handler->display->display_options['defaults']['arguments'] = FALSE;
+    }
     /* Contextual filter: Transaction: Payee */
     $handler->display->display_options['arguments']['payee']['id'] = 'payee';
     $handler->display->display_options['arguments']['payee']['table'] = 'mcapi_transactions';
@@ -333,10 +334,12 @@ function mcapi_views_default_views() {
     $handler->display->display_options['fields']['worth']['click_sort_column'] = 'currcode';
     $handler->display->display_options['fields']['worth']['type'] = 'worth_field';
     /* Field: Transaction: Description */
-    $handler->display->display_options['fields']['transaction_description']['id'] = 'transaction_description';
-    $handler->display->display_options['fields']['transaction_description']['table'] = 'field_data_transaction_description';
-    $handler->display->display_options['fields']['transaction_description']['field'] = 'transaction_description';
-    $handler->display->display_options['defaults']['arguments'] = FALSE;
+    if ($fieldname = variable_get('transaction_description_field')) {
+      $handler->display->display_options['fields'][$fieldname]['id'] = $fieldname;
+      $handler->display->display_options['fields'][$fieldname]['table'] = 'field_data_'.$fieldname;
+      $handler->display->display_options['fields'][$fieldname]['field'] = $fieldname;
+      $handler->display->display_options['defaults']['arguments'] = FALSE;
+    }
     /* Contextual filter: Transaction: Payer */
     $handler->display->display_options['arguments']['payer']['id'] = 'payer';
     $handler->display->display_options['arguments']['payer']['table'] = 'mcapi_transactions';

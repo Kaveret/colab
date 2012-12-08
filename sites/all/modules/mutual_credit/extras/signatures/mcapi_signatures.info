@@ -14,10 +14,3 @@ files[] = views/views_handler_field_mcapi_sign.inc
 
 dependencies[] = mcapi_forms
 dependencies[] = user_chooser
-
-; Information added by drupal.org packaging script on 2012-12-03
-version = "7.x-3.0-rc3"
-core = "7.x"
-project = "mutual_credit"
-datestamp = "1354535300"
-
