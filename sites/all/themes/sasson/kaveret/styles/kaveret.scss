@@ -1086,11 +1086,23 @@ div.img-biger .number[class*=" 0 "],
 			width: 624px;
 		} 
 	}
-	#edit-field-the-following-courses-even,
-	#node_groups_event_form_group_details,
-	#node_groups_event_form_group_main_event_image,
-	#edit-field-adress-event{
+	#edit-body #edit-body-und-0-format,
+	#node_groups_event_form_group_upload_files #edit-field-more-details-event #edit-field-more-details-event-und-0-format,
+	.form-item-language
+	{
 		display: none;
+	}
+	.form-submit{
+		background-color: #F9AB17;
+		color: white;
+		padding: 4px 17px;
+		margin-bottom: 1em;
+		margin-right: 1em;
+		text-align: center;
+		font-weight: bold;
+		font-size:12.15px;
+		font-family: arial;
+		border: none;
 	}
 	.form-item,.fieldset-legend{
 		font-size: 15px;
@@ -1099,7 +1111,8 @@ div.img-biger .number[class*=" 0 "],
 		font-weight: bold;
 	}
 	.form-item-title,.form-type-textfield{
-		#edit-title,#edit-field-location-of-event-text-und-0-value
+		#edit-title,#edit-field-location-of-event-text-und-0-value,
+		#edit-field-adress-event-und-0-value
 		{
 			/*box-shadow: 0 0 0 1px #fcda9a, 0 0 0 10px #fcf0d8, 0 0 0 1px #fcda9a; */
 			border: 1px solid #fcda9a; 
@@ -1112,14 +1125,16 @@ div.img-biger .number[class*=" 0 "],
 	}
 	.group-time-event>.fieldset-wrapper,
 	.field-name-field-location-of-event,
-	#node_groups_event_form_group_upload_files
+	#node_groups_event_form_group_upload_files>.fieldset-wrapper,
+	#node_groups_event_form_group_main_event_image >.fieldset-wrapper,
+	#node_groups_event_form_group_details>.fieldset-wrapper
 	{
 			border: 1px solid #fcda9a;
 			background: #fcf0d8;
 	}
 	.form-item-title{
 		border-top: 1px solid #F9AB17;
-		border: 1px solid #FACE77;
+		/*border: 1px solid #FACE77;*/
 		margin: 0;
 		height: 80px;
 		width: 626px;
@@ -1127,10 +1142,10 @@ div.img-biger .number[class*=" 0 "],
 		label{
 			margin-top: 17px;
 			padding: 0;
-			border-bottom: 2px solid #F9AB17;
+			/*border-bottom: 2px solid #F9AB17;*/
 		}
 		#edit-title{
-			margin-left: 10px;
+			/*margin-left: 10px;*/
 			margin-top: 9px;
 		}
 	}
@@ -1169,29 +1184,31 @@ div.img-biger .number[class*=" 0 "],
 			margin-left: 25px;
 			legend{
 				float: left;
-				margin-right: 20px;
-
+				left: -9px;
+				position: relative;
+				top: 50px;
 			}
 			.date-no-float{
 				width: 199px;
 				float: right;
-				margin-top: -12px;
+				margin-right: 12px;
 			}
 		}
 		#edit-field-start-event{
 			height: 68px;
-			margin-left: 25px;
+			margin-left: 14px;
+			margin-top: 50px;
 				label{
 				float: left;
-				margin-right: 20px;
+				margin-right: 16px;
 			}
 		}
 		#edit-field-end-event{
 			height: 68px;
-			margin-left: 25px;
+			margin-left: 14px;
 				label{
 				float: left;
-				margin-right: 20px;
+				margin-right: 16px;
 			}
 		}
 		}
@@ -1214,6 +1231,18 @@ div.img-biger .number[class*=" 0 "],
 	#edit-field-location-of-event-und-0>.fieldset-wrapper{
 		display: none;
 	}
+	#node_groups_event_form_group_main_event_image{
+		/*border-top: 1px solid #f9ab17;*/
+		margin-top: 20px;
+		float: right;
+		width: 700px;
+		.form-wrapper{
+			margin-left: 10px;
+			input{
+				border: 1px solid #fcda9a;
+			}
+		}
+	}
 	#edit-body{
 		float: left;
 		margin-top: 21px;
@@ -1224,7 +1253,25 @@ div.img-biger .number[class*=" 0 "],
 		}
 		.form-textarea-wrapper{
 			border: 2px solid #fcd58b;	
-		} 
+		}
+		.ckeditor_links{
+			a{
+				display: none;
+			}
+		}
+
+	}
+	#node_groups_event_form_group_upload_files{
+		.form-wrapper{
+			margin-left: 10px;
+			input{
+				border: 1px solid #fcda9a;
+			}
+			tr{
+				border: 1px solid #fcda9a;
+				background: #fcf0d8; 
+			}	
+	}
 	}
 	#edit-field-add-tags-the-more-the-bett{
 		border-top: 1px solid #f9ab17;
@@ -1252,21 +1299,29 @@ div.img-biger .number[class*=" 0 "],
 		padding-top: 22px;
 		height: 59px;
 	}
+	#node_groups_event_form_group_details{
+		margin-top: 16px;
+		.form-wrapper{
+			margin-left: 10px;
+			input{
+				border: 1px solid #fcda9a;
+			}
+		}
+	}
+	#edit-field-the-following-courses-even{
+		border-top: 1px solid #f9ab17;
+		margin-top: 16px;
+		tr{
+			border: 1px solid #fcda9a;
+			background: #fcf0d8; 
+		}
+	}
 	#edit-actions{
 		#edit-submit{
 			float: right;
-			background-color: #F9AB17;
-			color: white;
 			width: 76px;
 			height: 28px;
-			padding: 4px 17px;
-			margin-bottom: 1em;
-			margin-right: 1em;
-			text-align: center;
-			font-weight: bold;
-			font-size:12.15px;
-			font-family: arial;
-			border: none;
+			
 		}
 		#edit-preview{
 			display: none;
