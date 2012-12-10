@@ -4,7 +4,7 @@ function beezy_preprocess_page(&$vars) {
   //the main-menu needs to show the second level only, so we use menu_block for that
   //only on certain pages, but which???
   $block = menu_tree_build(menu_block_get_config(MENU_BLOCK_SECTION));
-  $vars['main_menu_links'] = $block['content']['#content'];
+  $vars['main_menu_links'] = $block['content'];
 
   //add a suggestion to use a different page template according to node->type
   if (isset($vars['node'])) {
