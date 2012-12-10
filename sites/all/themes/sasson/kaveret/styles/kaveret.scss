@@ -1078,7 +1078,20 @@ div.img-biger .number[class*=" 0 "],
 	}
 }
 /*----------Specific page-node-add-groups-event -----------*/
-.page-node-add-groups-event{
+.page-node-add-groups-event
+{	
+	#region-content{
+		width: 678px;
+		.form-item{
+			width: 624px;
+		} 
+	}
+	#edit-field-the-following-courses-even,
+	#node_groups_event_form_group_details,
+	#node_groups_event_form_group_main_event_image,
+	#edit-field-adress-event{
+		display: none;
+	}
 	.form-item,.fieldset-legend{
 		font-size: 15px;
 		color: #004a82;
@@ -1097,9 +1110,29 @@ div.img-biger .number[class*=" 0 "],
 		}
 	
 	}
-	.draggable,.group-time-event.fieldset-wrapper,.field-name-field-location-of-event{
-			background: #fcf0d8;
+	.group-time-event>.fieldset-wrapper,
+	.field-name-field-location-of-event,
+	#node_groups_event_form_group_upload_files
+	{
 			border: 1px solid #fcda9a;
+			background: #fcf0d8;
+	}
+	.form-item-title{
+		border-top: 1px solid #F9AB17;
+		border: 1px solid #FACE77;
+		margin: 0;
+		height: 80px;
+		width: 626px;
+		padding: 0;
+		label{
+			margin-top: 17px;
+			padding: 0;
+			border-bottom: 2px solid #F9AB17;
+		}
+		#edit-title{
+			margin-left: 10px;
+			margin-top: 9px;
+		}
 	}
 	.field-type-entityreference{		
 		.draggable{
@@ -1123,24 +1156,121 @@ div.img-biger .number[class*=" 0 "],
 	}
 	.group-time-event{
 		float: left;
+		height: 280px;
 		.fieldset-wrapper{
+		height: 249px;
 		width: 240px;
-		height: 237px;
-		#edit-field-date-event{
-			height: 98px;
-
+		border-right: 1px solid #f9ab17;
+		.form-select{
+			border: 1px solid #fcda9a;
 		}
-		
+		#edit-field-date-event{
+			height: 68px;
+			margin-left: 25px;
+			legend{
+				float: left;
+				margin-right: 20px;
+
+			}
+			.date-no-float{
+				width: 199px;
+				float: right;
+				margin-top: -12px;
+			}
+		}
+		#edit-field-start-event{
+			height: 68px;
+			margin-left: 25px;
+				label{
+				float: left;
+				margin-right: 20px;
+			}
+		}
+		#edit-field-end-event{
+			height: 68px;
+			margin-left: 25px;
+				label{
+				float: left;
+				margin-right: 20px;
+			}
+		}
 		}
 		
 	}
 	.field-name-field-location-of-event{
 		width: 329px;
-		height: 278px;
+		height: 280px;
 		border-top: 0;
 		margin-top: -6px;
 		margin-right: 85px;
 		float: right;
+		legend{
+			/*border: 1px solid #004A82;*/
+			text-decoration: underline;
+			color: #004A82;
+		}
+	
+	}
+	#edit-field-location-of-event-und-0>.fieldset-wrapper{
+		display: none;
+	}
+	#edit-body{
+		float: left;
+		margin-top: 21px;
+		border-top: 1px solid #f9ab17;
+		border-bottom: 1px solid #f9ab17;
+		label{
+			display: none;
+		}
+		.form-textarea-wrapper{
+			border: 2px solid #fcd58b;	
+		}
+	}
+	#edit-field-add-tags-the-more-the-bett{
+		border-top: 1px solid #f9ab17;
+		border-bottom: 1px solid #f9ab17;
+		height: 179px;
+		label{
+			margin-bottom: 10px;
+		}
+		margin-top: 10px;
+		background: #fcf0d8;
+
+		#edit-field-add-tags-the-more-the-bett-und{
+			margin-left: 42px;
+			float: left;
+			border: 1px solid #FCDA9A;
+			width: 166px;
+		}
+		.description{
+			float: right;
+			margin-right: 12px;
+		}
+	}
+	#edit-field-send-notification{
+		border-bottom: 1px solid #f9ab17;
+		padding-top: 22px;
+		height: 59px;
+	}
+	#edit-actions{
+		#edit-submit{
+			float: right;
+			background-color: #F9AB17;
+			color: white;
+			width: 76px;
+			height: 28px;
+			padding: 4px 17px;
+			margin-bottom: 1em;
+			margin-right: 1em;
+			text-align: center;
+			font-weight: bold;
+			font-size:12.15px;
+			font-family: arial;
+			border: none;
+		}
+		#edit-preview{
+			display: none;
+		}
 	}
 
 }

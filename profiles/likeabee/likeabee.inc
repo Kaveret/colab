@@ -238,7 +238,7 @@ function likeabee_resources_default_page() {
   //on this page is the payment form, the balances and beeziest traders and pending transactions
   $build[] = siteoverride_embed_block('mcapi', 'balances');
   $build[] = siteoverride_embed_block('mcapi_forms', '1stparty');
-  $build[] = siteoverride_embed_block('views', 'user_rankings-block_volumes'); //Fix this
+  $build[] = siteoverride_embed_block('views', 'user_rankings-block_volumes');
   return $build;
 }
 //kudos to keithm
