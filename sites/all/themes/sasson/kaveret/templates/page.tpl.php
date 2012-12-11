@@ -102,12 +102,12 @@
     </div><!-- /#featured -->
   <?php endif; ?>
 
-<div id="page"><!--
+<div id="page">  <!--
   <?php if ($main_menu_links): ?>
     <nav id="main-menu" role="navigation">
       <?php print $main_menu_links; ?>
     </nav><!-- /#main-menu -->
-  <?php endif; ?>-->
+  <?php endif; ?>  -->
 
   <?php if ($secondary_menu_links): ?>
     <nav id="secondary-menu" role="navigation">

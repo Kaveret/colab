@@ -39,5 +39,6 @@ function likeabee_marketplace_block_info_alter($blocks, $theme) {
     'title' => '',
     'cache' => '5',
     'i18n_mode' => '0',
-) + $blocks['uc_catalog']['catalog'];
+  ) + $blocks['uc_catalog']['catalog'];
 }
+
