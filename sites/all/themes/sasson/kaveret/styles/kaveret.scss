@@ -1684,17 +1684,40 @@ section[id^="block-views-individual-space-block"],
 	display:block;
 }
 .view-uc-catalog .views-field-title{
-	background: none repeat scroll 0% 0% rgb(159, 39, 114);
+	background-color:rgb(159, 39, 114);
 }
 div.view-uc-catalog-terms table{
 	margin:20px 0;
-	.views-field-name span.field-content{
+	/* the orange clickable category names */
+	.views-field-name span.field-content a{
 		margin: 0 7px 7px 0;
 		padding: 3px 6px;
 		background-color: rgb(249, 171, 23);
 		box-shadow: 0px 0px 1px 1px #000000;
 		border-radius: 2px;
+		color:white;
+		text-decoration:none;
 	}
-	a {color:white;text-decoration:none}
-	a:hover{text-decoration:underline;}
+	.views-field-name span.field-content a:hover{text-decoration:underline;}
 }
+#block-views-user-rankings-block-incomes, #block-views-user-rankings-block-expenditures, #block-views-user-rankings-block-volumes, #block-views-trade-analysis-system, #block-1-balances{
+	float:left;
+	text-align: center;
+	h2{
+		background-color:rgb(159, 39, 114);
+		font-size: 110%;
+		color:white;
+	}
+	width:180px;
+	height: 210px;
+	overflow-y:hide;
+	margin-right:1em;
+	background-color:
+	float: left;
+	padding: 0;
+	border-radius: 4px;
+	border: 2px solid #FBD38B;
+	float:left;
+	display:block;
+};
+
