@@ -360,7 +360,7 @@ border-right: 1px solid #FCF0D8;
 		margin: 0px -1px 0px 0px;
 		text-align: center;
 	}
-	.block-title,.views-field-title a{
+	.block-title a, .views-field-title a{
 		margin:0;
 		float: left;
 		height: 45px;
@@ -373,7 +373,7 @@ border-right: 1px solid #FCF0D8;
 		font-weight: normal;
 		padding: 17px 0px 0px 0px;
 	}
-	.block-title:first-line,.views-field-title a:first-line{
+	.block-title a:first-line, .views-field-title a:first-line{
 		color:#B01919;
 		font-size: 16px;
 	}
@@ -392,7 +392,7 @@ border-right: 1px solid #FCF0D8;
 			margin-top: 5px;
 		}
 	}
-	#block-views-link-to-group-members-block-1 .views-field-title a{
+	#block-views-link-to-group-members-block-1 .views-field-title a, h2.block-title{
 		color:#B01919;
 		font-size: 16px;
 	}

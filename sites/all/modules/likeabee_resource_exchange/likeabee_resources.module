@@ -16,7 +16,7 @@ function likeabee_resources_menu() {
     'menu_name' => 'menu-main-icons',
     'weight' => 0
   );
-  
+
   $items['resources/dashboard'] = array(
     'title' => 'Dashboard',
     'description' => 'Buy, sell, pay, swop or gift!',
@@ -37,6 +37,47 @@ function likeabee_resources_menu() {
 
   return $items;
 }
+/*
+ * implements hook_block_info
+ */
+function likeabee_resources_block_info() {
+  //this is a really nasty temp hack to keep the resources section consistent with the groups section
+  //simulating the menu system using a block for each menu item
+  $default = array(
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'resources*',
+    'regions' => array(
+      'kaveret' => 'features'
+    )
+  );
+
+  return array(
+    'dashboard' =>  $default + array(
+      'info' => 'Resources Dashboard',
+      'weight' => 1,
+    ),
+    'my_beez' => $default + array(
+      'info' => 'Resources My Beez',
+      'weight' => 2,
+    ),
+    'marketplace' => $default + array(
+      'info' => 'Resources Marketplace',
+      'weight' => 3,
+    )
+  );
+}
+function likeabee_resources_block_view($delta) {
+  switch ($delta) {
+    case 'dashboard': $title = l(t('Dashboard'), 'resources');break;
+    case 'my_beez': $title = l(t('My Beez'), 'resources/my_beez');break;
+    case 'marketplace': $title = l(t('Marketplace'), 'resources/marketplace');break;
+  }
+  return array(
+    'subject' => $title,
+    'content' => "\n"
+  );
+}
+
 
 
 function likeabee_resources_help($path, $args) {
@@ -69,7 +110,11 @@ function resources_dashboard() {
 function resources_my_beez() {
   //on this page is the payment form, the balances and beeziest traders and pending transactions
   $build[] = _siteoverride_embed_block('mcapi', 'balances');
-  $build[] = show_balance_history($GLOBALS['user']->uid, array('def_drup'));
+  $build[] = array(
+    '#type' => 'user_profile_item',
+    '#title' =>t('Balance History'),
+    '#markup' => render($chart)
+  );
   $build[] = array('#markup' => views_embed_view('statement', 'default', $GLOBALS['user']->uid));
   return $build;
 }

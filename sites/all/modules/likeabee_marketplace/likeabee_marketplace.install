@@ -99,7 +99,7 @@ American Express',
   );
 
   //Create a New Role for Trader
-  $role = user_role_load_by_name(t('trader'))
+  $role = user_role_load_by_name(t('trader'));
   if(!isset($role->rid)){
     $role = array('name' => t('trader'));
     user_role_save((object)$role);
