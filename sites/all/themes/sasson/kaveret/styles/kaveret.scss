@@ -402,7 +402,10 @@ border-right: 1px solid #FCF0D8;
 	#block-og-extras-node-links{
 		.item-list ul{ @include menu-featured-ul;}
 		.item-list li{ @include menu-featured-li;}
-		.item-list a { @include menu-featured-a;}
+		.item-list a { @include menu-featured-a; width: 150px; }
+		ul{
+			width: 150px;
+		}
 		ul li:hover{
 			background-color:#fdf6e4;
 		}
@@ -474,6 +477,7 @@ clear: both;
 /* -----  main icons ----- */
 #block-menu-menu-main-icons{
   float: left;
+  width: 220px;
 }
 #block-menu-menu-main-icons .menu{
 	padding: 10px 10px 0px 12px;
@@ -985,7 +989,7 @@ div.img-biger .number[class*=" 0 "],
 	font-weight: bold;
 	font-size: 16px;
 }
-div.view-list-of-groups,
+#block-quicktabs-list-of-groups,
 #block-views-group-s-events-block-2,
 #block-views-group-s-discussion-block-2,
 #block-views-group-s-deccument-block-4{
@@ -1020,6 +1024,21 @@ div.view-list-of-groups,
 	position: absolute;
 	bottom: 0;
 	width: 214px;
+	.views-field-field-description-group{
+		margin-left: 12px;
+		span{
+			.views-label-field-description-group{
+				color: #13387F;
+				font-size: 16px;
+				font-weight: bold;
+			}
+			.field-content{
+				float: left;
+				color: #004A82;
+				font-size: 14px;
+			}
+		}
+	}
 	.field-content{
 		padding-top: 16px;
 		a{
@@ -1028,6 +1047,7 @@ div.view-list-of-groups,
 		border-color: #FAAC18;
 		text-decoration: none;
 		
+		line-height: 22px;
 		}
 		.group{
 		float: right;
@@ -1035,15 +1055,21 @@ div.view-list-of-groups,
 		padding-top: 3px;
 		margin-right: 6px;
 		background-color: #FAAC18;
-		width: 53px;
-		height: 22px;
 		text-align: center;
+		width: 69px;
+		line-height: 1em;
+		padding-top: 5px;
+		height: 28px;
+		margin-top: -5px;
+		color: white;
+		font-weight: bolder;
 		}
 		.number{
 		float: left;
 		margin-right: 4px;
 		margin-left: 10px;
 		font-weight: bold;
+		color: #004A82;
 		}
 		.members{
 		font-size: 15px;
@@ -1079,11 +1105,26 @@ div.view-list-of-groups,
 }
 /*----------Specific page-node-add-groups-event -----------*/
 .page-node-add-groups-event
-{	
+{	#featured{
+
+		#block-og-extras-node-links{
+			margin-left: 42px;
+		}
+	}
 	#region-content{
 		width: 678px;
-		.form-item{
-			width: 624px;
+		.form-item-title,
+		#edit-field-adress-event,
+		#edit-field-location-of-event-text,
+		#node_groups_event_form_group_main_event_image,
+		#edit-body,
+		#node_groups_event_form_group_upload_files,
+		#edit-field-add-tags-the-more-the-bett,
+		#edit-field-send-notification,
+		#node_groups_event_form_group_details,
+		#edit-field-the-following-courses-even
+		{
+			width: 624px !important;
 		} 
 	}
 	#edit-body #edit-body-und-0-format,
@@ -1118,7 +1159,7 @@ div.view-list-of-groups,
 			border: 1px solid #fcda9a; 
 			box-shadow: 0 0 0 10px #fcf0d8, 0 0 0 1px #fcda9a,0 0 0 10px #fcf0d8;
 			margin-top: 10px;
-			width:603px;
+			width:624px;
 			margin-right: 11px;
 		}
 	
@@ -1135,9 +1176,9 @@ div.view-list-of-groups,
 	.form-item-title{
 		border-top: 1px solid #F9AB17;
 		/*border: 1px solid #FACE77;*/
-		margin: 0;
+		margin-left: 9px;
 		height: 80px;
-		width: 626px;
+		width: 624px;
 		padding: 0;
 		label{
 			margin-top: 17px;
@@ -1147,6 +1188,9 @@ div.view-list-of-groups,
 		#edit-title{
 			/*margin-left: 10px;*/
 			margin-top: 9px;
+		}
+		input{
+			width: 603px !important;
 		}
 	}
 	.field-type-entityreference{		
@@ -1169,9 +1213,18 @@ div.view-list-of-groups,
 			}
 		}
 	}
+	#edit-field-adress-event,
+	#edit-field-location-of-event-text,{
+			margin-left: 9px;
+			
+			input{
+			width: 603px !important;
+			}
+		}
 	.group-time-event{
 		float: left;
 		height: 280px;
+		width: 240px;
 		.fieldset-wrapper{
 		height: 249px;
 		width: 240px;
@@ -1215,11 +1268,12 @@ div.view-list-of-groups,
 		
 	}
 	.field-name-field-location-of-event{
-		width: 329px;
+		width: 329px !important;
 		height: 280px;
-		border-top: 0;
+		/*border-top: 0;*/
+		border: 0;
 		margin-top: -6px;
-		margin-right: 85px;
+		margin-right: 77px;
 		float: right;
 		legend{
 			/*border: 1px solid #004A82;*/
@@ -1234,8 +1288,8 @@ div.view-list-of-groups,
 	#node_groups_event_form_group_main_event_image{
 		/*border-top: 1px solid #f9ab17;*/
 		margin-top: 20px;
-		float: right;
-		width: 700px;
+		float: inherit;
+		width: 624px;
 		.form-wrapper{
 			margin-left: 10px;
 			input{
@@ -1244,6 +1298,7 @@ div.view-list-of-groups,
 		}
 	}
 	#edit-body{
+		width: 624px !important;
 		float: left;
 		margin-top: 21px;
 		border-top: 1px solid #f9ab17;
@@ -1262,6 +1317,7 @@ div.view-list-of-groups,
 
 	}
 	#node_groups_event_form_group_upload_files{
+		width: 624px !important;
 		.form-wrapper{
 			margin-left: 10px;
 			input{
@@ -1277,6 +1333,7 @@ div.view-list-of-groups,
 		border-top: 1px solid #f9ab17;
 		border-bottom: 1px solid #f9ab17;
 		height: 179px;
+		width: 624px !important;
 		label{
 			margin-bottom: 10px;
 		} 
@@ -1298,9 +1355,11 @@ div.view-list-of-groups,
 		border-bottom: 1px solid #f9ab17;
 		padding-top: 22px;
 		height: 59px;
+		width: 624px !important;
 	}
 	#node_groups_event_form_group_details{
 		margin-top: 16px;
+		width: 624px !important;
 		.form-wrapper{
 			margin-left: 10px;
 			input{
@@ -1311,6 +1370,7 @@ div.view-list-of-groups,
 	#edit-field-the-following-courses-even{
 		border-top: 1px solid #f9ab17;
 		margin-top: 16px;
+		width: 624px !important;
 		tr{
 			border: 1px solid #fcda9a;
 			background: #fcf0d8; 
@@ -1325,6 +1385,15 @@ div.view-list-of-groups,
 		}
 		#edit-preview{
 			display: none;
+		}
+	}
+	#sidebar-second{
+		background: #FCF0D8;
+		.content{
+			font-size: 14px;
+			color: #B01919;
+			font-family: arial;
+			text-align: left;
 		}
 	}
 
