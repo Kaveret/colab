@@ -1,0 +1,127 @@
+<?php
+
+ ini_set('display_errors', '1');
+
+/*
+ * I hope that this module will one day conform to a Plugin API for each likeabee section
+ */
+
+function likeabee_resources_menu() {
+
+  $items['resources'] = array(
+    'title' => 'Resources exchange',
+    'description' => 'Buy, sell, pay, swop or gift!',
+    'page callback' => 'resources_dashboard',
+    'access arguments' => array('transact'),
+    'menu_name' => 'menu-main-icons',
+    'weight' => 0
+  );
+  
+  $items['resources/dashboard'] = array(
+    'title' => 'Dashboard',
+    'description' => 'Buy, sell, pay, swop or gift!',
+    'page callback' => 'resources_dashboard',
+    'access arguments' => array('transact'),
+    'menu_name' => 'main-menu',
+    'weight' => 1
+  );
+
+  $items['resources/my_beez'] = array(
+    'title' => 'My Beez',
+    'description' => 'Buy, sell, pay, swop or gift!',
+    'page callback' => 'resources_my_beez',
+    'access arguments' => array('transact'),
+    'menu_name' => 'main-menu',
+    'weight' => 1
+  );
+
+  return $items;
+}
+
+
+function likeabee_resources_help($path, $args) {
+
+  if ($args[0] == 'resources') {
+    //unhide the menu tabs!!!
+    drupal_add_css('#page #main-menu{display:block;}', array('type' => 'inline'));
+  }
+  if ($path == 'resources') {
+    $help[] = t('This is the local economy section. Here you can find what you need pay in Beez or in Shekels, or advertise yourself or your needs.');
+    $help[] = t('Find out more about our currency, !beez', array('!beez' => l('Beez', 'help/beez')));
+    return implode(' ', $help);
+  }
+}
+
+/*
+ * menu callback
+ */
+function resources_dashboard() {
+  $build[] = _siteoverride_embed_block('views', 'user_rankings-block_incomes');
+  $build[] = _siteoverride_embed_block('views', 'user_rankings-block_expenditures');
+  $build[] = _siteoverride_embed_block('views', 'user_rankings-block_volumes');
+  $build[] = _siteoverride_embed_block('views', 'trade_analysis-system');
+  return $build;
+}
+
+/*
+ * menu callback
+ */
+function resources_my_beez() {
+  //on this page is the payment form, the balances and beeziest traders and pending transactions
+  $build[] = _siteoverride_embed_block('mcapi', 'balances');
+  $build[] = show_balance_history($GLOBALS['user']->uid, array('def_drup'));
+  $build[] = array('#markup' => views_embed_view('statement', 'default', $GLOBALS['user']->uid));
+  return $build;
+}
+
+
+
+
+//kudos to keithm
+function _siteoverride_embed_block($module, $delta, $region = 'content') {
+  // Create block stub.
+  $block = new stdClass();
+  $block->module = $module;
+  $block->delta = $delta;
+  $block->region = $region;
+  // Load title.
+  global $theme_key;
+  drupal_theme_initialize();
+  $block->title = db_query(
+    "SELECT title FROM {block} WHERE module = :module AND delta = :delta AND theme = :theme",
+     array(':module' => $module, ':delta' => $delta, ':theme' => $theme_key)
+  )->fetchField();
+  // Render the content and subject for the block.
+  $blocks = _block_render_blocks(array($block));
+  // Get an array of blocks suitable for drupal_render().
+  $array = _block_get_renderable_array($blocks);
+  return $array;
+}
+
+
+function likeabee_resources_marketplace() {
+  return 'This page will be a faceted search view of products. We could use the offers/wants module for now, but I think we should get on with installing commerce.';
+
+}
+
+function likeabee_resources_other() {
+  return "This page is filling up space. could be used to show other people's transaction, system stats, special offers, or perhaps to talk about how many beez have been issued and redeemed.";
+}
+
+
+function likeabee_resources_transactions_alter(&$transactions) {
+  //make a payment of 10% to payer and payee.
+  //works for both bees and shekel payments
+  $base_transaction = entity_metadata_create_transaction(array(
+    'type' => 'likeabee_issue',
+    'payer' => 1,
+    'worth' => array('und' => array(0 => array(
+      'quantity' => round($transactions[0]->worth['und'][0]['quantity'] / 10, 0, PHP_ROUND_HALF_UP),
+      'currcode' => 'def_drup' //that means beez, the default currency
+    )))
+  ));
+  $base_transaction->payee = $transactions[0]->payer;
+  $transactions[] = clone($base_transaction);
+  $base_transaction->payee = $transactions[0]->payee;
+  $transactions[] = $base_transaction;
+}

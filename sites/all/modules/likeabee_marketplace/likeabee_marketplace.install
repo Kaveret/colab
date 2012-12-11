@@ -101,9 +101,8 @@ American Express',
 
   //Set Permission for Trader
   $seller_permissions = array('administer product attributes',
-    'administer product options', 'administer store', 'configure quotes',
-    'configure taxes', 'create product content', 'delete own product content',
-    'edit own product content', 'fulfill orders', 'fulfill own orders',
+    'administer product options', 'administer store',
+    'create product content', 'delete own product content', 'edit own product content',
     'manual payments', 'view catalog', 'view customers', 'view own orders',
     'view own products', 'view own reports', 'view payments', 'write own order comments');
   user_role_grant_permissions($rid, $seller_permissions);

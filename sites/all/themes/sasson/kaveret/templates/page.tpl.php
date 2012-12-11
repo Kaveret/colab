@@ -68,7 +68,6 @@
  * @see template_process()
  */
 ?>
-<!--?php if (module_exists('kaveret')): ?-->
   <?php if ($logo || $site_name || $site_slogan || $page['header']): ?>
     <header id="header" role="banner">
       <?php if ($logo): ?>
@@ -103,12 +102,12 @@
     </div><!-- /#featured -->
   <?php endif; ?>
 
-<div id="page"><!--
+<div id="page">
   <?php if ($main_menu_links): ?>
     <nav id="main-menu" role="navigation">
-      <?php print $main_menu_links; ?>
-    </nav><!-- /#main-menu -->
-  <?php endif; ?>-->
+      <!--<?php print $main_menu_links; ?>-->
+    </nav>
+  <?php endif; ?>
 
   <?php if ($secondary_menu_links): ?>
     <nav id="secondary-menu" role="navigation">
@@ -171,4 +170,3 @@
     </footer><!-- /#footer -->
   <?php endif; ?> 
 
-<--?php endif; ?-->

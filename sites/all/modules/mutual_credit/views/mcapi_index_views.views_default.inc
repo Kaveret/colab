@@ -770,11 +770,11 @@ function mcapi_getview_user_transactions_index($multicurrencies) {
 
 function mcapi_getview_system_stats($multicurrencies) {
   $view = new view;
-  $view->name = 'system_stats';
+  $view->name = 'trade_analysis';
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'mcapi_index';
-  $view->human_name = 'system stats';
+  $view->human_name = 'Trading analysis';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -855,11 +855,11 @@ function mcapi_getview_system_stats($multicurrencies) {
   $handler->display->display_options['filters']['diff']['value']['value'] = '0';
 
   /* Display: Block */
-  $handler = $view->new_display('block', 'System trading stats', 'block');
+  $handler = $view->new_display('block', 'System trading stats', 'system');
   $handler->display->display_options['block_description'] = 'Trading summary';
 
   /* Display: Bloc */
-  $handler = $view->new_display('block', 'User trading stats', 'block_1');
+  $handler = $view->new_display('block', 'User trading stats', 'user');
   $handler->display->display_options['title'] = 'User\'s trading summary';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relation: Transaction index : 1st user */

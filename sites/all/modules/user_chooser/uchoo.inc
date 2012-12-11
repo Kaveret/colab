@@ -198,10 +198,10 @@ function uchoo_get_valid_uids($element, $string = '', $limit = FALSE) {
       //then use the roles method
     case 'user_chooser_roles':
       $pos = array_search(DRUPAL_AUTHENTICATED_RID, $element['#args']);
-      if (is_numeric($pos)) { //special case for role 2
+      if (is_numeric($pos) || empty($element['#args'])) { //role 2 means all known users
         unset($element['#args'][$pos]);
       }
-      if (count($element['#args'])) {
+      else {
         $query->join('users_roles', 'ur', 'ur.uid = u.uid');
         $query->condition('ur.rid', $element['#args']);
       }
