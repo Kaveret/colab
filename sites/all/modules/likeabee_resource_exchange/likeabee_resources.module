@@ -112,8 +112,8 @@ function resources_my_beez() {
   $build[] = _siteoverride_embed_block('mcapi', 'balances');
   $chart = array(
     '#theme' => 'balance_history',
-    '#account' => $account,
-    '#histories' => get_balance_history($account, array('def_drup')),
+    '#account' => $GLOBALS['user'],
+    '#histories' => get_balance_history($GLOBALS['user'], array('def_drup')),
   );
   $build[] = array(
     '#type' => 'user_profile_item',
