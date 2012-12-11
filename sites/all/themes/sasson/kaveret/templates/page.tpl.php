@@ -110,7 +110,7 @@
       <?php print $main_menu_links; ?>
     </nav> 
 -->
-  <?php endif; ?>  -->
+  <?php endif; ?>
 
   <?php if ($secondary_menu_links): ?>
     <nav id="secondary-menu" role="navigation">
