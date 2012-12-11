@@ -985,7 +985,7 @@ div.img-biger .number[class*=" 0 "],
 	font-weight: bold;
 	font-size: 16px;
 }
-#block-quicktabs-list-of-groups,
+div.view-list-of-groups,
 #block-views-group-s-events-block-2,
 #block-views-group-s-discussion-block-2,
 #block-views-group-s-deccument-block-4{
@@ -1667,4 +1667,24 @@ section[id^="block-views-individual-space-block"],
 	ul.menu li:hover ul {
 		display: block;
 	}
+}
+
+/* matslats temp theming for resources/marketplace */
+.view-uc-catalog td{
+	width:200px;
+	height: 300px;
+	overflow-y:hide;
+	margin-right:1em;
+	background-color:
+	float: left;
+	padding: 0;
+	border-radius: 4px;
+	border: 2px solid #FBD38B;
+	box-shadow: 0px 0px 0px 3px #FAE8C7;
+	float:left;
+	display:block;
+}
+}
+.view-uc-catalog .views-field-title{
+	background: none repeat scroll 0% 0% rgb(159, 39, 114);
 }
