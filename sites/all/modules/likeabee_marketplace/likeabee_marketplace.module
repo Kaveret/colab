@@ -1,5 +1,20 @@
 <?php
 
+function likeabee_marketplace_menu() {
+
+  //this is a copy of a page that manually calls up a taxonomy_term view
+  //that view has been modified in the database with the latest uc_products view in the footer
+  $items['resources/marketplace'] = array(
+    'title' => 'Catalog',
+    'page callback' => 'uc_catalog_browse',
+    'access callback' => TRUE,
+    'access arguments' => array(),
+    'type' => MENU_NORMAL_ITEM,
+    'menu_name' => 'main-menu'
+  );
+  return $items;
+}
+
 /*
  * implements hook_views_api
  * tells views where to look for its include files

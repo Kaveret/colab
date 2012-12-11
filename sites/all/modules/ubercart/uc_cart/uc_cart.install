@@ -8,7 +8,7 @@
 /**
  * Implements hook_schema().
  */
-function uc_cart_schema() {
+function uc_cart_schema() {drupal_set_message('uc_cart_schema');
   $schema = array();
 
   $schema['uc_cart_products'] = array(

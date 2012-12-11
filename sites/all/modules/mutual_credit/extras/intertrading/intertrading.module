@@ -293,15 +293,14 @@ function intertrading_handshake() {
 }
 
 function _intertrading_handshake() {
-  $currcode = variable_get('intertrading_currcode', '');
-  if (!$currcode) {
+  $currency = currency_load(variable_get('intertrading_currcode', ''));
+  if (!$currency) {
     drupal_set_message('Intertrading requires a currency to be specified', 'error');
     return array();
   }
   $stats['mail'] = variable_get('site_mail', '');
   $stats['api'] = INTERTRADING_API_VERSION;
   $stats['ticks'] = variable_get('intertrading_ticks', 0);
-  $currency = currency_load($currcode);
   if (isset($currency->divisions)) {
     //divisions is either string '01' or an keyed array
     $stats['divisions'] = $currency->divisions == '01' ? '01' : implode('|', array_keys($currency->divisions));
