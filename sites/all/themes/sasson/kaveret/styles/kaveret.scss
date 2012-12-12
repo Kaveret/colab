@@ -988,7 +988,24 @@ div.img-biger .number[class*=" 0 "],
 	color: #B01919;
 	font-weight: bold;
 	font-size: 16px;
+	margin-left: 12px;
 }
+/*@mixin select-all-bady-box{
+	margin-left: 12px;	
+	span{
+		.views-label-field-description-group{
+				color: #13387F;
+				font-size: 16px;
+				font-weight: bold;
+			}
+			.field-content{
+				float: left;
+				color: #004A82;
+				font-size: 14px;
+			}
+		}	
+
+} */
 #block-quicktabs-list-of-groups,
 #block-views-group-s-events-block-2,
 #block-views-group-s-discussion-block-2,
@@ -1017,6 +1034,19 @@ div.img-biger .number[class*=" 0 "],
 	}
 }
 /*----------Specific See all boxs -----------*/
+#block-quicktabs-list-of-groups .views-field-field-description-group{
+		margin-left: 12px;
+		.views-label-field-description-group {
+			color: #13387F;
+			font-size: 16px;
+			font-weight: bold;
+		}
+		.field-content{
+				float: left;
+				color: #004A82;
+				font-size: 14px;
+		}
+}
 #block-quicktabs-list-of-groups .views-field-group-group{
 	background: #fcf0d8;
 	height: 51px;
@@ -1024,21 +1054,6 @@ div.img-biger .number[class*=" 0 "],
 	position: absolute;
 	bottom: 0;
 	width: 214px;
-	.views-field-field-description-group{
-		margin-left: 12px;
-		span{
-			.views-label-field-description-group{
-				color: #13387F;
-				font-size: 16px;
-				font-weight: bold;
-			}
-			.field-content{
-				float: left;
-				color: #004A82;
-				font-size: 14px;
-			}
-		}
-	}
 	.field-content{
 		padding-top: 16px;
 		a{
