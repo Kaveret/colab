@@ -311,7 +311,8 @@ clear: both;
 /*---  block-views -----*/
 @mixin menu-featured-ul{
 	background: white;
-	margin: 62px 0 0;
+/* Baroch changed margin from 62px to -10px , since hover breaks (mouse cannot get there) */
+	margin: -10px 0 0;
 	display: none;
 	position: absolute;
 	z-index: 100;
