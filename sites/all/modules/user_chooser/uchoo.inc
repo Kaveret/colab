@@ -1,14 +1,16 @@
 <?php
 
-
+//helper function for building up the form element
 function _process_uchoo($element, $form_state) {
-  if (empty($element['#accepts'])) $element['#accepts'] = array('mail', 'uid', 'name');
-  if (!isset($element['#allow_blocked']))$element['#allow_blocked'] = 0; //just to be explicit
-  if (!isset($element['#allow_me']))$element['#allow_me'] = 0; //just to be explicit
+
+  if($element['#type'] == 'user_chooser_value_callback') {
+    $element['#value_callback'] = 'user_chooser_value_callback_callback';
+  }
   //for the preselect type, we use the 'select' widget with an option for each callback
   if ($element['#type'] == 'user_chooser_preselect') {
-    $element['#options'] = module_invoke_all('user_chooser_preselect');
+    $element['#options'] = module_invoke_all('user_chooser_preselect', $form_state['form_id'], @$element['#name']);
     $element['#theme'] = 'select';
+    $element['#multiple_fail_quietly'] = TRUE;
   }
   //before anything, we have to work out how many users are valid
   elseif ($uids = uchoo_get_valid_uids($element)) {
@@ -101,61 +103,35 @@ function uchoo_config_form() {
 //form element callback
 //checks that all submited values are in fact in the list.
 function user_chooser_validate(&$element, &$form_state) {
-  if ($element['#type'] == 'user_chooser_preselect') {
-    $function = isset($element['#value']) ? $element['#value'] : $element['#default_value'];
-    //replace the submitted callback with the values it returns
-    $element['#value'] = $function($element, $form_state);
-    if (empty($element['#allow_me'])) {
-      $key = array_search($GLOBALS['user']->uid, $element['#value']);
-      if (is_integer($key)) unset($element['#value'][$key]);
+
+  if (isset($element['#unidentified']) && count($element['#unidentified'])) {//unidentified users from uchoo_set_value
+    $message = t('Unknown users: @users', array('@users' => implode($element['#unidentified'])));
+    if (!$element['#multiple'] || $element['#multiple_fail_alert'] > 1) form_error($element, $message);
+    elseif($element['#multiple'] && $element['#multiple_fail_alert'] == 1) drupal_set_message($message, 'warning');
+  }
+
+  $values = (array)$element['#value'];
+
+  if (empty($element['#allow_me']) && $key = array_search($GLOBALS['user']->uid, $values) && is_integer($key)) {
+    unset($element['#value'][$key]);
+    if (!$element['#multiple'] || in_array($element['#type'], array('user_chooser_callback', 'user_chooser_preselect'))) {
+      form_error($element, t("You can't put yourself in '@name'", array('@name' => $element['#title'])));
     }
   }
-  else {
-    $values = is_array($element['#value']) ?  $element['#value'] : array_filter(array($element['#value']));
-    $uids = array();
-    $invalids = array();
-    foreach ($values as $key => $string) {
-      $conditions = db_or();
-      foreach ($element['#accepts'] as $field) {
-        $conditions->condition($field, $string);
-      }
-      $values[$key] = db_select('users', 'u')
-        ->fields('u', array('uid'))
-        ->condition('uid', 0, '!=')
-        ->condition($conditions)
-        ->execute()
-        ->fetchField();
-      if (!$values[$key]) {//users who don't exist
-        $invalids[] = $string;
-      }
+
+  $possible_submissions = uchoo_get_valid_uids($element);
+  $invalids = array();
+  foreach ($values as $uid) {
+    if (!in_array($uid, $possible_submissions)) {
+      //users who are filtered out
+      $invalids[] = $uid;
     }
-    if (empty($element['#allow_me'])) {
-      //quietly remove me if I'm not allowed
-      $key = array_search($GLOBALS['user']->uid, $values);
-      if (is_integer($key)) {
-        form_error($element, t("You can't put yourself in '@name'", array('@name' => $element['#title'])));
-        return;
-      }
-    }
-    $all_valid_uids = uchoo_get_valid_uids($element);
-    foreach (array_filter($values) as $uid) {
-      if (!in_array($uid, $all_valid_uids)) {
-        //users who are filtered out
-        $invalids[] = $uid;
-      }
-    }
-    if (!empty($invalids)) {
-      //owch I can't get the string for the invalid user here, I don't know where the element['#value'] changed
-      form_error($element, t("Invalid user for field: @name", array('@name' => implode($invalids))));
-      //set the contents of the field back to the errant value ready for the form rebuilding
-      $element['#value'] = $form_state['values'][$element['#name']];
-      return;
-    }
-    //if it passes validation, set the #value to the uid, which is usually expected.
-    //however, this looks odd if some other form element fails validation
-    $element['#value'] = is_array($element['#value']) ? $values : reset($values);
   }
-  form_set_value($element, $element['#value'], $form_state);
+  if (count($invalids)) {//invalids were identified in form_type_ELEMENT_TYPE_value
+    $message = t('Disallowed users: @users', array('@users' => implode($invalids)));
+    if (!$element['#multiple'] || $element['#multiple_fail_alert'] > 1) form_error($element, $message);
+    elseif($element['#multiple'] && $element['#multiple_fail_alert'] == 1) drupal_set_message($message, 'warning');
+  }
 }
 
 //retrives an array of user ids according to the form widget parameters and optionally the string from the autocomplete field.
@@ -245,4 +221,30 @@ function uchoo_display_all($uids, $use_uid = TRUE) {
     $names[$account->uid] = $account->name;
   }
   return $names;
+}
+
+//helper function to set values for all the widgets
+function _uchoo_set_value(&$element, $values, &$form_state) {
+  //check that the valid users only are selected, and mark the items which can't be found
+  $uids = array();
+  $invalids = array();
+  foreach ($values as $key => $string) {
+    $conditions = db_or();
+    foreach ($element['#accepts'] as $field) {
+      $conditions->condition($field, $string);
+    }
+    $values[$key] = db_select('users', 'u')
+      ->fields('u', array('uid'))
+      ->condition('uid', 0, '!=')
+      ->condition($conditions)
+      ->execute()
+      ->fetchField();
+    if (!$values[$key]) {//users who don't exist
+      $element['#unidentified'][] = $string;
+    }
+  }
+  if (!$element['#multiple']) $values = array_pop($values);
+  else $values = array_filter($values);
+  drupal_array_set_nested_value($form_state['values'], $element['#array_parents'], $values);
+  return $values;
 }

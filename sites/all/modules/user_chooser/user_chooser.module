@@ -1,6 +1,5 @@
 <?php
 // $Id:
-
 /*
  * User chooser module
  *
@@ -57,8 +56,12 @@ function user_chooser_element_info() {
     '#args' => array(),
     '#theme_wrappers' => array('form_element'),
     '#element_validate' => array('user_chooser_validate'),
+    '#value_callback' => 'user_chooser_value_callback',
     '#multiple' => FALSE,
     '#allow_me' => FALSE,
+    '#multiple_fail_alert' => 1,//values 0 no alert, 1 warning, 2 error
+    '#accepts' => array('mail', 'uid', 'name'),
+    '#allow_blocked' => 0 //just to be explicit
   );
   foreach (uchoo_types() as $type) {
     $info[$type] = $fields;
@@ -133,4 +136,27 @@ function user_chooser_roles($rid1) {
   foreach (func_get_args() as $rid) {
     if (isset($user_roles[$rid])) return TRUE;
   }
+}
+
+/*
+ * These have to go in the module file because the include isn't made in time.
+ */
+/*
+ * value_callback to replace form_type_ELEMENT_TYPE_value
+ */
+function user_chooser_value_callback_callback(&$element, $edit = FALSE, &$form_state) {
+  if (empty($edit)) return;
+  module_load_include('inc', 'user_chooser', 'uchoo');
+  $function = isset($element['#value']) ? $element['#value'] : $element['#default_value'];
+  //replace the submitted callback with the values it returns
+  $element['#value'] = $function($element, $form_state);
+  _uchoo_set_value($element, (array)$edit, $form_state);
+}
+/*
+ * value_callback to replace form_type_ELEMENT_TYPE_value
+ */
+function user_chooser_value_callback(&$element, $edit = FALSE, &$form_state) {
+  if (empty($edit)) return;
+  module_load_include('inc', 'user_chooser', 'uchoo');
+  return _uchoo_set_value($element, (array)$edit, $form_state);
 }
