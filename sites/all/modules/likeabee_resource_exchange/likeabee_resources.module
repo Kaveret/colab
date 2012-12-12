@@ -110,15 +110,10 @@ function resources_dashboard() {
 function resources_my_beez() {
   //on this page is the payment form, the balances and beeziest traders and pending transactions
   $build[] = _siteoverride_embed_block('mcapi', 'balances');
-  $chart = array(
+  $build[] = array(
     '#theme' => 'balance_history',
     '#account' => $GLOBALS['user'],
     '#histories' => get_balance_history($GLOBALS['user'], array('def_drup')),
-  );
-  $build[] = array(
-    '#type' => 'user_profile_item',
-    '#title' =>t('Balance History'),
-    '#markup' => render($chart)
   );
   $build[] = array('#markup' => views_embed_view('statement', 'default', $GLOBALS['user']->uid));
   return $build;
