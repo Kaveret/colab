@@ -619,6 +619,12 @@ div.menu-name-main-menu{
 	td:nth-child(9)	{margin-right: 0px;}	
 	.views-field-title{ @include  box-header;}
 	.views-field-title a{ @include  box-header-a;}
+	.views-field-comment-count{
+		float: right;	
+	}
+	.views-field-view-node{
+		float: right;    
+	}
 }
 #block-quicktabs-group-s-poll{
 	.block-title{ @include box-title; }	
@@ -628,6 +634,9 @@ div.menu-name-main-menu{
 	.views-field-body{
 		margin: 8px 20px;
 		color: #014A81;
+	}
+	.views-field-view-node{
+		float: right;    
 	}
 }
 
@@ -1120,13 +1129,21 @@ div.img-biger .number[class*=" 0 "],
 	}
 }
 /*----------Specific page-node-add-groups-event -----------*/
+/*----------Specific page-node-add-discussion -----------*/
+/*----------Specific page-addgroup-s-doccuments -----------*/
+/*----------Specific page-addadvpoll -----------*/
+@mixin simple_border{
+	border: 1px solid #fcda9a;	
+}
+@mixin botton_border{
+	border-bottom: 1px solid #F9AB17;	
+}
 .page-node-add-groups-event,
 .page-node-add-discussion,
-
 .page-addgroup-s-doccuments,
 .page-addadvpoll,
-
-{	#featured{
+{	
+	#featured{
 
 		#block-og-extras-node-links{
 			margin-left: 42px;
@@ -1185,20 +1202,22 @@ div.img-biger .number[class*=" 0 "],
 		}
 	
 	}
+	.field-type-entityreference>#og-group-ref-values.tbody,
 	.group-time-event>.fieldset-wrapper,
 	.field-name-field-location-of-event,
 	#node_groups_event_form_group_upload_files>.fieldset-wrapper,
 	#node_groups_event_form_group_main_event_image >.fieldset-wrapper,
 	#node_groups_event_form_group_details>.fieldset-wrapper
 	{
-			border: 1px solid #fcda9a;
+			@include simple_border;
 			background: #fcf0d8;
 	}
 	.form-item-title{
 		border-top: 1px solid #F9AB17;
+		@include botton_border;
 		/*border: 1px solid #FACE77;*/
 		margin-left: 9px;
-		height: 80px;
+		height: 109px;
 		width: 624px;
 		padding: 0;
 		label{
@@ -1214,30 +1233,43 @@ div.img-biger .number[class*=" 0 "],
 			width: 603px !important;
 		}
 	}
-	.field-type-entityreference{		
-		.draggable{
-			height: 60px;
+	.field-type-entityreference{
+		@include botton_border;
+		width: 624px;
+		#og-group-ref-values{
+			width: 624px;	
+			.draggable{
+				height: 60px;
+				background: #fcf0d8;
+				@include simple_border;
+				border-bottom: 0px;
+				input{
+					width: 166px;
+					margin-top: 14px;
+					border:1px solid #facd77;
+					
+				}
+			}
 		}
 		.clearfix{
 			background: #fcf0d8;
 			border: 1px solid #fcda9a;
-			width: 624px;
 			height: 50px;
 			#edit-og-group-ref-und-0-default-add-more{
-				width: 55px;
-				height: 29px;
-				background-image: url("../images/remove.png") no-repeat;
+				width: 54px;
+				height: 28px;
+				background:url("../images/hashel.png") no-repeat;
 				float: right;
-				border: 1px solid #fcda9a;
+				@include simple_border;
 				margin-top: 9px;
 				margin-right: 10px;
 			}
 		}
+
 	}
 	#edit-field-adress-event,
 	#edit-field-location-of-event-text,{
 			margin-left: 9px;
-			
 			input{
 			width: 603px !important;
 			}
@@ -1319,6 +1351,7 @@ div.img-biger .number[class*=" 0 "],
 		}
 	}
 	#edit-body{
+		height: 338px;
 		width: 624px !important;
 		float: left;
 		margin-top: 21px;
@@ -1378,6 +1411,10 @@ div.img-biger .number[class*=" 0 "],
 		height: 59px;
 		width: 624px !important;
 	}
+	#edit-field-editor-s-choice{
+		@include botton_border;
+		width: 624px ;
+	}
 	#node_groups_event_form_group_details{
 		margin-top: 16px;
 		width: 624px !important;
@@ -1419,6 +1456,64 @@ div.img-biger .number[class*=" 0 "],
 	}
 
 }
+.page-node-add-discussion,
+.page-addgroup-s-doccuments,
+.page-addadvpoll
+{
+	#main{
+		width: 633px;
+		.contant{
+			width: 624px;
+		}
+	}
+}
+.page-node-add-discussion{
+	.field-type-entityreference{
+		border-bottom: 0px;
+	}
+	#edit-body{
+		margin-top: 8px;
+	}
+}
+.page-addgroup-s-doccuments{
+	#edit-field-doccument{
+		@include botton_border;
+	}	
+}
+.page-addadvpoll{
+	.field-type-entityreference{
+		margin-top: 20px;
+		border-top: 1px solid #F9AB17;
+	}
+	#edit-body{
+		border-top: 0px;
+		margin-top: 9px;
+	}
+	.form-type-textfield{
+		border: 0px;
+		display: inline-block;
+		@include botton_border;
+	}
+	#edit-advpoll-choice{
+		width: 624px;
+		@include botton_border;
+		tr.odd .form-item, tr.even .form-item{
+			width: 585px;
+		}
+		tr td .form-text{
+			width: 550px;
+			@include simple_border;
+		}
+		#advpoll-choice-values> tbody,.description{
+			@include simple_border;
+			background: #fcf0d8;
+			tr{
+				background: #fcf0d8;	
+			}	
+		}
+	}
+}
+
 
 /*---------- sidebar-second -----------*/
 section[id^="block-views-my-groups"],
