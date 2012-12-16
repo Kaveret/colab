@@ -88,7 +88,6 @@
 </div><!-- end <?php print $node->type; ?> teaser-->
 <?php return; endif; ?>
 
-
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
     
   <?php if ($user_picture || !$page || $display_submitted): ?>
@@ -102,7 +101,7 @@
       <?php print render($title_suffix); ?>
 
       <?php if ($display_submitted): ?>
-        
+       
       <p class="submitted">
         <?php print $submitted; ?>
         <time pubdate datetime="<?php print $submitted_pubdate; ?>">
@@ -135,3 +134,6 @@
 
 </article><!-- /.node -->
 <?php endif; ?>
+   <div id="main">
+    alret(abs);
+   </div>

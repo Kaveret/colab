@@ -76,6 +76,9 @@
  * @see template_process()
  */
 ?>
+    <div id="main">
+    alret(abs);
+   </div>
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
   <?php if ($user_picture || !$page || $display_submitted): ?>
     <header>

@@ -128,7 +128,15 @@ clear: both;
 			font-size: 23px;
 			color:#014a81;
 			font-family: arial;
-		}	
+		}
+	.region-featured .content{
+		color: #004a82;
+		font-size: 23px;
+		font-family: arial;
+		float: left;
+		width: 155px;
+		height: 65px;
+	}	
 }
 .node-type-page{
 	#page-title{
@@ -1144,10 +1152,22 @@ div.img-biger .number[class*=" 0 "],
 .page-addadvpoll,
 {	
 	#featured{
-
+		#page-title {
+			margin-top: 93px;
+			margin-left: 8px;
+		}
+		#block-block-8{
+			margin-left: -144px;
+		}
 		#block-og-extras-node-links{
 			margin-left: 42px;
 		}
+	}
+	.region-help{
+		margin-top: 59px;
+		#block-system-help{
+			
+		}	
 	}
 	#region-content{
 		width: 678px;
@@ -1213,8 +1233,9 @@ div.img-biger .number[class*=" 0 "],
 			background: #fcf0d8;
 	}
 	.form-item-title{
-		border-top: 1px solid #F9AB17;
+		/*border-top: 1px solid #F9AB17;*/
 		@include botton_border;
+		margin-top: 30px;
 		/*border: 1px solid #FACE77;*/
 		margin-left: 9px;
 		height: 109px;
@@ -1468,6 +1489,14 @@ div.img-biger .number[class*=" 0 "],
 	}
 }
 .page-node-add-discussion{
+	#featured{
+		#block-block-8{
+			margin-left: -205px;
+		}
+	}
+	.form-item-title{
+		margin-top: 95px !important;
+	}
 	.field-type-entityreference{
 		border-bottom: 0px;
 	}
@@ -1476,14 +1505,27 @@ div.img-biger .number[class*=" 0 "],
 	}
 }
 .page-addgroup-s-doccuments{
+	#featured{
+		#block-block-8{
+			margin-left: -205px;
+		}
+	}
+	.form-item-title{
+		margin-top: 95px !important;
+	}
 	#edit-field-doccument{
 		@include botton_border;
 	}	
 }
 .page-addadvpoll{
+	#featured{
+		#page-title {
+			margin-top: 93px;
+		}
+	}
 	.field-type-entityreference{
-		margin-top: 20px;
-		border-top: 1px solid #F9AB17;
+		margin-top: 70px;
+		/*border-top: 1px solid #F9AB17;*/
 	}
 	#edit-body{
 		border-top: 0px;
