@@ -369,7 +369,7 @@ border-right: 1px solid #FCF0D8;
 		margin: 0px -1px 0px 0px;
 		text-align: center;
 	}
-	.block-title a, .views-field-title a{
+	.block-title a, .views-field-title a, h2.block-title{
 		margin:0;
 		float: left;
 		height: 45px;
@@ -388,6 +388,7 @@ border-right: 1px solid #FCF0D8;
 	}
 }
 /*---   Specific of block-views  ---*/
+
 #featured{
 	#block-views-current-group-block{
 		width: 204px;
@@ -409,6 +410,21 @@ border-right: 1px solid #FCF0D8;
 		cursor: default;
 	}
 	#block-og-extras-node-links{
+		h2:first-line{ color:#B01919;font-size: 16px;}
+		h2 { 
+			margin:0;
+			float: left;
+			height: 45px;
+			line-height: 14px;
+			background: url("../images/arrow-header.png") no-repeat 41px 49px;
+			text-decoration: none;
+			cursor: pointer;
+			color:#014a81;	
+			font-size: 11px;
+			font-weight: normal;
+			padding: 17px 0px 0px 0px;
+			text-align: center; 
+		}
 		.item-list ul{ @include menu-featured-ul;}
 		.item-list li{ @include menu-featured-li;}
 		.item-list a { @include menu-featured-a; width: 150px; }
@@ -435,6 +451,21 @@ border-right: 1px solid #FCF0D8;
 		display: block;
 	}	
 	#block-block-10{
+		h2:first-line{ color:#B01919;font-size: 16px;}
+		h2 { 
+			margin:0;
+			float: left;
+			height: 45px;
+			line-height: 14px;
+			background: url("../images/arrow-header.png") no-repeat 41px 49px;
+			text-decoration: none;
+			cursor: pointer;
+			color:#014a81;	
+			font-size: 11px;
+			font-weight: normal;
+			padding: 17px 0px 0px 0px;
+			text-align: center; 
+		}
 		.content{ @include menu-featured-ul; }
 		.content p{ @include menu-featured-li; height: auto;}
 		.content a{ @include menu-featured-a;}
@@ -619,7 +650,8 @@ div.menu-name-main-menu{
 }
 #block-quicktabs-group-s-events,
 #block-quicktabs-group-s-discussion-,
-#block-quicktabs-group-s-doccuments{
+#block-quicktabs-group-s-doccuments
+{
 	.block-title{ @include box-title; }
 	td{ @include box;
 		float: none;
@@ -648,6 +680,7 @@ div.menu-name-main-menu{
 	.views-field-body{
 		margin: 8px 20px;
 		color: #014A81;
+		height: 140px !important;
 	}
 	.views-field-view-node{
 		float: right;    
@@ -675,6 +708,26 @@ div.menu-name-main-menu{
 			margin: 0;
 	}
 }
+#block-quicktabs-group-s-discussion-{
+	.views-field-body{
+		height: 140px !important;
+	}
+}
+#block-quicktabs-group-s-doccuments{
+	.views-field-field-doccument{
+		height: 146px;	
+	}
+}
+#block-quicktabs-groups-books{
+	td{ @include box;
+		float: none;
+		padding-right: 17px;
+		padding-bottom: 18px; 
+		margin-right: 0px;
+		margin-bottom: 0px;
+	}
+}
+
 /*#quicktabs{
 	.block-title{
 	   @include box-title;
@@ -1363,7 +1416,14 @@ div.img-biger .number[class*=" 0 "],
 	
 	}
 	#edit-field-location-of-event-und-0>.fieldset-wrapper{
-		display: none;
+		.form-item-field-location-of-event-und-0-country,
+		.form-item-field-location-of-event-und-0-locpick-user-latitude,
+		.form-item-field-location-of-event-und-0-locpick-user-longitude,
+		.description
+		{
+			display: none;	
+		}
+		
 	}
 	#node_groups_event_form_group_main_event_image{
 		/*border-top: 1px solid #f9ab17;*/
