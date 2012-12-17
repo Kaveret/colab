@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Default theme implementation to display a node.
@@ -76,7 +75,6 @@
  * @see template_process()
  */
 ?>
-<?php if (module_exists('kaveret')): ?>
 <?php if ($teaser): ?>
 <div class = "node node-poll teaser">
   <h2>
@@ -133,5 +131,4 @@
   <?php print render($content['comments']); ?>
 
 </article><!-- /.node -->
-<?php endif; ?>
 
