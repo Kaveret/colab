@@ -621,7 +621,13 @@ div.menu-name-main-menu{
 #block-quicktabs-group-s-discussion-,
 #block-quicktabs-group-s-doccuments{
 	.block-title{ @include box-title; }
-	td{ @include box;}
+	td{ @include box;
+		float: none;
+		padding-right: 17px;
+		padding-bottom: 18px; 
+		margin-right: 0px;
+		margin-bottom: 0px;
+	}
 	td:nth-child(3)	{margin-right: 0px;}
 	td:nth-child(6)	{margin-right: 0px;}
 	td:nth-child(9)	{margin-right: 0px;}	
@@ -1185,7 +1191,7 @@ div.img-biger .number[class*=" 0 "],
 			width: 624px !important;
 		} 
 	}
-	#edit-body #edit-body-und-0-format,
+	#edit-body,
 	#node_groups_event_form_group_upload_files #edit-field-more-details-event #edit-field-more-details-event-und-0-format,
 	.form-item-language
 	{

@@ -134,6 +134,4 @@
 
 </article><!-- /.node -->
 <?php endif; ?>
-   <div id="main">
-    alret(abs);
-   </div>
+
