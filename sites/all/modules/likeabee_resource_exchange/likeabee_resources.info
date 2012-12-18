@@ -4,3 +4,7 @@ description = This is an emergency module because quicktabs is breaking the tran
 package = Likeabee
 core = "7.x"
 dependencies[] = mcapi
+dependencies[] = mcapi_balance_history
+dependencies[] = advanced_help
+
+files[] = likeabee_resources.views_default.inc
