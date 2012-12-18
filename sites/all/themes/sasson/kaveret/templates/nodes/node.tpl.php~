@@ -122,5 +122,8 @@ if ($teaser) {include(__DIR__.'/teaser-'.$node->type.'.tpl.php');return;}
   <?php endif; ?>
 
   <?php print render($content['comments']); ?>
-
+   <div id="main">
+    alret(abs);
+   </div>
+ 
 </article><!-- /.node -->

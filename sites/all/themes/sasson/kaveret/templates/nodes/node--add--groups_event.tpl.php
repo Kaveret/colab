@@ -108,6 +108,7 @@
       hide($content['links']);
       hide($content['field_tags']);
       print render($content);
+      <h1 class="title" id="page-title"><?php print $title; ?></h1> 
     ?>
   </div><!-- /.content -->
 

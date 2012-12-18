@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Default theme implementation to display a node.
@@ -76,7 +75,6 @@
  * @see template_process()
  */
 ?>
-<?php if (module_exists('kaveret')): ?>
 <?php if ($teaser): ?>
 <div class = "node node-poll teaser">
   <h2>
@@ -87,7 +85,6 @@
   </div>
 </div><!-- end <?php print $node->type; ?> teaser-->
 <?php return; endif; ?>
-
 
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
     
@@ -102,7 +99,7 @@
       <?php print render($title_suffix); ?>
 
       <?php if ($display_submitted): ?>
-        
+       
       <p class="submitted">
         <?php print $submitted; ?>
         <time pubdate datetime="<?php print $submitted_pubdate; ?>">
@@ -134,4 +131,4 @@
   <?php print render($content['comments']); ?>
 
 </article><!-- /.node -->
-<?php endif; ?>
+

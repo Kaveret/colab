@@ -81,7 +81,7 @@
   <?php if ($user_picture || !$page || $display_submitted): ?>
     <header>
       <?php print $user_picture; ?>
-
+ 
       <?php print render($title_prefix); ?>
       <?php if (!$page): ?>
         <h2<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
@@ -96,14 +96,14 @@
         <?php print $submitted_date; ?>
         </time>
       </p>
-        
+       
       <?php endif; ?>
     </header>
   <?php endif; ?>
 
   <div class="content"<?php print $content_attributes; ?>>
       <?php i f  ($page): ?>
-	<h2><? php print $title; ?></h2>
+  <h2><? php print $title; ?></h2>
       <?php endif; ?>
       <?php pri nt render($title_suffix); ?>
     <?php
