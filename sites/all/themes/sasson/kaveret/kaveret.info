@@ -106,9 +106,11 @@ settings[sasson_breadcrumb_showtitle] = 0
 settings[sasson_breadcrumb_separator] = '»'
 settings[sasson_feed_icons] = 0
 
+
 ; Information added by drupal.org packaging script on 2012-08-31
 version = "7.x-2.6"
 core = "7.x"
 project = "sasson"
 datestamp = "1346448442"
+
 

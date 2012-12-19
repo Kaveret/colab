@@ -1,2 +1,76 @@
- @flip {file: "kaveret.scss"}
+/**
+ * @file sasson/styles/sasson-rtl.scss
+ */
 
+// ==== RTL support. ========================================================
+// This file imports and automatically create all the RTL overrides
+// ==========================================================================
+#featured {
+	#block-views-496829e4ed0eb890c08a769ebd3a80e3 .views-field-title a,
+	#block-views-link-to-webform-block-1 .views-field-title a{
+		width: 91px;
+	}
+	#block-og-extras-node-links h2,
+	#block-views-group-configurations-block h2.block-title{
+		width: 91px;
+	}
+
+}
+
+#block-menu-menu-main-icons .menu li a{
+	margin-right: 3px !important;
+	
+}
+#block-menu-menu-main-icons .menu .leaf  a{
+	width: 87px;
+} 
+.region-sidebar-second{
+	#block-views-tags-block,#block-views-groups-block{
+		 .block-title{
+			background-position-x: 179px;
+			padding-right: 19px;
+		}
+	}
+}
+/*---------Group--------------------------------------------*/
+/*----------------------------------------------------------*/
+/*----------------------------------------------------------*/
+/*---------Group page--------------*/
+.region-content{
+	#block-quicktabs-list-of-groups #quicktabs-container-list_of_groups{
+		float: right;
+		margin-top: 19px;
+		.views-field-field-description-group .field-content{
+			float: none;
+		}
+	}
+}
+/*---------Groups page--------------*/
+#quicktabs{
+	#block-quicktabs-group-s-events #quicktabs-container-group_s_events,
+	#block-quicktabs-group-s-discussion- #quicktabs-container-group_s_discussion_,
+	#block-quicktabs-group-s-doccuments #quicktabs-container-group_s_doccuments {
+			float: right;
+		}
+}
+/*---------activities-my-group--------------*/
+.section-activities #main .region-content{
+	margin-right: -20px;	
+}
+/*---------node/add/groups-event--------------*/
+#edit-og-group-ref .fieldset-wrapper #form-item-og-group-ref-und-0-default-0-target-id input #edit-og-group-ref-und-0-default-0-target-id{
+	background-position-x: 6px;	
+}
+/*---------User status--------------*/
+/*---------node/add/groups-event--------------*/
+.page-node-add-groups-event{
+	.form-item,#edit-og-group-ref,
+	#edit-field-add-tags-the-more-the-bett,
+	#edit-field-the-following-courses-even,
+	#edit-field-send-notification,
+	#edit-field-editor-s-choice{
+		float: right;
+	}
+}
+
+@flip {file: "kaveret.scss"};
