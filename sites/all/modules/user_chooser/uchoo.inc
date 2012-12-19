@@ -1,7 +1,7 @@
 <?php
 
 //helper function for building up the form element
-function _process_uchoo($element, $form_state) {
+function _process_uchoo($element, &$form_state) {
 
   if($element['#type'] == 'user_chooser_value_callback') {
     $element['#value_callback'] = 'user_chooser_value_callback_callback';
@@ -31,8 +31,7 @@ function _process_uchoo($element, $form_state) {
     }
     else {
       $element['#theme'] = 'textfield';
-      $element['#autocomplete_path'] = 'system/ajax/uchoo/'.current_path() .'/'.$element['#name'];
-
+      $element['#autocomplete_path'] = 'system/ajax/uchoo/'.$form_state['complete form']['form_build_id']['#value'].'/'.$element['#name'];
       if (!empty($form_state['values'][$element['#name']])) {
         $element['#value'] = $form_state['values'][$element['#name']];
       }
@@ -47,6 +46,7 @@ function _process_uchoo($element, $form_state) {
            $element['#description'] =  t('Accepts @types; comma separated', array('@types' => implode(', ', $accepts)));
          }
       }
+      $form_state['cache'] = TRUE;
     }
   }
   else {
@@ -110,7 +110,7 @@ function user_chooser_validate(&$element, &$form_state) {
     elseif($element['#multiple'] && $element['#multiple_fail_alert'] == 1) drupal_set_message($message, 'warning');
   }
 
-  $values = (array)$element['#value'];
+  $values = array_filter((array)$element['#value']);
 
   if (empty($element['#allow_me']) && $key = array_search($GLOBALS['user']->uid, $values) && is_integer($key)) {
     unset($element['#value'][$key]);
@@ -183,7 +183,7 @@ function uchoo_get_valid_uids($element, $string = '', $limit = FALSE) {
       }
       break;
     default:
-      drupal_set_message('Unsupported user_chooser element #type:'. $element['#type']);
+      drupal_set_message('Unsupported user_chooser element #type:'. print_r($element, 1));
   }
   if ($limit) {
     $query->range(0, variable_get('user_chooser_threshhold', 50));

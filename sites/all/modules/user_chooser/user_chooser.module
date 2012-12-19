@@ -68,6 +68,7 @@ function user_chooser_element_info() {
   }
   return $info;
 }
+
 //these provide ways of carving up the user database by providing a callback and parameters
 //each of these could have an access callback and this function could have its own hook
 function uchoo_types() {
@@ -99,20 +100,18 @@ function uchoo_autocomplete() {
   $args = func_get_args();
   $string = array_pop($args);
   $element_name = array_pop($args);
-  $path = implode('/', $args);
-  if ($router_item = menu_get_item($path)) {//borrowed from menu_execute_active handler
-    if ($router_item['access']) {
-      if ($router_item['include_file']) {
-        require_once DRUPAL_ROOT . '/' . $router_item['include_file'];
-      }
-      $form = call_user_func_array($router_item['page_callback'], $router_item['page_arguments']);
-    }
-    else $form = MENU_ACCESS_DENIED;
-  }
-  else $form = MENU_NOT_FOUND;
+  $form_build_id = array_pop($args);
+  //see ajax_get_form
+  $form = form_get_cache($form_build_id, form_state_defaults());
+  if (!$form) drupal_exit();
 
-  $element = $form[$element_name];
-  $uids = uchoo_get_valid_uids($element, $string, TRUE);
+  // Since some of the submit handlers are run, redirects need to be disabled.
+  $form_state['no_redirect'] = TRUE;
+  $form_state['rebuild_info']['copy']['#build_id'] = TRUE;
+  $form_state['rebuild_info']['copy']['#action'] = TRUE;
+  //we don't need to process the form - we just wanted the $element
+
+  $uids = uchoo_get_valid_uids($form[$element_name], $string, TRUE);
   die(drupal_json_output(drupal_map_assoc(uchoo_display_all($uids))));
 }
 

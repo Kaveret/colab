@@ -78,7 +78,7 @@ function mcapiforms_setup_filter() {
     'format' => MCAPIFORM_STRING_FORMAT,
     'name' => t('Payment form'),
     'weight' => 20,
-    'status' => TRUE,
+    'status' => 1,
     'filters' => array(//use only core filters
       'filter_autop' => array()
     )
@@ -90,7 +90,6 @@ function mcapiforms_setup_filter() {
   foreach ($mcapiforms as $name => $settings) {
     $settings = unserialize($settings);
     $settings['experience']['template'] = str_replace('<br />', '', $settings['experience']['template']);
-    $settings['experience']['sure_template'] = str_replace('<br />', '', $settings['experience']['sure_template']);
     db_query("UPDATE {mcapi_forms} SET data = :data where name = :name",
       array(':data' => serialize($settings), ':name' => $name)
     );

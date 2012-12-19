@@ -11,16 +11,16 @@ function likeabee_resources_menu() {
   $items['resources'] = array(
     'title' => 'Resources exchange',
     'description' => 'Buy, sell, pay, swop or gift!',
-    'page callback' => 'resources_dashboard',
+    'page callback' => 'resources_beeziest',
     'access arguments' => array('transact'),
     'menu_name' => 'menu-main-icons',
     'weight' => 0
   );
 
   $items['resources/dashboard'] = array(
-    'title' => 'Dashboard',
+    'title' => 'Beeziest members',
     'description' => 'Buy, sell, pay, swop or gift!',
-    'page callback' => 'resources_dashboard',
+    'page callback' => 'resources_beeziest',
     'access arguments' => array('transact'),
     'menu_name' => 'main-menu',
     'weight' => 1
@@ -79,6 +79,30 @@ function likeabee_resources_block_view($delta) {
 }
 
 
+/*
+ * Implements views hook_views_api
+ */
+function likeabee_resources_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'likeabee_resources'),
+  );
+}
+/*
+ * implements hook_theme
+ */
+function likeabee_resources_theme() {
+  return array(
+    //this block provides a box around sections of a page
+    'likeabee_page_block' => array(
+      'variables' => array(
+         'adv_help' => '',
+         'title' => '',
+         'content' => array()
+      )
+    )
+  );
+}
 
 function likeabee_resources_help($path, $args) {
 
@@ -96,11 +120,19 @@ function likeabee_resources_help($path, $args) {
 /*
  * menu callback
  */
-function resources_dashboard() {
-  $build[] = _siteoverride_embed_block('views', 'user_rankings-block_incomes');
-  $build[] = _siteoverride_embed_block('views', 'user_rankings-block_expenditures');
-  $build[] = _siteoverride_embed_block('views', 'user_rankings-block_volumes');
-  $build[] = _siteoverride_embed_block('views', 'trade_analysis-system');
+function resources_beeziest() {
+  $build[] = array(
+    '#markup' => views_embed_view('trade_analysis', 'system')
+  );
+  $build[] = array(
+    '#markup' => views_embed_view('user_rankings', 'block_incomes')
+  );
+  $build[] = array(
+    '#markup' => views_embed_view('user_rankings', 'block_expenditures')
+  );
+  $build[] = array(
+    '#markup' => views_embed_view('user_rankings', 'block_volumes')
+  );
   return $build;
 }
 
@@ -108,39 +140,51 @@ function resources_dashboard() {
  * menu callback
  */
 function resources_my_beez() {
-  //on this page is the payment form, the balances and beeziest traders and pending transactions
-  $build[] = _siteoverride_embed_block('mcapi', 'balances');
-  $build[] = array(
-    '#theme' => 'balance_history',
-    '#account' => $GLOBALS['user'],
-    '#histories' => get_balance_history($GLOBALS['user'], array('def_drup')),
+  return array(
+    'balances' => array(
+      '#theme' => 'likeabee_page_block',
+      '#title' => t('My BeeZ'),
+      '#adv_help' => 'my_beez',
+      '#content' => array(
+        mcapi_balances_view($GLOBALS['user']->uid, array('def_drup')),
+        array(
+          '#theme' => 'balance_history',
+          '#account' => $GLOBALS['user'],
+          '#histories' => get_balance_history($GLOBALS['user'], array('def_drup')),
+        )
+      )
+    ),
+    'transactions' => array(
+      '#theme' => 'likeabee_page_block',
+      '#title' => t('My recent activities'),
+      '#adv_help' => 'my_transactions',
+      '#content' => array(
+        array('#markup' => t('Available balance in BeeZ: @balance')),//this figure is given above
+        array('#markup' => t('Total balance (all currencies, available and pending) converted to Shekels: @quant')),
+        array('#markup' => views_embed_view('statement', 'default', $GLOBALS['user']->uid))
+      )
+    ),
+    'pay' => array(
+      '#theme' => 'likeabee_page_block',
+      '#title' => t('My recent activities'),
+      '#adv_help' => 'my_beez_pay',
+      '#content' => array(
+        '#markup' => drupal_render(mcapi_get_form('1stparty'))
+      )
+    )
   );
-  $build[] = array('#markup' => views_embed_view('statement', 'default', $GLOBALS['user']->uid));
-  return $build;
 }
 
 
-
-
-//kudos to keithm
-function _siteoverride_embed_block($module, $delta, $region = 'content') {
-  // Create block stub.
-  $block = new stdClass();
-  $block->module = $module;
-  $block->delta = $delta;
-  $block->region = $region;
-  // Load title.
-  global $theme_key;
-  drupal_theme_initialize();
-  $block->title = db_query(
-    "SELECT title FROM {block} WHERE module = :module AND delta = :delta AND theme = :theme",
-     array(':module' => $module, ':delta' => $delta, ':theme' => $theme_key)
-  )->fetchField();
-  // Render the content and subject for the block.
-  $blocks = _block_render_blocks(array($block));
-  // Get an array of blocks suitable for drupal_render().
-  $array = _block_get_renderable_array($blocks);
-  return $array;
+/*
+ * menu_calback
+ */
+function theme_likeabee_page_block($vars) {
+  $output = '<div class = "likeabee-block"><div class = "header">';
+  $output .= $vars['title'];
+  $output .= theme('advanced_help_topic', array('module' => 'likeabee_resources', 'topic' => $vars['adv_help']));
+  $output .= '<div class = "content">'.drupal_render($vars['content']).'</div></div>';
+  return $output;
 }
 
 
