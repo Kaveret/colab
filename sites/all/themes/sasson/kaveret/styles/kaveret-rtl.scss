@@ -72,5 +72,11 @@
 		float: right;
 	}
 }
-
+#sidebar-second{
+	.region-sidebar-second{
+		.content{
+			float: right;
+		}
+	}
+}
 @flip {file: "kaveret.scss"};
