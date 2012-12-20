@@ -1222,12 +1222,6 @@ div.img-biger .number[class*=" 0 "],
 			margin-left: 42px;
 		}
 	}
-	.region-help{
-		margin-top: 59px;
-		#block-system-help{
-			
-		}	
-	}
 	#region-content{
 		width: 678px;
 		.form-item-title,
@@ -1294,7 +1288,6 @@ div.img-biger .number[class*=" 0 "],
 	.form-item-title{
 		/*border-top: 1px solid #F9AB17;*/
 		@include botton_border;
-		margin-top: 30px;
 		/*border: 1px solid #FACE77;*/
 		margin-left: 9px;
 		height: 109px;
@@ -1361,7 +1354,7 @@ div.img-biger .number[class*=" 0 "],
 		.fieldset-wrapper{
 		height: 249px;
 		width: 240px;
-		border-right: 1px solid #f9ab17;
+		
 		.form-select{
 			border: 1px solid #fcda9a;
 		}
@@ -1373,6 +1366,9 @@ div.img-biger .number[class*=" 0 "],
 				left: -9px;
 				position: relative;
 				top: 50px;
+			}
+			.date-processed{
+				border-right: 1px solid #f9ab17;	
 			}
 			.date-no-float{
 				width: 199px;
@@ -1560,9 +1556,6 @@ div.img-biger .number[class*=" 0 "],
 			margin-left: -205px;
 		}
 	}
-	.form-item-title{
-		margin-top: 95px !important;
-	}
 	.field-type-entityreference{
 		border-bottom: 0px;
 	}
@@ -1576,9 +1569,6 @@ div.img-biger .number[class*=" 0 "],
 			margin-left: -205px;
 		}
 	}
-	.form-item-title{
-		margin-top: 95px !important;
-	}
 	#edit-field-doccument{
 		@include botton_border;
 	}	
@@ -1588,10 +1578,6 @@ div.img-biger .number[class*=" 0 "],
 		#page-title {
 			margin-top: 93px;
 		}
-	}
-	.field-type-entityreference{
-		margin-top: 70px;
-		/*border-top: 1px solid #F9AB17;*/
 	}
 	#edit-body{
 		border-top: 0px;
