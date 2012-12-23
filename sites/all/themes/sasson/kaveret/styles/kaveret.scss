@@ -986,7 +986,8 @@ background-color:none;
 		margin-left:110px;
 	}
 }
-#block-views-group-members-block .content{
+#block-views-group-members-block .content,
+#block-views-friends-block-1 .content{
 		.views-row{
 			border-bottom: 0px;
 			float: left;
@@ -1040,6 +1041,10 @@ background-color:none;
 div.img-biger .number[class*=" 0 "],
 .numbers-visible[class*=" 0 "]{
 	display:none;
+}
+
+#block-views-friends-block-1{
+	width:100%;
 }
 /*----------See all boxs-----------*/
 @mixin select-all-box{
