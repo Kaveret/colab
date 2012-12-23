@@ -22,6 +22,7 @@ dependencies[] = mp_orders
 dependencies[] = mp_products
 dependencies[] = mp_product_tools
 dependencies[] = mp_reports
+dependencies[] = mp_masspay
 
 files[] = likeabee_marketplace.views_default.inc
 

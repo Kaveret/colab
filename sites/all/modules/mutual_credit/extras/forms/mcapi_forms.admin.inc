@@ -1,4 +1,4 @@
-d<?php
+<?php
 include ('mcapi_forms.inc');
 
 /**
@@ -26,7 +26,6 @@ function mcapi_forms_help($path, $args) {
  */
 function _edit_mcapi_form(&$form, &$form_state) {
   $mcapi_form = &$form_state['item']->data;
-
   $form['#prefix'] = '<div id = "form-wrapper">';
   $form['#suffix'] = '</div>';
   //I think ctools is supposed to be handling this
@@ -142,10 +141,11 @@ function _edit_mcapi_form(&$form, &$form_state) {
             '#description' => t("Either 'incoming' or 'outgoing' relative to the logged in user"),
             '#type' => $mcapi_form['direction']['widget'],
             '#options' => array(
-                '' => t('Neither'),
-                'incoming' => $mcapi_form['direction']['incoming'],
-                'outgoing' => $mcapi_form['direction']['outgoing'],
-            )
+              '' => t('Neither'),
+              'incoming' => $mcapi_form['direction']['incoming'],
+              'outgoing' => $mcapi_form['direction']['outgoing'],
+            ),
+            '#required' => FALSE
           );
           $form['direction'] = _mcapi_form_config_fieldset($mcapi_form['direction'], $preset, 'direction')
             +_mcapi_direction_config_fields($mcapi_form['direction']);
@@ -177,6 +177,10 @@ function _edit_mcapi_form(&$form, &$form_state) {
     if (in_array($name, array('search_index', 'search_result')))continue;
     $view_modes[$name] = $mode['label'];
   }
+  $view_modes['token'] = t(
+    'Tokenised sentence; configure at !link',
+    array('!link' => l('admin/accounting/misc', 'admin/accounting/misc'))
+  );
   $form['experience'] = array(
     '#title' => t('User experience'),
     '#description' => t('Deteriming how the form and the confirmation work for the user'),
@@ -203,7 +207,7 @@ function _edit_mcapi_form(&$form, &$form_state) {
       '#weight' => 2,
       '#required' => TRUE
     ),
-    'token_tree' => array(
+    'token_tree1' => array(
       '#theme' => 'token_tree',
       '#token_types' => array('mcapiform'),
       '#global_types' => FALSE,
@@ -221,15 +225,7 @@ function _edit_mcapi_form(&$form, &$form_state) {
       '#options' => $view_modes,
       '#default_value' => isset($mcapi_form['experience']['sure_format']) ? $mcapi_form['experience']['sure_format'] : 'certificate',
       '#weight' => 5,
-    ),
-    'sure_template' => array(
-      '#title' => '('. t('Confirmation page') .')',
-      '#description' => t('If using tokens mode, write HTML here to layout the confirmation, using the tokens above.'),
-      '#type' => 'textarea',
-      '#rows' => 4,
-      '#default_value' => @$mcapi_form['experience']['sure_template'],
-      '#weight' => 6,
-    ),
+    )
   );
   $form['submission'] = array(
     '#title' => t('Form submission'),
@@ -269,7 +265,6 @@ function _edit_mcapi_form(&$form, &$form_state) {
     $form['experience']['title']['#description'] = $note . $form['experience']['title']['#description'];
     $form['experience']['template']['#description'] = $note . $form['experience']['template']['#description'];
     $form['experience']['sure_title']['#description'] = $note . @$form['experience']['sure_title']['#description'];
-    $form['experience']['sure_template']['#description'] = $note . $form['experience']['sure_template']['#description'];
     $form['submission']['button']['#description'] = $note . $form['submission']['button']['#description'];
     $form['submission']['feedback']['#description'] = $note . $form['submission']['feedback']['#description'];
   }
@@ -310,8 +305,6 @@ function _mcapi_form_config_fieldset($field_defaults, array $empty_element, $fie
   }
   elseif (element_children($empty_element)) {//this is a normal fieldAPI field - not checkboxes or radios
     foreach (element_children($empty_element) as $delta) {
-//      debug(element_children($empty_element[$delta]), $delta);
-//      debug($preset, 'preset[$delta][$col] is not always valid');
       foreach (element_children($empty_element[$delta]) as $col) {
         if (strlen($preset[$delta][$col])) {
           $element['preset'][$delta][$col]['#default_value'] = $preset[$delta][$col];
@@ -385,7 +378,6 @@ function mcapi_edit_mcapi_form_validate($form, &$form_state) {
   //could check all the other fields too, but thi sis a protected area and we'd be here till xmas
   //this is only here because the i18n_string module nees translatable fields to have a format
   $values['experience']['template'] = check_markup($values['experience']['template'], MCAPIFORM_STRING_FORMAT);
-  $values['experience']['sure_template'] = check_markup($values['experience']['sure_template'], MCAPIFORM_STRING_FORMAT);
 }
 
 /*

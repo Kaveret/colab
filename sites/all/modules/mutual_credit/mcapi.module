@@ -230,8 +230,8 @@ function entity_metadata_create_transaction($values = array(), $for_me = FALSE) 
     $transaction->worth = array(LANGUAGE_NONE => $values['worth']);
   }
   elseif(isset($values['quantity'])) {
-    $transaction->worth[LANGUAGE_NONE][$values['currcode']]['quantity'] = $values['quantity'];
-    $transaction->worth[LANGUAGE_NONE][$values['currcode']]['currcode'] = $values['currcode'] ? $values['currcode'] : key($currencies);
+    $transaction->worth[LANGUAGE_NONE][0]['quantity'] = $values['quantity'];
+    $transaction->worth[LANGUAGE_NONE][0]['currcode'] = $values['currcode'] ? $values['currcode'] : key($currencies);
   }
   else {
     $currcodes = array_keys($currencies);
@@ -255,6 +255,7 @@ function entity_metadata_create_transaction($values = array(), $for_me = FALSE) 
       );
     }
   }
+  $transaction->dependents = array();
   return $transaction;
 }
 
@@ -278,9 +279,14 @@ function mcapi_help($section, $arg) {
       return drupal_render(drupal_get_form('mcapi_description_field'));
     case 'admin/accounting/currencies':
       $currencies = &drupal_static('currencies');
-      if (count($currencies) > 1);
-      module_load_include('inc', 'mcapi');
-      return drupal_render(drupal_get_form('mcapi_mixed_transactions'));
+      if (count($currencies) > 1) {
+        module_load_include('inc', 'mcapi');
+        return drupal_render(drupal_get_form('mcapi_mixed_transactions'));
+      }
+    case 'admin/accounting/misc':
+      return implode(' ', array(
+        t("Send mail notifications for completed transactions using the action/trigger system: !link", array('!link' => l('admin/config/system/actions', 'admin/config/system/actions')))
+      ));
   }
 }
 
@@ -314,12 +320,11 @@ function mcapi_permission() {
  */
 function mcapi_theme($existing, $type, $theme, $path) {
   $items = array(
-    'transaction' => array(
-      'template' => 'transaction',
-      'pattern' => 'transaction__',
+    'certificate' => array(
+      'template' => 'certificate',
+      'pattern' => 'certificate__',
       'variables' => array(
         'transaction' => NULL,
-        'view_mode' => 'certificate',
       )
     ),
     'worth_element'=> array(
@@ -474,6 +479,7 @@ function mcapi_block_info() {
 function mcapi_block_view($delta) {
   module_load_include('inc', 'mcapi');
   if ($settings = _mcapi_block_settings($delta, 'user_aggregated_view')) {
+    if (empty($settings['account']) || empty($settings['account']->uid)) return;
     return array(
       'subject' => $settings['account']->uid == $GLOBALS['user']->uid ?
         t('Trading status') :
@@ -854,23 +860,30 @@ function mcapi_currency_form(&$form, &$form_state){
  * build a render array for any number of transactions
  * first arg can be one or an array of transactions, WITH CHILDREN LOADED as in transaction_load
  */
-function transaction_view($transactions, $view_mode = 'certificate', $token_string = '') {
+function transaction_view($transactions, $view_mode = 'certificate') {
   if (!is_array($transactions)) {//we have been passed a single transaction
     $transactions = array($transactions->xid => $transactions);
   }
   foreach ($transactions as $transaction) {
     if ($view_mode == 'token') {
-      $params = array('transaction' => $transaction, 'user' => $GLOBALS['user']);
-      $renderable[] = array(
-        '#markup' => token_replace($token_string, $params),
-        '#view_mode' => $view_mode
-      );
+      global $language;
+      $options = array('language' => $language, 'sanitize' => FALSE);
+      foreach ($transactions as $transaction) {
+        $params = array('transaction' => $transaction);
+        $sentence = token_replace(variable_get('mcapi_sentence'), $params, $options);
+        $renderable[] = array(
+          '#view_mode' => 'token',
+          '#prefix' => '<div class = "sentence">',
+          '#markup' => $sentence,
+          '#suffix' => '</div>',
+        );
+      }
     }
     else {
       $renderable[] = array(
-        '#theme' => 'transaction',
+        '#view_mode' => 'certificate',
+        '#theme' => 'certificate',
         '#transaction' => $transaction,
-        '#view_mode' => $view_mode
       );
     }
   }
@@ -886,27 +899,26 @@ function transaction_view($transactions, $view_mode = 'certificate', $token_stri
  * $variables['transaction'] may have ->dependents from transaction_load
  * or it may be a simulated transaction with no xid and serial or dependents
  */
-function template_preprocess_transaction(&$variables) {
+function template_preprocess_certificate(&$variables) {
   $cluster = &$variables['transaction'];
   $variables['payer'] = format_username(user_load($cluster->payer));
   $variables['payee'] = format_username(user_load($cluster->payee));
   $variables['state'] = $cluster->state;
   $variables['recorded'] = format_date($cluster->created, 'medium');
   $variables['type'] = $cluster->type;
-  $date_format = $variables['view_mode'] == 'certificate' ? 'long' : 'short';
-  $variables['date'] = format_date($cluster->created, $date_format);
+  $variables['date'] = format_date($cluster->created, 'long');
 
-  $variables['classes_array'] = array('transaction', $variables['view_mode'], $cluster->type, 'state-'.$cluster->state);
+  $variables['classes_array'] = array('transaction', 'certificate', $cluster->type, 'state-'.$cluster->state);
   if (empty($cluster->xid)) $variables['classes_array'][] = 'preview';
 
   //fieldAPI expects several at a time, keyed by entity key
   //NB in preview mode the xid hasn't been determined but it doesn't seem to matter
   $clusters = array($cluster->xid => $cluster);
   //note that the $cluster is changed by reference
-  field_attach_prepare_view('transaction', $clusters, $variables['view_mode']);
+  field_attach_prepare_view('transaction', $clusters, 'certificate');
   entity_prepare_view('transaction', $clusters);
   //this returns a render array
-  $variables['additional'] = field_attach_view('transaction', $cluster, $variables['view_mode']);
+  $variables['additional'] = field_attach_view('transaction', $cluster, 'certificate');
   //this populates top level of variables with the render array
   field_attach_preprocess('transaction', $cluster, $variables['additional'], $variables);
 
@@ -1117,7 +1129,7 @@ function mcapi_field_formatter_info() {
  * implements hook_field_formatter_view
  * prepare a render array containing all (worth) $items
  */
-function mcapi_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+function mcapi_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items) {
   $element = array();
   foreach($items as $delta => $item) {
     //if (empty($item['currcode'])) continue;
@@ -1334,7 +1346,7 @@ function form_type_worth_value(&$element, $edit = FALSE, &$form_state) {
       $value['quantity'] += $div/100;
     }
   }
-  //might save some memory and declutter debugging
+  //decluttering
   unset($element['currcode'], $element['main_quant'], $element['div_quant']);
   //we have to set the form_state[values] here because they have probably already been set by the parent element
   //they are only set automatically if they haven't been set at all
