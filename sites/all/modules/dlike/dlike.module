@@ -57,7 +57,7 @@ function dlike_menu() {
 /**
  * Implementation of hook_form_form_id_alter().
  */
-function dlike_form_flag_form_alter(&$form, $form_state) {
+function dlike_form_flag_form_alter(&$form, $form_state) {debug('dlike_form_flag_form_alter');
 
   $form['dlike-' . $form['#flag']->name . '_option'] = array(
     '#type' => 'checkbox',

@@ -23,18 +23,10 @@ function likeabee_group_content_menu() {
 }
 
 
-/**
- * Implementation of hook_form().
- */
-function lbee_type_form(&$node, $form_state){
-  $form = node_content_form($node, $form_state);
-}
-
-
-function likeabee_group_content_form_node_form_alter(&$form, $form_state, $form_id) {
+function likeabee_group_content_form_node_form_alter(&$form, $form_state) {
   $context = og_context();
   $types = array('photo');
-  if (isset($context->gid) && in_array($form['#node']->type, $types)) {
+  if (isset($context['gid']) && in_array($form['#node']->type, $types)) {
     //hide all group choosing widgets, because group is set by $context
     drupal_add_css('#edit-og-group-ref{display:none;}', array('type' => 'inline'));
     unset($form['og_group_ref'][LANGUAGE_NONE][0]['admin']);
@@ -131,9 +123,10 @@ function theme_gallery_preview($variables) {
  * implements hook_node_view_alter
  * put the gallery name before the node title
  */
-function likeabee_group_content_node_view_alter(&$build, $type) {
-  debug('hook_node_view_alter needs work...');
-  if ($build['#bundle'] == 'image')unset($build['links']);
+function ________likeabee_group_content_node_view_alter(&$build, $type) {
+  if ($build['#bundle'] == 'image'){
+    unset($build['links']);
+  }
 }
 
 /**
