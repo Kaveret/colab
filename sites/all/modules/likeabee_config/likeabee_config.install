@@ -241,6 +241,6 @@ function likeabee_setup_filters() {
     user_role_grant_permissions($rid, $permissions);
   }
 
-
+  
 
 }
