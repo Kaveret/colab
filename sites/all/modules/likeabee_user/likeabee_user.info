@@ -1,0 +1,7 @@
+; $Id:
+name = Likeabee users
+description = Defines profile fields, realnames and other user specific logic
+package = Likeabee
+core = "7.x"
+
+dependencies[] = text
