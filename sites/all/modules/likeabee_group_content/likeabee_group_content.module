@@ -1,10 +1,33 @@
 <?php
+/*
+ * This module adds the following features:
+ * Content types available in groups
+ * A broadcast tool, configurable by content type
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
 
+
+define('NODE_BROADCAST_FLAG', 'sticky');
 
 /*
  * implements hook_menu
  */
 function likeabee_group_content_menu() {
+
+  $items['admin/config/group/broadcast'] = array(
+    'title' => t('Likeabee broadcast'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('likeabee_settings'),
+    'access arguments' => array('access user profiles'),
+  );
+  return $items;
+
   $items['galleries'] = array(
     'title' => 'Galleries',
     'page callback' => 'image_galleries',
@@ -19,17 +42,102 @@ function likeabee_group_content_menu() {
     'access arguments' => array('access user profiles'),
     'menu_name' => 'secondary-menu'
   );
-  return $items;
 }
 
+function likeabee_settings() {
+  foreach (node_type_get_types() as $type) {
+    if (og_is_group_content_type('node', $type->type)) {
+      $options[$type->type] = $type->name;
+    }
+  }
 
+  $form['broadcast'] = array(
+    '#title' => t('Broadcast tool'),
+    '#description' => t('Determine which types can be broadcast'),
+    '#type' => 'fieldset',
+    'likeabee_broadcast_types' => array(
+      '#title' => t('Group content types'),
+      '#type' => 'checkboxes',
+      '#options' => $options,
+      '#default_value' => variable_get('likeabee_broadcast_types')
+    )
+  );
+  return system_settings_form($form);
+}
+
+/*
+ * implements hook_FORM_node_form_alter
+ */
 function likeabee_group_content_form_node_form_alter(&$form, $form_state) {
+  $type = &$form['#node']->type;
+  //hide the widget for the choosing the groups that content should go into
+  //actually only the css is necessary
   $context = og_context();
   $types = array('photo');
-  if (isset($context['gid']) && in_array($form['#node']->type, $types)) {
+  if (isset($context['gid']) && in_array($type, $types)) {
     //hide all group choosing widgets, because group is set by $context
     drupal_add_css('#edit-og-group-ref{display:none;}', array('type' => 'inline'));
     unset($form['og_group_ref'][LANGUAGE_NONE][0]['admin']);
+  }
+
+  //add the broadcast button
+  if (in_array($type, variable_get('likeabee_broadcast_types'))) {
+    if (!$form['#node']->{NODE_BROADCAST_FLAG}) {
+      $form['actions']['broadcast'] = array(
+        '#type' => 'submit',
+        '#description' => t('Each item can be broadcast only once.'),
+        '#value' => t('Save & Broadcast to group'),
+        '#weight' => 10,
+        '#submit' => array('node_broadcast_submit')
+      );
+    }
+  }
+}
+
+
+/*
+ * additional submit handler for node form
+ */
+function node_broadcast_submit($form, $form_state) {
+  $form_state['values'][NODE_BROADCAST_FLAG] = 1;
+  node_form_submit($form, $form_state);
+  global $language;
+  $params = array('node' => node_load($form_state['values']['nid']));
+  drupal_mail('likeabee_group_content', 'broadcast', variable_get('site_mail', 'blah'), $language, $params);
+
+}
+
+function likeabee_group_content_mail($key, &$message, $params) {
+  $node = &$params['node'];
+  $mails = db_select('users', 'u')
+    ->fields('u', array('mail'))
+    ->condition('uid', og_get_users_by_roles($node->nid))
+    ->execute()->fetchCol();
+  $sender = user_load($node->uid);
+  $message['subject'] = t('@site_name: @node_title',
+    array('@site_name' => variable_get('site_name'), '@node_title' => $node->title)
+  );
+  $message['body'][] = t('@name posted a new @type.', array(
+    '@name' => $sender->name,
+    '@type' => node_type_get_type($node->type)->name
+  ));
+
+  $message['body'][] = drupal_render(node_view($node));
+  $message['headers']['From'] = $sender->mail;
+  $message['headers']['Bcc'] = implode(', ', $mails);
+  //include attachments
+  if (isset($node->upload) && is_array($node->upload)) {
+    $items = (array)reset($node->upload);
+    foreach($items as $att) {
+      if (!$att['fid']) continue;
+      $file = file_load($att['fid']);
+      $message['params']['attachments'][] = array(
+        'uri' => $file->uri,
+        'filecontent' => file_get_contents($file->uri),
+        'filename' => $file->filename,
+        'filemime' => file_get_mimetype($file->uri)
+      );
+    }
   }
 }
 

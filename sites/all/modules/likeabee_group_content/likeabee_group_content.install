@@ -429,7 +429,7 @@ function likeabee_setup_instance_image($bundle) {
 
 function likeabee_setup_instance_tags($bundle) {
   $instance = array(
-    'label' => t('Tags'),
+    'label' => t('Add Tags (the more the better)'),
     'description' => t('Write as many keywords as you like, comma separated.'),
     'field_name' => 'tags',
     'entity_type' => 'node',
@@ -441,19 +441,19 @@ function likeabee_setup_instance_tags($bundle) {
         'type' => 'taxonomy_term_reference_link',
         'label' => 'above',
         'settings' => array(),
-        'module' => 'taxonomy',
-      ),
-      'teaser' => array(
-        'type' => 'hidden',
-        'label' => 'hidden',
-        'settings' => array(),
-        'module' => 'taxonomy',
       ),
     ),
     'widget' => array(
-      'type' => 'options_select',
-      'module' => 'options'
-    )
+      'weight' => '10',
+      'type' => 'taxonomy_autocomplete',
+      'module' => 'taxonomy',
+      'active' => 0,
+      'settings' => array(
+        'size' => 60,
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'autocomplete_deluxe_path' => 'autocomplete_deluxe/taxonomy',
+      ),
+    ),
   );
   $existing = (array)field_read_instance('node', 'tags', $bundle, array('include_deleted' => TRUE));
   if (array_filter($existing)) {
