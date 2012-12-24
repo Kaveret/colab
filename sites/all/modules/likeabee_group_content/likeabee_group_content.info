@@ -1,0 +1,13 @@
+; $Id:
+name = Likeabee group content
+description = Users posting and sharing content in their respective groups
+package = Likeabee
+core = "7.x"
+
+dependencies[] = og
+dependencies[] = video_embed_field
+dependencies[] = date_popup
+;dependencies[] = calendar
+dependencies[] = taxonomy
+dependencies[] = flag
+dependencies[] = entityreference
