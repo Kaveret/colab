@@ -1,5 +1,7 @@
 <?php
 
+define('UC_CATALOG_VID', 6);
+
 function likeabee_marketplace_menu() {
 
   //this is a copy of a page that manually calls up a taxonomy_term view
