@@ -53,10 +53,11 @@ function likeabee_group_content_install() {
     'photo' => array(
       'type' => 'photo',
       'name' => t('Photo'),
-      'base' => 'lbee_type',
+      'base' => 'node_content',
       'module' => 'likeabee_group_content',
       'description' => t('Images categorised into galleries'),
       'title_label' => t('Caption'),
+      'disabled' => 0
     ),
   );
   foreach ($types as $type) {
