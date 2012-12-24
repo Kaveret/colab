@@ -594,7 +594,7 @@ function likeabee_user_install() {
   }
 
   //now create instances, one for each field
-  $instances = array(
+  $instances[] = array(
     'label' => t('First name'),
     'description' => '',
     'widget' => array(
@@ -626,7 +626,7 @@ function likeabee_user_install() {
     'bundle' => 'user',
     'deleted' => '0',
   );
-  $instances = array(
+  $instances[] = array(
     'label' => t('Family name'),
     'description' => '',
     'widget' => array(
@@ -658,7 +658,7 @@ function likeabee_user_install() {
     'bundle' => 'user',
     'deleted' => '0',
   );
-  $instances = array(
+  $instances[] = array(
     'label' => t('Group membership'),
     'widget' => array(
       'type' => 'og_complex',
@@ -707,7 +707,7 @@ function likeabee_user_install() {
     'bundle' => 'user',
     'deleted' => '0',
   );
-  $instances = array(
+  $instances[] = array(
     'label' => t('My Facebook Page'),
     'widget' => array(
       'weight' => '11',
@@ -750,7 +750,7 @@ function likeabee_user_install() {
     'bundle' => 'user',
     'deleted' => '0',
   );
-  $instances = array(
+  $instances[] = array(
     'label' => t('My Twitter'),
     'widget' => array(
       'weight' => '12',
@@ -793,7 +793,7 @@ function likeabee_user_install() {
     'bundle' => 'user',
     'deleted' => '0',
   );
-  $instances = array(
+  $instances[] = array(
     'label' => t('My personal site'),
     'widget' => array(
       'weight' => '13',
@@ -837,7 +837,7 @@ function likeabee_user_install() {
     'bundle' => 'user',
     'deleted' => '0',
   );
-  $instances = array(
+  $instances[] = array(
     'label' => t('About me'),
     'widget' => array(
       'weight' => '8',
@@ -871,7 +871,7 @@ function likeabee_user_install() {
     'bundle' => 'user',
     'deleted' => '0',
   );
-  $instances = array(
+  $instances[] = array(
     'label' => t('My Favorites'),
     'widget' => array(
       'weight' => '9',
@@ -915,7 +915,7 @@ function likeabee_user_install() {
     'bundle' => 'user',
     'deleted' => '0',
   );
-  $instances = array(
+  $instances[] = array(
     'label' => t('My Recommendations'),
     'widget' => array(
       'weight' => '10',
@@ -962,7 +962,7 @@ function likeabee_user_install() {
 
   foreach ($instances as $instance) {
     $name = $instance['field_name'];
-    if (field_read_instance('user', $name, 'user')) return;
+    if (field_read_instance('user', $name, 'user')) continue;
     field_create_instance($instance);
     drupal_set_message("Added instance '$name' to user entity");
   }
