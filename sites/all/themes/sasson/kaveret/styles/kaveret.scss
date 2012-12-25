@@ -403,7 +403,7 @@ border-right: 1px solid #FCF0D8;
 		width: 191px;
 		.views-field-title a{
 			color: #004A82 !important;
-			cursor: default;
+			cursor: pointer;
 			margin-left: -5px;
 			font-size: 23px ;
 			text-align: left;
@@ -1090,6 +1090,45 @@ background-color:none;
 div.img-biger .number[class*=" 0 "],
 .numbers-visible[class*=" 0 "]{
 	display:none;
+}
+/* -----  Specific webform page  ----- */
+.node-type-group-webform{
+	#page-title {
+		display: none;
+	}
+	.region-content{
+		border: 1px solid #fcda9a;
+		background: #fcf0d8;
+		input,textarea{
+			border: 1px solid #fcda9a;	
+		}	
+	}
+	label{
+		font-size: 15px;
+		color: #004a82;
+		font-family: arial;
+		font-weight: bold;
+	}
+	#edit-submit{
+		float: right;
+		background-color: #F9AB17;
+		color: white;
+		padding: 4px 17px;
+		margin-bottom: 1em;
+		margin-right: 1em;
+		text-align: center;
+		font-weight: bold;
+		font-size:13px;
+		font-family: arial;
+		margin-top: 20px;
+	}
+	#webform-component-name input{
+		margin-left: 4px;
+	}
+	#webform-component-phone input {
+		margin-left: 6px;
+	}
+	
 }
 /*----------See all boxs-----------*/
 @mixin select-all-box{

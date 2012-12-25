@@ -207,6 +207,30 @@
 		.content{
 			float: right;
 		}
+		#block-views-my-groups-block{
+			height: 89px;
+		}
+		#block-views-tags-block{
+			height: 71px;
+		}
+		#block-views-groups-block{
+			height: 173px;
+		}
+	}
+}
+/*---------content--------------*/
+
+.node-type-group-webform{
+	#webform-component-name input{
+		margin-right: 67px !important;
+		margin-left: auto;
+	}
+	#webform-component-phone input {
+		margin-right: 66px !important;
+		margin-left: auto;
+	}
+	#webform-component-message{
+		margin-right: 14px;
 	}
 }
 @flip {file: "kaveret.scss"};
