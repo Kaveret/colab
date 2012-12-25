@@ -320,11 +320,12 @@ clear: both;
 @mixin menu-featured-ul{
 	background: white;
 /* Baroch changed margin from 62px to -10px , since hover breaks (mouse cannot get there) */
-	margin: -10px 0 0;
+	
 	display: none;
 	position: absolute;
 	z-index: 100;
 	box-shadow: 0px 0px 5px 0px #C5B88E;
+	margin-top: 61px;
 }
 @mixin menu-featured-li{
 	list-style: none;
@@ -359,6 +360,7 @@ border-left: 1px solid #FCF0D8;
 border-right: 1px solid #FCF0D8;
 }
 /*--- block-views  ---*/
+
 #featured{
 	.block{
 		height: 62px;
@@ -385,27 +387,37 @@ border-right: 1px solid #FCF0D8;
 	.block-title a:first-line, .views-field-title a:first-line{
 		color:#B01919;
 		font-size: 16px;
+		#block-views-current-group-block{
+			color: #004A82 !important;	
+		}
 	}
 }
 /*---   Specific of block-views  ---*/
-
+@mixin three_div_abouttab{
+	.view-id-about_group .view-display-id-block;
+	.view-id-about_group .view-display-id-block_1;
+	.view-id-about_group .view-display-id-block_2;
+}
 #featured{
 	#block-views-current-group-block{
-		width: 204px;
-		color:#014a81;
+		width: 191px;
 		.views-field-title a{
+			color: #004A82 !important;
 			cursor: default;
 			margin-left: -5px;
-			font-size: 22.5px;
+			font-size: 23px ;
 			text-align: left;
 			background: none;
 			margin-top: 5px;
+			width: 100px;
+			font-family: arial;
 		}
 	}
-	#block-views-link-to-group-members-block-1 .views-field-title a, h2.block-title{
+	h2.block-title{
 		color:#B01919;
 		font-size: 16px;
 	}
+
 	#block-og-extras-node-links,#block-views-group-configurations-block{
 		cursor: default;
 	}
@@ -425,11 +437,11 @@ border-right: 1px solid #FCF0D8;
 			padding: 17px 0px 0px 0px;
 			text-align: center; 
 		}
-		.item-list ul{ @include menu-featured-ul;}
+		.item-list ul{ @include menu-featured-ul;margin: 0;  margin-top: 61px; }
 		.item-list li{ @include menu-featured-li;}
 		.item-list a { @include menu-featured-a; width: 150px; }
 		ul{
-			width: 150px;
+			width: 111px;
 		}
 		ul li:hover{
 			background-color:#fdf6e4;
@@ -438,11 +450,44 @@ border-right: 1px solid #FCF0D8;
 	#block-og-extras-node-links:hover .item-list ul{
 		display: block;
 	}
+	#block-views-about-group-block-3{
+		.view-about-group .block-title{ 
+			color:#B01919; 
+			font-size: 16px;
+			cursor: pointer;
+			background: url("../images/arrow-header.png") no-repeat 41px 49px;
+		 }
+		 /*.view-about-group{
+		 	box-shadow: 0px 0px 5px 0px #C5B88E;
+		}*/
+		.view-about-group{ @include menu-featured-li; width: 115px;}
+		.view-about-group a{ @include menu-featured-a; width: 110px;}
+		.view-id-about_group .view-display-id-block_3{width: 91px;}
+		.view-id-about_group .view-display-id-block_4{margin-top: 14px;width: 91px;}
+		.view-id-about_group .view-display-id-block{margin-top: 27px;}
+		.view-id-about_group .view-display-id-block,
+		.view-id-about_group .view-display-id-block_1,
+		.view-id-about_group .view-display-id-block_2 {
+			display: none;
+		}
+		/*.view-id-about_group .view-display-id-block,
+		.view-id-about_group .view-display-id-block_1,
+		.view-id-about_group .view-display-id-block_2 :hover{
+			display: block;	
+		}*/
+	}
+	#block-views-about-group-block-3:hover .view-id-about_group{
+		display: block;	
+	}
 	#block-views-group-configurations-block{
+		background: url("../images/configuration.png") no-repeat;
+		background-position-y: 18px;
+		background-position-x: 45px;
 		width: 100px;
+		h2.block-title{text-indent: -9999px;}
 		.views-row{ @include menu-featured-ul; }
 		.views-field{ @include menu-featured-li; width: 115px;}
-		.views-field a{ @include menu-featured-a; width: 110px;}
+		.views-field a{ @include menu-featured-a; width: 110px; text-align: right;}
 		.views-field:hover {
 			background-color:#fdf6e4;
 		}
@@ -475,8 +520,10 @@ border-right: 1px solid #FCF0D8;
 	}
 	#block-block-10:hover .content{
 		display: block;
-	}	
+	}
+
 }
+
 /* -----  breadcrumb ----- */
 #breadcrumb{
 	margin-top: 9px;
@@ -709,6 +756,9 @@ div.menu-name-main-menu{
 	}
 }
 #block-quicktabs-group-s-discussion-{
+	.views-field-title{
+		height: 38px;
+	}
 	.views-field-body{
 		height: 140px !important;
 	}

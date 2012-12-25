@@ -11,8 +11,32 @@
 		width: 91px;
 	}
 	#block-og-extras-node-links h2,
-	#block-views-group-configurations-block h2.block-title{
+	#block-views-group-configurations-block{
+		h2.block-title{
 		width: 91px;
+		}
+		.views-field a{
+			text-align: right !important;
+		}
+	}
+	/#block-views-current-group-block 
+	{
+		width: 191px;
+		.views-field-title a{
+			margin-right: 16px;
+			color: #004A82 !important;
+			font-size: 23px ;
+			font-family: arial;
+			.group_name{
+				margin-right: 5px;
+			}
+		}
+	}
+	#block-views-link-to-group-members-block-1 .views-field-title a{
+		width: 91px;
+	}
+	#block-views-link-to-webform-block-1{
+		margin-right: 108px;
 	}
 
 }
@@ -52,6 +76,12 @@
 	#block-quicktabs-group-s-doccuments #quicktabs-container-group_s_doccuments {
 			float: right;
 		}
+}
+#quicktabs .block-odd{
+	height: 260px;
+}
+#block-quicktabs-group-s-video{
+	height: 300px !important;
 }
 /*---------activities-my-group--------------*/
 .section-activities #main .region-content{
