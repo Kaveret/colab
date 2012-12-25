@@ -1,5 +1,7 @@
 <?php
 
+module_load_include('module', 'likeabee_marketplace');//to include the constant
+
 function likeabee_marketplace_enable() {
   $vars = array (
     'date_format_uc_store' => 'm/d/Y',
@@ -15,7 +17,7 @@ function likeabee_marketplace_enable() {
 !street2
 !city, !zone_code !postal_code
 !country_name_if',
-    'uc_catalog_vid' => '6',
+    'uc_catalog_vid' => UC_CATALOG_VID, //this needs to be
     'uc_check_address' => array (
       'uc_check_mailing_company' => '',
       'uc_check_mailing_street1' => '',
@@ -52,17 +54,12 @@ American Express',
     'uc_credit_type_enabled' => 1,
     'uc_credit_validate_numbers' => 0,
     'uc_credit_visa' => 1,
-    'uc_image_product' => 'uc_product_image',
+    'uc_image_product' => 'uc_product_image',//this may need checking
     'uc_payment_credit_gateway' => 'paypal_wpp',
     'uc_payment_method_check_checkout' => 1,
     'uc_checkout_anonymous' => 0,
-    'uc_payment_method_check_weight' => '1',
-    'uc_payment_method_cod_checkout' => 1,
-    'uc_payment_method_cod_weight' => '1',
     'uc_payment_method_credit_checkout' => 1,
     'uc_payment_method_credit_weight' => '2',
-    'uc_payment_method_other_checkout' => 0,
-    'uc_payment_method_other_weight' => '10',
     'uc_payment_method_paypal_ec_checkout' => 0,
     'uc_payment_method_paypal_ec_weight' => '1',
     'uc_payment_method_paypal_wps_checkout' => 1,
@@ -76,18 +73,18 @@ American Express',
     'uc_pg_paypal_wpp_cc_txn_type' => 'auth_capture',
     'uc_pg_paypal_wpp_enabled' => 1,
     'uc_currency_code' => "ILS",
-	'uc_currency_dec' => ".",
-	'uc_currency_prec' => "2",
-	'uc_currency_sign' => " ₪",
-	'uc_currency_thou' => ",",
-	'mp_products_admin_base' => '',
-	'mp_products_admin_override' => 0,
-	'mp_products_auto_calc' => 0,
-	'mp_products_auto_calc_field' => 'sell_price',
-	'mp_products_commission_rate' => '.75',
-	'mp_products_enable_list' => 1,
-	'mp_products_hide_fields' => 1,
-	'mp_products_insert_js' => 0,
+    'uc_currency_dec' => ".",
+    'uc_currency_prec' => "2",
+    'uc_currency_sign' => " ₪",
+    'uc_currency_thou' => ",",
+    'mp_products_admin_base' => '',
+    'mp_products_admin_override' => 0,
+    'mp_products_auto_calc' => 0,
+    'mp_products_auto_calc_field' => 'sell_price',
+    'mp_products_commission_rate' => '.75',
+    'mp_products_enable_list' => 1,
+    'mp_products_hide_fields' => 1,
+    'mp_products_insert_js' => 0,
   );
   foreach ($vars as $key => $val) {
     variable_set($key, $val);

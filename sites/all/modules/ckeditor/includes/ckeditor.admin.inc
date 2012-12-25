@@ -461,6 +461,8 @@ function ckeditor_admin_global_profile_form_submit($form, &$form_state) {
     }
 
     $settings = ckeditor_admin_values_to_settings($edit);
+
+debug($settings);
     db_insert('ckeditor_settings')
             ->fields(array(
                 "name" => $edit["name"],
@@ -468,8 +470,8 @@ function ckeditor_admin_global_profile_form_submit($form, &$form_state) {
             ))
             ->execute();
 
-    drupal_set_message(t('The CKEditor global profile was saved.'));
-    $form_state['redirect'] = 'admin/config/content/ckeditor';
+  drupal_set_message(t('The CKEditor global profile was saved.'));
+  $form_state['redirect'] = 'admin/config/content/ckeditor';
 }
 
 /**
@@ -1499,6 +1501,7 @@ function ckeditor_admin_values_to_settings($values) {
         }
     }
 
+debug($values);
     return serialize($values);
 }
 

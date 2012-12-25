@@ -1,0 +1,977 @@
+<?php
+
+/*
+ * implements hook_install
+ * sets up the user profile fields
+ */
+function likeabee_user_install() {
+  $fields[] = array(
+    'entity_types' => array(),
+    'translatable' => '0',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+      'module' => 'field_sql_storage',
+      'active' => '1',
+    ),
+    'foreign keys' => array(
+      'format' => array(
+        'table' => 'filter_format',
+        'columns' => array(
+          'format' => 'format',
+        ),
+      ),
+    ),
+    'indexes' => array(
+      'format' => array(
+        'format',
+      ),
+    ),
+    'field_name' => 'profile_firstname',
+    'type' => 'text',
+    'module' => 'text',
+    'active' => '1',
+    'locked' => '0',
+    'cardinality' => '1',
+    'deleted' => '0',
+    'columns' => array(
+      'value' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+      'format' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+    ),
+  );
+  $fields[] = array(
+    'entity_types' => array(),
+    'translatable' => '0',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+      'module' => 'field_sql_storage',
+      'active' => '1',
+    ),
+    'foreign keys' => array(
+      'format' => array(
+        'table' => 'filter_format',
+        'columns' => array(
+          'format' => 'format',
+        ),
+      ),
+    ),
+    'indexes' => array(
+      'format' => array(
+        'format',
+      ),
+    ),
+    'field_name' => 'profile_familyname',
+    'type' => 'text',
+    'module' => 'text',
+    'active' => '1',
+    'locked' => '0',
+    'cardinality' => '1',
+    'deleted' => '0',
+    'columns' => array(
+      'value' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+      'format' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+    ),
+  );
+  $fields[] = array(
+    'settings' => array(
+      'handler' => 'og',
+      'handler_submit' => 'Change handler',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'og_behavior' => array(
+            'status' => TRUE,
+          ),
+        ),
+        'target_bundles' => array(),
+        'membership_type' => 'og_membership_type_default',
+      ),
+      'target_type' => 'node',
+    ),
+    'entity_types' => array(),
+    'translatable' => '0',
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+      'module' => 'field_sql_storage',
+      'active' => '1',
+    ),
+    'foreign keys' => array(
+      'node' => array(
+        'table' => 'node',
+        'columns' => array(
+          'target_id' => 'nid',
+        ),
+      ),
+    ),
+    'indexes' => array(
+      'target_id' => array(
+        'target_id',
+      ),
+    ),
+    'field_name' => 'og_user_node',
+    'type' => 'entityreference',
+    'module' => 'entityreference',
+    'active' => '1',
+    'locked' => '0',
+    'cardinality' => '-1',
+    'deleted' => '0',
+    'columns' => array(
+      'target_id' => array(
+        'description' => 'The id of the target entity.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+    ),
+  );
+  $fields[] = array(
+    'translatable' => '0',
+    'entity_types' => array(),
+    'settings' => array(
+      'attributes' => array(
+        'target' => 'default',
+        'class' => '',
+        'rel' => '',
+      ),
+      'url' => 0,
+      'title' => 'optional',
+      'title_value' => '',
+      'title_maxlength' => 128,
+      'enable_tokens' => 1,
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+    ),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+      'module' => 'field_sql_storage',
+      'active' => '1',
+      'details' => array(
+        'sql' => array(
+          'FIELD_LOAD_CURRENT' => array(
+            'field_data_field_user_facebook_page' => array(
+              'url' => 'field_user_facebook_page_url',
+              'title' => 'field_user_facebook_page_title',
+              'attributes' => 'field_user_facebook_page_attributes',
+            ),
+          ),
+          'FIELD_LOAD_REVISION' => array(
+            'field_revision_field_user_facebook_page' => array(
+              'url' => 'field_user_facebook_page_url',
+              'title' => 'field_user_facebook_page_title',
+              'attributes' => 'field_user_facebook_page_attributes',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'field_permissions' => array(
+      'type' => '0',
+    ),
+    'field_name' => 'field_user_facebook_page',
+    'type' => 'link_field',
+    'module' => 'link',
+    'active' => '1',
+    'locked' => '0',
+    'cardinality' => '1',
+    'deleted' => '0',
+    'columns' => array(
+      'url' => array(
+        'type' => 'varchar',
+        'length' => 2048,
+        'not null' => FALSE,
+        'sortable' => TRUE,
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'sortable' => TRUE,
+      ),
+      'attributes' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => FALSE,
+      ),
+    ),
+  );
+  $fields[] = array(
+    'translatable' => '0',
+    'entity_types' => array(),
+    'settings' => array(
+      'attributes' => array(
+        'target' => 'default',
+        'class' => '',
+        'rel' => '',
+      ),
+      'url' => 0,
+      'title' => 'optional',
+      'title_value' => '',
+      'title_maxlength' => 128,
+      'enable_tokens' => 1,
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+    ),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+      'module' => 'field_sql_storage',
+      'active' => '1',
+      'details' => array(
+        'sql' => array(
+          'FIELD_LOAD_CURRENT' => array(
+            'field_data_field_my_twitter' => array(
+              'url' => 'field_my_twitter_url',
+              'title' => 'field_my_twitter_title',
+              'attributes' => 'field_my_twitter_attributes',
+            ),
+          ),
+          'FIELD_LOAD_REVISION' => array(
+            'field_revision_field_my_twitter' => array(
+              'url' => 'field_my_twitter_url',
+              'title' => 'field_my_twitter_title',
+              'attributes' => 'field_my_twitter_attributes',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'field_permissions' => array(
+      'type' => '0',
+    ),
+    'field_name' => 'field_my_twitter',
+    'type' => 'link_field',
+    'module' => 'link',
+    'active' => '1',
+    'locked' => '0',
+    'cardinality' => '1',
+    'deleted' => '0',
+    'columns' => array(
+      'url' => array(
+        'type' => 'varchar',
+        'length' => 2048,
+        'not null' => FALSE,
+        'sortable' => TRUE,
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'sortable' => TRUE,
+      ),
+      'attributes' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => FALSE,
+      ),
+    ),
+  );
+  $fields[] = array(
+    'translatable' => '0',
+    'entity_types' => array(),
+    'settings' => array(
+      'attributes' => array(
+        'target' => 'default',
+        'class' => '',
+        'rel' => '',
+      ),
+      'url' => 0,
+      'title' => 'optional',
+      'title_value' => '',
+      'title_maxlength' => 128,
+      'enable_tokens' => 1,
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+    ),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+      'module' => 'field_sql_storage',
+      'active' => '1',
+      'details' => array(
+        'sql' => array(
+          'FIELD_LOAD_CURRENT' => array(
+            'field_data_field_my_personal_site' => array(
+              'url' => 'field_my_personal_site_url',
+              'title' => 'field_my_personal_site_title',
+              'attributes' => 'field_my_personal_site_attributes',
+            ),
+          ),
+          'FIELD_LOAD_REVISION' => array(
+            'field_revision_field_my_personal_site' => array(
+              'url' => 'field_my_personal_site_url',
+              'title' => 'field_my_personal_site_title',
+              'attributes' => 'field_my_personal_site_attributes',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'field_permissions' => array(
+      'type' => '0',
+    ),
+    'field_name' => 'field_my_personal_site',
+    'type' => 'link_field',
+    'module' => 'link',
+    'active' => '1',
+    'locked' => '0',
+    'cardinality' => '1',
+    'deleted' => '0',
+    'columns' => array(
+      'url' => array(
+        'type' => 'varchar',
+        'length' => 2048,
+        'not null' => FALSE,
+        'sortable' => TRUE,
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'sortable' => TRUE,
+      ),
+      'attributes' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => FALSE,
+      ),
+    ),
+  );
+  $fields[] = array(
+    'translatable' => '0',
+    'entity_types' => array(),
+    'settings' => array(),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+      'module' => 'field_sql_storage',
+      'active' => '1',
+      'details' => array(
+        'sql' => array(
+          'FIELD_LOAD_CURRENT' => array(
+            'field_data_field_about_me' => array(
+              'value' => 'field_about_me_value',
+              'summary' => 'field_about_me_summary',
+              'format' => 'field_about_me_format',
+            ),
+          ),
+          'FIELD_LOAD_REVISION' => array(
+            'field_revision_field_about_me' => array(
+              'value' => 'field_about_me_value',
+              'summary' => 'field_about_me_summary',
+              'format' => 'field_about_me_format',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'foreign keys' => array(
+      'format' => array(
+        'table' => 'filter_format',
+        'columns' => array(
+          'format' => 'format',
+        ),
+      ),
+    ),
+    'indexes' => array(
+      'format' => array(
+        'format',
+      ),
+    ),
+    'field_permissions' => array(
+      'type' => '0',
+    ),
+    'field_name' => 'field_about_me',
+    'type' => 'text_with_summary',
+    'module' => 'text',
+    'active' => '1',
+    'locked' => '0',
+    'cardinality' => '1',
+    'deleted' => '0',
+    'columns' => array(
+      'value' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+      ),
+      'summary' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+      ),
+      'format' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+    ),
+  );
+  $fields[] = array(
+    'translatable' => '0',
+    'entity_types' => array(),
+    'settings' => array(
+      'attributes' => array(
+        'target' => 'default',
+        'class' => '',
+        'rel' => '',
+      ),
+      'url' => 0,
+      'title' => 'optional',
+      'title_value' => '',
+      'title_maxlength' => 128,
+      'enable_tokens' => 1,
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+    ),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+      'module' => 'field_sql_storage',
+      'active' => '1',
+      'details' => array(
+        'sql' => array(
+          'FIELD_LOAD_CURRENT' => array(
+            'field_data_field_my_favorites' => array(
+              'url' => 'field_my_favorites_url',
+              'title' => 'field_my_favorites_title',
+              'attributes' => 'field_my_favorites_attributes',
+            ),
+          ),
+          'FIELD_LOAD_REVISION' => array(
+            'field_revision_field_my_favorites' => array(
+              'url' => 'field_my_favorites_url',
+              'title' => 'field_my_favorites_title',
+              'attributes' => 'field_my_favorites_attributes',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'field_permissions' => array(
+      'type' => '0',
+    ),
+    'field_name' => 'field_my_favorites',
+    'type' => 'link_field',
+    'module' => 'link',
+    'active' => '1',
+    'locked' => '0',
+    'cardinality' => '-1',
+    'deleted' => '0',
+    'columns' => array(
+      'url' => array(
+        'type' => 'varchar',
+        'length' => 2048,
+        'not null' => FALSE,
+        'sortable' => TRUE,
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'sortable' => TRUE,
+      ),
+      'attributes' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => FALSE,
+      ),
+    ),
+  );
+  $fields[] = array(
+    'translatable' => '0',
+    'entity_types' => array(),
+    'settings' => array(
+      'attributes' => array(
+        'target' => 'default',
+        'class' => '',
+        'rel' => '',
+      ),
+      'url' => 0,
+      'title' => 'optional',
+      'title_value' => '',
+      'title_maxlength' => 128,
+      'enable_tokens' => 1,
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+    ),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+      'module' => 'field_sql_storage',
+      'active' => '1',
+      'details' => array(
+        'sql' => array(
+          'FIELD_LOAD_CURRENT' => array(
+            'field_data_field_my_recommendations' => array(
+              'url' => 'field_my_recommendations_url',
+              'title' => 'field_my_recommendations_title',
+              'attributes' => 'field_my_recommendations_attributes',
+            ),
+          ),
+          'FIELD_LOAD_REVISION' => array(
+            'field_revision_field_my_recommendations' => array(
+              'url' => 'field_my_recommendations_url',
+              'title' => 'field_my_recommendations_title',
+              'attributes' => 'field_my_recommendations_attributes',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'field_permissions' => array(
+      'type' => '0',
+    ),
+    'field_name' => 'field_my_recommendations',
+    'type' => 'link_field',
+    'module' => 'link',
+    'active' => '1',
+    'locked' => '0',
+    'cardinality' => '-1',
+    'deleted' => '0',
+    'columns' => array(
+      'url' => array(
+        'type' => 'varchar',
+        'length' => 2048,
+        'not null' => FALSE,
+        'sortable' => TRUE,
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'sortable' => TRUE,
+      ),
+      'attributes' => array(
+        'type' => 'text',
+        'size' => 'medium',
+        'not null' => FALSE,
+      ),
+    ),
+  );
+  foreach ($fields as $field) {
+    $name = $field['field_name'];
+    if (field_read_field($name)) return;
+    field_create_field($field);
+    drupal_set_message("Created field '$name'");
+  }
+
+  //now create instances, one for each field
+  $instances[] = array(
+    'label' => t('First name'),
+    'description' => '',
+    'widget' => array(
+      'weight' => -5,
+      'type' => 'text_textfield',
+      'module' => 'text',
+      'active' => 1,
+      'settings' => array(
+        'display_label' => TRUE,
+        'size' => 60,
+      ),
+    ),
+    'settings' => array(
+      'user_register_form' => TRUE,
+      'text_processing' => 0,
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'type' => 'text_default',
+        'settings' => array(),
+        'module' => 'text',
+        'weight' => -5,
+      ),
+    ),
+    'required' => 1,
+    'field_name' => 'profile_firstname',
+    'entity_type' => 'user',
+    'bundle' => 'user',
+    'deleted' => '0',
+  );
+  $instances[] = array(
+    'label' => t('Family name'),
+    'description' => '',
+    'widget' => array(
+      'weight' => -4,
+      'type' => 'text_textfield',
+      'module' => 'text',
+      'active' => 1,
+      'settings' => array(
+        'display_label' => TRUE,
+        'size' => 60,
+      ),
+    ),
+    'settings' => array(
+      'user_register_form' => TRUE,
+      'text_processing' => 0,
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'type' => 'text_default',
+        'settings' => array(),
+        'module' => 'text',
+        'weight' => -4,
+      ),
+    ),
+    'required' => 0,
+    'field_name' => 'profile_familyname',
+    'entity_type' => 'user',
+    'bundle' => 'user',
+    'deleted' => '0',
+  );
+  $instances[] = array(
+    'label' => t('Group membership'),
+    'widget' => array(
+      'type' => 'og_complex',
+      'module' => 'og',
+      'settings' => array(),
+      'weight' => '4',
+    ),
+    'settings' => array(
+      'behaviors' => array(
+        'og_widget' => array(
+          'status' => TRUE,
+          'default' => array(
+            'widget_type' => 'options_select',
+          ),
+          'admin' => array(
+            'widget_type' => 'entityreference_autocomplete',
+          ),
+        ),
+      ),
+      'user_register_form' => FALSE,
+    ),
+    'view modes' => array(
+      'full' => array(
+        'label' => 'Full',
+        'type' => 'og_list_default',
+        'custom settings' => FALSE,
+      ),
+      'teaser' => array(
+        'label' => 'Teaser',
+        'type' => 'og_list_default',
+        'custom settings' => FALSE,
+      ),
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'type' => 'hidden',
+        'weight' => '6',
+        'settings' => array(),
+      ),
+    ),
+    'required' => FALSE,
+    'description' => '',
+    'field_name' => 'og_user_node',
+    'entity_type' => 'user',
+    'bundle' => 'user',
+    'deleted' => '0',
+  );
+  $instances[] = array(
+    'label' => t('My Facebook Page'),
+    'widget' => array(
+      'weight' => '11',
+      'type' => 'link_field',
+      'module' => 'link',
+      'active' => 0,
+      'settings' => array(),
+    ),
+    'settings' => array(
+      'validate_url' => 1,
+      'url' => 0,
+      'title' => 'none',
+      'title_value' => '',
+      'title_maxlength' => '128',
+      'enable_tokens' => 1,
+      'display' => array(
+        'url_cutoff' => '80',
+      ),
+      'attributes' => array(
+        'target' => '_blank',
+        'rel' => '',
+        'class' => '',
+        'configurable_title' => 0,
+        'title' => '',
+      ),
+      'user_register_form' => TRUE,
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'type' => 'hidden',
+        'weight' => '9',
+        'settings' => array(),
+      ),
+    ),
+    'required' => 0,
+    'description' => '',
+    'field_name' => 'field_user_facebook_page',
+    'entity_type' => 'user',
+    'bundle' => 'user',
+    'deleted' => '0',
+  );
+  $instances[] = array(
+    'label' => t('My Twitter'),
+    'widget' => array(
+      'weight' => '12',
+      'type' => 'link_field',
+      'module' => 'link',
+      'active' => 0,
+      'settings' => array(),
+    ),
+    'settings' => array(
+      'validate_url' => 1,
+      'url' => 0,
+      'title' => 'none',
+      'title_value' => '',
+      'title_maxlength' => '128',
+      'enable_tokens' => 1,
+      'display' => array(
+        'url_cutoff' => '80',
+      ),
+      'attributes' => array(
+        'target' => '_blank',
+        'rel' => '',
+        'class' => '',
+        'configurable_title' => 0,
+        'title' => '',
+      ),
+      'user_register_form' => TRUE,
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'type' => 'hidden',
+        'weight' => '10',
+        'settings' => array(),
+      ),
+    ),
+    'required' => 0,
+    'description' => '',
+    'field_name' => 'field_my_twitter',
+    'entity_type' => 'user',
+    'bundle' => 'user',
+    'deleted' => '0',
+  );
+  $instances[] = array(
+    'label' => t('My personal site'),
+    'widget' => array(
+      'weight' => '13',
+      'type' => 'link_field',
+      'module' => 'link',
+      'active' => 0,
+      'settings' => array(),
+    ),
+    'settings' => array(
+      'validate_url' => 1,
+      'url' => 0,
+      'title' => 'none',
+      'title_value' => '',
+      'title_maxlength' => '128',
+      'enable_tokens' => 1,
+      'display' => array(
+        'url_cutoff' => '80',
+      ),
+      'attributes' => array(
+        'target' => '_blank',
+        'rel' => '',
+        'class' => '',
+        'configurable_title' => 0,
+        'title' => '',
+      ),
+      'user_register_form' => 0,
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'type' => 'hidden',
+        'weight' => '4',
+        'settings' => array(),
+      ),
+    ),
+    'required' => 0,
+    'description' => '',
+    'default_value' => NULL,
+    'field_name' => 'field_my_personal_site',
+    'entity_type' => 'user',
+    'bundle' => 'user',
+    'deleted' => '0',
+  );
+  $instances[] = array(
+    'label' => t('About me'),
+    'widget' => array(
+      'weight' => '8',
+      'type' => 'text_textarea_with_summary',
+      'module' => 'text',
+      'active' => 1,
+      'settings' => array(
+        'rows' => '20',
+        'summary_rows' => 5,
+      ),
+    ),
+    'settings' => array(
+      'text_processing' => '1',
+      'display_summary' => 0,
+      'user_register_form' => TRUE,
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'type' => 'text_default',
+        'weight' => '1',
+        'settings' => array(),
+        'module' => 'text',
+      ),
+    ),
+    'required' => 0,
+    'description' => '',
+    'default_value' => NULL,
+    'field_name' => 'field_about_me',
+    'entity_type' => 'user',
+    'bundle' => 'user',
+    'deleted' => '0',
+  );
+  $instances[] = array(
+    'label' => t('My Favorites'),
+    'widget' => array(
+      'weight' => '9',
+      'type' => 'link_field',
+      'module' => 'link',
+      'active' => 0,
+      'settings' => array(),
+    ),
+    'settings' => array(
+      'validate_url' => 1,
+      'url' => 0,
+      'title' => 'required',
+      'title_value' => '',
+      'title_maxlength' => '128',
+      'enable_tokens' => 1,
+      'display' => array(
+        'url_cutoff' => '80',
+      ),
+      'attributes' => array(
+        'target' => '_blank',
+        'rel' => '',
+        'class' => '',
+        'configurable_title' => 0,
+        'title' => '',
+      ),
+      'user_register_form' => TRUE,
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'type' => 'hidden',
+        'weight' => '2',
+        'settings' => array(),
+      ),
+    ),
+    'required' => 0,
+    'description' => '',
+    'default_value' => NULL,
+    'field_name' => 'field_my_favorites',
+    'entity_type' => 'user',
+    'bundle' => 'user',
+    'deleted' => '0',
+  );
+  $instances[] = array(
+    'label' => t('My Recommendations'),
+    'widget' => array(
+      'weight' => '10',
+      'type' => 'link_field',
+      'module' => 'link',
+      'active' => 0,
+      'settings' => array(),
+    ),
+    'settings' => array(
+      'validate_url' => 1,
+      'url' => 0,
+      'title' => 'required',
+      'title_value' => '',
+      'title_maxlength' => '128',
+      'enable_tokens' => 1,
+      'display' => array(
+        'url_cutoff' => '80',
+      ),
+      'attributes' => array(
+        'target' => '_blank',
+        'rel' => '',
+        'class' => '',
+        'configurable_title' => 0,
+        'title' => '',
+      ),
+      'user_register_form' => TRUE,
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'type' => 'hidden',
+        'weight' => '3',
+        'settings' => array(),
+      ),
+    ),
+    'required' => 0,
+    'description' => '',
+    'default_value' => NULL,
+    'field_name' => 'field_my_recommendations',
+    'entity_type' => 'user',
+    'bundle' => 'user',
+    'deleted' => '0',
+  );
+
+  foreach ($instances as $instance) {
+    $name = $instance['field_name'];
+    if (field_read_instance('user', $name, 'user')) continue;
+    field_create_instance($instance);
+    drupal_set_message("Added instance '$name' to user entity");
+  }
+
+  variable_set('realname_pattern', '[user:profile_firstname] [user:profile_familyname]');
+}
+
+function likeabee_user_uninstall() {
+
+  field_delete_field('profile_familyname');
+  field_delete_field('profile_firstname');
+}

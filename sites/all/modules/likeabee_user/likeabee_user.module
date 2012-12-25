@@ -1,0 +1,46 @@
+<?php
+/*
+ * Manipulates the username field
+ * This module will declare and control all the user fields
+ */
+
+/*
+ * implements hook_user_presave
+ * alters the username as it is saved to be comprised of the firstname + familyname
+ */
+function likeabee_user_user_presave(&$edit, &$account, $category = NULL) {
+  if (isset($edit['profile_firstname'][LANGUAGE_NONE][0]['value'])) {
+    $edit['name'] = implode(' ', array_filter(array(
+      $edit['profile_firstname'][LANGUAGE_NONE][0]['value'],
+      @$edit['profile_familyname'][LANGUAGE_NONE][0]['value']
+    )));
+  }
+
+}
+
+/*
+ * implements hook_user_view
+ * hides the name fields which comprise the username
+ */
+function likeabee_user_user_view($account) {
+  unset($account->content['profile_firstname']);
+  unset($account->content['profile_familyname']);
+}
+/*
+ * implements hook_FORM_user_register_form_ALTER
+ * hide the username field (in favour of the firstname and second name fields)
+ */
+function likeabee_user_form_user_register_form_alter() {
+  $form['account']['name']['#access'] = FALSE;
+  $form['account']['name']['#value'] = user_password();//just need something random until the form is submitted
+}
+
+/*
+ * implements hook_FORM_user_profile_form_ALTER
+ * hide the username field (in favour of the firstname and second name fields)
+ */
+function likeabee_user_form_user_profile_form_alter(&$form, &$form_state) {
+  $form['account']['name']['#access'] = FALSE;
+//  $form['contact']['#access'] = FALSE;
+//  $form['timezone']['#access'] = FALSE;
+}

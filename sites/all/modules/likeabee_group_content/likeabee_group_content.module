@@ -1,0 +1,279 @@
+<?php
+/*
+ * This module adds the following features:
+ * Content types available in groups
+ * A broadcast tool, configurable by content type
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
+
+define('NODE_BROADCAST_FLAG', 'sticky');
+
+/*
+ * implements hook_menu
+ */
+function likeabee_group_content_menu() {
+
+  $items['admin/config/group/broadcast'] = array(
+    'title' => t('Likeabee broadcast'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('likeabee_settings'),
+    'access arguments' => array('access user profiles'),
+  );
+  return $items;
+
+  $items['galleries'] = array(
+    'title' => 'Galleries',
+    'page callback' => 'image_galleries',
+    'access arguments' => array('access user profiles'),
+    'menu_name' => 'secondary-menu'
+  );
+  $items['galleries/%taxonomy_term'] = array(
+    'title callback' => 'taxonomy_term_title',
+    'title arguments' => array(1),
+    'page callback' => 'image_gallery',
+    'page arguments' => array(1),
+    'access arguments' => array('access user profiles'),
+    'menu_name' => 'secondary-menu'
+  );
+}
+
+function likeabee_settings() {
+  foreach (node_type_get_types() as $type) {
+    if (og_is_group_content_type('node', $type->type)) {
+      $options[$type->type] = $type->name;
+    }
+  }
+
+  $form['broadcast'] = array(
+    '#title' => t('Broadcast tool'),
+    '#description' => t('Determine which types can be broadcast'),
+    '#type' => 'fieldset',
+    'likeabee_broadcast_types' => array(
+      '#title' => t('Group content types'),
+      '#type' => 'checkboxes',
+      '#options' => $options,
+      '#default_value' => variable_get('likeabee_broadcast_types')
+    )
+  );
+  return system_settings_form($form);
+}
+
+/*
+ * implements hook_FORM_node_form_alter
+ */
+function likeabee_group_content_form_node_form_alter(&$form, $form_state) {
+  $type = &$form['#node']->type;
+  //hide the widget for the choosing the groups that content should go into
+  //actually only the css is necessary
+  $context = og_context();
+  $types = array('photo');
+  if (isset($context['gid']) && in_array($type, $types)) {
+    //hide all group choosing widgets, because group is set by $context
+    drupal_add_css('#edit-og-group-ref{display:none;}', array('type' => 'inline'));
+    unset($form['og_group_ref'][LANGUAGE_NONE][0]['admin']);
+  }
+
+  //add the broadcast button
+  if (in_array($type, variable_get('likeabee_broadcast_types'))) {
+    if (!$form['#node']->{NODE_BROADCAST_FLAG}) {
+      $form['actions']['broadcast'] = array(
+        '#type' => 'submit',
+        '#description' => t('Each item can be broadcast only once.'),
+        '#value' => t('Save & Broadcast to group'),
+        '#weight' => 10,
+        '#submit' => array('node_broadcast_submit')
+      );
+    }
+  }
+}
+
+
+/*
+ * additional submit handler for node form
+ */
+function node_broadcast_submit($form, $form_state) {
+  $form_state['values'][NODE_BROADCAST_FLAG] = 1;
+  node_form_submit($form, $form_state);
+  global $language;
+  $params = array('node' => node_load($form_state['values']['nid']));
+  drupal_mail('likeabee_group_content', 'broadcast', variable_get('site_mail', 'blah'), $language, $params);
+
+}
+
+function likeabee_group_content_mail($key, &$message, $params) {
+  $node = &$params['node'];
+  $mails = db_select('users', 'u')
+    ->fields('u', array('mail'))
+    ->condition('uid', og_get_users_by_roles($node->nid))
+    ->execute()->fetchCol();
+  $sender = user_load($node->uid);
+  $message['subject'] = t('@site_name: @node_title',
+    array('@site_name' => variable_get('site_name'), '@node_title' => $node->title)
+  );
+  $message['body'][] = t('@name posted a new @type.', array(
+    '@name' => $sender->name,
+    '@type' => node_type_get_type($node->type)->name
+  ));
+
+  $message['body'][] = drupal_render(node_view($node));
+  $message['headers']['From'] = $sender->mail;
+  $message['headers']['Bcc'] = implode(', ', $mails);
+  //include attachments
+  if (isset($node->upload) && is_array($node->upload)) {
+    $items = (array)reset($node->upload);
+    foreach($items as $att) {
+      if (!$att['fid']) continue;
+      $file = file_load($att['fid']);
+      $message['params']['attachments'][] = array(
+        'uri' => $file->uri,
+        'filecontent' => file_get_contents($file->uri),
+        'filename' => $file->filename,
+        'filemime' => file_get_mimetype($file->uri)
+      );
+    }
+  }
+}
+
+/*
+ * implements hook_theme
+ */
+function likeabee_group_content_theme() {
+  return array(
+    'gallery_preview' => array(
+      'variables' => array(
+        'term' => NULL
+      )
+    )
+  );
+}
+/*
+ * implements views hook_views_api
+ */
+function _____likeabee_group_content_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'likeabee_group_content'),
+  );
+}
+
+/*
+ * menu callback
+ * present each gallery, with a random image from each
+ * Need to create a link to this with ?og_group_ref=$nid
+ */
+function ____image_galleries() {
+  debug(og_context(), 'need to filter these galleries so they only apply to the current group:');
+  //get all the terms from the galleries vocab
+  $tree = taxonomy_get_tree(db_query("SELECT vid FROM {taxonomy_vocabulary} WHERE machine_name = 'galleries'")->fetchField());
+  foreach($tree as $term) {
+    $render[$term->tid] = array(
+      '#theme' => 'gallery_preview',
+      '#term' => $term,
+    );
+  }
+
+  return drupal_render($render);
+}
+
+function image_gallery($term) {
+  debug(og_context(), 'need to filter these galleries so they only apply to the current group:');
+  drupal_set_title (t('Gallery: @galleryname', array('@galleryname' => $term->name)));
+  $breadcrumb[] = l(t('Home'), NULL);
+  drupal_set_breadcrumb(array_reverse($breadcrumb));
+  drupal_add_feed('taxonomy/term/' . $term->tid . '/feed', 'RSS - ' . $term->name);
+
+  if ($nids = taxonomy_select_nodes($term->tid, FALSE, FALSE, array('t.nid' => 'DESC'))) {
+    $nodes = node_load_multiple($nids);
+    $build = node_view_multiple($nodes);
+    $build['pager'] = array(
+      '#theme' => 'pager',
+      '#weight' => 5,
+     );
+  }
+  else {
+    $build['no_content'] = array(
+      '#prefix' => '<p>',
+      '#markup' => t('There is currently no content classified with this term.'),
+      '#suffix' => '</p>',
+    );
+  }
+  return $build;
+}
+
+/*
+ * default_implementation of theme hook 'gallery_preview'
+ */
+function theme_gallery_preview($variables) {
+  $term = &$variables['term'];
+  $nids = taxonomy_select_nodes($term->tid, FALSE);
+  if (!$nids) return;
+  shuffle($nids);
+  $node = node_load(current($nids));
+  $img = theme('image_style', array(
+    'path' => $node->image[LANGUAGE_NONE][0]['uri'],
+    'style_name' => 'medium'
+  ));
+  $output = '<div style = "background-color:#eee; margin:5px; float:left; padding:5px; width:220px; height: 270px">';
+  $output .=  l($img, 'galleries/'.$term->tid, array('html' => TRUE, 'attributes' => array('style' => 'float:left; margin-right:5px', 'valign' => 'top')));
+  $output .= "<h4 valign = 'top'>$term->name</h4>";
+  $output .= $term->description.'</div>';
+  return $output;
+}
+
+/*
+ * implements hook_node_view_alter
+ * put the gallery name before the node title
+ */
+function ________likeabee_group_content_node_view_alter(&$build, $type) {
+  if ($build['#bundle'] == 'image'){
+    unset($build['links']);
+  }
+}
+
+/**
+ * implements flag hook_flag_default_flags
+ */
+function likeabee_group_content_flag_default_flags() {
+  $flags = array();
+  // Exported flag: "Share in my profile".
+  $flags['share_in_my_profile'] = array(
+    'content_type' => 'node',
+    'title' => 'Share in my profile',
+    'global' => '1',
+    'types' => array(
+      0 => 'image', //TODO THIS MUST WORK ON ALL GROUP TYPES
+    ),
+    'flag_short' => 'Share in my profile',
+    'flag_long' => '',
+    'flag_message' => '',
+    'unflag_short' => 'Remove from my profile',
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'roles' => array(
+      'flag' => array(
+        0 => '2',
+      ),
+      'unflag' => array(
+        0 => '2',
+      ),
+    ),
+    'weight' => 0,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'show_on_page' => 1,
+    'show_on_teaser' => 0,
+    'show_contextual_link' => 0,
+    'i18n' => 0,
+    'api_version' => 2,
+  );
+  return $flags;
+}
