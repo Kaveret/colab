@@ -13,6 +13,18 @@
     $form['actions']['submit']['#value'] = t('GO!'); // Change the text on the submit button
   
   }
-} 
+}
+function kaveret_preprocess_page(&$vars) {
+
+       
+        if($vars['node']->type=='about_the_group_pages')
+        {
+       $vars['node']->title=null;
+       
+
+        }
+    }
+    
+
 ?>
 
