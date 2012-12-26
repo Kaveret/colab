@@ -438,10 +438,10 @@ border-right: 1px solid #FCF0D8;
 			text-align: center; 
 		}
 		.item-list ul{ @include menu-featured-ul;margin: 0;  margin-top: 61px; }
-		.item-list li{ @include menu-featured-li;}
+		.item-list li{ @include menu-featured-li;width: 133px}
 		.item-list a { @include menu-featured-a; width: 150px; }
 		ul{
-			width: 111px;
+			width: 149px;
 		}
 		ul li:hover{
 			background-color:#fdf6e4;
@@ -450,16 +450,23 @@ border-right: 1px solid #FCF0D8;
 	#block-og-extras-node-links:hover .item-list ul{
 		display: block;
 	}
+	#block-views-link-to-webform-block-1{
+		a{
+			color:#143376 !important; 
+		}
+	}
 	#block-views-about-group-block-3{
-		.view-about-group .block-title{ 
-			color:#B01919; 
-			font-size: 16px;
-			cursor: pointer;
+		.view-header .view-content{
 			background: url("../images/arrow-header.png") no-repeat 41px 49px;
-		 }
-		 /*.view-about-group{
-		 	box-shadow: 0px 0px 5px 0px #C5B88E;
-		}*/
+			height: 65px;
+			background-position-y: 35px; 
+			.block-title{ 
+				color:#143376; 
+				font-size: 16px;
+				cursor: pointer;
+			}
+		}
+	
 		.view-about-group{ @include menu-featured-li; width: 115px;}
 		.view-about-group a{ @include menu-featured-a; width: 110px;}
 		.view-id-about_group .view-display-id-block_3{width: 91px;}
@@ -469,12 +476,12 @@ border-right: 1px solid #FCF0D8;
 		.view-id-about_group .view-display-id-block_1,
 		.view-id-about_group .view-display-id-block_2 {
 			display: none;
+			box-shadow: 0px 0px 5px 0px #C5B88E;
 		}
-		/*.view-id-about_group .view-display-id-block,
-		.view-id-about_group .view-display-id-block_1,
-		.view-id-about_group .view-display-id-block_2 :hover{
-			display: block;	
-		}*/
+		.view-id-about_group .view-display-id-block a:hover
+		{
+			background-color:#fdf6e4;	
+		}
 	}
 	#block-views-about-group-block-3:hover .view-id-about_group{
 		display: block;	
@@ -1875,6 +1882,17 @@ section[id^="block-views-individual-space-block"],
 		margin-top: 33px;
 		background: #FCF0D8;
 		width: 239px;
+	}
+}
+.node-type-about-the-group-pages{
+	#page-title{
+		display: none;
+	}
+	#block-system-main .field-item{
+		text-align: left;
+		font-size: 25px;
+		color: #014A81;
+		float: left;
 	}
 }
 /**************************  footer  ******************************/
