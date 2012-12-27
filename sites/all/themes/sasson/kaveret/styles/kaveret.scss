@@ -1053,7 +1053,8 @@ background-color:none;
 		margin-left:110px;
 	}
 }
-#block-views-group-members-block .content{
+#block-views-group-members-block .content,
+#block-views-friends-block-1 .content{
 		.views-row{
 			border-bottom: 0px;
 			float: left;
@@ -1108,6 +1109,11 @@ div.img-biger .number[class*=" 0 "],
 .numbers-visible[class*=" 0 "]{
 	display:none;
 }
+
+#block-views-friends-block-1{
+	width:100%;
+}
+
 /* -----  Specific webform page  ----- */
 .node-type-group-webform{
 	#page-title {
