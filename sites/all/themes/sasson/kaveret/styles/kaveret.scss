@@ -310,11 +310,12 @@ clear: both;
 	height: 61px;
 	/*background: -moz-linear-gradient(top, rgba(253,246,230,1) 0%, rgba(255,255,255,1) 49%, rgba(253,246,230,1) 100%);
 	/* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%); 
+	/*background: -webkit-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);*/ 
 	/* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
+	/*background: -o-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);*/
 	/* Opera 11.10+ */
-	background: -ms-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
+	/*background: -ms-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);*/
+	background:url("../images/menuBG.png") repeat-x;
 }
 /*---  block-views -----*/
 @mixin menu-featured-ul{
@@ -497,7 +498,7 @@ border-right: 1px solid #FCF0D8;
 	}
 
 	#block-views-group-configurations-block{
-		background: url("../images/configuration.png") no-repeat;
+		background: url("../images/goodconfiguration.png") no-repeat;
 		background-position-y: 18px;
 		background-position-x: 45px;
 		width: 100px;
@@ -1229,9 +1230,11 @@ div.img-biger .number[class*=" 0 "],
 	}
 }
 /*----------Specific See all boxs -----------*/
-#block-quicktabs-list-of-groups .views-field-field-description-group{
+#block-quicktabs-list-of-groups .views-field-field-description-group,
+#block-views-4cf7ecc831800e49c7e8e4d4e5fa3265 .views-field-field-user-description{
 		margin-left: 12px;
-		.views-label-field-description-group {
+		.views-label-field-description-group,
+		.views-label-field-user-description{
 			color: #13387F;
 			font-size: 16px;
 			font-weight: bold;

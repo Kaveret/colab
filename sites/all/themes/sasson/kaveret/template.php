@@ -14,16 +14,16 @@
   
   }
 }
-function kaveret_preprocess_page(&$vars) {
+/*function kaveret_preprocess_page(&$vars) {
 
        
         if($vars['node']->type=='about_the_group_pages')
         {
-       $vars['node']->title=null;
+                $vars['node']->title=false;
        
 
         }
-    }
+    }*/
     
 
 ?>
