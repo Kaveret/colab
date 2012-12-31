@@ -19,7 +19,7 @@
 			text-align: right !important;
 		}
 	}
-	/#block-views-current-group-block 
+	#block-views-current-group-block 
 	{
 		width: 191px;
 		.views-field-title a{
@@ -27,22 +27,16 @@
 			color: #004A82 !important;
 			font-size: 23px ;
 			font-family: arial;
+			width: 190px;
 			.group_name{
-				margin-right: 5px;
+				margin-right: 16px;
 			}
 		}
 	}
 	#block-views-link-to-group-members-block-1 .views-field-title a{
 		width: 91px;
 	}
-	#block-views-link-to-webform-block-1{
-		margin-right: 120px;
-	}
 
-
-}
-.node-type-about-the-group-pages #featured #block-views-link-to-webform-block-1{
-		margin-right: 209px;
 }
 #block-menu-menu-main-icons .menu li a{
 	margin-right: 3px !important;
@@ -211,7 +205,7 @@
 			float: right;
 		}
 		#block-views-my-groups-block{
-			height: 89px;
+			height: 179px;
 		}
 		#block-views-tags-block{
 			height: 71px;
@@ -235,5 +229,22 @@
 	#webform-component-message{
 		margin-right: 14px;
 	}
+}
+/*----------about----------------*/
+
+.node-type-about-the-group-pages{
+	#main{
+		.region-content{
+			float: right;
+		}
+	}
+}
+/*----------node-type-group-s-avtivity---------*/
+#block-views-groups-poll-block-1 .view-header{
+	left: 13px;
+}
+/*----------node-type-group-members---------*/
+#block-views-4cf7ecc831800e49c7e8e4d4e5fa3265 .views-field-field-user-description{
+	margin-right: 12px;
 }
 @flip {file: "kaveret.scss"};

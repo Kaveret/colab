@@ -41,6 +41,13 @@ $(document).ready(function(){
 		{$(this).animate({"margin-left": "-=180px"}, 500);} 
 		}
 		});
+	$("#block-views-about-group-block-3").mouseover(
+		function()
+		{
+			$("view-id-about_group").css( "display", "block");
+		}
+
+		);
 
 
 });  
