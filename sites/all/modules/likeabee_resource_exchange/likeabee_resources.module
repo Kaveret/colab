@@ -138,52 +138,11 @@ function __cforge_currencies_block_info_alter(&$blocks, $theme, $code_blocks) {
   $blocks['mcapi_limits']['balance_limits']['status'] = 1;
   $blocks['mcapi_limits']['balance_limits']['visibility'] = BLOCK_VISIBILITY_LISTED;
   $blocks['mcapi_limits']['balance_limits']['pages'] = 'offers*\nwants\ntransactions';
-
 }
 
 
 
 
-/*
- * implements hook_block_info
- */
-function likeabee_resources_block_info() {
-  //this is a really nasty temp hack to keep the resources section consistent with the groups section
-  //simulating the menu system using a block for each menu item
-  $default = array(
-    'visibility' => BLOCK_VISIBILITY_LISTED,
-    'pages' => 'resources*',
-    'regions' => array(
-      'beezy' => 'features'
-    )
-  );
-
-  return array(
-    'dashboard' =>  $default + array(
-      'info' => 'Resources Dashboard',
-      'weight' => 1,
-    ),
-    'my_beez' => $default + array(
-      'info' => 'Resources My Beez',
-      'weight' => 2,
-    ),
-    'marketplace' => $default + array(
-      'info' => 'Resources Marketplace',
-      'weight' => 3,
-    )
-  );
-}
-function likeabee_resources_block_view($delta) {
-  switch ($delta) {
-    case 'dashboard': $title = l(t('Dashboard'), 'resources');break;
-    case 'my_beez': $title = l(t('My Beez'), 'resources/my_beez');break;
-    case 'marketplace': $title = l(t('Marketplace'), 'resources/marketplace');break;
-  }
-  return array(
-    'subject' => $title,
-    'content' => "\n"
-  );
-}
 
 /*
  * implements hook_theme
@@ -277,8 +236,8 @@ function resources_my_beez() {
  * menu_calback
  */
 function theme_likeabee_page_block($vars) {
-  $output = '<div class = "likeabee-block"><div class = "header">';
-  $output .= $vars['title'];
+  $output = '<div class = "likeabee-block">';
+  $output .= '<div class = "header">'. $vars['title'] .'<div>';
   $output .= theme('advanced_help_topic', array('module' => 'likeabee_resources', 'topic' => $vars['adv_help']));
   $output .= '<div class = "content">'.drupal_render($vars['content']).'</div></div>';
   return $output;

@@ -350,7 +350,6 @@ function field_sql_storage_field_storage_load($entity_type, $entities, $age, $fi
       if (!isset($delta_count[$row->entity_id][$row->language])) {
         $delta_count[$row->entity_id][$row->language] = 0;
       }
-
       if ($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED || $delta_count[$row->entity_id][$row->language] < $field['cardinality']) {
         $item = array();
         // For each column declared by the field, populate the item

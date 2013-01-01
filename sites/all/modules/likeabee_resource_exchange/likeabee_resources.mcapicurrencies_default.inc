@@ -16,9 +16,9 @@ function likeabee_resources_mcapicurrencies_default_alter(&$currencies) {
     ),
     'human_name' =>  t('Hours'),
     'display' => array(
-      'format' => '@minus<strong>H</strong>@integer',
+      'format' => '@minus<strong>H</strong>@integer: @subdivision',
       'divisions' => CURRENCY_DIVISION_MODE_CUSTOM,
-      'divisions_setting' => "0|Hours
+      'divisions_setting' => "0|00 Hours
 25|15 mins
 50|30 mins
 75|45 mins",
@@ -29,7 +29,7 @@ function likeabee_resources_mcapicurrencies_default_alter(&$currencies) {
       'user_aggregated_view' => 'transact',
       'currency_aggregated_view' => 'transact',
     ),
-    'transaction_access' => array(
+    'transaction_view_access' => array(
       TRANSACTION_STATE_FINISHED => array(
         'transaction_access_callback_perm_transact' => 'transaction_access_callback_perm_transact',
         'transaction_access_callback_perm_manage_all' => 'transaction_access_callback_perm_manage_all',
@@ -37,16 +37,21 @@ function likeabee_resources_mcapicurrencies_default_alter(&$currencies) {
       TRANSACTION_STATE_ERASED => array(
         'transaction_access_callback_perm_manage_all' => 'transaction_access_callback_perm_manage_all',
       ),
+      TRANSACTION_STATE_PENDING => array(
+        'transaction_access_callback_perm_manage_all' => 'transaction_access_callback_perm_manage_all',
+        'transaction_access_callback_signatory' => 'transaction_access_callback_signatory',
+      ),
       TRANSACTION_STATE_REVERSED => array(),
     ),
-    'transaction_operations' => array()
+    'transaction_operation_access' => array(
+      'undo' => array(
+        'transaction_access_callback_perm_manage_all' => 'transaction_access_callback_perm_manage_all',
+      ),
+      'undo_pending' => array(
+        'transaction_access_callback_perm_manage_all' => 'transaction_access_callback_perm_manage_all',
+        'transaction_access_callback_signatory' => 'transaction_access_callback_signatory',
+      )
+    )
   );
-  if (module_exists('mcapi_signatures')) {
-    $currency->data->transaction_access[TRANSACTION_STATE_PENDING] = array(
-      'transaction_access_callback_perm_manage_all' => 'transaction_access_callback_perm_manage_all',
-      'transaction_access_callback_signatory' => 'transaction_access_callback_signatory',
-    );
-  }
   $currencies[DEFAULT_CURRENCY_NAME] = $currency;
-  return $currencies;
 }
