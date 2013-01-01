@@ -1,0 +1,66 @@
+<?php
+/**
+* Implementation of hook_ctools_plugin_api().
+*
+* Tell Ctools that we support the quicktabs API.
+* see http://drupal.org/node/572880  http://drupal.org/node/1371626 
+*
+function likeabee_homepage_ctools_plugin_api($owner, $api) {
+  if ($owner == 'quicktabs' && $api == 'quicktabs') {
+    return array('version' => 1, 'path' => drupal_get_path('module', 'mymodule') . '/includes/quicktabs');
+  }
+  echo "<h1>	mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</h1>";
+}*/
+
+function likeabee_homepage_quicktabs_default_quicktabs(){
+$items = array();
+  echo "<h1>    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</h1>";
+
+$quicktabs = new stdClass();
+$quicktabs->disabled = FALSE; /* Edit this to true to make a default quicktabs disabled initially */
+$quicktabs->api_version = 1;
+$quicktabs->machine_name = 'test123';
+$quicktabs->ajax = 0;
+$quicktabs->hide_empty_tabs = TRUE;
+$quicktabs->default_tab = 0;
+$quicktabs->title = 'Test 123';
+$quicktabs->tabs = array(
+  0 => array(
+    'vid' => 'event_page',
+    'display' => 'block_1',
+    'args' => '',
+    'title' => 'Movies',
+    'weight' => '-100',
+    'type' => 'view',
+  ),
+  1 => array(
+    'vid' => 'event_page',
+    'display' => 'block_3',
+    'args' => '',
+    'title' => 'Articles',
+    'weight' => '-99',
+    'type' => 'view',
+  ),
+  2 => array(
+    'vid' => 'event_page',
+    'display' => 'block_4',
+    'args' => '',
+    'title' => 'Sites',
+    'weight' => '-98',
+    'type' => 'view',
+  ),
+  3 => array(
+    'vid' => 'event_page',
+    'display' => 'block_5',
+    'args' => '',
+    'title' => 'More Deatils',
+    'weight' => '-97',
+    'type' => 'view',
+  ),
+);
+$quicktabs->renderer = 'quicktabs';
+$quicktabs->style = 'default';
+$quicktabs->options = array();
+$items["test123"] = $quicktabs;
+return $items;
+}
