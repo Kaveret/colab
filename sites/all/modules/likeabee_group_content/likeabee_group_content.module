@@ -145,7 +145,16 @@ function likeabee_group_content_mail($key, &$message, $params) {
  * implements hook_theme
  */
 function likeabee_group_content_theme() {
-  return array(
+
+  $items = array(
+    'likeabee_groups_summary' => array(
+      'variables' => array(
+        'title' => '',
+        'type' => '',
+        'view' => '',
+        'gid' => 0
+      ),
+    ),
     'gallery_preview' => array(
       'variables' => array(
         'term' => NULL
@@ -253,17 +262,6 @@ function group_summary($title, $type) {
   );
 }
 
-function likeabee_group_content_theme() {
-  $items['likeabee_groups_summary'] = array(
-    'variables' => array(
-      'title' => '',
-      'type' => '',
-      'view' => '',
-      'gid' => 0
-    )
-  );
-  return $items;
-}
 function theme_likeabee_groups_summary($variables) {
   static $flip = 'even';
   $type = &$variables['type'];
