@@ -1,0 +1,261 @@
+<?php
+
+
+
+/**
+ * implements hook_install_tasks for the installation profile
+ */
+function likeabee_install() {
+  db_query(
+    "UPDATE {system} SET weight = :weight WHERE name = 'likeabee'",
+    array(':weight' => db_query("SELECT weight +1 FROM {system} WHERE name = 'cforge' ")->fetchField())
+  );
+
+  variable_set('menu_secondary_links_source', 'secondary-menu');//as in cforge
+  variable_set('menu_main_links_source', 'main-menu');//as in cforge
+  variable_set('theme_default', 'beezy');
+  theme_enable(array('beezy'));
+  theme_disable(array('sky_seldulac'));
+  likeabee_override_nav_menu();
+  likeabee_override_cforge_blocks();
+}
+
+//the stuff that cforge put into the navigation menu is moved into the orange dropdowns in the top right.
+//we continue to use the navigation menu for this
+function likeabee_override_nav_menu() {
+  //create 3 new menus
+  $menus = array(
+    1 => array(
+      'menu_name' => 'community',
+      'title' => t('Community Space'),
+      'description' => t("Links to everybody's stuff")
+    ),
+    2 => array(
+      'menu_name' => 'localadmin',
+      'title' => t('Manage'), //not to be confused with the builtin menu 'management'
+      'description' => t("Administrators only")
+    ),
+  );
+  foreach ($menus as $menu) {
+    menu_save($menu);
+  }
+  //unfortunately links which were created directly to the menu_links table cannot be altered through hooks
+  db_update('menu_links')->fields(array('menu_name' => 'localadmin'))->condition('link_path', 'admin/structure/taxonomy/galleries')->execute();
+}
+
+function likeabee_override_cforge_blocks() {
+  variable_set('menu_block_ids', array(MENU_BLOCK_MAIN_MENU_LEV1, MENU_BLOCK_MAIN_MENU_LEV2));
+  $blocks[] = array(
+    'module' => 'menu_block',
+    'delta' => MENU_BLOCK_MAIN_MENU_LEV1,
+    'title' => '<none>',
+    'status' => 1,
+    'cache' => DRUPAL_NO_CACHE,
+    'visibility' => BLOCK_VISIBILITY_NOTLISTED,//shows everywhere
+    'pages' => '',//except nowhere
+    'custom' => FALSE,
+    'roles' => array(),
+    'regions' => array(
+      //'beezy' => 'header'
+    ),
+    'title_link' => 0,
+    'admin_title' => 'Main menu Section icons',
+    'parent' => 'main-menu:0',
+    'level' => 1,
+    'follow' => 0,
+    'depth' => 1,
+    'expanded' => 0,
+    'sort' => 0
+  );
+  $blocks[] = array(
+    'module' => 'menu_block',
+    'delta' => MENU_BLOCK_MAIN_MENU_LEV2,
+    'title' => '<none>',
+    'status' => 1,
+    'cache' => DRUPAL_NO_CACHE,
+    'visibility' => BLOCK_VISIBILITY_NOTLISTED,//shows everywhere
+    'pages' => '',//except nowhere
+    'custom' => FALSE,
+    'roles' => array(),
+    'regions' => array(
+      'beezy' => 'content'
+    ),
+    'title_link' => 0,
+    'admin_title' => 'Main menu 2nd level',
+    'parent' => 'main-menu:0',
+    'level' => 2,
+    'follow' => 0,
+    'depth' => 2,
+    'expanded' => 0,
+    'sort' => 0
+  );
+
+  $blocks[] = array(
+    'module' => 'menu',
+    'delta' => 'secondary-menu',
+    'title' => '<none>',
+    'status' => 1,
+    'cache' => DRUPAL_NO_CACHE,
+    'visibility' => BLOCK_VISIBILITY_NOTLISTED,//shows everywhere
+    'pages' => '',//except nowhere
+    'custom' => FALSE,
+    'roles' => array(),
+    'regions' => array(
+      'beezy' => 'footer'
+    )
+  );
+
+  $blocks[] = array(
+    'module' => 'mcapi_signatures',
+    'delta' => 'user_pending',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => "user/*/statement",
+    'currcodes' => array('def_drup'),
+    'user_source' => 1,//view your own profile
+    'regions' => array(
+      'beezy' => 'content_bottom'
+    ),
+  );
+
+  module_load_include('admin.inc', 'block');
+  foreach ($blocks as $block) {
+    $form_state = array('values' => $block);
+    //this form isn't suitable for using with drupal_form_submit because it picks default from the database
+    block_admin_configure_submit(array(), $form_state);
+  }
+  //just set the weight of the pending block - probably not necessary as there's no competition in that region on that page
+  db_update('block')->fields(array('weight' => 5))
+    ->condition('module', 'mcapi_signatures')
+    ->condition('delta', 'user_pending')
+    ->condition('theme', 'beezy')
+    ->execute();
+
+  db_delete('block')->condition('module', array('search', 'cforge'))->execute();
+  //clear all the default content
+  foreach (node_load_multiple(array(), array('uid' => 1)) as $node) {
+    node_delete($node->nid);
+  }
+  //take the offers and wants blocks off the front page
+  db_update('block')->fields(array('pages' => 'transactions'))->condition('delta', array('ow_offers-latest', 'ow_wants-latest'))->execute();
+  db_update('block')->fields(array('region' => ''))->condition('module', 'comment')->condition('delta', 'recent')->execute();
+  db_update('block')->fields(array('region' => ''))->condition('module', 'user')->condition('delta', 'new')->execute();
+
+  //put the 2 new menus in the right region.
+  db_update('block')->fields(array('region' => 'header'))->condition('theme', 'beezy')->condition('delta', array('community', 'localadmin'))->execute();
+  //and update the block titles. this won't work with i18n
+  db_update('block')->fields(array('title' => t('User space')))->condition('delta', 'user-menu')->execute();
+  db_update('block')->fields(array('title' => t('Manage')))->condition('delta', 'localadmin')->execute();
+}
+
+function likeabee_uninstall() {
+  db_delete('block')->condition('module', 'menu_block')->execute();
+  db_delete('block_role')->condition('module', 'menu_block')->execute();
+  variable_del('menu_block_ids');
+}
+
+
+
+
+
+
+/* not being used at the moment */
+function likeabee_content_types() {
+  return array (
+    'article' => array(
+       'type' => 'article',
+       'name' => 'כתבה',
+       'base' => 'node_content',
+       'module' => 'node',
+       'description' => 'השתמשו ב<em>מאמרים</em> עבור תכנים תלויי זמן כמו חדשות, הודעות לעיתונות או הודעות בבלוג.',
+       'help' => '',
+       'has_title' => '1',
+       'title_label' => 'Title',
+    ),
+    'book' => array(
+       'type' => 'book',
+       'name' => 'ספר / פרק למרכז הידע',
+       'base' => 'node_content',
+       'module' => 'node',
+       'description' => '',
+       'help' => '',
+       'has_title' => '1',
+       'title_label' => 'כותרת',
+    ),
+    'discussion' => array(
+       'type' => 'discussion',
+       'name' => 'Discussion',
+       'base' => 'node_content',
+       'module' => 'node',
+       'description' => '',
+       'help' => '',
+       'has_title' => '1',
+       'title_label' => 'Title',
+    ),
+    'document' => array(
+       'type' => 'document',
+       'name' => 'Documents',
+       'base' => 'node_content',
+       'module' => 'node',
+       'description' => '',
+       'help' => '',
+       'has_title' => '1',
+       'title_label' => 'Title',
+    ),
+    'event' => array(
+       'type' => 'event',
+       'name' => 'Event',
+       'base' => 'node_content',
+       'module' => 'node',
+       'description' => '',
+       'help' => 'Provides details about an event. Events can linked to several groups.',
+       'has_title' => '1',
+       'title_label' => 'Event Title',
+       'custom' => '1',
+       'modified' => '1',
+       'locked' => '0',
+       'disabled' => '0',
+       'orig_type' => 'event_in_a_group',
+       'disabled_changed' => false,
+    ),
+    'group' => array(
+       'type' => 'group',
+       'name' => 'group',
+       'base' => 'node_content',
+       'module' => 'node',
+       'description' => '',
+       'help' => '',
+       'has_title' => '1',
+       'title_label' => 'Group Name',
+    ),
+    'page' => array(
+       'type' => 'page',
+       'name' => 'דף בסיסי',
+       'base' => 'node_content',
+       'module' => 'node',
+       'description' => 'אפשר להשתמש ב<em>עמוד בסיסי</em> עבור תוכן סטטי, למשל עמוד ה\'אודות\' .',
+       'help' => '',
+       'has_title' => '1',
+       'title_label' => 'Title',
+       'custom' => '1',
+    ),
+    'video' => array(
+       'type' => 'video',
+       'name' => 'Video',
+       'base' => 'node_content',
+       'module' => 'node',
+       'description' => '',
+       'help' => '',
+       'has_title' => '1',
+       'title_label' => 'Title',
+       'custom' => '1',
+    ),
+  );
+
+  foreach ($types as $type) {
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+  }
+  foreach (array('page', 'article', 'event', 'advpoll', 'discussion', 'group') as $type) {
+    node_add_body_field($types[$type], t('Body'));
+  }
+}
