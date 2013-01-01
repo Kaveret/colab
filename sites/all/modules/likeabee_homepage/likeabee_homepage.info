@@ -1,0 +1,5 @@
+; $Id:
+name = Likeabee Homepage
+description = Likeabee Homepage By Baroch Oren
+package = Likeabee
+core = "7.x"
