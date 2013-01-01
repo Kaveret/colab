@@ -9,6 +9,9 @@ dependencies[] = mcapi_index_views
 dependencies[] = mcapi_forms
 dependencies[] = mcapi_limits
 dependencies[] = accountant_ui
-dependencies[] = advanced_help
+dependencies[] = mcapi_signatures
+;dependencies[] = advanced_help
 
 files[] = likeabee_resources.views_default.inc
+files[] = likeabee_resources.mcapicurrencies_default.inc
+files[] = likeabee_resources.mcapiforms_default.inc

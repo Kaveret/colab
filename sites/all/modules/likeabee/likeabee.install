@@ -18,6 +18,7 @@ function likeabee_install() {
   theme_disable(array('sky_seldulac'));
   likeabee_override_nav_menu();
   likeabee_override_cforge_blocks();
+  likeabee_create_users();
 }
 
 //the stuff that cforge put into the navigation menu is moved into the orange dropdowns in the top right.
@@ -137,14 +138,18 @@ function likeabee_override_cforge_blocks() {
   }
   //take the offers and wants blocks off the front page
   db_update('block')->fields(array('pages' => 'transactions'))->condition('delta', array('ow_offers-latest', 'ow_wants-latest'))->execute();
+  db_update('block')->fields(array('pages' => 'offer*\nwant*'))->condition('delta', 'add_proposition')->execute();
   db_update('block')->fields(array('region' => ''))->condition('module', 'comment')->condition('delta', 'recent')->execute();
   db_update('block')->fields(array('region' => ''))->condition('module', 'user')->condition('delta', 'new')->execute();
+  db_update('block')->fields(array('region' => ''))->condition('module', 'mcapi_forms')->execute();
 
   //put the 2 new menus in the right region.
-  db_update('block')->fields(array('region' => 'header'))->condition('theme', 'beezy')->condition('delta', array('community', 'localadmin'))->execute();
+  db_update('block')->fields(array('region' => 'header', 'status' => 1))->condition('theme', 'beezy')->condition('delta', array('community', 'localadmin', 'user-menu'))->execute();
   //and update the block titles. this won't work with i18n
-  db_update('block')->fields(array('title' => t('User space')))->condition('delta', 'user-menu')->execute();
-  db_update('block')->fields(array('title' => t('Manage')))->condition('delta', 'localadmin')->execute();
+  db_update('block')->fields(array('title' => t('Individual space')))->condition('delta', 'user-menu')->execute();
+  db_update('block')->fields(array('title' => t('MANAGE')))->condition('delta', 'localadmin')->execute();
+  db_update('block')->fields(array('title' => t('Community Space')))->condition('delta', 'localadmin')->execute();
+  db_query("UPDATE");
 }
 
 function likeabee_uninstall() {
@@ -258,4 +263,19 @@ function likeabee_content_types() {
   foreach (array('page', 'article', 'event', 'advpoll', 'discussion', 'group') as $type) {
     node_add_body_field($types[$type], t('Body'));
   }
+}
+
+
+function likeabee_create_user() {
+  $edit = array(
+    'name' => 'baroch',
+    'pass' => 'baroch',
+    'mail' => 'info@barochoren.com',
+    'profile_firstname' => array(LANGUAGE_NONE => array(array('value' => 'Baroch'))),
+    'profile_familyname' => array(LANGUAGE_NONE => array(array('value' => 'Cohen'))),
+    'roles' => array(RID_TRADER => RID_TRADER),
+    'status' => 1
+  );
+  user_save(NULL, $edit);//should be user 2
+  return;
 }

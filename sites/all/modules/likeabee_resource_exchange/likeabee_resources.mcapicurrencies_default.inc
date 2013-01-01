@@ -1,11 +1,10 @@
 <?php
 
-define('DEFAULT_CURRENCY_NAME', 'def_drup');
 /*
  * implements hook_mcapicurrencies_default
- * simply copies the currency in the default currency variable, used for single currency systems
+ * the 'default' currency is a local currency and later we will add a network-wide currency, Beez.
  */
-function likeabee_resources_mcapicurrencies_default_alter() {
+function likeabee_resources_mcapicurrencies_default_alter(&$currencies) {
   $currency = new stdClass;
   $currency->disabled = FALSE; /* Edit this to true to make a default currency disabled initially */
   $currency->api_version = 3;
@@ -15,29 +14,38 @@ function likeabee_resources_mcapicurrencies_default_alter() {
     'info' => array(//this wierd structure is for ctools benefit
       'currcode' => DEFAULT_CURRENCY_NAME,
     ),
-    'human_name' =>  t('BeeZ'),
+    'human_name' =>  t('Hours'),
     'display' => array(
-      'format' => '@minus<strong>BZ</strong>@integer',
+      'format' => '@minus<strong>H</strong>@integer',
       'divisions' => CURRENCY_DIVISION_MODE_CUSTOM,
-      'divisions_setting' => "",
+      'divisions_setting' => "0|Hours
+25|15 mins
+50|30 mins
+75|45 mins",
     ),
     'uid' => 1,
     'currency_access' => array(
-      'membership' => 'user_segments_transact',
-      'user_aggregated_view' => 'user_segments_transact',
-      'currency_aggregated_view' => 'user_segments_all',
-      'undo' => 'user_segments_manage_all_transactions',
+      'membership' => 'transact',
+      'user_aggregated_view' => 'transact',
+      'currency_aggregated_view' => 'transact',
     ),
     'transaction_access' => array(
       TRANSACTION_STATE_FINISHED => array(
-        'mcapi_access_authenticated' => 'transaction_access_authenticated',
+        'transaction_access_callback_perm_transact' => 'transaction_access_callback_perm_transact',
+        'transaction_access_callback_perm_manage_all' => 'transaction_access_callback_perm_manage_all',
       ),
-      TRANSACTION_STATE_ERASED => array(),
+      TRANSACTION_STATE_ERASED => array(
+        'transaction_access_callback_perm_manage_all' => 'transaction_access_callback_perm_manage_all',
+      ),
       TRANSACTION_STATE_REVERSED => array(),
-    )
+    ),
+    'transaction_operations' => array()
   );
   if (module_exists('mcapi_signatures')) {
-    $currency->data->transaction_access[TRANSACTION_STATE_PENDING] = array();
+    $currency->data->transaction_access[TRANSACTION_STATE_PENDING] = array(
+      'transaction_access_callback_perm_manage_all' => 'transaction_access_callback_perm_manage_all',
+      'transaction_access_callback_signatory' => 'transaction_access_callback_signatory',
+    );
   }
   $currencies[DEFAULT_CURRENCY_NAME] = $currency;
   return $currencies;

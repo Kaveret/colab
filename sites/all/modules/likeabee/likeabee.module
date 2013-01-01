@@ -3,6 +3,12 @@
 define('MENU_BLOCK_MAIN_MENU_LEV1', 1);
 define('MENU_BLOCK_MAIN_MENU_LEV2', 2);
 
+function likeabee_help($path, $args) {
+  if (substr($path, 0, 4) == 'user' && count(array_filter($args)) < 3) {
+    return 'The accounting info on this page is duplicated in the resources section. This page needs theming. See user-profile.tpl.php';
+  }
+}
+
 function likeabee_menu() {
   //just make a callback for the home page
   $items['home'] = array(
@@ -28,7 +34,7 @@ function likeabee_menu_alter(&$items) {
 
 
 function temp_home() {
-  return "There's no place like it";
+  return l('Resources', 'resources');
 }
 
 function likeabee_node_view_alter(&$build, $node) {

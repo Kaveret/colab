@@ -1,25 +1,23 @@
 <?php
-currencies_load();
 
 /*
  * Implements ctools hook mcapi_default_forms
  * N.B. Because ctools doesn't seem to run cache as well as might be expected, this is called any time a form is needed
  * Also: these are saved in the menu item arguments which may cause unexpected cacheing behaviour
  */
-function likeabee_resources_mcapiforms_default_alter() {
+function likeabee_resources_mcapiforms_default_alter(&$mcapiforms) {
   $forms = array('1stparty', '3rdparty');
   foreach ($forms as $form_id) {
-    $function = 'mcapiform_default_'.$form_id;
+    $function = 'likeabee_default_'.$form_id;
     $mcapiforms[$form_id] = $function();
     if (function_exists('i18n_string_object_update')) {
       $strings = array('name' => $form_id) + $mcapiforms[$form_id]->data['experience'];
       //i18n_string_object_update('payform_experience', $strings);
     }
   }
-  return $mcapiforms;
 }
 
-function mcapiform_default_1stparty() {
+function likeabee_default_1stparty() {
   $currencies = &drupal_static('currencies');
   $mcapiform = new stdClass;
   $mcapiform->disabled = FALSE; /* Edit this to true to make a default mcapi_form disabled initially */
@@ -48,14 +46,22 @@ function mcapiform_default_1stparty() {
       'widget' => 'select',
       'strip' => 0,
     ),
+    'transaction_description' => array(
+      'preset' => array(
+        0 => array(
+          'value' => '',
+        ),
+      ),
+      'strip' => 1,
+    ),
     'worth' => array(
       'preset' => array(
         0 => array(
-          'currcode' => key($currencies),
+          'currcode' => 'def_drup',
           'quantity' => '0',
         )
       ),
-      'strip' => 0,
+      'strip' => 1,
     ),
     'submission' => array(
       'button' => 'Submit',
@@ -65,7 +71,8 @@ function mcapiform_default_1stparty() {
     'experience' => array(
       'title' => 'Make a payment',
       'template' => 'I want to [mcapiform:direction]
-[mcapiform:secondperson] [mcapiform:worth]',
+[mcapiform:secondperson] [mcapiform:worth]
+For [mcapiform:transaction_description]',
       'sure_title' => 'Are you sure?',
       'sure_format' => 'certificate',
     )
@@ -73,7 +80,7 @@ function mcapiform_default_1stparty() {
   return $mcapiform;
 }
 
-function mcapiform_default_3rdparty() {
+function likeabee_default_3rdparty() {
   $currencies = &drupal_static('currencies');
   $mcapiform = new stdClass;
   $mcapiform->disabled = FALSE; /* Edit this to true to make a default form disabled initially */
@@ -100,10 +107,18 @@ function mcapiform_default_3rdparty() {
       'user_chooser_config' => 'user_chooser_permissions:transact',
       'strip' => 1,
     ),
+    'transaction_description' => array(
+      'preset' => array(
+        0 => array(
+          'value' => '',
+        ),
+      ),
+      'strip' => 1,
+    ),
     'worth' => array(
       'preset' => array(
         0 => array(
-          'currcode' => key($currencies),
+          'currcode' => 'def_drup',
           'quantity' => '0',
         ),
       ),
@@ -118,6 +133,7 @@ function mcapiform_default_3rdparty() {
       'title' => 'Record a transaction',
       'template' => 'Payer: [mcapiform:payer]
 Payee: [mcapiform:payee]
+For [mcapiform:transaction_description]
 [mcapiform:worth]',
       'sure_title' => 'Are you sure?',
       'sure_format' => 'certificate',

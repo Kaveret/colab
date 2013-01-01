@@ -118,7 +118,7 @@ function likeabee_resources_views_api() {
 function likeabee_resources_ctools_plugin_api() {
   return array(
     'api' => 3,
-    'path' => drupal_get_path('module', 'cforge_currencies'),
+    'path' => drupal_get_path('module', 'likeabee_resources'),
   );
 }
 
