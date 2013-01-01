@@ -2056,6 +2056,7 @@ function og_get_group_audience_fields($entity_type = 'user', $bundle_name = 'use
   // field_info_instances() doesn't give the field type, so we have to use
   // field_info_fields().
   foreach (field_info_fields() as $field_name => $field_info) {
+
     if (!og_is_group_audience_field($field_name)) {
       continue;
     }
@@ -2089,6 +2090,8 @@ function og_get_group_audience_fields($entity_type = 'user', $bundle_name = 'use
  *   Group.
  */
 function og_get_group_type($entity_type, $bundle_name, $type = 'group') {
+//  return;
+
   if ($type == 'group') {
     return (bool)field_info_instance($entity_type, OG_GROUP_FIELD, $bundle_name);
   }
@@ -2106,6 +2109,7 @@ function og_get_group_type($entity_type, $bundle_name, $type = 'group') {
  *   The node type to be checked.
  */
 function og_is_group_type($entity_type, $bundle_name) {
+
   return og_get_group_type($entity_type, $bundle_name);
 }
 
@@ -2130,7 +2134,7 @@ function og_is_group_content_type($entity_type, $bundle_name) {
  */
 function og_get_all_group_entity() {
   $return = array();
-
+return $return;
   foreach (entity_get_info() as $entity_type => $entity_value) {
     foreach ($entity_value['bundles'] as $bundle => $bundle_value) {
       if (og_is_group_type($entity_type, $bundle)) {
@@ -2193,6 +2197,7 @@ function og_get_all_group_content_entity() {
  */
 function og_get_all_group_content_bundle() {
   $return = array();
+  return $return;
 
   foreach (entity_get_info() as $entity_type => $entity_value) {
     foreach ($entity_value['bundles'] as $bundle => $bundle_value) {

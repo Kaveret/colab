@@ -1,0 +1,276 @@
+<?php
+
+define('WISH_STATE_OPEN', 'open');
+define('WISH_STATE_COMMITTED', 'committed');
+define('WISH_STATE_FULFILLED', 'fulfilled');
+define('WISH_STATE_FIELD_NAME', 'wish_state');
+define('FULFILLER_FIELD_NAME', 'fulfiller');
+//open|committed|fulfilled
+
+function likeabee_dreams_menu() {
+  $items['taxonomy/autocomplete_wishes'] = array(
+    'page callback' => 'taxonomy_autocomplete_dreams',
+    'access arguments' => array('create wish content')
+  );
+  $items['user/%user_uid_optional/dreams'] = array(
+    'title' => 'Dreams',
+    'page callback' => 'dreams_user_view_dreams',
+    'page arguments' => array(1),
+    'access arguments' => array('view user profiles')
+  );
+  return $items;
+}
+
+/*
+ * menu callback for ajax
+ * suggests to the autocomplete widget terms from wish nodes owned by the current user.
+ */
+function taxonomy_autocomplete_dreams($field_name, $tag = '') {
+  $terms = db_query("SELECT td.name FROM {node} n
+    LEFT JOIN {field_data_wishes_tags} f ON n.nid = f.entity_id
+    LEFT JOIN {taxonomy_term_data} td ON f.wishes_tags_tid = td.tid
+    WHERE n.type = 'wish' and n.uid = :uid", array(':uid' => $GLOBALS['user']->uid)
+  )->fetchCol();
+  drupal_json_output(drupal_map_assoc($terms));
+}
+
+function likeabee_dreams_field_widget_info_alter(&$widgets) {
+  $widgets['taxonomy_autocomplete_dreams'] = $widgets['taxonomy_autocomplete'];
+  $widgets['taxonomy_autocomplete_dreams']['settings']['label'] = t('Autocomplete for dreams');
+  $widgets['taxonomy_autocomplete_dreams']['settings']['autocomplete_path'] = 'taxonomy/autocomplete/dreams';
+}
+
+function likeabee_dreams_theme() {
+  $items = array(
+    'dream_cluster' => array(
+      'variables' => array(
+        'nodes_by_category' => array()
+      )
+    )
+  );
+  return $items;
+}
+/*
+ * display peoples wishes, grouped into dreams
+ * expects a struture thus
+ * array(
+ *   dream_tid => array(
+ *     nid => array(
+ *       'node',
+ *       'action'
+ */
+function theme_dream_cluster($variables) {
+  $nodes_by_category = &$variables['nodes_by_category'];
+  foreach ($nodes_by_category as $tid => $nodes) {
+
+    $header = array(taxonomy_term_load($tid)->name);
+    $rows = array();
+    foreach($nodes as $nid => $node) {
+      $rows[] = array($node['#node']->title, 'button');
+    }
+    $render_array[] = array(
+      '#theme' => 'table',
+      '#rows' => $rows,
+      '#header'=> $header
+    );
+  }
+  return drupal_render($render_array);
+}
+
+function dreams_user_view_dreams($account) {
+  $nodes = node_load_multiple(array(), array('uid' => $account->uid, 'type' => 'wish'));
+  //group the nodes by their category in wishes_tags
+  foreach ($nodes as $node) {
+    $nodes_by_category[$node->wishes_tags[LANGUAGE_NONE][0]['tid']][$node->nid] = node_view($node);
+  }
+
+  return array(
+    '#theme' => 'dream_cluster',
+    '#nodes_by_category' => $nodes_by_category
+  );
+}
+
+
+/**
+ * implements hook_views_api
+ */
+function likeabee_dreams_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'likeabee_dreams'),
+  );
+}
+
+
+/**
+ * implements hook_permission
+ */
+function likeabee_dreams_permission() {
+  return array(
+    'register wishes' => array(
+      'title' => t('Register wishes'),
+      'description' => t("Create 'wish' nodes"),
+    ),
+    'fulfil wishes' => array(
+      'title' => t('Fulfil wishes'),
+      'description' => t("Volunteer to fulfil someone's wish"),
+    ),
+    'edit any wish' => array(
+      'title' => t('Edit any wish'),
+//      'description' => t("Edit the node"),
+    ),
+  );
+}
+
+/**
+ * implements hook_node_access
+ */
+function likeabee_dreams_node_access($node, $op, $account) {
+  $type = is_string($node) ? $node : $node->type;
+  if ($type != 'community_task') return NODE_ACCESS_IGNORE;
+  switch ($op) {
+    case 'update':
+    case 'create':
+    case 'delete':
+      if (user_access('edit tasks')) return NODE_ACCESS_ALLOW;
+    case 'view':
+      if (user_access('view tasks')) return NODE_ACCESS_ALLOW;
+  }
+  return NODE_ACCESS_DENY;
+}
+
+/*
+ * implements node hook_view
+ */
+function likeabee_dreams_node_view($node) {
+  $field = $node->WISH_STATE_FIELD_NAME;
+
+  //$build['content']['actions'] = likeabee_dreams_action_form($field['#object']->nid, $field['#items'][0]['value']);
+}
+
+
+function likeabee_dreams_action_form($nid, $state) {
+  $output = array();
+  $node = node_load($nid);
+  $mywish = $GLOBALS['user']->uid == $node->uid;
+  if ($state == WISH_STATE_OPEN) {
+    if (user_access('fulfil wishes') && !$mywish) {
+      $output[] = drupal_get_form('commit_button_form', $nid);
+    }
+  }
+  elseif ($state == WISH_STATE_COMMITTED) {
+    //the node author or the committer can back out
+    if ($mywish || user_access('edit any wish')) {
+      $output[] = drupal_get_form('uncommit_button_form', $nid);
+      $output[] = drupal_get_form('acknowledge_button_form', $nid);
+    }
+    elseif($GLOBALS['user']->uid == $node->FULFILLER_FIELD_NAME[LANGUAGE_NONE][0]['value']) {
+      $output[] = drupal_get_form('uncommit_button_form', $nid);
+    }
+  }
+  return $output;
+}
+
+/*
+ * form builder for commit form
+ */
+function commit_button_form($form, $form_state, $nid) {
+  return dreams_onebutton_form($nid, t('I can fulfil this!'));
+}
+/*
+ * form builder for uncommit form
+ */
+function uncommit_button_form($form, $form_state, $nid) {
+  return dreams_onebutton_form($nid, t('Uncommit'));
+}
+
+/*
+ * form builder for acknowledge form
+ */
+function acknowledge_button_form($form, $form_state, $nid) {
+  return dreams_onebutton_form($nid, t('Wish fulfilled!'));
+}
+
+
+function dreams_onebutton_form($nid, $button_text) {
+  $form = array();
+  $form['nid'] = array(
+    '#type' => 'hidden',
+    '#default_value' => $nid,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => $button_text,
+  );
+  return $form;
+}
+
+/*
+ * submit callback for commit form
+ */
+function commit_button_form_submit($form, &$form_state) {
+  $node = nod_load($form_state['values']['nid']);
+  $node->WISH_STATE_FIELD_NAME[LANGUAGE_NONE][0]['value'] = WISH_STATE_COMMITTED;
+  $node->FULFILLER_FIELD_NAME[LANGUAGE_NONE][0]['value'] = $GLOBALS['user']->uid;
+  node_save($node);
+  foreach (trigger_get_assigned_actions('wish_fulfilled') as $aid => $info) {
+    actions_do($aid, $node, array('group' => 'node', 'hook' => 'wish_fulfilled'));
+  }
+//  $form_state['redirect'] = 'node/'.$form_state['values']['nid'];
+}
+
+/*
+ * submit callback for uncommit form
+ */
+function uncommit_button_form_submit($form, $form_state) {
+  $node = node_load($form_state['values']['nid']);
+  $node->WISH_STATE_FIELD_NAME[LANGUAGE_NONE][0]['value'] = WISH_STATE_OPEN;
+  $node->FULFILLER_FIELD_NAME[LANGUAGE_NONE][0]['value'] = 0;
+  node_save($node);
+  foreach (trigger_get_assigned_actions('wish_committed') as $aid => $info) {
+    actions_do($aid, $node, array('group' => 'node', 'hook' => 'wish_committed'));
+  }
+//  $form_state['redirect'] = 'node/'. $node->nid;
+}
+
+/*
+ * submit callback for acknowledge form
+ */
+function acknowledge_button_form_submit($form, $form_state) {
+  $node = node_load($form_state['values']['nid']);
+  $node->WISH_STATE_FIELD_NAME[LANGUAGE_NONE][0]['value'] = WISH_STATE_FULFILLED;
+  node_save($node);
+  foreach (trigger_get_assigned_actions('wish_uncommitted') as $aid => $info) {
+    actions_do($aid, $node, array('group' => 'node', 'hook' => 'wish_uncommitted'));
+  }
+  //$form_state['redirect'] = 'user/'. $node->uid .'/acknowledgements';
+}
+
+/*
+ * implement hook_views_default_views
+ */
+function likeabee_dreams_views_data_alter(&$tables) {
+  $tables['field_data_wish_state']['wish_state']['help'] = t("Node type 'Wish' only. Possible states are: Open, Committed, Fulfilled");
+  $tables['field_data_wish_state']['wish_state']['field']['handler'] = 'views_handler_field_dream_state';
+  //debug($tables['field_data_wish_state']['wish_state']);
+}
+
+
+
+function likeabee_dreams_hook_info() {
+  return array(
+    'wish_fulfilled' => array(),
+    'wish_committed' => array(),
+    'wish_uncommitted' => array()
+  );
+}
+
+function likeabee_dreams_trigger_info() {
+  return array(
+    'likeabee_dreams' => array(
+      'wish_fulfilled' => array('label' => t('A wisher marks a wish fulfilled')),
+      'wish_committed' => array('label' => t('Someone commits to fulfil a wish')),
+      'wish_uncommitted' => array('label' => t('Someone uncommits to fulfil a wish')),
+    )
+  );
+}

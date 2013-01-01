@@ -455,7 +455,7 @@ function template_preprocess_views_view_summary_unformatted(&$vars) {
  * Display a view as a table style.
  */
 function template_preprocess_views_view_table(&$vars) {
-  $view     = $vars['view'];
+  $view = $vars['view'];
 
   // We need the raw data for this grouping, which is passed in as $vars['rows'].
   // However, the template also needs to use for the rendered fields.  We
@@ -597,7 +597,6 @@ function template_preprocess_views_view_table(&$vars) {
         $vars['rows'][$num][$column] .= $field_output;
       }
     }
-
     // Remove columns if the option is hide empty column is checked and the field is not empty.
     if (!empty($options['info'][$field]['empty_column'])) {
       $empty = TRUE;

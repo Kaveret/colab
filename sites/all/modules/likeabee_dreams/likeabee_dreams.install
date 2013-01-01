@@ -1,0 +1,352 @@
+<?php
+
+function likeabee_dreams_install() {
+    //create the content types
+  $type = array(
+    'type' => 'wish',
+    'name' => t('Wishes'),
+    'base' => 'node_content',
+    'module' => 'likeabee_dreams',
+    'description' => t('Things needed to make dreams come true'),
+    'title_label' => t('Summary'),
+  );
+  $type = node_type_set_defaults($type);
+  node_type_save($type);
+  node_add_body_field($type, 'Details');
+
+  $worth = field_info_field('worth');
+  $instance = field_info_instance('node', 'worth', $type->type);
+  if (empty($instance)) {
+    $instance = array(
+      'field_name' => 'worth',
+      'entity_type' => 'node',
+      'bundle' => $type->type,
+      'label' => t('Beez you can pay'),
+      'widget' => array('type' => 'text_textarea_with_summary'),
+      'settings' => array(),
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'type' => 'worth_field',
+          'module' => 'mcapi'
+        ),
+      ),
+      'widget' => array(
+        'type' => 'worth_widget',
+        'module' => 'mcapi',
+        'weight' => 5
+      )
+    );
+    $instance = field_create_instance($instance);
+  }
+  //and we re-use the sticky flag to indicate whether the wish has been met.
+  $existing = taxonomy_vocabulary_machine_name_load('wishes_tags');
+  $new_vocab = (object)array(
+    'name' => 'Wishes tags',
+    'module' => 'likeabee_dreams',
+    'machine_name' => 'wishes_tags',
+    'vid' => $existing ? $existing->vid : NULL
+  );
+  taxonomy_vocabulary_save($new_vocab);
+
+  $fields = field_read_fields(array('field_name' => 'wishes_tags'));
+  if (empty($fields)) {
+    $field = array(
+      'field_name' => 'wishes_tags',
+      'type' => 'taxonomy_term_reference',
+      'entity_types' => array('node'),
+      'module' => 'taxonomy',
+      'bundles' => array('node' => array('wish')),
+      'settings' => array(
+        'allowed_values' => array(
+          array(
+            'vocabulary' => 'wishes_tags',
+            'parent' => '0',
+          )
+        )
+      ),
+      'columns' => array(
+        'tid' => array(
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => FALSE,
+        )
+      ),
+      'indexes' => array(
+        'tid' => array('tid')
+      ),
+      'foreign keys' => array(
+        'tid' => array(
+          'table' => 'taxonomy_term_data',
+          'columns' => array('tid')
+        )
+      ),
+    );
+    field_create_field($field);
+  }
+  $instance = array(
+    'label' => t("Which dream is this for?"),
+    'description' => t('Write a category (the dream this refers to).'),
+    'field_name' => 'wishes_tags',
+    'entity_type' => 'node',
+    'bundle' => 'wish',
+    'required' => FALSE,
+    'settings' => array(),
+    'display' => array(
+      'default' => array(
+        'type' => 'taxonomy_term_reference_link',
+        'label' => 'above',
+        'settings' => array(),
+      ),
+    ),
+    //the best widget would be provided by another module
+    'widget' => array(
+      'weight' => '10',
+      'type' => 'taxonomy_autocomplete',
+      'module' => 'taxonomy',
+      'active' => 0,
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete_wishes',
+        'size' => 15,
+      ),
+    ),
+    'deleted' => FALSE
+  );
+  $existing = (array)field_read_instance('node', 'wishes_tags', 'wish', array('include_deleted' => TRUE));
+  if (array_filter($existing)) {
+    field_update_instance($instance + $existing);
+  }
+  else {
+    field_create_instance($instance);
+  }
+
+module_load_include('module', 'likeabee_dreams');//for the constants
+  $fields = field_read_fields(array('field_name' => 'wish_state'));
+  if (empty($fields)) {
+    $field = array(
+      'field_name' => 'wish_state',
+      'translatable' => '0',
+      'entity_types' => array (),
+      'settings' => array (
+        'allowed_values' => array (
+          WISH_STATE_OPEN => t('Open'),
+          WISH_STATE_COMMITTED => t('Committed'),
+          WISH_STATE_FULFILLED => t('Fulfilled'),
+        ),
+        'allowed_values_function' => '',
+      ),
+      'storage' => array (
+        'type' => 'field_sql_storage',
+        'settings' => array (),
+        'module' => 'field_sql_storage',
+        'active' => '1',
+        'details' => array (
+          'sql' => array (
+            'FIELD_LOAD_CURRENT' => array (
+              'field_data_wish_state' => array (
+                'value' => 'wish_state_value',
+              ),
+            ),
+            'FIELD_LOAD_REVISION' => array (
+              'field_revision_wish_state' => array (
+                'value' => 'wish_state_value',
+              ),
+            ),
+          ),
+        ),
+      ),
+      'foreign keys' => array(),
+      'indexes' => array (
+        'value' => array (
+          0 => 'value',
+        ),
+      ),
+      'field_permissions' => array (
+        'type' => '1',
+      ),
+      'type' => 'list_text',
+      'module' => 'list',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'columns' => array (
+        'value' => array (
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => false,
+        ),
+      ),
+    );
+    field_create_field($field);
+  }
+
+  $instance = array(
+    'label' => 'Wish state',
+    'widget' => array (
+      'weight' => '11',
+      'type' => 'options_buttons',
+      'module' => 'options',
+      'active' => 1,
+      'settings' => array(),
+    ),
+    'settings' => array(
+      'user_register_form' => false,
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'type' => 'list_default',
+        'settings' => array(),
+        'module' => 'list',
+        'weight' => 7,
+      ),
+    ),
+    'required' => 1,
+    'description' => '',
+    'default_value' => array(
+      0 => array(
+        'value' => 'open',
+      ),
+    ),
+    'field_name' => 'wish_state',
+    'entity_type' => 'node',
+    'bundle' => 'wish',
+    'deleted' => '0',
+  );
+  $existing = (array)field_read_instance('node', 'wish_state', 'wish', array('include_deleted' => TRUE));
+  if (array_filter($existing)) {
+    field_update_instance($instance + $existing);
+  }
+  else {
+    field_create_instance($instance);
+  }
+
+
+  $fields = field_read_fields(array('field_name' => FULFILLER_FIELD_NAME));
+  if (empty($fields)) {
+    $field = array (
+      'translatable' => '0',
+      'entity_types' => array (),
+      'settings' => array (
+        'target_type' => 'user',
+        'handler' => 'base',
+        'handler_settings' => array(
+          'target_bundles' => array(),
+          'sort' => array (
+            'type' => 'none',
+          ),
+          'behaviors' => array (
+            'views-select-list' => array (
+              'status' => 1,
+            ),
+          ),
+        ),
+      ),
+      'storage' => array (
+        'type' => 'field_sql_storage',
+        'settings' => array (),
+        'module' => 'field_sql_storage',
+        'active' => '1',
+        'details' => array (
+          'sql' => array (
+            'FIELD_LOAD_CURRENT' => array (
+              'field_data_'.FULFILLER_FIELD_NAME => array (
+                'target_id' => FULFILLER_FIELD_NAME.'_target_id',
+              ),
+            ),
+            'FIELD_LOAD_REVISION' => array (
+              'field_revision_'.FULFILLER_FIELD_NAME => array (
+                'target_id' => FULFILLER_FIELD_NAME.'_target_id',
+              ),
+            ),
+          ),
+        ),
+      ),
+      'foreign keys' => array (
+        'node' => array (
+          'table' => 'node',
+          'columns' => array (
+            'target_id' => 'nid',
+          ),
+        ),
+      ),
+      'indexes' => array (
+        'target_id' => array (
+          0 => 'target_id',
+        ),
+      ),
+      'field_permissions' => array (
+        'type' => '0',
+      ),
+      'field_name' => FULFILLER_FIELD_NAME,
+      'type' => 'entityreference',
+      'module' => 'entityreference',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'columns' => array (
+        'target_id' => array (
+          'description' => 'The id of the target entity.',
+          'type' => 'int',
+          'unsigned' => true,
+          'not null' => true,
+        ),
+      ),
+    );
+    field_create_field($field);
+  }
+
+  $instance = array (
+    'label' => t('Fulfiller'),
+    'widget' => array (
+      'weight' => '12',
+      'type' => 'entityreference_autocomplete',
+      'module' => 'entityreference',
+      'active' => 1,
+      'settings' => array (
+        'match_operator' => 'CONTAINS',
+        'size' => '60',
+        'path' => '',
+      ),
+    ),
+    'settings' => array (
+      'behaviors' => array (
+        'prepopulate' => array (
+          'status' => 0,
+        ),
+      ),
+      'user_register_form' => false,
+    ),
+    'display' => array (
+      'default' => array (
+        'label' => 'above',
+        'type' => 'entityreference_label',
+        'settings' =>  array (
+          'link' => false,
+        ),
+        'module' => 'entityreference',
+        'weight' => 8,
+      ),
+    ),
+    'required' => 0,
+    'description' => '',
+    'default_value' => NULL,
+    'default_value_function' => '',
+    'field_name' => FULFILLER_FIELD_NAME,
+    'entity_type' => 'node',
+    'bundle' => 'wish',
+    'deleted' => '0',
+  );
+  $existing = (array)field_read_instance('node', FULFILLER_FIELD_NAME, 'wish', array('include_deleted' => FALSE));
+  if (array_filter($existing)) {
+    field_update_instance($instance + $existing);
+  }
+  else {
+    field_create_instance($instance);
+  }
+
+
+  variable_set('comment_wish', 0);
+}

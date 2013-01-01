@@ -82,6 +82,8 @@
           <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
         </a>
       <?php endif; ?>
+      <?php print render($page['header']); ?>
+      <?php print drupal_render(drupal_get_form('search_form')); ?>
 
       <?php if ($site_name): ?>
           <h1 id="site-name">
@@ -92,13 +94,17 @@
       <?php if ($site_slogan): ?>
         <div id="site-slogan"><?php print $site_slogan; ?></div>
       <?php endif; ?>
-      <?php if (isset($userpic_social))print $userpic_social; ?>
-
-      <?php print render($page['header']); ?>
+      <?php if (isset($userpic_social))print_r($userpic_social); ?>
     </header><!-- /#header -->
   <?php endif; ?>
 
 <div id="page">
+  <?php if ($main_menu_links): ?>
+    <nav id="main-menu" role="navigation">
+      <?php print render($main_menu_links); ?>
+    </nav><!-- /#main-menu -->
+  <?php endif; ?>
+
  <div id="main">
     <?php if ($tabs): ?>
       <div class="tabs"><?php print render($tabs); ?></div>
@@ -108,6 +114,9 @@
         <?php print render($page['highlighted']); ?>
       </div><!-- /#highlighted -->
     <?php endif; ?>
+     <!--<div id="breadcrumb"><?php
+       //print $breadcrumb;
+      ?></div>-->
     <?php print render($title_prefix); ?>
     <?php print render($title_suffix); ?>
 
@@ -116,28 +125,40 @@
     <?php if ($action_links): ?>
       <ul class="action-links"><?php print render($action_links); ?></ul>
     <?php endif; ?>
+    <?php print render($page['content_top']); ?>
+    <?php if ($is_front) : ?>
+      <img height="267" src="<?php print path_to_theme(); ?>/images/top_img.png" width="722" />
+    <?php endif; ?>
+    <?php print render($page['content']); ?>
+    <?php print render($page['content_bottom']); ?>
+
+    <?php print $feed_icons; ?>
+  </div><!-- /#main -->
 
   <?php if ($page['sidebar_first']): ?>
     <aside id="sidebar-first" class="sidebar" role="complementary">
       <?php print render($page['sidebar_first']); ?>
     </aside><!-- /#sidebar-first -->
   <?php endif; ?>
+
   <?php if ($page['sidebar_second']): ?>
     <aside id="sidebar-second" class="sidebar" role="complementary">
       <?php print render($page['sidebar_second']); ?>
     </aside><!-- /#sidebar-second -->
   <?php endif; ?>
-
-    <img height="267" src="<?php print path_to_theme(); ?>/images/top_img.png" width="722" />
-    <?php print render($page['content']); ?>
-
-    <?php print $feed_icons; ?>
-  </div><!-- /#main -->
-
-
 </div><!-- /#page -->
 
-<footer id="footer">
+<footer id = "footer">
+  <div id = "logo-footer"></div>
+  <!-- this is directly in the theme for now, but ideally would be done using the menu_block first level of main-menu -->
+<!--footer icons are hidden because these services are not built yet
+  <ul id = "footer-icons">
+    <li><a href="/" title="" class="active">Dreams &amp; Initiatives</a></li>
+    <li><a href="/" title="" class="active">Learning Center</a></li>
+    <li><a href="/" title="" class="active">Communities &amp; Groups</a></li>
+    <li><a href="/" title="" class="active">Resources Exchange</a></li>
+  </ul>
+-->
   <?php if ($secondary_menu_links): ?>
   <nav id="secondary-menu" role="navigation">
     <?php print $secondary_menu_links ?>
@@ -148,5 +169,6 @@
   <?php //this is the blocks in the footer region
     print render($page['footer']);
   ?>
+
 </footer><!-- /#footer -->
 

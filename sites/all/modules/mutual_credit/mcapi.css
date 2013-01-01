@@ -1,14 +1,10 @@
 
-div.worth-widget div.form-item,
-div.sentence {
+/*div.sentence, */
+div.worth-widget div.form-item {
   display:inline
 }
 div.sentence .link{
   padding: 0 0 0 1em;
-}
-#mcapi-forms-form.step-1 .form-type-checkboxes label,
-#mcapi-forms-form.step-1 .form-type-radios label{
-  display:none;
 }
 #dependent-transactions{
   border:medium solid grey;

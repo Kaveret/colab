@@ -77,9 +77,11 @@ function mcapi_menu_inc() {
   );
   $items['transact'] = array(
     'title' => 'Record transaction',
-    'description' => 'Log a transaction in the database',
+    'description' => 'Log a transaction in the database',#co
     'page callback' => 'drupal_get_form',
     'page arguments' => array('transaction_default_form'),
+    //we use this permission but it's possible to create a paradox since each currency has its own permission
+    //if we knew what currency we would use callback 'currency_access' and arg 'membership'
     'access arguments' => array('transact'),
     'file' => 'mcapi.inc',
   );
@@ -128,8 +130,8 @@ function mcapi_menu_inc() {
     'title' => 'Undo',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('mcapi_transaction_undo_confirm_form', 1),
-    'access callback' => 'transaction_undo_access',
-    'access arguments' => array(1),
+    'access callback' => 'transaction_operation_access',
+    'access arguments' => array('undo', 1),
     'weight' => 1,
     'type' => MENU_LOCAL_ACTION,
     'file' => 'mcapi.inc',
@@ -270,10 +272,10 @@ function transaction_form_submit($form, &$form_state) {
     array(':form_build_id' => $form_build_id, ':time' => REQUEST_TIME)
   );
   form_state_values_clean($form_state);
-  $transaction = (object)$form_state['values'];
-
+  $transaction = entity_metadata_create_transaction($form_state['values']);
   //build the transaction object from the $form_state[values]
   entity_form_submit_build_entity('transaction', $transaction, $form, $form_state);
+
   try{
     if ($form['#skip_alter']) {
       $transactions = array($transaction);
@@ -350,11 +352,11 @@ function mcapi_misc_options_form($form_state) {
       t('Cannot be changed after a transaction has been undone'),
     '#type' => 'radios',
     '#options' => array(
-      MCPI_CURRENCY_UNDO_DELETE => t('Wipe slate - remove transactions from database'),
-      MCPI_CURRENCY_UNDO_ERASE => t('Scratch - use deleted transaction state'),
-      MCPI_CURRENCY_UNDO_REVERSE => t('Reverse - create an equal and opposite transaction'),
+      MCAPI_CURRENCY_UNDO_DELETE => t('Wipe slate - remove transactions from database'),
+      MCAPI_CURRENCY_UNDO_ERASE => t('Scratch - use deleted transaction state'),
+      MCAPI_CURRENCY_UNDO_REVERSE => t('Reverse - create an equal and opposite transaction'),
     ),
-    '#default_value' => variable_get('mcapi_controller_delete_mode', MCPI_CURRENCY_UNDO_REVERSE),
+    '#default_value' => variable_get('mcapi_controller_delete_mode', MCAPI_CURRENCY_UNDO_REVERSE),
     '#disabled' => !variable_get('change_undo_mode', FALSE)
   );
 
@@ -484,73 +486,20 @@ function mcapi_validate_ttype(&$element, $form_state) {
 /*
  * transaction_access callbacks
  */
-function transaction_access_anyone($transaction, $account = NULL) {
+function transaction_access_callback_anyone($transaction, $account) {
   return TRUE;
 }
-function transaction_access_authenticated($transaction, $account = NULL) {
-  if (!$account) $account = $GLOBALS['user'];
-  return $account->uid;
+function transaction_access_callback_perm_transact($transaction, $account) {
+  return user_access('transact',$account);
 }
-function transaction_access_accountant($transaction, $account = NULL) {
+function transaction_access_callback_perm_manage_all($transaction, $account) {
   return user_access('manage all transactions', $account);
 }
-function transaction_access_payee($transaction) {
-  return $GLOBALS['user']->uid == $transaction->payee;
+function transaction_access_callback_payee($transaction, $account) {
+  return $account->uid == $transaction->payee;
 }
-function transaction_access_payer($transaction) {
-  return $GLOBALS['user']->uid == $transaction->payer;
-}
-
-
-/*
- * currency access callbacks
- * determine a segment of users
- * each of these returns TRUE or FALSE if passed a User ID
- * or a list of User IDs if passed nothing
- * This is likely to be moved towards user_chooser
- */
-function user_segments_transact($uid = 0) {
-  if ($uid) {
-    return user_access('transact', user_load($uid));
-  }
-  return _matslats_role_get_users('transact', $uid);
-}
-function user_segments_manage_all_transactions($uid = 0) {
-  if ($uid) {
-    return user_access('manage all transactions', user_load($uid));
-  }
-  return _matslats_role_get_users('manage all transactions');
-}
-function user_segments_all($uid = 0) {
-  $query = db_select('users', 'u')->fields('u', array('uid'))->condition('status', 1);
-  if ($uid) $query->condition('uid', $uid);
-  $uids = $query->execute()->fetchcol();
-  if ($uid) return in_array($uid, $uids);
-  return $uids;
-}
-//utility function for the above
-//if the user doesn't have permission
-function _matslats_role_get_users($permission) {
-  $rids = user_roles(TRUE, $permission);
-  if (empty($rids)) return array(1);
-  $query = db_select('users_roles', 'ur');
-  $query->join('users', 'u', 'u.uid = ur.uid');
-  return $query->fields('ur', array('uid'))
-    ->condition('ur.rid', array_keys($rids))
-    ->condition('u.status', TRUE)
-    ->execute()
-    ->fetchCol();
-}
-
-/*
- * access control wrapper for currency
- * if uid is specified, returns TRUE or FALSE
- * otherwise returns a list of users
- */
-function currency_access($op, $currcode, $uid = NULL) {
-  if (is_null($uid))$uid = $GLOBALS['user']->uid;
-  $function = currency_load($currcode)->currency_access[$op];
-  return $function($uid);
+function transaction_access_callback_payer($transaction, $account) {
+  return $account->uid == $transaction->payer;
 }
 
 
@@ -689,6 +638,72 @@ function mcapi_mail($key, &$message, $params) {
   }
 }
 
+
+/*
+ * action callback
+ * mail the transaction participants, and cc
+ * $transaction may have dependents
+ */
+function mcapi_transaction_entity_uid($dunno, $context) {
+  extract($context);
+  $entity = $$group;
+  $transaction = array(
+    //allow a price to be fixed on the entity using the worth field.
+    'worth' => isset($entity->worth) ? $entity->worth : $worth_items['worths'],
+    'type' => 'auto',
+    'state' => TRANSACTION_STATE_FINISHED
+  );
+  $transaction['description'] = $description;
+
+  if ($direction == 'uidpays') {
+    $transaction['payee'] = 1;
+    $transaction['payer'] = $entity->uid;
+  }
+  else {
+    $transaction['payee'] = $entity->uid;
+    $transaction['payer'] = 1;
+  }
+  $transactions = array(entity_metadata_create_transaction($transaction));
+  try{
+    transactions_insert($transactions, TRUE);
+  }
+  catch (Exception $e) {
+    drupal_set_message(t('Automated transaction failed: @message', array('@message' => $e->message)), 'error');
+  }
+}
+
+/*
+ * Settings form callback for action mcapi_transaction_entity_uid
+ */
+function mcapi_transaction_entity_uid_form($context) {
+  $context += array(
+    'mapping' => 'uidpays',
+    'transaction_types' => array(),
+    'otheruser' => 1,
+    'worth_items' => array('worths' => array(), 'round' => 'down')
+  );
+  $form['direction'] = array(
+    '#title' => t('Direction'),
+    '#type' => 'radios',
+    '#options' => array(
+      'uidpays' => t('Account 1 pays user'),
+      'paysuid' => t('User pays account 1'),
+    ),
+    '#default_value' => isset($context['mapping']) ? $context['mapping'] : 'payerpays',
+  );
+  mcapi_configure_worth_field($form, $context['worth_items'], TRUE, 'worth_items');
+  $form['worth_items']['#description'] = t("this value will be overwritten if the passed entity has the 'worth' field");
+  return $form;
+}
+/*
+ * configuration action submit callback
+ */
+function mcapi_transaction_entity_uid_submit($form, $form_state) {
+  form_state_values_clean($form_state);
+  return $form_state['values'];
+}
+
+
 /*
  * action callback for hook_transaction_cluster_alter
  * Alters the original transaction and/or returns a child
@@ -746,27 +761,33 @@ function mcapi_supplementary_transaction_action_form($context) {
     'otheruser' => 1,
     'worth_items' => array('worths' => array(), 'round' => 'down')
   );
-  $form['mapping'] = array(
-    '#title' => t('Mapping'),
-    '#type' => 'radios',
-    '#options' => array(
-      'payerpays' => t('Payer pays other'),
-      'payeepays' => t('Payee pays other'),
-      'payspayer' => t('Other pays payer'),
-      'payspayee' => t('Other pays payee'),
+  $form['participants'] = array(
+    '#title' => t('Participants'),
+    '#description' => t('Determine who will pay whom'),
+    '#type' => 'fieldset',
+    'mapping' => array(
+      '#title' => t('Mapping'),
+      '#description' => t('On a node trigger, the payer and payee will both evaluate to the node author'),
+      '#type' => 'radios',
+      '#options' => array(
+        'payerpays' => t('Payer pays other'),
+        'payeepays' => t('Payee pays other'),
+        'payspayer' => t('Other pays payer'),
+        'payspayee' => t('Other pays payee'),
+      ),
+      '#default_value' => isset($context['mapping']) ? $context['mapping'] : 'payerpays',
     ),
-    '#default_value' => isset($context['mapping']) ? $context['mapping'] : 'payerpays',
+    'otheruser' => array(
+      '#title' => t('Other account'),
+      '#type' => 'user_chooser_permissions',
+      '#args' => array('transact'),
+      '#allow_me' => TRUE,
+      '#default_value' => isset($context['otheruser']) ? $context['otheruser'] : 1,
+      '#weight' => 1,
+    )
   );
 
   $form['transaction_types'] = _transaction_type_selector(@$context['transaction_types'], TRUE);
-  $form['otheruser'] = array(
-    '#title' => t('Other account'),
-    '#type' => 'user_chooser_permissions',
-    '#args' => array('transact'),
-    '#allow_me' => TRUE,
-    '#default_value' => isset($context['otheruser']) ? $context['otheruser'] : 1,
-    '#weight' => 1,
-  );
   mcapi_configure_worth_field($form, $context['worth_items'], FALSE, 'worth_items');
   return $form;
 }
@@ -778,6 +799,7 @@ function mcapi_supplementary_transaction_action_submit($form, $form_state) {
   return $form_state['values'];
 }
 
+
 /**
  * function to generate a fieldset for configuring the worth of an autotransaction
  * presents one currency widget for every currency
@@ -786,15 +808,26 @@ function mcapi_supplementary_transaction_action_submit($form, $form_state) {
  * $dependent : whether or not the auto transaction will depend on on the values from another transaction
  * $fieldset_name : depending on how the settings are saved, this may need to be a unique variable name
  */
-function mcapi_configure_worth_field(&$form, $saved, $primary_transaction = TRUE, $fieldset_name) {
+function mcapi_configure_worth_field(&$form, $saved, $primary_transaction = TRUE, $fieldset_name = 'worth_items') {
   $currencies = &drupal_static('currencies');
+  foreach (@$saved['worths'] as $item) {
+    $defaults[$item['currcode']] = $item['quantity'];
+  }
   $form[$fieldset_name] = array(
     '#title' => t('Worth'),
     '#type' => 'fieldset',
     '#name' => $fieldset_name,//this helps in the fieldset validation
     '#tree' => TRUE,
-    '#required' => TRUE,
-    'worths' => get_worths_element((array)@$saved['worths']),
+    'worths' => array(
+      //'#title' => t('Worths'),
+      '#type' => 'worths',
+      '#default_value' => $defaults,
+      '#all' => TRUE,
+      '#allow_zero' => FALSE,
+        //this is not conifg mode because it's not 'presetting the form its actually setting a value
+        //it affects what happens to the zero and null values
+      '#required' => TRUE,
+    )
   );
   if ($primary_transaction) {
     $form[$fieldset_name]['#description'] = t('What is the fixed value of this transaction?');
@@ -807,7 +840,6 @@ function mcapi_configure_worth_field(&$form, $saved, $primary_transaction = TRUE
     $worths = &$form[$fieldset_name]['worths'];
     foreach (element_children($worths) as $delta) {
       if (!$primary_transaction) {
-        $worths[$delta]['#config'] = TRUE;
         //this field will accept a formula, not just a number
         $worths[$delta]['main_quant']['#size'] = 10;
         $worths[$delta]['main_quant']['#maxlength'] = 10;
@@ -822,17 +854,14 @@ function mcapi_configure_worth_field(&$form, $saved, $primary_transaction = TRUE
       '#weight' => 1
     );
   }
-}
 
-/*
- * element validate for the fieldset of worth fields in the config fieldset
- * check that at least one of the worth fields has a value
- */
-function element_validate_empty_config_worths($element, $form_state) {
-  foreach (element_children($element) as $key) {
-    if (!mcapi_field_is_empty($form_state['values'][$element['#name']][$key])) return;
+  if (variable_get('transaction_description_field')) {
+    $form['description'] = array(
+      '#title' => t('Transaction description text'),
+      '#type' => 'textfield',
+      '#default_value' => @$context['description'],
+    );
   }
-  form_error($element, t('A value is required'));
 }
 
 
@@ -865,7 +894,7 @@ function _mcapi_calc($formula, $base_quant) {
   $equation = str_replace('[q]', $base_quant, $formula) .';';
   $val = eval('return '. $equation);
   if (is_numeric($val)) return $val;
-  drupal_set_message(t('Problem with calculation for dependent transaction: '.$val));
+  drupal_set_message(t('Problem with calculation for dependent transaction: @val', array('@val' => $val)));
 }
 //TODO
 //Parse error: syntax error, unexpected '/' in /var/www/drupal7/sites/all/modules/matslats/mutual_credit/mcapi.inc(853) : eval()'d code on line 1
@@ -938,6 +967,7 @@ function mcapi_description_field($form, $form_state) {
   );
   return system_settings_form($form);
 }
+
 function _mcapi_get_text_instances() {
   $options = array();
   if (substr($_SERVER['SCRIPT_NAME'], -9) == 'index.php' && module_exists('field')) {//coz field_info_fields isn't available during update.php
@@ -950,72 +980,6 @@ function _mcapi_get_text_instances() {
   return $options;
 }
 
-/*
- * retrieve a form element for multiple currencies
- * either one widget with a currency chooser
- * or many widgets with fixed currencies
- * this is mostly used in mcapi_field_widget_form
- * but also for configuration forms
- */
-function get_worths_element($items, $required = FALSE) {
-  $currencies = &drupal_static('currencies');
-  $element['#type'] = 'worths';
-  if (empty($items)) {
-    foreach (array_keys($currencies) as $currcode) {
-      $items[] = array(
-        'currcode' => $currcode,
-        'quantity' => NULL
-      );
-    }
-  }
-  //iterate through all the currencies
-  //if mixed transaction flag is off, then we don't increment the delta
-  //and instead just add to the #currcodes
-  $delta = 0;
-
-  foreach($items as $d => $item) {
-    $element[$delta]['#title'] = t('Worth');
-    $element[$delta]['#title_display'] = 'attribute';
-    $element[$delta]['#type'] = 'worth';
-    $element[$delta]['#required'] = FALSE;
-    $element[$delta]['#currcodes'][] = $item['currcode'];
-    $element[$delta]['#default_value'] = $item;
-    if(variable_get('mcapi_mixed_transactions', TRUE)) {
-      $element[$delta]['#title'] = $currencies[$item['currcode']]->human_name;
-      $delta++;
-    }
-  }
-  return $element;
-}
-
-/**
- * element validation callback
- * check the centiles value is valid
- * check that the $quantity is a number
- */
-function worth_element_validate(&$element, &$form_state, $form) {
-  if (!empty($element['#config'])) return;
-  $quant = $element['#value']['quantity'];
-
-  if (!is_numeric($quant)) {
-    form_error($element, t('@fieldname must be numeric', array('@fieldname' => $element['#title'])));
-  }
-  if ($quant < 0) {
-    form_error($element, t('Negative values not allowed'));
-  }
-
-  $currencies = &drupal_static('currencies');
-  if (!isset($currencies[$element['#value']['currcode']])) {
-    form_error($element, t('This currency does not exist: @currcode', array('@currcode' => $element['#value']['currcode'])));
-  }
-  if ($division = $quant - intval($quant)) {
-    $currency = currency_load($element['#value']['currcode']);
-    //check that divisions match allowed values for the currency
-    if (count($currency->display['divisions_allowed']) && !isset($currency->display['divisions_allowed'][$division*100])) {
-      form_error($element, t('@division is not a permitted division of currency @name', array('@division' => $division, '@name' => $currency->human_name)));
-    }
-  }
-}
 
 /*
  * default worths element validator
@@ -1029,10 +993,26 @@ function worths_element_validate(&$element, &$form_state) {
   //anyway we can retrieve the values, set in form_type_worth_value, from form_state
   //then we filter them reindex the array and send them back to form_state
   $items = drupal_array_get_nested_value($form_state['values'], $element['#array_parents']);
-  _worths_element_filter($items);
+
+  if ($element['#allow_zero']) {
+    foreach ($items as $delta => $item) {
+      if (mcapi_field_is_empty($item)) {
+        unset($items[$delta]);
+      }
+    }
+  }
+  else {
+    foreach ($items as $delta => $item) {
+      if (empty($item['quantity'])) {
+        unset($items[$delta]);
+      }
+    }
+  }
+  //renumber the items or field_API will break!
+  $items = array_values($items);
   if ($element['#required']) {//note that this checks all the $items together
     if (empty($items)) {
-      form_error($element, '!name field is required.', array('!name' => $element['#title']));
+      form_error($element, t('!name field is required.', array('!name' => $element['#title'])));
     }
   }
   //very important for rendering that the $item keys are straight
@@ -1043,7 +1023,8 @@ function worths_element_validate(&$element, &$form_state) {
  * element process callback
  * is called once for each $item
  */
-function worth_element_process($element) {
+function worth_element_process($element, &$form_state) {
+  form_load_include($form_state, 'inc', 'mcapi');
   $currencies = &drupal_static('currencies');
   $main_quant = '';
   $quantity = $element['#default_value']['quantity'];
@@ -1053,26 +1034,27 @@ function worth_element_process($element) {
     $element['#currcodes'] = array_keys($currencies);
   }
   $element['currcode'] = currency_picker_element($element['#currcodes'], @$element['#default_value']['currcode']);
+  $currency = currency_load($element['currcode']['#value']);
+  $element['#title'] = $currency->human_name;
+  $element['#title_display'] = 'attribute';
+
   if ($element['currcode']['#type'] == 'hidden') {
-    $currency = currency_load($element['currcode']['#value']);
     $div_mode = $currency->display['divisions'];
-    if (in_array($div_mode, array(CURRENCY_DIVISION_MODE_CUSTOM, CURRENCY_DIVISION_MODE_CENTS_FIELD))) {
-      $div_quant = ''; //just initialising it
-    }
+    $use_div_subelement = in_array($div_mode, array(CURRENCY_DIVISION_MODE_CUSTOM, CURRENCY_DIVISION_MODE_CENTS_FIELD));
   }
+
   //work out the defaults for each subfield
   //null is not presumed to be zero, and is preserved
-  $main_quant = $quantity;
-
-  if (is_numeric($quantity) || $quantity = '') {
-    if (isset($div_quant)) {
-      list($main_quant, $div_quant) = currency_explode($quantity);
-    }
-    else {
-      $main_quant = abs($quantity);
-    }
-  }//otherwise it'll be a config value and remains as it
-
+  if ($use_div_subelement) {
+    list($main_quant, $div_quant) = currency_explode($quantity);
+  }
+  else {
+    $main_quant = $quantity;
+  }
+  //in normal mode, show a blank field where the default value is 0
+  if (empty($element['#allow_zero']) && $main_quant == '0') {
+    $main_quant = '';
+  }
   //while we return a float, the widget may want to show two fields.
   //in any case we show a main field, and an optional division field
   $element['main_quant'] = array(
@@ -1086,7 +1068,7 @@ function worth_element_process($element) {
   );
 
   //we only show the division field if the currency requires it
-  if (isset($div_quant)) {//that means $currency is also set
+  if ($use_div_subelement) {//that means $currency is also set
 
     if ($currency->display['divisions'] == CURRENCY_DIVISION_MODE_CUSTOM) {
       $element['div_quant'] = array(
@@ -1109,18 +1091,40 @@ function worth_element_process($element) {
       );
     }
   }
+
   return $element;
 }
 
+/**
+ * element validation callback
+ * check the centiles value is valid
+ * check that the $quantity is a number
+ */
+function worth_element_validate(&$element, &$form_state, $form) {
+  $quant = $element['#value']['quantity'];
 
-function _worths_element_filter(&$items) {
-  foreach ($items as $delta => $item) {
-    if (mcapi_field_is_empty($item)) {
-      unset($items[$delta]);
+  if (!is_numeric($quant) && !$element['#allow_zero']) {
+    form_error($element, t('@fieldname must be numeric', array('@fieldname' => $element['#title'])));
+  }
+  if ($quant < 0) {
+    form_error($element, t('Negative values not allowed'));
+  }
+
+  $currencies = &drupal_static('currencies');
+  if (!isset($currencies[$element['#value']['currcode']])) {
+    form_error($element, t('This currency does not exist: @currcode', array('@currcode' => $element['#value']['currcode'])));
+  }
+  if ($division = $quant - intval($quant)) {
+    $currency = currency_load($element['#value']['currcode']);
+    //check that divisions match allowed values for the currency
+    if (count($currency->display['divisions_allowed']) && !isset($currency->display['divisions_allowed'][$division*100])) {
+      form_error($element, t('@division is not a permitted division of currency @name', array('@division' => $division, '@name' => $currency->human_name)));
     }
   }
-  $items = array_values($items);
 }
+
+
+
 
 /*
  * Default implementation of theme 'worth_field'
@@ -1169,14 +1173,14 @@ function theme_worth_element($variables) {
   $element['#attributes']['class'][] = "worth-widget";
   return '<div ' . drupal_attributes($element['#attributes']) . '>'. $currcode . $quantity .'</div>';
 }
-
+/*
 function theme_worths_element($variables) {
   $element = &$variables['element'];
   $children = drupal_render_children($element);
   $element['#attributes']['class'][] = "worths-widget";
   return '<div ' . drupal_attributes($element['#attributes']) . '>'.$children .'</div>';
 }
-
+*/
 
 
 /*
