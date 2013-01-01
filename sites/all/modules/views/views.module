@@ -442,7 +442,6 @@ function views_menu_alter(&$callbacks) {
       }
     }
   }
-
   // Save memory: Destroy those views.
   foreach ($views as $data) {
     list($view, $display_id) = $data;
@@ -698,7 +697,6 @@ function views_block_view($delta) {
   }
   list($name, $display_id) = $explode;
   // Load the view
-
   if ($view = views_get_view($name)) {
     if ($view->access($display_id)) {
       $output = $view->execute_display($display_id);
@@ -710,7 +708,6 @@ function views_block_view($delta) {
     }
     $view->destroy();
   }
-  else return array('#markup' => $name. ' view does not exist');
 }
 
 /**
@@ -1332,6 +1329,7 @@ function views_get_localization_plugin() {
 
 // -----------------------------------------------------------------------
 // Views database functions
+
 
 /**
  * Get all view templates.

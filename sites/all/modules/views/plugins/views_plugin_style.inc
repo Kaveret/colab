@@ -316,7 +316,6 @@ class views_plugin_style extends views_plugin {
       debug('views_plugin_style_default: Missing row plugin');
       return;
     }
-
     // Group the rows according to the grouping instructions, if specified.
     $sets = $this->render_grouping(
       $this->view->result,

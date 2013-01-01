@@ -1,0 +1,15 @@
+; $Id:
+name = Likeabee Dreams Accelerator
+description = Post Requests, and mark them 'met'
+package = Likeabee
+core = "7.x"
+
+files[] = likeabee_dreams.mcapiforms_default.inc
+files[] = likeabee_dreams.views_default.inc
+files[] = likeabee_dreams.views.inc
+files[] = views_handler_field_dream_state.inc
+
+dependencies[] = list
+dependencies[] = taxonomy
+dependencies[] = mcapi_forms
+dependencies[] = entityreference

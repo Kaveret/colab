@@ -1,11 +1,15 @@
 #header{
   margin-top: 10px;
 }
-#footer{
-  width: 100%;
-  margin: 0;
-}
+div.region-header{float:right;}
 
+#page, #header, .region-featured, .region-footer, .content {
+  float: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+}
 
 /* featured menu by matslats
  * The features menu is made of blocks whose <ul> content is hidden.
@@ -135,7 +139,10 @@
   }
 }
 
+
 #footer {
+  width: 100%;
+  margin: 0;
   background: #9f2772;
   height: 70px;
   box-shadow: 0px -4px 0px 2px  #9f2772;
@@ -143,7 +150,7 @@
   display: inline-block;
   margin: 20px 0 0;
   width: 100%;
-  #secondary-links{ /* just guessing, since there are no working secondary links yet */
+  #block-menu-secondary-menu{
       position: relative;  
       width: 725px;
       left: 82px;
@@ -170,12 +177,12 @@
         border-right: 0px solid #ffd4ff;
       }
   }  
-  div.menu-level-1{
+  ul#footer-icons{
       position: relative;      
       width: 238px;
       float: right;
       right: 7px;
-      .menu li{
+      li{
         list-style: none;
         background: url('../images/home-icons.png') no-repeat top left;
         margin: 6px;
@@ -192,7 +199,7 @@
       li:nth-child(3){ background-position:50% -94px; } 
       li:nth-child(4){ background-position: 50% -69px; } 
   }
-  #logo-footer{/* seem to have lost track of this */
+  #logo-footer{
       position: relative;
       left: -15px;
       margin: 7px 7px  0px 7px;      
@@ -247,7 +254,7 @@
   }
 }
 /* -----  logo  ----- */
-.not-front{
+.not-front{ /*this should be done with page--front.tpl.php rather than writing php to produce different classes*/
   #logo{
   float: right;
   margin-left: 14px;
@@ -278,7 +285,7 @@
 /**************************  Header  ******************************/
 /* -----  search  ----- */
 
-#block-search-form{
+#search-form{
   label,.form-submit { display: none; }
   input {
     background: url('../images/home-icons.png') no-repeat 100% 7%;
@@ -289,107 +296,80 @@
     margin-left: 4px;
   }
 }
-/* ----- individual-space / community-space  ----- */
-#block-menu-menu-individual-space .block-title.element-invisible,
-#block-menu-menu-community-space .block-title.element-invisible,
-#block-menu-menu-log-in ul.menu li a{
+
+
+div.region-header section.block-menu{
   position: relative !important;
-  float: left;
-  background: url("../images/primary-links-with-down-arrow.gif") no-repeat 54px 18px #f9ab17;
-  height: 25px;
-  font-size: 12px;
+  background-image: url("../images/primary-links-with-down-arrow.gif");
+  background-color: #f9ab17;
+  background-position: center bottom;
+  background-repeat:no-repeat;
+  font-size: 7px;
   color: #fff;
-  font-weight: bolder;
-  width: 113px;
   text-align: center;
   text-decoration: none;
   padding: 0px;
-  display:block ;
   cursor: default;
-}
-#block-menu-menu-individual-space,
-#block-menu-menu-community-space{
-  width: 118px;
-  float: right;
-  ul{
-     padding: 0;
-  }
-  li{
-    list-style: none;
-  }
-  li.first {
-    margin-right: 0;
-    box-shadow: 0px 0px;
-  }
-  li.last {
-    margin-bottom: 15px;
-  }
-  li a{
-  color: #fff;
-  font-weight: bolder;
   width: 113px;
-  text-align: center;
-  text-decoration: none;
-  padding: 0px;
-  display: inline-block;
-  }
-  ul.menu{
-  background: white;
-  margin: 36px 1px 0;
-  display: none;
-  position: absolute;
-  z-index: 100;
-  box-shadow: 0px 0px 5px 0px #C5B88E;
-  }
-  li{
-  float: none;
-  margin: 0;
-  padding-right: 16px;
-  background-image: none;
-  background: white;
-  height: 20px;
-  margin-bottom: 0px;
-  width: auto;
-  }
-  li a {
-      display: inline-block;
-      width: 80px;
-      border: 0px;
-      padding: 6px 0 0;
-      text-decoration: none;
-      color:#5a6b98;
-      font-weight: normal;
-      text-align: left;
-      padding-left: 12px;
-      font-size: 13px;
-  }
-}
-/* -----  log in  ----- */
-#block-menu-menu-log-in ul.menu{
-  width: 118px;
   float: right;
-  li{
-    list-style: none;
-    margin: -9px 0px 0px 0px;
-    a{cursor:  pointer;}
+  margin: 0 2px;
+  div.content{
+    background: white;
+    display: none;
+    position: absolute;
+    width: 150px;
+    z-index: 100;
+    box-shadow: 0px 0px 5px 0px #C5B88E;
+    ul{
+      padding: 0;
+      li{
+        list-style: none;
+        float: none;
+        margin: 0;
+        padding-right: 16px;
+        background-image: none;
+        background: white;
+        height: 20px;
+        margin-bottom: 0px;
+        width: auto;
+      }
+      li.first {
+        margin-right: 0;
+        box-shadow: 0px 0px;
+      }
+      li.last {
+        margin-bottom: 15px;
+      }
+      li a{
+        color: #f9ab17;
+        font-weight: bolder;
+        font-weight: normal;
+        width: 80px;
+        width: 113px;
+        width: 123px;
+        text-align: center;
+        text-align: left;
+        text-decoration: none;
+        padding: 6px 0 0;
+        padding-left: 12px;
+        border: 0px;
+        font-size: 13px;
+      }
+    }
   }
 }
+
+div.region-header section:hover div.content,
+div.region-header section div.content:hover{
+  display: block;
+}
+
+
 /* -----  individual space  ----- */
-#block-menu-menu-individual-space .content li.last a{
-  width: 123px;
-  color: orange;
+#block-system-user-menu .content li a,
+#block-menu-localadmin .content li a{
 }
-#block-menu-menu-individual-space:hover ul.menu,
-#block-menu-menu-community-space:hover ul.menu {
-    display: block;
-}
-/*bblock-menu-menu-community-space{
-  right: 10px;
-  div.contextual-links-wrapper{
-    width: 167px;
-    ul.contextual-links{left: 0;}
-  }
-}*/
+
 
 /*---  block-views -----*/
 @mixin menu-featured-ul{
@@ -1249,76 +1229,7 @@ section[id^="block-views-individual-space-block"]{
 }
 /**************************  footer  ******************************/
 
-#footer{
-  background: #9f2772;
-  height: 70px;
-  box-shadow: 0px -4px 0px 2px  #9f2772;
-  border-top: 1px dashed #FFFFFF;
-  display: inline-block;
-  margin: 20px 0 0;
-  width: 100%;
-  #block-menu-menu-footer{
-    position: relative;  
-    width: 725px;
-    left: 82px;
-    z-index: 2;
-    top: 5px;
-    .content li{
-      list-style: none;
-      font-size: 13px;
-      float: left;
-      margin: 11px 2px 0 2px;
-      border-right: 1px solid #FFD4FF;
-      position: relative;
-      height: 8px;
-      left: -38px;
-      a{
-        color: #ffd4ff;
-        padding: 0 7px;
-        text-decoration: none;
-        position: relative;
-        top: -5px;
-      }
-    }
-    .content li:nth-child(7){
-      border-right: 0px solid #ffd4ff;
-    }
-  }  
-  #block-menu-menu-footer-icons{
-    position: relative;      
-    width: 238px;
-    top: -65px;
-    float: right;
-    right: 7px;
-    .menu li{
-      list-style: none;
-      background: url('../images/home-icons.png') no-repeat top left;
-      margin: 6px;
-      float: right;
-      width: 19px;
-      height: 22px;
-      a{
-        font-size: 0px;
-        padding: 20px 0px 3px 23px;
-      }
-    }
-    li:nth-child(1){ background-position: 50% -119px;margin-left: 6px; } 
-    li:nth-child(2){background-position: 50% -44px;} 
-    li:nth-child(3){ background-position:50% -94px; } 
-    li:nth-child(4){ background-position: 50% -69px; } 
-  }
-  #logo-footer{
-    position: relative;
-    left: -15px;
-    margin: 7px 7px  0px 7px;      
-    width: 116px;
-    float: left;
-    height: 31px;
-    border-radius: 10px;
-    background: url('../logo.png') no-repeat white center;
-    background-size: 96px;
-  }
-}
+
 /*************************  tabs  *****************************/
 #block-menu-menu-tabs{
   float:left;/*otherwise the div overlays all the way to the right, and you can't click*/

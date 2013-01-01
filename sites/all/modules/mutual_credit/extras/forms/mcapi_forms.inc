@@ -16,7 +16,6 @@ function mcapi_form_build(&$form, &$form_state, $form_id) {
   $form['#settings'] =  $form_state['build_info']['args'][MCAPIFORM_BUILD_INFO_ARG];
   $settings = &$form['#settings'];
   $transaction = $form['#transaction'];
-
   //change the 5 translatable strings
   if (module_exists('i18n_string')) {
     //prepare the i18n pseudo_object, because i18n expects a flat object and the mcapi_form just isn't, sorry
@@ -71,7 +70,6 @@ function mcapi_form_build(&$form, &$form_state, $form_id) {
         //specifies which user_chooser widget
         $form[$participant]['#type'] = strtok($settings[$participant]['user_chooser_config'], ':');
         $form[$participant]['#args'] = array(strtok(':'));
-        //$form[$participant]['#default_value'] = $settings[$participant]['preset'];
         $form[$participant]['#allow_me'] = TRUE;//this could be put in the config
       }
     }
@@ -96,18 +94,12 @@ function mcapi_form_build(&$form, &$form_state, $form_id) {
           'outgoing' => $settings['direction']['outgoing']
         ),
         //if we are loading the page from blank, or rebuilding the form, we set the default values here,
-        '#default_value' =>  $transaction->direction,
+        '#default_value' =>  strval($transaction->direction),
         '#required' => TRUE
       );
       unset($form['payer'], $form['payee']);
       //this validation function must run BEFORE the main one in the API, because its add payer and payee, which are required for normal validation
       array_unshift($form['#validate'], 'mcapi_forms_validate_secondperson');
-    }
-    //convert the zeros from the settings to empty strings in the actual form
-    foreach (element_children($form['worth'][LANGUAGE_NONE]) as $delta) {
-      if (empty($form['worth'][LANGUAGE_NONE][$delta]['#default_value']['quantity'])) {
-        $form['worth'][LANGUAGE_NONE][$delta]['#default_value']['quantity'] = '';
-      }
     }
   }
   elseif ($form['#step'] == 2) {
@@ -168,16 +160,7 @@ function mcapi_form_build(&$form, &$form_state, $form_id) {
   $form['#attributes']['class'][] = 'step-'.$form['#step'];
   $form['#contextual_links']['mcapi_forms'] = array('admin/accounting/forms/list', array($settings['info']['name']));
 }
-/*
- * implements hook_contextual_links_view_alter
- * prevents the edit form form returning directly the context
- * because it has to rebuild the menu first on admin/accounting/forms
- */
-function mcapi_forms_contextual_links_view_alter(&$element, $items) {
-  if (!empty($element['#links']['mcapi-forms-edit']['query']['destination'])) {
-    unset($element['#links']['mcapi-forms-edit']['query']['destination']);
-  }
-}
+
 
 /*
  * $variables consists of the usual suspects plus
@@ -186,12 +169,12 @@ function mcapi_forms_contextual_links_view_alter(&$element, $items) {
  */
 function theme_mcapi_form($variables) {
   $form = &$variables['form'];
-  $buttons = drupal_render($form['buttons']);
+  $form['buttons']['#strip'] = TRUE;
   //render the visible stuff first
   if ($form['#step'] == 1) {
     foreach (element_children($form) as $fieldname) {
-      if (in_array($fieldname, array('payer', 'payee', 'secondperson', 'direction'))) {
-        if (isset($form[$fieldname]['#strip']) && $form[$fieldname]['#strip']) {
+      if (in_array($fieldname, array('payer', 'payee', 'secondperson', 'direction', 'actions'))) {
+        if (isset($form[$fieldname]['#strip']) && $form[$fieldname]['#strip'] || $fieldname == 'buttons') {
           unset($form[$fieldname]['#theme_wrappers']);
           unset($form[$fieldname]['#title']);
           unset($form[$fieldname]['#description']);
@@ -203,8 +186,10 @@ function theme_mcapi_form($variables) {
           //but they have different structures for radios, checkboxes and worths
           if (isset($form[$fieldname][LANGUAGE_NONE]['#entity'])) {
             unset($form[$fieldname][LANGUAGE_NONE]['#theme_wrappers']);
-            //unset($form[$fieldname][LANGUAGE_NONE]['#title']);
-            //unset($form[$fieldname][LANGUAGE_NONE]['#description']);
+            //for some reason, getting rid of the theme wrappers on radio buttons doesn't work
+            //but removing title and description is mostly equivalent
+            unset($form[$fieldname][LANGUAGE_NONE]['#title']);
+            unset($form[$fieldname][LANGUAGE_NONE]['#description']);
           }
           //compared to normal fields
           elseif(isset($form[$fieldname][LANGUAGE_NONE][0]['#entity'])) {
@@ -218,11 +203,11 @@ function theme_mcapi_form($variables) {
       check_markup($form['#template'], MCAPIFORM_STRING_FORMAT),
       array('mcapiform' => $form),
       array('sanitize' => FALSE)
-    ) . '<br />'.$buttons;
+    );
   }
   elseif ($form['#step'] == 2) {
     $preview = drupal_render($form['#preview']);
-    return drupal_render_children($form) . $preview . $buttons;
+    return $preview . drupal_render_children($form) . drupal_render($form['buttons']);
   }
 }
 

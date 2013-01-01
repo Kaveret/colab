@@ -5,8 +5,8 @@
  */
 function likeabee_config_install() {
   likeabee_setup_filters();
-
 }
+
 
 function likeabee_setup_filters() {
   drupal_set_message("Setting up the filters and ckeditor - this has not been tested yet...");
@@ -15,7 +15,6 @@ function likeabee_setup_filters() {
   db_query("INSERT INTO {filter_format} (`format`, `name`, `cache`, `status`, `weight`) VALUES
 ('filtered_html', 'Filtered HTML', 1, 1, 0),
 ('full_html', 'Full HTML', 1, 1, 1),
-('mcapiform_string_format', 'Payment form', 1, 1, 20),
 ('php_code', 'PHP code', 0, 1, 11),
 ('plain_text', 'Plain text', 1, 1, 10);");
 
@@ -31,14 +30,6 @@ function likeabee_setup_filters() {
 ('full_html', 'filter', 'filter_htmlcorrector', 10, 1, 0x613a303a7b7d),
 ('full_html', 'filter', 'filter_html_escape', -10, 0, 0x613a303a7b7d),
 ('full_html', 'filter', 'filter_url', 0, 1, 0x613a313a7b733a31373a2266696c7465725f75726c5f6c656e677468223b693a37323b7d),
-('mcapiform_string_format', 'filter', 'filter_autop', 0, 1, 0x613a303a7b7d),
-('mcapiform_string_format', 'filter', 'filter_html', -10, 0, 0x613a333a7b733a31323a22616c6c6f7765645f68746d6c223b733a37343a223c613e203c656d3e203c7374726f6e673e203c636974653e203c626c6f636b71756f74653e203c636f64653e203c756c3e203c6f6c3e203c6c693e203c646c3e203c64743e203c64643e223b733a31363a2266696c7465725f68746d6c5f68656c70223b693a313b733a32303a2266696c7465725f68746d6c5f6e6f666f6c6c6f77223b693a303b7d),
-('mcapiform_string_format', 'filter', 'filter_htmlcorrector', 10, 0, 0x613a303a7b7d),
-('mcapiform_string_format', 'filter', 'filter_html_escape', -10, 0, 0x613a303a7b7d),
-('mcapiform_string_format', 'filter', 'filter_url', 0, 0, 0x613a313a7b733a31373a2266696c7465725f75726c5f6c656e677468223b693a37323b7d),
-('mcapiform_string_format', 'gmap', 'gmap_macro', 0, 0, 0x613a303a7b7d),
-('mcapiform_string_format', 'php', 'php_code', 0, 0, 0x613a303a7b7d),
-('mcapiform_string_format', 'video_embed_field', 'video_embed_field', 0, 0, 0x613a303a7b7d),
 ('php_code', 'filter', 'filter_autop', 0, 0, 0x613a303a7b7d),
 ('php_code', 'filter', 'filter_html', -10, 0, 0x613a333a7b733a31323a22616c6c6f7765645f68746d6c223b733a37343a223c613e203c656d3e203c7374726f6e673e203c636974653e203c626c6f636b71756f74653e203c636f64653e203c756c3e203c6f6c3e203c6c693e203c646c3e203c64743e203c64643e223b733a31363a2266696c7465725f68746d6c5f68656c70223b693a313b733a32303a2266696c7465725f68746d6c5f6e6f666f6c6c6f77223b693a303b7d),
 ('php_code', 'filter', 'filter_htmlcorrector', 10, 0, 0x613a303a7b7d),
@@ -237,10 +228,12 @@ function likeabee_setup_filters() {
       'use text format full_html',
     ),
   );
+
+  filter_formats_reset();
   foreach ($all_permissions as $rid => $permissions) {
     user_role_grant_permissions($rid, $permissions);
   }
 
-  
+
 
 }

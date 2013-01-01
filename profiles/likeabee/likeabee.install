@@ -1,6 +1,15 @@
 <?php
 
+/*
+ *
+    Notice: Undefined index: og_extras in install_profile_modules() (line 1352 of /var/www/likeabee/includes/install.core.inc).
+    Notice: Trying to get property of non-object in install_profile_modules() (line 1352 of /var/www/likeabee/includes/install.core.inc).
+    Notice: Undefined index: og_extras in install_profile_modules() (line 1362 of /var/www/likeabee/includes/install.core.inc).
+    Notice: Trying to get property of non-object in install_profile_modules() (line 1362 of /var/www/likeabee/includes/install.core.inc).
+    Notice: Undefined index: og_extras in install_profile_modules() (line 1370 of /var/www/likeabee/includes/install.core.inc).
+    Notice: Trying to get property of non-object in install_profile_modules() (line 1370 of /var/www/likeabee/includes/install.core.inc).
 
+ */
 
 /**
  * implements hook_install_tasks for the installation profile
@@ -142,18 +151,8 @@ function likeabee_import_blocks() {
 function likeabee_import_variables() {
 
 }
-function likeabee_content_types() {
+function likeabee_content_types() {//these need to be spread out
   $types = array (
-    'advpoll' => array(
-       'type' => 'advpoll',
-       'name' => 'Poll',
-       'base' => 'node_content',
-       'module' => 'node',
-       'description' => 'Advanced Poll adds additional poll functionality, cookie voting, write-ins and voting modes.',
-       'help' => '',
-       'has_title' => '1',
-       'title_label' => 'Question',
-    ),
     'article' => array(
        'type' => 'article',
        'name' => 'כתבה',

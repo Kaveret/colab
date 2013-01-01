@@ -24,6 +24,7 @@ function entity_entity_property_info() {
       $items += $controller->entityPropertyInfo();
     }
   }
+//return $items;
   // Add in info for all core entities.
   foreach (_entity_metadata_core_modules() as $module) {
     module_load_include('inc', 'entity', "modules/$module.info");

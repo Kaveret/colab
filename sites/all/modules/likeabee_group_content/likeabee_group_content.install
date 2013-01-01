@@ -41,6 +41,76 @@ foreach ($field_names as $field_name) {
 }
 drupal_set_message("<textarea rows=30 style=\"width: 100%;\">" . $fields_output ."\n\n". $instances_output . '</textarea>');
 
+
+ *
+ *
+ * Here are the proposed fieldAPI fields
+ * Debug: Fields on groups_event:Array(
+    [0] => og_group_ref
+    [1] => body
+    [2] => field_image
+    [5] => field_date
+    [3] => field_editor_s_choice
+)
+Debug: Fields on discussion:Array(
+    [0] => og_group_ref
+    [1] => body
+    [3] => some kind of comment rating
+    [3] => field_editor_s_choice
+)
+Debug: Fields on field_s_doccuments:Array(
+    [0] => og_group_ref
+    [1] => field_document //requires
+    [2] => field_editor_s_choice
+)
+Debug: Fields on product:Array(
+    [0] => og_group_ref
+    [0] => body
+    [2] => field_image replaces 'uc_product_image'
+    [2] => taxonomy_catalog
+)
+Debug: Fields on video:Array(
+    [0] => og_group_ref
+    [1] => field_video_group //the vid itself requires module 'video_embed_field'
+    [2] => field_editor_s_choice
+)
+Debug: Fields on photo:Array(
+    [0] => og_group_ref
+    [1] => field_image
+    [2] => field_editor_s_choice
+)
+Debug: Fields on Proposition:Array(
+    [0] => og_group_ref
+    [1] => body
+)
+
+Fields to create:
+og_group_ref
+body
+field_image
+field_date
+field_document //uploaded file
+taxonomy_catalog //based on vocab
+field_video_group //the vid itself requires module 'video_embed_field'
+field_editor_s_choice //flag module
+some kind of comment rating //Flag module
+
+//most of these fields are provided by the advpoll module
+//I propose we just use the normall poll module
+Debug: Fields on advpoll: Array (
+    [1] => advpoll_choice
+    [2] => advpoll_max_choices
+    [3] => advpoll_dates
+    [4] => advpoll_closed
+    [5] => advpoll_options
+    [6] => advpoll_mode
+    [7] => advpoll_cookie_duration
+    [8] => advpoll_results
+    [9] => advpoll_behavior
+    [10] => og_group_ref
+    [11] => field_editor_s_choice
+)
+ *
  *
  */
 
@@ -130,7 +200,6 @@ function likeabee_setup_vocab_field($vocab_name, $field_name, $title) {
       'type' => 'taxonomy_term_reference',
       'entity_types' => array(),
       'module' => 'taxonomy',
-      'bundles' => array(),
       'settings' => array(
         'allowed_values' => array(
           array(
@@ -150,16 +219,12 @@ function likeabee_setup_vocab_field($vocab_name, $field_name, $title) {
         )
       ),
       'indexes' => array(
-        'tid' => array(
-          'tid'
-        )
+        'tid' => array('tid')
       ),
       'foreign keys' => array(
         'tid' => array(
           'table' => 'taxonomy_term_data',
-          'columns' => array(
-            'tid',
-          )
+          'columns' => array('tid')
         )
       ),
     );
@@ -451,9 +516,10 @@ function likeabee_setup_instance_tags($bundle) {
       'settings' => array(
         'size' => 60,
         'autocomplete_path' => 'taxonomy/autocomplete',
-        'autocomplete_deluxe_path' => 'autocomplete_deluxe/taxonomy',
+        'autocomplete_deluxe_path' => 'autocomplete_deluxe/taxonomy',//are we really using this?
       ),
     ),
+    'deleted' => FALSE
   );
   $existing = (array)field_read_instance('node', 'tags', $bundle, array('include_deleted' => TRUE));
   if (array_filter($existing)) {

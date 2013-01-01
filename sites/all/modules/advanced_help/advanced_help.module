@@ -318,6 +318,7 @@ function advanced_help_get_topic_hierarchy(&$topics) {
  * Add advanced help links to the modules page.
  */
 function advanced_help_form_system_modules_alter(&$form, &$form_state) {
+  if (empty($form['modules'])) return;
   $advanced_help_modules = drupal_map_assoc(array_keys(advanced_help_get_topics()));
   foreach (element_children($form['modules']) as $group) {
     foreach (element_children($form['modules'][$group]) as $module) {
