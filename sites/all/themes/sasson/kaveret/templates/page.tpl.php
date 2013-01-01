@@ -129,9 +129,9 @@
         <?php print render($page['highlighted']); ?>
       </div><!-- /#highlighted -->
     <?php endif; ?>
-     <!--<div id="breadcrumb"><?php 
-       //print $breadcrumb;
-      ?></div>-->
+     <div id="breadcrumb"><?php 
+       print $breadcrumb;
+      ?></div>
     <?php print render($title_prefix); ?>
     <?php print render($title_suffix); ?>
 
