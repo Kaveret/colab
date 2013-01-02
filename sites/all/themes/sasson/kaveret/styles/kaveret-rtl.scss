@@ -68,11 +68,26 @@
 }
 /*---------Groups page--------------*/
 #quicktabs{
-	#block-quicktabs-group-s-events #quicktabs-container-group_s_events,
-	#block-quicktabs-group-s-discussion- #quicktabs-container-group_s_discussion_,
-	#block-quicktabs-group-s-doccuments #quicktabs-container-group_s_doccuments {
+	#quicktabs-container-group_s_events,
+	#quicktabs-container-group_s_discussion_,
+	#quicktabs-container-group_s_doccuments,
+	#quicktabs-container-group_s_video,
+	#quicktabs-container-group_s_poll{
 			float: right;
+			margin-top: 15px;
 		}
+	.views-field-ops{
+		text-align: left;
+		font-weight: bold;
+		color: black !important;
+		font-style: italic;
+		margin-top: -45px;
+		height: 45px;
+	}
+	#block-quicktabs-group-s-discussion- .views-field-ops{
+		margin-top: -63px;
+		height: 62px;
+	}	
 }
 #quicktabs .block-odd{
 	height: 260px;
@@ -204,15 +219,15 @@
 		.content{
 			float: right;
 		}
-		#block-views-my-groups-block{
-			height: 179px;
+		#block-views-my-groups-block,
+		#block-views-tags-block,
+		#block-views-groups-block
+		{
+			width: 200px;
+			height: auto;
+			float: right;	
 		}
-		#block-views-tags-block{
-			height: 71px;
-		}
-		#block-views-groups-block{
-			height: 173px;
-		}
+		
 	}
 }
 /*---------content--------------*/
@@ -242,6 +257,24 @@
 /*----------node-type-group-s-avtivity---------*/
 #block-views-groups-poll-block-1 .view-header{
 	left: 13px;
+}
+		/*----------see all---------*/
+.node-type-group-doccuments-page,
+.node-type-group-s-events-page,
+.node-type-group-s-discussion-page,
+.node-type-group-s-video-page,
+.node-type-group-s-poll
+{
+	.region-content{
+		float: right;
+	}
+	.views-field-field-event-image,
+	.views-field-field-video-group{
+		margin-right: 0px !important;
+		.video-embed-description{
+			margin-right:12px;
+		}
+	}
 }
 /*----------node-type-group-members---------*/
 #block-views-4cf7ecc831800e49c7e8e4d4e5fa3265 .views-field-field-user-description{

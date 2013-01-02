@@ -423,6 +423,12 @@ border-right: 1px solid #FCF0D8;
 	#block-og-extras-node-links,#block-views-group-configurations-block{
 		cursor: default;
 	}
+	#block-views-link-to-group-members-block-1{
+			width: 116px !important;
+			a{
+				width: 113px;
+			}
+	}
 	#block-og-extras-node-links{
 		h2:first-line{ color:#B01919;font-size: 16px;}
 		h2 { 
@@ -492,8 +498,8 @@ border-right: 1px solid #FCF0D8;
 		display: block !important;
 			
 	}
-	#block-views-about-group-block-3 .view-footer:hover{
-		display: block;
+	#block-views-about-group-block-3:hover{
+		height: 120px;
 
 	}
 
@@ -547,6 +553,7 @@ border-right: 1px solid #FCF0D8;
 }
 /* -----  breadcrumb ----- */
 #breadcrumb{
+	width: 500px;
 	margin-top: 9px;
 	.mafrid{
 		font-size: 0px;
@@ -564,13 +571,15 @@ border-right: 1px solid #FCF0D8;
 
 #breadcrumb a ,#breadcrumb{
 	float: left;
-	color: #303030;
+	color: #555356;
 	text-decoration: none;
-	font-size: 15px;
+	font-size: 12px;
+	font-family: arial;
 }
 div #breadcrumb:after{
 clear: both;
 }
+
 
 /*********************************************************************/
 /**************************  content  ********************************/
@@ -798,6 +807,24 @@ div.menu-name-main-menu{
 		margin-bottom: 0px;
 	}
 }
+#block-quicktabs-group-s-video{
+	td{
+		padding-right: 17px;
+		padding-bottom: 18px;
+		margin-right: 0px;
+		margin-bottom: 0px;
+		.views-field-field-video-group{
+			height: 207px;
+	 		.video-embed-description{
+				background-color: rgba(255, 255, 255, 0.34);
+				top: -167px;
+				position: relative;
+				padding: 0px 14px;
+				width: 274px;
+			}
+		}
+	}
+}
 
 /*#quicktabs{
 	.block-title{
@@ -910,7 +937,8 @@ top: -182px;
 }
 .region-content section[id^="block-views-group-"],
 #block-views-005b576a4668f306ce5565ee3a21b75f,
-#block-views-groups-poll-block-1{
+#block-views-groups-poll-block-1
+{
 		position: relative;
 		margin: 11px 14px;
 		border: 1px solid #FACE77;
@@ -1119,7 +1147,47 @@ div.img-biger .number[class*=" 0 "],
 #block-views-friends-block-1{
 	width:100%;
 }
-
+#block-views-group-s-deccument-block-4,
+#block-views-group-s-event-block-4,
+#block-views-group-discussion-block-4,
+#block-views-groups-poll-block-4,
+#block-views-group-video-block-4,
+#block-views-group-s-discussion-block-2,
+#block-views-group-s-poll-block-2,
+#block-views-group-s-video-block-2{
+	.views-field{
+		margin-left: 12px;
+		float: left;
+		color: #004A82;
+		font-size: 14px;
+		.views-label-created,
+		.views-label-name{
+			color: #13387F;
+			font-size: 16px;
+			font-weight: bold;
+		}
+		.embedded-video{
+			margin-left: -12px;
+		}
+	}
+	.views-field-title a{
+		margin-left: 0px !important; 
+	}
+	.views-field-comment-count,
+	.views-field-view-node{
+		position: absolute;
+		bottom: 0;
+		height: 26px;
+	}
+}
+#block-views-group-s-video-block-2 td{
+	width: 219px !important;
+}
+#block-views-group-s-event-block-4 {
+	.views-field-field-event-image{
+		margin-left: 0px !important;
+	}
+}
 /* -----  Specific webform page  ----- */
 .node-type-group-webform{
 	#page-title {
@@ -1176,6 +1244,7 @@ div.img-biger .number[class*=" 0 "],
 	padding-bottom: 6px;
 	margin-bottom: 5px;
 	background: white;
+	width: 197px;
 }
 @mixin select-all-title-link{
 	padding: 0;
@@ -1201,10 +1270,15 @@ div.img-biger .number[class*=" 0 "],
 		}	
 
 } */
+/*.region-content div[id^="block-views-"][id$='block-4']*/
 #block-quicktabs-list-of-groups,
 #block-views-group-s-events-block-2,
 #block-views-group-s-discussion-block-2,
-#block-views-group-s-deccument-block-4
+#block-views-group-s-deccument-block-4,
+#block-views-group-s-event-block-4,
+#block-views-group-discussion-block-4,
+#block-views-group-video-block-4,
+#block-views-group-s-video-block-2
 {
 	td{
 		@include select-all-box;
@@ -1218,7 +1292,8 @@ div.img-biger .number[class*=" 0 "],
 	}
 }
 #block-views-4cf7ecc831800e49c7e8e4d4e5fa3265,
-#block-views-group-s-poll-block-2{
+#block-views-group-s-poll-block-2,
+#block-views-groups-poll-block-4{
 	.views-row{
 		@include select-all-box;
 	}
@@ -1231,7 +1306,8 @@ div.img-biger .number[class*=" 0 "],
 }
 /*----------Specific See all boxs -----------*/
 #block-quicktabs-list-of-groups .views-field-field-description-group,
-#block-views-4cf7ecc831800e49c7e8e4d4e5fa3265 .views-field-field-user-description{
+#block-views-4cf7ecc831800e49c7e8e4d4e5fa3265 .views-field-field-user-description
+{
 		margin-left: 12px;
 		.views-label-field-description-group,
 		.views-label-field-user-description{
@@ -1298,14 +1374,6 @@ div.img-biger .number[class*=" 0 "],
 	.views-field-name{
 	float: none;
 	margin: 1px 10px;
-	}
-}
-#block-views-group-s-discussion-block-2{
-	.views-field-body{
-	    height: 237px;
-	}
-	.views-field views-field-comment-count{
-	padding-left: 12px;
 	}
 }
 #block-views-group-s-deccument-block-4 .view-group-s-deccument{
