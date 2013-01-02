@@ -40,6 +40,7 @@
  * @see template_preprocess_block()
  * @see template_process()
  */
+//print_r($block);echo $content;
 ?>
 <?php $tag = $block->subject ? 'section' : 'div'; ?>
 <<?php print $tag; ?> id="<?php print $block_html_id; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>

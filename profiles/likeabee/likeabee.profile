@@ -178,16 +178,6 @@ function likeabee_block_info_alter(&$blocks, $theme) {
   _likeabee_block_info_alter($blocks);
 }
 
-/*|
- * groups menu isn't a real menu because it would have to contain aliases and tricky things like that.
- * easier just to render a nested list and put it in a block.
- * this should be cached
- */
-function groups_pseudo_menu() {
-  module_load_include('inc', 'likeabee');
-  return _groups_pseudo_menu();
-}
-
 function template_preprocess_userpic_social(&$vars) {
   $account = $vars['account'];
   //Arggggh can only apply styling to 'managed' files with schema like public://

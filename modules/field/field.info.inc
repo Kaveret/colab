@@ -619,6 +619,7 @@ function field_info_fields() {
  * @see field_info_field_by_id()
  */
 function field_info_field($field_name) {
+
   $info = _field_info_collate_fields();
   if (isset($info['field_ids'][$field_name])) {
     return $info['fields'][$info['field_ids'][$field_name]];

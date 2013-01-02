@@ -198,7 +198,6 @@ class views_plugin_display_page extends views_plugin_display {
         }
       }
     }
-
     return $items;
   }
 

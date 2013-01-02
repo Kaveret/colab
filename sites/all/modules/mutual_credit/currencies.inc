@@ -56,67 +56,84 @@ function _mcapi_currency_form(&$form, &$form_state, $currency) {
     '#type' => 'vertical_tabs',
     '#weight' => 10,
   );
-  $user_segments = module_invoke_all('user_segments');
   $form['currency_access'] = array(
     '#title' => 'Currency access',
     '#type' => 'fieldset',
     '#group' => 'additional_settings',
-    'membership' => array(
-      '#title' => t('Use currency'),
-      '#description' => t('Determine which users are permitted to use this currency'),
-      '#type' => 'radios',
-      '#options' => $user_segments,
-      '#default_value' => $currency->currency_access['membership'],
-      '#weight' => 1,
-      '#prefix' => '<style>.form-type-checkboxes .form-type-checkbox{margin:0;} .form-type-checkbox input{margin:0; padding:0}</style>',
-    ),
-    'user_aggregated_view' => array(
-      '#title' => t('View aggregated user transaction data'),
-      '#description' => t('Such as balance, gross income, number of transactions'),
-      '#type' => 'radios',
-      '#options' => $user_segments,
-      '#default_value' => $currency->currency_access['user_aggregated_view'],
-      '#weight' => 2,
-    ),
-    'currency_aggregated_view' => array(
-      '#title' => t('View aggregated system data'),
-      '#type' => 'radios',
-      '#options' => $user_segments,
-      '#default_value' => $currency->currency_access['currency_aggregated_view'],
-      '#weight' => 3,
-    ),
-    'undo' => array(
-      '#title' => t('Undo any transaction in this currency'),
-      '#type' => 'radios',
-      '#options' => $user_segments,
-      '#default_value' => $currency->currency_access['undo'],
-      '#weight' => 4,
-    ),
     '#weight' => -1
   );
-  if ($GLOBALS['user']->uid == 1) {
-    $form['currency_access']['#description'] = t('Module developers: use @hook to add more options', array('@hook' => 'hook_user_segments'));
+  $weight = 0;
+
+
+  foreach (module_implements('permission') as $module) {
+    $function = $module .'_permission';
+    foreach ($function() as $perm => $info) {
+      $options[$module][$perm] = strip_tags($info['title']);
+    }
   }
+  $form['currency_access']['membership'] = array(
+    '#title' => t('Use the currency'),
+    '#description' => t('Determine which users are permitted to use this currency'),
+    '#type' => 'select',
+    '#options' => $options,
+    '#default_value' => @$currency->currency_access['membership'] ? $currency->currency_access['membership'] : 'transact',
+    '#weight' => $weight++,
+  );
+  $form['currency_access']['user_aggregated_view'] = array(
+    '#title' => t('View aggregated user transaction data'),
+    '#description' => t("Such as users' balances, gross income, number of transactions"),
+    '#type' => 'select',
+    '#options' => $options,
+    '#default_value' => @$currency->currency_access['user_aggregated_view'] ? $currency->currency_access['user_aggregated_view'] : 'transact',
+    '#weight' => $weight++,
+  );
+  $form['currency_access']['currency_aggregated_view'] = array(
+    '#title' => t('View aggregated system data'),
+    '#description' => t('Look at currency usage stats stripped of personal information'),
+    '#type' => 'select',
+    '#options' => $options,
+    '#default_value' => @$currency->currency_access['currency_aggregated_view'] ? $currency->currency_access['currency_aggregated_view'] : 'transact',
+    '#weight' => $weight++,
+  );
 
   static $i = 0;
   static $j = 0;
-  $form['transaction_access'] = array(
-    '#title' => t('Transaction access'),
+  $form['transaction_view_access'] = array(
+    '#title' => t('Privacy'),
     '#description' => t('Determine who can view transactions in each state.') .' '. t('Any the checked conditions must return TRUE'),
     '#type' => 'fieldset',
     '#group' => 'additional_settings',
   );
+  $access_callbacks = module_invoke_all('transaction_access_callbacks');
   foreach (mcapi_get_states('#full') as $constant => $state) {
     $states = isset($currency->view) ? $currency->view : array();
-    $form['transaction_access'][$constant] = array(
-      '#title' => $state['name'],
+    $form['transaction_view_access'][$constant] = array(
+      '#title' => t("Transactions in state '@state'", array('@state' => $state['name'])),
       '#description' => $state['description'],
       '#type' => 'checkboxes',
-      '#options' => module_invoke_all('transaction_access_callbacks'),
-      '#default_value' => isset($currency->transaction_access[$constant]) ? $currency->transaction_access[$constant] : array(),
+      '#options' => $access_callbacks,
+      '#default_value' => isset($currency->transaction_view_access[$constant]) ? $currency->transaction_view_access[$constant] : array(),
       '#weight' => $j++,
     );
   }
+  $form['transaction_operation_access'] = array(
+    '#title' => t('Transaction operations'),
+    '#description' => t('Determine who can do what to transactions') .'. '. t('Any of the checked conditions must return TRUE'),
+    '#type' => 'fieldset',
+    '#group' => 'additional_settings',
+  );
+
+  foreach (module_invoke_all('transaction_operations') as $callback => $info) {
+    $form['transaction_operation_access'][$callback] = array(
+      '#title' => $info['title'],
+      '#description' => @$info['description'],
+      '#type' => 'checkboxes',
+      '#options' => $access_callbacks,
+      '#default_value' => isset($currency->transaction_operation_access[$callback]) ? $currency->transaction_operation_access[$callback] : array(),
+      '#weight' => $j++,
+    );
+  }
+
   $form['uid'] = array(
     '#title' => t('Declared by'),
     '#description' => t("Users with permission to 'transact'"),
@@ -184,14 +201,16 @@ function mcapi_validate_currcode(&$element, $form_state) {
 function currency_edit_access($currency) {
   return user_access('configure all currencies') || $currency->uid == $GLOBALS['user']->uid;
 }
-
+/*
+ * load the currencies from ctools and alter them before they get used
+ */
 function currencies_load_all() {
   ctools_include('export');
   $currencies = array();
   $functions = array_keys(module_invoke_all('transaction_access_callbacks'));
   $all = ctools_export_crud_load_all('mcapi_currencies');
   //unpack them - this is a bit of a shortcut, but ctools takes you right round the park
-  foreach($all as $currcode => $currency) {
+  foreach($all as $currcode => $currency) {debug($currency);
     if (!empty($currency->disabled)) continue;
     $data = &$currency->data;
     //convert the divisions_allowed into an array
@@ -204,16 +223,13 @@ function currencies_load_all() {
     }
     $data->display['divisions_allowed'] = $divisions;
     //this is a good moment to check that all the currencies for all the operations, for all the states, have access callbacks
-    foreach (mcapi_get_states('#full') as $constant => $state_info) {
-      if (!isset($data->transaction_access[$constant])) {
-        drupal_set_message(t('Resave currency @currname, paying attention to transaction access for state @state: !edit_link',array(
-          '@currname' => $data->human_name,
-          '@state' => $state_info['name'],
-          '!edit_link' => l(t('edit'), 'admin/accounting/currencies/list/'.$currcode.'/edit')
-          )
-        ), 'warning');
-        $data->transaction_access[$constant] = drupal_map_assoc($state_info['default_access_callbacks']);
-      }
+    $accesses = array('transaction_view_access' => 'Privacy', 'transaction_operation_access' => 'Transaction operations', 'currency_access' => 'Currency Access');
+    foreach ($accesses as $prop => $name) {
+      if (property_exists($data, $prop)) continue;
+      drupal_set_message(
+        "Resave currency $data->human_name, paying attention to $name : ". l(t('edit'), 'admin/accounting/currencies/list/'.$currcode.'/edit'),
+        'warning'
+      );
     }
     $currencies[$currcode] = $currency;
   }
@@ -245,11 +261,5 @@ function mcapi_currency_form_submit($form, &$form_state) {
   //things got a little out of kilter here - this shouldn't be necessary
   $form_state['item']->currcode = $form_state['values']['info']['currcode'];
   $form_state['item']->data = (object)$form_state['values'];
-  //register_shutdown_function('currencies_load_refresh');
   cache_clear_all('currencies', 'cache');
-}
-
-//utility callback (takes no args)
-function currencies_load_refresh() {
-  //currencies_load(NULL, TRUE);
 }

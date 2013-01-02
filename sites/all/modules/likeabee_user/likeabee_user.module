@@ -15,7 +15,6 @@ function likeabee_user_user_presave(&$edit, &$account, $category = NULL) {
       @$edit['profile_familyname'][LANGUAGE_NONE][0]['value']
     )));
   }
-
 }
 
 /*
@@ -43,4 +42,8 @@ function likeabee_user_form_user_profile_form_alter(&$form, &$form_state) {
   $form['account']['name']['#access'] = FALSE;
 //  $form['contact']['#access'] = FALSE;
 //  $form['timezone']['#access'] = FALSE;
+}
+
+function likeabee_user_form_user_login_form_alter(&$form, &$form_state) {
+  debug($form, 'need to change the wording for firstname + familyname');
 }

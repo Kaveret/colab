@@ -1480,7 +1480,6 @@ class views_plugin_query_default extends views_plugin_query {
         }
 
         $result = $query->execute();
-
         $view->result = array();
         foreach ($result as $item) {
           $view->result[] = $item;

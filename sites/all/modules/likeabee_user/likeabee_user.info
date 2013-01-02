@@ -5,3 +5,4 @@ package = Likeabee
 core = "7.x"
 
 dependencies[] = text
+dependencies[] = entityreference

@@ -233,10 +233,7 @@ pre {
 /**
  * Page title.
  */
-#page-title {
-  background: #333;
-  padding-top: 20px;
-}
+
 #branding h1.page-title {
   color: #000;
   margin: 0;
@@ -1087,11 +1084,10 @@ width: 40%;
 float: left;
 }
 
-.description,
 .form-item-field-location-of-event-und-0-locpick-user-latitude,
 .form-item-field-location-of-event-und-0-locpick-user-longitude,
 .form-item-field-location-of-event-und-0-country{
-display: none;
+  display: none;
 }
 .field-add-more-submit{
 

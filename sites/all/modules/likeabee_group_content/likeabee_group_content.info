@@ -12,5 +12,6 @@ dependencies[] = taxonomy
 dependencies[] = flag
 dependencies[] = entityreference
 dependencies[] = og_extras
+dependencies[] = og_context
 dependencies[] = mimemail
 dependencies[] = mailsystem

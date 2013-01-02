@@ -210,5 +210,14 @@ function likeabee_resources_views_default_views() {
   );
   $views[$view->name] = $view;
   return $views;
+}
 
+
+/*
+ * implement hook_views_default_views_alter
+ * this view isn't needed at least for now
+ */
+function likeabee_resources_views_default_views_alter(&$views) {
+  unset($views['transactions']);
+  //$views['transactions']->display['transactions']->display_options['path'] = resources/my_beez;
 }

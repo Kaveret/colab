@@ -491,7 +491,6 @@ function block_admin_configure_submit($form, &$form_state) {
         ));
       }
       $query->execute();
-
       // Store regions per theme for this block
       foreach ($form_state['values']['regions'] as $theme => $region) {
         db_merge('block')
@@ -515,6 +514,7 @@ function block_admin_configure_submit($form, &$form_state) {
     cache_clear_all();
     $form_state['redirect'] = 'admin/structure/block';
   }
+  else echo 'problem submitting block';
 }
 
 /**

@@ -67,6 +67,9 @@
  * @see template_process()
  */
 ?>
+
+<div id="page">
+  
   <?php if ($logo || $site_name || $site_slogan || $page['header']): ?>
     <header id="header" role="banner">
       <?php if ($logo): ?>
@@ -88,27 +91,11 @@
       <?php print render($page['header']); ?>
     </header><!-- /#header -->
   <?php endif; ?>
-
-  <?php if ($page['featured']): ?>
-    <div id="featured">
-	<?php if ($title): ?>
-	<div class="layout-page-title">
-	      <h1 class="title" id="page-title"><?php print $title; ?></h1>
-	</div>
-	<?php endif; ?>
-
-      <?php print render($page['featured']); ?>
-    </div><!-- /#featured -->
-  <?php endif; ?>
-
-
-<div id="page">  
+  
   <?php if ($main_menu_links): ?>
-<!--
     <nav id="main-menu" role="navigation">
       <?php print $main_menu_links; ?>
-    </nav> 
--->
+    </nav><!-- /#main-menu -->
   <?php endif; ?>
 
   <?php if ($secondary_menu_links): ?>
@@ -117,24 +104,29 @@
     </nav> <!-- /#secondary-menu -->
   <?php endif; ?>
 
+  <?php if ($page['featured']): ?>
+    <div id="featured">
+      <?php print render($page['featured']); ?>
+    </div><!-- /#featured -->
+  <?php endif; ?>
 
-
- <div id="main">
-  
-    <?php if ($tabs): ?>
-      <div class="tabs"><?php print render($tabs); ?></div>
-    <?php endif; ?>
+  <div id="main">
     <?php if ($page['highlighted']): ?>
       <div id="highlighted">
         <?php print render($page['highlighted']); ?>
       </div><!-- /#highlighted -->
     <?php endif; ?>
-     <div id="breadcrumb"><?php 
-       print $breadcrumb;
-      ?></div>
+     <div id="breadcrumb">
+    <?php print $breadcrumb; ?>
+  </div>
     <?php print render($title_prefix); ?>
+    <?php if ($title): ?>
+      <h1 class="title" id="page-title"><?php print $title; ?></h1>
+    <?php endif; ?>
     <?php print render($title_suffix); ?>
-
+    <?php if ($tabs): ?>
+      <div class="tabs"><?php print render($tabs); ?></div>
+    <?php endif; ?>
     <?php print $messages; ?>
     <?php print render($page['help']); ?>
     <?php if ($action_links): ?>
@@ -159,17 +151,11 @@
       <?php print render($page['sidebar_second']); ?>
     </aside><!-- /#sidebar-second -->
   <?php endif; ?>
-</div><!-- /#page -->
-
-<?php if ($page['quicktabs']): ?>
-    <div id="quicktabs">
- <?php print render($page['quicktabs']); ?>
- </div><!-- /#quicktabs -->
- <?php endif; ?>
 
   <?php if ($page['footer']): ?>
     <footer id="footer" role="contentinfo">
       <?php print render($page['footer']); ?>
     </footer><!-- /#footer -->
-  <?php endif; ?> 
+  <?php endif; ?>
 
+</div><!-- /#page -->

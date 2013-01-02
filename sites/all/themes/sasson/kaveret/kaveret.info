@@ -19,6 +19,7 @@ base theme = sasson
 ; styles[styles/filename.scss][options][recompile] = true
 
 styles[styles/kaveret.scss][options][media] = all
+styles[styles/resource.scss][options][media] = all
 
 
 ; Theme Script Files ------------------------------------------------------
