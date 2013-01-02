@@ -19,6 +19,9 @@ function likeabee_install() {
   likeabee_override_nav_menu();
   likeabee_override_cforge_blocks();
   likeabee_create_users();
+
+  //for development only
+  variable_set('preprocess_css', TRUE);
 }
 
 //the stuff that cforge put into the navigation menu is moved into the orange dropdowns in the top right.

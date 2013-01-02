@@ -189,7 +189,6 @@ function resources_beeziest() {
   $build[] = array(
     '#markup' => views_embed_view('user_rankings', 'block_volumes')
   );
-  debug($build);
   return $build;
 }
 
@@ -209,17 +208,20 @@ function resources_my_beez() {
           '#account' => $GLOBALS['user'],
           '#histories' => get_balance_history($GLOBALS['user'], array('def_drup')),
         )
-      )
+      ),
+      '#weight' =>1
     ),
     'transactions' => array(
       '#theme' => 'likeabee_page_block',
       '#title' => t('My recent activities'),
       '#adv_help' => 'my_transactions',
       '#content' => array(
+        //this probably needs some better theming - it just renders as a paragraph now.
         array('#markup' => t('Available balance in BeeZ: @balance')),//this figure is given above
         array('#markup' => t('Total balance (all currencies, available and pending) converted to Shekels: @quant')),
         array('#markup' => views_embed_view('statement', 'default', $GLOBALS['user']->uid))
-      )
+      ),
+      '#weight' => 2
     ),
     'pay' => array(
       '#theme' => 'likeabee_page_block',
@@ -227,7 +229,8 @@ function resources_my_beez() {
       '#adv_help' => 'my_beez_pay',
       '#content' => array(
         '#markup' => drupal_render(mcapi_get_form('1stparty'))
-      )
+      ),
+      '#weight' => 3
     )
   );
 }
@@ -237,10 +240,15 @@ function resources_my_beez() {
  * menu_calback
  */
 function theme_likeabee_page_block($vars) {
-  $output = '<div class = "likeabee-block">';
-  $output .= '<div class = "header">'. $vars['title'] .'</div>';
-  $output .= theme('advanced_help_topic', array('module' => 'likeabee_resources', 'topic' => $vars['adv_help']));
-  $output .= '<div class = "content">'.drupal_render($vars['content']).'</div></div>';
+  $help = theme('advanced_help_topic', array('module' => 'likeabee_resources', 'topic' => $vars['adv_help']));
+  $output = '
+<div class = "likeabee-block">
+  <div class = "header">'. $vars['title'] . $help .'
+  </div>
+  <div class = "content">'.drupal_render($vars['content']).'
+  </div>
+</div>
+';
   return $output;
 }
 
