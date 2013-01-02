@@ -237,7 +237,7 @@ function resources_my_beez() {
  */
 function theme_likeabee_page_block($vars) {
   $output = '<div class = "likeabee-block">';
-  $output .= '<div class = "header">'. $vars['title'] .'<div>';
+  $output .= '<div class = "header">'. $vars['title'] .'</div>';
   $output .= theme('advanced_help_topic', array('module' => 'likeabee_resources', 'topic' => $vars['adv_help']));
   $output .= '<div class = "content">'.drupal_render($vars['content']).'</div></div>';
   return $output;
