@@ -27,6 +27,7 @@ dependencies[] = menu_block
 
 ;development only
 dependencies[] = devel
+dependencies[] = dblog
 ;dependencies[] = devel_codify
 dependencies[] = views_ui
 dependencies[] = field_ui

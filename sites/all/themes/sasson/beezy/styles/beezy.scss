@@ -365,10 +365,86 @@ div.region-header section div.content:hover{
 }
 
 
-/* -----  individual space  ----- */
-#block-system-user-menu .content li a,
-#block-menu-localadmin .content li a{
+.likeabee-block .header{
+  border: 1px solid #FACE77;
+  border-radius: 6px 6px 6px 6px;
+  margin: 26px 14px;
+  color: #064882;
+  padding: 17px;
+  font-size: 14px;
 }
+
+.likeabee-block .header .transaction-totals .balance{
+  font-size:20px;
+}
+
+.advanced-help-link,
+.advanced-help-link:hover {
+  background: url("../images/resource/cursore.png") no-repeat scroll 0 0 transparent;
+  float: right;
+  height: 21px;
+  width: 22px;
+}
+
+.likeabee-block .transaction-totals{
+  float:left;
+  margin-right: 30px;
+}
+
+.likeabee-block img.chart{
+  border: 1px solid #f1ad00;
+  padding: 12px 42px;
+}
+
+.likeabee-block table{
+  border:1px solid #FACE77;
+}
+
+.likeabee-block table tr {
+  background-color: #fff;
+  border-bottom: 1px solid #FACE77;
+  font-size: 12px;
+  font-weight: normal;
+  a{
+    text-decoration: none;
+    color: #064882;
+  }
+  td{
+    padding: 5px 10px;
+  }
+}
+
+.likeabee-block table thead tr th{
+  width:80px;
+  height:20px;
+  font-size: 12px;
+  background-color: #fdf6e4;;
+  border:1px solid #FACE77;
+  padding-left: 10px;
+  font-weight: normal;
+}
+
+.likeabee-block form#mcapi-forms-form.step-1 p,
+.likeabee-block .form-type-radio{
+  display: inline-block;
+  margin-right:10px;
+}
+/* mixins can only be defined at root level, apparently */
+/*
+.likeabee-block input#edit-submit.form-submit{
+  @include button;
+}
+
+@mixin button {
+  background-color: #F1AD00;
+  border: medium none;
+  color: white;
+  font-weight: bold;
+  padding: 5px 17px;
+}
+*/
+
+
 
 
 /*---  block-views -----*/
@@ -1336,3 +1412,4 @@ section[id^="block-views-individual-space-block"]{
 .hover-tats{
   display: block;
 }
+

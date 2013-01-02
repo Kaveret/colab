@@ -4,6 +4,8 @@ description = Ubercart settings. Created by Sakshay
 package = Likeabee
 core = "7.x"
 
+dependencies[] = likeabee_resources
+
 dependencies[] = uc_attribute
 dependencies[] = uc_cart
 dependencies[] = uc_catalog

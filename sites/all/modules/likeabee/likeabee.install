@@ -267,15 +267,34 @@ function likeabee_content_types() {
 
 
 function likeabee_create_user() {
-  $edit = array(
-    'name' => 'baroch',
+  $edits[] = array(
+    'name' => 'Baroch Oren',
     'pass' => 'baroch',
     'mail' => 'info@barochoren.com',
     'profile_firstname' => array(LANGUAGE_NONE => array(array('value' => 'Baroch'))),
-    'profile_familyname' => array(LANGUAGE_NONE => array(array('value' => 'Cohen'))),
+    'profile_familyname' => array(LANGUAGE_NONE => array(array('value' => 'Oren'))),
+    'roles' => array(RID_TRADER => RID_TRADER, RID_COMMITTEE => RID_COMMITTEE),
+    'status' => 1
+  );
+  $edits[] = array(
+    'name' => 'Brouria Helfa',
+    'pass' => 'baroch',
+    'mail' => 'info@barochoren.com',
+    'profile_firstname' => array(LANGUAGE_NONE => array(array('value' => 'Brouria'))),
+    'profile_familyname' => array(LANGUAGE_NONE => array(array('value' => 'Helfa'))),
     'roles' => array(RID_TRADER => RID_TRADER),
     'status' => 1
   );
-  user_save(NULL, $edit);//should be user 2
-  return;
+  $edits[] = array(
+    'name' => 'Arie Ben David',
+    'pass' => 'baroch',
+    'mail' => 'info@barochoren.com',
+    'profile_firstname' => array(LANGUAGE_NONE => array(array('value' => 'Aire'))),
+    'profile_familyname' => array(LANGUAGE_NONE => array(array('value' => 'Ben David'))),
+    'roles' => array(RID_TRADER => RID_TRADER),
+    'status' => 1
+  );
+  foreach ($edits as $edit) {
+    user_save(NULL, $edit);//should be user 2
+  }
 }

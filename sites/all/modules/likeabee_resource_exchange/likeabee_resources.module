@@ -13,7 +13,7 @@ function likeabee_resources_menu() {
     'weight' => 0
   );
 
-  $items['resources/dashboard'] = array(
+  $items['resources/beeziest'] = array(
     'title' => 'Beeziest members',
     'description' => 'Buy, sell, pay, swop or gift!',
     'page callback' => 'resources_beeziest',
@@ -189,6 +189,7 @@ function resources_beeziest() {
   $build[] = array(
     '#markup' => views_embed_view('user_rankings', 'block_volumes')
   );
+  debug($build);
   return $build;
 }
 
