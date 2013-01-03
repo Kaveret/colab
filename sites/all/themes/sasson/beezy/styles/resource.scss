@@ -1,6 +1,7 @@
 $blue: #064882;
 $orange: #FACE77;
 $soft-orange:#fdf6e4;
+$red:#B01919;
 
 @mixin button {
    background-color: #F1AD00;
@@ -10,6 +11,11 @@ $soft-orange:#fdf6e4;
     padding: 5px 17px;
  }
 
+a {
+	text-decoration: none;
+}
+
+/*************   my beez page *************/
 .likeabee-block .header{
     border: 1px solid $orange;
     border-radius: 6px 6px 6px 6px;
@@ -79,3 +85,50 @@ $soft-orange:#fdf6e4;
 	@include button;
 }
 
+/*************    Market page  ***********************/
+
+/* matslats temp theming for resources/marketplace */
+.view-likeabee-catalog .views-field-title,
+.view-likeabee-catalog .views-field-model{
+	padding: 6px 6px 0 6px;
+    color:$red;
+	 a{
+	color:$red;
+	}
+}
+
+.view-likeabee-catalog .views-field-title{
+    margin-bottom:-8px;
+}
+
+.view-likeabee-catalog td{
+    border: 2px solid #FBD38B;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 0 0 3px #FAE8C7;
+    float: left;
+    height: 373px;
+    margin: 0 41px 31px 0;
+    padding: 0;
+    position: relative;
+    width: 214px;
+}
+
+.view-likeabee-catalog .views-field-entity-id{
+	margin:0 10px;
+}
+
+ .view-likeabee-catalog input{
+ 	border:none;
+    background: url("../images/resource/add_to_card.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    display: block;
+    font-weight: bold;
+    height: 43px;
+    width: 100%;
+ }
+
+ .view-likeabee-catalog .views-field-name .views-label,
+ .view-likeabee-catalog .views-field-display-price .views-label{
+ 	color: $red;
+ 	font-size: 10px;
+ }
