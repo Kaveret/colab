@@ -60,5 +60,15 @@ function likeabee_marketplace_block_info_alter($blocks, $theme) {
 }
 
 function likeabee_marketplace_browse() {
+  //this whole view needs to be reconsidered. It started as a copy of uc_catalog, and could end that way
   return views_embed_view('likeabee_catalog', 'catalog_grid');
+}
+
+
+/*
+ * implements hook_styles_alter
+ */
+function likeabee_marketplace_image_styles_alter(&$styles) {
+  $styles['uc_product_list']['effects'][0]['data']['width'] = 195;
+  $styles['uc_product_list']['effects'][0]['data']['height'] = 142;
 }
