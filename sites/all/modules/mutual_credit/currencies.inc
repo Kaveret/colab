@@ -125,7 +125,7 @@ function _mcapi_currency_form(&$form, &$form_state, $currency) {
 
   foreach (module_invoke_all('transaction_operations') as $callback => $info) {
     $form['transaction_operation_access'][$callback] = array(
-      '#title' => $info['title'],
+      '#title' => $info['description'],
       '#description' => @$info['description'],
       '#type' => 'checkboxes',
       '#options' => $access_callbacks,
@@ -210,7 +210,7 @@ function currencies_load_all() {
   $functions = array_keys(module_invoke_all('transaction_access_callbacks'));
   $all = ctools_export_crud_load_all('mcapi_currencies');
   //unpack them - this is a bit of a shortcut, but ctools takes you right round the park
-  foreach($all as $currcode => $currency) {debug($currency);
+  foreach($all as $currcode => $currency) {
     if (!empty($currency->disabled)) continue;
     $data = &$currency->data;
     //convert the divisions_allowed into an array
