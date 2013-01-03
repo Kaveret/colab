@@ -403,6 +403,20 @@ body.page-contact {
     }
   }
 }
+
+/* -----  articles ----- */
+body.node-type-article {
+  p.submitted {
+    display: none;
+  }
+  div.content .node-article div.field-name-field-image {
+    float: right; /* LTR */
+    margin-left: 20px; /* LTR */
+  }
+  .comment-wrapper {
+    clear: both;
+  }
+}
 /*-----------------------------------------------
                    Forms
 -----------------------------------------------*/
