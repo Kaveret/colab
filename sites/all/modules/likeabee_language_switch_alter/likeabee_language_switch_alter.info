@@ -1,0 +1,6 @@
+name = Likeabee language switcher alter
+description = Removes the active language from the language switchers.
+core = 7.x
+package = Likeabee
+dependencies[] = locale
+files[] = likeabee_language_switch_alter.module

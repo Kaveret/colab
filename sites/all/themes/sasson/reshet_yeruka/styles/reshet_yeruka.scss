@@ -58,7 +58,7 @@ $green = #9ab34e;
 /* -----  General Styles (Colors, Backgrounds etc.)  ----- */
 
 /* -----  Typography  ----- */
-$menu_fontsize = 18px; /* default is 16px */
+$menu_fontsize = 15px; /* default is 16px */
 $homepage_sideboxes_fontsize = 18px;
 $homepage_bottomboxes_fontsize = 14px;
 
@@ -85,25 +85,28 @@ $h2marginbottom=10px;
   margin-left: auto;
   margin-right: auto;
   margin-top:15px;
+  ul {
+    padding: 0px 0px 0px 15px;
+  }
   li {
-    padding: 10px 15px;
+    padding: 5px 8px;
     font-size: $menu_fontsize;
     list-style: none outside none;
     float: right;
     border-style: solid;
-    border-width: 2px;
-    margin-left: 1px;
+    border-width: 1px;
+    margin-left: 0px;
     margin-right: 1px;
     &.first {
-      border-bottom-right-radius: 10px; /* LTR */
-      border-top-right-radius: 10px; /* LTR */
+      border-bottom-right-radius: 5px; /* LTR */
+      border-top-right-radius: 5px; /* LTR */
     }
    /* & :not(.first) {
       margin-right: 2px;
     }*/
     &.last {
-      border-bottom-left-radius: 10px; /* LTR */
-      border-top-left-radius: 10px; /* LTR */
+      border-bottom-left-radius: 5px; /* LTR */
+      border-top-left-radius: 5px; /* LTR */
     }
     a {
       text-decoration: none;
