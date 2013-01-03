@@ -1,0 +1,8 @@
+<?php
+
+function likeabee_language_switch_alter_language_switch_links_alter(&$result, &$type, &$path) {
+  global $language ;
+  $lang_name = $language->language ;
+  unset($result[$lang_name]);
+}
+
