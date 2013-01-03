@@ -125,7 +125,6 @@ function likeabee_content_summary($title, $type, $gid = NULL) {
 }
 
 function theme_likeabee_content_summary($variables) {
-  debug($variables);
   static $flip = 'even';
   $type = &$variables['type'];
   $flip = $flip == 'even' ? 'odd' : 'even';
@@ -134,7 +133,6 @@ function theme_likeabee_content_summary($variables) {
   $output[] = '<div class = "link-all">'. l('See All', "content/summary/$type/". $variables['gid']) . '</div>';
   $output[] = $variables['view'];
   return implode("\n", $output) .'</div><!--End group summary-->';
-  debug($output);
 }
 
 
@@ -217,8 +215,6 @@ function likeabee_flag_default_flags() {
     'i18n' => 0,
     'api_version' => 2,
   );
-  $flags = array();
-
 
   // Exported flag: "Share in my profile".
   $flags['share_in_my_profile'] = array(
@@ -298,4 +294,11 @@ function likeabee_flag_default_flags() {
   );
   return $flags;
 
+}
+
+
+function likeabee_language_switch_links_alter(&$result, &$type, &$path) {
+  global $language ;
+  $lang_name = $language->language ;
+  unset($result[$lang_name]);
 }

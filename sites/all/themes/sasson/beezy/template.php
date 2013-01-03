@@ -1,5 +1,11 @@
 <?php
 
+function beezy_preprocess_node(&$vars) {
+  if ($vars['teaser']) {
+    array_push($vars['theme_hook_suggestions'], 'node__'.$vars['type'].'__teaser');
+  }
+}
+
 function beezy_preprocess_page(&$vars) {
   //the main-menu needs to show the second level only, so we use menu_block for that
   //only on certain pages, but which???
@@ -12,7 +18,6 @@ function beezy_preprocess_page(&$vars) {
     $args = arg();
     // Remove first argument of "node".
     unset($args[0]);
-
     // Set type.
     $type = "page__type_{$vars['node']->type}";
 

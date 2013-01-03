@@ -76,9 +76,10 @@
  * @see template_process()
  */
 ?>
-?>
+
 <div class = "node node-event teaser">
 <a href="/node/<?php print $nid; ?>"><?php print $title; ?></a>
-<a href="/node/<?php print $nid; ?>"><?php print $image; ?></a>
-<a href="/node/<?php print $nid; ?>"><?php print $body; ?></a>
+<?php print render($content['event_date']); ?>
+<?php print render($content['image']); ?>
+<?php print render($content['body']); ?>
 </div><!-- /event teaser -->

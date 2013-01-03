@@ -20,7 +20,7 @@ function likeabee_install() {
   likeabee_override_cforge_blocks();
   likeabee_create_users();
   likeabee_setup_filters();
-  likeabee_modify_fields();
+  likeabee_modify_cforge_fields();
 
   //for development only
   variable_set('preprocess_css', TRUE);
@@ -537,7 +537,7 @@ function likeabee_setup_filters() {
 
 }
 
-function likeabee_modify_fields() {
+function likeabee_modify_cforge_fields() {
   $image_instance = array(
     'field_name' => 'image',//this field is declared by the offers_wants module
     'bundle' => 'event',
@@ -556,7 +556,7 @@ function likeabee_modify_fields() {
       'max_filesize' => '1MB',
       'max_resolution' => '1024x768',
       'min_resolution' => '240x180',
-      'default_image' => ''
+      'default_image' => ''///an image is needed here, dunno what the root is
     ),
     'display' => array(
       'default' => array(
@@ -570,7 +570,9 @@ function likeabee_modify_fields() {
       'teaser' => array(
         'type' => 'image',
         'label' => 'none',
-        'settings' => array( )
+        'settings' => array(
+          'image_style' => 'uc_product_list',
+        )
       )
     ),
     'required' => 0,
