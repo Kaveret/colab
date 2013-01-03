@@ -217,7 +217,13 @@ body.page-contact {
   }
 }
 
-
+body.node-type-article {
+  div.content div.field-name-field-image {
+    float: left; /* RTL */
+    margin-right: 20px;
+    margin-left: 0px;
+  }
+}
 /*-----------------------------------------------
                    Forms
 -----------------------------------------------*/
