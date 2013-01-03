@@ -8,7 +8,7 @@ function likeabee_marketplace_menu() {
   //that view has been modified in the database with the latest uc_products view in the footer
   $items['resources/marketplace'] = array(
     'title' => 'Catalog',
-    'page callback' => 'uc_catalog_browse',
+    'page callback' => 'likeabee_marketplace_browse',
     'access callback' => TRUE,
     'access arguments' => array(),
     'type' => MENU_NORMAL_ITEM,
@@ -59,3 +59,6 @@ function likeabee_marketplace_block_info_alter($blocks, $theme) {
   ) + $blocks['uc_catalog']['catalog'];
 }
 
+function likeabee_marketplace_browse() {
+  return views_embed_view('likeabee_catalog', 'catalog_grid');
+}
