@@ -20,9 +20,9 @@ function likeabee_menu() {
 }
 
 function likeabee_menu_alter(&$items) {
-  $items['admin/content']['menu_name'] = 'localadmin';
-  $items['admin/people']['menu_name'] = 'localadmin';
-  $items['admin/config/system/backup_migrate/export']['menu_name'] = 'localadmin';
+  $items['admin/content']['menu_name'] = 'minimanager';
+  $items['admin/people']['menu_name'] = 'minimanager';
+  $items['admin/config/system/backup_migrate/export']['menu_name'] = 'minimanager';
   $items['offers']['menu_name'] = 'community';//could be done in views_alter
   $items['wants']['menu_name'] = 'community';//could be done in views_alter
   $items['news']['menu_name'] = 'community';//could be done in views_alter

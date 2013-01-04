@@ -125,7 +125,7 @@ function mcapi_menu_inc() {
     'type' => MENU_DEFAULT_LOCAL_TASK,
   );
 
-  foreach (transaction_operations(FALSE) as $op => $info) {
+  foreach (transaction_operations(NULL, FALSE, FALSE) as $op => $info) {
     $items["transaction/%transaction/$op"] = array(
       'title' => $info['imperative'],
       'description' => $info['description'],
@@ -144,11 +144,7 @@ function mcapi_menu_inc() {
 }
 
 function transaction_operation_form($form, &$form_state, $op, $transaction) {
-  $operations = transaction_operations();
-  $info = &$operations[$op];
-  if (isset($info['file_extension'])) {
-    form_load_include($form_state, $info['file_extension'], $info['module']);
-  }
+  $info = transaction_operations($op, FALSE, TRUE);
   mcapi_hide_tabs();
   $form['serial'] = array(
     '#type' => 'hidden',
@@ -1241,4 +1237,22 @@ function theme_transaction_totals(&$variables) {
     $outputs[] = "<div class = \"transaction-totals $currcode\">$output</div>";
   }
   return implode("<br />", $outputs);
+}
+
+function transaction_get_links($transaction) {
+  $links = array();
+  foreach (transaction_operations(NULL, TRUE, TRUE) as $op => $info) {
+    if (!transaction_operation_access($op, $transaction)) continue;
+    $t = 't';
+    $links[] = array(
+      '#theme' => 'link',
+      '#path' => 'transaction/'.$transaction->serial.'/'.$op,
+      '#text' => $t($info['imperative']),//t function should only be used directly with literal strings
+      '#options' => array(
+        'attributes' => array(),
+        'html' => FALSE
+      )
+    );
+  }
+  return ($links);
 }

@@ -75,8 +75,9 @@ function likeabee_resources_user_view($account, $view_mode) {
     '#markup' => render(mcapi_balances_view($account->uid, array('def_drup'))),
     '#weight' => 3,
   );
+  module_load_include('inc', 'mcapi_signatures');
   $account->content['pending_transactions'] = array(
-    '#markup' => render(list_pending($account->uid, array('def_drup'))),
+    '#markup' => render(list_pending_for_uid($account->uid, array('def_drup'))),
     '#weight' => 4,
   );
 }

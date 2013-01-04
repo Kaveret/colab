@@ -1,0 +1,308 @@
+<?php
+
+
+/*
+ * implements hook_install
+ */
+function devel_codify_install() {
+  $modules = variable_get('admin_menu_devel_modules', _admin_menu_developer_modules());
+  $modules[] = 'devel_codify';
+  variable_set('admin_menu_devel_modules', $modules);
+}
+
+/*
+ * implements hook_menu
+ */
+function devel_codify_menu() {
+  $items['devel/export'] = array(
+    'title' => "Export fields, blocks, & views",
+    'page callback' => 'devel_codify',
+    'page arguments' => array(1),
+    'access arguments' => array('administer nodes'),
+    'menu_name' => 'devel',
+    'weight' => 5
+  );
+  /*$items['devel/import'] = array(
+    'title' => "import fields, blocks, & views",
+    'page callback' => 'devel_import',
+    'page arguments' => array(1),
+    'access arguments' => array('administer nodes'),
+    'menu_name' => 'devel',
+    'weight' => 6
+  );*/
+  return $items;
+}
+
+
+/*
+ * implements admin_menu hook_admin_menu_output_build
+ * adds the import and export links to the admin menu
+ */
+function devel_codify_admin_menu_output_build(&$content) {
+  $destination = drupal_get_destination();
+
+  $content['icon']['icon']['export'] = array(
+    '#title' => t('Config dump to code'),
+    '#weight' => 50,
+    '#access' => user_access('administer site configuration'),
+    '#href' => 'devel/export',
+    '#options' => array(
+      'query' => $destination + array('token' => drupal_get_token('devel/export')),
+    ),
+  );
+  /*$content['icon']['icon']['import'] = array(
+    '#title' => t('Config import dump'),
+    '#weight' => 50,
+    '#access' => user_access('administer site configuration'),
+    '#href' => 'devel/import',
+    '#options' => array(
+      'query' => $destination + array('token' => drupal_get_token('devel/import')),
+    ),
+  );*/
+}
+
+/*
+ * menu callback
+ */
+function devel_codify() {
+  $directory = 'public://devel';
+  //$directory = 'http://localhost/kaveret7/';
+  file_prepare_directory($directory, FILE_CREATE_DIRECTORY);
+  include_once DRUPAL_ROOT . '/includes/utility.inc';
+  //if (module_exists('views')) devel_codify_views();
+  foreach (devel_codify_type_info() as $type => $plural_name) {
+    if (substr($type, 0, 6) == 'ctools') {
+      $data = "<?php\n";
+      $function = 'devel_codify_ctools';
+      $count = $function(substr($type, 7), $data);
+    }
+    else {
+      $data = "<?php\n";
+      $function = 'devel_codify_'.$type;
+      $data .= "$$type = array();\n";
+      $count = $function($data);
+    }
+    $filename = $type . '.export.php';
+	$filePath = $directory .'/'.$filename;
+    file_unmanaged_save_data($data, $directory .'/'.$filename, FILE_EXISTS_REPLACE);
+    //drupal_set_message(t('Dumped @count @types', array('@types' => $plural_name, '@count' => $count)));
+	drupal_set_message(t('Dumped @file @count @types', array('@file' => $filePath,'@types' => $plural_name, '@count' => $count)));
+  }
+  drupal_goto();
+}
+
+/*
+ * menu callback
+ */
+/*function devel_import() {
+  foreach (devel_codify_type_info() as $type => $plural_name) {
+    $uri = 'public://devel/'.$type.'.export.php';
+    if (substr($type, 0, 5) != 'ctools') {
+      $function = 'devel_import_'.$type;
+      include($uri);
+      $count = $function($$type);
+    }
+    else {//ctools
+      $function = 'devel_import_ctools';
+      $table = substr($type, 6);
+      $string = file_get_contents($uri);
+      $count = $function($string);
+    }
+    unset($$type);//to save memory
+    drupal_set_message(t('Imported @count @types', array('@types' => $plural_name, '@count' => $count)));
+  }
+  drupal_goto();
+}*/
+
+
+/*
+ * fieldAPI fields
+ * which fortunately has an easy way
+ * that's part of what 'API' means
+ */
+/*function devel_codify_fields(&$output) {
+  $fields = field_read_fields();
+  foreach ($fields as $field_info) {
+    $output .= '$fields[] = ' . drupal_var_export($field_info) . ";\n";
+  }
+  return count($fields);
+}*/
+
+/*
+ * Get all variable of Uc_cart
+ */
+function devel_codify_uc_cart(&$output) {
+  $query = db_select('variable', 'v', array('fetch' => PDO::FETCH_ASSOC))->condition('v.name', '%uc\_%', 'LIKE');
+  $query->fields('v');
+  $results = $query->execute();	
+  $i=0;
+  foreach ($results as $uc_cart_var) {
+	$uc_cart_var['value'] = unserialize($uc_cart_var['value']);
+	$output .= '$uc_cart[] = ' . drupal_var_export((array)$uc_cart_var) . ";\n";
+	$i++;
+  }
+  return $i;		
+}
+/*
+ * Get all variable of Market Place
+ */
+function devel_codify_market_place(&$output) {
+  $query = db_select('variable', 'v', array('fetch' => PDO::FETCH_ASSOC))->condition('v.name', '%mp\_%', 'LIKE');
+  $query->fields('v');
+  $results = $query->execute();	
+  $i=0;
+  foreach ($results as $market_place_var) {
+	$market_place_var['value'] = unserialize($market_place_var['value']);
+	$output .= '$market_place[] = ' . drupal_var_export((array)$market_place_var) . ";\n";
+	$i++;
+  }
+  return $i;		
+}
+
+/**
+ *import fields from file
+ * Assume the fields on file are the whole lot, but they may have been edited
+ * therefore ids must be preserved for imported fields, and fields not imported must be removed
+ */
+/*function devel_import_fields(&$fields) {
+  //we now have an array called $fields
+  foreach ($fields as $field) {
+    field_update_field($field);
+    $preserve_fields[] = $field['id'];
+  }
+  db_delete('field_config')->condition('id', $preserve_fields, 'NOT IN');
+  return count($fields);
+}*/
+
+/*
+ * fieldAPI fields
+ * which fortunately has an easy way
+ */
+/*function devel_codify_instances(&$output) {
+  $instances = field_read_instances();
+  foreach ($instances as $instance_info) {
+    $output .= '$instances[] = ' . drupal_var_export($instance_info) . ";\n";
+  }
+  return count($instances);
+}
+
+function devel_import_instances(&$instances) {
+  //we now have an array called $instances
+  foreach ($instances as $instance) {
+    field_update_instance($instance);
+    $preserve_instances[] = $instance['id'];
+  }
+  db_delete('field_config_instance')->condition('id', $preserve_instances, 'NOT IN')->execute();
+  return count($instances);
+}*/
+
+/**
+ * Blocks
+ * we're going to have to be a bit rougher than with fields, doing what amounts to a database dump
+ * a block is an internal data object only, derived and calculated. there are no crud operations
+ * so we have to work much closer to the database.
+ * TODO save the block roles as well
+ */
+function devel_codify_blocks(&$output) {
+  //only bother with blocks in active themes
+  foreach(list_themes() as $key => $info) if ($info->status)$themes[] = $key;
+  $blocks = db_select('block', 'b')->fields('b')->condition('theme', $themes)->execute()->fetchAll();
+  $i=0;
+  foreach ($blocks as $block) {
+	if(strstr($block->module, 'uc_')) {
+		$output .= '$blocks[] = ' . drupal_var_export((array)$block) . ";\n";
+		$i++;
+	}
+  }
+  return $i;
+}
+/*function devel_import_blocks(&$blocks) {
+  foreach(list_themes() as $key => $info) if ($info->status)$themes[] = $key;
+  include('public://devel/instances.export.php');
+  //we now have an array called $blocks
+  foreach($blocks as $block) {
+    $bids[] = $block['bid'];
+    drupal_write_record('block', $block, array('bid'));//not using the usual block keys
+  }
+  db_delete('block')
+  ->condition('bid', $bids, 'NOT IN')
+  ->condition('theme', $themes, 'NOT IN')
+  ->execute();
+  return count($bids);
+}*/
+
+/*
+ * Views
+ */
+function devel_codify_ctools($table, &$output) {
+  $views = ctools_export_load_object($table);
+  $i=0;
+  foreach ($views as $view) {
+    if($view->name == 'marketplace' || strstr($view->name, 'uc_')){
+		$output .= '$views["'.$view->name.'"] = "'.ctools_export_crud_export($table, $view) .'";'."\n\n";
+		$i++;
+	}
+  }
+  //$output .= implode("<<<>>>", $blobs);
+  return $i;
+}
+
+/*function devel_import_ctools($table, &$string) {
+  $code_objects = explode('<<<>>>', $string);
+  $existing = ctools_export_load_object($table);
+  foreach ($code_objects as $code) {
+    ctools_export_crud_import($table, $code);
+  }
+  foreach($existing as $name => $view) {
+    if (empty($views[$name])) {
+      debug('testing: would delete '.$name);continue;
+      views_delete_view($view);
+    }
+  }
+  return count($views);
+}*/
+
+
+
+function devel_codify_type_info() {
+  /*if (module_exists('field')) {
+    $types['fields'] = t('fields');
+    $types['instances'] = t('instances');
+    cache_clear_all(NULL, 'cache_field');
+  }*/
+  if (module_exists('block')) {
+    $types['blocks'] = t('blocks');
+  }
+  
+  if (module_exists('uc_cart')) {
+    $types['uc_cart'] = t('uc_cart');
+  }
+  if (module_exists('mp_marketplace')) {
+    $types['market_place'] = t('market_place');
+  }
+  if (module_exists('views')) {
+    ctools_include('export');
+    cache_clear_all(NULL, 'cache_views');
+    cache_clear_all(NULL, 'cache_views_data');
+    $types['ctools-views_view'] = t('views');
+  }
+  //$types['seller_role'] = t('seller_role');
+  $types['seller_role_permission'] = t('seller_role_permission');
+  return $types;
+}
+
+function devel_codify_seller_role_permission(&$output) {
+  $rid = user_role_load_by_name(t('vendor'));
+  $query = db_select('role_permission', 'r', array('fetch' => PDO::FETCH_ASSOC))->condition('r.rid', $rid->rid);
+  $query->fields('r');
+  $results = $query->execute();	
+  $i=0;
+  foreach ($results as $uc_cart_var) {
+	$output1 .= drupal_var_export((array)$uc_cart_var) . ",\n";
+	$i++;
+  }
+  $output .= '$seller_role_permission = array(' .$output1. ');'; 
+  //exit;
+  return $i;
+}
+

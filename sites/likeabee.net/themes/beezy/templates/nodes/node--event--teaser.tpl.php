@@ -81,5 +81,4 @@
 <a href="/node/<?php print $nid; ?>"><?php print $title; ?></a>
 <?php print render($content['event_date']); ?>
 <?php print render($content['image']); ?>
-<?php print render($content['body']); ?>
 </div><!-- /event teaser -->

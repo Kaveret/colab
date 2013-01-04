@@ -27,10 +27,11 @@ function likeabee_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = '3';
   $handler->display->display_options['row_plugin'] = 'node';
   /* Relationship: OG membership: OG membership from Node */
+  /*
   $handler->display->display_options['relationships']['og_membership_rel']['id'] = 'og_membership_rel';
   $handler->display->display_options['relationships']['og_membership_rel']['table'] = 'node';
   $handler->display->display_options['relationships']['og_membership_rel']['field'] = 'og_membership_rel';
-
+*/
   /* Relationship: OG membership: Group Node from OG membership */
   /*
   $handler->display->display_options['relationships']['og_membership_related_node_group']['id'] = 'og_membership_related_node_group';
@@ -59,6 +60,7 @@ function likeabee_views_default_views() {
   $handler->display->display_options['arguments']['type']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['type']['limit'] = '0';
   /* Contextual filter: OG membership: Group ID */
+  /*
   $handler->display->display_options['arguments']['gid']['id'] = 'gid';
   $handler->display->display_options['arguments']['gid']['table'] = 'og_membership';
   $handler->display->display_options['arguments']['gid']['field'] = 'gid';
@@ -70,6 +72,8 @@ function likeabee_views_default_views() {
   $handler->display->display_options['arguments']['gid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['gid']['specify_validation'] = TRUE;
   $handler->display->display_options['arguments']['gid']['validate']['type'] = 'og';
+   * 
+   */
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -87,11 +91,13 @@ function likeabee_views_default_views() {
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Flags: Flag counter */
+  /*
   $handler->display->display_options['sorts']['count']['id'] = 'count';
   $handler->display->display_options['sorts']['count']['table'] = 'flag_counts';
   $handler->display->display_options['sorts']['count']['field'] = 'count';
   $handler->display->display_options['sorts']['count']['relationship'] = 'flag_count_rel';
   $handler->display->display_options['sorts']['count']['order'] = 'DESC';
+  */
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -101,17 +107,6 @@ function likeabee_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-
-  /* Filter criterion: Content: Which Block to Show at the Main Group Page? (field_block_main) */
-  $handler->display->display_options['filters']['field_block_main_tid']['id'] = 'field_block_main_tid';
-  $handler->display->display_options['filters']['field_block_main_tid']['table'] = 'field_data_field_block_main';
-  $handler->display->display_options['filters']['field_block_main_tid']['field'] = 'field_block_main_tid';
-  $handler->display->display_options['filters']['field_block_main_tid']['relationship'] = 'og_membership_related_node_group';
-  $handler->display->display_options['filters']['field_block_main_tid']['value'] = array(
-    8 => '8',
-  );
-  $handler->display->display_options['filters']['field_block_main_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_block_main_tid']['vocabulary'] = 'block_s_group';
   $handler->display->display_options['block_description'] = 'Group\'s Events - Popular';
 
   /* Display: Editor's Choice */
@@ -164,14 +159,19 @@ function likeabee_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'node';
   $handler->display->display_options['row_options']['links'] = FALSE;
   /* Relationship: OG membership: OG membership from Node */
+  /*
   $handler->display->display_options['relationships']['og_membership_rel']['id'] = 'og_membership_rel';
   $handler->display->display_options['relationships']['og_membership_rel']['table'] = 'node';
   $handler->display->display_options['relationships']['og_membership_rel']['field'] = 'og_membership_rel';
+   */
   /* Relationship: OG membership: Group Node from OG membership */
+  /*
   $handler->display->display_options['relationships']['og_membership_related_node_group']['id'] = 'og_membership_related_node_group';
   $handler->display->display_options['relationships']['og_membership_related_node_group']['table'] = 'og_membership';
   $handler->display->display_options['relationships']['og_membership_related_node_group']['field'] = 'og_membership_related_node_group';
   $handler->display->display_options['relationships']['og_membership_related_node_group']['relationship'] = 'og_membership_rel';
+   *
+   */
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';

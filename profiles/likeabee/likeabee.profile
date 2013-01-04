@@ -257,27 +257,6 @@ function likeabee_preprocess_page(&$vars) {
   $vars['share_icons'] = menu_tree('share-icons');
   $vars['share_icons']['#prefix'] = '<div id = "share-icons">';
   $vars['share_icons']['#suffix'] = '</div>';
-
-}
-
-/*
- * implements hook_styles_alter
- * all the styles in code and in data
- * before it goes into cache
- */
-function likeabee_image_styles_alter(&$styles) {
-  //change the size of the thumbnail
-  $effect_id = key($styles['thumbnail']['effects']);
-  $styles['thumbnail']['effects'][$effect_id]['data']['width'] = 32;
-  $styles['thumbnail']['effects'][$effect_id]['data']['height'] = 32;
-}
-/*
- * implements hook_image_default_styles
- * declare new styles here
- *
- */
-function likeabee_image_default_styles() {
-  return array();
 }
 
 
