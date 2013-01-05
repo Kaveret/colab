@@ -1,0 +1,8 @@
+; $Id$
+name = "Cforge Gallery"
+description = "Upload photos into galleries"
+core = 7.x
+dependencies[] = image
+package = Community Forge
+
+files[] = cforge_gallery.views_default.inc

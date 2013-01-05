@@ -283,6 +283,7 @@ function _mcapi_module_weights() {
   foreach ($weights as $weight => $modules) {
     db_update('system')->fields(array('weight' => $weight))->condition('name', $modules)->execute();
   }
+  cache_clear_all('*', 'cache_bootstrap', TRUE);
 }
 
 function mcapi_controller_options_form_ajax($form, $form_state) {
@@ -935,5 +936,12 @@ function mcapi_update_7015() {
     unset($currency->transaction_access);
     db_update('mcapi_currencies')->fields(array('data' => serialize($currency)))->condition('currcode', $currcode)->execute();
   }
+
+  $sentence = variable_get('mcapi_sentence');
+  $sentence .= '[transaction:links]';
+  variable_set('mcapi_sentence', $sentence);
+  cache_clear_all('*', 'cache_token', TRUE);
+  _mcapi_module_weights();
+
   drupal_set_message("Check your currencies' access callbacks");
 }

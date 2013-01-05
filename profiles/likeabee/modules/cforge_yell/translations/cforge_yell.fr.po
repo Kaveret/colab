@@ -1,0 +1,53 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  cforge_yell.module: n/a
+#  cforge_yell.install: n/a
+#  cforge_yell.info: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-11-06 11:42+0100\n"
+"PO-Revision-Date: 2012-11-18 20:54+0100\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: cforge_yell.module:11
+msgid "Add a listing"
+msgstr "Ajouter un listing"
+
+#: cforge_yell.module:22
+msgid "Choose default categories for the offers/wants directory: !link"
+msgstr ""
+"Choisir des catégories par défaut pour le répertoire des offres et "
+"demandes: !link"
+
+#: cforge_yell.install:11
+msgid "offers & wants"
+msgstr "offres & demandes"
+
+#: cforge_yell.install:16
+msgid "Manage secondary member options, contact, galleries, etc."
+msgstr ""
+"Gérer les options secondaires concernant les membres, contact, collections "
+"de photos, etc."
+
+#: cforge_yell.info:0
+msgid "Cforge yellow pages"
+msgstr "Pages jaunes Cforge"
+
+#: cforge_yell.info:0
+msgid "Settings for offers and wants"
+msgstr "Paramètres pour les offres et demandes"
+
+#: cforge_yell.info:0
+msgid "Community Forge"
+msgstr "Community Forge"

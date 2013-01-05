@@ -1,0 +1,194 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  cforge_currencies.mcapiforms_default.inc: n/a
+#  cforge_currencies.views_default.inc: n/a
+#  cforge_currencies.module: n/a
+#  cforge_currencies.install: n/a
+#  cforge_currencies.info: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-11-06 11:41+0100\n"
+"PO-Revision-Date: 2012-11-18 20:20+0100\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: cforge_currencies.mcapiforms_default.inc:56
+msgid "The transaction will be finalised when the other user signs it."
+msgstr "L'échange sera finalisé dès confirmation par l'autre membre."
+
+#: cforge_currencies.views_default.inc:204
+msgid "more..."
+msgstr "plus..."
+
+#: cforge_currencies.views_default.inc:205
+msgid "Offset"
+msgstr "Contrepartie"
+
+#: cforge_currencies.views_default.inc:206;512
+msgid "Payee"
+msgstr "Celui qui reçoit"
+
+#: cforge_currencies.views_default.inc:207;511
+msgid "Payer"
+msgstr "Celui qui donne"
+
+#: cforge_currencies.views_default.inc:208
+msgid "Serial number"
+msgstr "Numéro de série"
+
+#: cforge_currencies.views_default.inc:209
+msgid "Name"
+msgstr "Nom"
+
+#: cforge_currencies.views_default.inc:210;513
+msgid "Worth"
+msgstr "Valeur"
+
+#: cforge_currencies.views_default.inc:211;515
+msgid "Type"
+msgstr "Type"
+
+#: cforge_currencies.views_default.inc:212
+msgid "Transactions"
+msgstr "Echanges"
+
+#: cforge_currencies.views_default.inc:213
+msgid "Who paid whom"
+msgstr "Qui a donné à qui"
+
+#: cforge_currencies.views_default.inc:214
+msgid "[name] paid [name_1]"
+msgstr "[name] a donné à [name_1]"
+
+#: cforge_currencies.views_default.inc:502
+msgid ""
+"This is the default accountant's interface. It is simply a transaction view "
+"with all the filters exposed. More accountants tools are needed, depending "
+"on how the system is to be used."
+msgstr ""
+"Interface comptable par défaut : simplement un affichage d'échanges avec "
+"tous les filtres exposés. Plus d'outils de comptabilité sont nécessaires, "
+"selon la manière dont le système est utilisé."
+
+#: cforge_currencies.views_default.inc:507
+msgid "Transaction management"
+msgstr "Gestion des échanges"
+
+#: cforge_currencies.views_default.inc:508
+msgid ""
+"All transactions can be seen from here. Use the filters to list what you "
+"need."
+msgstr ""
+"Tous les échanges peuvent être consultés ici. Utilisez les filtres pour un "
+"affichage personnalisé."
+
+#: cforge_currencies.views_default.inc:509
+msgid "Débiteur"
+msgstr "Celui qui donne"
+
+#: cforge_currencies.views_default.inc:510
+msgid "Recorded"
+msgstr "Enregistré"
+
+#: cforge_currencies.views_default.inc:514
+msgid "State"
+msgstr "Etat"
+
+#: cforge_currencies.views_default.inc:516
+msgid "Undo"
+msgstr "Annuler"
+
+#: cforge_currencies.views_default.inc:517
+msgid "Quantity"
+msgstr "Quantité"
+
+#: cforge_currencies.views_default.inc:518
+msgid "Page"
+msgstr "Page"
+
+#: cforge_currencies.module:28
+msgid "Balance Limits"
+msgstr "Limite des soldes"
+
+#: cforge_currencies.module:34
+msgid "Balances"
+msgstr "Soldes"
+
+#: cforge_currencies.module:41
+msgid "Balance History"
+msgstr "Historique du solde"
+
+#: cforge_currencies.module:55
+msgid "Once this account has traded, this value cannot be changed."
+msgstr ""
+"Après l'échange avec ce compte, cette valeur ne peut plus être modifiée."
+
+#: cforge_currencies.module:56
+msgid ""
+"Please ensure the mail for this account goes to a responsible person: @mail"
+msgstr ""
+"Veillez à ce que l'adresse email de ce compte soit attribuée à une personne "
+"responsable: @mail"
+
+#: cforge_currencies.install:12
+msgid "currency"
+msgstr "monnaie"
+
+#: cforge_currencies.install:19
+msgid "Record exchange"
+msgstr "Enregistrer l'échange"
+
+#: cforge_currencies.install:55
+msgid "Disabling all currency modules"
+msgstr "Désactiver tous les modules traitant des monnaies"
+
+#: cforge_currencies.install:121
+msgid "System trading stats"
+msgstr "Statistiques système des échanges"
+
+#: cforge_currencies.info:0
+msgid "Cforge currencies"
+msgstr "Monnaies Cforge"
+
+#: cforge_currencies.info:0
+msgid ""
+"Standard LETS / Timebank accounting with intertrade and mirror of national "
+"currency"
+msgstr ""
+"Comptabilité standard pour SEL / Banque du Temps, avec échanges inter-SEL / "
+"Banque du Temps et reflet de la monnaie nationale"
+
+#: cforge_currencies.info:0
+msgid "Community Forge"
+msgstr "Community Forge"
+
+msgid "Description of the exchange :"
+"[mcapiform:transaction_description]"
+"with"
+"[mcapiform:secondperson]"
+""
+"[mcapiform:direction]"
+""
+"the sum of"
+"[mcapiform:worth]"
+""
+msgstr "Catégorie de l'échange :"
+"[mcapiform:transaction_description]"
+"avec"
+"[mcapiform:secondperson]"
+""
+"[mcapiform:direction]"
+""
+"une somme de"
+"[mcapiform:worth]"
+""

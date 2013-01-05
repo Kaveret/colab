@@ -1,0 +1,10 @@
+; $Id$
+name = Cforge launch
+description = Import users, offers, wants & balances, then mail all users with new password. Transaction imports must be done someotherhow for the time being.
+core = 7.x
+package = Community Forge
+configure = admin/people/import
+
+dependencies[] = mcapi
+dependencies[] = uif
+dependencies[] = mcapi_import

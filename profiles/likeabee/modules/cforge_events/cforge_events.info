@@ -1,0 +1,13 @@
+; $Id$
+name = "Cforge Events"
+description = "Post events and view on calendar"
+core = 7.x
+package = Community Forge
+
+;life was too short to make this work
+;dependencies[] = calendar
+dependencies[] = date
+dependencies[] = date_popup
+dependencies[] = date_views
+
+files[] = cforge_events.views_default.inc
