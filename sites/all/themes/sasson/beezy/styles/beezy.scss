@@ -53,7 +53,6 @@ div.region-header{float:right;}
         }
         a{
           color:#014a81; 
-          text-decoration: none;
           height:50px;
         }
         div.item-list{
@@ -168,7 +167,6 @@ div.region-header{float:right;}
         a{
           color: #ffd4ff;
           padding: 0 7px;
-          text-decoration: none;
           position: relative;
           top: -5px;
         }
@@ -349,7 +347,6 @@ div.region-header section.block-menu{
         width: 123px;
         text-align: center;
         text-align: left;
-        text-decoration: none;
         padding: 6px 0 0;
         padding-left: 12px;
         border: 0px;
@@ -391,23 +388,26 @@ div.region-header section div.content:hover{
   margin-right: 30px;
 }
 
+a {
+  text-decoration: none;
+}
+
 .likeabee-block img.chart{
   border: 1px solid #f1ad00;
   padding: 12px 42px;
 }
 
 .likeabee-block table{
-  border:1px solid #FACE77;
+  border:1px solid $orange;
 }
 
 .likeabee-block table tr {
   background-color: #fff;
-  border-bottom: 1px solid #FACE77;
+  border-bottom: 1px solid $orange;
   font-size: 12px;
   font-weight: normal;
   a{
-    text-decoration: none;
-    color: #064882;
+    color: $blue;
   }
   td{
     padding: 5px 10px;
@@ -418,8 +418,8 @@ div.region-header section div.content:hover{
   width:80px;
   height:20px;
   font-size: 12px;
-  background-color: #fdf6e4;;
-  border:1px solid #FACE77;
+  background-color: $soft-orange;
+  border:1px solid $orange;
   padding-left: 10px;
   font-weight: normal;
 }
@@ -429,6 +429,7 @@ div.region-header section div.content:hover{
   display: inline-block;
   margin-right:10px;
 }
+
 /* mixins can only be defined at root level, apparently */
 /*
 .likeabee-block input#edit-submit.form-submit{
@@ -436,14 +437,13 @@ div.region-header section div.content:hover{
 }
 
 @mixin button {
-  background-color: #F1AD00;
+   background-color: #F1AD00;
   border: medium none;
   color: white;
   font-weight: bold;
   padding: 5px 17px;
-}
+ }
 */
-
 
 
 
@@ -470,7 +470,6 @@ div.region-header section div.content:hover{
   display: inline-block;
   width: 80px;
   border: 0px;
-  text-decoration: none;
   color:#5a6b98;
   font-weight: normal;
   text-align: left;
@@ -563,7 +562,6 @@ clear: both;
       color:#014a81;
       margin-right: 6px;
       margin-left: 15px;
-           text-decoration: none;
       display: inline-block;
       font-size: 13px;
       padding: 82px 0px 0 0px;
@@ -608,7 +606,6 @@ div.view-id-list_of_groups {
     background: white;
     a{
       padding: 0;
-      text-decoration: none;
       color: #B01919;
       font-weight: bold;
       font-size: 16px;
@@ -646,31 +643,29 @@ div.view-id-list_of_groups {
   .views-field-group-group .field-content{
     padding-top: 16px;
     a{
-
-    color: white;
-    font-weight: bolder;
-    border-color: #FAAC18;
-    text-decoration: none;
-    padding: 5px 10px;
+      color: white;
+      font-weight: bolder;
+      border-color: #FAAC18;
+      padding: 5px 10px;
     }
     .group{
-    float: right;
-    font-size: 13px;
-    padding-top: 3px;
-    margin-right: 6px;
-    background-color: #FAAC18;
-    width: 53px;
-    height: 22px;
+      float: right;
+      font-size: 13px;
+      padding-top: 3px;
+      margin-right: 6px;
+      background-color: #FAAC18;
+      width: 53px;
+      height: 22px;
     }
     .number{
-    float: left;
-    margin-right: 4px;
-    margin-left: 10px;
-    font-weight: bold;
+      float: left;
+      margin-right: 4px;
+      margin-left: 10px;
+      font-weight: bold;
     }
     .members{
-    font-size: 15px;
-    float: left;
+      font-size: 15px;
+      float: left;
     }
     .picture{
     float: left;
@@ -709,7 +704,6 @@ div.menu-name-main-menu{
     padding: 2px 0px;
     a{
       font-size: 14px;
-      text-decoration: none;
       color: white;
       font-weight: bolder;
       padding-left: 8px;
@@ -731,7 +725,6 @@ div.menu-name-main-menu{
 }
 @mixin box-header-a{
   font-size: 14px;
-  text-decoration: none;
   color: white;
   font-weight: bolder;
   padding-left: 8px;
@@ -818,7 +811,6 @@ div.menu-name-main-menu{
       margin:0px 14px 14px 14px;
     }
     a{
-      text-decoration: none;
       color: #A3001E;
       font-size: 14px;
     }
@@ -1015,7 +1007,6 @@ div.img-biger .number[class*=" 0 "],
     margin-bottom: 5px;
     background: white;
     a{
-      text-decoration: none;
       padding: 0;
       margin-left: -8px;
       color: #B01919;
@@ -1073,7 +1064,6 @@ div.img-biger .number[class*=" 0 "],
 }
 @mixin select-all-title-link{
   padding: 0;
-  text-decoration: none;
   color: #B01919;
   font-weight: bold;
   font-size: 16px;
@@ -1128,8 +1118,7 @@ div.img-biger .number[class*=" 0 "],
 /*---------- sidebar-second -----------*/
 section[id^="block-views-my-groups"],
 section[id^="block-views-tags-block"],
-section[id^="block-views-groups-block"],
-section[id^="block-views-individual-space-block"]{
+section[id^="block-views-groups-block"]{
   margin-top: -4px;
   .block-title{
     margin: 0;
@@ -1138,17 +1127,16 @@ section[id^="block-views-individual-space-block"]{
   }
   ul{
     list-style: none;    
-        }
-  li{
-  margin: 0;
-  color: #4E4E4E;
-  font-size: 13.5px;
   }
-        a{
-           color: #4E4E4E;
-           text-decoration: none;
+  li{
+    margin: 0;
+    color: #4E4E4E;
     font-size: 13.5px;
-        }
+  }
+  a{
+    color: #4E4E4E;
+    font-size: 13.5px;
+  }
 
 #block-views-tags-block .block-title,
 #block-views-groups-block .block-title{
@@ -1244,7 +1232,6 @@ section[id^="block-views-individual-space-block"]{
   a{
     color: #B01919;
     font-weight: bold;
-    text-decoration: none;
   }
   .views-field-field-location-of-event-text{
   border-right: 1.8px solid #B01919;
@@ -1269,7 +1256,6 @@ section[id^="block-views-individual-space-block"]{
     .flag-join-event a{
     padding: 2px 0px 4px 1px;
     color: white;
-    text-decoration: none;
     }
 }
 .field-name-field-join-to-event{
@@ -1281,7 +1267,6 @@ section[id^="block-views-individual-space-block"]{
       font-weight: bolder;
       padding: 10px;
       color: white;
-      text-decoration: none;
   }
 }
 .section-event #main .content{
@@ -1325,9 +1310,6 @@ section[id^="block-views-individual-space-block"]{
     left: 0;
     margin-left: -48px;
     padding: 0;
-    a{
-      text-decoration: none;
-    }
     ul li{
       margin-top: 3px;
       position: absolute;
