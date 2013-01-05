@@ -83,13 +83,7 @@
         </a>
       <?php endif; ?>
       <?php print render($page['header']); ?>
-      <?php print drupal_render(drupal_get_form('search_form')); ?>
-
-      <?php if ($site_name): ?>
-          <h1 id="site-name">
-            <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
-          </h1>
-      <?php endif; ?>
+      <?php print drupal_render($search); ?>
 
       <?php if ($site_slogan): ?>
         <div id="site-slogan"><?php print $site_slogan; ?></div>
@@ -101,7 +95,9 @@
 <div id="page">
   <?php if ($main_menu_links): ?>
     <nav id="main-menu" role="navigation">
-      <?php print render($main_menu_links); ?>
+      <?php 
+      //  print render($main_menu_links); this will be done with a block instead
+      ?>
     </nav><!-- /#main-menu -->
   <?php endif; ?>
 
@@ -148,7 +144,7 @@
   <?php endif; ?>
 </div><!-- /#page -->
 
-<footer id = "footer">
+<footer>
   <div id = "logo-footer"></div>
   <!-- this is directly in the theme for now, but ideally would be done using the menu_block first level of main-menu -->
 <!--footer icons are hidden because these services are not built yet
@@ -159,16 +155,15 @@
     <li><a href="/" title="" class="active">Resources Exchange</a></li>
   </ul>
 -->
-  <?php if ($secondary_menu_links): ?>
   <nav id="secondary-menu" role="navigation">
     <?php print $secondary_menu_links ?>
   </nav> <!-- /#secondary-menu -->
-  <?php endif; ?>
+
   <?php print render($footer_icons); ?>
   <?php print render($share_icons); ?>
   <?php //this is the blocks in the footer region
     print render($page['footer']);
   ?>
 
-</footer><!-- /#footer -->
+</footer>
 

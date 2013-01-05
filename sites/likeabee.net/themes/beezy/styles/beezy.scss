@@ -1,9 +1,14 @@
 #header{
   margin-top: 10px;
 }
-div.region-header{float:right;}
+div.region-header{
+  float:right;
+}
+a{
+  text-decoration:none;
+}
 
-#page, #header, .region-featured, .region-footer, .content {
+#page, #header, .region-footer, .content {
   float: none;
   display: block;
   margin-left: auto;
@@ -11,15 +16,165 @@ div.region-header{float:right;}
   width: 960px;
 }
 
+
+header{
+  #search-form{
+    padding: 5px 0 0 10px;
+    input {
+      background: url('../images/home-icons.png') no-repeat 100% 7%;
+      border: 2px solid #AFAFAF;
+      width: 194px;
+      height: 26px;
+      padding: 3px 54px 0px 24px;
+      margin-left: 4px;
+    }
+  }
+  section.block-menu{
+    position: relative !important;
+    background-image: url("../images/primary-links-with-down-arrow.gif");
+    background-color: #f9ab17;
+    background-position: center bottom;
+    background-repeat:no-repeat;
+    font-size: 7px;
+    color: #fff;
+    text-align: center;
+    cursor: default;
+    width: 113px;
+    float: right;
+    div.content{ /* this is the block which appears on mouseover */
+      background: white;
+      padding-bottom: 5px;
+      display: none;
+      position: absolute;
+      width: 150px;
+      z-index: 100;
+      font-size: 13px;
+      box-shadow: 0px 0px 5px 0px #C5B88E;
+      ul{
+        margin: 0;
+        padding: 0 0 0 10px;
+        li{
+          list-style: none;
+          margin: 0;
+          background: white;
+          height: 20px;
+        }
+        li.first {
+          box-shadow: 0px 0px;
+        }
+        li a{
+          color: #f9ab17;
+          border: 0px;
+        }
+      }
+    }
+  }
+  section:hover div.content,
+  section div.content:hover{
+    display: block;
+  }
+
+}
+/* this needs to be put back in */
+#userpic-social{float:right;}
+
+
+@mixin button {
+  background-color: #F1AD00;
+  border: medium none;
+  color: white;
+  font-weight: bold;
+  padding: 5px 17px;
+}
+
+
+footer {
+  width: 100%;
+  background: #9f2772;
+  height: 70px;
+  margin: auto;
+  padding: 20px 0 20px;
+  width: 100%;
+  #secondary-menu{
+    float:none;
+    margin:auto;
+    li{
+      list-style: none;
+      font-size: 13px;
+      float: left;
+      border-right: 1px solid #FFD4FF;
+      position: relative;
+      a{
+        color: #ffd4ff;
+        padding: 0 7px;
+      }
+    }
+    li.last{
+      border-right: none;
+    }
+  }
+  ul#footer-icons{
+      position: relative;
+      width: 238px;
+      float: right;
+      right: 7px;
+      li{
+        list-style: none;
+        background: url('../images/home-icons.png') no-repeat top left;
+        margin: 6px;
+        float: right;
+        width: 19px;
+        height: 22px;
+        a{
+          font-size: 0px;
+          padding: 20px 0px 3px 23px;
+        }
+      }
+      li:nth-child(1){ background-position: 50% -119px;margin-left: 6px; }
+      li:nth-child(2){background-position: 50% -44px;}
+      li:nth-child(3){ background-position:50% -94px; }
+      li:nth-child(4){ background-position: 50% -69px; }
+  }
+  #logo-footer{
+    position: relative;
+    left: -15px;
+    margin: 7px 7px  0px 7px;
+    width: 116px;
+    float: left;
+    height: 31px;
+    border-radius: 10px;
+    background: url('../logo.png') no-repeat white center;
+    background-size: 96px;
+  }
+}
+/*
+ * NOTE TO SYLISTS
+ * EVERYTHING ABOVE THIS LINE IS IN USE
+ * EVERYTHING BELOW THIS LINE NEEDS TO BE REVIEWED
+ * EVERYTHING ABOVE THIS LINE SHOULD BE IN SOME KIND OF ORDER
+ * THAT WAY DUPLICATES WILL BE OBVIOUS BECAUSE EVERYTHING WILL HAVE ITS PLACE
+ * LIKE
+ * overall page settings
+ * header region
+ * menus
+ * sidebars & blocks
+ * main content
+ * footer
+ */
+
+
+
+
 /* featured menu by matslats
  * The features menu is made of blocks whose <ul> content is hidden.
- * Rolling over the block(title) makes the <ul> appear underneath 
+ * Rolling over the block(title) makes the <ul> appear underneath
+ * we are no longer using the features region with blocks in it, but the styles might be reused with the menu system
  */
 #featured{
   border:1px #FAD07C solid;
   border-top: 0px;
   /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%); 
+  background: -webkit-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
   /* Chrome10+,Safari5.1+ */
   background: -o-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
   /* Opera 11.10+ */
@@ -52,8 +207,7 @@ div.region-header{float:right;}
           font-size: 16px;
         }
         a{
-          color:#014a81; 
-          text-decoration: none;
+          color:#014a81;
           height:50px;
         }
         div.item-list{
@@ -64,13 +218,12 @@ div.region-header{float:right;}
           z-index: 100;
           box-shadow: 0px 0px 5px 0px #C5B88E;
           li{
-            background-image: none;  
-            text-decoration: none;
+            background-image: none;
             color:#5a6b98;
             font-weight: normal;
             text-align: left;
             font-size: 13px;
-            float: none;    
+            float: none;
             background-color: white;
             height: 11px;
             padding: 5px 0px;
@@ -92,19 +245,6 @@ div.region-header{float:right;}
     }
   }
 }
-#block-search-form, #featured h2{
-  float: left;
-  margin: 6px 0px 0px 25px;
-}
-/* an attempt to hammer the main icons over to the left, but the real problem is the width of them + the front page picture
-#sidebar-second {
-  .region-sidebar-second, 
-  .block,
-  div.content,
-  div.menu-block-wrapper,
-  ul {float:left;}
-}
-
 
 /* -----  share icons, wherever they are----- */
 #share-icons{
@@ -132,87 +272,15 @@ div.region-header{float:right;}
       background: url('../images/home-icons.png') no-repeat 50% 0;
       font-size: 0px;
     }
-    .facebook a{ background-position: 50% -147px; } 
-    .twiter a{ background-position: -27% -211px;  } 
-    .rss a{ background-position: 50% -179px;  } 
-    .youtube a{ background-position: 50% -242px;  } 
+    .facebook a{ background-position: 50% -147px; }
+    .twiter a{ background-position: -27% -211px;  }
+    .rss a{ background-position: 50% -179px;  }
+    .youtube a{ background-position: 50% -242px;  }
   }
 }
 
 
-#footer {
-  width: 100%;
-  margin: 0;
-  background: #9f2772;
-  height: 70px;
-  box-shadow: 0px -4px 0px 2px  #9f2772;
-  border-top: 1px dashed #FFFFFF;
-  display: inline-block;
-  margin: 20px 0 0;
-  width: 100%;
-  #block-menu-secondary-menu{
-      position: relative;  
-      width: 725px;
-      left: 82px;
-      z-index: 2;
-      top: 5px;
-      .content li{
-        list-style: none;
-        font-size: 13px;
-        float: left;
-        margin: 11px 2px 0 2px;
-        border-right: 1px solid #FFD4FF;
-        position: relative;
-        height: 8px;
-        left: -38px;
-        a{
-          color: #ffd4ff;
-          padding: 0 7px;
-          text-decoration: none;
-          position: relative;
-          top: -5px;
-        }
-      }
-      .content li:nth-child(7){
-        border-right: 0px solid #ffd4ff;
-      }
-  }  
-  ul#footer-icons{
-      position: relative;      
-      width: 238px;
-      float: right;
-      right: 7px;
-      li{
-        list-style: none;
-        background: url('../images/home-icons.png') no-repeat top left;
-        margin: 6px;
-        float: right;
-        width: 19px;
-        height: 22px;
-        a{
-          font-size: 0px;
-          padding: 20px 0px 3px 23px;
-        }
-      }
-      li:nth-child(1){ background-position: 50% -119px;margin-left: 6px; } 
-      li:nth-child(2){background-position: 50% -44px;} 
-      li:nth-child(3){ background-position:50% -94px; } 
-      li:nth-child(4){ background-position: 50% -69px; } 
-  }
-  #logo-footer{
-      position: relative;
-      left: -15px;
-      margin: 7px 7px  0px 7px;      
-      width: 116px;
-      float: left;
-      height: 31px;
-      border-radius: 10px;
-      background: url('../logo.png') no-repeat white center;
-      background-size: 96px;
-  }
-}
 
-#userpic-social{float:right;}
 
 
 #floating{
@@ -233,9 +301,7 @@ div.region-header{float:right;}
   margin-top: 40px;
   }
 }
-#site-name,#main-menu,#secondary-menu{
-  display: none;
-}
+
 /* -----  page title  ----- */
 #page-title{
   text-align: left;
@@ -256,113 +322,15 @@ div.region-header{float:right;}
 /* -----  logo  ----- */
 .not-front{ /*this should be done with page--front.tpl.php rather than writing php to produce different classes*/
   #logo{
-  float: right;
-  margin-left: 14px;
+    float: right;
+    margin-left: 14px;
   }
   #logo img{
-  height: 22px;
-  margin: -28px 11px -51px 0px;
-  }
-  #block-views-group-logo-block,
-  #block-views-individual-space-block{
-  width: 165px;
-  float: left;
-  margin-bottom: 9px;
-  margin-top: -3px;
-  }
-}
-.node-type-page,
-.page-node-add,
-.section-event{
-  #logo{
-  float: left;
-  margin-right: 14px;
-  }
-  #logo img{
-  height: 36px;  
-  }
-}
-/**************************  Header  ******************************/
-/* -----  search  ----- */
-
-#search-form{
-  label,.form-submit { display: none; }
-  input {
-    background: url('../images/home-icons.png') no-repeat 100% 7%;
-    border: 2px solid #AFAFAF;
-    width: 194px;
-    height: 26px;
-    padding: 0px 54px 0px 24px;
-    margin-left: 4px;
+    height: 22px;
+    margin: -28px 11px -51px 0px;
   }
 }
 
-
-div.region-header section.block-menu{
-  position: relative !important;
-  background-image: url("../images/primary-links-with-down-arrow.gif");
-  background-color: #f9ab17;
-  background-position: center bottom;
-  background-repeat:no-repeat;
-  font-size: 7px;
-  color: #fff;
-  text-align: center;
-  text-decoration: none;
-  padding: 0px;
-  cursor: default;
-  width: 113px;
-  float: right;
-  margin: 0 2px;
-  div.content{
-    background: white;
-    display: none;
-    position: absolute;
-    width: 150px;
-    z-index: 100;
-    box-shadow: 0px 0px 5px 0px #C5B88E;
-    ul{
-      padding: 0;
-      li{
-        list-style: none;
-        float: none;
-        margin: 0;
-        padding-right: 16px;
-        background-image: none;
-        background: white;
-        height: 20px;
-        margin-bottom: 0px;
-        width: auto;
-      }
-      li.first {
-        margin-right: 0;
-        box-shadow: 0px 0px;
-      }
-      li.last {
-        margin-bottom: 15px;
-      }
-      li a{
-        color: #f9ab17;
-        font-weight: bolder;
-        font-weight: normal;
-        width: 80px;
-        width: 113px;
-        width: 123px;
-        text-align: center;
-        text-align: left;
-        text-decoration: none;
-        padding: 6px 0 0;
-        padding-left: 12px;
-        border: 0px;
-        font-size: 13px;
-      }
-    }
-  }
-}
-
-div.region-header section:hover div.content,
-div.region-header section div.content:hover{
-  display: block;
-}
 
 
 .likeabee-block .header{
@@ -406,7 +374,6 @@ div.region-header section div.content:hover{
   font-size: 12px;
   font-weight: normal;
   a{
-    text-decoration: none;
     color: #064882;
   }
   td{
@@ -429,22 +396,9 @@ div.region-header section div.content:hover{
   display: inline-block;
   margin-right:10px;
 }
-/* mixins can only be defined at root level, apparently */
-/*
 .likeabee-block input#edit-submit.form-submit{
   @include button;
 }
-
-@mixin button {
-  background-color: #F1AD00;
-  border: medium none;
-  color: white;
-  font-weight: bold;
-  padding: 5px 17px;
-}
-*/
-
-
 
 
 /*---  block-views -----*/
@@ -470,26 +424,130 @@ div.region-header section div.content:hover{
   display: inline-block;
   width: 80px;
   border: 0px;
-  text-decoration: none;
   color:#5a6b98;
   font-weight: normal;
   text-align: left;
   padding-left: 12px;
   font-size: 13px;
 }
-/*-----------------------------*/
-.section-group #block-views-496829e4ed0eb890c08a769ebd3a80e3,
-.section-activities #block-views-link-to-activity-block-1,
-.section-event #block-views-link-to-activity-block-1,
-.section-events  #block-views-link-to-activity-block-1,
-.section-node-add #block-og-extras-node-links,
-.section-members #block-views-link-to-group-members-block-1{
-  background-color: white;
-  border-left: 1px solid #FCF0D8;
-  border-right: 1px solid #FCF0D8;
+
+$blue: #064882;
+$orange: #FACE77;
+$soft-orange:#fdf6e4;
+$red:#B01919;
+
+/*************   my beez page *************/
+.likeabee-block .header{
+    border: 1px solid $orange;
+    border-radius: 6px 6px 6px 6px;
+    margin: 26px 14px;
+    color: $blue;
+    padding: 17px;
+    font-size: 14px;
 }
 
+.likeabee-block .header .transaction-totals .balance{
+  font-size:20px;
+}
 
+.advanced-help-link,
+.advanced-help-link:hover {
+    background: url("../images/resource/cursore.png") no-repeat scroll 0 0 transparent;
+    float: right;
+    height: 21px;
+    width: 22px;
+  }
+
+.likeabee-block .transaction-totals{
+  float:left;
+  margin-right: 30px;
+}
+
+.likeabee-block img.chart{
+  border: 1px solid #f1ad00;
+  padding: 12px 42px;
+}
+
+.likeabee-block table{
+  border:1px solid $orange;
+}
+
+.likeabee-block table tr {
+    background-color: #fff;
+    border-bottom: 1px solid $orange;
+    font-size: 12px;
+  font-weight: normal;
+  a{
+    color: $blue;
+  }
+  td{
+    padding: 5px 10px;
+  }
+}
+
+.likeabee-block table thead tr th{
+  width:80px;
+  height:20px;
+  font-size: 12px;
+  background-color: $soft-orange;
+  border:1px solid $orange;
+  padding-left: 10px;
+  font-weight: normal;
+}
+
+.likeabee-block form#mcapi-forms-form.step-1 p,
+.likeabee-block .form-type-radio{
+  display: inline-block;
+  margin-right:10px;
+}
+
+/*************    Market page  ***********************/
+
+/* matslats temp theming for resources/marketplace Please do better if you can*/
+.view-likeabee-catalog .views-field-title,
+.view-likeabee-catalog .views-field-model{
+  padding: 6px 6px 0 6px;
+  color:$red;
+  a{
+    color:$red;
+  }
+}
+
+.view-likeabee-catalog .views-field-title{
+  margin-bottom:-8px;
+}
+
+.view-likeabee-catalog td{
+  border: 2px solid #FBD38B;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 0 0 0 3px #FAE8C7;
+  float: left;
+  height: 373px;
+  margin: 0 41px 31px 0;
+  padding: 0;
+  position: relative;
+  width: 214px;
+}
+
+.view-likeabee-catalog .views-field-entity-id{
+  margin:0 10px;
+}
+
+.view-likeabee-catalog input{
+  border:none;
+  background: url("../images/resource/add_to_card.png") no-repeat scroll 0 0 transparent;
+  color: #FFFFFF;
+  display: block;
+  font-weight: bold;
+  height: 43px;
+  width: 100%;
+}
+
+ .view-likeabee-catalog .views-field-name .views-label,
+ .view-likeabee-catalog .views-field-display-price .views-label{
+   color: $red;
+   font-size: 10px;
+ }
 
 
 
@@ -516,7 +574,6 @@ div.region-header section div.content:hover{
 #breadcrumb a ,#breadcrumb{
   float: left;
   color: #303030;
-  text-decoration: none;
   font-size: 15px;
 }
 div #breadcrumb:after{
@@ -537,7 +594,7 @@ clear: both;
 #block-menu-menu-main-icons{
   float: left;
 }
-#block-menu-block-3 .menu, 
+#block-menu-block-3 .menu,
 .menu-block-menu_block_3{
   padding: 10px 10px 0px 12px;
   margin: -9px 0px 33px -43px;
@@ -548,7 +605,7 @@ clear: both;
       width: 227px;
       padding: 0;
       margin: 20px 0px 38px -17px;
-  }  
+  }
   li{
       margin-left: 10px;
       margin-right: -6px;
@@ -563,12 +620,11 @@ clear: both;
       color:#014a81;
       margin-right: 6px;
       margin-left: 15px;
-           text-decoration: none;
       display: inline-block;
       font-size: 13px;
       padding: 82px 0px 0 0px;
       text-align: center;
-      width: 85px; 
+      width: 85px;
       letter-spacing: 0px;
       line-height: 12px;
       word-spacing: 1px;
@@ -576,10 +632,10 @@ clear: both;
     }
 
   }
-    li:nth-child(1){ background-position: 54% -236px; } 
-  li:nth-child(2){ background-position: 56%   22px; } 
-  li:nth-child(3){ background-position: 55% -154px; } 
-  li:nth-child(4){ background-position: 63% -69px;  } 
+  li:nth-child(1){ background-position: 54% -236px; }
+  li:nth-child(2){ background-position: 56%   22px; }
+  li:nth-child(3){ background-position: 55% -154px; }
+  li:nth-child(4){ background-position: 63% -69px;  }
 }
 
 
@@ -608,7 +664,6 @@ div.view-id-list_of_groups {
     background: white;
     a{
       padding: 0;
-      text-decoration: none;
       color: #B01919;
       font-weight: bold;
       font-size: 16px;
@@ -646,11 +701,9 @@ div.view-id-list_of_groups {
   .views-field-group-group .field-content{
     padding-top: 16px;
     a{
-
     color: white;
     font-weight: bolder;
     border-color: #FAAC18;
-    text-decoration: none;
     padding: 5px 10px;
     }
     .group{
@@ -680,10 +733,6 @@ div.view-id-list_of_groups {
   }
 }
 
-/*************************  General   **************************
-************** (information/activity/members - see all - all groups/ side) *****************/
-/* -----  General information box  ----- */
-
 div.menu-name-main-menu{
   li{display:inline;}
 }
@@ -691,12 +740,7 @@ div.menu-name-main-menu{
 div.view-groups-content-preview div.node.teaser{
   background: #9f2772;
 }
-/*************************  General stykes  **************************/
-/* -----  General information boxs  ----- */
 
-div.menu-name-main-menu{
-  li{display:inline;}
-}
 @mixin box{
   width: 303px;
   height: 202px;
@@ -709,7 +753,6 @@ div.menu-name-main-menu{
     padding: 2px 0px;
     a{
       font-size: 14px;
-      text-decoration: none;
       color: white;
       font-weight: bolder;
       padding-left: 8px;
@@ -731,7 +774,6 @@ div.menu-name-main-menu{
 }
 @mixin box-header-a{
   font-size: 14px;
-  text-decoration: none;
   color: white;
   font-weight: bolder;
   padding-left: 8px;
@@ -755,7 +797,6 @@ div.menu-name-main-menu{
   margin: 0;
   margin-bottom: 7px;
   }
-  a{text-decoration: none;}
 }
 
 /* -----  General activity boxs  ----- */
@@ -764,6 +805,7 @@ div.menu-name-main-menu{
   .block-odd{float: left;}
   .block-even{float: right;}
 }
+
 .region-content section[id^="block-views-group-"]{
     position: relative;
     margin: 11px 14px;
@@ -771,10 +813,10 @@ div.menu-name-main-menu{
     border-radius: 6px;
     box-shadow: 0px 0px 0px 4px #FCF0D8;
     width: 341px;
-    
+
     .block-title{
       float: left;
-      color:#014a81;  
+      color:#014a81;
       background-color: #FCF0D8;
       border-bottom: 1px solid #FACE77;
       padding: 9px 19px;
@@ -787,25 +829,14 @@ div.menu-name-main-menu{
       position: absolute;
       right: 13px;
       margin-top: -7px;
-      a{color:#014a81; font-size: 19px;}  
+      a{color:#014a81; font-size: 19px;}
     }
     .view-content{
       clear: both;
       padding-top: 5px;
     }
-    .view-footer{
-      margin-top: 10px;
-      float: right;
-      clear: both;
-      text-align: right;
-      width: 100%;
-      padding-top: 7px;
-      border-top: 1px solid #FACE77;
-      p{margin: 0px;}
-      a{color:#014a81;font-size: 19px;}
-    }
     header h2{
-      width:auto; 
+      width:auto;
       clear: both;
       background-color:#fff;
       padding: 0;
@@ -818,7 +849,6 @@ div.menu-name-main-menu{
       margin:0px 14px 14px 14px;
     }
     a{
-      text-decoration: none;
       color: #A3001E;
       font-size: 14px;
     }
@@ -954,7 +984,7 @@ div.menu-name-main-menu{
         width: 100%;
         height: 100%;
         background-color: #fff;
-      }  
+      }
       .username{
         color: white;
         margin-left: 12px;
@@ -997,7 +1027,7 @@ div.img-biger .number[class*=" 0 "],
   border-radius: 4px;
   border: 2px solid #FBD38B;
   box-shadow: 0px 0px 0px 3px #FAE8C7;
-  
+
   .views-field-title,
   .views-field-field-description-group,
   .views-field-field-user-description{
@@ -1015,7 +1045,6 @@ div.img-biger .number[class*=" 0 "],
     margin-bottom: 5px;
     background: white;
     a{
-      text-decoration: none;
       padding: 0;
       margin-left: -8px;
       color: #B01919;
@@ -1056,7 +1085,7 @@ div.img-biger .number[class*=" 0 "],
     font-size: 13px;
     font-weight: normal;
   }
-       
+
   .views-field-group-group .field-content{
     padding-top: 16px;
     a{
@@ -1073,7 +1102,6 @@ div.img-biger .number[class*=" 0 "],
 }
 @mixin select-all-title-link{
   padding: 0;
-  text-decoration: none;
   color: #B01919;
   font-weight: bold;
   font-size: 16px;
@@ -1137,18 +1165,18 @@ section[id^="block-views-individual-space-block"]{
     color: #014A81;
   }
   ul{
-    list-style: none;    
+    list-style: none;
         }
   li{
   margin: 0;
   color: #4E4E4E;
   font-size: 13.5px;
   }
-        a{
-           color: #4E4E4E;
-           text-decoration: none;
+  a{
+     color: #4E4E4E;
     font-size: 13.5px;
-        }
+  }
+}
 
 #block-views-tags-block .block-title,
 #block-views-groups-block .block-title{
@@ -1228,7 +1256,7 @@ section[id^="block-views-individual-space-block"]{
 }
 .node-type-groups-event .node-groups-event .field-name-body{
   clear: both;
-  padding: 25px 74px;    
+  padding: 25px 74px;
 }
 #block-views-group-logo-event-block img{
   margin: 9px;
@@ -1244,7 +1272,6 @@ section[id^="block-views-individual-space-block"]{
   a{
     color: #B01919;
     font-weight: bold;
-    text-decoration: none;
   }
   .views-field-field-location-of-event-text{
   border-right: 1.8px solid #B01919;
@@ -1281,7 +1308,6 @@ section[id^="block-views-individual-space-block"]{
       font-weight: bolder;
       padding: 10px;
       color: white;
-      text-decoration: none;
   }
 }
 .section-event #main .content{
@@ -1303,7 +1329,6 @@ section[id^="block-views-individual-space-block"]{
     width: 239px;
   }
 }
-/**************************  footer  ******************************/
 
 
 /*************************  tabs  *****************************/
@@ -1325,16 +1350,13 @@ section[id^="block-views-individual-space-block"]{
     left: 0;
     margin-left: -48px;
     padding: 0;
-    a{
-      text-decoration: none;
-    }
     ul li{
       margin-top: 3px;
       position: absolute;
       list-style: none;
       width: auto;
       height: 39px;
-      margin-bottom: 10px; 
+      margin-bottom: 10px;
       padding-left: 43px;
       line-height: 16px;
       border-top-right-radius: 26px;
@@ -1353,14 +1375,14 @@ section[id^="block-views-individual-space-block"]{
       }
     }
   }
-  ul li:nth-child(1) {z-index:104; top: 4px; background-position: 98% 101%; margin-top: 10px;}   
-  ul li:nth-child(2) {z-index:103; top:66px;   background-position: 98% -1%;  }  
-  ul li:nth-child(3) {z-index:102; top:123px;  background-position: 98% 67%;  } 
-  ul li:nth-child(4) {z-index:101; top:180px;  background-position: 99% 32.5%;  }   
+  ul li:nth-child(1) {z-index:104; top: 4px; background-position: 98% 101%; margin-top: 10px;}
+  ul li:nth-child(2) {z-index:103; top:66px;   background-position: 98% -1%;  }
+  ul li:nth-child(3) {z-index:102; top:123px;  background-position: 98% 67%;  }
+  ul li:nth-child(4) {z-index:101; top:180px;  background-position: 99% 32.5%;  }
 
   ul li:last-child{margin-bottom: 10px;}
   /*ul li ul*/
-  ul li ul{  
+  ul li ul{
     box-shadow: 0px 0px 2px 1.5px #C5BFAF;
     background: #fff;
     position: absolute;
@@ -1390,13 +1412,13 @@ section[id^="block-views-individual-space-block"]{
     li{
       background: url('../images/points.png') no-repeat 3% 0% white;
       margin-left: 4px;
-    } 
-    li:nth-child(1) { background-position: 0% 2%; } 
-    li:nth-child(2) {letter-spacing: -1px; background-position: 0% 21%;  }  
-    li:nth-child(3) { background-position: 0% 40%;  } 
-    li:nth-child(4) { background-position: 0% 60%;  } 
-    li:nth-child(5) { background-position: 0% 80%;  } 
-    li:nth-child(6) { background-position: 0% 100%;  } 
+    }
+    li:nth-child(1) { background-position: 0% 2%; }
+    li:nth-child(2) {letter-spacing: -1px; background-position: 0% 21%;  }
+    li:nth-child(3) { background-position: 0% 40%;  }
+    li:nth-child(4) { background-position: 0% 60%;  }
+    li:nth-child(5) { background-position: 0% 80%;  }
+    li:nth-child(6) { background-position: 0% 100%;  }
   }
   ul.menu li a,ul.menu li ul{
     display: none;

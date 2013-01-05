@@ -1,7 +1,0 @@
-; $Id:
-name = Likeabee miscellaneous configuration
-description = Other settings that might be moved to an install profile
-package = Likeabee
-core = "7.x"
-
-dependencies[] = ckeditor

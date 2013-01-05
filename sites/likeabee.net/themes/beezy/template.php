@@ -28,6 +28,8 @@ function beezy_preprocess_page(&$vars) {
       theme_get_suggestions($args, $type)
     );
   }
+  $vars['search'] = drupal_get_form('search_form', '', '', '', '');
+  //debug(array_keys($vars));
 }
 
 

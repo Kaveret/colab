@@ -1,0 +1,96 @@
+<?php
+
+//have to decide whether to create a node type especially for this
+//also look at what the d6->d7 upgrade does
+
+/**
+ * implamentation of hook_help
+ */
+function cforge_docs_help($path) {
+  if ($path == 'docs' && user_access('edit documents')) {
+    return l(t('Add another document'), 'node/add/document');
+  }
+}
+
+/**
+ * Implementation of hook_node_info)().
+ */
+function cforge_docs_node_info(){
+  $types['document'] = array(
+    'name' => 'Document',
+    'module' => 'cforge_docs',
+    'base' => 'cforge_docs',
+    'description' => t('Page with attached Document(s) which can be categorised.'),
+    'has_title' => TRUE,
+    'title_label' => t('Document title'),
+  );
+  return $types;
+}
+
+
+/*
+ * access control for the document type
+ * $op = view, update, delete, create
+ */
+function cforge_docs_access($op, $node, $account = NULL) {
+  if (!$account) $account = $GLOBALS['user'];
+  switch($op) {
+    case 'update':
+    case 'delete':
+    case 'create':
+      return user_access('edit documents', $account);
+    case 'view':
+      //assume that if you can view private you can also view public
+      if (user_access('view private documents', $account)) return TRUE;
+      elseif (!$node->sticky && user_access('view non-private documents', $account)) return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Implementation of hook_permission
+ */
+function cforge_docs_permission(){
+  return array(
+    'edit documents' => array(
+      'title' => t('Edit documents'),
+      'description' => t('Edit nodes with file attachments')
+    ),
+    'view private documents' => array(
+      'title' => t('View private documents'),
+      'description' => t('Each document has a privacy setting')
+    ),
+    'view non-private documents' => array(
+      'title' => t('View non-private documents'),
+      'description' => t('Each document has a privacy setting')
+    )
+  );
+}
+
+/**
+ * Implementation of hook_form)().
+ */
+function cforge_docs_form(&$node, $form_state){
+  return node_content_form($node, $form_state);
+}
+
+/**
+ * Implementation of hook_form_alter()
+ * open up the uploads section of the form
+ */
+function cforge_docs_form_document_node_form_alter(&$form, $form_state){
+  $form['sticky'] = $form['options']['sticky'];
+  unset($form['options']['sticky']);
+  //change the name of the sticky flag to private
+  $form['sticky']['#access'] = TRUE;//because this is set in cforge_custom
+  $form['sticky']['#title'] = t('Private');
+  $form['sticky']['#description'] = t('Tick to show the document only to members');
+  $form['sticky']['#weight'] = 1;
+}
+
+function cforge_docs_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'cforge_docs'),
+  );
+}

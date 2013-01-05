@@ -1,0 +1,44 @@
+name = Community Forge
+description = Manage your local community, with credit clearing
+version = VERSION
+core = 7.x
+
+files[] = cforge.drush.inc
+files[] = cforge.install
+files[] = cforge.views_default.inc
+
+;core optional
+dependencies[] = aggregator
+dependencies[] = block
+dependencies[] = comment
+dependencies[] = contact
+;dependencies[] = dblog
+dependencies[] = file
+dependencies[] = help
+dependencies[] = menu
+dependencies[] = path
+dependencies[] = search
+dependencies[] = taxonomy
+dependencies[] = update
+dependencies[] = trigger
+
+;contrib
+dependencies[] = advanced_help
+dependencies[] = backup_migrate
+dependencies[] = captcha
+dependencies[] = image_captcha
+dependencies[] = ckeditor
+dependencies[] = date
+dependencies[] = date_api
+dependencies[] = mcapi
+dependencies[] = mailsystem
+dependencies[] = mimemail
+dependencies[] = usertabs
+dependencies[] = views
+dependencies[] = views_data_export
+
+;devel
+;dependencies[] = views_ui
+;dependencies[] = admin_menu
+;dependencies[] = field_ui
+;dependencies[] = contextual

@@ -1,0 +1,24 @@
+<?php
+
+//add the user profile flag
+function cforge_offline_install() {
+  module_load_install('cforge');
+  $row = array(
+    'title' => t('Postal membership'),
+    'description' => t('This member prefers to receive updates by post'),
+    'name' => 'profile_postal',
+    'type' => 'checkbox',
+    'weight' => 6,
+    'required' => 0,
+    'register' => 1
+  );
+
+  _field_info_collate_types(TRUE);
+  _matslats_make_profilefield_boolean('profile_postal');
+  _matslats_make_profile_instance('options', 'profile_postal', 'options_onoff', 'list_default', (object)$row);
+}
+
+function cforge_offline_uninstall() {
+  field_delete_field('profile_postal');
+  field_purge_batch(1);
+}
