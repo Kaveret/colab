@@ -9,8 +9,8 @@ function likeabee_resources_menu() {
     'description' => 'Buy, sell, pay, swop or gift!',
     'page callback' => 'resources_beeziest',
     'access arguments' => array('transact'),
-    'menu_name' => 'menu-main',
-    'weight' => 0
+    'menu_name' => 'main-menu',
+    'weight' => 4
   );
 
   $items['resources/beeziest'] = array(

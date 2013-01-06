@@ -56,7 +56,7 @@ function likeabee_block_setup_beezy() {
   $blocks[] = array(
     'module' => 'menu_block',
     'delta' => MENU_BLOCK_MAIN_MENU_LEV1,
-    'region' => 'content_top',
+    'region' => 'content',
     'status' => 0,//temporary!!
     'title' => '<none>',
     'title_link' => 0,
@@ -72,7 +72,8 @@ function likeabee_block_setup_beezy() {
     'module' => 'menu_block',
     'delta' => MENU_BLOCK_MAIN_MENU_LEV2,
     'title' => '<none>',
-    'region' => 'content',
+    'region' => 'help',
+    'weight' => -1, //assuming the help block is 0
     'title_link' => 0,
     'admin_title' => 'Main menu 2nd level',
     'parent' => 'main-menu:0',
