@@ -210,86 +210,6 @@ footer {
 
 
 
-/* featured menu by matslats
- * The features menu is made of blocks whose <ul> content is hidden.
- * Rolling over the block(title) makes the <ul> appear underneath
- * we are no longer using the features region with blocks in it, but the styles might be reused with the menu system
- */
-#featured{
-  border:1px #FAD07C solid;
-  border-top: 0px;
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
-  margin-left: auto;
-  margin-right: auto;
-  h2 {
-    display:inline;
-  }
-  div.item-list{
-    float: left;
-    height: 62px;
-    border-left: 1px solid #fcf0d8;
-    border-right: 1px solid #fcf0d8;
-    margin: 0px -1px 0px 0px;
-    text-align: center;
-    ul{
-      list-style: none;
-      float: left;
-      li{ /*the always-visible part of the block */
-        margin:0;
-        float: left;
-        height: 45px;
-        width: 89px;
-        background: url("../images/arrow-header.png") no-repeat 41px 49px;
-        padding: 9px 0px 17px 0px;
-        font-size: 11px;
-        a:first-line{
-          color:#B01919;
-          font-size: 16px;
-        }
-        a{
-          color:#014a81;
-          height:50px;
-        }
-        div.item-list{
-          background: white;
-          margin: 62px 0 0;
-          display: none;
-          position: absolute;
-          z-index: 100;
-          box-shadow: 0px 0px 5px 0px #C5B88E;
-          li{
-            background-image: none;
-            color:#5a6b98;
-            font-weight: normal;
-            text-align: left;
-            font-size: 13px;
-            float: none;
-            background-color: white;
-            height: 11px;
-            padding: 5px 0px;
-            width: 130px;
-            a{
-              color:#5a6b98;
-              font-weight: normal;
-              text-align: left;
-              padding: 0px 12px 0px 12px;
-            }
-          }
-        }
-        /* when hovering over the block, show the ul */
-        /* not working */
-        li:hover div.item-list{
-          display: block;
-        }
-      }
-    }
-  }
-}
 
 /* -----  share icons, wherever they are----- */
 #share-icons{
@@ -556,9 +476,6 @@ div.view-id-list_of_groups {
   }
 }
 
-div.menu-name-main-menu{
-  li{display:inline;}
-}
 
 div.view-groups-content-preview div.node.teaser{
   background: #9f2772;

@@ -56,7 +56,7 @@ function likeabee_block_setup_beezy() {
   $blocks[] = array(
     'module' => 'menu_block',
     'delta' => MENU_BLOCK_MAIN_MENU_LEV1,
-    'region' => 'content_top',
+    'region' => 'content',
     'status' => 0,//temporary!!
     'title' => '<none>',
     'title_link' => 0,
@@ -72,7 +72,8 @@ function likeabee_block_setup_beezy() {
     'module' => 'menu_block',
     'delta' => MENU_BLOCK_MAIN_MENU_LEV2,
     'title' => '<none>',
-    'region' => 'content',
+    'region' => 'help',
+    'weight' => -1, //assuming the help block is 0
     'title_link' => 0,
     'admin_title' => 'Main menu 2nd level',
     'parent' => 'main-menu:0',
@@ -308,7 +309,7 @@ function enable_beezy_theme() {
     'toggle_comment_user_picture' => 1,
     'toggle_comment_user_verification' => 0,
     'toggle_favicon' => 1,
-    'toggle_main_menu' => 1,
+    'toggle_main_menu' => 0,
     'toggle_secondary_menu' => 1,
     'default_logo' => 1,
     'logo_path' => '',
