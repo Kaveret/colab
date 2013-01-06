@@ -297,12 +297,6 @@ function likeabee_flag_default_flags() {
 }
 
 
-function likeabee_language_switch_links_alter(&$result, &$type, &$path) {
-  global $language ;
-  $lang_name = $language->language ;
-  unset($result[$lang_name]);
-}
-
 function likeabee_form_search_form_alter(&$form, $form_state) {
   unset($form['basic']['submit']);
 }
