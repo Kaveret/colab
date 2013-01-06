@@ -79,6 +79,35 @@ function likeabee_image_default_styles() {
   return array();
 }
 
+function likeabee_block_info() {
+  $blocks['user_content_by_type'] = array(
+    'info' => 'Content produced by the user, grouped by type',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'user*',
+    'regions' => array('beezy' => 'sidebar_second')
+  );
+  return $blocks;
+}
+
+function likeabee_block_view($delta) {
+  $account = user_uid_optional_load();
+  debug($account);
+  $name = $account->profile_firstname[LANGUAGE_NONE][0][value];
+  $types = db_query("SELECT DISTINCT type FROM {node} WHERE uid = :uid", array(':uid' => $account->uid))->fetchcol();
+  $type_names = node_type_get_names();
+  foreach ($types as $type) {
+    //views_embed_view doesn't give us the display title
+    $render[] = array(
+      '#markup' => '<h2>'.t('@type content from @name', array('@name' => $name, '@type' => $type_names[$type])) . '</h2>'
+    );
+    $render[] = array('#markup' => views_embed_view('user_content_by_type', 'last3', $type, $uid));
+  }
+  return array(
+    'subject' => '<none>',
+    'content' => $render
+  );
+}
+
 /*
  * implements hook_block_view
  * put the menu blocks in place

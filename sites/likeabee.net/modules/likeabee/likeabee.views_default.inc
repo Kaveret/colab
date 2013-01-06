@@ -2,6 +2,95 @@
 
 function likeabee_views_default_views() {
   $view = new view();
+  $view->name = 'user_content_by_type';
+  $view->description = 'Thsi is called multiple times from script to produce several lists at a time';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'User content by type';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'My content';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '3';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'type',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Relationship: Content: Author */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['required'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: Type */
+  $handler->display->display_options['arguments']['type']['id'] = 'type';
+  $handler->display->display_options['arguments']['type']['table'] = 'node';
+  $handler->display->display_options['arguments']['type']['field'] = 'type';
+  $handler->display->display_options['arguments']['type']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['type']['title_enable'] = TRUE;
+  $handler->display->display_options['arguments']['type']['title'] = '%2 content from %1';
+  $handler->display->display_options['arguments']['type']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['type']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['type']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['type']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['type']['limit'] = '0';
+/* Contextual filter: Content: User posted or commented */
+  $handler->display->display_options['arguments']['uid_touch']['id'] = 'uid_touch';
+  $handler->display->display_options['arguments']['uid_touch']['table'] = 'node';
+  $handler->display->display_options['arguments']['uid_touch']['field'] = 'uid_touch';
+  $handler->display->display_options['arguments']['uid_touch']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid_touch']['title_enable'] = TRUE;
+  $handler->display->display_options['arguments']['uid_touch']['title'] = '%1 content from %2';
+  $handler->display->display_options['arguments']['uid_touch']['default_argument_type'] = 'user';
+  $handler->display->display_options['arguments']['uid_touch']['default_argument_options']['user'] = TRUE;
+  $handler->display->display_options['arguments']['uid_touch']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid_touch']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid_touch']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+
+  /* Display: Block */
+  $handler = $view->new_display('attachment', 'Attachment', 'last3');
+  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+
+  $views[$view->name] = $view;
+
+
+
+  $view = new view();
   $view->name = 'content_preview';
   $view->description = 'Show all content (nodes) of a group.';
   $view->tag = 'likeabee';
