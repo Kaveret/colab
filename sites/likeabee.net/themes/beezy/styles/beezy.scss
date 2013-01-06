@@ -1,3 +1,4 @@
+/* overall page settings */
 #header{
   margin-top: 10px;
 }
@@ -7,6 +8,9 @@ div.region-header{
 a{
   text-decoration:none;
 }
+/* this needs to be put back in */
+#userpic-social{float:right;}
+
 
 #page, #header, .region-footer, .content {
   float: none;
@@ -16,6 +20,7 @@ a{
   width: 960px;
 }
 
+/* header section, which should be the same on every page */
 
 header{
   #search-form{
@@ -73,13 +78,52 @@ header{
   section div.content:hover{
     display: block;
   }
-
 }
-/* this needs to be put back in */
-#userpic-social{float:right;}
+/* This is the 'main-menu' rendered by the menublocks module
+  At the moment this lives in the help region */
+#block-menu-block-2 {
+   border:1px #FAD07C solid;
+  border-top: 0px;
+  /* none of these gradient backgrounds appear to be working in firefox */
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
+  margin-left: auto;
+  margin-right: auto;
+  height: 62px;
+  text-align: center;
+  ul{
+    list-style: none;
+    float: left;
+    li{ /*the always-visible part of the block */
+      margin:0;
+      float:left;
+      display:inline;
+      height: 45px;
+      width: 89px;
+      background: url("../images/arrow-header.png") no-repeat 41px 49px;
+      padding: 9px 0px 17px 0px;
+      font-size: 11px;
+      a{
+        color:#014a81;
+        height:50px;
+      }
+      a:first-line{
+        color:#B01919;
+        font-size: 16px;
+      }
+    }
+  }
+}
+#block-system-help {
+  clear:left;
+}
 
 
-@mixin button {
+@mixin button { /* what is this used for ??? What is a mixin??? */
   background-color: #F1AD00;
   border: medium none;
   color: white;
@@ -88,6 +132,7 @@ header{
 }
 
 
+/* Footer section, which should be the same on every page */
 footer {
   width: 100%;
   background: #9f2772;
@@ -330,228 +375,6 @@ footer {
     margin: -28px 11px -51px 0px;
   }
 }
-
-
-
-.likeabee-block .header{
-  border: 1px solid #FACE77;
-  border-radius: 6px 6px 6px 6px;
-  margin: 26px 14px;
-  color: #064882;
-  padding: 17px;
-  font-size: 14px;
-}
-
-.likeabee-block .header .transaction-totals .balance{
-  font-size:20px;
-}
-
-.advanced-help-link,
-.advanced-help-link:hover {
-  background: url("../images/resource/cursore.png") no-repeat scroll 0 0 transparent;
-  float: right;
-  height: 21px;
-  width: 22px;
-}
-
-.likeabee-block .transaction-totals{
-  float:left;
-  margin-right: 30px;
-}
-
-.likeabee-block img.chart{
-  border: 1px solid #f1ad00;
-  padding: 12px 42px;
-}
-
-.likeabee-block table{
-  border:1px solid #FACE77;
-}
-
-.likeabee-block table tr {
-  background-color: #fff;
-  border-bottom: 1px solid #FACE77;
-  font-size: 12px;
-  font-weight: normal;
-  a{
-    color: #064882;
-  }
-  td{
-    padding: 5px 10px;
-  }
-}
-
-.likeabee-block table thead tr th{
-  width:80px;
-  height:20px;
-  font-size: 12px;
-  background-color: #fdf6e4;;
-  border:1px solid #FACE77;
-  padding-left: 10px;
-  font-weight: normal;
-}
-
-.likeabee-block form#mcapi-forms-form.step-1 p,
-.likeabee-block .form-type-radio{
-  display: inline-block;
-  margin-right:10px;
-}
-.likeabee-block input#edit-submit.form-submit{
-  @include button;
-}
-
-
-/*---  block-views -----*/
-@mixin menu-featured-ul{
-  background: white;
-  margin: 62px 0 0;
-  display: none;
-  position: absolute;
-  z-index: 100;
-  box-shadow: 0px 0px 5px 0px #C5B88E;
-}
-@mixin menu-featured-li{
-  list-style: none;
-  float: none;
-  margin: 0;
-  padding-right: 16px;
-  background-image: none;
-  background: white;
-  height: 22px;
-  width: 95px;
-}
-@mixin menu-featured-a{
-  display: inline-block;
-  width: 80px;
-  border: 0px;
-  color:#5a6b98;
-  font-weight: normal;
-  text-align: left;
-  padding-left: 12px;
-  font-size: 13px;
-}
-
-$blue: #064882;
-$orange: #FACE77;
-$soft-orange:#fdf6e4;
-$red:#B01919;
-
-/*************   my beez page *************/
-.likeabee-block .header{
-    border: 1px solid $orange;
-    border-radius: 6px 6px 6px 6px;
-    margin: 26px 14px;
-    color: $blue;
-    padding: 17px;
-    font-size: 14px;
-}
-
-.likeabee-block .header .transaction-totals .balance{
-  font-size:20px;
-}
-
-.advanced-help-link,
-.advanced-help-link:hover {
-    background: url("../images/resource/cursore.png") no-repeat scroll 0 0 transparent;
-    float: right;
-    height: 21px;
-    width: 22px;
-  }
-
-.likeabee-block .transaction-totals{
-  float:left;
-  margin-right: 30px;
-}
-
-.likeabee-block img.chart{
-  border: 1px solid #f1ad00;
-  padding: 12px 42px;
-}
-
-.likeabee-block table{
-  border:1px solid $orange;
-}
-
-.likeabee-block table tr {
-    background-color: #fff;
-    border-bottom: 1px solid $orange;
-    font-size: 12px;
-  font-weight: normal;
-  a{
-    color: $blue;
-  }
-  td{
-    padding: 5px 10px;
-  }
-}
-
-.likeabee-block table thead tr th{
-  width:80px;
-  height:20px;
-  font-size: 12px;
-  background-color: $soft-orange;
-  border:1px solid $orange;
-  padding-left: 10px;
-  font-weight: normal;
-}
-
-.likeabee-block form#mcapi-forms-form.step-1 p,
-.likeabee-block .form-type-radio{
-  display: inline-block;
-  margin-right:10px;
-}
-
-/*************    Market page  ***********************/
-
-/* matslats temp theming for resources/marketplace Please do better if you can*/
-.view-likeabee-catalog .views-field-title,
-.view-likeabee-catalog .views-field-model{
-  padding: 6px 6px 0 6px;
-  color:$red;
-  a{
-    color:$red;
-  }
-}
-
-.view-likeabee-catalog .views-field-title{
-  margin-bottom:-8px;
-}
-
-.view-likeabee-catalog td{
-  border: 2px solid #FBD38B;
-  border-radius: 4px 4px 4px 4px;
-  box-shadow: 0 0 0 3px #FAE8C7;
-  float: left;
-  height: 373px;
-  margin: 0 41px 31px 0;
-  padding: 0;
-  position: relative;
-  width: 214px;
-}
-
-.view-likeabee-catalog .views-field-entity-id{
-  margin:0 10px;
-}
-
-.view-likeabee-catalog input{
-  border:none;
-  background: url("../images/resource/add_to_card.png") no-repeat scroll 0 0 transparent;
-  color: #FFFFFF;
-  display: block;
-  font-weight: bold;
-  height: 43px;
-  width: 100%;
-}
-
- .view-likeabee-catalog .views-field-name .views-label,
- .view-likeabee-catalog .views-field-display-price .views-label{
-   color: $red;
-   font-size: 10px;
- }
-
-
-
-
 
 
 /* -----  breadcrumb ----- */
