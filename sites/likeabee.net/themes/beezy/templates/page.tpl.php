@@ -93,15 +93,9 @@
   <?php endif; ?>
 
 <div id="page">
-  <?php if ($main_menu_links): ?>
-    <nav id="main-menu" role="navigation">
-      <?php 
-      //  print render($main_menu_links); this will be done with a block instead
-      ?>
-    </nav><!-- /#main-menu -->
-  <?php endif; ?>
 
  <div id="main">
+   <h1><?php print $title; ?></h1>
     <?php if ($tabs): ?>
       <div class="tabs"><?php print render($tabs); ?></div>
     <?php endif; ?>

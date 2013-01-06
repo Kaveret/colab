@@ -33,5 +33,7 @@ dependencies[] = views_ui
 dependencies[] = field_ui
 dependencies[] = contextual
 dependencies[] = admin_menu
+dependencies[] = features
 dependencies[] = defaultcontent
+dependencies[] = default_content
 

@@ -12,7 +12,7 @@ function likeabee_help($path, $args) {
 function likeabee_menu() {
   //just make a callback for the home page
   $items['home'] = array(
-    'title' => 'temp home',
+    'title' => 'Home page',
     'page callback' => 'temp_home',
     'access arguments' => array('access content')
   );
@@ -59,17 +59,6 @@ function likeabee_theme() {
 
 
 /*
- * implements hook_styles_alter
- * all the styles in code and in data
- * before it goes into cache
- */
-function likeabee_image_styles_alter(&$styles) {
-  //change the size of the thumbnail
-  $effect_id = key($styles['thumbnail']['effects']);
-  $styles['thumbnail']['effects'][$effect_id]['data']['width'] = 32;
-  $styles['thumbnail']['effects'][$effect_id]['data']['height'] = 32;
-}
-/*
  * implements hook_image_default_styles
  * declare new styles here
  *
@@ -77,6 +66,19 @@ function likeabee_image_styles_alter(&$styles) {
 function likeabee_image_default_styles() {
 
   return array();
+}
+/*
+ * implements hook_styles_alter
+ * all the styles in code and in data
+ * before it goes into cache
+ */
+function likeabee_image_styles_alter(&$styles) {
+  //change the size of the thumbnail
+  if (isset($styles['thumbnail'])) {
+    $effect_id = key($styles['thumbnail']['effects']);
+    $styles['thumbnail']['effects'][$effect_id]['data']['width'] = 32;
+    $styles['thumbnail']['effects'][$effect_id]['data']['height'] = 32;
+  }
 }
 
 function likeabee_block_info() {
@@ -91,16 +93,16 @@ function likeabee_block_info() {
 
 function likeabee_block_view($delta) {
   $account = user_uid_optional_load();
-  debug($account);
-  $name = $account->profile_firstname[LANGUAGE_NONE][0][value];
+  $name = $account->profile_firstname[LANGUAGE_NONE][0]['value'];
   $types = db_query("SELECT DISTINCT type FROM {node} WHERE uid = :uid", array(':uid' => $account->uid))->fetchcol();
   $type_names = node_type_get_names();
+  //types are in no particular order
   foreach ($types as $type) {
     //views_embed_view doesn't give us the display title
     $render[] = array(
       '#markup' => '<h2>'.t('@type content from @name', array('@name' => $name, '@type' => $type_names[$type])) . '</h2>'
     );
-    $render[] = array('#markup' => views_embed_view('user_content_by_type', 'last3', $type, $uid));
+    $render[] = array('#markup' => views_embed_view('user_content_by_type', 'last3', $type, $account->uid));
   }
   return array(
     'subject' => '<none>',
@@ -122,7 +124,7 @@ function likeabee_block_info_alter($blocks, $theme) {
 
 
 function temp_home() {
-  $output = likeabee_content_summary('blah', 'event');
+  $output = likeabee_content_summary('Events', 'event');
 //  $output = array('#markup' => 'blah');
   return $output;
 }

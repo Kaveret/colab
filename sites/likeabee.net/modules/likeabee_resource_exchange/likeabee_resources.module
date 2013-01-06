@@ -5,7 +5,7 @@
  */
 function likeabee_resources_menu() {
   $items['resources'] = array(
-    'title' => 'Resources exchange',
+    'title' => 'Resource exchange',
     'description' => 'Buy, sell, pay, swop or gift!',
     'page callback' => 'resources_beeziest',
     'access arguments' => array('transact'),
