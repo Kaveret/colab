@@ -170,6 +170,7 @@ function likeabee_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+
   /* Display: All */
   $handler = $view->new_display('block', 'All', 'all');
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
@@ -178,9 +179,11 @@ function likeabee_views_default_views() {
   /* Display: Popular */
   $handler = $view->new_display('block', 'Popular', 'popular');
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
-  $handler->display->display_options['defaults']['sorts'] = FALSE;
+
+
   /* Sort criterion: Flags: Flag counter */
   /*
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
   $handler->display->display_options['sorts']['count']['id'] = 'count';
   $handler->display->display_options['sorts']['count']['table'] = 'flag_counts';
   $handler->display->display_options['sorts']['count']['field'] = 'count';
@@ -210,7 +213,6 @@ function likeabee_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  $handler->display->display_options['filters']['field_block_main_tid']['vocabulary'] = 'block_s_group';
   /* Filter criterion: Content: Editor&#039;s Choice (field_editor_s_choice) */
   $handler->display->display_options['filters']['field_editor_s_choice_value']['id'] = 'field_editor_s_choice_value';
   $handler->display->display_options['filters']['field_editor_s_choice_value']['table'] = 'field_data_field_editor_s_choice';
@@ -218,7 +220,7 @@ function likeabee_views_default_views() {
   $handler->display->display_options['filters']['field_editor_s_choice_value']['value'] = array(
     1 => '1',
   );
-  $handler->display->display_options['block_description'] = 'Group\'s Event- Editor\'s Choice';
+  $handler->display->display_options['block_description'] = 'Editor\'s Choice';
   $views[$view->name] = $view;
 
 
@@ -329,4 +331,9 @@ function likeabee_views_default_views() {
 
   $views[$view->name] = $view;
   return $views;
+}
+
+
+function likeabee_views_default_views_alter($views) {
+  unset($views['transactions']);//this puts its menu item in the main-menu, where it's not wanted
 }

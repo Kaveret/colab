@@ -46,6 +46,7 @@ header{
     cursor: default;
     width: 113px;
     float: right;
+    margin: 0 3px;
     div.content{ /* this is the block which appears on mouseover */
       background: white;
       padding-bottom: 5px;
@@ -72,6 +73,7 @@ header{
           border: 0px;
         }
       }
+      ul ul{display:none} /* This hides the node/add submenu */
     }
   }
   section:hover div.content,
@@ -79,8 +81,12 @@ header{
     display: block;
   }
 }
+
+
 /* This is the 'main-menu' rendered by the menublocks module
-  At the moment this lives in the help region */
+ *  At the moment this lives in the help region
+ */
+
 #block-menu-block-2 {
    border:1px #FAD07C solid;
   border-top: 0px;
@@ -129,6 +135,50 @@ header{
   color: white;
   font-weight: bold;
   padding: 5px 17px;
+}
+
+#block-menu-block-1 .menu,
+.menu-block-menu_block_3{
+  padding: 10px 10px 0px 12px;
+  margin: -9px 0px 33px -43px;
+  width: 243px;
+  float:left;
+  clear:left;
+  ul{
+      width: 227px;
+      padding: 0;
+      margin: 20px 0px 38px -17px;
+  }
+  li{
+      margin-left: 10px;
+      margin-right: -6px;
+      margin-top: 8px;
+      margin-bottom: -3px;
+      float: left;
+      height: 95px;
+      width: 95px;
+      list-style: none;
+      background: url('../images/big-icons.png') no-repeat 50% 0;
+    a{
+      color:#014a81;
+      margin-right: 6px;
+      margin-left: 15px;
+      display: inline-block;
+      font-size: 13px;
+      padding: 82px 0px 0 0px;
+      text-align: center;
+      width: 85px;
+      letter-spacing: 0px;
+      line-height: 12px;
+      word-spacing: 1px;
+      font-weight: bold;
+    }
+
+  }
+  li:nth-child(1){ background-position: 54% -236px; }
+  li:nth-child(2){ background-position: 56%   22px; }
+  li:nth-child(3){ background-position: 55% -154px; }
+  li:nth-child(4){ background-position: 63% -69px;  }
 }
 
 
@@ -555,53 +605,7 @@ clear: both;
   float: right;
   margin: 14px 0px 13px -45px;
 }
-/* -----  main icons ----- */
-#block-menu-menu-main-icons{
-  float: left;
-}
-#block-menu-block-3 .menu,
-.menu-block-menu_block_3{
-  padding: 10px 10px 0px 12px;
-  margin: -9px 0px 33px -43px;
-  width: 243px;
-  float:left;
-  clear:left;
-  ul{
-      width: 227px;
-      padding: 0;
-      margin: 20px 0px 38px -17px;
-  }
-  li{
-      margin-left: 10px;
-      margin-right: -6px;
-      margin-top: 8px;
-      margin-bottom: -3px;
-      float: left;
-      height: 95px;
-      width: 95px;
-      list-style: none;
-      background: url('../images/big-icons.png') no-repeat 50% 0;
-    a{
-      color:#014a81;
-      margin-right: 6px;
-      margin-left: 15px;
-      display: inline-block;
-      font-size: 13px;
-      padding: 82px 0px 0 0px;
-      text-align: center;
-      width: 85px;
-      letter-spacing: 0px;
-      line-height: 12px;
-      word-spacing: 1px;
-      font-weight: bold;
-    }
 
-  }
-  li:nth-child(1){ background-position: 54% -236px; }
-  li:nth-child(2){ background-position: 56%   22px; }
-  li:nth-child(3){ background-position: 55% -154px; }
-  li:nth-child(4){ background-position: 63% -69px;  }
-}
 
 
 div.view-id-list_of_groups {

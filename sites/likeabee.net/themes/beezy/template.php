@@ -6,30 +6,19 @@ function beezy_preprocess_node(&$vars) {
   }
 }
 
-function beezy_preprocess_page(&$vars) {
-  //the main-menu needs to show the second level only, so we use menu_block for that
-  //only on certain pages, but which???
-  //$block = menu_tree_build(menu_block_get_config(MENU_BLOCK_SECTION));
-  //$vars['main_menu_links'] = $block['content'];
-
+function beezy_process_page(&$vars) {
   //add a suggestion to use a different page template according to node->type
-  if (isset($vars['node'])) {
-    // Get path arguments.
-    $args = arg();
-    // Remove first argument of "node".
-    unset($args[0]);
-    // Set type.
-    $type = "page__type_{$vars['node']->type}";
-
+  if (isset($vars['node']) && $vars['node']->type == 'group') {
     // Bring it all together.
     $vars['theme_hook_suggestions'] = array_merge(
       $vars['theme_hook_suggestions'],
-      array($type),
+      array("page__type__group"),
       theme_get_suggestions($args, $type)
     );
   }
+
   $vars['search'] = drupal_get_form('search_form', '', '', '', '');
-  //debug(array_keys($vars));
+//  debug(array_keys($vars));
 }
 
 

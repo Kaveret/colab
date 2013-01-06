@@ -114,10 +114,10 @@
   </div><!-- /.content -->
 
   <?php if (!empty($content['field_tags']) || !empty($content['links'])): ?>
-    <footer>
+    <div class = 'content-footer'>
       <?php print render($content['field_tags']); ?>
       <?php print render($content['links']); ?>
-    </footer>
+    </div>
   <?php endif; ?>
 
   <?php print render($content['comments']); ?>
