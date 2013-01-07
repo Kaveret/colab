@@ -37,14 +37,14 @@ function likeabee_default_1stparty() {
     'secondperson' => array(
       'preset' => '',
       'user_chooser_config' => 'user_chooser_permissions:transact',
-      'strip' => 1,
+      'strip' => 0,
     ),
     'direction' => array(
-      'preset' => 'outgoing',
-      'incoming' => 'Request',
-      'outgoing' => 'Pay',
-      'widget' => 'select',
-      'strip' => 0,
+      'preset' => '',
+      'incoming' => t('Request'),
+      'outgoing' => t('Pay'),
+      'widget' => 'radios',
+      'strip' => 1,
     ),
     'transaction_description' => array(
       'preset' => array(
@@ -61,7 +61,7 @@ function likeabee_default_1stparty() {
           'quantity' => '0',
         )
       ),
-      'strip' => 1,
+      'strip' => 0,
     ),
     'submission' => array(
       'button' => 'Submit',

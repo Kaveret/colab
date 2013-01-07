@@ -53,6 +53,11 @@ function likeabee_theme() {
         'gid' => NULL
       ),
     ),
+    'userpic_social' => array(
+      'variables' => array(
+        'account' => NULL
+      ),
+    )
   );
   return $items;
 }
@@ -92,30 +97,27 @@ function likeabee_block_info() {
 }
 
 function likeabee_block_view($delta) {
-  $account = user_uid_optional_load();
-  $name = $account->profile_firstname[LANGUAGE_NONE][0]['value'];
-  $types = db_query("SELECT DISTINCT type FROM {node} WHERE uid = :uid", array(':uid' => $account->uid))->fetchcol();
-  $type_names = node_type_get_names();
-  //types are in no particular order
-  foreach ($types as $type) {
-    //views_embed_view doesn't give us the display title
-    $render[] = array(
-      '#markup' => '<h2>'.t('@type content from @name', array('@name' => $name, '@type' => $type_names[$type])) . '</h2>'
-    );
-    $render[] = array('#markup' => views_embed_view('user_content_by_type', 'last3', $type, $account->uid));
+  switch ($delta) {
+    case 'user_content_by_type':
+      if (arg(0) != 'user') return;
+      $uid = arg(1) ? arg(1) : $GLOBALS['user']->uid;
+      $account = user_uid_optional_load($uid);
+      $types = db_query("SELECT DISTINCT type FROM {node} WHERE uid = :uid", array(':uid' => $account->uid))->fetchcol();
+      $type_names = node_type_get_names();
+      $render = array();
+      //types are in no particular order
+      foreach ($types as $type) {
+        //views_embed_view doesn't give us the display title
+        $render[] = array(
+          '#markup' => '<h2>'.t('@type content from @name', array('@name' => $type_names[$type], '@type' => $type_names[$type])) . '</h2>'
+        );
+        $render[] = array('#markup' => views_embed_view('user_content_by_type', 'last3', $type, $account->uid));
+      }
+      return array(
+        'subject' => '<none>',
+        'content' => $render
+      );
   }
-  return array(
-    'subject' => '<none>',
-    'content' => $render
-  );
-}
-
-/*
- * implements hook_block_view
- * put the menu blocks in place
- */
-function likeabee_block_view_alter(&$build, $block) {
-  if ($block->module == 'cforge') $build = array();
 }
 
 function likeabee_block_info_alter($blocks, $theme) {
@@ -128,6 +130,13 @@ function temp_home() {
 //  $output = array('#markup' => 'blah');
   return $output;
 }
+/*
+ * implements hook_page_alter
+ * puts the floating menu
+ */
+function likeabee_page_alter(&$page) {
+  $page['search'] = drupal_get_form('search_form', '', '', '', '');
+}
 
 function likeabee_node_view_alter(&$build, $node) {
   if ($build['#bundle'] != 'group') return; //this is needed to prevent nesting because group summary invokes a view with nodes in
@@ -138,7 +147,6 @@ function likeabee_node_view_alter(&$build, $node) {
   $build['discussion'] = likeabee_content_summary(t("Group's discussions"), 'discussion');
   $build['documents'] = likeabee_content_summary(t("Group's documents"), 'document');
 }
-
 
 function likeabee_content_summary($title, $type, $gid = NULL) {
   static $w = 1;
@@ -330,4 +338,56 @@ function likeabee_flag_default_flags() {
 
 function likeabee_form_search_form_alter(&$form, $form_state) {
   unset($form['basic']['submit']);
+}
+
+
+function template_preprocess_userpic_social(&$vars) {
+  $account = $vars['account'];
+  //Arggggh can only apply styling to 'managed' files with schema like public://
+  //the default user picture is a plain url
+  $style = 'thumbnail';//might need something even smaller
+  if ($picture_fid = $account->picture) {
+    $picture = file_load($picture_fid)->uri;
+    if (file_valid_uri($picture_filepath)) {
+      $picture = theme('image_style', array('style_name' => $style, 'path' => $picture_filepath));
+    }
+    else {
+      $vars['picture'] = '';
+      $args = array('@uid' => $account->uid, '@fid' => $picture_filepath);
+      drupal_set_message(t('Invalid picture filepath for user @uid: @fid', $args));
+      watchdog('likeabee.profile', 'Invalid picture filepath for user @uid: @fid', $args);
+    }
+  }
+  else {//simulate the thumbnail styling of the default image
+    $style = image_style_load($style);
+    //assume the first effect is a scale - this is a core style after all
+    $effect = current($style['effects']);
+    $picture = theme('image', array(
+      'path' => variable_get('user_picture_default', ''),
+      'width' => $effect['data']['width'],
+      'height' => $effect['data']['height']
+    ));
+  }
+  $vars['picture'] = array(
+    '#theme' => 'link',
+    '#text' => $picture,
+    '#path' => "user/$account->uid",
+    '#options' => array('html' => TRUE, 'attributes' => array())
+  );
+
+  $vars['facebook'] = @$account->fb_home['und']['0']['value'];
+  $vars['twitter'] = @$account->twitter['und']['0']['value'];
+  $vars['email'] = $account->mail;
+}
+
+function theme_userpic_social(&$vars) {
+  $output = drupal_render($vars['picture']);
+  if ($vars['facebook']) {
+    $output .= '<div class = "facebook">'.l(t('Facebook'), $vars['facebook']) . '</div>';
+  }
+  if ($vars['twitter']) {
+    $output .= '<div class = "twitter">'.l(t('Twitter'), $vars['twitter']) . '</div>';
+  }
+  $output .= '<div class = "email">'.l(t('Email'), $vars['email']) . '</div>';
+  return '<div id = "userpic-social">'.$output.'</div>';
 }

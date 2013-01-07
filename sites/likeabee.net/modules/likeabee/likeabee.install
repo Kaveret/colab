@@ -1,18 +1,20 @@
 <?php
 
-
-
-  variable_set('preprocess_css', FALSE);
-  variable_set('preprocess_js', FALSE);
-
+variable_set('preprocess_css', FALSE);
+variable_set('preprocess_js', FALSE);
 
 /**
  * implements hook_install_tasks for the installation profile
  */
 function likeabee_install() {
+  $weight = db_query("SELECT weight +1 FROM {system} WHERE name = 'cforge' ")->fetchField();
   db_query(
     "UPDATE {system} SET weight = :weight WHERE name = 'likeabee'",
-    array(':weight' => db_query("SELECT weight +1 FROM {system} WHERE name = 'cforge' ")->fetchField())
+    array(':weight' => $weight + 1)
+  );
+  db_query(
+    "UPDATE {system} SET weight = :weight WHERE name LIKE 'likeabee_%'",
+    array(':weight' => $weight + 2)
   );
   enable_beezy_theme();
   theme_disable(array('sky_seldulac'));
@@ -57,7 +59,9 @@ function likeabee_block_setup_beezy() {
     'module' => 'menu_block',
     'delta' => MENU_BLOCK_MAIN_MENU_LEV1,
     'region' => 'content',
-    'status' => 0,//temporary!!
+    'pages' => '<front>',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'status' => 1,
     'title' => '<none>',
     'title_link' => 0,
     'admin_title' => 'Main menu Section icons',
@@ -72,7 +76,7 @@ function likeabee_block_setup_beezy() {
     'module' => 'menu_block',
     'delta' => MENU_BLOCK_MAIN_MENU_LEV2,
     'title' => '<none>',
-    'region' => 'help',
+    'region' => 'navigation',
     'weight' => -1, //assuming the help block is 0
     'title_link' => 0,
     'admin_title' => 'Main menu 2nd level',
@@ -83,7 +87,6 @@ function likeabee_block_setup_beezy() {
     'expanded' => 0,
     'sort' => 0
   );
-
   $blocks[] = array(
     'module' => 'menu',
     'delta' => 'footer-menu',
@@ -362,4 +365,8 @@ function enable_beezy_theme() {
     'sasson_feed_icons' => 0,
     'sasson_settings__active_tab' => 'edit-sasson-general',
   ));
+}
+
+function likeabee_update_7001() {
+  module_disable(array('flag'));//just temporary, to be tidy
 }

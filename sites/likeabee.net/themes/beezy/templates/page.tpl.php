@@ -68,29 +68,29 @@
  * @see template_process()
  */
 ?>
-<?php if ($page['floating']): ?>
-    <div id="floating">
- <?php print render($page['floating']); ?>
- </div><!-- /#floating -->
- <?php endif; ?>
+<?php if (!$is_front): ?>
+  <div id="floating">
+    <?php print drupal_render($floating); ?>
+  </div><!-- /#floating -->
+<?php endif; ?>
 
 
-  <?php if ($logo || $site_name || $site_slogan || $page['header']): ?>
-    <header id="header" role="banner">
-      <?php if ($logo): ?>
-        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-          <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-        </a>
-      <?php endif; ?>
-      <?php print render($page['header']); ?>
-      <?php print drupal_render($search); ?>
+<?php if ($logo || $site_name || $site_slogan || $page['header']): ?>
+  <header id="header" role="banner">
+    <?php if ($logo): ?>
+      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
+        <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+      </a>
+    <?php endif; ?>
+    <?php print render($page['header']); ?>
+    <?php print drupal_render($search); ?>
 
-      <?php if ($site_slogan): ?>
-        <div id="site-slogan"><?php print $site_slogan; ?></div>
-      <?php endif; ?>
-      <?php if (isset($userpic_social))print_r($userpic_social); ?>
-    </header><!-- /#header -->
-  <?php endif; ?>
+    <?php if ($site_slogan): ?>
+      <div id="site-slogan"><?php print $site_slogan; ?></div>
+    <?php endif; ?>
+    <?php if (isset($userpic_social))print_r($userpic_social); ?>
+  </header><!-- /#header -->
+<?php endif; ?>
 
 <div id="page">
 
@@ -99,16 +99,14 @@
     <?php if ($tabs): ?>
       <div class="tabs"><?php print render($tabs); ?></div>
     <?php endif; ?>
-    <?php if ($page['highlighted']): ?>
-      <div id="highlighted">
-        <?php print render($page['highlighted']); ?>
-      </div><!-- /#highlighted -->
+    <?php if ($page['navigation']): ?>
+      <div id="navigation">
+        <?php print render($page['navigation']); ?>
+      </div><!-- /#navigation -->
     <?php endif; ?>
      <!--<div id="breadcrumb"><?php
        //print $breadcrumb;
       ?></div>-->
-    <?php print render($title_prefix); ?>
-    <?php print render($title_suffix); ?>
 
     <?php print $messages; ?>
     <?php print render($page['help']); ?>

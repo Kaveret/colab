@@ -322,7 +322,6 @@ class views_plugin_style extends views_plugin {
       $this->options['grouping'],
       TRUE
     );
-
     return $this->render_grouping_sets($sets);
   }
 

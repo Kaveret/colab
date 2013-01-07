@@ -35,17 +35,13 @@ scripts[] = scripts/beezy.js
 
 regions[header] = Header
 regions[help] = Help
-regions[page_top] = Page top
-regions[page_bottom] = Page bottom
-regions[featured] = Featured
-regions[highlighted] = Highlighted
+regions[navigation] = Navigation
 regions[content_top] = Content top
 regions[content] = Content
 regions[content_bottom] = Content bottom
 regions[sidebar_first] = Sidebar first
 regions[sidebar_second] = Sidebar second
 regions[footer] = Footer
-regions[floating] = Floating
 
 ; Theme Settings ----------------------------------------------------------
 ; these are the defaults for the theme settings configuration.

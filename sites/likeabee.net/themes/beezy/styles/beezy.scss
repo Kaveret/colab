@@ -12,7 +12,7 @@ a{
 #userpic-social{float:right;}
 
 
-#page, #header, .region-footer, .content {
+#page, #header, #footer, #navigation{
   float: none;
   display: block;
   margin-left: auto;
@@ -23,6 +23,14 @@ a{
 /* header section, which should be the same on every page */
 
 header{
+  #logo{ /* use page-front.tpl.php to move the header on that page */
+    float: right;
+    margin-left: 14px;
+    img{
+      height: 22px;
+      margin: -28px 11px -51px 0px;
+    }
+  }
   #search-form{
     padding: 5px 0 0 10px;
     input {
@@ -83,12 +91,14 @@ header{
 }
 
 
-/* This is the 'main-menu' rendered by the menublocks module
- *  At the moment this lives in the help region
+/*
+ * Navigation region contains the main menu (2nd level)
+ * and the current userpic_social
  */
 
-#block-menu-block-2 {
-   border:1px #FAD07C solid;
+#navigation {
+  height: 55px;
+  border:1px #FAD07C solid;
   border-top: 0px;
   /* none of these gradient backgrounds appear to be working in firefox */
   /* Chrome,Safari4+ */
@@ -97,29 +107,32 @@ header{
   background: -o-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
   /* Opera 11.10+ */
   background: -ms-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
-  margin-left: auto;
-  margin-right: auto;
-  height: 62px;
-  text-align: center;
-  ul{
-    list-style: none;
-    float: left;
-    li{ /*the always-visible part of the block */
-      margin:0;
+  div {
+    float:left;
+  }
+  #block-menu-block-2 div.content {
+    display:inline;
+    div.menu-block-wrapper{
       float:left;
-      display:inline;
-      height: 45px;
-      width: 89px;
-      background: url("../images/arrow-header.png") no-repeat 41px 49px;
-      padding: 9px 0px 17px 0px;
-      font-size: 11px;
-      a{
-        color:#014a81;
-        height:50px;
-      }
-      a:first-line{
-        color:#B01919;
-        font-size: 16px;
+      ul{
+        text-align:center;
+        margin:0;
+        padding:0;
+        li{ /*the always-visible part of the block */
+          float:left;
+          display:inline;
+          width: 90px;
+          height: 55px;
+          background: url("../images/arrow-header.png") no-repeat 43px 50px;
+          font-size: 11px;
+          a{
+            color:#014a81;
+          }
+          a:first-line{
+            color:#B01919;
+            font-size: 16px;
+          }
+        }
       }
     }
   }
@@ -137,8 +150,8 @@ header{
   padding: 5px 17px;
 }
 
-#block-menu-block-1 .menu,
-.menu-block-menu_block_3{
+/* this is for the big icons on the front page */
+#block-menu-block-1 .menu,{
   padding: 10px 10px 0px 12px;
   margin: -9px 0px 33px -43px;
   width: 243px;
@@ -181,6 +194,42 @@ header{
   li:nth-child(4){ background-position: 63% -69px;  }
 }
 
+
+
+/* this is for the middle sized icons floating on the left of everywhere but the front page */
+div#floating{
+	position: absolute;
+  top:150px;
+  ul {
+    padding: 0px;
+    li{
+      margin: 0px;
+      list-style: none;
+/* big-icons.png needs to be rerendered without spaces. then the % positioning below will work. My life is too short to count pixels /*
+      background-image: url('../images/big-icons.png');
+      background-repeat:  no-repeat;
+      background-size: 32px;
+      line-height: 32px;
+      a {
+        width: 32px;
+        height: 32px;
+        visibility:hidden;
+      }
+    }
+    li.groups{
+      background-position: 0 0%;
+    }
+    li.dreams-accelerator{
+      background-position: 0 25%;
+    }
+    li.resource-exchange{
+      background-position: 0 75%;
+    }
+    li.learning-center{
+      background-position: 0 50%;
+    }
+  }
+}
 
 /* Footer section, which should be the same on every page */
 footer {
@@ -334,18 +383,6 @@ footer {
     color:#014a81;
   }
 }
-/* -----  logo  ----- */
-.not-front{ /*this should be done with page--front.tpl.php rather than writing php to produce different classes*/
-  #logo{
-    float: right;
-    margin-left: 14px;
-  }
-  #logo img{
-    height: 22px;
-    margin: -28px 11px -51px 0px;
-  }
-}
-
 
 
 .likeabee-block .header{
@@ -363,7 +400,7 @@ footer {
 
 .advanced-help-link,
 .advanced-help-link:hover {
-  background: url("../images/resource/cursore.png") no-repeat scroll 0 0 transparent;
+  background: url("../images/resource/cursor.png") no-repeat scroll 0 0 transparent;
   float: right;
   height: 21px;
   width: 22px;
@@ -1144,18 +1181,7 @@ section[id^="block-views-individual-space-block"]{
   }
 }
 
-#block-views-tags-block .block-title,
-#block-views-groups-block .block-title{
-  padding-left: 19px;
-  background: url('../images/home-icons.png') no-repeat;
-}
-#block-views-tags-block .block-title{
-  background-position:-4% 100%;
-}
 
-#block-views-groups-block .block-title{
-  background-position:-4% -0.5%;
-}
 /**************** Infromtion Page *********************/
 .field-name-field-image-group div div{
   width: 700px;

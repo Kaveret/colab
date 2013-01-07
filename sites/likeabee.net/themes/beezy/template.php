@@ -16,9 +16,10 @@ function beezy_process_page(&$vars) {
       theme_get_suggestions($args, $type)
     );
   }
-
-  $vars['search'] = drupal_get_form('search_form', '', '', '', '');
-//  debug(array_keys($vars));
+  if (!$vars['is_front']) {
+    $vars['floating'] = menu_tree_build(menu_block_get_config(MENU_BLOCK_MAIN_MENU_LEV1));
+    $vars['floating'] = $vars['floating']['content'];
+  }
 }
 
 
