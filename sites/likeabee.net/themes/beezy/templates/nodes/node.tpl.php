@@ -80,7 +80,7 @@
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
 
   <?php if ($user_picture || !$page || $display_submitted): ?>
-    <header>
+    <header id ="content">
       <?php print $user_picture; ?>
 
       <?php print render($title_prefix); ?>

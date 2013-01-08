@@ -150,6 +150,48 @@ function default_content_content_defaults() {
     ),
   );
 
+
+
+
+  $content['groups'] = (object) array(
+    'link' => array(
+      'menu_name' => 'main-menu',
+      'link_path' => 'node-name/groups',
+      'router_path' => 'node/%',
+      'link_title' => 'Groups & Communities',
+      'options' => array(),
+      'module' => 'menu',
+      'hidden' => '0',
+      'external' => '0',
+      'has_children' => '0',
+      'expanded' => '0',
+      'weight' => '0',
+      'identifier' => 'main-menu:node-name/learning_centre',
+    ),
+    'title' => 'Learning centre',
+    'status' => '1',
+    'promote' => '0',
+    'sticky' => '0',
+    'type' => 'page',
+    'language' => 'und',
+    'created' => '1357489418',
+    'comment' => '0',
+    'translate' => '0',
+    'machine_name' => 'learning_centre',
+    'body' => array(
+      'und' => array(
+        0 => array(
+          'value' => '<p>Creating opportunities for small social groups to converge around topics and share values. Modelled on Facebook groups, it is important that this be highly integrated with the environment so that talk can be channeled into action.</p>
+',
+          'summary' => NULL,
+          'format' => 'editor_full_html',
+          'safe_value' => '<p>Creating opportunities for small social groups to converge around topics and share values. Modelled on Facebook groups, it is important that this be highly integrated with the environment so that talk can be channeled into action.</p>
+',
+          'safe_summary' => '',
+        ),
+      ),
+    ),
+  );
   $content['learning_centre'] = (object) array(
     'link' => array(
       'menu_name' => 'main-menu',
