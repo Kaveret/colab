@@ -1256,3 +1256,25 @@ function transaction_get_links($transaction) {
   }
   return ($links);
 }
+
+
+/*
+ * entity module support
+ * these functions present the components of the worth field as an entity property
+ * they are called without the .info.inc file necessarily having being included
+ */
+function entity_metadata_field_property_get_mcapi_currcode($data, $options, $name, $type, $info) {
+  foreach ($data[LANGUAGE_NONE] as $delta => $data) {
+    $values[$delta] = $data['currcode'];
+  }
+  return $values;
+}
+function entity_metadata_field_property_get_mcapi_quantity($data, $options, $name, $type, $info) {
+  foreach ($data[LANGUAGE_NONE] as $delta => $data) {
+    $values[$delta] = $data['quantity'];
+  }
+  return $values;
+}
+function entity_metadata_field_worth_get($entity, $options, $name, $type, $info) {
+  return $entity->worth[LANGUAGE_NONE];
+}
