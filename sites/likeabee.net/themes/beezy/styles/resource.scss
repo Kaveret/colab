@@ -64,7 +64,7 @@ body{
 .page-transact-1stparty #main{
     border: 1px solid $orange;
     border-radius: 6px 6px 6px 6px;
-    margin: 26px 14px;
+    margin: 26px 0px;
     color: $blue;
     font-size: 14px;
     .header{
@@ -73,6 +73,10 @@ body{
         border-radius: 6px 6px 0 0;
         height: 18px;
         padding: 15px;
+        margin:0;
+        border-top:none;
+        border-left: none;
+        border-right: none;
     }
     .content{
         padding: 17px;
