@@ -786,6 +786,7 @@ function transaction_operation_access($op, $transaction, $account = NULL) {
     }
     else {
       $info = transaction_operations($op, TRUE, FALSE);//this loads the include file
+      if (!isset($currency->transaction_operation_access[$op])) return FALSE;
       $callbacks = array_filter($currency->transaction_operation_access[$op]);
       $op_access_callback = 'transaction_operation_access_'.$op;
       if (!$op_access_callback($callbacks, $transaction)) return FALSE;

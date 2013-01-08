@@ -188,16 +188,16 @@ function likeabee_resources_help($path, $args) {
  */
 function resources_beeziest() {
   $build[] = array(
-    '#markup' => views_embed_view('trade_analysis', 'system')
+    '#markup' => '<h2>Trade analysis</h2>' . views_embed_view('trade_analysis', 'system'),
   );
   $build[] = array(
-    '#markup' => views_embed_view('user_rankings', 'block_incomes')
+    '#markup' => '<h2>Highest earners</h2>' . views_embed_view('user_rankings', 'block_incomes')
   );
   $build[] = array(
-    '#markup' => views_embed_view('user_rankings', 'block_expenditures')
+    '#markup' => '<h2>higest spenders</h2>' . views_embed_view('user_rankings', 'block_expenditures')
   );
   $build[] = array(
-    '#markup' => views_embed_view('user_rankings', 'block_volumes')
+    '#markup' => '<h2>Highest volumes</h2>' . views_embed_view('user_rankings', 'block_volumes')
   );
   return $build;
 }
