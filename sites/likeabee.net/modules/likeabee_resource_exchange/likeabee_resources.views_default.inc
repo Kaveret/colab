@@ -218,6 +218,14 @@ function likeabee_resources_views_default_views() {
  * this view isn't needed at least for now
  */
 function likeabee_resources_views_default_views_alter(&$views) {
+  //$views['transactions']->display['transactions']->display_options['path'] = 'resources/my_beez';
   unset($views['transactions']);
-  //$views['transactions']->display['transactions']->display_options['path'] = resources/my_beez;
+  $views['ow_offers']->display['all']->display_options['path'] = 'resources/offers';
+  $views['ow_offers']->display['all']->display_options['menu']['title'] = 'Offers';
+  $views['ow_offers']->display['all']->display_options['menu']['type'] = 'normal';
+  $views['ow_offers']->display['all']->display_options['menu']['name'] = 'main-menu';
+  $views['ow_wants']->display['all']->display_options['path'] = 'dreams/wishes';
+  $views['ow_wants']->display['all']->display_options['menu']['title'] = 'Wishes';
+  $views['ow_wants']->display['all']->display_options['menu']['type'] = 'normal';
+  $views['ow_wants']->display['all']->display_options['menu']['name'] = 'main-menu';
 }

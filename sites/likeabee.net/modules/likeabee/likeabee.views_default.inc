@@ -360,8 +360,3 @@ function likeabee_views_default_views() {
   $views[$view->name] = $view;
   return $views;
 }
-
-
-function likeabee_views_default_views_alter($views) {
-  unset($views['transactions']);//this puts its menu item in the main-menu, where it's not wanted
-}

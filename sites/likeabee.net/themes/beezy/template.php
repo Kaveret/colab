@@ -16,10 +16,7 @@ function beezy_process_page(&$vars) {
       theme_get_suggestions($args, $type)
     );
   }
-  if (!$vars['is_front']) {
-    $vars['floating'] = menu_tree_build(menu_block_get_config(MENU_BLOCK_MAIN_MENU_LEV1));
-    $vars['floating'] = $vars['floating']['content'];
-  }
+  $vars['floating'] = menu_tree('main-menu');
 }
 
 

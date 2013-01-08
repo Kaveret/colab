@@ -3,6 +3,11 @@
 define('MENU_BLOCK_MAIN_MENU_LEV1', 1);
 define('MENU_BLOCK_MAIN_MENU_LEV2', 2);
 
+/*
+ * offers and wants module is being used as a quick fix
+ * but really they should be separate content types with separate user stories, views, logic etc
+ */
+
 function likeabee_help($path, $args) {
   if (substr($path, 0, 4) == 'user' && count(array_filter($args)) < 3) {
     return 'The accounting info on this page is duplicated in the resources section. This page needs theming. See user-profile.tpl.php';
@@ -18,13 +23,13 @@ function likeabee_menu() {
   );
   return $items;
 }
-
+/*
+ * implements hook_menu_alter
+ */
 function likeabee_menu_alter(&$items) {
   $items['admin/content']['menu_name'] = 'minimanager';
   $items['admin/people']['menu_name'] = 'minimanager';
   $items['admin/config/system/backup_migrate/export']['menu_name'] = 'minimanager';
-  $items['offers']['menu_name'] = 'community';//could be done in views_alter
-  $items['wants']['menu_name'] = 'community';//could be done in views_alter
   $items['news']['menu_name'] = 'community';//could be done in views_alter
   $items['galleries']['menu_name'] = 'community';
   $items['docs']['menu_name'] = 'community';//could be done in views_alter
@@ -32,6 +37,13 @@ function likeabee_menu_alter(&$items) {
   $items['members']['menu_name'] = 'community'; //could be done in views_alter
 }
 
+function likeabee_preprocess_link(&$link) {
+  if (substr($link['path'], 0, 6) == 'offers') $link['path'] = str_replace('offers', 'resources/offers', $link['path']);
+  if (substr($link['path'], 0, 6) == 'wants') $link['path'] = str_replace('wants', 'dreams/wants', $link['path']);
+}
+/*
+ * implement hook_views_api
+ */
 function likeabee_views_api() {
   return array(
     'api' => 3,
@@ -85,7 +97,9 @@ function likeabee_image_styles_alter(&$styles) {
     $styles['thumbnail']['effects'][$effect_id]['data']['height'] = 32;
   }
 }
-
+/*
+ * implements hook_block_info
+ */
 function likeabee_block_info() {
   $blocks['user_content_by_type'] = array(
     'info' => 'Content produced by the user, grouped by type',
@@ -96,6 +110,9 @@ function likeabee_block_info() {
   return $blocks;
 }
 
+/*
+ * implements hook_block_view
+ */
 function likeabee_block_view($delta) {
   switch ($delta) {
     case 'user_content_by_type':
@@ -119,25 +136,29 @@ function likeabee_block_view($delta) {
       );
   }
 }
-
-function likeabee_block_info_alter($blocks, $theme) {
+/*
+ * implements hook_block_info_alter
+ */
+function likeabee_block_info_alter(&$blocks, $theme) {
   unset($blocks['cforge']);
 }
 
 
 function temp_home() {
-  $output = likeabee_content_summary('Events', 'event');
-//  $output = array('#markup' => 'blah');
+  $output = likeabee_content_summary('Photos', 'image');
   return $output;
 }
 /*
  * implements hook_page_alter
  * puts the floating menu
+ * I don't know how this would normally be done
  */
 function likeabee_page_alter(&$page) {
   $page['search'] = drupal_get_form('search_form', '', '', '', '');
 }
-
+/*
+ * implements hook_node_view_alter
+ */
 function likeabee_node_view_alter(&$build, $node) {
   if ($build['#bundle'] != 'group') return; //this is needed to prevent nesting because group summary invokes a view with nodes in
   $build['section_chooser']['#weight'] = -1;
@@ -335,7 +356,9 @@ function likeabee_flag_default_flags() {
 
 }
 
-
+/*
+ * implements hook_FORM_search_form_ALTER
+ */
 function likeabee_form_search_form_alter(&$form, $form_state) {
   unset($form['basic']['submit']);
 }

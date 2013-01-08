@@ -20,11 +20,15 @@ function likeabee_install() {
   theme_disable(array('sky_seldulac'));
   cforge_reset_blocks();
   likeabee_create_event_image();//just adding one field for now
-
+  likeabee_create_galleries();
   likeabee_create_menus();
   likeabee_create_users();
   //for development only
   variable_set('preprocess_css', TRUE);
+
+
+  module_load_install('cforge');
+  _cf_make_bundle_commentable('proposition');
 }
 
 //the stuff that cforge put into the navigation menu is moved into the orange dropdowns in the top right.
@@ -87,9 +91,20 @@ function likeabee_block_setup_beezy() {
     'expanded' => 0,
     'sort' => 0
   );
+
+  $blocks[] = array(
+    'module' => 'offers_wants',
+    'delta' => 'propositions_taxonomy_block',
+    'title' => 'Offer categories',
+    'cache' => DRUPAL_NO_CACHE,
+    'region' => 'sidebar_second',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'resources/offers'
+  );
+
   $blocks[] = array(
     'module' => 'menu',
-    'delta' => 'footer-menu',
+    'delta' => 'secondary-menu',
     'title' => '<none>',
     'cache' => DRUPAL_NO_CACHE,
     'region' => 'footer'
@@ -140,8 +155,21 @@ function likeabee_uninstall() {
   field_delete_instance($instance, $field_cleanup = TRUE);
 }
 
-
-
+/*
+ * here is no features extension for exporting taxonomy terms.
+ */
+function likeabee_create_galleries() {
+  $vid = taxonomy_vocabulary_machine_name_load('galleries')->vid;
+  $names = array(
+    'Gallery 1',
+    'Gallery 2',
+    'Gallery 3'
+  );
+  foreach ($names as $name) {
+    $term = (object)compact('name', 'vid');
+    taxonomy_term_save($term);
+  }
+}
 
 
 
@@ -295,7 +323,7 @@ function likeabee_create_event_image() {
 function likeabee_custom_menus() {
   //add the custom menus
   menu_save(array(
-    'menu_name' => 'secondary-menu',//this is because that's how it worked in Drupal6
+    'menu_name' => 'secondary-menu',//reusing the menu declared in cforge
     'title' => 'Footer links menu',
     'description' => 'Less important links, for all users'
   ));

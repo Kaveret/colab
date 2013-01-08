@@ -76,14 +76,14 @@
 
 
 <?php if ($logo || $site_name || $site_slogan || $page['header']): ?>
-  <header id="header" role="banner">
+  <header role="banner">
     <?php if ($logo): ?>
       <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
         <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
       </a>
     <?php endif; ?>
     <?php print render($page['header']); ?>
-    <?php print drupal_render($search); ?>
+    <?php print drupal_render($page['search']); ?>
 
     <?php if ($site_slogan): ?>
       <div id="site-slogan"><?php print $site_slogan; ?></div>
@@ -95,7 +95,7 @@
 <div id="page">
 
  <div id="main">
-   <h1><?php print $title; ?></h1>
+   <h1><?php if (!$is_front)print $title; ?></h1>
     <?php if ($tabs): ?>
       <div class="tabs"><?php print render($tabs); ?></div>
     <?php endif; ?>
@@ -114,9 +114,6 @@
       <ul class="action-links"><?php print render($action_links); ?></ul>
     <?php endif; ?>
     <?php print render($page['content_top']); ?>
-    <?php if ($is_front) : ?>
-      <img height="267" src="<?php print path_to_theme(); ?>/images/top_img.png" width="722" />
-    <?php endif; ?>
     <?php print render($page['content']); ?>
     <?php print render($page['content_bottom']); ?>
 
@@ -129,7 +126,7 @@
     </aside><!-- /#sidebar-first -->
   <?php endif; ?>
 
-  <?php if ($page['sidebar_second']): ?>
+  <?php if ($page['sidebar_second']):?>
     <aside id="sidebar-second" class="sidebar" role="complementary">
       <?php print render($page['sidebar_second']); ?>
     </aside><!-- /#sidebar-second -->
