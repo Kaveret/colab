@@ -252,7 +252,7 @@ function likeabee_create_users() {
   );
   $edits[] = array(
     'name' => 'Brouria Helfa',
-    'pass' => 'baroch',
+    'pass' => 'brouria',
     'mail' => 'info@barochoren.com',
     'profile_firstname' => array(LANGUAGE_NONE => array(array('value' => 'Brouria'))),
     'profile_familyname' => array(LANGUAGE_NONE => array(array('value' => 'Helfa'))),
@@ -261,7 +261,7 @@ function likeabee_create_users() {
   );
   $edits[] = array(
     'name' => 'Arie Ben David',
-    'pass' => 'baroch',
+    'pass' => 'arie',
     'mail' => 'info@barochoren.com',
     'profile_firstname' => array(LANGUAGE_NONE => array(array('value' => 'Aire'))),
     'profile_familyname' => array(LANGUAGE_NONE => array(array('value' => 'Ben David'))),

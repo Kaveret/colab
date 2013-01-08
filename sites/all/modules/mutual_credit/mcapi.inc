@@ -138,6 +138,7 @@ function mcapi_menu_inc() {
     );
     if (isset($info['file_extension'])) {
       $items["transaction/%transaction/$op"]['file'] = $info['module'] .'.'. $info['file_extension'];
+      $items["transaction/%transaction/$op"]['file path'] = drupal_get_path('module', $info['module']);
     }
   }
   return $items;

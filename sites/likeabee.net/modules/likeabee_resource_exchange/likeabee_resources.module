@@ -279,5 +279,7 @@ function likeabee_resources_transactions_alter(&$transactions) {
 
 function likeabee_resources_form_mcapi_forms_form_alter(&$form, $form_state) {
   $form['worth'][LANGUAGE_NONE]['#title'] = t('Amount');
+  $form['worth'][LANGUAGE_NONE]['#description'] = '';
   $form['secondperson']['#title'] = t('User name');
+  $form['secondperson']['#description'] = '';
 }

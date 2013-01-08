@@ -41,6 +41,5 @@ $table = array(
 ?>
 <div style ="float:right" id ="pending-signatures">
   <h2><?php print $transaction->state == TRANSACTION_STATE_FINISHED ? t('Signed by') : t('Awaiting Signatures'); ?></h2>
-  <?php if ($sign_link) print render($sign_link); ?>
   <?php print render($table); ?>
 </div>
