@@ -7,7 +7,7 @@ function likeabee_marketplace_menu() {
   //this is a copy of a page that manually calls up a taxonomy_term view
   //that view has been modified in the database with the latest uc_products view in the footer
   $items['resources/marketplace'] = array(
-    'title' => 'Catalog',
+    'title' => 'Marketplace',
     'page callback' => 'likeabee_marketplace_browse',
     'access callback' => TRUE,
     'access arguments' => array(),

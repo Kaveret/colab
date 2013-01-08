@@ -10,7 +10,7 @@ function likeabee_resources_menu() {
     'page callback' => 'resources_beeziest',
     'access arguments' => array('transact'),
     'menu_name' => 'main-menu',
-    'weight' => 4
+    'weight' => 1
   );
 
   $items['resources/beeziest'] = array(
@@ -28,7 +28,7 @@ function likeabee_resources_menu() {
     'page callback' => 'resources_my_beez',
     'access arguments' => array('transact'),
     'menu_name' => 'main-menu',
-    'weight' => 1
+    'weight' => 2
   );
   return $items;
 }
@@ -53,6 +53,15 @@ function likeabee_resources_menu_alter(&$items) {
   $items['transact/1stparty']['type'] = MENU_NORMAL_ITEM;
   $items['transact/3rdparty']['menu_name'] = 'localadmin';
   $items['transact/3rdparty']['type'] = MENU_NORMAL_ITEM;
+
+  unset($items['node/add/proposition']);
+  $items['node/add/offer']['type'] = MENU_NORMAL_ITEM;
+  $items['node/add/want']['type'] = MENU_NORMAL_ITEM;
+  $items['node/add/want']['title'] = 'Make a wish';
+}
+
+function likeabee_resources_menu_link_alter(&$link) {
+  if (in_array($link['link_path'], array('node/add/offer', 'node/add/want'))) $link['plid'] = 0;
 }
 
 /**
@@ -197,6 +206,7 @@ function resources_beeziest() {
  * menu callback
  */
 function resources_my_beez() {
+  $title = drupal_get_title();
   return array(
     'balances' => array(
       '#theme' => 'likeabee_page_block',
@@ -208,6 +218,9 @@ function resources_my_beez() {
           '#theme' => 'balance_history',
           '#account' => $GLOBALS['user'],
           '#histories' => get_balance_history($GLOBALS['user'], array('def_drup')),
+        ),
+        array(
+          '#markup' => drupal_render(mcapi_get_form('1stparty'))
         )
       ),
       '#weight' =>1
@@ -224,16 +237,8 @@ function resources_my_beez() {
       ),
       '#weight' => 2
     ),
-    'pay' => array(
-      '#theme' => 'likeabee_page_block',
-      '#title' => t('My recent activities'),
-      '#adv_help' => 'my_beez_pay',
-      '#content' => array(
-        '#markup' => drupal_render(mcapi_get_form('1stparty'))
-      ),
-      '#weight' => 3
-    )
   );
+  drupal_set_title($title);
 }
 
 
@@ -254,15 +259,6 @@ function theme_likeabee_page_block($vars) {
 }
 
 
-function likeabee_resources_marketplace() {
-  return 'This page will be a faceted search view of products. We could use the offers/wants module for now, but I think we should get on with installing commerce.';
-
-}
-
-function likeabee_resources_other() {
-  return "This page is filling up space. could be used to show other people's transaction, system stats, special offers, or perhaps to talk about how many beez have been issued and redeemed.";
-}
-
 
 function likeabee_resources_transactions_alter(&$transactions) {
   //make a payment of 10% to payer and payee.
@@ -279,4 +275,9 @@ function likeabee_resources_transactions_alter(&$transactions) {
   $transactions[] = clone($base_transaction);
   $base_transaction->payee = $transactions[0]->payee;
   $transactions[] = $base_transaction;
+}
+
+function likeabee_resources_form_mcapi_forms_form_alter(&$form, $form_state) {
+  $form['worth'][LANGUAGE_NONE]['#title'] = t('Amount');
+  $form['secondperson']['#title'] = t('User name');
 }

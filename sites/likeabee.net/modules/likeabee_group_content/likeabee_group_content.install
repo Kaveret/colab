@@ -147,8 +147,9 @@ function likeabee_group_content_install() {
   );
   taxonomy_term_save($term);
   //create up all the other fields needed by group content types
-  $image_field = likeabee_setup_field_image();
-  $ogref_field = likeabee_setup_field_ogref();
+  likeabee_setup_field_image();
+  likeabee_setup_field_ogref();
+  create_og_membership_field();
   //$choice_field = likeabee_setup_field_editor_choice();
 
 
@@ -179,6 +180,76 @@ function likeabee_group_content_uninstall() {
   taxonomy_vocabulary_delete(taxonomy_vocabulary_machine_name_load('tags')->vid);
 
   variable_del('node_options_image');
+}
+
+
+function create_og_membership_field() {
+  field_create_field(array(
+    'entity_types' => array(
+      'og_membership',
+    ),
+    'translatable' => '0',
+    'settings' => array(),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+      'module' => 'field_sql_storage',
+      'active' => '1',
+      'details' => array(
+        'sql' => array(
+          'FIELD_LOAD_CURRENT' => array(
+            'field_data_og_membership_request' => array(
+              'value' => 'og_membership_request_value',
+              'format' => 'og_membership_request_format',
+            ),
+          ),
+          'FIELD_LOAD_REVISION' => array(
+            'field_revision_og_membership_request' => array(
+              'value' => 'og_membership_request_value',
+              'format' => 'og_membership_request_format',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'foreign keys' => array(
+      'format' => array(
+        'table' => 'filter_format',
+        'columns' => array(
+          'format' => 'format',
+        ),
+      ),
+    ),
+    'indexes' => array(
+      'format' => array(
+        'format',
+      ),
+    ),
+    'field_name' => 'og_membership_request',
+    'type' => 'text_long',
+    'module' => 'text',
+    'active' => '1',
+    'locked' => '0',
+    'cardinality' => '1',
+    'deleted' => '0',
+    'columns' => array(
+      'value' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+      ),
+      'format' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+    ),
+    'bundles' => array(
+      'og_membership' => array(
+        'og_membership_type_default',
+      ),
+    ),
+  ));
 }
 
 

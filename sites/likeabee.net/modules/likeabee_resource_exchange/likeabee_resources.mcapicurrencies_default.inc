@@ -14,10 +14,10 @@ function likeabee_resources_mcapicurrencies_default_alter(&$currencies) {
     'info' => array(//this wierd structure is for ctools benefit
       'currcode' => DEFAULT_CURRENCY_NAME,
     ),
-    'human_name' =>  t('Hours'),
+    'human_name' =>  t('Beez'),
     'display' => array(
-      'format' => '@minus<strong>H</strong>@integer: @subdivision',
-      'divisions' => CURRENCY_DIVISION_MODE_CUSTOM,
+      'format' => '@minus<strong>BZ</strong>@integer',
+      'divisions' => CURRENCY_DIVISION_MODE_NONE,
       'divisions_setting' => "0|00 Hours
 25|15 mins
 50|30 mins

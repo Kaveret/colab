@@ -1,28 +1,34 @@
 <?php
 
-
-
-  variable_set('preprocess_css', FALSE);
-  variable_set('preprocess_js', FALSE);
-
+variable_set('preprocess_css', FALSE);
+variable_set('preprocess_js', FALSE);
 
 /**
  * implements hook_install_tasks for the installation profile
  */
 function likeabee_install() {
+  $weight = db_query("SELECT weight +1 FROM {system} WHERE name = 'cforge' ")->fetchField();
   db_query(
     "UPDATE {system} SET weight = :weight WHERE name = 'likeabee'",
-    array(':weight' => db_query("SELECT weight +1 FROM {system} WHERE name = 'cforge' ")->fetchField())
+    array(':weight' => $weight + 1)
+  );
+  db_query(
+    "UPDATE {system} SET weight = :weight WHERE name LIKE 'likeabee_%'",
+    array(':weight' => $weight + 2)
   );
   enable_beezy_theme();
   theme_disable(array('sky_seldulac'));
   cforge_reset_blocks();
   likeabee_create_event_image();//just adding one field for now
-
+  likeabee_create_galleries();
   likeabee_create_menus();
   likeabee_create_users();
   //for development only
   variable_set('preprocess_css', TRUE);
+
+
+  module_load_install('cforge');
+  _cf_make_bundle_commentable('proposition');
 }
 
 //the stuff that cforge put into the navigation menu is moved into the orange dropdowns in the top right.
@@ -57,7 +63,9 @@ function likeabee_block_setup_beezy() {
     'module' => 'menu_block',
     'delta' => MENU_BLOCK_MAIN_MENU_LEV1,
     'region' => 'content',
-    'status' => 0,//temporary!!
+    'pages' => '<front>',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'status' => 1,
     'title' => '<none>',
     'title_link' => 0,
     'admin_title' => 'Main menu Section icons',
@@ -72,7 +80,7 @@ function likeabee_block_setup_beezy() {
     'module' => 'menu_block',
     'delta' => MENU_BLOCK_MAIN_MENU_LEV2,
     'title' => '<none>',
-    'region' => 'help',
+    'region' => 'navigation',
     'weight' => -1, //assuming the help block is 0
     'title_link' => 0,
     'admin_title' => 'Main menu 2nd level',
@@ -85,8 +93,18 @@ function likeabee_block_setup_beezy() {
   );
 
   $blocks[] = array(
+    'module' => 'offers_wants',
+    'delta' => 'propositions_taxonomy_block',
+    'title' => 'Offer categories',
+    'cache' => DRUPAL_NO_CACHE,
+    'region' => 'sidebar_second',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'resources/offers'
+  );
+
+  $blocks[] = array(
     'module' => 'menu',
-    'delta' => 'footer-menu',
+    'delta' => 'secondary-menu',
     'title' => '<none>',
     'cache' => DRUPAL_NO_CACHE,
     'region' => 'footer'
@@ -137,8 +155,21 @@ function likeabee_uninstall() {
   field_delete_instance($instance, $field_cleanup = TRUE);
 }
 
-
-
+/*
+ * here is no features extension for exporting taxonomy terms.
+ */
+function likeabee_create_galleries() {
+  $vid = taxonomy_vocabulary_machine_name_load('galleries')->vid;
+  $names = array(
+    'Gallery 1',
+    'Gallery 2',
+    'Gallery 3'
+  );
+  foreach ($names as $name) {
+    $term = (object)compact('name', 'vid');
+    taxonomy_term_save($term);
+  }
+}
 
 
 
@@ -292,7 +323,7 @@ function likeabee_create_event_image() {
 function likeabee_custom_menus() {
   //add the custom menus
   menu_save(array(
-    'menu_name' => 'secondary-menu',//this is because that's how it worked in Drupal6
+    'menu_name' => 'secondary-menu',//reusing the menu declared in cforge
     'title' => 'Footer links menu',
     'description' => 'Less important links, for all users'
   ));
@@ -362,4 +393,8 @@ function enable_beezy_theme() {
     'sasson_feed_icons' => 0,
     'sasson_settings__active_tab' => 'edit-sasson-general',
   ));
+}
+
+function likeabee_update_7001() {
+  module_disable(array('flag'));//just temporary, to be tidy
 }
