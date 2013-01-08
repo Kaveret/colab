@@ -33,8 +33,6 @@ foreach ($transaction->pending_signatures as $uid => $status) {
     $row
   );
 }
-$sign_link = _get_signoff_link($transaction);
-if (!$sign_link) $sign_link = _get_sign_link($transaction);
 $table = array(
   '#theme' => 'table',
   '#attributes' => array('style' => "width:15em;"),

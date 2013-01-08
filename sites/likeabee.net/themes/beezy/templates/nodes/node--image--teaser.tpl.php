@@ -77,7 +77,7 @@
  */
 ?>
 
-<article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
+<article id="node-image" class="<?php print $classes; ?>"<?php print $attributes; ?>>
 
   <?php if ($user_picture || !$page || $display_submitted): ?>
     <header id ="content">

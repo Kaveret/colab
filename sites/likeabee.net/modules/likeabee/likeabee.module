@@ -145,7 +145,8 @@ function likeabee_block_info_alter(&$blocks, $theme) {
 
 
 function temp_home() {
-  $output = likeabee_content_summary('Photos', 'image');
+  $output[] = likeabee_content_summary('Photos', 'image');
+  //$output[] = likeabee_content_summary('Events', 'event');
   return $output;
 }
 /*

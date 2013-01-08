@@ -28,7 +28,7 @@ body.front header #logo{
     height: inherit;
   }
 }
-header {
+header#page {
   height: 50px;
   #logo {
     float: right;
@@ -199,8 +199,11 @@ header {
     }
   }
 }
-
-
+/* temp to stop the front page image masking the floating menu */
+body.front {
+  /* 1 and 2 is for different versions of the site */
+  div#block-block-1, div#block-block-2{float:left;}
+}
 
 /* this is for the middle sized icons floating on the left of everywhere but the front page */
 div#floating{
@@ -449,10 +452,8 @@ div#main h1{
   font-size: 25px;
   color:#014a81;
   float: left;
-  display: block;
   min-width: 204px;
-  text-align: left;
-  font-size: 25px;
+  font-size: 20px;
   color:#014a81;
 }
 
