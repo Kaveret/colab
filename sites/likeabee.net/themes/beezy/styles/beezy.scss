@@ -1,5 +1,5 @@
 /* overall page settings */
-header{
+header#page{
   margin-top: 10px;
 }
 div.region-header{
@@ -12,7 +12,7 @@ a{
 #userpic-social{float:right;}
 
 
-#page, header, #footer, #navigation{
+#page, #footer, #navigation{
   float: none;
   display: block;
   margin-left: auto;
@@ -160,6 +160,7 @@ header {
 /* this is for the big icons on the front page */
 #block-menu-block-1 {
   float:left;
+  z-index: 99px; /* because the front page picture block is going over this block */
   ul.menu{
     width: 180px;
     clear:left;

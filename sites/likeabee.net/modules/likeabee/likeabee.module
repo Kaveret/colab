@@ -140,7 +140,7 @@ function likeabee_block_view($delta) {
  * implements hook_block_info_alter
  */
 function likeabee_block_info_alter(&$blocks, $theme) {
-  //unset($blocks['cforge']);
+  $blocks['cforge']['nitin']['status'] = 0;
 }
 
 
