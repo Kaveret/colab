@@ -281,6 +281,16 @@ display: none;*/
                  Front Page
 -----------------------------------------------*/
 
+#views_slideshow_cycle_teaser_section_slideshow_on_homepage-block {
+  .views-slideshow-cycle-main-frame-row {
+    width: 100%;
+  }
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
 #main {   
   margin-top: 30px;
   div.view-reshet-yeruka-homepage-center-boxes {
