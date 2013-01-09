@@ -70,7 +70,6 @@ gcfjn
 ?>
 
 <div id="page">
-  
   <?php if ($logo || $site_name || $site_slogan || $page['header']): ?>
     <header id="header" role="banner">
       <?php if ($logo): ?>
