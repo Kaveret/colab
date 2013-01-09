@@ -1,0 +1,713 @@
+<?php
+
+/*
+ * Installs fields and field instances for 6 contenttypes
+ * Event, discussion, document, video/photo (combined).
+ * + product (from Ubercart), proposition (from offers_wants),
+ *
+ * They will be made from the following fields
+ * body
+ * field_date
+ * field_likes
+ * field_document //uploaded file
+ * field_product_categories //based on vocab
+ * field_tags //based on vocab
+ * field_image
+ * field_video
+ * field_editor_choice //for some reason this was done with a boolean field not the flag module
+ * og_group_ref //says which group the item belongs to
+ *
+
+3. The following code run in devel/phpwill take a node bundle name and give youall the fields and field instances in code,
+   ready to import:
+$node_bundle = 'groups_event';
+//note - there seems to be no way to export the 'field_group' info along with the fields.
+//======================
+include_once DRUPAL_ROOT . '/includes/utility.inc';
+$instances = field_read_instances(array('bundle' => $node_bundle));
+$instances_output = '';
+foreach ($instances as $key => $instance) {
+  $field_names[] = $instance['field_name'];
+  unset($instance['id']);
+  unset($instance['field_id']);
+  $instances_output .= "field_create_instance(" . drupal_var_export($instance) . ");\n";
+}
+debug($field_names, 'Fields on '.$node_bundle, 1);
+$fields_output = '';
+foreach ($field_names as $field_name) {
+  $field = field_read_field($field_name);
+  unset($field['id']);
+  $fields_output .= "field_create_field(" . drupal_var_export($field) . ");\n";
+}
+drupal_set_message("<textarea rows=30 style=\"width: 100%;\">" . $fields_output ."\n\n". $instances_output . '</textarea>');
+
+
+ *
+ *
+ * Here are the proposed fieldAPI fields
+ * Debug: Fields on groups_event:Array(
+    [0] => og_group_ref
+    [1] => body
+    [2] => field_image
+    [5] => field_date
+    [3] => field_editor_s_choice
+)
+Debug: Fields on discussion:Array(
+    [0] => og_group_ref
+    [1] => body
+    [3] => some kind of comment rating
+    [3] => field_editor_s_choice
+)
+Debug: Fields on field_s_doccuments:Array(
+    [0] => og_group_ref
+    [1] => field_document //requires
+    [2] => field_editor_s_choice
+)
+Debug: Fields on product:Array(
+    [0] => og_group_ref
+    [0] => body
+    [2] => field_image replaces 'uc_product_image'
+    [2] => taxonomy_catalog
+)
+Debug: Fields on video:Array(
+    [0] => og_group_ref
+    [1] => field_video_group //the vid itself requires module 'video_embed_field'
+    [2] => field_editor_s_choice
+)
+Debug: Fields on photo:Array(
+    [0] => og_group_ref
+    [1] => field_image
+    [2] => field_editor_s_choice
+)
+Debug: Fields on Proposition:Array(
+    [0] => og_group_ref
+    [1] => body
+)
+
+Fields to create:
+og_group_ref
+body
+field_image
+field_date
+field_document //uploaded file
+taxonomy_catalog //based on vocab
+field_video_group //the vid itself requires module 'video_embed_field'
+field_editor_s_choice //flag module
+some kind of comment rating //Flag module
+
+//most of these fields are provided by the advpoll module
+//I propose we just use the normall poll module
+Debug: Fields on advpoll: Array (
+    [1] => advpoll_choice
+    [2] => advpoll_max_choices
+    [3] => advpoll_dates
+    [4] => advpoll_closed
+    [5] => advpoll_options
+    [6] => advpoll_mode
+    [7] => advpoll_cookie_duration
+    [8] => advpoll_results
+    [9] => advpoll_behavior
+    [10] => og_group_ref
+    [11] => field_editor_s_choice
+)
+ *
+ *
+ */
+
+/*
+ * implements hook_install
+ */
+function likeabee_group_content_install() {
+  //create the content types
+  $types = array(
+    'photo' => array(
+      'type' => 'photo',
+      'name' => t('Photo'),
+      'base' => 'node_content',
+      'module' => 'likeabee_group_content',
+      'description' => t('Images categorised into galleries'),
+      'title_label' => t('Caption'),
+      'disabled' => 0
+    ),
+  );
+  foreach ($types as $type) {
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+  }
+
+
+
+  //create the vocabularies & their fields which will be used in the content-type field instances
+  likeabee_setup_vocab_field('tags', 'tags', t('Tags'));
+  likeabee_setup_vocab_field('galleries', 'gallery', t('Gallery'));
+  //add a first term to the galleries vocabulary
+  $term = (object)array(
+    'name' => t('Miscellaneous images'),
+    'vid' => taxonomy_vocabulary_machine_name_load('galleries')->vid
+  );
+  taxonomy_term_save($term);
+  //create up all the other fields needed by group content types
+  likeabee_setup_field_image();
+  likeabee_setup_field_ogref();
+  create_og_membership_field();
+  //$choice_field = likeabee_setup_field_editor_choice();
+
+
+  _node_types_build()->types;
+//images
+  likeabee_setup_instance_image('photo');
+  likeabee_setup_instance_gallery('photo');
+  likeabee_setup_instance_tags('photo');
+  likeabee_setup_instance_ogref('photo');
+  //likeabee_setup_choice_instance('photo');
+
+  variable_set('node_options_image', array('status'));//published by default
+}
+/*
+ * implements hook_uninstall
+ */
+function likeabee_group_content_uninstall() {
+  field_delete_field('gallery');
+  field_delete_field('ogref');
+  field_delete_field('tags');
+  field_delete_field('image');
+  field_delete_field('video');
+
+  node_type_delete('photo');
+
+  field_purge_batch(1);
+  taxonomy_vocabulary_delete(taxonomy_vocabulary_machine_name_load('galleries')->vid);
+  taxonomy_vocabulary_delete(taxonomy_vocabulary_machine_name_load('tags')->vid);
+
+  variable_del('node_options_image');
+}
+
+
+function create_og_membership_field() {
+  field_create_field(array(
+    'entity_types' => array(
+      'og_membership',
+    ),
+    'translatable' => '0',
+    'settings' => array(),
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+      'module' => 'field_sql_storage',
+      'active' => '1',
+      'details' => array(
+        'sql' => array(
+          'FIELD_LOAD_CURRENT' => array(
+            'field_data_og_membership_request' => array(
+              'value' => 'og_membership_request_value',
+              'format' => 'og_membership_request_format',
+            ),
+          ),
+          'FIELD_LOAD_REVISION' => array(
+            'field_revision_og_membership_request' => array(
+              'value' => 'og_membership_request_value',
+              'format' => 'og_membership_request_format',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'foreign keys' => array(
+      'format' => array(
+        'table' => 'filter_format',
+        'columns' => array(
+          'format' => 'format',
+        ),
+      ),
+    ),
+    'indexes' => array(
+      'format' => array(
+        'format',
+      ),
+    ),
+    'field_name' => 'og_membership_request',
+    'type' => 'text_long',
+    'module' => 'text',
+    'active' => '1',
+    'locked' => '0',
+    'cardinality' => '1',
+    'deleted' => '0',
+    'columns' => array(
+      'value' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => FALSE,
+      ),
+      'format' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+    ),
+    'bundles' => array(
+      'og_membership' => array(
+        'og_membership_type_default',
+      ),
+    ),
+  ));
+}
+
+
+function likeabee_setup_vocab_field($vocab_name, $field_name, $title) {
+  $existing = taxonomy_vocabulary_machine_name_load($field_name);
+  $new_vocab = (object)array(
+    'name' => $title,
+    'module' => 'likeabee_group_content',
+    'machine_name' => $vocab_name,
+    'vid' => $existing ? $existing->vid : NULL
+  );
+  taxonomy_vocabulary_save($new_vocab);
+
+  $fields = field_read_fields(array('field_name' => $field_name));
+
+  if (empty($fields)) {
+    $field = array(
+      'field_name' => $field_name,
+      'type' => 'taxonomy_term_reference',
+      'entity_types' => array(),
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          array(
+            'vocabulary' => $vocab_name,
+            'parent' => '0',
+          )
+        )
+      ),
+      'bundles' => array(
+        'node' => array()
+      ),
+      'columns' => array(
+        'tid' => array(
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => FALSE,
+        )
+      ),
+      'indexes' => array(
+        'tid' => array('tid')
+      ),
+      'foreign keys' => array(
+        'tid' => array(
+          'table' => 'taxonomy_term_data',
+          'columns' => array('tid')
+        )
+      ),
+    );
+    field_create_field($field);
+  }
+}
+
+function likeabee_setup_field_image() {
+  $field_name = 'image';
+  $field = field_info_field($field_name);
+  if (!$field) {
+    $field = array(
+      'settings' => array(
+        'uri_scheme' => 'public',
+        'default_image' => 0,
+        'required' => TRUE,
+        'file_directory' => 'images',
+        'file_extensions' => 'png gif jpg jpeg',
+        'max_filesize' => '800k',
+        'max_resolution' => '',
+        'min_resolution' => '',
+      ),
+      'entity_types' => array(),
+      'foreign keys' => array(
+        'fid' => array(
+          'table' => 'file_managed',
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+        ),
+      ),
+      'indexes' => array(
+        'fid' => array(
+          'fid',
+        ),
+      ),
+      'field_name' => $field_name,
+      'type' => 'image',
+      'module' => 'image',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'columns' => array(
+        'fid' => array(
+          'description' => 'The {file_managed}.fid being referenced in this field.',
+          'type' => 'int',
+          'not null' => FALSE,
+          'unsigned' => TRUE,
+        ),
+        'alt' => array(
+          'description' => "Alternative image text, for the image's 'alt' attribute.",
+          'type' => 'varchar',
+          'length' => 512,
+          'not null' => FALSE,
+        ),
+        'title' => array(
+          'description' => "Image title text, for the image's 'title' attribute.",
+          'type' => 'varchar',
+          'length' => 1024,
+          'not null' => FALSE,
+        ),
+        'width' => array(
+          'description' => 'The width of the image in pixels.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+        ),
+        'height' => array(
+          'description' => 'The height of the image in pixels.',
+          'type' => 'int',
+          'unsigned' => TRUE,
+        ),
+      ),
+      'bundles' => array(
+        'node' => array(
+          'image',
+        ),
+      ),
+    );
+    $field = field_create_field($field);
+  }
+}
+
+function likeabee_setup_field_ogref() {
+  $field_name = 'og_group_ref';
+  if (field_info_field($field_name)) return;
+
+  field_create_field(array(
+    'settings' => array(
+      'target_type' => 'node',
+      'handler' => 'og',
+      'handler_settings' => array(
+        'target_bundles' => array(
+          'group' => 'group',
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'membership_type' => 'og_membership_type_default',
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 1,
+          ),
+          'og_behavior' => array(
+            'status' => TRUE,
+          ),
+        ),
+      ),
+      'handler_submit' => 'Change handler',
+    ),
+    'target_type' => 'node',
+    'entity_types' => array(),
+    'translatable' => '0',
+    'storage' => array(
+      'type' => 'field_sql_storage',
+      'settings' => array(),
+      'module' => 'field_sql_storage',
+      'active' => '1',
+      'details' => array(
+        'sql' => array(
+          'FIELD_LOAD_CURRENT' => array(
+            'field_data_og_group_ref' => array(
+              'target_id' => 'og_group_ref_target_id',
+            ),
+          ),
+          'FIELD_LOAD_REVISION' => array(
+            'field_revision_og_group_ref' => array(
+              'target_id' => 'og_group_ref_target_id',
+            ),
+          ),
+        ),
+      ),
+    ),
+    'foreign keys' => array(
+      'node' => array(
+        'table' => 'node',
+        'columns' => array(
+          'target_id' => 'nid',
+        ),
+      ),
+    ),
+    'indexes' => array(
+      'target_id' => array(
+        'target_id',
+      ),
+    ),
+    'field_permissions' => array(
+      'type' => '0',
+    ),
+    'field_name' => $field_name,
+    'type' => 'entityreference',
+    'module' => 'entityreference',
+    'active' => '1',
+    'locked' => '0',
+    'cardinality' => '-1',
+    'deleted' => '0',
+    'columns' => array(
+      'target_id' => array(
+        'description' => 'The id of the target entity.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+    ),
+  ));
+}
+
+function likeabee_setup_instance_gallery($bundle) {
+  $instance = array(
+    'label' => t('Gallery'),
+    'description' => t('Which gallery to put this photo in?'),
+    'field_name' => 'gallery',
+    'entity_type' => 'node',
+    'bundle' => $bundle,
+    'required' => TRUE,
+    'settings' => array(),
+    'display' => array(
+      'default' => array(
+        'type' => 'taxonomy_term_reference_link',
+        'label' => 'above',
+        'settings' => array(),
+        'module' => 'taxonomy',
+      ),
+      'teaser' => array(
+        'type' => 'hidden',
+        'label' => 'hidden',
+        'settings' => array(),
+        'module' => 'taxonomy',
+      ),
+    ),
+    'widget' => array(
+      'type' => 'options_select',
+      'module' => 'options'
+    )
+  );
+  $existing = field_read_instance('node', 'gallery', $bundle, array('include_deleted' => TRUE));
+
+  if ($existing) {
+    debug($existing);
+    field_update_instance($instance + $existing);
+  }
+  else {
+    field_create_instance($instance);
+  }
+}
+
+
+function likeabee_setup_instance_image($bundle) {
+  $instance = array(
+    'label' => 'Image',
+    'description' => 'Select an image to upload.',
+    'widget' => array(
+      'weight' => -1,
+      'type' => 'image_image',
+      'module' => 'image',
+      'active' => 1,
+      'settings' => array(
+        'progress_indicator' => 'throbber',
+        'preview_image_style' => 'thumbnail',
+      ),
+    ),
+    'settings' => array(
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '2MB',
+      'max_resolution' => '1024x768',
+      'min_resolution' => '400x300',
+      'alt_field' => 0,
+      'title_field' => 0,
+      'default_image' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'display' => array(
+      'default' => array(
+        'type' => 'image',
+        'label' => 'hidden',
+        'settings' => array(
+          'image_style' => 'large',
+          'image_link' => 'file',
+        ),
+        'module' => 'image',
+        'weight' => -5,
+      ),
+      'teaser' => array(
+        'type' => 'image',
+        'label' => 'hidden',
+        'settings' => array(
+          'image_style' => 'medium',
+          'image_link' => 'content'
+        ),
+        'weight' => -5,
+      ),
+    ),
+    'required' => 1,
+    'field_name' => 'image',
+    'entity_type' => 'node',
+    'bundle' => $bundle,
+  );
+  $existing = field_read_instance('node', 'image', $bundle, array('include_deleted' => TRUE));
+  if ($existing) {
+    field_update_instance($instance + $existing);
+  }
+  else {
+    field_create_instance($instance);
+  }
+}
+
+function likeabee_setup_instance_tags($bundle) {
+  $instance = array(
+    'label' => t('Add Tags (the more the better)'),
+    'description' => t('Write as many keywords as you like, comma separated.'),
+    'field_name' => 'tags',
+    'entity_type' => 'node',
+    'bundle' => $bundle,
+    'required' => FALSE,
+    'settings' => array(),
+    'display' => array(
+      'default' => array(
+        'type' => 'taxonomy_term_reference_link',
+        'label' => 'above',
+        'settings' => array(),
+      ),
+    ),
+    'widget' => array(
+      'weight' => '10',
+      'type' => 'taxonomy_autocomplete',
+      'module' => 'taxonomy',
+      'active' => 0,
+      'settings' => array(
+        'size' => 60,
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'autocomplete_deluxe_path' => 'autocomplete_deluxe/taxonomy',//are we really using this?
+      ),
+    ),
+    'deleted' => FALSE
+  );
+  $existing = (array)field_read_instance('node', 'tags', $bundle, array('include_deleted' => TRUE));
+  if (array_filter($existing)) {
+    field_update_instance($instance + $existing);
+  }
+  else {
+    field_create_instance($instance);
+  }
+}
+
+
+
+function likeabee_setup_instance_ogref($bundle) {
+  $instance = array(
+    'label' => 'Groups audience',
+    'widget' => array(
+      'weight' => '0',
+      'type' => 'og_complex',
+      'module' => 'og',
+      'active' => 0,
+      'settings' => array(),
+    ),
+    'settings' => array(
+      'behaviors' => array(
+        'prepopulate' => array(
+          'status' => 1,
+          'action' => 'none',
+          'fallback' => 'none',
+          'skip_perm' => '0',
+        ),
+        'og_widget' => array(
+          'status' => TRUE,
+          'default' => array(
+            'widget_type' => 'entityreference_autocomplete',
+          ),
+          'admin' => array(
+            'widget_type' => 'entityreference_autocomplete',
+          ),
+        ),
+      ),
+      'user_register_form' => FALSE,
+    ),
+    'view modes' => array(
+      'full' => array(
+        'label' => 'Full',
+        'type' => 'og_list_default',
+        'custom settings' => FALSE,
+      ),
+      'teaser' => array(
+        'label' => 'Teaser',
+        'type' => 'og_list_default',
+        'custom settings' => FALSE,
+      ),
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'type' => 'hidden',
+        'weight' => '0',
+        'settings' => array(),
+      ),
+    ),
+    'required' => 0,
+    'description' => '',
+    'default_value' => NULL,
+    'default_value_function' => 'entityreference_prepopulate_field_default_value',
+    'field_name' => 'og_group_ref',
+    'entity_type' => 'node',
+    'bundle' => $bundle,
+  );
+  $existing = field_read_instance('node', 'og_group_ref', $bundle, array('include_deleted' => TRUE));
+  if ($existing) {
+    field_update_instance($instance + $existing);
+  }
+  else {
+    field_create_instance($instance);
+  }
+}
+
+function likeabee_setup_instance_video($bundle) {
+  $instance = array(
+    'label' => 'Video',
+    'widget' => array(
+      'weight' => '31',
+      'type' => 'video_embed_field_video',
+      'module' => 'video_embed_field',
+      'active' => 0,
+      'settings' => array(),
+    ),
+    'settings' => array(
+      'description_field' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'type' => 'video_embed_field',
+        'weight' => '1',
+        'settings' => array(
+          'video_style' => 'normal',
+          'description' => 1,
+        ),
+        'module' => 'video_embed_field',
+      ),
+    ),
+    'required' => 0,
+    'description' => '',
+    'default_value' => NULL,
+    'field_name' => 'field_video',
+    'entity_type' => 'node',
+    'bundle' => $bundle,
+  );
+  $existing = field_read_instance('node', 'field_video', $bundle, array('include_deleted' => TRUE));
+  if ($existing) {
+    field_update_instance($instance + $existing);
+  }
+  else {
+    field_create_instance($instance);
+  }
+}

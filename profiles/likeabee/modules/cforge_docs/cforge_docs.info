@@ -1,0 +1,12 @@
+; $Id$
+name = "Cforge Docs"
+description = "Store and categories uploaded files, with privacy option"
+core = 7.x
+package = Community Forge
+
+files[] = cforge_docs.views.inc
+files[] = cforge_docs.views_default.inc
+files[] = views_handler_field_cfdocs_access.inc
+
+dependencies[] = file
+dependencies[] = views

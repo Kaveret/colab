@@ -1,0 +1,184 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  offline_contact.tpl.php: n/a
+#  print-table.tpl.php: n/a
+#  cforge_offline.views.inc: n/a
+#  cforge_offline.views_default.inc: n/a
+#  views_plugin_display_print_table.inc: n/a
+#  cforge_offline.module: n/a
+#  cforge_offline.install: n/a
+#  cforge_offline.info: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-11-06 11:42+0100\n"
+"PO-Revision-Date: 2012-11-18 20:53+0100\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: offline_contact.tpl.php:18
+msgid "Phone: @phone"
+msgstr "Téléphone:  @phone"
+
+#: print-table.tpl.php:24
+msgid "Printed on @date"
+msgstr "Imprimé le @date"
+
+#: cforge_offline.views.inc:12
+msgid "An html table sent direct to the browser"
+msgstr "Un tableau html envoyé directement au navigateur"
+
+#: cforge_offline.views_default.inc:111
+msgid "Family name"
+msgstr "Nom de famille"
+
+#: views_plugin_display_print_table.inc:65
+msgid "Print-page settings"
+msgstr "Paramètres d'impression"
+
+#: views_plugin_display_print_table.inc:70
+msgid "Multiple displays"
+msgstr "Affichages multiples"
+
+#: views_plugin_display_print_table.inc:79
+msgid "None"
+msgstr "Aucun"
+
+#: views_plugin_display_print_table.inc:84;102;185
+msgid "Attach to"
+msgstr "Attacher à"
+
+#: views_plugin_display_print_table.inc:89;118;176
+msgid "Position"
+msgstr "Position"
+
+#: views_plugin_display_print_table.inc:111
+msgid "The feed icon will be available only to the selected displays."
+msgstr ""
+"L'icône du flux de données sera disponible uniquement pour les affichages "
+"suivants."
+
+#: views_plugin_display_print_table.inc:121;179
+msgid "Attach before or after the parent display?"
+msgstr "Attacher avant ou après l'affichage parent?"
+
+#: views_plugin_display_print_table.inc:127
+msgid ""
+"This view will be displayed by visiting this path on your site. It is "
+"recommended that the path be something like \"path/%/%/feed\" or \"path/%/%/"
+"rss.xml\", putting one % in the path for each argument you have defined in "
+"the view."
+msgstr ""
+"Cette vue sera visible en tapant ce chemin dans votre site. On recommande "
+"que ce chemin ressemble à \"path/%/%/feed\" ou \"path/%/%/rss.xml\", en "
+"mettant un % dans le chemin pour chaque argument que vous avez défini dans "
+"la vue."
+
+#: views_plugin_display_print_table.inc:140
+msgid "Inherit contextual filters"
+msgstr "Hériter des filtres contextuels"
+
+#: views_plugin_display_print_table.inc:143;152;161
+msgid "Inherit"
+msgstr "Hériter"
+
+#: views_plugin_display_print_table.inc:144
+msgid ""
+"Should this display inherit its contextual filter values from the parent "
+"display to which it is attached?"
+msgstr ""
+"Cet affichage doit-il recevoir les valeurs de son filtre contextuel, de "
+"l'affichage parent auquel il est attaché ?"
+
+#: views_plugin_display_print_table.inc:149
+msgid "Inherit exposed filters"
+msgstr "Hériter des filtres exposés"
+
+#: views_plugin_display_print_table.inc:153
+msgid ""
+"Should this display inherit its exposed filter values from the parent "
+"display to which it is attached?"
+msgstr ""
+"Cet affichage doit-il recevoir les valeurs de son filtre exposé, de "
+"l'affichage parent auquel il est affiché?"
+
+#: views_plugin_display_print_table.inc:158
+msgid "Inherit pager"
+msgstr "Hériter de la pagination"
+
+#: views_plugin_display_print_table.inc:162
+msgid ""
+"Should this display inherit its paging values from the parent display to "
+"which it is attached?"
+msgstr ""
+"Cet affichage doit-il recevoir les valeurs de sa pagination, de l'affichage "
+"parent auquel il est attaché?"
+
+#: views_plugin_display_print_table.inc:167
+msgid "Render pager"
+msgstr "Fournir une pagination"
+
+#: views_plugin_display_print_table.inc:170
+msgid "Render"
+msgstr "Fournir"
+
+#: views_plugin_display_print_table.inc:171
+msgid ""
+"Should this display render the pager values? This is only meaningful if "
+"inheriting a pager."
+msgstr ""
+"Cet affichage doit-il fournir les valeurs de la pagination? Cela n'a de sens "
+"que si la pagination est héritée."
+
+#: views_plugin_display_print_table.inc:194
+msgid "Select which display or displays this should attach to."
+msgstr "Sélectionner à quel(s) affichage(s) ceci doit être attaché."
+
+#: views_plugin_display_print_table.inc:220
+msgid "Before"
+msgstr "Avant"
+
+#: views_plugin_display_print_table.inc:221
+msgid "After"
+msgstr "Après"
+
+#: views_plugin_display_print_table.inc:222
+msgid "Both"
+msgstr "Les deux"
+
+#: views_plugin_display_print_table.inc:250
+msgid "Printer-friendly version"
+msgstr "Version imprimable"
+
+#: cforge_offline.module:34
+msgid "Contact card"
+msgstr "Carte de contact"
+
+#: cforge_offline.install:7
+msgid "Postal membership"
+msgstr "Adhésion postale"
+
+#: cforge_offline.install:8
+msgid "This member prefers to receive updates by post"
+msgstr "Ce membre préfère recevoir les mises à jour par la poste"
+
+#: cforge_offline.info:0
+msgid "Cforge offline"
+msgstr "Cforge hors ligne"
+
+#: cforge_offline.info:0
+msgid "support for offline users"
+msgstr "support pour les utilisateurs hors ligne"
+
+#: cforge_offline.info:0
+msgid "Community Forge"
+msgstr "Community Forge"

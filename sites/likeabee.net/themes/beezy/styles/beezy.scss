@@ -1,0 +1,1054 @@
+/* overall page settings */
+header#page{
+  margin-top: 10px;
+}
+div.region-header{
+  float:right;
+}
+a{
+  text-decoration:none;
+}
+/* this needs to be put back in */
+#userpic-social{float:right;}
+
+
+#page, #footer, #navigation{
+  float: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+}
+
+/* header section, which should be the same on every page */
+/* except for the front page */
+body.front header #logo{
+  float:left;
+  img{
+    height: inherit;
+  }
+}
+header#page {
+  height: 50px;
+  #logo {
+    float: right;
+    margin-left: 14px;
+    img{
+      height: 22px;
+    }
+  }
+  #search-form{
+    padding: 5px 0 0 10px;
+    input {
+      background: url('../images/home-icons.png') no-repeat 100% 7%;
+      border: 2px solid #AFAFAF;
+      width: 194px;
+      height: 26px;
+      padding: 3px 54px 0px 24px;
+      margin-left: 4px;
+    }
+  }
+  section.block-menu{
+    position: relative !important;
+    background-image: url("../images/primary-links-with-down-arrow.gif");
+    background-color: #f9ab17;
+    background-position: center bottom;
+    background-repeat:no-repeat;
+    font-size: 7px;
+    color: #fff;
+    text-align: center;
+    cursor: default;
+    width: 113px;
+    float: right;
+    margin: 0 3px;
+    div.content{ /* this is the block which appears on mouseover */
+      background: white;
+      padding-bottom: 5px;
+      display: none;
+      position: absolute;
+      width: 150px;
+      z-index: 100;
+      font-size: 13px;
+      box-shadow: 0px 0px 5px 0px #C5B88E;
+      ul{
+        margin: 0;
+        padding: 0 0 0 10px;
+        li{
+          list-style: none;
+          margin: 0;
+          background: white;
+          height: 20px;
+        }
+        li.first {
+          box-shadow: 0px 0px;
+        }
+        li a{
+          color: #f9ab17;
+          border: 0px;
+        }
+      }
+      ul ul{display:none} /* This hides the node/add submenu */
+    }
+  }
+  section:hover div.content,
+  section div.content:hover{
+    display: block;
+  }
+}
+
+
+/*
+ * Navigation region contains the main menu (2nd level)
+ * and the current userpic_social
+ */
+
+#navigation {
+  height: 55px;
+  border:1px #FAD07C solid;
+  border-top: 0px;
+  background: url("../images/header-back.png") repeat 0 0 transparent;
+  /* none of these gradient backgrounds appear to be working in firefox */
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
+  div {
+    float:left;
+  }
+  #block-menu-block-2 div.content {
+    display:inline;
+    div.menu-block-wrapper{
+      float:left;
+      ul{
+        text-align:center;
+        margin:0;
+        padding:0;
+        li{ /*the always-visible part of the block */
+          float:left;
+          display:inline;
+          width: 90px;
+          height: 55px;
+          background: url("../images/arrow-header.png") no-repeat 43px 50px;
+          font-size: 11px;
+          a{
+            color:#014a81;
+          }
+          a:first-line{
+            color:#B01919;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+#block-system-help {
+  clear:left;
+}
+
+
+@mixin button { /* what is this used for ??? What is a mixin??? */
+  background-color: #F1AD00;
+  border: medium none;
+  color: white;
+  font-weight: bold;
+  padding: 5px 17px;
+}
+
+/* this is for the big icons on the front page */
+#block-menu-block-1 {
+  float:left;
+  z-index: 99px; /* because the front page picture block is going over this block */
+  ul.menu{
+    width: 180px;
+    clear:left;
+    padding: 0;
+    li{
+      float: left;
+      height: 60px;
+      width: 60px;
+      margin: 0 20px 30px 0;
+      list-style: none;
+      background-image: url('../images/big-icons.png');
+      background-repeat: no-repeat;
+      a{
+        color:#014a81;
+        display: inline-block;
+        font-size: 11px;
+        padding: 60px 0px 0 0px;
+        text-align: center;
+        letter-spacing: 0px;
+        line-height: 12px;
+        word-spacing: 1px;
+        font-weight: bold;
+      }
+
+    }
+    li.resource-exchange{
+      background-position: 50% 91%;
+    }
+    li.learning-centre{
+      background-position: 50% 61%;
+    }
+    li.dreams-accelerator{
+      background-position: 50% 30%;
+    }
+    li.groups-communities{
+      background-position: 50% 0%;
+    }
+  }
+}
+/* temp to stop the front page image masking the floating menu */
+body.front {
+  /* 1 and 2 is for different versions of the site */
+  div#block-block-1, div#block-block-2{float:left;}
+}
+
+/* this is for the middle sized icons floating on the left of everywhere but the front page */
+div#floating{
+  float:left;/*otherwise the div overlays all the way to the right, and you can't click*/
+  position: relative;
+  top:150px;
+  ul {
+    padding: 0px;
+    li{
+      list-style: none;
+/* big-icons.png needs to be rerendered without spaces. then the % positioning below will work. My life is too short to count pixels */
+      background: url('../images/big-icons.png') no-repeat right 0 #F0AC00;
+      margin-bottom: 10px;
+      margin-top: 3px;
+      position: absolute;
+      width: auto;
+      height: 58px;
+      padding-left: 76px;
+      line-height: 26px;
+      border-top-right-radius: 26px;
+      border-bottom-right-radius: 26px;
+      box-shadow: 0px 0px 6px -1px #555353;
+      text-indent: -9999px;
+      a {
+        position: static;
+        width: 147px;
+        color: white;
+        font-weight: bold;
+        font-size: 10px;
+        padding: 3px 0px 7px 0px;
+        margin: 0px 65px 0px -15px;
+      }
+      ul{
+        display: none;
+        line-height: 1.6;
+        box-shadow: 0px 0px 2px 1.5px #C5BFAF;
+        background: #fff;
+        position: absolute;
+        left: 1px;
+        top: 42px;
+        width: auto;
+        padding: 0;
+        margin: 0;
+        li{
+          box-shadow: 0px 0px;
+          border-radius: 2px;
+          background: #fff;
+          position: static;
+          height: auto;
+          padding: 0;
+          margin: 0;
+           a{
+            color:#4D4C4C;
+            padding: 2px 0px 0px 21px;
+            margin: 0px 0px 0px 0px;
+            font-weight: normal;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+    li:nth-child(3) ul{
+      li{
+        background: url('../images/points.png') no-repeat 3% 0% white;
+        margin-left: 4px;
+      }
+      li:nth-child(1) { background-position: 0% 2%; }
+      li:nth-child(2) {background-position: 0% 21%;letter-spacing: -1px;}
+      li:nth-child(3) { background-position: 0% 40%;  }
+      li:nth-child(4) { background-position: 0% 60%;  }
+      li:nth-child(5) { background-position: 0% 80%;  }
+      li:nth-child(6) { background-position: 0% 100%;  }
+    }
+
+    li.resource-exchange{
+      top:150px;
+      background-position: right 61%;
+      z-index:103;
+    }
+    li.groups{
+      margin-top: 10px;
+      top: 4px;
+      background-position: 0 0%;
+      z-index:101;
+    }
+    li.dreams-accelerator{
+      top:83px;
+      background-position: right 30%;
+      z-index:102;
+    }
+    li.learning-center{
+      top:180px;
+      background-position: 0 50%;
+      z-index:103;
+    }
+    li:hover a{
+      display: block;
+      text-indent: 0px;
+    }
+    li:hover ul {
+      display: block;
+    }
+  }
+}
+
+
+
+
+/* Footer section, which should be the same on every page */
+footer {
+  width: 100%;
+  background: #9f2772;
+  height: 45px;
+  margin: auto;
+  padding: 20px 0 20px;
+  width: 100%;
+  #secondary-menu{
+    float:none;
+    margin:auto;
+    li{
+      list-style: none;
+      font-size: 13px;
+      float: left;
+      border-right: 1px solid #FFD4FF;
+      position: relative;
+      a{
+        color: #ffd4ff;
+        padding: 0 7px;
+      }
+    }
+    li.last{
+      border-right: none;
+    }
+  }
+  ul#footer-icons{
+      position: relative;
+      width: 238px;
+      float: right;
+      right: 7px;
+      li{
+        list-style: none;
+        background: url('../images/home-icons.png') no-repeat top left;
+        margin: 6px;
+        float: right;
+        width: 19px;
+        height: 22px;
+        a{
+          font-size: 0px;
+          padding: 20px 0px 3px 23px;
+        }
+      }
+      li:nth-child(1){ background-position: 50% -119px;margin-left: 6px; }
+      li:nth-child(2){background-position: 50% -44px;}
+      li:nth-child(3){ background-position:50% -94px; }
+      li:nth-child(4){ background-position: 50% -69px; }
+  }
+  #logo-footer{
+    position: relative;
+    left: -15px;
+    margin: 7px 7px  0px 7px;
+    width: 116px;
+    float: left;
+    height: 31px;
+    border-radius: 10px;
+    background: url('../logo.png') no-repeat white center;
+    background-size: 96px;
+  }
+}
+/*
+ * NOTE TO SYLISTS
+ * EVERYTHING ABOVE THIS LINE IS IN USE
+ * EVERYTHING BELOW THIS LINE NEEDS TO BE REVIEWED
+ * EVERYTHING ABOVE THIS LINE SHOULD BE IN SOME KIND OF ORDER
+ * THAT WAY DUPLICATES WILL BE OBVIOUS BECAUSE EVERYTHING WILL HAVE ITS PLACE
+ * LIKE
+ * overall page settings
+ * header region
+ * menus
+ * sidebars & blocks
+ * main content
+ * footer
+ */
+
+
+
+
+
+/* -----  share icons, wherever they are----- */
+#share-icons{
+  float: left;
+  margin: -15px 0px 0px;
+  ul.menu{
+    margin-left: 4px;
+    padding: 0;
+    li{
+      list-style: none;
+      height: 30px;
+      margin: 0;
+      padding: 0px 6px 0px 5px;
+      width: 31px;
+      border-right: 1px solid #D3D1D3;
+      float: left;
+    }
+    li:nth-child(4){
+      border-right: 0px
+    }
+    a{
+      float: left;
+      height: 30px;
+      width: 30px;
+      background: url('../images/home-icons.png') no-repeat 50% 0;
+      font-size: 0px;
+    }
+    .facebook a{ background-position: 50% -147px; }
+    .twiter a{ background-position: -27% -211px;  }
+    .rss a{ background-position: 50% -179px;  }
+    .youtube a{ background-position: 50% -242px;  }
+  }
+}
+
+
+
+
+
+#floating{
+  position: absolute;
+}
+.region-content-top,.page-groups .region-content{
+  clear: both;
+}
+.region-content{clear: both;}
+.section-activities,.section-users{
+   #main .region-content{
+    clear: both;
+    width: 106.05%;/*width: 747px;*/
+    margin-left: -22px;
+  }
+}
+/* the second sidebar starts right at the top of the page, directly below the header, don't know why */
+#sidebar-second{
+  position:relative;
+  top:150px;
+}
+
+/* -----  page title  ----- */
+div#main h1{
+  text-align: left;
+  font-size: 25px;
+  color:#014a81;
+  float: left;
+  min-width: 204px;
+  font-size: 20px;
+  color:#014a81;
+}
+
+.likeabee-block .header{
+  border: 1px solid #FACE77;
+  border-radius: 6px 6px 6px 6px;
+  margin: 26px 14px;
+  color: #064882;
+  padding: 17px;
+  font-size: 14px;
+}
+
+.likeabee-block .header .transaction-totals .balance{
+  font-size:20px;
+}
+
+.advanced-help-link,
+.advanced-help-link:hover {
+  background: url("../images/resource/cursor.png") no-repeat scroll 0 0 transparent;
+  float: right;
+  height: 21px;
+  width: 22px;
+}
+
+.likeabee-block .transaction-totals{
+  float:left;
+  margin-right: 30px;
+}
+
+.likeabee-block img.chart{
+  border: 1px solid #f1ad00;
+  padding: 12px 42px;
+}
+
+.likeabee-block table{
+  border:1px solid #FACE77;
+}
+
+.likeabee-block table tr {
+  background-color: #fff;
+  border-bottom: 1px solid #FACE77;
+  font-size: 12px;
+  font-weight: normal;
+  a{
+    color: #064882;
+  }
+  td{
+    padding: 5px 10px;
+  }
+}
+
+.likeabee-block table thead tr th{
+  width:80px;
+  height:20px;
+  font-size: 12px;
+  background-color: #fdf6e4;;
+  border:1px solid #FACE77;
+  padding-left: 10px;
+  font-weight: normal;
+}
+
+.likeabee-block form#mcapi-forms-form.step-1 p,
+.likeabee-block .form-type-radio{
+  display: inline-block;
+  margin-right:10px;
+}
+.likeabee-block input#edit-submit.form-submit{
+  @include button;
+}
+
+
+/*---  block-views -----*/
+@mixin menu-featured-ul{
+  background: white;
+  margin: 62px 0 0;
+  display: none;
+  position: absolute;
+  z-index: 100;
+  box-shadow: 0px 0px 5px 0px #C5B88E;
+}
+@mixin menu-featured-li{
+  list-style: none;
+  float: none;
+  margin: 0;
+  padding-right: 16px;
+  background-image: none;
+  background: white;
+  height: 22px;
+  width: 95px;
+}
+@mixin menu-featured-a{
+  display: inline-block;
+  width: 80px;
+  border: 0px;
+  color:#5a6b98;
+  font-weight: normal;
+  text-align: left;
+  padding-left: 12px;
+  font-size: 13px;
+}
+
+$blue: #064882;
+$orange: #FACE77;
+$soft-orange:#fdf6e4;
+$red:#B01919;
+
+/*************   my beez page *************/
+.likeabee-block .header{
+    border: 1px solid $orange;
+    border-radius: 6px 6px 6px 6px;
+    margin: 26px 14px;
+    color: $blue;
+    padding: 17px;
+    font-size: 14px;
+}
+
+.likeabee-block .header .transaction-totals .balance{
+  font-size:20px;
+}
+
+.advanced-help-link,
+.advanced-help-link:hover {
+    background: url("../images/resource/cursore.png") no-repeat scroll 0 0 transparent;
+    float: right;
+    height: 21px;
+    width: 22px;
+  }
+
+.likeabee-block .transaction-totals{
+  float:left;
+  margin-right: 30px;
+}
+
+.likeabee-block img.chart{
+  border: 1px solid #f1ad00;
+  padding: 12px 42px;
+}
+
+.likeabee-block table{
+  border:1px solid $orange;
+}
+
+.likeabee-block table tr {
+    background-color: #fff;
+    border-bottom: 1px solid $orange;
+    font-size: 12px;
+  font-weight: normal;
+  a{
+    color: $blue;
+  }
+  td{
+    padding: 5px 10px;
+  }
+}
+
+.likeabee-block table thead tr th{
+  width:80px;
+  height:20px;
+  font-size: 12px;
+  background-color: $soft-orange;
+  border:1px solid $orange;
+  padding-left: 10px;
+  font-weight: normal;
+}
+
+.likeabee-block form#mcapi-forms-form.step-1 p,
+.likeabee-block .form-type-radio{
+  display: inline-block;
+  margin-right:10px;
+}
+
+
+/* matslats temp theming for resources/marketplace Please do better if you can*/
+.view-likeabee-catalog .views-field-title,
+.view-likeabee-catalog .views-field-model{
+  padding: 6px 6px 0 6px;
+  color:$red;
+  a{
+    color:$red;
+  }
+}
+
+.view-likeabee-catalog .views-field-title{
+  margin-bottom:-8px;
+}
+
+.view-likeabee-catalog td{
+  border: 2px solid #FBD38B;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: 0 0 0 3px #FAE8C7;
+  float: left;
+  height: 373px;
+  margin: 0 41px 31px 0;
+  padding: 0;
+  position: relative;
+  width: 214px;
+}
+
+.view-likeabee-catalog .views-field-entity-id{
+  margin:0 10px;
+}
+
+.view-likeabee-catalog input{
+  border:none;
+  background: url("../images/resource/add_to_card.png") no-repeat scroll 0 0 transparent;
+  color: #FFFFFF;
+  display: block;
+  font-weight: bold;
+  height: 43px;
+  width: 100%;
+}
+
+.view-likeabee-catalog .views-field-name .views-label,
+.view-likeabee-catalog .views-field-display-price .views-label{
+  color: $red;
+  font-size: 10px;
+}
+
+
+
+
+
+
+/* -----  breadcrumb ----- */
+#breadcrumb{
+  margin-top: 9px;
+  .mafrid{
+    font-size: 0px;
+    padding: 9px 8px;
+    margin-top: 2px;
+    float: left;
+    background: url('../images/arrow-adress.jpg') no-repeat 1px;
+  }
+  .mafrid:nth-child(2){opacity: 1;}
+  .mafrid:nth-child(4){opacity: 0.8;}
+  .mafrid:nth-child(6){opacity: 0.6;}
+  .mafrid:nth-child(8){opacity: 0.4;}
+  .mafrid:nth-child(10){opacity: 0.2;}
+}
+
+#breadcrumb a ,#breadcrumb{
+  float: left;
+  color: #303030;
+  font-size: 15px;
+}
+div #breadcrumb:after{
+  clear: both;
+}
+
+
+
+div.view-id-list_of_groups {
+  width: 753px;
+  td{
+    float: left;
+    padding: 0;
+    margin: 0px 24px 31px 0px;
+    width: 215px;
+    height: 373px;
+    border-radius: 4px;
+    border: 2px solid #FBD38B;
+    box-shadow: 0px 0px 0px 3px #FAE8C7;
+  }
+  .views-field-title,
+  .views-field-field-description-group{
+    margin: 0px 10px;
+    width: 186px;
+  }
+  .views-field-title,.views-field-name{
+    border-bottom: 1px solid #FACE77;
+    margin-top: 6px;
+    padding-bottom: 6px;
+    margin-bottom: 5px;
+    background: white;
+    a{
+      padding: 0;
+      color: #B01919;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  }
+  .views-field-field-description-group,
+  .views-field-name,
+  .views-field-group-group{
+  color: #014a81;
+  }
+  .views-field-field-group-logo,
+   .views-field-field-user-picture{
+  height: 141px;
+  }
+  .views-label-field-description-group,
+.views-label-field-user-description{
+    height: 123px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    padding-right: 40px;
+  }
+  .field-content{
+    font-weight: normal;
+  }
+  .views-field-group-group{
+    background: #fcf0d8;
+    height: 51px;
+    border: 1px solid #FBD38B;
+  }
+  .views-field-name{
+    float: right;
+    font-size: 13px;
+    font-weight: normal;
+  }
+  .views-field-group-group .field-content{
+    padding-top: 16px;
+    a{
+    color: white;
+    font-weight: bolder;
+    border-color: #FAAC18;
+    padding: 5px 10px;
+    }
+    .group{
+    float: right;
+    font-size: 13px;
+    padding-top: 3px;
+    margin-right: 6px;
+    background-color: #FAAC18;
+    width: 53px;
+    height: 22px;
+    }
+    .number{
+    float: left;
+    margin-right: 4px;
+    margin-left: 10px;
+    font-weight: bold;
+    }
+    .members{
+    font-size: 15px;
+    float: left;
+    }
+    .picture{
+    float: left;
+    margin: 0px 0px 0px 6px;
+
+    }
+  }
+}
+
+
+@mixin box{
+  width: 303px;
+  height: 202px;
+  margin-right: 17px;
+  margin-bottom: 18px;
+  float: left;
+  h2 {
+    margin: 0;
+    font-size: 14px;
+    padding: 2px 0px;
+    a{
+      font-size: 14px;
+      color: white;
+      font-weight: bolder;
+      padding-left: 8px;
+    }
+  }
+}
+@mixin box-title{
+  color: #B01919;
+  font-size: 24px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  font-weight: normal;
+}
+@mixin box-header{
+  background: #9f2772;
+  margin: 0;
+  font-size: 14px;
+  padding: 2px 0px;
+}
+@mixin box-header-a{
+  font-size: 14px;
+  color: white;
+  font-weight: bolder;
+  padding-left: 8px;
+}
+
+
+/* -----  General activity boxs  ----- */
+.section-activities #main .region-content,
+.section-users #main .region-content{
+  .block-odd{float: left;}
+  .block-even{float: right;}
+}
+
+.region-content section[id^="block-views-group-"]{
+    position: relative;
+    margin: 11px 14px;
+    border: 1px solid #FACE77;
+    border-radius: 6px;
+    box-shadow: 0px 0px 0px 4px #FCF0D8;
+    width: 341px;
+
+    .block-title{
+      float: left;
+      color:#014a81;
+      background-color: #FCF0D8;
+      border-bottom: 1px solid #FACE77;
+      padding: 9px 19px;
+      margin: 0;
+      font-size: 19px;
+      font-weight: normal;
+      width: 303px;
+    }
+    .view-header{
+      position: absolute;
+      right: 13px;
+      margin-top: -7px;
+      a{color:#014a81; font-size: 19px;}
+    }
+    .view-content{
+      clear: both;
+      padding-top: 5px;
+    }
+    header h2{
+      width:auto;
+      clear: both;
+      background-color:#fff;
+      padding: 0;
+    }
+    img,.views-field-field-video-group{
+      float: left;
+      margin-right: 10px;
+    }
+    .content{
+      margin:0px 14px 14px 14px;
+    }
+    a{
+      color: #A3001E;
+      font-size: 14px;
+    }
+    .views-field-created,
+    .views-label-name,
+    .views-label-name a.username{
+      color:#686868;
+      font-size: 14px;
+    }
+    .views-field-created{
+      margin-top: -5px;
+      font-size: 12px;
+    }
+    div.views-field-body{
+      margin-left: 0px;
+      color:#014a81;
+      font-size: 14px;
+      .field-content p{
+        margin: 0px;
+      }
+    }
+    .views-row{
+      border-bottom: 1px solid #FACE77;
+      margin-top: 13px;
+      padding-bottom: 8px;
+    }
+    .views-row-last{border-bottom:0}
+    .pager{
+      border-top: 1px solid #FACE77;
+      padding-top: 7px;
+      text-align: right;
+      margin: 6px 0px -8px 0px;
+      a{
+        color:#014a81;
+      }
+    }
+}
+div.img-biger .number[class*=" 0 "],
+.numbers-visible[class*=" 0 "]{
+  display:none;
+}
+
+
+
+
+
+/*----------See all boxs-----------*/
+@mixin select-all-box{
+  float: left;
+  padding: 0;
+  margin: 0px 24px 31px 0px;
+  width: 215px;
+  height: 373px;
+  border-radius: 4px;
+  border: 2px solid #FBD38B;
+  box-shadow: 0px 0px 0px 3px #FAE8C7;
+
+  .views-field-title,
+  .views-field-field-description-group,
+  .views-field-field-user-description{
+    margin: 0px 10px;
+    padding-left: 10px;
+  }
+  .views-field-field-description-group,
+  .views-field-field-user-description{
+  height: 141px;
+  }
+  .views-field-title{
+    border-bottom: 1px solid #FACE77;
+    margin-top: 6px;
+    padding-bottom: 6px;
+    margin-bottom: 5px;
+    background: white;
+    a{
+      padding: 0;
+      margin-left: -8px;
+      color: #B01919;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  }
+  .views-field-name,
+  .views-field-created,
+  .views-field-body{
+    padding:0px 12px;
+    color:black;
+  }
+  .views-field-body{
+    clear: both;
+    color: #014A81;
+  }
+  .views-field-field-description-group,
+  .views-field-field-user-description
+  .views-field-name,
+  .views-field-group-group{
+    color: #014a81;
+  }
+  .views-field-field-event-image{
+    height: 143px;
+  }
+  .views-field-field-description-group{
+    height: 123px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  .views-field-group-group{
+    background: #fcf0d8;
+    height: 51px;
+    border: 1px solid #FBD38B;
+  }
+  .views-field-name{
+    font-size: 13px;
+    font-weight: normal;
+  }
+
+  .views-field-group-group .field-content{
+    padding-top: 16px;
+    a{
+    background-color: #FAAC18;
+    }
+  }
+}
+@mixin select-all-title{
+  border-bottom: 1px solid #FACE77;
+  margin-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 5px;
+  background: white;
+}
+@mixin select-all-title-link{
+  padding: 0;
+  color: #B01919;
+  font-weight: bold;
+  font-size: 16px;
+}
+.date-display-single{
+  padding-top: 12px;
+  width: 93px;
+  text-align: center;
+  float: left;
+  margin-right: 0px;
+  height: 89px;
+  padding-right: 15px;
+  border-right: 1px solid black;
+  background: url('../images/day-img.png') no-repeat 36% 6%;
+  line-height: 23px;
+}
+.field-name-field-location-of-event-text{
+  border-bottom: 1px dashed black;
+  margin-bottom: 3px;
+  padding-bottom: 6px;
+  width: 192px;
+}
+
+
+.hover-tats{
+  display: block;
+}
+
+

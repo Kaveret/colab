@@ -1,0 +1,222 @@
+<?php
+/*
+ * This module adds the following features:
+ * Content types available in groups
+ */
+
+
+
+/*
+ * implements hook_menu
+ */
+function likeabee_group_content_menu() {
+  $items['galleries'] = array(
+    'title' => 'Galleries',
+    'page callback' => 'image_galleries',
+    'access arguments' => array('access user profiles'),
+    'menu_name' => 'secondary-menu'
+  );
+  $items['galleries/%taxonomy_term'] = array(
+    'title callback' => 'taxonomy_term_title',
+    'title arguments' => array(1),
+    'page callback' => 'image_gallery',
+    'page arguments' => array(1),
+    'access arguments' => array('access user profiles'),
+    'menu_name' => 'secondary-menu'
+  );
+}
+
+/*
+ * implements hook_FORM_node_form_alter
+ */
+function likeabee_group_content_form_node_form_alter(&$form, $form_state) {
+  $type = &$form['#node']->type;
+  //hide the widget for the choosing the groups that content should go into
+  //actually only the css is necessary
+  $context = og_context();
+  $types = array('photo');
+  if (isset($context['gid']) && in_array($type, $types)) {
+    //hide all group choosing widgets, because group is set by $context
+    drupal_add_css('#edit-og-group-ref{display:none;}', array('type' => 'inline'));
+    unset($form['og_group_ref'][LANGUAGE_NONE][0]['admin']);
+  }
+}
+
+/*
+ * implements hook_theme
+ */
+function likeabee_group_content_theme() {
+  $items = array(
+    'gallery_preview' => array(
+      'variables' => array(
+        'term' => NULL
+      )
+    )
+  );
+  return $items;
+}
+/*
+ * implements views hook_views_api
+ */
+function _____likeabee_group_content_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'likeabee_group_content'),
+  );
+}
+
+/*
+ * menu callback
+ * present each gallery, with a random image from each
+ * Need to create a link to this with ?og_group_ref=$nid
+ */
+function ____image_galleries() {
+  debug(og_context(), 'need to filter these galleries so they only apply to the current group:');
+  //get all the terms from the galleries vocab
+  $tree = taxonomy_get_tree(db_query("SELECT vid FROM {taxonomy_vocabulary} WHERE machine_name = 'galleries'")->fetchField());
+  foreach($tree as $term) {
+    $render[$term->tid] = array(
+      '#theme' => 'gallery_preview',
+      '#term' => $term,
+    );
+  }
+
+  return drupal_render($render);
+}
+
+function image_gallery($term) {
+  debug(og_context(), 'need to filter these galleries so they only apply to the current group:');
+  drupal_set_title (t('Gallery: @galleryname', array('@galleryname' => $term->name)));
+  $breadcrumb[] = l(t('Home'), NULL);
+  drupal_set_breadcrumb(array_reverse($breadcrumb));
+  drupal_add_feed('taxonomy/term/' . $term->tid . '/feed', 'RSS - ' . $term->name);
+
+  if ($nids = taxonomy_select_nodes($term->tid, FALSE, FALSE, array('t.nid' => 'DESC'))) {
+    $nodes = node_load_multiple($nids);
+    $build = node_view_multiple($nodes);
+    $build['pager'] = array(
+      '#theme' => 'pager',
+      '#weight' => 5,
+     );
+  }
+  else {
+    $build['no_content'] = array(
+      '#prefix' => '<p>',
+      '#markup' => t('There is currently no content classified with this term.'),
+      '#suffix' => '</p>',
+    );
+  }
+  return $build;
+}
+
+/*
+ * default_implementation of theme hook 'gallery_preview'
+ */
+function theme_gallery_preview($variables) {
+  $term = &$variables['term'];
+  $nids = taxonomy_select_nodes($term->tid, FALSE);
+  if (!$nids) return;
+  shuffle($nids);
+  $node = node_load(current($nids));
+  $img = theme('image_style', array(
+    'path' => $node->image[LANGUAGE_NONE][0]['uri'],
+    'style_name' => 'medium'
+  ));
+  $output = '<div style = "background-color:#eee; margin:5px; float:left; padding:5px; width:220px; height: 270px">';
+  $output .=  l($img, 'galleries/'.$term->tid, array('html' => TRUE, 'attributes' => array('style' => 'float:left; margin-right:5px', 'valign' => 'top')));
+  $output .= "<h4 valign = 'top'>$term->name</h4>";
+  $output .= $term->description.'</div>';
+  return $output;
+}
+
+/*
+ * implements hook_node_view_alter
+ * put the gallery name before the node title
+ */
+function ________likeabee_group_content_node_view_alter(&$build, $type) {
+  if ($build['#bundle'] == 'image'){
+    unset($build['links']);
+  }
+}
+
+
+
+function likeabee_group_content_block_info() {
+  $blocks['group_manage'] = array(
+    'info' => t('Group management')//can't remember what this is for
+  );
+  return $blocks;
+}
+
+
+/*
+ * Make a list of node/add links for within a group
+ * groups menu isn't a real menu because it would have to contain aliases and tricky things like that.
+ * easier just to render a nested list and put it in a block.
+ * this should be cached
+ */
+function groups_pseudo_menu() {
+  //borrowed from og_extras_node_links
+  $group = og_context(); //dependency on og_context
+  $gid = $group['gid'];
+
+  $options = array('query' => array('destination' => current_path()));
+
+  $items['group_home'] = array(
+    'data' => l(t('Information Read and watch'), "node/$gid", $options)
+  );
+  $items['group_activities'] = array(
+    'data' => l(t('Activity Group Activities'), 'activity/activities-my-group', $options)
+  );
+  $items['group_members'] = array(
+    'data' => l(t('Information Read and watch'), "node/$gid", $options)
+  );
+
+  $items['group_manage'] = array(
+    'data' => l(t('Manage Group'), 'members/members-my-group', $options),
+    'children' => array(
+      'edit_group' => array(
+        'data' => l(t('Edit group'), "node/$gid/edit", $options)
+       ),
+       'group_permissions' => array(
+         'data' => l(t('Permissions'), "group/node/$gid/admin/permissions", $options)
+       ),
+       'group_membership' => array(
+         'data' => l(t('Membership'), "group/node/$gid/admin/people", $options)
+      )
+    )
+  );
+
+  foreach (node_type_get_types() as $type_name => $info) {
+    if (og_is_group_content_type('node', $type_name) && node_access('create', $type_name)) {
+      $names[$type_name] = node_type_get_name($type_name);
+    }
+  }
+  asort($names);
+  // Build links.
+  $options  = array(
+    'query' => array(
+      'gids_' . $group['group_type'] . '[]' => $group['gid'],
+    ) + drupal_get_destination(),
+  );
+  $items['node_add'] = array(
+    'data' => l(t('Create content'), '', $options),
+    'children' => array()
+  );
+  foreach ($names as $type => $name) {
+    $items['node_add']['children'][$type] = array(
+      'data' => l($name, 'node/add/'.$type, $options),
+    );
+  }
+
+  return array(
+    'node_title' => array(
+       '#markup' => '<h2>'.node_load($gid)->title.'</h2>'
+    ),
+    'pseudo_menu' => array(
+       '#theme' => 'item_list',
+       '#type' => 'ul',
+       '#items' => $items
+    )
+  );
+}

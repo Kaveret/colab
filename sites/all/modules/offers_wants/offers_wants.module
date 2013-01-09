@@ -569,7 +569,7 @@ function offers_wants_jmenu_categories($want) {
   $direction = $want ? 'wants' : 'offers';
   //this is actually a different kind of tree to elsewhere in this module.
   foreach ($result1 as $term) {
-    $term = array('count' => 0, 'edit_path' => '');
+    $term += array('count' => 0, 'edit_path' => '');
     if (empty($term['tid']) || empty($counts[$term['tid']])) continue;
     $tid = $term['tid'];
     $term['title'] = $term['name'];

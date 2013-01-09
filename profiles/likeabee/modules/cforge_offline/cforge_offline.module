@@ -1,0 +1,82 @@
+<?php
+
+/*
+ * implements hook_theme
+ * there's a conflict with hook_custom_theme
+ */
+function cforge_offline_theme() {
+  return array (
+    'offline_contact' => array(
+      'template' => 'offline_contact',
+      'variables' => array(
+        'account' => NULL,
+      )
+    ),
+    'print_table' => array(
+      'template' => 'print-table',
+      'variables' => array(
+        'table' => '',
+        'page_title' => '',
+      ),
+    )
+  );
+}
+
+/**
+ * Implements hook_user_view_alter().
+ * adds the contact card to the user profile page
+ */
+function cforge_offline_user_view_alter(&$build) {
+  if (isset($build['profile_address']) && $build['profile_address']['#access']) {
+    $account = &$build['profile_address']['#object'];
+    $css = 'padding: 2em; float:left; margin: 0 2em 2em 0;';
+    if ($account->profile_postal) {
+      //Envelope image will not be broken if the site isn't at the root.
+      //However using url() will break if the site is using a language prefix
+      $imagefile = drupal_get_path('module', 'cforge_offline') . '/envelope.jpg';
+      $css .= "background-size: 100% 100%; background-image: url(/'$imagefile');";
+    }
+    else {
+      $css .= "box-shadow: 2px 2px 2px 1px #888; border: 1px solid #777;background-color:#e0e0e0e";
+    }
+    drupal_add_css('div.offline-contact{'.$css.'}', array('type' => 'inline'));
+    $build['offline_contact'] = array(
+      '#markup' => theme('offline_contact', array('account' => $account)),
+      '#weight' => -20,
+    );
+    $build['profile_address']['#access'] = 0;
+    $build['profile_locality']['#access'] = 0;
+  }
+}
+
+
+/*
+ * implements theme hook_preprocess_offline_contact
+ */
+function template_preprocess_offline_contact(&$vars){
+  $account = &$vars['account'];
+  $vars['name'] = array('#markup' => format_username($account));
+  $vars['address'] = field_view_field('user', $account, 'profile_address');
+  $vars['address']['#label_display'] = 'hidden';
+  $vars['locality'] = field_view_field('user', $account, 'profile_locality');
+  $vars['locality']['#label_display'] = 'hidden';
+}
+/*
+ * implements theme hook_process_offline_contact
+ */
+function template_process_offline_contact(&$vars){
+  $vars['name'] = drupal_render($vars['name']);
+  $vars['address'] = drupal_render($vars['address']);
+  $vars['locality'] = drupal_render($vars['locality']);
+}
+
+
+/*
+ * Implements views hook_views_api
+ */
+function cforge_offline_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'cforge_offline'),
+  );
+}

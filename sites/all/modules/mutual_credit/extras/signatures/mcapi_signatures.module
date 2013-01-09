@@ -4,6 +4,9 @@
 
 define ('TRANSACTION_STATE_PENDING', -1);
 
+/*
+ * implements hook_help
+ */
 function mcapi_signatures_help($path) {
   if ($path != 'admin/accounting/signatures') return;
   $help = t('Require signatures for certain transaction types before they are cleared.');
@@ -29,66 +32,11 @@ function mcapi_signatures_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('mcapi_signatures_config'),
     'access arguments' => array('design transaction forms'),
-  );
-  $items['transaction/%transaction/signoff'] = array(
-    'title' => 'Sign off',
-    'description' => 'Sign the transaction on behalf of everyone',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('mcapi_signoff_confirm_form', 1),
-    'access callback' => 'transaction_signoff_access',
-    'access arguments' => array(1),
-    'type' => MENU_LOCAL_ACTION,
-  );
-  $items['transactions/signall/%user'] = array(
-    'title' => 'Sign all my transactions',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('mcapi_signall_confirm_form', 2),
-    'access callback' => 'user_has_pending',
-    'access arguments' => array(2),
-    'type' => MENU_CALLBACK,
+    'file' => 'mcapi_signatures.inc'
   );
   return $items;
 }
 
-function mcapi_signatures_menu_alter(&$items) {
-  //this menu item is generated from the ctools transaction form in mcapi_signatures_mcapiforms_default()
-  //it can ONLY be seen by signatories
-  $items['transaction/%transaction/sign']['access callback'] = 'transaction_sign_access';
-  $items['transaction/%transaction/sign']['access arguments'] = array(1);
-  $items['transaction/%transaction/sign']['type'] = MENU_LOCAL_ACTION;
-  $items['transaction/%transaction/sign']['page arguments'][] = 1;
-  $items['admin/structure/trigger/mcapi']['weight'] = 1;
-}
-
-function mcapi_signatures_hook_info() {
-  return array(
-    //a signature is added to a transaction
-    //takes args $transaction and $signer_uid
-    'transaction_sign' => array(),
-    'transaction_signed_off' => array(),
-  );
-}
-
-/*
- * Implements hook_views_api
- */
-function mcapi_signatures_views_api() {
-  return array(
-    'api' => 3,
-    'path' => drupal_get_path('module', 'mcapi_signatures').'/views',
-  );
-}
-
-/*
- * Implements ctools hook_ctools_plugin_api
- * not sure if this is needed
- */
-function mcapi_signatures_ctools_plugin_api() {
-  return array(
-    'api' => 3,
-    'path' => drupal_get_path('module', 'mcapi_signatures'),
-  );
-}
 /*
  * Will implement hook_entity_load or some such
  */
@@ -121,172 +69,10 @@ function mcapi_signatures_mcapi_info_states() {
     TRANSACTION_STATE_PENDING => array(
       'name' => t("Pending"),
       'description' => t("awaiting signatures before becoming 'finished'."),
-      'default_access_callbacks' => array('transaction_access_payer', 'transaction_access_payee')
+      'default_access_callbacks' => array('transaction_access_callback_signatory')
     )
   );
 }
-
-function mcapi_signatures_config($form, $form_state) {
-  module_load_include('inc', 'mcapi');
-  //some types we know about will never be pending
-  $types = _get_signable_transaction_types();
-  $w = 0;
-  $form = array('#tree' => TRUE);
-  foreach ($types as $type) {
-    $var_name = 'mcapi_signatures_'.$type;
-    $settings = @$form_state['values'][$var_name] ? $form_state['values'][$var_name] : variable_get($var_name, array());
-    $form[$var_name] = array(
-      '#title' => $type,
-      '#type' => 'fieldset',
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-      '#id' => $type,
-      'participants' => array(
-        '#title' => t('Both participants must sign'),
-        '#description' => t("Logged in user signs automatically"),
-        '#type' => 'checkbox',
-        '#default_value' => isset($settings['participants']) ? $settings['participants'] : TRUE
-      ),
-      'countersignatories' => array(
-        '#title' => t('Counter-signers'),
-        '#description' => t('Choose one or more users'),
-        '#type' => 'user_chooser_roles',
-        '#args' => array(DRUPAL_AUTHENTICATED_RID),
-        '#default_value' => isset($settings['countersignatories']) ? $settings['countersignatories'] : array(),
-        '#multiple' => TRUE,
-        '#allow_me' =>TRUE
-      ),
-      'complete' => array(
-        '#title' => t('Send notification'),
-        '#description' => t("Use the email template on this page to notify all signatories"),
-        '#type' => 'checkbox',
-        '#default_value' => isset($settings['complete']) ? $settings['complete'] : FALSE,
-        '#weight' => 5
-      ),
-      '#weight' => $w++
-    );
-  }
-  $mail_def = variable_get('mcapi_sign_notify_template', array());
-  $form['mcapi_sign_notify_template'] = array(
-    '#title' => t('Signature notification'),
-    '#description' => implode(' ', array(
-      t('Compose the email notifying signatories that a transaction needs their attention'),
-      t('Use the tokens provided')
-    )),
-    '#type' => 'fieldset',
-    'subject' => array(
-      '#title' => t('Subject'),
-      '#type' => 'textfield',
-      '#default_value' => isset($mail_def['subject']) ? $mail_def['subject'] : t('Your signature required'),
-      '#required' => TRUE,
-    ),
-    'body' => array(
-      '#title' => t('Body'),
-      '#type' => 'textarea',
-      '#default_value' => isset($mail_def['body']) ? $mail_def['body'] : '[transaction:url:absolute]',
-      '#required' => TRUE,
-      '#weight' => 1
-    ),
-    '#weight' => $w++
-  );
-  $mail_def = variable_get('mcapi_signed_off_notify_template', array());
-  $form['mcapi_signed_off_notify_template'] = array(
-    '#title' => t('Completed notification'),
-    '#description' => implode(' ', array(
-      t('Compose the email sent to all signatories when a pending transaction completes.'),
-      t('Use the tokens provided')
-    )),
-    '#type' => 'fieldset',
-    'subject' => array(
-      '#title' => t('Subject'),
-      '#type' => 'textfield',
-      '#default_value' => isset($mail_def['subject']) ? $mail_def['subject'] : t('Transaction signed off'),
-      '#required' => TRUE,
-    ),
-    'body' => array(
-      '#title' => t('Body'),
-      '#type' => 'textarea',
-      '#default_value' => isset($mail_def['body']) ? $mail_def['body'] : '[transaction:url:absolute]',
-      '#required' => TRUE,
-      '#weight' => 1
-    ),
-    '#weight' => $w++
-  );
-  $form['token_tree'] = array(
-    '#theme' => 'token_tree',
-    '#token_types' => array('transaction', 'user', 'site'),
-    '#global_types' => FALSE,
-    '#weight' => $w++
-  );
-  return system_settings_form($form);
-}
-
-/*
- * write the signature for each transaction to the database.
- * $transaction->pending signatures is an array
- * array(
- *   $uid => $signature_needed BOOLEAN
- * )
- * Every value should be 1 when the transaction is created
- */
-function mcapi_signatures_save($transaction) {
-  $old_state = $transaction->state;
-  //need to check property 'pending_signatures' because it may not have been declared
-  if (!empty($transaction->pending_signatures)) {
-    //save all the signatures whether or not they have been signed
-    foreach ($transaction->pending_signatures as $uid => $pending) {
-      $values[] = "( $transaction->serial, $uid, ". intval($pending)." )";
-    }
-    db_query("REPLACE INTO {mcapi_signatures} (serial, uid, pending) VALUES ". implode(', ', $values));
-  }
-  $new_state = count(array_filter($transaction->pending_signatures)) ? TRANSACTION_STATE_PENDING : TRANSACTION_STATE_FINISHED;
-  if ($new_state != $old_state) {
-    //change the state of the loaded object, then change the state in the db
-    $transaction->state = $new_state;
-    //because the transaction is already written, and to improve integrity, we reset the state here
-    transactions_state(
-      array($transaction->serial),
-      $new_state
-    );
-  }
-}
-
-/*
- * resaves signatories from the transaction object and changes state if all are signed
- */
-function mcapi_sign($serials, $uids) {
-  if (is_numeric($uids)) {
-    $uids = array($uids);
-  }
-  if (count($uids) > 1 && count($serials) > 1) throw new Exception('Pending module error');
-  //remove signatures one at a time
-  foreach ($serials as $serial) {
-    //only the first transaction in the cluster can have signatures
-    $transaction = transaction_load($serial);
-    foreach ($uids as $uid) {
-      if ($transaction->pending_signatures[$uid] == 1) {
-        $transaction->pending_signatures[$uid] = 0;
-        //this might change the state of the transaction
-        mcapi_signatures_save($transaction);
-      }
-      else {
-        drupal_set_message(t('Transaction #@serial is already signed by @name',
-          array('@serial' => $transaction->serial, '@name' => user_load($uid)->name)
-        ));
-      }
-    }
-    if ($transaction->state == TRANSACTION_STATE_PENDING) {
-      drupal_set_message(t("@num signatures remaining on transaction #@serial",
-        array('@num' => count(array_filter($transaction->pending_signatures)), '@serial' => $serial)
-      ));
-    }
-    else {
-      drupal_set_message(t('Transaction @serial is signed off', array('@serial' => $transaction->serial)));
-      module_invoke_all('transaction_signed_off', $transaction);
-    }
-  }
-}
-
 
 //returns a list of the user objects who are yet to sign
 //will take EITHER a serial OR a uid, returns a list of the other
@@ -303,54 +89,9 @@ function mcapi_get_signatories($serial = NULL, $uid = NULL) {
   else {
     $result = $query->fields('s', array('serial'))->condition('pending', 1)->condition('uid', $uid)->execute()->fetchCol();
   }
-
   return $result;
 }
 
-function user_has_pending($account) {
-  $whether = db_query("SELECT count(serial) FROM {mcapi_signatures} where uid = :uid AND pending = 1", array(':uid' => $account->uid))
-    ->fetchfield();
-  if (!$whether) return;
-  return $account->uid == $GLOBALS['user']->uid || user_access('manage all transactions');
-
-}
-//menu access callback
-//returns true if the user is a listed signatory and hasn't signed
-//this function name is constructed - do not change!
-function transaction_sign_access($transaction) {
-  //check the transaction is pending and the given account needs to sign it.
-  if ($transaction->state != TRANSACTION_STATE_PENDING) return FALSE;
-  //check the user is listed as a signatory
-  if (!empty($transaction->pending_signatures[$GLOBALS['user']->uid])) return TRUE;
-}
-
-//menu access callback
-//can the current user 'sign off' any (pending) transaction
-function transaction_signoff_access($transaction) {
-  if ($transaction->state == TRANSACTION_STATE_PENDING) {
-    if (user_access('manage all transactions')) return TRUE;
-  }
-}
-
-
-/*
- * implements hook_form_FORMID_alter
- * this has to run AFTER the mcapi_forms implementation
- */
-function mcapi_signatures_form_mcapi_forms_form_alter(&$form, &$form_state) {
-  //changing state of all ONLY transaction forms made with mcapi_forms module
-  if (isset($form['#step']) && $form['#step'] == 1) {
-    _set_form_state_to_pending($form, $form_state);
-  }
-
-  //makes some adjustments to this modules mcapi_form, which starts on step 2
-  if ($form_state['build_info']['args'][MCAPIFORM_BUILD_INFO_ARG]['info']['name'] != 'add_my_signature') return;
-  unset($form['experience']['title'], $form['experience']['template']);
-  //replace the transaction_form_submit callback because we only want to change the state, not save the 'values and everything
-  $key = array_search('transaction_form_submit', $form['#submit']);
-  $form['#submit'][$key] = 'add_my_signature_submit';
-  unset($form['buttons']['delete']);
-}
 
 /*
  * implements hook_form_FORM_ID_alter
@@ -358,215 +99,64 @@ function mcapi_signatures_form_mcapi_forms_form_alter(&$form, &$form_state) {
  */
 function mcapi_signatures_form_transaction_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'mcapi_forms_form') return;
+  module_load_include('inc', 'mcapi_signatures');
   _set_form_state_to_pending($form, $form_state);
 }
-
-
-//check whether this transaction type needs signatures and change the state accordingly
-//changes the status in the transaction form according to the settings for the transaction_type
-function _set_form_state_to_pending(&$form, $form_state) {
-    //read the settings and set the $form['state'] hidden widget
-  $type = isset($form['type']['#value']) ? $form['type']['#value'] : $form['type']['#default_value'];//yuk
-  if (in_array($type, _get_signable_transaction_types())) {
-    $config = variable_get('mcapi_signatures_'.$type, array());
-    if (@$config['participants'] || count(@$config['countersignatories'])) {
-      $form['state'] = array(
-        '#type' => 'value',
-        '#value' => TRANSACTION_STATE_PENDING
-      );
-    }
+/*
+ * implements hook_form_FORMID_alter
+ * this has to run AFTER the mcapi_forms implementation
+ */
+function mcapi_signatures_form_mcapi_forms_form_alter(&$form, &$form_state) {
+  //changing state of all ONLY transaction forms made with mcapi_forms module
+  if (isset($form['#step']) && $form['#step'] == 1) {
+    module_load_include('inc', 'mcapi_signatures');
+    _set_form_state_to_pending($form, $form_state);
   }
 }
 
 /*
- * Integration with mcapi_forms module
- *
- * Implements hook_form_FORM_ID_alter
- * modifies the saved form 'add_my_signature' to hide fields controlled by this module
+ * implements hook_block_info
  */
-function mcapi_signatures_form_ctools_export_ui_edit_item_form_alter(&$form, &$form_state) {
-  //check that this is actually a transaction form
-  if ($form_state['plugin']['schema'] == 'mcapi_forms') {
-    //on the mcapi form edit page, add a link to the signatures config page
-    $form['signatures'] = array(
-      '#markup' => l(t('Set up signatories (new window)'), 'admin/accounting/signatures', array('fragment' => $form_state['item']->name, 'attributes' => array('target' => '_blank'))),
-      '#weight' => 101
-    );
-    if ($form_state['item']->name != 'add_my_signature') return;
-    $form['architecture']['path']['#disabled'] = TRUE;
-    $form['architecture']['use_block']['#type'] = 'hidden';
-    $form['architecture']['menu_link']['#type'] = 'hidden';
-    $form['architecture']['menu_link']['#value'] = 0;
-    $form['perspective']['#type'] = 'hidden';
-    $form['perspective']['#value'] = 3;
-    $form['experience']['title']['#type'] = 'hidden';
-    $form['experience']['template']['#type'] = 'hidden';
-    $form['experience']['template']['#requried'] = FALSE;
-    $form['experience']['title']['#required'] = FALSE;
-    $instances = field_info_instances('transaction', 'transaction');
-    unset($form['#validate'][array_search('mcapi_forms_template_validate', $form['#validate'])]);
-
-    foreach (element_children($form) as $key) {
-      if (isset($form[$key]['#group']) && $form[$key]['#group'] == 'mcapi_form_fields') {
-        unset($form[$key]);
-      }
-    }
-    unset($form['step-1']);
-  }
-}
-
-
-
-/*
- * transaction form submit callback
- */
-function add_my_signature_submit($form, &$form_state) {
-  $serial = $form_state['build_info']['args'][TRANSACTION_BUILD_INFO_ARG]->serial;
-  mcapi_sign(array($serial), array($GLOBALS['user']->uid));
-  $form_state['values']['serial'] = $serial; //this is needed for the redirect in mcapi_forms_form_postsubmit
-}
-
-
-/*
- * This menu callback is handled differently to the standard signing form
- */
-function mcapi_signoff_confirm_form($form, $form_state, $transaction) {
-  mcapi_hide_tabs();
-  $form = array();
-  $form_state['redirect'] = 'transaction/'. $transaction->serial;
-  $form['serial'] = array(
-    '#type' => 'hidden',
-    '#value' => $transaction->serial
-  );
-  $signatories = array_filter(mcapi_get_signatories($transaction->serial));
-  $users = user_load_multiple(array_keys($signatories));
-  $form['#prefix'] = t('Are you sure you want to sign this transaction on behalf of @users?',
-    array('@users' => _mcapi_sig_format_usernames($users))
-  );
-  return confirm_form(
-    $form,
-    t('Are you sure?'),
-    'user',
-    '',
-    t('Sign'), t('Cancel'),
-    'sign'
-  );
-}
-
-function mcapi_signoff_confirm_form_validate($form, $form_state) {
-  if ($reason = pending_not_signable($form_state['values']['serial'])) {
-    form_set_error('', $reason);
-  }
-}
-
-
-function mcapi_signoff_confirm_form_submit($form, &$form_state) {
-  $serial = &$form_state['values']['serial'];
-  if ($reason = pending_not_signable($serial)) {
-    drupal_set_message($reason, 'error');
-    return;
-  }
-  $signatories = array_filter(mcapi_get_signatories($serial));
-  mcapi_sign(array($serial), array_keys($signatories));
-  $form_state['redirect'] = 'transaction/'. $serial;
-}
-
-function mcapi_cancel_confirm_form($form, $form_state, $transaction) {
-  $form = array();
-  $form_state['redirect'] = 'transaction/'. $transaction->serial;
-  $form['serial'] = array(
-    '#type' => 'hidden',
-    '#value' => $transaction->serial
-  );
-  $signatories = array_filter(mcapi_get_signatories($transaction->serial));
-  $users = user_load_multiple(array_keys($signatories));
-  $form['#prefix'] = t('Are you sure you want to cancel this pending transaction',
-    array('@users' => _mcapi_sig_format_usernames($users))
-  );
-  return confirm_form(
-    $form,
-    t('Are you sure?'),
-    'user',
-    '',
-    t('Cancel'), t('Not so sure'),
-    'sign'
-  );
-}
-
-function mcapi_cancel_confirm_form_submit($form, &$form_state) {
-  $serial = &$form_state['values']['serial'];
-  transactions_state(array($serial), TRANSACTION_STATE_ERASED);
-  $form_state['redirect'] = 'user';
-}
-
-//signs the transaction and returns a message if the transaction is not signable
-function pending_not_signable($serial) {
-  $signatories = array_filter(mcapi_get_signatories($serial));
-  try {
-    if (transaction_load($serial)->state != TRANSACTION_STATE_PENDING) {
-      throw new Exception(t('Transaction is not in pending state'));
-    }
-    if (empty($signatories)) {
-      throw new Exception(t('Pending transaction has no signatures waiting'));
-    }
-  }
-  catch(Exception $e) {
-    return $e->getMessage();
-  }
-}
-
-function mcapi_signall_confirm_form($form, $form_state, $account) {
-  $form = array();
-  $form['uid'] = array(
-    '#type' => 'hidden',
-    '#value' => $account->uid
-  );
-  $form['#prefix'] = t('Are you sure you want to sign all your transactions?');
-  return confirm_form(
-    $form,
-    t('Are you sure?'),
-    'user',
-    '',
-    t('Sign'), t('Cancel'),
-    'sign'
-  );
-}
-
-function mcapi_signall_confirm_form_submit($form, &$form_state) {
-  $uid = &$form_state['values']['uid'];
-  //get all the transactions
-  $serials = array_keys(mcapi_get_signatories(NULL, $uid));
-  $transactions = transactions_load(array(), array('serial' => $serials));
-  //sign them one by one
-  foreach ($transactions as $transaction) {
-    $serials[] = $transaction->serial;
-  }
-  mcapi_sign($serials, array($uid));
-  $form_state['redirect'] = 'user';
-}
-
 function mcapi_signatures_block_info() {
   //this is very hard to do in views
   return array(
     'user_pending' => array(
       'info' => t('All pending transactions (per user)')
+    ),
+    'waiting_on_uid' => array(
+      'info' => t('Signatures for user to sign')
     )
   );
 }
-
+/*
+ * implements hook_block_view
+ */
 function mcapi_signatures_block_view($delta) {
   module_load_include('inc', 'mcapi');
-  if ($settings = _mcapi_block_settings($delta, 'user_aggregated_view')) {
+  $settings = _mcapi_block_settings($delta, 'user_aggregated_view');
+  module_load_include('inc', 'mcapi_signatures');
+  if ($delta == 'user_pending') {
     return array(
       'subject' => t('Pending transactions'),
-      'content' => list_pending($settings['account']->uid, $settings['currcodes'])
+      'content' => list_pending_for_uid($settings['account']->uid, $settings['currcodes'])
+    );
+  }
+  elseif($delta == 'waiting_on_uid') {
+    return array(
+      'subject' => t('Awaiting my signature'),
+      'content' => list_waiting_on_uid($settings['account']->uid, $settings['currcodes'])
     );
   }
 }
-
+/*
+ * implements hook_block_configure
+ */
 function mcapi_signatures_block_configure($delta) {
   return mcapi_block_configure($delta);
 }
+/*
+ * implements hook_block_save
+ */
 function mcapi_signatures_block_save($delta, $values) {
   return mcapi_block_save($delta, $values);
 }
@@ -588,15 +178,22 @@ function mcapi_signatures_block_info_alter(&$blocks) {
  * appends the 'signatures needed' view to the mcapi-balance block
  */
 function mcapi_signatures_block_view_alter(&$data, $block) {
-  if ($block->delta == 'balances' && $block->module = 'mcapi' && isset($data['#settings']['account'])) {
+  if ($block->delta == 'balances' && $block->module == 'mcapi' && isset($data['#settings']['account'])) {
+    module_load_include('inc', 'mcapi_signatures');
+    $render = list_waiting_on_uid($data['#settings']['account']->uid);
+    if (empty($render)) return;
     $data['content']= array(
       $data['content'],
       array('#markup' => '<h5>'.t('Awaiting my signature...').'</h5>'),
-      array('#markup' => views_embed_view('sig_blocks', 'my_sig_needed', $data['#settings']['account']->uid))
+      $render
     );
   }
 }
 
+/*
+ * implements hook_cron
+ * checks integrity of signatures and transactions
+ */
 function mcapi_signatures_cron() {
   //call me paranoid, but I'd like to just check data integrity
   $serials = db_query("SELECT t.serial FROM {mcapi_transactions} t LEFT JOIN {mcapi_signatures} s ON t.serial = s.serial WHERE s.pending = 1 AND t.state = :state", array(':state' => TRANSACTION_STATE_FINISHED))->fetchCol();
@@ -606,27 +203,6 @@ function mcapi_signatures_cron() {
 }
 
 
-function mcapi_disable_recursive(&$array) {
-  $array['#disabled'] = TRUE;
-  foreach(element_children($array) as $fieldname) {
-    mcapi_disable_recursive($array[$fieldname]);
-  }
-}
-
-
-/*
- * implements hook_trigger_info
- */
-function mcapi_signatures_trigger_info() {
-  return array(
-    'mcapi' => array(
-      'transaction_sign' => array(
-        'label' => t('A signature is added to a transaction'),
-      ),
-    )
-  );
-}
-
 /*
  * implements mcapi hook_transactions_state
  * saves the signatures and sends any notifications needed
@@ -635,52 +211,16 @@ function mcapi_signatures_trigger_info() {
  * so we process one a time children which aren't needed here
  */
 function mcapi_signatures_transactions_state($transactions, $new_state) {
-  //check the module settings for the transaction type
-  foreach ($transactions as $transaction) {
-    $config = variable_get('mcapi_signatures_'.$transaction->type, array('participants' => TRUE, 'countersignatories' => array()));
-    $params = array('transaction' => $transaction);
-    $uid = &$GLOBALS['user']->uid;
-    if ($new_state == TRANSACTION_STATE_PENDING) {
-      if ($config['participants']) {
-        $transaction->pending_signatures[$transaction->payer] = $uid == $transaction->payer ? 0 : 1;
-        $transaction->pending_signatures[$transaction->payee] = $uid == $transaction->payee ? 0 : 1;
-      }
-      $config['countersignatories']= array_filter((array)$config['countersignatories']);
-      foreach($config['countersignatories'] as $counter_uid) {
-        $transaction->pending_signatures[$counter_uid] = $uid == $counter_uid ? 0 : 1;
-      }
-      mcapi_signatures_save($transaction);
-      $key = 'participants';
-      $params['conf'] = variable_get('mcapi_sign_notify_template', array());
-    }
-    //moving from pending to finished
-    elseif($new_state == TRANSACTION_STATE_FINISHED && $transaction->state == TRANSACTION_STATE_PENDING) {
-      $key = 'complete';
-      $params['conf'] = variable_get('mcapi_signed_off_notify_template', array());
-    }
-    //send the mail, using the module settings for this transaction
-    if (!empty($params['conf']) && $config[$key]) {
-      foreach(user_load_multiple(array_keys(array_filter($transaction->pending_signatures))) as $account) {
-        $params['user'] = $account;
-        drupal_mail('mcapi_signatures', $key, $account->mail, user_preferred_language($account), $params);
-      }
-    }
-  }
+  module_load_include('inc', 'mcapi_signatures');
+  _mcapi_signatures_transactions_state($transactions, $new_state);
 }
-
-function mcapi_signatures_mail($key, &$message, $params) {
-  $options = array('language' => $message['language'], 'sanitize' => FALSE);
-  $message['subject'] = token_replace($params['conf']['subject'], $params, $options);
-  $message['body'][] = token_replace($params['conf']['body'], $params, $options);
-}
-
 
 /*
  * implements hook_theme
  */
 function mcapi_signatures_theme() {
-  $items['pending_signatures_box'] = array(
-    'template' => 'pending_signatures_box',
+  $items['pending_signatures'] = array(
+    'template' => 'pending_signatures',
     'variables' => array(
       'transaction' => NULL,//raw data pulled from the transaction
     )
@@ -697,28 +237,17 @@ function mcapi_signatures_theme_registry_alter(&$items) {
 }
 
 /*
- * Bit of a one off, this one
+ * implement hook_transaction_view_alter
  */
-function _mcapi_sig_format_usernames($accounts) {
-  foreach($accounts as $account) {
-    $names[] = format_username($account);
+function mcapi_signatures_transaction_view_alter(&$build) {
+  foreach ($build as $render_array) {
+    if ($render_array['#view_mode'] == 'certificate' && $render_array['#transaction']->state == TRANSACTION_STATE_PENDING) {
+      $file = url(drupal_get_path('module', 'mcapi_signatures'))."/pending.png";
+      $css = ".state--1{background-image:url($file);background-repeat: no-repeat; background-position: center;}";
+      drupal_add_css($css, array('type' => 'inline'));
+    }
   }
-  return implode(' & ' ,$names);
 }
-
-function list_pending($uid, $currcodes = array()) {
-
-  $serials = db_query(
-    "SELECT serial FROM {mcapi_transactions} WHERE state = :pending AND (payer = $uid OR payee = $uid)",
-    array(':pending' => TRANSACTION_STATE_PENDING)
-  )->fetchCol();
-  if ($serials) {
-    $transactions = transactions_load(array(), array('serial' => $serials));
-    return transaction_view($transactions, 'token');
-  }
-  else return array('#markup' => t('No transactions'));
-}
-
 
 /*
  * implements theming hook_process_transaction
@@ -728,73 +257,25 @@ function mcapi_signatures_preprocess_certificate(&$variables) {
   $transaction = &$variables['transaction'];
   if ($transaction->state == TRANSACTION_STATE_PENDING && isset($transaction->pending_signatures)) {
     $variables['pending'] = array(
-      '#theme' => 'pending_signatures_box',
+      '#theme' => 'pending_signatures',
       '#transaction' => $transaction
     );
   }
 }
 
-
-function _get_signoff_link($transaction) {
-  if (transaction_signoff_access($transaction)) {
-    $build['sign'] = array(
-      '#theme' => 'link',
-      '#text' => t('Sign off'),
-      '#path' => 'transaction/'.$transaction->serial.'/signoff',
-      '#options' => array(
-        'attributes' => array(
-          'title' => t('Sign the transaction on behalf of everyone'),
-          'class' => 'link'
-         ),
-        'html' => TRUE,//required
-       ),
-    );
-    return $build;
-  }
-}
-function _get_sign_link($transaction) {
-  if (transaction_sign_access($transaction)) {
-    $build['sign'] = array(
-      '#theme' => 'link',
-      '#text' => t('Sign'),
-      '#path' => 'transaction/'.$transaction->serial.'/sign',
-      '#options' => array(
-        'attributes' => array(
-          'title' => t('Sign the transaction'),
-          'class' => 'link'
-         ),
-        'html' => TRUE,//required
-       ),
-    );
-    return $build;
-  }
-}
-
-
-//utility function
-//gets all the transaction types and excludes a few that we know aren't suitable for configuring
-function _get_signable_transaction_types() {
-  $types = array_diff(mcapi_get_types(), array('child', 'undo', 'undone', 'remote payment', 'remote receipt', 'mass'));
-  sort($types);
-  return $types;
-}
-
 /*
- * implements mcapi hook ransaction_operations
+ * implements mcapi hook transaction_operations
  * each callback refers to 2 functions - itself and CALLBACK_views
  */
 function mcapi_signatures_transaction_operations() {
-  return array(
-    'undo_pending' => array(
-      'title' => t('Undo pending transactions'),
-      //'description' => t('Determine which users are permitted to use this currency')
-    ),
-  );
+  module_load_include('inc', 'mcapi_signatures');
+  return _mcapi_signatures_transaction_operations();
 }
 
 /*
  * implements mcapi hook transaction_access_callbacks
  * each callback refers to 2 functions - itself and CALLBACK_views
+ * each callback recieves 3 arguments
  */
 function mcapi_signatures_transaction_access_callbacks() {
   return array(
@@ -805,13 +286,26 @@ function mcapi_signatures_transaction_access_callbacks() {
  * callback for transaction_access
  */
 function transaction_access_callback_signatory($transaction) {
-  if (!isset($transaction->pending_signatures)) return FALSE;
-  return in_array($GLOBALS['user']->uid, array_keys($transaction->pending_signatures));
+  return in_array($GLOBALS['user']->uid, array_keys((array)$transaction->pending_signatures));
 }
 /*
  * callback for transaction view access for views
  */
-function transaction_access_callback_signatory_views() {
-  //this could be horrible...
-  return TRUE;
+function transaction_access_callback_signatory_views($query, $condition, $state) {
+  //no harm in joining the same table more than once
+  //But there is a harm in joining only once because the query builder runs more than once for some reason.
+  $query->addJoin('LEFT', 'mcapi_signatures', 'mcapi_signatures', 'mcapi_signatures.serial = mcapi_transactions.serial');
+  $condition->condition('mcapi_signatures.uid', $GLOBALS['user']->uid);
+}
+
+/*
+ * implements hook_mcapicurrencies_default_alter
+ * its here coz its small and tidier than creating a mcapicurrencies_default.inc file
+ */
+function mcapi_signatures_mcapicurrencies_default_alter(&$currencies) {
+  foreach ($currencies as $name => $currency) {
+    $currencies[$name]->data->transaction_view_access[TRANSACTION_STATE_PENDING] = drupal_map_assoc(
+      array('transaction_access_callback_signatory', 'transaction_access_callback_perm_manage_all')
+    );
+  }
 }

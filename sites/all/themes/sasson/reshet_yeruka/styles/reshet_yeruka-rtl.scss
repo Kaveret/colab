@@ -79,14 +79,14 @@ $green = #9ab34e;
 
     &.first {
       border: {
-        bottom-left-radius: 10px; /* RTL */
-        top-left-radius: 10px; /* RTL */
+        bottom-left-radius: 5px; /* RTL */
+        top-left-radius: 5px; /* RTL */
       }
     }
     &.last {
       border: {
-        bottom-right-radius: 10px; /* RTL */
-        top-right-radius: 10px; /* RTL */
+        bottom-right-radius: 5px; /* RTL */
+        top-right-radius: 5px; /* RTL */
       }
     }
   }
@@ -217,7 +217,13 @@ body.page-contact {
   }
 }
 
-
+body.node-type-article {
+  div.content .node-article div.field-name-field-image {
+    float: left; /* RTL */
+    margin-right: 20px;
+    margin-left: 0px;
+  }
+}
 /*-----------------------------------------------
                    Forms
 -----------------------------------------------*/

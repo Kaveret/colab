@@ -1,0 +1,417 @@
+<?php
+
+define('MENU_BLOCK_MAIN_MENU_LEV1', 1);
+define('MENU_BLOCK_MAIN_MENU_LEV2', 2);
+
+/*
+ * offers and wants module is being used as a quick fix
+ * but really they should be separate content types with separate user stories, views, logic etc
+ */
+
+function likeabee_help($path, $args) {
+  if (substr($path, 0, 4) == 'user' && count(array_filter($args)) < 3) {
+    return 'The accounting info on this page is duplicated in the resources section. This page needs theming. See user-profile.tpl.php';
+  }
+}
+
+function likeabee_menu() {
+  //just make a callback for the home page
+  $items['home'] = array(
+    'title' => 'Home page',
+    'page callback' => 'temp_home',
+    'access arguments' => array('access content')
+  );
+  return $items;
+}
+/*
+ * implements hook_menu_alter
+ */
+function likeabee_menu_alter(&$items) {
+  $items['admin/content']['menu_name'] = 'minimanager';
+  $items['admin/people']['menu_name'] = 'minimanager';
+  $items['admin/config/system/backup_migrate/export']['menu_name'] = 'minimanager';
+  $items['news']['menu_name'] = 'community';//could be done in views_alter
+  $items['galleries']['menu_name'] = 'community';
+  $items['docs']['menu_name'] = 'community';//could be done in views_alter
+  $items['events-all']['menu_name'] = 'community';//could be done in views_alter
+  $items['members']['menu_name'] = 'community'; //could be done in views_alter
+}
+
+function likeabee_preprocess_link(&$link) {
+  if (substr($link['path'], 0, 6) == 'offers') $link['path'] = str_replace('offers', 'resources/offers', $link['path']);
+  if (substr($link['path'], 0, 6) == 'wants') $link['path'] = str_replace('wants', 'dreams/wants', $link['path']);
+}
+/*
+ * implement hook_views_api
+ */
+function likeabee_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'likeabee'),
+  );
+}
+
+
+/*
+ * implements hook_theme
+ */
+function likeabee_theme() {
+  $items = array(
+    'likeabee_content_summary' => array(
+      'variables' => array(
+        'title' => '',
+        'type' => '',
+        'view' => '',
+        'gid' => NULL
+      ),
+    ),
+    'userpic_social' => array(
+      'variables' => array(
+        'account' => NULL
+      ),
+    )
+  );
+  return $items;
+}
+
+
+/*
+ * implements hook_image_default_styles
+ * declare new styles here
+ *
+ */
+function likeabee_image_default_styles() {
+
+  return array();
+}
+/*
+ * implements hook_styles_alter
+ * all the styles in code and in data
+ * before it goes into cache
+ */
+function likeabee_image_styles_alter(&$styles) {
+  //change the size of the thumbnail
+  if (isset($styles['thumbnail'])) {
+    $effect_id = key($styles['thumbnail']['effects']);
+    $styles['thumbnail']['effects'][$effect_id]['data']['width'] = 32;
+    $styles['thumbnail']['effects'][$effect_id]['data']['height'] = 32;
+  }
+}
+/*
+ * implements hook_block_info
+ */
+function likeabee_block_info() {
+  $blocks['user_content_by_type'] = array(
+    'info' => 'Content produced by the user, grouped by type',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'user*',
+    'regions' => array('beezy' => 'sidebar_second')
+  );
+  return $blocks;
+}
+
+/*
+ * implements hook_block_view
+ */
+function likeabee_block_view($delta) {
+  switch ($delta) {
+    case 'user_content_by_type':
+      if (arg(0) != 'user') return;
+      $uid = arg(1) ? arg(1) : $GLOBALS['user']->uid;
+      $account = user_uid_optional_load($uid);
+      $types = db_query("SELECT DISTINCT type FROM {node} WHERE uid = :uid", array(':uid' => $account->uid))->fetchcol();
+      $type_names = node_type_get_names();
+      $render = array();
+      //types are in no particular order
+      foreach ($types as $type) {
+        //views_embed_view doesn't give us the display title
+        $render[] = array(
+          '#markup' => '<h2>'.t('@type content from @name', array('@name' => $type_names[$type], '@type' => $type_names[$type])) . '</h2>'
+        );
+        $render[] = array('#markup' => views_embed_view('user_content_by_type', 'last3', $type, $account->uid));
+      }
+      return array(
+        'subject' => '<none>',
+        'content' => $render
+      );
+  }
+}
+/*
+ * implements hook_block_info_alter
+ */
+function likeabee_block_info_alter(&$blocks, $theme) {
+  $blocks['cforge']['nitin']['status'] = 0;
+}
+
+
+function temp_home() {
+  $output[] = likeabee_content_summary('Photos', 'image');
+  //$output[] = likeabee_content_summary('Events', 'event');
+  return $output;
+}
+/*
+ * implements hook_page_alter
+ * puts the floating menu
+ * I don't know how this would normally be done
+ */
+function likeabee_page_alter(&$page) {
+  $page['search'] = drupal_get_form('search_form', '', '', '', '');
+}
+/*
+ * implements hook_node_view_alter
+ */
+function likeabee_node_view_alter(&$build, $node) {
+  if ($build['#bundle'] != 'group') return; //this is needed to prevent nesting because group summary invokes a view with nodes in
+  $build['section_chooser']['#weight'] = -1;
+  $build['events'] = likeabee_content_summary(t("Group's events"), 'event');
+  $build['poll'] = likeabee_content_summary(t("Group's polls"), 'poll');
+  $build['video'] = likeabee_content_summary(t("Group's videos"), 'video');
+  $build['discussion'] = likeabee_content_summary(t("Group's discussions"), 'discussion');
+  $build['documents'] = likeabee_content_summary(t("Group's documents"), 'document');
+}
+
+function likeabee_content_summary($title, $type, $gid = NULL) {
+  static $w = 1;
+  $view = views_embed_view('content_preview', 'choice', $type, $gid);
+  //there's no proper way to ascertain if a view is empty after it is themed
+  if (strlen($view) < 200) return array();
+  return array(
+    '#theme' => 'likeabee_content_summary',
+    '#title' => $title,
+    '#type' => $type,
+    '#view' => $view,
+    '#gid' => $gid,
+    '#weight' => $w++,
+  );
+}
+
+function theme_likeabee_content_summary($variables) {
+  static $flip = 'even';
+  $type = &$variables['type'];
+  $flip = $flip == 'even' ? 'odd' : 'even';
+  $output[] = "<div class = \"content-summary-$type $flip\" ><h2>".$variables['title'].'</h2>';
+  //we need a consistent name for the 'all display'
+  $output[] = '<div class = "link-all">'. l('See All', "content/summary/$type/". $variables['gid']) . '</div>';
+  $output[] = $variables['view'];
+  return implode("\n", $output) .'</div><!--End group summary-->';
+}
+
+
+
+/*
+ * implements flag hook_flag_default_flags
+ */
+function likeabee_flag_default_flags() {
+  // Exported flag: "Join the event".
+  $flags['join_event'] = array(
+    'content_type' => 'node',
+    'title' => 'Join the event',
+    'global' => '0',
+    'types' => array(
+//TODO need to check these type_names
+      0 => 'event',
+      1 => 'image',
+      2 => 'document',
+      3 => 'discussion',
+    ),
+    'flag_short' => 'Join The Event',
+    'flag_long' => '',
+    'flag_message' => 'Join The Event',
+    'unflag_short' => 'Leave The Event',
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'roles' => array(
+      'flag' => array(
+        0 => DRUPAL_AUTHENTICATED_RID
+      ),
+      'unflag' => array(
+        0 => DRUPAL_AUTHENTICATED_RID
+      ),
+    ),
+    'weight' => 0,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'show_on_page' => 0,
+    'show_on_teaser' => 0,
+    'show_contextual_link' => 0,
+    'i18n' => 0,
+    'api_version' => 2,
+  );
+
+  // Exported flag: "Content Viewed".
+  $flags['content_viewed'] = array(
+    'content_type' => 'node',
+    'title' => 'Content Viewed',
+    'global' => '0',
+    'types' => array(
+//TODO need to check these type_names
+      0 => 'discussion',
+      1 => 'document',
+      2 => 'event',
+    ),
+    'flag_short' => 'view',
+    'flag_long' => '',
+    'flag_message' => '',
+    'unflag_short' => 'not view',
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'normal',
+    'roles' => array(
+      'flag' => array(
+        0 => DRUPAL_AUTHENTICATED_RID
+      ),
+      'unflag' => array(
+        0 => DRUPAL_AUTHENTICATED_RID
+      ),
+    ),
+    'weight' => 0,
+    'show_on_form' => 0,
+    'access_author' => 'others',
+    'show_on_page' => 0,
+    'show_on_teaser' => 0,
+    'show_contextual_link' => 0,
+    'i18n' => 0,
+    'api_version' => 2,
+  );
+
+  // Exported flag: "Share in my profile".
+  $flags['share_in_my_profile'] = array(
+    'content_type' => 'node',
+    'title' => 'Share in my profile',
+    'global' => '1',
+    'types' => array(
+//TODO need to check these type_names
+      0 => 'discussion',
+      1 => 'document',
+      2 => 'event',
+      4 => 'image',
+    ),
+    'flag_short' => 'Share in my profile',
+    'flag_long' => '',
+    'flag_message' => '',
+    'unflag_short' => 'Remove from my profile',
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'roles' => array(
+      'flag' => array(
+        0 => DRUPAL_AUTHENTICATED_RID
+      ),
+      'unflag' => array(
+        0 => DRUPAL_AUTHENTICATED_RID
+      ),
+    ),
+    'weight' => 0,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'show_on_page' => 1,
+    'show_on_teaser' => 0,
+    'show_contextual_link' => 0,
+    'i18n' => 0,
+    'api_version' => 2,
+  );
+
+  // Exported flag: "Editor's choice".
+  $flags['editor_choice'] = array(
+    'content_type' => 'node',
+    'title' => t("Editor's choice"),
+    'global' => '1',
+    'types' => array(
+//TODO need to check these type_names
+      0 => 'discussion',
+      1 => 'document',
+      2 => 'event',
+      4 => 'video',
+      4 => 'image',
+    ),
+    'flag_short' => t("Editor's choice"),
+    'flag_long' => '',
+    'flag_message' => '',
+    'unflag_short' => t('Un-choose'),
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'roles' => array(
+      'flag' => array(
+        0 => DRUPAL_AUTHENTICATED_RID
+      ),
+      'unflag' => array(
+        0 => DRUPAL_AUTHENTICATED_RID
+      ),
+    ),
+    'weight' => 0,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'show_on_page' => 1,
+    'show_on_teaser' => 0,
+    'show_contextual_link' => 0,
+    'i18n' => 0,
+    'api_version' => 2,
+  );
+  return $flags;
+
+}
+
+/*
+ * implements hook_FORM_search_form_ALTER
+ */
+function likeabee_form_search_form_alter(&$form, $form_state) {
+  unset($form['basic']['submit']);
+}
+
+
+function template_preprocess_userpic_social(&$vars) {
+  $account = $vars['account'];
+  //Arggggh can only apply styling to 'managed' files with schema like public://
+  //the default user picture is a plain url
+  $style = 'thumbnail';//might need something even smaller
+  if ($picture_fid = $account->picture) {
+    $picture = file_load($picture_fid)->uri;
+    if (file_valid_uri($picture_filepath)) {
+      $picture = theme('image_style', array('style_name' => $style, 'path' => $picture_filepath));
+    }
+    else {
+      $vars['picture'] = '';
+      $args = array('@uid' => $account->uid, '@fid' => $picture_filepath);
+      drupal_set_message(t('Invalid picture filepath for user @uid: @fid', $args));
+      watchdog('likeabee.profile', 'Invalid picture filepath for user @uid: @fid', $args);
+    }
+  }
+  else {//simulate the thumbnail styling of the default image
+    $style = image_style_load($style);
+    //assume the first effect is a scale - this is a core style after all
+    $effect = current($style['effects']);
+    $picture = theme('image', array(
+      'path' => variable_get('user_picture_default', ''),
+      'width' => $effect['data']['width'],
+      'height' => $effect['data']['height']
+    ));
+  }
+  $vars['picture'] = array(
+    '#theme' => 'link',
+    '#text' => $picture,
+    '#path' => "user/$account->uid",
+    '#options' => array('html' => TRUE, 'attributes' => array())
+  );
+
+  $vars['facebook'] = @$account->fb_home['und']['0']['value'];
+  $vars['twitter'] = @$account->twitter['und']['0']['value'];
+  $vars['email'] = $account->mail;
+}
+
+function theme_userpic_social(&$vars) {
+  $output = drupal_render($vars['picture']);
+  if ($vars['facebook']) {
+    $output .= '<div class = "facebook">'.l(t('Facebook'), $vars['facebook']) . '</div>';
+  }
+  if ($vars['twitter']) {
+    $output .= '<div class = "twitter">'.l(t('Twitter'), $vars['twitter']) . '</div>';
+  }
+  $output .= '<div class = "email">'.l(t('Email'), $vars['email']) . '</div>';
+  return '<div id = "userpic-social">'.$output.'</div>';
+}

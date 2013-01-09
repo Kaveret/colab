@@ -1,0 +1,19 @@
+<?php
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+function likeabee_resources_install() {
+  module_disable(array('cforge_currencies'));
+  variable_set('user_chooser_threshhold', 1);
+
+  create_transaction_description_field();//in mcapi.install
+
+  //last time the transaction description field wasn't present, but it should be set up when cforge_currencies was originally installed
+//  maybe because the text module wasn't enabled...
+//  module_load_install('mcapi');
+//  create_transaction_description_field();
+
+}

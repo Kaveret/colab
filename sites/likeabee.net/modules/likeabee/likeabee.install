@@ -1,0 +1,400 @@
+<?php
+
+variable_set('preprocess_css', FALSE);
+variable_set('preprocess_js', FALSE);
+
+/**
+ * implements hook_install_tasks for the installation profile
+ */
+function likeabee_install() {
+  $weight = db_query("SELECT weight +1 FROM {system} WHERE name = 'cforge' ")->fetchField();
+  db_query(
+    "UPDATE {system} SET weight = :weight WHERE name = 'likeabee'",
+    array(':weight' => $weight + 1)
+  );
+  db_query(
+    "UPDATE {system} SET weight = :weight WHERE name LIKE 'likeabee_%'",
+    array(':weight' => $weight + 2)
+  );
+  enable_beezy_theme();
+  theme_disable(array('sky_seldulac'));
+  cforge_reset_blocks();
+  likeabee_create_event_image();//just adding one field for now
+  likeabee_create_galleries();
+  likeabee_create_menus();
+  likeabee_create_users();
+  //for development only
+  variable_set('preprocess_css', TRUE);
+
+
+  module_load_install('cforge');
+  _cf_make_bundle_commentable('proposition');
+}
+
+//the stuff that cforge put into the navigation menu is moved into the orange dropdowns in the top right.
+//we continue to use the navigation menu for this
+function likeabee_create_menus() {
+  //create 3 new menus
+  $menus = array(
+    1 => array(
+      'menu_name' => 'community',
+      'title' => t('Community Space'),
+      'description' => t("Links to everybody's stuff")
+    ),
+    2 => array(
+      'menu_name' => 'minimanager',
+      'title' => t('Manage'), //not to be confused with the builtin menu 'management'
+      'description' => t("Administrators only")
+    ),
+  );
+  foreach ($menus as $menu) {
+    menu_save($menu);
+  }
+  //unfortunately links which were created directly to the menu_links table cannot be altered through hooks
+  db_update('menu_links')->fields(array('menu_name' => 'minimanager'))->condition('link_path', 'admin/structure/taxonomy/galleries')->execute();
+}
+
+/*
+ * implements cforge hook_block_setup_THEME
+ */
+function likeabee_block_setup_beezy() {
+  variable_set('menu_block_ids', array(MENU_BLOCK_MAIN_MENU_LEV1, MENU_BLOCK_MAIN_MENU_LEV2));
+  $blocks[] = array(
+    'module' => 'menu_block',
+    'delta' => MENU_BLOCK_MAIN_MENU_LEV1,
+    'region' => 'content',
+    'pages' => '<front>',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'status' => 1,
+    'title' => '<none>',
+    'title_link' => 0,
+    'admin_title' => 'Main menu Section icons',
+    'parent' => 'main-menu:0',
+    'level' => 1,
+    'follow' => 0,
+    'depth' => 1,
+    'expanded' => 0,
+    'sort' => 0
+  );
+  $blocks[] = array(
+    'module' => 'menu_block',
+    'delta' => MENU_BLOCK_MAIN_MENU_LEV2,
+    'title' => '<none>',
+    'region' => 'navigation',
+    'weight' => -1, //assuming the help block is 0
+    'title_link' => 0,
+    'admin_title' => 'Main menu 2nd level',
+    'parent' => 'main-menu:0',
+    'level' => 2,
+    'follow' => 0,
+    'depth' => 2,
+    'expanded' => 0,
+    'sort' => 0
+  );
+
+  $blocks[] = array(
+    'module' => 'offers_wants',
+    'delta' => 'propositions_taxonomy_block',
+    'title' => 'Offer categories',
+    'cache' => DRUPAL_NO_CACHE,
+    'region' => 'sidebar_second',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => 'resources/offers'
+  );
+
+  $blocks[] = array(
+    'module' => 'menu',
+    'delta' => 'secondary-menu',
+    'title' => '<none>',
+    'cache' => DRUPAL_NO_CACHE,
+    'region' => 'footer'
+  );
+
+  $blocks[] = array(
+    'module' => 'mcapi_signatures',
+    'delta' => 'user_pending',
+    'region' => 'content_bottom',
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => "user/*/statement",
+    'title' => '<none>',
+    'currcodes' => array('def_drup'),
+    'user_source' => 1,//view your own profile
+  );
+  $blocks[] = array(
+    'module' => 'system',
+    'delta' => 'user-menu',
+    'title' => t('Individual space'),
+    'region' => 'header',
+    'weight' => 1
+  );
+  $blocks[] = array(
+    'module' => 'menu',
+    'delta' => 'community',
+    'title' => t('Community Space'),
+    'region' => 'header',
+    'weight' => 2
+  );
+  $blocks[] = array(
+    'module' => 'menu',
+    'delta' => 'minimanager',
+    'title' => t('MANAGE'),
+    'region' => 'header',
+    'weight' => 3
+  );
+  return $blocks;
+}
+
+function likeabee_uninstall() {
+  db_delete('block')->condition('module', 'menu_block')->execute();
+  db_delete('block_role')->condition('module', 'menu_block')->execute();
+  variable_del('menu_block_ids');
+  db_delete('menu_custom')->condition('menu_name', array('community', 'minimanager'))->execute();
+  $uids = db_query("SELECT uid FROM {users} WHERE uid > 1")->fetchCol();
+  user_delete_multiple($uids);
+  $instance = field_read_instance('node', 'image', 'event', array('include_inactive' => TRUE));
+  field_delete_instance($instance, $field_cleanup = TRUE);
+}
+
+/*
+ * here is no features extension for exporting taxonomy terms.
+ */
+function likeabee_create_galleries() {
+  $vid = taxonomy_vocabulary_machine_name_load('galleries')->vid;
+  $names = array(
+    'Gallery 1',
+    'Gallery 2',
+    'Gallery 3'
+  );
+  foreach ($names as $name) {
+    $term = (object)compact('name', 'vid');
+    taxonomy_term_save($term);
+  }
+}
+
+
+
+/* not being used at the moment */
+function likeabee_content_types() {
+  return array (
+    //page and article are created by cforge.install
+    'book' => array(
+       'type' => 'book',
+       'name' => 'ספר / פרק למרכז הידע',
+       'base' => 'node_content',
+       'module' => 'node',
+       'description' => '',
+       'help' => '',
+       'has_title' => '1',
+       'title_label' => 'כותרת',
+    ),
+    'document' => array(
+       'type' => 'document',
+       'name' => 'Documents',
+       'base' => 'node_content',
+       'module' => 'node',
+       'description' => '',
+       'help' => '',
+       'has_title' => '1',
+       'title_label' => 'Title',
+    ),
+    'event' => array(
+       'type' => 'event',
+       'name' => 'Event',
+       'base' => 'node_content',
+       'module' => 'node',
+       'description' => '',
+       'help' => 'Provides details about an event. Events can linked to several groups.',
+       'has_title' => '1',
+       'title_label' => 'Event Title',
+    ),
+    'group' => array(
+       'type' => 'group',
+       'name' => 'group',
+       'base' => 'node_content',
+       'module' => 'node',
+       'description' => '',
+       'help' => '',
+       'has_title' => '1',
+       'title_label' => 'Group Name',
+    ),
+    'video' => array(
+       'type' => 'video',
+       'name' => 'Video',
+       'base' => 'node_content',
+       'module' => 'node',
+       'description' => '',
+       'help' => '',
+       'has_title' => '1',
+       'title_label' => 'Title',
+       'custom' => '1',
+    ),
+  );
+
+  foreach ($types as $type) {
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+  }
+  foreach (array('page', 'article', 'event', 'advpoll', 'discussion', 'group') as $type) {
+    node_add_body_field($types[$type], t('Body'));
+  }
+}
+
+
+function likeabee_create_users() {
+  $edits[] = array(
+    'name' => 'Baroch Oren',
+    'pass' => 'baroch',
+    'mail' => 'info@barochoren.com',
+    'profile_firstname' => array(LANGUAGE_NONE => array(array('value' => 'Baroch'))),
+    'profile_familyname' => array(LANGUAGE_NONE => array(array('value' => 'Oren'))),
+    'roles' => array(RID_TRADER => RID_TRADER, RID_COMMITTEE => RID_COMMITTEE),
+    'status' => 1
+  );
+  $edits[] = array(
+    'name' => 'Brouria Helfa',
+    'pass' => 'brouria',
+    'mail' => 'info@barochoren.com',
+    'profile_firstname' => array(LANGUAGE_NONE => array(array('value' => 'Brouria'))),
+    'profile_familyname' => array(LANGUAGE_NONE => array(array('value' => 'Helfa'))),
+    'roles' => array(RID_TRADER => RID_TRADER),
+    'status' => 1
+  );
+  $edits[] = array(
+    'name' => 'Arie Ben David',
+    'pass' => 'arie',
+    'mail' => 'info@barochoren.com',
+    'profile_firstname' => array(LANGUAGE_NONE => array(array('value' => 'Aire'))),
+    'profile_familyname' => array(LANGUAGE_NONE => array(array('value' => 'Ben David'))),
+    'roles' => array(RID_TRADER => RID_TRADER),
+    'status' => 1
+  );
+  foreach ($edits as $edit) {
+    user_save(NULL, $edit);//should be user 2
+  }
+}
+
+
+function likeabee_create_event_image() {
+  //add image field to the event type
+  $image_instance = array(
+    'field_name' => 'image',//this field is declared by the offers_wants module
+    'bundle' => 'event',
+    'entity_type' => 'node',
+    'label' => t('Image'),
+    'description' => '',
+    'widget' => array(
+      'weight' => -1,
+      'type' => 'image_image',
+      'module' => 'image',
+      'active' => 1,
+      'settings' => array(),
+    ),
+    'settings' => array(
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '1MB',
+      'max_resolution' => '1024x768',
+      'min_resolution' => '240x180',
+      'default_image' => ''///an image is needed here, dunno what the root is
+    ),
+    'display' => array(
+      'default' => array(
+        'label' => 'none',
+        'type' => 'image',
+        'settings' => array(
+          'image_style' => 'large',
+        ),
+         'module' => 'image',
+      ),
+      'teaser' => array(
+        'type' => 'image',
+        'label' => 'none',
+        'settings' => array(
+          'image_style' => 'uc_product_list',
+        )
+      )
+    ),
+    'required' => 0,
+    'deleted' => 0
+  );
+  field_create_instance($image_instance);
+}
+
+
+function likeabee_custom_menus() {
+  //add the custom menus
+  menu_save(array(
+    'menu_name' => 'secondary-menu',//reusing the menu declared in cforge
+    'title' => 'Footer links menu',
+    'description' => 'Less important links, for all users'
+  ));
+}
+
+function enable_beezy_theme() {
+  variable_set('theme_default', 'beezy');
+  theme_enable(array('beezy'));
+  variable_set('theme_beezy_settings', array (
+    'toggle_logo' => 1,
+    'toggle_name' => 0,
+    'toggle_slogan' => 0,
+    'toggle_node_user_picture' => 1,
+    'toggle_comment_user_picture' => 1,
+    'toggle_comment_user_verification' => 0,
+    'toggle_favicon' => 1,
+    'toggle_main_menu' => 0,
+    'toggle_secondary_menu' => 1,
+    'default_logo' => 1,
+    'logo_path' => '',
+    'logo_upload' => '',
+    'default_favicon' => 1,
+    'favicon_path' => '',
+    'favicon_upload' => '',
+    'sasson_show_grid' => 0,
+    'sasson_grid_width' => '960px',
+    'sasson_columns' => '16',
+    'sasson_gutter_width' => '20px',
+    'sasson_sidebar_first' => '4',
+    'sasson_sidebar_second' => '4',
+    'sasson_responsive' => 1,
+    'sasson_responsive_approach' => 'desktop_first',
+    'sasson_responsive_narrow' => '960px',
+    'sasson_responsive_narrower' => '767px',
+    'sasson_responsive_narrowest' => '480px',
+    'sasson_responsive_mf_small' => '480px',
+    'sasson_responsive_mf_medium' => '767px',
+    'sasson_responsive_mf_large' => '960px',
+    'sasson_responsive_menus_width' => '480px',
+    'sasson_responsive_menus_selectors' => 'ul#main-menu-links, ul#secondary-menu-links',
+    'sasson_responsive_menus_autohide' => 1,
+    'sasson_sass' => 1,
+    'sasson_devel' => 1,
+    'sasson_images_path' => '',
+    'sasson_fonts_path' => '',
+    'sasson_stylesheets_path' => '',
+    'sasson_sass_recompile' => 0,
+    'sasson_sprites_recompile' => 0,
+    'sasson_cssreset' => 'normalize',
+    'sasson_formalize' => 0,
+    'sasson_force_ie' => 1,
+    'sasson_html5shiv' => 1,
+    'sasson_ie_comments' => 1,
+    'sasson_prompt_cf' => 'IE 7',
+    'sasson_font' => '',
+    'sasson_font_fallback' => 'sans-serif',
+    'sasson_font_selectors' => 'body',
+    'sasson_watcher' => 0,
+    'sasson_watch_file' => 'sites/likeabee.net/themes/beezy/styles/beezy.scss',
+    'sasson_instant_watcher' => 1,
+    'sasson_overlay' => 0,
+    'sasson_overlay_url' => '',
+    'sasson_overlay_opacity' => '0.5',
+    'sasson_breadcrumb_hideonlyfront' => 1,
+    'sasson_breadcrumb_showtitle' => 0,
+    'sasson_breadcrumb_separator' => '»',
+    'sasson_feed_icons' => 0,
+    'sasson_settings__active_tab' => 'edit-sasson-general',
+  ));
+}
+
+function likeabee_update_7001() {
+  module_disable(array('flag'));//just temporary, to be tidy
+}

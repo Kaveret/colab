@@ -1,0 +1,285 @@
+<?php
+
+/*
+ * implements hook_menu
+ */
+function likeabee_resources_menu() {
+  $items['resources'] = array(
+    'title' => 'Resource exchange',
+    'description' => 'Buy, sell, pay, swop or gift!',
+    'page callback' => 'resources_beeziest',
+    'access arguments' => array('transact'),
+    'menu_name' => 'main-menu',
+    'weight' => 1
+  );
+
+  $items['resources/beeziest'] = array(
+    'title' => 'Beeziest members',
+    'description' => 'Buy, sell, pay, swop or gift!',
+    'page callback' => 'resources_beeziest',
+    'access arguments' => array('transact'),
+    'menu_name' => 'main-menu',
+    'weight' => 1
+  );
+
+  $items['resources/my_beez'] = array(
+    'title' => 'My Beez',
+    'description' => 'Buy, sell, pay, swop or gift!',
+    'page callback' => 'resources_my_beez',
+    'access arguments' => array('transact'),
+    'menu_name' => 'main-menu',
+    'weight' => 2
+  );
+  return $items;
+}
+
+/*
+ * implements hook_menu_alter
+ * also see cforge_currencies_menu_links in cforge_currencies.install
+ */
+function likeabee_resources_menu_alter(&$items) {
+
+  $items['transact/masspay']['menu_name'] = 'manage';
+  //to emulate what happened in d6, move all the mass pay menu items
+  foreach (array('', '/one2many', '/many2one', '/one2few', '/few2one') as $arg) {
+    $items['transact/masspay'.$arg] = $items['admin/accounting/masspay'.$arg];
+    $items['transact/masspay'.$arg]['menu_name'] = 'user-menu';
+    $items['transact/masspay'.$arg]['type'] = $arg == '/many2one' ? MENU_DEFAULT_LOCAL_TASK : MENU_LOCAL_TASK;
+    $items['transact/masspay'.$arg]['hidden'] = -1;
+    unset($items['admin/accounting/masspay'.$arg]);
+  }
+  unset($items['user/%/income_expenditure']);
+  $items['transact/1stparty']['menu_name'] = 'user-menu';
+  $items['transact/1stparty']['type'] = MENU_NORMAL_ITEM;
+  $items['transact/3rdparty']['menu_name'] = 'localadmin';
+  $items['transact/3rdparty']['type'] = MENU_NORMAL_ITEM;
+
+  unset($items['node/add/proposition']);
+  $items['node/add/offer']['type'] = MENU_NORMAL_ITEM;
+  $items['node/add/want']['type'] = MENU_NORMAL_ITEM;
+  $items['node/add/want']['title'] = 'Make a wish';
+}
+
+function likeabee_resources_menu_link_alter(&$link) {
+  if (in_array($link['link_path'], array('node/add/offer', 'node/add/want'))) $link['plid'] = 0;
+}
+
+/**
+ * Implements hook_user_view().
+ * Adds trading stats to the main user profile page.
+ */
+function likeabee_resources_user_view($account, $view_mode) {
+  if (!currency_access('user_aggregated_view', 'def_drup')) return;
+  $account->content['balance_history'] = array(
+    '#theme' => 'balance_history',
+    '#account' => $account,
+    '#histories' => get_balance_history($account, array('def_drup')),
+    '#weight' => 1
+  );
+  $account->content['limits'] = array(
+    '#markup' => render(balance_limits_view($account->uid, array('def_drup'))),
+    '#weight' => 2,
+  );
+  $account->content['balances'] = array(
+    '#markup' => render(mcapi_balances_view($account->uid, array('def_drup'))),
+    '#weight' => 3,
+  );
+  module_load_include('inc', 'mcapi_signatures');
+  $account->content['pending_transactions'] = array(
+    '#markup' => render(list_pending_for_uid($account->uid, array('def_drup'))),
+    '#weight' => 4,
+  );
+}
+
+/*
+ * implements hook_form_FORM_ID_alter
+ * fix the intertrading settings form against tampering
+ */
+/*
+function likeabee_resources_form_intertrade_settings_alter(&$form, $form_state) {
+  $form['intertrading_server']['#disabled'] = TRUE;
+  if ($intertrading_uid = &$form['undertrading_uid']['#default_value']) {
+    $account = user_load($intertrading_uid);
+    $form['intertrading_uid']['#description'] = t('Once this account has traded, this value cannot be changed.') .' '.
+      t('Please ensure the mail for this account goes to a responsible person: @mail',
+        array('@mail' => l($account->mail, "user/$account->uid/edit"))
+    );
+    $balances = mc_balances($account, variable_get('intertrading_cid'));
+    if ($balances['count']) {
+      $form['intertrading_uid']['#disabled'] = TRUE;
+    }
+  }
+}
+*/
+
+/*
+ * Implements views hook_views_api
+ */
+function likeabee_resources_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'likeabee_resources'),
+  );
+}
+
+/*
+ * Implements ctools hook_ctools_plugin_api
+ */
+function likeabee_resources_ctools_plugin_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'likeabee_resources'),
+  );
+}
+
+
+/*
+ * implements hook_block_info_alter
+ * overrides the saved block settings
+ * see also hook_cf_block
+ */
+function __cforge_currencies_block_info_alter(&$blocks, $theme, $code_blocks) {
+  if ($theme != 'sky_seldulac') return;
+  $blocks['mcapi']['balances']['region'] = 'sidebar_second';
+  $blocks['mcapi']['balances']['status'] = 1;
+  $blocks['mcapi']['balances']['visibility'] = BLOCK_VISIBILITY_LISTED;
+  $blocks['mcapi']['balances']['pages'] = 'user/*';
+  $blocks['mcapi_limits']['balance_limits']['region'] = 'sidebar_second';
+  $blocks['mcapi_limits']['balance_limits']['status'] = 1;
+  $blocks['mcapi_limits']['balance_limits']['visibility'] = BLOCK_VISIBILITY_LISTED;
+  $blocks['mcapi_limits']['balance_limits']['pages'] = 'offers*\nwants\ntransactions';
+}
+
+
+
+
+
+/*
+ * implements hook_theme
+ */
+function likeabee_resources_theme() {
+  return array(
+    //this block provides a box around sections of a page
+    'likeabee_page_block' => array(
+      'variables' => array(
+         'adv_help' => '',
+         'title' => '',
+         'content' => array()
+      )
+    )
+  );
+}
+
+function likeabee_resources_help($path, $args) {
+
+  if ($args[0] == 'resources') {
+    //unhide the menu tabs!!!
+    drupal_add_css('#page #main-menu{display:block;}', array('type' => 'inline'));
+  }
+  if ($path == 'resources') {
+    $help[] = t('This is the local economy section. Here you can find what you need pay in Beez or in Shekels, or advertise yourself or your needs.');
+    $help[] = t('Find out more about our currency, !beez', array('!beez' => l('Beez', 'help/beez')));
+    return implode(' ', $help);
+  }
+}
+
+/*
+ * menu callback
+ */
+function resources_beeziest() {
+  $build[] = array(
+    '#markup' => '<h2>Trade analysis</h2>' . views_embed_view('trade_analysis', 'system'),
+  );
+  $build[] = array(
+    '#markup' => '<h2>Highest earners</h2>' . views_embed_view('user_rankings', 'block_incomes')
+  );
+  $build[] = array(
+    '#markup' => '<h2>higest spenders</h2>' . views_embed_view('user_rankings', 'block_expenditures')
+  );
+  $build[] = array(
+    '#markup' => '<h2>Highest volumes</h2>' . views_embed_view('user_rankings', 'block_volumes')
+  );
+  return $build;
+}
+
+/*
+ * menu callback
+ */
+function resources_my_beez() {
+  $title = drupal_get_title();
+  return array(
+    'balances' => array(
+      '#theme' => 'likeabee_page_block',
+      '#title' => t('My BeeZ'),
+      '#adv_help' => 'my_beez',
+      '#content' => array(
+        mcapi_balances_view($GLOBALS['user']->uid, array('def_drup')),
+        array(
+          '#theme' => 'balance_history',
+          '#account' => $GLOBALS['user'],
+          '#histories' => get_balance_history($GLOBALS['user'], array('def_drup')),
+        ),
+        array(
+          '#markup' => drupal_render(mcapi_get_form('1stparty'))
+        )
+      ),
+      '#weight' =>1
+    ),
+    'transactions' => array(
+      '#theme' => 'likeabee_page_block',
+      '#title' => t('My recent activities'),
+      '#adv_help' => 'my_transactions',
+      '#content' => array(
+        //this probably needs some better theming - it just renders as a paragraph now.
+        array('#markup' => t('Available balance in BeeZ: @balance')),//this figure is given above
+        array('#markup' => t('Total balance (all currencies, available and pending) converted to Shekels: @quant')),
+        array('#markup' => views_embed_view('statement', 'default', $GLOBALS['user']->uid))
+      ),
+      '#weight' => 2
+    ),
+  );
+  drupal_set_title($title);
+}
+
+
+/*
+ * menu_calback
+ */
+function theme_likeabee_page_block($vars) {
+  $help = theme('advanced_help_topic', array('module' => 'likeabee_resources', 'topic' => $vars['adv_help']));
+  $output = '
+<div class = "likeabee-block">
+  <div class = "header">'. $vars['title'] . $help .'
+  </div>
+  <div class = "content">'.drupal_render($vars['content']).'
+  </div>
+</div>
+';
+  return $output;
+}
+
+
+
+function likeabee_resources_transactions_alter(&$transactions) {
+  //make a payment of 10% to payer and payee.
+  //works for both bees and shekel payments
+  $base_transaction = entity_metadata_create_transaction(array(
+    'type' => 'likeabee_issue',
+    'payer' => 1,
+    'worth' => array('und' => array(0 => array(
+      'quantity' => round($transactions[0]->worth['und'][0]['quantity'] / 10, 0, PHP_ROUND_HALF_UP),
+      'currcode' => 'def_drup' //that means beez, the default currency
+    )))
+  ));
+  $base_transaction->payee = $transactions[0]->payer;
+  $transactions[] = clone($base_transaction);
+  $base_transaction->payee = $transactions[0]->payee;
+  $transactions[] = $base_transaction;
+}
+
+function likeabee_resources_form_mcapi_forms_form_alter(&$form, $form_state) {
+  $form['worth'][LANGUAGE_NONE]['#title'] = t('Amount');
+  $form['worth'][LANGUAGE_NONE]['#description'] = '';
+  $form['secondperson']['#title'] = t('User name');
+  $form['secondperson']['#description'] = '';
+}

@@ -1,0 +1,280 @@
+$blue: #064882;
+$orange: #FACE77;
+$soft-orange:#fdf6e4;
+$red:#B01919;
+$purple:#7d54a9;
+
+@mixin button {
+   background-color: #F1AD00;
+    border: medium none;
+    color: white;
+    font-weight: bold;
+    padding: 5px 17px;
+ }
+
+a, a:hover,a:visited {
+	text-decoration: none;
+    color:$purple;
+}
+
+@mixin table {
+    margin-bottom:20px;
+    thead tr th{
+        height:20px;
+        font-size: 13px;
+        background-color: $soft-orange;
+        border:1px solid $orange;
+        padding-left: 10px;
+        font-weight: normal;
+    }
+    tr {
+    background-color: #fff;
+    border: 1px solid $orange;
+    font-size: 13px;
+    font-weight: normal;
+    a{
+        text-decoration: none;
+        color: $blue;
+    }}
+    td{
+        padding: 5px 10px;
+    }
+}
+
+
+h1{
+    color: $blue;
+    font-size:30px;
+}
+
+body{
+    color: $blue;
+}
+/*************   my beez page *************/
+
+#block-menu-localadmin{
+    background-color: $soft-orange;
+    color:$blue;
+    border: 1px solid $orange;
+    height: 30px;
+    background-image:  url("/sites/likeabee.net/themes/beezy/images/primary-links-with-down-arrow-manage.gif");
+}
+
+.likeabee-block,
+.page-transact-1stparty #main{
+    border: 1px solid $orange;
+    border-radius: 6px 6px 6px 6px;
+    margin: 26px 0px;
+    color: $blue;
+    font-size: 14px;
+    .header{
+        background-color: $soft-orange;
+        border-bottom: 1px solid $orange;
+        border-radius: 6px 6px 0 0;
+        height: 18px;
+        padding: 15px;
+        margin:0;
+        border-top:none;
+        border-left: none;
+        border-right: none;
+    }
+    .content{
+        padding: 17px;
+    }
+    .balance{
+        font-size: 20px;
+    }
+}
+
+.page-transact-1stparty #main h1{
+    background-color: $soft-orange;
+    border-bottom: 1px solid $orange;
+    border-radius: 6px 6px 0 0;
+    font-size: 20px;
+    height: 26px;
+    margin-top: 0;
+    padding: 15px;
+}
+
+
+.likeabee-block .header .transaction-totals .balance{
+	font-size:20px;
+}
+
+.advanced-help-link,
+.advanced-help-link:hover {
+    background: url("../images/resource/cursore.png") no-repeat scroll 0 0 transparent;
+    float: right;
+    height: 21px;
+    width: 22px;
+  }
+
+.likeabee-block .transaction-totals{
+	float:left;
+	margin-right: 30px;
+}
+
+.likeabee-block img.chart{
+	border: 1px solid #f1ad00;
+	padding: 12px 42px;
+}
+
+.likeabee-block table{
+	        @include table;
+}
+
+.likeabee-block .form-item-secondperson,
+.page-transact-1stparty .form-item-secondperson{
+    float:left;
+    margin-right:70px;
+}
+
+.likeabee-block .form-item-worth-und .description,
+.page-transact-1stparty .form-item-worth-und .description{
+    margin-top:-8px;
+}
+
+.likeabee-block table thead tr th{
+	width:85px;
+	height:20px;
+	font-size: 13px;
+	background-color: $soft-orange;
+	border:1px solid $orange;
+	padding-left: 10px;
+	font-weight: normal;
+}
+
+.likeabee-block form#mcapi-forms-form.step-1 p,
+.likeabee-block .form-type-radio,
+.page-transact-1stparty form#mcapi-forms-form.step-1 p,
+.page-transact-1stparty .form-type-radio{
+	display: inline-block;
+	margin-right:10px;
+}
+
+.likeabee-block input#edit-submit.form-submit,
+.page-transact-1stparty input#edit-submit.form-submit{
+	@include button;
+}
+
+
+
+/*************    Market page  ***********************/
+
+/* matslats temp theming for resources/marketplace */
+.view-uc-catalog .views-field-title{
+	padding: 6px;
+	height: 45px;
+	 a{
+	color:$red;
+	}
+}
+
+.view-uc-catalog td{
+    border: 2px solid #FBD38B;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 0 0 3px #FAE8C7;
+    float: left;
+    height: 373px;
+    margin: 0 41px 31px 0;
+    padding: 0;
+    position: relative;
+    width: 214px;
+}
+
+.view-uc-catalog-terms .views-field-entity-id{
+	margin:0 10px;
+}
+
+ .view-uc-catalog-terms input{
+ 	border:none;
+    background: url("../images/resource/add_to_card.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    display: block;
+    font-weight: bold;
+    height: 43px;
+    width: 100%;
+ }
+
+ .view-uc-catalog-terms .views-field-name .views-label,
+ .view-uc-catalog-terms .views-field-display-price .views-label{
+ 	color: $red;
+ 	font-size: 10px;
+ }
+
+ /*************   members, offer & wants pages *************/
+
+.view-member-list table,
+.view-ow-offers table,
+.view-ow-wants table{
+    width:100%;
+    @include table;
+}
+
+
+.node-proposition {
+    ul.links{
+        background-color: $soft-orange;
+        display: block;
+        margin: 0;
+        padding-bottom: 16px;
+        text-align: center;
+        a{
+            color:$red;
+        }
+        li{
+            margin-bottom:10px;
+        }
+    }
+    .user-picture{
+        background-color: $soft-orange;
+        height: 117px;
+        padding-left: 64px;
+        padding-top: 14px;
+    }
+    .field-name-image{
+        margin-bottom:24px;
+    }
+}
+
+ /*************   user table *************/
+
+.page-user table{
+    @include table;
+    width:100%;
+}
+
+ /*************   user menu *************/
+
+.tabs {
+    a{
+    background-color: $soft-orange !important;
+    border:1px solid $orange !important;
+    border-radius: 5px 5px 5px 5px;
+    padding: 1px 10px !important;
+    }
+    a.active{
+        background-color: #fff !important;
+    }
+    ul{
+        border:none;
+    }
+}
+
+ /*************   gallery page *************/
+
+.page-galleries div.content div{
+    border: 2px solid #FBD38B;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 0 0 3px #FAE8C7;
+    float: left;
+    height: 373px !important;
+    margin: 0 41px 31px 0 !important;
+    padding: 0;
+    position: relative;
+    width: 214px;
+    background-color: #fff !important;
+    h4{
+        color:$red;
+    }
+}

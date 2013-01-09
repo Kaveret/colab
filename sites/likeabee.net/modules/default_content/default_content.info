@@ -1,0 +1,17 @@
+name = likeabee_placeholder_content
+description = some nodes
+core = 7.x
+package = Features
+php = 5.2.4
+dependencies[] = defaultcontent
+features[content][] = aster_flower
+features[content][] = dreams_accelerator
+features[content][] = learning_centre
+features[content][] = meeting_event
+features[content][] = nesta_review
+features[content][] = new_bench
+features[content][] = something_super
+features[content][] = uzbekis_departure
+features[content_menu_links][] = main-menu:node-name/dreams_accelerator
+features[content_menu_links][] = main-menu:node-name/learning_centre
+features[features_api][] = api:1

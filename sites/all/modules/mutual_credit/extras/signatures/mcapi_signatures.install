@@ -140,4 +140,24 @@ function mcapi_signatures_update_7008() {
     ->condition('serial', $pending_serials)
     ->execute();
 }
+/**
+ * update an array key in the signature settings
+ */
+function mcapi_signatures_update_7009() {
+  module_load_include('inc', 'mcapi_signatures');
+  foreach (_get_signable_transaction_types() as $type) {
+    $varname = 'mcapi_signatures_'.$type;
+    $var = variable_get('mcapi_signatures_'.$type, array());
+    if (empty($var)) continue;
+    $var['notify'] = $var['complete'];
+    unset($var['complete']);
+    variable_set($varname, $var);
+  }
+  $sentence = variable_get('mcapi_sentence');
+  $sentence = str_replace('[transaction:sign_link]', '', $sentence);
+  variable_set('mcapi_sentence', $sentence);
+}
 
+//later when surer, do this
+//variable_del('mcapi_signed_off_notify_template');
+//and remove from hook_variable
