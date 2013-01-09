@@ -53,12 +53,15 @@
 		}
 	}
 }
+
+/*---------breadcrumb--------------*/
 #breadcrumb{
 	float: right;
 	.mafrid{
 		background: url('../images/arrow-adress-he.jpg') no-repeat 1px;
 	}
 }
+
 /*---------Group--------------------------------------------*/
 /*----------------------------------------------------------*/
 /*----------------------------------------------------------*/
@@ -72,7 +75,9 @@
 		}
 	}
 }
+
 /*---------Groups page--------------*/
+/*---------Profil page--------------*/
 #quicktabs-container-group_s_events,
 #quicktabs-container-group_s_discussion_,
 #quicktabs-container-group_s_doccuments,
@@ -96,7 +101,7 @@
 
 #block-quicktabs-group-s-discussion- .views-field-ops{
 	margin-top: -63px;
-	height: 62px;
+	height: 63px;
 }	
 
 #quicktabs .block-odd{
