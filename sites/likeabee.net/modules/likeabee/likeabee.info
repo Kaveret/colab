@@ -24,6 +24,7 @@ dependencies[] = menu_block
 ;dependencies[] = og_context
 ;dependencies[] = og_extras
 ;dependencies[] = video_embed_field
+;dependencies[] = uid_login
 
 ;development only
 dependencies[] = devel

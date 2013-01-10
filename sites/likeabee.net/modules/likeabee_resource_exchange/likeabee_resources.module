@@ -185,19 +185,21 @@ function likeabee_resources_help($path, $args) {
 
 /*
  * menu callback
+ * I won't make a theme callback for these boxes until the graphic designer has created something and given it a name!
  */
 function resources_beeziest() {
   $build[] = array(
-    '#markup' => '<h2>Trade analysis</h2>' . views_embed_view('trade_analysis', 'system'),
+    '#markup' => '<div class = "beezybox"><h2>Trade analysis</h2>' . views_embed_view('trade_analysis', 'system').'</div>',
   );
   $build[] = array(
-    '#markup' => '<h2>Highest earners</h2>' . views_embed_view('user_rankings', 'block_incomes')
+    '#markup' => '<div class = "beezybox"><h2>Top Traders</h2>' . views_embed_view('user_rankings', 'block_trades').'</div>'
   );
   $build[] = array(
-    '#markup' => '<h2>higest spenders</h2>' . views_embed_view('user_rankings', 'block_expenditures')
+//    '#markup' => '<h2>Top Reputations</h2>' . views_embed_view('user_rankings', '')
+    '#markup' => '<div class = "beezybox"><h2>Highest Reputations</h2>' . 'not programmed yet'
   );
   $build[] = array(
-    '#markup' => '<h2>Highest volumes</h2>' . views_embed_view('user_rankings', 'block_volumes')
+    '#markup' => '<div class = "beezybox"><h2>Highest Volumes</h2>' . views_embed_view('user_rankings', 'block_volumes').'</div>'
   );
   return $build;
 }

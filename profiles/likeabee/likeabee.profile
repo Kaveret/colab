@@ -16,81 +16,10 @@ function likeabee_help($path, $args) {
   }
 }
 
-/*
- * implements hook_menu
- */
-function likeabee_menu() {
-  $items['home'] = array(
-    'title' => "Welcome to Likeabee",
-    'page callback' => 'likeabee_home',
-    'page arguments' => array(),
-    'access callback' => TRUE,
-    'access arguments' => array(),
-    'file' => 'likeabee.inc'
-  );
-  //$items['groups'] is provided by default view list_of_groups
-  $items['learning'] = array(
-    'title' => 'Learning Centre',
-    'description' => 'Buy, sell, pay, swop or gift!',
-    'page callback' => 'likeabee_home',
-    'access callback' => 'user_access',
-    'access arguments' => array('transact'),
-    'menu_name' => 'main-menu',
-    'file' => 'likeabee.inc',
-    'weight' => 2
-  );
-  $items['dreams'] = array(
-    'title' => 'Dreams & Initiatives',
-    'description' => 'Buy, sell, pay, swop or gift!',
-    'page callback' => 'likeabee_home',
-    'access callback' => 'user_access',
-    'access arguments' => array('transact'),
-    'menu_name' => 'main-menu',
-    'file' => 'likeabee.inc',
-    'weight' => 3
-  );
-  $items['resources'] = array(
-    'title' => 'Resources Exchange',
-    'description' => 'Buy, sell, pay, swop or gift!',
-    'page callback' => 'likeabee_resources_default_page',
-    'access callback' => 'user_access',
-    'access arguments' => array('transact'),
-    'menu_name' => 'main-menu',
-    'file' => 'likeabee.inc',
-    'weight' => 4
-  );
-
-  $items['resources/dashboard'] = array(
-    'title' => 'Dashboard',
-    'description' => 'Buy, sell, pay, swop or gift!',
-    'page callback' => 'likeabee_resources_default_page',
-    'access callback' => 'user_access',
-    'access arguments' => array('transact'),
-    'menu_name' => 'main-menu',
-    'file' => 'likeabee.inc',
-    'weight' => -5
-  );
-  $items['resources/marketplace'] = array(
-    'title' => 'Marketplace',
-    'description' => 'Buy, sell, pay, swop or gift!',
-    'page callback' => 'likeabee_resources_marketplace',
-    'access callback' => 'user_access',
-    'access arguments' => array('transact'),
-    'menu_name' => 'main-menu',
-    'file' => 'likeabee.inc',
-    'weight' => 5
-  );
-  return $items;
-}
-
-function menu_link_alter() {
-
-}
-
 
 /*
  * implements hook_node_view_alter
- * modifies the group node view
+ * modifies the group node view to put all the previews under it
  */
 function likeabee_node_view_alter(&$build, $node) {
   if ($build['#bundle'] != 'group') return; //this is needed to prevent nesting because group summary invokes a view with nodes in
@@ -99,12 +28,8 @@ function likeabee_node_view_alter(&$build, $node) {
 }
 
 function likeabee_menu_alter(&$items) {
-
   unset($items['user/%/statement']); //actually should disable the view displays
   unset($items['user/%/income_expenditure']); //actually should disable the view displays, but its not in code in this module yet
-  foreach ($items as $path => $item) {
-    if (substr($path, 0, 6) == 'user/%')debug($path);
-  }
 }
 
 
@@ -118,20 +43,11 @@ function likeabee_theme() {
     ),
     'file' => 'likeabee.inc'//not needed really because the function which calls this is already in likeabee.inc
   );
-  $items['userpic_social'] = array(
-    'variables' => array(
-      'account' => NULL
-    ),
-  );
+
   $items['username_description'] = array(
     'variables' => array(
       'account' => NULL
     ),
-  );
-  $items['my_content'] = array(
-    'variables' => array(
-      'account' => NULL
-    )
   );
   return $items;
 }
@@ -143,29 +59,6 @@ function likeabee_views_api() {
   );
 }
 
-function likeabee_block_info() {
-  $blocks['my_content'] = array(
-    'info' => t('Links to views of content by type and by user'),
-    //these are default settings only. fixed settings are in likeabee_block_info_alter
-    'pages' => 'user*',
-    'visibility' => BLOCK_VISIBILITY_LISTED,
-    'status' => 1,
-    'region' => 'sidebar_second'
-  );
-  return $blocks;
-}
-
-function likeabee_block_view($delta) {
-  //there might be a quicker wasy to ensure this only builds for my user profile pages
-  if ($account = menu_get_object('user')) {
-    if ($account->uid != $GLOBALS['user']->uid) return;
-    module_load_include('inc', 'likeabee');
-    return array(
-      'subject' => t('My Content'),
-      'content' => likeabee_my_content_links($account)
-    );
-  }
-}
 
 /*
  * implements hook_block_info_alter
@@ -178,56 +71,6 @@ function likeabee_block_info_alter(&$blocks, $theme) {
   _likeabee_block_info_alter($blocks);
 }
 
-function template_preprocess_userpic_social(&$vars) {
-  $account = $vars['account'];
-  //Arggggh can only apply styling to 'managed' files with schema like public://
-  //the default user picture is a plain url
-  $style = 'thumbnail';//might need something even smaller
-  if ($picture_fid = $account->picture) {
-    $picture = file_load($picture_fid)->uri;
-    if (file_valid_uri($picture_filepath)) {
-      $picture = theme('image_style', array('style_name' => $style, 'path' => $picture_filepath));
-    }
-    else {
-      $vars['picture'] = '';
-      $args = array('@uid' => $account->uid, '@fid' => $picture_filepath);
-      drupal_set_message(t('Invalid picture filepath for user @uid: @fid', $args));
-      watchdog('likeabee.profile', 'Invalid picture filepath for user @uid: @fid', $args);
-    }
-  }
-  else {//simulate the thumbnail styling of the default image
-    $style = image_style_load($style);
-    //assume the first effect is a scale - this is a core style after all
-    $effect = current($style['effects']);
-    $picture = theme('image', array(
-      'path' => variable_get('user_picture_default', ''),
-      'width' => $effect['data']['width'],
-      'height' => $effect['data']['height']
-    ));
-  }
-  $vars['picture'] = array(
-    '#theme' => 'link',
-    '#text' => $picture,
-    '#path' => "user/$account->uid",
-    '#options' => array('html' => TRUE, 'attributes' => array())
-  );
-
-  $vars['facebook'] = @$account->fb_home['und']['0']['value'];
-  $vars['twitter'] = @$account->twitter['und']['0']['value'];
-  $vars['email'] = $account->mail;
-}
-
-function theme_userpic_social(&$vars) {
-  $output = drupal_render($vars['picture']);
-  if ($vars['facebook']) {
-    $output .= '<div class = "facebook">'.l(t('Facebook'), $vars['facebook']) . '</div>';
-  }
-  if ($vars['twitter']) {
-    $output .= '<div class = "twitter">'.l(t('Twitter'), $vars['twitter']) . '</div>';
-  }
-  $output .= '<div class = "email">'.l(t('Email'), $vars['email']) . '</div>';
-  return '<div id = "userpic-social">'.$output.'</div>';
-}
 
 function template_preprocess_username_description(&$vars) {
   $account = &$vars['account'];
