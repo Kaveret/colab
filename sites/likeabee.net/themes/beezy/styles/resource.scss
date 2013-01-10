@@ -19,6 +19,7 @@ a, a:hover,a:visited {
 
 @mixin table {
     margin-bottom:20px;
+    margin-top:10px;
     thead tr th{
         height:20px;
         font-size: 13px;
@@ -41,6 +42,17 @@ a, a:hover,a:visited {
     }
 }
 
+@mixin 3-box {
+    border: 2px solid #FBD38B;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 0 0 3px #FAE8C7;
+    float: left;
+    margin: 0 41px 31px 0 !important;
+    padding: 0;
+    position: relative;
+    width: 214px;
+    background-color: #fff !important;
+}
 
 h1{
     color: $blue;
@@ -109,16 +121,15 @@ body{
     width: 22px;
   }
 
-.likeabee-block .transaction-totals{
-	float:left;
-	margin-right: 30px;
-}
-
 .likeabee-block img.chart{
 	border: 1px solid #f1ad00;
-	padding: 12px 42px;
-}
+    float: right;
+    padding: 12px 8px;}
 
+.likeabee-block .transaction-totals{
+    float:right;
+    margin-left: 30px;
+}
 .likeabee-block table{
 	        @include table;
 }
@@ -264,17 +275,28 @@ body{
  /*************   gallery page *************/
 
 .page-galleries div.content div{
-    border: 2px solid #FBD38B;
-    border-radius: 4px 4px 4px 4px;
-    box-shadow: 0 0 0 3px #FAE8C7;
-    float: left;
+    @include 3-box;
     height: 373px !important;
-    margin: 0 41px 31px 0 !important;
-    padding: 0;
-    position: relative;
-    width: 214px;
-    background-color: #fff !important;
     h4{
         color:$red;
+    }
+}
+
+ /*************  beeziest members page *************/
+
+.view-user-rankings{
+    @include 3-box;
+    height: 300px !important;
+    li{
+        list-style-type: none;
+        border-bottom: 1px solid $soft-orange;
+        padding:5px;
+    }
+    ol{
+        padding: 0;
+    }
+    a.username{
+        width:200px;
+        display: block;
     }
 }

@@ -1,3 +1,10 @@
+$blue: #064882;
+$orange: #FACE77;
+$soft-orange:#fdf6e4;
+$red:#B01919;
+$purple:#7d54a9;
+
+
 /* overall page settings */
 header#page{
   margin-top: 10px;
@@ -28,7 +35,7 @@ body.front header #logo{
     height: inherit;
   }
 }
-header#page {
+header {
   height: 50px;
   #logo {
     float: right;
@@ -52,7 +59,7 @@ header#page {
     position: relative !important;
     background-image: url("../images/primary-links-with-down-arrow.gif");
     background-color: #f9ab17;
-    background-position: center bottom;
+    background-position: center 90%;
     background-repeat:no-repeat;
     font-size: 7px;
     color: #fff;
@@ -83,7 +90,7 @@ header#page {
           box-shadow: 0px 0px;
         }
         li a{
-          color: #f9ab17;
+          color: #064882;
           border: 0px;
         }
       }
@@ -95,14 +102,20 @@ header#page {
     display: block;
   }
 }
-
-
+#block-menu-minimanager{
+    background-image: url("../images/primary-links-with-down-arrow-manage.gif");
+    background-color: $soft-orange;
+    color:$orange;
+    border:1px solid $orange;
+    height: 30px;
+  }
 /*
  * Navigation region contains the main menu (2nd level)
  * and the current userpic_social
  */
 
 #navigation {
+  width: 100%;
   height: 55px;
   border:1px #FAD07C solid;
   border-top: 0px;
@@ -126,12 +139,15 @@ header#page {
         margin:0;
         padding:0;
         li{ /*the always-visible part of the block */
-          float:left;
-          display:inline;
+          background: url("../images/arrow-header.png") no-repeat scroll center 90% transparent;
+          display: inline;
+          float: left;
+          font-size: 13px;
+          height: 38px;
+          padding: 7px 0 10px;
           width: 90px;
-          height: 55px;
-          background: url("../images/arrow-header.png") no-repeat 43px 50px;
-          font-size: 11px;
+          border-right: 1px solid $orange;
+          margin:0;
           a{
             color:#014a81;
           }
@@ -140,6 +156,9 @@ header#page {
             font-size: 16px;
           }
         }
+        li.active-trail{
+              background-color:#fff !important;
+          }
       }
     }
   }
@@ -200,30 +219,28 @@ header#page {
     }
   }
 }
-/* temp to stop the front page image masking the floating menu */
-body.front {
-  /* 1 and 2 is for different versions of the site */
-  div#block-block-1, div#block-block-2{float:left;}
-}
+
+
 
 /* this is for the middle sized icons floating on the left of everywhere but the front page */
 div#floating{
   float:left;/*otherwise the div overlays all the way to the right, and you can't click*/
   position: relative;
-  top:150px;
+  top:100px;
   ul {
     padding: 0px;
     li{
       list-style: none;
 /* big-icons.png needs to be rerendered without spaces. then the % positioning below will work. My life is too short to count pixels */
-      background: url('../images/big-icons.png') no-repeat right 0 #F0AC00;
+      background: url('../images/big-icons.png') no-repeat right 0px #F0AC00;
+background-size: 44px 248px;
       margin-bottom: 10px;
       margin-top: 3px;
       position: absolute;
       width: auto;
-      height: 58px;
+      height: 41px;
       padding-left: 76px;
-      line-height: 26px;
+      line-height: 16px;
       border-top-right-radius: 26px;
       border-bottom-right-radius: 26px;
       box-shadow: 0px 0px 6px -1px #555353;
@@ -280,8 +297,8 @@ div#floating{
     }
 
     li.resource-exchange{
-      top:150px;
-      background-position: right 61%;
+      top:124px;
+      background-position: right 91%;
       z-index:103;
     }
     li.groups{
@@ -291,21 +308,38 @@ div#floating{
       z-index:101;
     }
     li.dreams-accelerator{
-      top:83px;
+      top:70px;
       background-position: right 30%;
       z-index:102;
     }
     li.learning-center{
       top:180px;
-      background-position: 0 50%;
+      background-position: right 61%;
       z-index:103;
+    }
+    li:hover{
+      padding-left: 20px;
+      background-size: 44px 248px; 
+      z-index:200;
+      margin-bottom:2px; 
     }
     li:hover a{
       display: block;
       text-indent: 0px;
+      font-size: 15px;
+      padding: 5px 20px 5px 5px;
+      margin-right:50px;
+      width:80px;
+    }
+    li:hover li a, li:hover li{
+      padding-left: 5px
+    }
+     li:hover li.first a, li:hover li.first{
+      margin-top: 10px
     }
     li:hover ul {
       display: block;
+      width:100px;
     }
   }
 }
@@ -454,9 +488,10 @@ div#main h1{
   text-align: left;
   font-size: 25px;
   color:#014a81;
-  float: left;
+  display: block;
   min-width: 204px;
-  font-size: 20px;
+  text-align: left;
+  font-size: 25px;
   color:#014a81;
 }
 
@@ -1052,3 +1087,11 @@ div.img-biger .number[class*=" 0 "],
 }
 
 
+/* temp to stop the front page image masking the floating menu */
+body.front {
+  /* 1 and 2 is for different versions of the site */
+  div#block-block-1, div#block-block-2{float:left;}
+}
+
+
+view-user-rankings
