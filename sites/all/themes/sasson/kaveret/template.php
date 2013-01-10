@@ -24,7 +24,18 @@
 
         }
     }*/
-    
+    function kaveret_breadcrumb($variables) {
+  $breadcrumb = $variables['breadcrumb'];
+  $crumbs = '';
+  if (!empty($breadcrumb)) {
+    $crumbs = '<div id="breadcrumbs"><span>You are here: </span><ul>';
+    foreach($breadcrumb as $value) {
+      $crumbs .= '<li>' . $value . '</li>';
+    }
+    $crumbs .= '<li>' . drupal_get_title() . '</li></ul></div>';
+  }
+  return $crumbs;
+}
 
 ?>
 

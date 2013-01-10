@@ -53,6 +53,15 @@
 		}
 	}
 }
+
+/*---------breadcrumb--------------*/
+#breadcrumb{
+	float: right;
+	.mafrid{
+		background: url('../images/arrow-adress-he.jpg') no-repeat 1px;
+	}
+}
+
 /*---------Group--------------------------------------------*/
 /*----------------------------------------------------------*/
 /*----------------------------------------------------------*/
@@ -66,16 +75,20 @@
 		}
 	}
 }
+
 /*---------Groups page--------------*/
-#quicktabs{
-	#quicktabs-container-group_s_events,
-	#quicktabs-container-group_s_discussion_,
-	#quicktabs-container-group_s_doccuments,
-	#quicktabs-container-group_s_video,
-	#quicktabs-container-group_s_poll{
-			float: right;
-			margin-top: 15px;
-		}
+/*---------Profil page--------------*/
+#quicktabs-container-group_s_events,
+#quicktabs-container-group_s_discussion_,
+#quicktabs-container-group_s_doccuments,
+#quicktabs-container-group_s_video,
+#quicktabs-container-group_s_poll,
+#quicktabs-container-share_polls_profile,
+#quicktabs-container-share_videos_profile,
+#quicktabs-container-share_content,
+#quicktabs-container-share_documents_profile{
+	float: right;
+	margin-top: 15px;
 	.views-field-ops{
 		text-align: left;
 		font-weight: bold;
@@ -83,17 +96,23 @@
 		font-style: italic;
 		margin-top: -45px;
 		height: 45px;
-	}
-	#block-quicktabs-group-s-discussion- .views-field-ops{
-		margin-top: -63px;
-		height: 62px;
 	}	
 }
+
+#block-quicktabs-group-s-discussion- .views-field-ops{
+	margin-top: -63px;
+	height: 63px;
+}	
+
 #quicktabs .block-odd{
 	height: 260px;
 }
-#block-quicktabs-group-s-video{
+#block-quicktabs-group-s-video,
+#block-quicktabs-share-videos-profile{
 	height: 300px !important;
+}
+.section-users #main .region-content{
+	width: 100%;
 }
 /*---------activities-my-group--------------*/
 .section-activities #main .region-content{
@@ -279,5 +298,73 @@
 /*----------node-type-group-members---------*/
 #block-views-4cf7ecc831800e49c7e8e4d4e5fa3265 .views-field-field-user-description{
 	margin-right: 12px;
+}
+/*----------node-type-groups-event---------*/
+#node_groups_event_full_group_when_event{
+	float: right;
+	.fieldset-legend{
+	 		padding: 9px 14px 5px 188px;
+	}
+	.field-type-datetime{
+		float: right;
+		.date-display-single{
+			border-left: 1px solid black;
+	 		border-right: 0px;
+			float: right;
+			padding-left: 15px;
+			margin-left: 0px;
+			background-position-x: 33px;
+		}
+	}
+}
+
+#node_groups_event_full_group_where_event{
+	margin-left: 0px !important;
+	float: right;
+	margin-right: 26px;
+	.fieldset-legend{
+	 	padding: 9px 14px 5px 180px;
+	}
+	.fieldset-wrapper{
+		float: right;
+		margin-right: 10px;
+	}
+}
+#block-views-event-page-block{
+	float: right;
+	margin-right: 91px;
+}
+.node-type-groups-event{
+	.region-content-top {
+		float: left;
+	}
+	#block-system-main > .content{
+		float: right;
+		margin-right: 27px;
+	}
+	.field-name-field-location-of-event{
+		float: left !important;
+		/* margin-left: 46px;
+		margin-right: 0px; */
+		margin-right: 0px !important;
+		margin-left: 30px !important;
+	}
+	.region-content-bottom{
+		float: right;
+		#quicktabs-event_s_background > .item-list,
+		#quicktabs-event_s_background .quicktabs-tabpage{
+			float: right;
+		}
+	}
+	.region-sidebar-second{
+		#block-views-group-s-event-block-6 .views-field-field-date-event{
+			border-right: 1px solid #c34f49 ;
+			border-left: 0px; 
+			.field-content{
+				margin-right: 9px;
+			}
+		}
+	}
+	
 }
 @flip {file: "kaveret.scss"};
