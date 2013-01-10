@@ -29,6 +29,10 @@ function likeabee_install() {
 
   module_load_install('cforge');
   _cf_make_bundle_commentable('proposition');
+
+
+  variable_set('user_picture_default', drupal_get_path('module', 'likeabee').'/bee.jpg');
+
 }
 
 //the stuff that cforge put into the navigation menu is moved into the orange dropdowns in the top right.

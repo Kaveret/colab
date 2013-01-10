@@ -1,0 +1,3 @@
+name = Uid Login
+description = Users log in with their User ID number, NOT their username
+core = 7.x
