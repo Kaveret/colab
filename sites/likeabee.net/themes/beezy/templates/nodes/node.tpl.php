@@ -76,11 +76,10 @@
  * @see template_process()
  */
 ?>
-
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>"<?php print $attributes; ?>>
-
+    
   <?php if ($user_picture || !$page || $display_submitted): ?>
-    <header id ="content">
+    <header>
       <?php print $user_picture; ?>
 
       <?php print render($title_prefix); ?>
@@ -90,14 +89,14 @@
       <?php print render($title_suffix); ?>
 
       <?php if ($display_submitted): ?>
-
+        
       <p class="submitted">
         <?php print $submitted; ?>
         <time pubdate datetime="<?php print $submitted_pubdate; ?>">
         <?php print $submitted_date; ?>
         </time>
       </p>
-
+        
       <?php endif; ?>
     </header>
   <?php endif; ?>
@@ -113,10 +112,10 @@
   </div><!-- /.content -->
 
   <?php if (!empty($content['field_tags']) || !empty($content['links'])): ?>
-    <div class = "node-footer">
+    <footer>
       <?php print render($content['field_tags']); ?>
       <?php print render($content['links']); ?>
-    </div>
+    </footer>
   <?php endif; ?>
 
   <?php print render($content['comments']); ?>

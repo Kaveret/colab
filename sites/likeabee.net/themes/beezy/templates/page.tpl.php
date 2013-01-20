@@ -92,6 +92,13 @@
   </header><!-- /#header -->
 <?php endif; ?>
 
+    <?php if ($page['navigation']): ?>
+      <div id="navigation">
+        <?php print render($page['navigation']); ?>
+      </div><!-- /#navigation -->
+    <?php endif; ?>
+
+
 <div id="page">
 
  <div id="main">
@@ -99,14 +106,10 @@
     <?php if ($tabs): ?>
       <div class="tabs"><?php print render($tabs); ?></div>
     <?php endif; ?>
-    <?php if ($page['navigation']): ?>
-      <div id="navigation">
-        <?php print render($page['navigation']); ?>
-      </div><!-- /#navigation -->
-    <?php endif; ?>
-     <!--<div id="breadcrumb"><?php
-       //print $breadcrumb;
-      ?></div>-->
+
+     <div id="breadcrumb"><?php
+       print $breadcrumb;
+      ?></div>
 
     <?php print $messages; ?>
     <?php print render($page['help']); ?>

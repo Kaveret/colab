@@ -2,7 +2,7 @@ $blue: #064882;
 $orange: #FACE77;
 $soft-orange:#fdf6e4;
 $red:#B01919;
-$purple:#7d54a9;
+$purple:#982c77;
 
 @mixin button {
    background-color: #F1AD00;
@@ -61,6 +61,10 @@ h1{
 
 body{
     color: $blue;
+}
+
+#main{
+    min-height: 300px;
 }
 /*************   my beez page *************/
 
@@ -246,6 +250,9 @@ body{
     .field-name-image{
         margin-bottom:24px;
     }
+    hr{
+        display: none;
+    }
 }
 
  /*************   user table *************/
@@ -284,19 +291,95 @@ body{
 
  /*************  beeziest members page *************/
 
-.view-user-rankings{
+.beezybox{
     @include 3-box;
-    height: 300px !important;
+    width: 185px;
+    font-size: 12px;
+    min-height: 200px;
+    margin-top:10px !important;
+    h2{
+        background-color: $soft-orange;
+        border-bottom: 1px solid $orange;
+        font-size: 18px;
+        font-weight: normal;
+        margin: 0;
+        padding: 10px;
+        text-align: center;
+    }
     li{
         list-style-type: none;
         border-bottom: 1px solid $soft-orange;
         padding:5px;
+        font-size: 12px;
     }
     ol{
         padding: 0;
+        margin: 0;
     }
     a.username{
-        width:200px;
+        width:185px;
         display: block;
+        font-size: 14px;
+    }
+}
+
+.beezydash{
+        border: 1px solid #feefd8;
+        border-radius: 10px;
+        margin-top: 10px;
+        height: 45px;
+        width: 758px;
+        h2{
+            border-radius: 10px 0 0 10px;
+            background-color: $soft-orange;
+            font-size: 18px;
+            font-weight: normal;
+            margin: 0;
+            padding: 10px;
+            text-align: center;
+            color: $purple;
+            float:left;
+            width: 187px;
+        }
+    .views-field-serial, .views-field-uid2, .views-field-volume{
+        background-color: #FDDEA5;
+        float: left;
+        height: 30px;
+        margin: 1px 5px 0 1px;
+        padding: 13px 0 0;
+        text-align: center;
+        width: 179px;
+        .views-label{
+            color:$purple;
+        }
+        .field-content{
+            font-weight: bold;
+        }
+    }
+    .views-field-volume{
+        margin-right: 0;        
+        border-radius: 0 10px 10px 0px;
+    }
+}
+ /*************  Docs page *************/
+
+.view-cforge-docs table{
+    @include table;
+    width:100%;
+    .views-field-title{
+        width:70%;
+    }
+}
+
+.node-type-document{
+    .user-picture img{
+        width:50px;
+        height: 50px;
+    }
+    .submitted{
+        margin:0;
+    }
+    .content{
+        margin-top:50px;
     }
 }

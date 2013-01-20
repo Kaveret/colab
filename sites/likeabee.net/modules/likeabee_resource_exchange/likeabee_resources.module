@@ -189,14 +189,14 @@ function likeabee_resources_help($path, $args) {
  */
 function resources_beeziest() {
   $build[] = array(
-    '#markup' => '<div class = "beezybox"><h2>Trade analysis</h2>' . views_embed_view('trade_analysis', 'system').'</div>',
+    '#markup' => '<div class = "beezydash"><h2>Trade analysis</h2>' . views_embed_view('trade_analysis', 'system').'</div>',
   );
   $build[] = array(
     '#markup' => '<div class = "beezybox"><h2>Top Traders</h2>' . views_embed_view('user_rankings', 'block_trades').'</div>'
   );
   $build[] = array(
 //    '#markup' => '<h2>Top Reputations</h2>' . views_embed_view('user_rankings', '')
-    '#markup' => '<div class = "beezybox"><h2>Highest Reputations</h2>' . 'not programmed yet'
+    '#markup' => '<div class = "beezybox"><h2>Highest Reputations</h2>' . 'not programmed yet.</div>'
   );
   $build[] = array(
     '#markup' => '<div class = "beezybox"><h2>Highest Volumes</h2>' . views_embed_view('user_rankings', 'block_volumes').'</div>'

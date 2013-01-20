@@ -2,7 +2,8 @@ $blue: #064882;
 $orange: #FACE77;
 $soft-orange:#fdf6e4;
 $red:#B01919;
-$purple:#7d54a9;
+$purple:#982c77;
+$gray: #525252;
 
 
 /* overall page settings */
@@ -127,8 +128,9 @@ header {
   background: -o-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
   /* Opera 11.10+ */
   background: -ms-linear-gradient(top, rgba(253,246,230,1) 0%,rgba(255,255,255,1) 49%,rgba(253,246,230,1) 100%);
-  div {
-    float:left;
+  #block-menu-block-2 {
+        margin: 0 auto;
+    width: 934px;
   }
   #block-menu-block-2 div.content {
     display:inline;
@@ -300,22 +302,31 @@ background-size: 44px 248px;
       top:124px;
       background-position: right 91%;
       z-index:103;
+      width:0;
     }
-    li.groups{
-      margin-top: 10px;
-      top: 4px;
-      background-position: 0 0%;
+    li.groups-communities{
+      top: 16px;
+      background-position: right 0px;
       z-index:101;
+      width:0;
     }
     li.dreams-accelerator{
       top:70px;
       background-position: right 30%;
       z-index:102;
+      width:0;
     }
     li.learning-center{
       top:180px;
       background-position: right 61%;
       z-index:103;
+      width:0;
+    }
+     li.marketplace--2{
+      top:235px;
+      background-position: right 61%;
+      z-index:103;
+      width:0;
     }
     li:hover{
       padding-left: 20px;
@@ -340,6 +351,9 @@ background-size: 44px 248px;
     li:hover ul {
       display: block;
       width:100px;
+    }
+    li:hover{
+      width:130px;
     }
   }
 }
@@ -480,7 +494,7 @@ footer {
 /* the second sidebar starts right at the top of the page, directly below the header, don't know why */
 #sidebar-second{
   position:relative;
-  top:150px;
+  top:130px;
 }
 
 /* -----  page title  ----- */
@@ -717,13 +731,14 @@ $red:#B01919;
 
 /* -----  breadcrumb ----- */
 #breadcrumb{
-  margin-top: 9px;
+  margin: 9px 0;
   .mafrid{
     font-size: 0px;
     padding: 9px 8px;
     margin-top: 2px;
     float: left;
-    background: url('../images/arrow-adress.jpg') no-repeat 1px;
+    background: url('../images/arrow-adress.jpg') no-repeat 1px 1px transparent;
+    margin-left: 2px;
   }
   .mafrid:nth-child(2){opacity: 1;}
   .mafrid:nth-child(4){opacity: 0.8;}
@@ -1093,5 +1108,23 @@ body.front {
   div#block-block-1, div#block-block-2{float:left;}
 }
 
-
-view-user-rankings
+/* block at the right side */
+#sidebar-second .block {
+  .block-title{
+    color:$red;
+    font-size:16px;
+    margin:0;
+  }
+  ul{
+    padding: 0;
+    margin-top:0;
+  }
+  li{
+    list-style-image: none;
+    list-style-type: none;
+    margin:0;
+    a{
+      color:$gray;
+    }
+  }
+}

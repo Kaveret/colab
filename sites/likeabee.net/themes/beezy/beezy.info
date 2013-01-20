@@ -34,8 +34,8 @@ scripts[] = scripts/beezy.js
 ; these are the stock regions
 
 regions[header] = Header
-regions[help] = Help
 regions[navigation] = Navigation
+regions[help] = Help
 regions[content_top] = Content top
 regions[content] = Content
 regions[content_bottom] = Content bottom
