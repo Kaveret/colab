@@ -5,7 +5,8 @@ menu_block
 special:
 likeabee
 default_content
-
+likeabee_resources
+likeabee_marketplace
 
 the following themes:
 beezy

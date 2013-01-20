@@ -28,8 +28,13 @@ dependencies[] = taxonomy
 ;dependencies[] = uid_login
 
 
-;contrib
+;contrib (part of cforge)
 dependencies[] = cforge_gallery
+
+;likeabee
+dependencies[] = likeabee_resources
+;dependencies[] = likeabee_marketplace
+
 
 ;development only
 dependencies[] = devel
