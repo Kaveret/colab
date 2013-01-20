@@ -1,7 +1,0 @@
-; $Id$
-name = "Cforge yellow pages"
-description = "Settings for offers and wants"
-core = 7.x
-package = Community Forge
-
-dependencies[] = offers_wants
