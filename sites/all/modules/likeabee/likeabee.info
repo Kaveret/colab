@@ -20,11 +20,16 @@ files[] = likeabee.views_default.inc
 ;dependencies[] = flag_actions
 ;dependencies[] = locale
 dependencies[] = menu_block
+dependencies[] = taxonomy
 ;dependencies[] = og
 ;dependencies[] = og_context
 ;dependencies[] = og_extras
 ;dependencies[] = video_embed_field
 ;dependencies[] = uid_login
+
+
+;contrib
+dependencies[] = cforge_gallery
 
 ;development only
 dependencies[] = devel
@@ -38,3 +43,5 @@ dependencies[] = features
 dependencies[] = defaultcontent
 dependencies[] = default_content
 
+; to allow string translation
+dependencies[] = l10n_update

@@ -24,7 +24,8 @@ function likeabee_install() {
   likeabee_create_menus();
   likeabee_create_users();
 
-  require_once(likeabee.blocks_settings.inc);
+  require_once(//drupal_get_path('theme', 'beezy').
+    'likeabee.blocks_settings.inc');
   _likeabee_apply_block_settings();
 
   //for development only

@@ -36,7 +36,7 @@ function _likeabee_apply_block_settings() {
       }
     }
   }
-  drupal_set_message('Successfully configured Likeabee's block settings.');
+  drupal_set_message('Successfully configured Likeabee\'s block settings.');
 }
 
 
