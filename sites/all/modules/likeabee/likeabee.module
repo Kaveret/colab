@@ -21,8 +21,26 @@ function likeabee_menu() {
     'page callback' => 'temp_home',
     'access arguments' => array('access content')
   );
+
+  //add login option, see https://dev.linnovate.net/issues/19920 issue 3
+  $items['login2'] = array(
+    'menu_name' => 'user-menu',
+    'access callback' => '_likeabee_user_not_logged_in',
+    'title' => 'Log in or Register',
+    'page callback' => '_likeabee_goto_login',
+    'weight' => -50,
+  );
+
   return $items;
 }
+
+function _likeabee_user_not_logged_in(){
+  return !user_is_logged_in();
+}
+function _likeabee_goto_login(){
+  drupal_goto("user");
+}
+
 /*
  * implements hook_menu_alter
  */

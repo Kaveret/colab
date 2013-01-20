@@ -23,6 +23,10 @@ function likeabee_install() {
   likeabee_create_galleries();
   likeabee_create_menus();
   likeabee_create_users();
+
+  require_once(likeabee.blocks_settings.inc);
+  _likeabee_apply_block_settings();
+
   //for development only
   variable_set('preprocess_css', TRUE);
 
@@ -32,6 +36,9 @@ function likeabee_install() {
 
 
   variable_set('user_picture_default', drupal_get_path('module', 'likeabee').'/bee.jpg');
+
+  // to allow account registrations from anonymous users #TODO: add captcha for these 
+  variable_set('user_register', 1);
 
 }
 
@@ -57,6 +64,22 @@ function likeabee_create_menus() {
   //unfortunately links which were created directly to the menu_links table cannot be altered through hooks
   db_update('menu_links')->fields(array('menu_name' => 'minimanager'))->condition('link_path', 'admin/structure/taxonomy/galleries')->execute();
 }
+
+/*
+ * Implements likeabee hook_menu().
+ *
+function likeabee_menu() {
+  $items['user'] = array(
+    'title' => 'Login or Register',
+    'page callback' => 'page_creator_function',
+    'access callback' => TRUE,
+    'menu_name' => 'main-menu',  // This is the changed line.
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}*/
+
 
 /*
  * implements cforge hook_block_setup_THEME
