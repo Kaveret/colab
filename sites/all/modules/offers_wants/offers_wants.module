@@ -11,6 +11,9 @@
  * * goods and services
  * * optional 'wants' in addition to offers.
  */
+
+
+
 function offers_wants_help($path, $args) {
   if ($path == 'admin/config/ow') {
     $help[] = t('This panel saves you digging around in Drupal by giving you easy options while managing other parts of the system.');
@@ -390,6 +393,8 @@ function offers_wants_theme_registry_alter(&$callbacks) {
  * implements hook_preprocess_THEMEHOOK
  */
 function offers_wants_preprocess_node(&$variables) {
+  drupal_add_css(drupal_get_path('module', 'offers_wants') . '/offers_wants.css', array('group' => CSS_DEFAULT, 'type' => 'file'));
+
   $node = &$variables['node'];
   if ($variables['node']->type != 'proposition') return;
   //just make sure comments are at the bottom

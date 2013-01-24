@@ -60,7 +60,7 @@ if ($teaser) {
   <?php if ($teaser) print $heading; ?>
   <?php print $submitted; ?>
 
-  <div style = "float:right;">
+  <div class="right-user-block">
     <?php print $user_picture; ?>
     <div class="link-wrapper">
       <?php print render($content['links']) ?>
