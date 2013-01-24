@@ -36,7 +36,13 @@ function likeabee_install() {
 
   variable_set('user_picture_default', drupal_get_path('module', 'likeabee').'/bee.jpg');
 
-  // to allow account registrations from anonymous users #TODO: add captcha for these 
+  // Add captcha on user registration form and on site-wide contact form
+  db_query(
+    "UPDATE {captcha_points} SET captcha_type = 'default' WHERE form_id = 'user_register_form'");
+  db_query(
+    "UPDATE {captcha_points} SET captcha_type = 'default' WHERE form_id = 'contact_site_form');
+
+  // Allow account registrations from anonymous users
   variable_set('user_register', 1);
 }
 
