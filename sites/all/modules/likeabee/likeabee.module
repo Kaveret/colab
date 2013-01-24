@@ -15,6 +15,10 @@ function likeabee_help($path, $args) {
 }
 
 function likeabee_menu() {
+  // HACK! Baroch Oren 2013-01-24: disabled the homepage callback, since it breaks the functionality of $is_front and drupal_is_front_page() 
+  // in cforge/cforge.install:   variable_set('site_frontpage', "home");
+ variable_set('site_frontpage', "node");
+
   //just make a callback for the home page
   $items['home'] = array(
     'title' => 'Home page',

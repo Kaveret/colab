@@ -31,16 +31,13 @@ function likeabee_install() {
   //for development only
   variable_set('preprocess_css', TRUE);
 
-
   module_load_install('cforge');
   _cf_make_bundle_commentable('proposition');
-
 
   variable_set('user_picture_default', drupal_get_path('module', 'likeabee').'/bee.jpg');
 
   // to allow account registrations from anonymous users #TODO: add captcha for these 
   variable_set('user_register', 1);
-
 }
 
 //the stuff that cforge put into the navigation menu is moved into the orange dropdowns in the top right.
@@ -169,6 +166,7 @@ function likeabee_block_setup_beezy() {
     'region' => 'header',
     'weight' => 3
   );
+  drupal_set_message("Cforge hook_block_setup_THEME just configured blocks.");
   return $blocks;
 }
 
@@ -296,8 +294,22 @@ function likeabee_create_users() {
     'roles' => array(RID_TRADER => RID_TRADER),
     'status' => 1
   );
+  $edits[] = array(
+    'name' => 'Dvora',
+    'pass' => 'dvash',
+    'mail' => 'info@barochoren.com',
+    'profile_firstname' => array(LANGUAGE_NONE => array(array('value' => 'Dvora'))),
+    'profile_familyname' => array(LANGUAGE_NONE => array(array('value' => ''))),
+    'roles' => array(RID_TRADER => RID_TRADER),
+    'status' => 1
+  );
   foreach ($edits as $edit) {
-    user_save(NULL, $edit);//should be user 2
+    try {
+      user_save(NULL, $edit);//should be user 2
+    }
+    catch (Exception $e) {
+      drupal_set_message("Caught exception trying to add user ".$edit['name'].".");
+    }
   }
 }
 
