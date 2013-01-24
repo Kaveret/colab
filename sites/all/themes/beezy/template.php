@@ -16,6 +16,7 @@ function beezy_process_page(&$vars) {
       theme_get_suggestions($args, $type)
     );
   }
+  // add floating side menu on all pages that are not the frontpage
   $vars['floating'] = menu_tree('main-menu');
 }
 

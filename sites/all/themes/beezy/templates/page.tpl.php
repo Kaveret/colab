@@ -100,16 +100,16 @@
 
 
 <div id="page">
-
+     <div id="breadcrumb"><?php
+       print $breadcrumb;
+      ?></div>
  <div id="main">
-   <h1><?php if (!$is_front)print $title; ?></h1>
+   <h1><?php if (!$is_front) print $title; ?></h1>
     <?php if ($tabs): ?>
       <div class="tabs"><?php print render($tabs); ?></div>
     <?php endif; ?>
 
-     <div id="breadcrumb"><?php
-       print $breadcrumb;
-      ?></div>
+
 
     <?php print $messages; ?>
     <?php print render($page['help']); ?>
@@ -138,15 +138,7 @@
 
 <footer>
   <div id = "logo-footer"></div>
-  <!-- this is directly in the theme for now, but ideally would be done using the menu_block first level of main-menu -->
-<!--footer icons are hidden because these services are not built yet
-  <ul id = "footer-icons">
-    <li><a href="/" title="" class="active">Dreams &amp; Initiatives</a></li>
-    <li><a href="/" title="" class="active">Learning Center</a></li>
-    <li><a href="/" title="" class="active">Communities &amp; Groups</a></li>
-    <li><a href="/" title="" class="active">Resources Exchange</a></li>
-  </ul>
--->
+
   <nav id="secondary-menu" role="navigation">
     <?php print $secondary_menu_links ?>
   </nav> <!-- /#secondary-menu -->
