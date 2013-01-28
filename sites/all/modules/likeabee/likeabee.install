@@ -7,6 +7,7 @@ variable_set('preprocess_js', FALSE);
  * implements hook_install_tasks for the installation profile
  */
 function likeabee_install() {
+  drupal_set_message("Installing likeabee..");
   $weight = db_query("SELECT weight +1 FROM {system} WHERE name = 'cforge' ")->fetchField();
   db_query(
     "UPDATE {system} SET weight = :weight WHERE name = 'likeabee'",
@@ -24,9 +25,17 @@ function likeabee_install() {
   likeabee_create_menus();
   likeabee_create_users();
 
+  // apply block settings
   require_once(//drupal_get_path('theme', 'beezy').
     'likeabee.blocks_settings.inc');
   _likeabee_apply_block_settings();
+
+  // apply permissions settings
+  require_once(drupal_get_path('module', 'features').
+    '/includes/features.user.inc');  
+  require_once(drupal_get_path('module', 'features').
+    '/features.export.inc');
+  user_permission_features_rebuild('likeabee');
 
   //for development only
   variable_set('preprocess_css', TRUE);
@@ -40,10 +49,11 @@ function likeabee_install() {
   db_query(
     "UPDATE {captcha_points} SET captcha_type = 'default' WHERE form_id = 'user_register_form'");
   db_query(
-    "UPDATE {captcha_points} SET captcha_type = 'default' WHERE form_id = 'contact_site_form');
+    "UPDATE {captcha_points} SET captcha_type = 'default' WHERE form_id = 'contact_site_form'");
 
   // Allow account registrations from anonymous users
   variable_set('user_register', 1);
+  drupal_set_message("Likeabee has been installed successfully :-)");
 }
 
 //the stuff that cforge put into the navigation menu is moved into the orange dropdowns in the top right.
@@ -54,12 +64,12 @@ function likeabee_create_menus() {
     1 => array(
       'menu_name' => 'community',
       'title' => t('Community Space'),
-      'description' => t("Links to everybody's stuff")
+      'description' => t('Links to everybody\'s stuff'),
     ),
     2 => array(
       'menu_name' => 'minimanager',
       'title' => t('Manage'), //not to be confused with the builtin menu 'management'
-      'description' => t("Administrators only")
+      'description' => t('Administrators only'),
     ),
   );
   foreach ($menus as $menu) {

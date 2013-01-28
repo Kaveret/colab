@@ -191,5 +191,85 @@ function likeabee_user_default_permissions() {
     'module' => 'offers_wants',
   );
 
+  // Exported permission: create proposition content.
+  $permissions['create proposition content'] = array(
+    'name' => 'create proposition content',
+    'roles' => array(
+      0 => 'authenticated user',
+      1 => 'trader',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: delete any proposition content.
+  $permissions['delete any proposition content'] = array(
+    'name' => 'delete any proposition content',
+    'roles' => array(
+      0 => 'committee',
+      1 => 'system',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: delete own proposition content.
+  $permissions['delete own proposition content'] = array(
+    'name' => 'delete own proposition content',
+    'roles' => array(
+      0 => 'authenticated user',
+      1 => 'committee',
+      2 => 'trader',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: edit any proposition content.
+  $permissions['edit any proposition content'] = array(
+    'name' => 'edit any proposition content',
+    'roles' => array(
+      0 => 'committee',
+      1 => 'system',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: edit documents.
+  $permissions['edit documents'] = array(
+    'name' => 'edit documents',
+    'roles' => array(
+      0 => 'committee',
+      1 => 'system',
+    ),
+    'module' => 'cforge_docs',
+  );
+
+  // Exported permission: edit own proposition content.
+  $permissions['edit own proposition content'] = array(
+    'name' => 'edit own proposition content',
+    'roles' => array(
+      0 => 'authenticated user',
+      1 => 'trader',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: view non-private documents.
+  $permissions['view non-private documents'] = array(
+    'name' => 'view non-private documents',
+    'roles' => array(
+      0 => 'anonymous user',
+    ),
+    'module' => 'cforge_docs',
+  );
+
+  // Exported permission: view private documents.
+  $permissions['view private documents'] = array(
+    'name' => 'view private documents',
+    'roles' => array(
+      0 => 'authenticated user',
+      1 => 'trader',
+    ),
+    'module' => 'cforge_docs',
+  );
+
   return $permissions;
 }
