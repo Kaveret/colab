@@ -1,0 +1,76 @@
+; $Id:
+name = Likeabee
+description = convert a cforge installation to a basic basic likeabee site
+package = Likeabee
+core = "7.x"
+
+files[] = likeabee.views_default.inc
+
+;core
+;dependencies[] = book
+;dependencies[] = dlike
+;dependencies[] = email
+;dependencies[] = entity
+;dependencies[] = entityreference
+;dependencies[] = entityreference_prepopulate
+;dependencies[] = entity_token
+;dependencies[] = field_group
+;dependencies[] = field_permissions
+;dependencies[] = flag
+;dependencies[] = flag_actions
+;dependencies[] = locale
+dependencies[] = menu_block
+dependencies[] = taxonomy
+;dependencies[] = og
+;dependencies[] = og_context
+;dependencies[] = og_extras
+;dependencies[] = video_embed_field
+;dependencies[] = uid_login
+
+
+;contrib (part of cforge)
+dependencies[] = cforge_gallery
+
+;likeabee
+dependencies[] = likeabee_resources
+;dependencies[] = likeabee_marketplace
+
+
+;development only
+dependencies[] = devel
+dependencies[] = dblog
+;dependencies[] = devel_codify
+dependencies[] = views_ui
+dependencies[] = field_ui
+dependencies[] = contextual
+dependencies[] = admin_menu
+dependencies[] = defaultcontent
+dependencies[] = default_content
+
+; to allow string translation
+dependencies[] = l10n_update
+
+; for updating permissions
+dependencies[] = features
+dependencies[] = node
+dependencies[] = offers_wants
+features[features_api][] = api:1
+features[user_permission][] = configure ow
+features[user_permission][] = create image content
+features[user_permission][] = create page content
+features[user_permission][] = create story content
+features[user_permission][] = delete any image content
+features[user_permission][] = delete any page content
+features[user_permission][] = delete any story content
+features[user_permission][] = delete own image content
+features[user_permission][] = delete own page content
+features[user_permission][] = delete own story content
+features[user_permission][] = edit any image content
+features[user_permission][] = edit any page content
+features[user_permission][] = edit any story content
+features[user_permission][] = edit own image content
+features[user_permission][] = edit own page content
+features[user_permission][] = edit own story content
+features[user_permission][] = edit propositions
+features[user_permission][] = post proposition
+features[user_permission][] = view proposition

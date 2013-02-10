@@ -1,0 +1,54 @@
+name = kaverte
+description = Kaverte profile
+version = VERSION
+core = 7.x
+
+; Core
+dependencies[] = block
+dependencies[] = color
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = contact
+dependencies[] = dblog
+dependencies[] = help
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = overlay
+dependencies[] = path
+dependencies[] = rdf
+dependencies[] = search
+dependencies[] = shortcut
+dependencies[] = taxonomy
+
+; Contrib modules
+dependencies[] = admin_menu_toolbar
+dependencies[] = admin_views
+dependencies[] = ctools
+dependencies[] = devel
+dependencies[] = date
+dependencies[] = diff
+dependencies[] = entity
+dependencies[] = entityreference
+dependencies[] = fboauth
+dependencies[] = features
+dependencies[] = hint
+dependencies[] = module_filter
+dependencies[] = page_manager
+dependencies[] = panels
+dependencies[] = panels_mini
+dependencies[] = libraries
+dependencies[] = nodequeue
+dependencies[] = omega_tools
+dependencies[] = search_api
+dependencies[] = search_api_db
+dependencies[] = search_api_views
+dependencies[] = strongarm
+dependencies[] = title
+dependencies[] = views
+dependencies[] = views_ui
+

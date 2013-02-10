@@ -1,0 +1,370 @@
+/**
+ * @file sasson/styles/sasson-rtl.scss
+ */
+
+// ==== RTL support. ========================================================
+// This file imports and automatically create all the RTL overrides
+// ==========================================================================
+#featured {
+	#block-views-496829e4ed0eb890c08a769ebd3a80e3 .views-field-title a,
+	#block-views-link-to-webform-block-1 .views-field-title a{
+		width: 91px;
+	}
+	#block-og-extras-node-links h2,
+	#block-views-group-configurations-block{
+		h2.block-title{
+		width: 91px;
+		}
+		.views-field a{
+			text-align: right !important;
+		}
+	}
+	#block-views-current-group-block 
+	{
+		width: 191px;
+		.views-field-title a{
+			margin-right: 16px;
+			color: #004A82 !important;
+			font-size: 23px ;
+			font-family: arial;
+			width: 190px;
+			.group_name{
+				margin-right: 16px;
+			}
+		}
+	}
+	#block-views-link-to-group-members-block-1 .views-field-title a{
+		width: 91px;
+	}
+
+}
+#block-menu-menu-main-icons .menu li a{
+	margin-right: 3px !important;
+	
+}
+#block-menu-menu-main-icons .menu .leaf  a{
+	width: 87px;
+} 
+.region-sidebar-second{
+	#block-views-tags-block,#block-views-groups-block{
+		 .block-title{
+			background-position-x: 179px;
+			padding-right: 19px;
+		}
+	}
+}
+
+/*---------breadcrumb--------------*/
+#breadcrumb{
+	float: right;
+	.mafrid{
+		background: url('../images/arrow-adress-he.jpg') no-repeat 1px;
+	}
+}
+
+/*---------Group--------------------------------------------*/
+/*----------------------------------------------------------*/
+/*----------------------------------------------------------*/
+/*---------Group page--------------*/
+.region-content{
+	#block-quicktabs-list-of-groups #quicktabs-container-list_of_groups{
+		float: right;
+		margin-top: 19px;
+		.views-field-field-description-group .field-content{
+			float: none;
+		}
+	}
+}
+
+/*---------Groups page--------------*/
+/*---------Profil page--------------*/
+#quicktabs-container-group_s_events,
+#quicktabs-container-group_s_discussion_,
+#quicktabs-container-group_s_doccuments,
+#quicktabs-container-group_s_video,
+#quicktabs-container-group_s_poll,
+#quicktabs-container-share_polls_profile,
+#quicktabs-container-share_videos_profile,
+#quicktabs-container-share_content,
+#quicktabs-container-share_documents_profile{
+	float: right;
+	margin-top: 15px;
+	.views-field-ops{
+		text-align: left;
+		font-weight: bold;
+		color: black !important;
+		font-style: italic;
+		margin-top: -45px;
+		height: 45px;
+	}	
+}
+
+#block-quicktabs-group-s-discussion- .views-field-ops{
+	margin-top: -63px;
+	height: 63px;
+}	
+
+#quicktabs .block-odd{
+	height: 260px;
+}
+#block-quicktabs-group-s-video,
+#block-quicktabs-share-videos-profile{
+	height: 300px !important;
+}
+.section-users #main .region-content{
+	width: 100%;
+}
+/*---------activities-my-group--------------*/
+.section-activities #main .region-content{
+	margin-right: -20px;	
+}
+/*---------node/add/groups-event--------------*/
+#edit-og-group-ref .fieldset-wrapper #form-item-og-group-ref-und-0-default-0-target-id input #edit-og-group-ref-und-0-default-0-target-id{
+	background-position-x: 6px;	
+}
+/*---------User status--------------*/
+/*---------node/add/groups-event--------------*/
+.page-node-add-groups-event{
+	.form-item-title,#edit-og-group-ref,
+	#edit-field-adress-event,
+	#edit-field-location-of-event-text,
+	#edit-field-add-tags-the-more-the-bett,
+	#edit-field-the-following-courses-even,
+	#edit-field-send-notification,
+	#edit-field-editor-s-choice{
+		float: right;
+	}
+	.group-time-event{
+		float:right;
+		legend .fieldset-legend{
+			margin-left: 159px;
+		}
+		.fieldset-wrapper{ 
+			#edit-field-date-event{
+				margin-right: 25px;
+				.date-processed{
+					border-left: 1px solid #f9ab17;
+					border-right: 0px;
+					legend{
+						float: right;
+						margin-right: -18px;
+						top: 42px;
+					}
+					#edit-field-date-event-und-0-value{
+						padding: 0px;
+					}
+				}
+				.date-no-float{
+					float: left;
+				}
+			}
+			#edit-field-start-event{
+				margin-right: 14px;
+				margin-top:31px;
+				label{
+					float: right;
+					margin-right: 3px;
+				} 
+			}
+			#edit-field-end-event{
+				margin-right: 14px;
+					label{
+					float: right;
+					margin-right: 3px;
+				} 
+			}
+			.cck-time-element{
+				margin-left: 64px;
+			} 
+			.description{
+				float: right;;
+			} 
+		}
+	}
+	.field-name-field-location-of-event{
+		margin-right: 44px;
+		legend{
+			margin-right: 0px;
+		}
+	}
+	#node_groups_event_form_group_main_event_image{
+		float: right;
+		legend{
+			margin-right: 0px;
+		}
+	}
+	#node_groups_event_form_group_upload_files{
+		legend {
+			margin-right: 0px;
+			margin-left: 0px;
+		}
+		.form-wrapper{
+			margin-right: 10px;
+		}
+		#edit-field-sites-event tr .form-type-textfield,
+		#edit-field-more-details-event .form-item-field-more-details-event-und-0-value{
+			float: 	none;
+		} 
+	}
+	#node_groups_event_form_group_details{
+		
+		legend{
+			margin-right: 0px;
+			margin-left: 0px;
+		}
+		.fieldset-wrapper{
+			background: #FCF0D8;
+			.form-wrapper{
+				margin-right: 16px;
+			}	
+		}
+		
+	}
+	#edit-actions #edit-submit{
+		float: left;
+	}
+}
+.page-node-add-discussion #edit-actions #edit-submit,
+.page-addgroup-s-doccuments #edit-actions #edit-submit,
+.page-addadvpoll #edit-actions #edit-submit{
+	float: left;
+}
+.page-addgroup-s-doccuments #edit-field-doccument legend {
+	margin: 0px;
+	padding: 0px;
+}
+#sidebar-second{
+	.region-sidebar-second{
+		.content{
+			float: right;
+		}
+		#block-views-my-groups-block,
+		#block-views-tags-block,
+		#block-views-groups-block
+		{
+			width: 200px;
+			height: auto;
+			float: right;	
+		}
+		
+	}
+}
+/*---------content--------------*/
+
+.node-type-group-webform{
+	#webform-component-name input{
+		margin-right: 67px !important;
+		margin-left: auto;
+	}
+	#webform-component-phone input {
+		margin-right: 66px !important;
+		margin-left: auto;
+	}
+	#webform-component-message{
+		margin-right: 14px;
+	}
+}
+/*----------about----------------*/
+
+.node-type-about-the-group-pages{
+	#main{
+		.region-content{
+			float: right;
+		}
+	}
+}
+/*----------node-type-group-s-avtivity---------*/
+#block-views-groups-poll-block-1 .view-header{
+	left: 13px;
+}
+		/*----------see all---------*/
+.node-type-group-doccuments-page,
+.node-type-group-s-events-page,
+.node-type-group-s-discussion-page,
+.node-type-group-s-video-page,
+.node-type-group-s-poll
+{
+	.region-content{
+		float: right;
+	}
+	.views-field-field-event-image,
+	.views-field-field-video-group{
+		margin-right: 0px !important;
+		.video-embed-description{
+			margin-right:12px;
+		}
+	}
+}
+/*----------node-type-group-members---------*/
+#block-views-4cf7ecc831800e49c7e8e4d4e5fa3265 .views-field-field-user-description{
+	margin-right: 12px;
+}
+/*----------node-type-groups-event---------*/
+#node_groups_event_full_group_when_event{
+	float: right;
+	.fieldset-legend{
+	 		padding: 9px 14px 5px 188px;
+	}
+	.field-type-datetime{
+		float: right;
+		.date-display-single{
+			border-left: 1px solid black;
+	 		border-right: 0px;
+			float: right;
+			padding-left: 15px;
+			margin-left: 0px;
+			background-position-x: 33px;
+		}
+	}
+}
+
+#node_groups_event_full_group_where_event{
+	margin-left: 0px !important;
+	float: right;
+	margin-right: 26px;
+	.fieldset-legend{
+	 	padding: 9px 14px 5px 180px;
+	}
+	.fieldset-wrapper{
+		float: right;
+		margin-right: 10px;
+	}
+}
+#block-views-event-page-block{
+	float: right;
+	margin-right: 91px;
+}
+.node-type-groups-event{
+	.region-content-top {
+		float: left;
+	}
+	#block-system-main > .content{
+		float: right;
+		margin-right: 27px;
+	}
+	.field-name-field-location-of-event{
+		float: left !important;
+		/* margin-left: 46px;
+		margin-right: 0px; */
+		margin-right: 0px !important;
+		margin-left: 30px !important;
+	}
+	.region-content-bottom{
+		float: right;
+		#quicktabs-event_s_background > .item-list,
+		#quicktabs-event_s_background .quicktabs-tabpage{
+			float: right;
+		}
+	}
+	.region-sidebar-second{
+		#block-views-group-s-event-block-6 .views-field-field-date-event{
+			border-right: 1px solid #c34f49 ;
+			border-left: 0px; 
+			.field-content{
+				margin-right: 9px;
+			}
+		}
+	}
+	
+}
+@flip {file: "kaveret.scss"};

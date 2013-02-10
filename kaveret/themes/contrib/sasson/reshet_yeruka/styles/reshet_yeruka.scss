@@ -1,0 +1,433 @@
+/* #############################################
+ * ##### Sasson - advanced drupal theming. #####
+ * #############################################
+ *   
+ * SITENAME theme main stylesheet.
+ * 
+ *  Index
+ *  -----------
+ *  1. Imports and Definitions
+ *  2. General Sitewide Styles
+ *    -- Layout
+ *    -- General Styles
+ *    -- Typography
+ *    -- Links 
+ *    -- Header
+ *    -- Sidebars
+ *    -- Footer
+ *  3. Front Page
+ *  4. Inner Pages
+ *  5. Forms
+ * 
+ */
+
+/*-----------------------------------------------
+           Imports and Definitions
+-----------------------------------------------*/
+// @import "compass/css3";           // Uncomment to use CSS3 mixins (http://compass-style.org/reference/compass/css3/)
+// @import "960/grid";               // Uncomment to use 960gs mixins (see Sasson's layout partials for examples)
+// @import "grid/gridy";             // Uncomment to use gridy mixins (the layout system powering Sasson v3.x)
+// @import "partials/mixins";        // Uncomment to call your own mixins partial (check your /partials directory)
+// @import "sprites/smart";          // Uncomment to call your 'smart' sprite (check your /images/sprites directory)
+$lightblue = #e6f3f9;
+$middleblue = #73CFFA;
+$borderblue = #86BEF1;
+$blue = #5aa3c4;
+$green = #9ab34e;
+
+@mixin rr_homepage_a($pad,$size) {
+            text-decoration: none;
+            padding-left: $pad; /* LTR */
+            font-size: $size;
+}
+/*-----------------------------------------------
+          General Sitewide Styles
+-----------------------------------------------*/
+/* -----  Layout  ----- */
+.one-sidebar.sidebar-first #main {
+  margin-left: 2.7%; /* LTR */
+  margin-right: 0%; /* LTR */
+  margin-top: 36px;
+  padding-right: 3%; /* LTR */
+  width: 69%;
+  border-right-color: $blue; /* LTR */
+  border-right-style: solid; /* LTR */
+  border-right-width: 2px; /* LTR */
+
+}
+/* -----  General Styles (Colors, Backgrounds etc.)  ----- */
+
+/* -----  Typography  ----- */
+$menu_fontsize = 15px; /* default is 16px */
+$homepage_sideboxes_fontsize = 18px;
+$homepage_bottomboxes_fontsize = 14px;
+
+$h2height=36px;
+$h2marginbottom=10px;
+
+  h1 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: $green;
+    line-height: 60%;
+    padding-bottom: 10px;
+    font-size: 1.4em;
+  }
+/* -----  Links  ----- */
+
+/* -----  Header  ----- */
+
+#header {
+
+  float: none;
+  width: 960px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:15px;
+  ul {
+    padding: 0px 0px 0px 15px;
+  }
+  li {
+    padding: 5px 8px;
+    font-size: $menu_fontsize;
+    list-style: none outside none;
+    float: right;
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 0px;
+    margin-right: 1px;
+    &.first {
+      border-bottom-right-radius: 5px; /* LTR */
+      border-top-right-radius: 5px; /* LTR */
+    }
+   /* & :not(.first) {
+      margin-right: 2px;
+    }*/
+    &.last {
+      border-bottom-left-radius: 5px; /* LTR */
+      border-top-left-radius: 5px; /* LTR */
+    }
+    a {
+      text-decoration: none;
+    }
+
+  }
+}
+
+#block-system-main-menu {
+  float: right; /* RTL */
+  ul.menu li {
+    background: -moz-linear-gradient(top, #f1f6e2 0%, #dee5c4 100%);
+    background: -webkit-linear-gradient(top, #f1f6e2 0%, #dee5c4 100%);
+    background: -o-linear-gradient(top, #f1f6e2 0%, #dee5c4 100%);
+    background: -ms-linear-gradient(top, #f1f6e2 0%, #dee5c4 100%);
+    border-color:  #ecefdc;
+    /*border-color: -moz-linear-gradient(top, #f8faed 0%, #ecefdc 100%);
+    border-color: -webkit-linear-gradient(top, #f8faed 0%, #ecefdc 100%);
+    border-color: -o-linear-gradient(top, #f8faed 0%, #ecefdc 100%);
+    border-color: -ms-linear-gradient(top, #f8faed 0%, #ecefdc 100%);*/
+  }
+ /* li:not(.last) {
+    border-left-color: #bece8d;
+  }*/
+
+}
+
+#block-locale-language {
+  float: right; /* RTL */
+  ul li {
+    background: #f0f0f0;
+    border-color:  #ecefdc;
+  }
+  /*li.active {
+      display: none;
+      visibility: hidden; 
+  }
+ /* li :not(.last) {
+    border-left-color: #c8c8c8;
+  }*/
+
+
+}
+
+
+/* -----  Featured ----- */
+
+#featured {
+  float: none;
+  width: 960px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+}
+
+/* -----  Sidebars  ----- */
+  #sidebar-first {
+    div.region-sidebar-first{
+      border-right-style: solid; /* LTR */
+      border-right-width: 2px; /* LTR */
+      border-right-color: $borderblue; /* LTR */
+      margin-top: 35px;
+      padding-bottom: 50px;
+
+      div.block {
+        margin-right: 12%; /* LTR */
+        div.second-box-on-sidebar-1 {
+          margin-top: 40px;
+          .content a {
+            float: right; /* LTR */
+          }
+        }
+
+        h2 {
+          height: $h2height;
+          margin-top: 0px;
+          background-color: $blue;
+          margin-bottom: $h2marginbottom;
+          a {
+            color: white;
+            @include rr_homepage_a(12px, $homepage_sideboxes_fontsize);
+          }
+        }
+      }
+    }
+    #block-menu-menu-menu-on-the-side {
+      h2 {
+        display: none;
+      }
+      ul {
+       padding-right: 20px; /* RTL */
+       padding-left: 0px; /* RTL */
+       li { 
+        list-style: none outside none;
+        margin-left: 0px; /* RTL */
+        
+        a {
+          text-decoration: none;
+          background-color: $lightblue;
+          color: navy;
+          display: block;
+          padding-left: 5%; /* RTL */
+        }
+        a.active {
+           color: white;
+           background: -moz-linear-gradient(top, $blue 0%, $middleblue 50%, $blue 100%);
+           background: -webkit-linear-gradient(top, $blue 0%, $middleblue 50%, $blue 100%);
+           background: -o-linear-gradient(top, $blue 0%, $middleblue 50%, $blue 100%);
+           background: -ms-linear-gradient(top, $blue 0%, $middleblue 50%, $blue 100%);
+        } 
+       } /* li */   
+      }
+    }
+    
+  }
+  .one-sidebar.sidebar-first #sidebar-first {
+    margin: 0%;
+    left: -75%; /* LTR */
+    width: 25%;
+  }
+/* -----  Footer  ----- */
+
+#footer {
+  background: #5aa3c4;
+  margin-top: 50px;
+
+  a,p {
+    font-size: 12px;
+    text-decoration: none;
+  }
+  p {
+    margin-bottom: 0px;
+
+/*  float: none;
+  width: 960px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+display: none;*/
+  }
+}
+	
+.region-footer {
+  color: white;
+  background: #5aa3c4;
+
+  text-align: center;
+}
+
+#block-menu-menu-links-on-footer {
+  .block-title {
+    display: none;
+  }
+  
+  ul.menu {
+    text-align:center;
+    padding: 0px;
+    margin: 0px 0px 0.5em 0;
+    li {
+      list-style: none outside none;
+      display: inline;
+      a, a:active, a:visited {
+	color: white;
+      }
+    }
+  }
+}
+
+
+/*-----------------------------------------------
+                 Front Page
+-----------------------------------------------*/
+
+#views_slideshow_cycle_teaser_section_slideshow_on_homepage-block {
+  .views-slideshow-cycle-main-frame-row {
+    width: 100%;
+  }
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+#main {   
+  margin-top: 30px;
+  div.view-reshet-yeruka-homepage-center-boxes {
+    padding-top: 5px;
+    h2 {
+      margin-top: 0px;
+    }
+  }
+  
+  h2 {
+    color: white;
+    background-color: $blue;
+    height: $h2height;
+    margin-bottom: $h2marginbottom;
+    a, a:active, a:visited {
+      color: white;
+      @include rr_homepage_a(30px, $homepage_sideboxes_fontsize);
+      padding-top: 2px;
+    }	
+  }
+  
+  div.region-content-bottom {
+    width: 152%;
+    margin-top: 70px;
+    
+    div.view-reshet-yeruka-homepage-low-boxes {
+      td {
+        padding-left: 1.3%;
+        padding-right: 1.3%;
+        width: 34.6%;
+        &.col-first {
+        padding-left: 0%; /* LTR */
+        width: 32.7%
+        }
+        &.col-last {
+        padding-right: 0%; /* LTR */
+        width: 32.7%
+        }
+      }
+      a { 
+        text-decoration: none;
+        img {
+          width: 100%;
+        }
+      }
+      h2 {
+        height: $h2height;
+        line-height: 2.5em;
+        background-color: $green;      
+	color: white;
+        text-decoration: none;
+        margin-bottom: $h2marginbottom;
+        @include rr_homepage_a(10px, $homepage_bottomboxes_fontsize);
+      }
+      div.views-field-body {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+
+body.front {
+  #sidebar-first {
+    width: 22.9167%;
+
+    div.region-sidebar-first{
+      div.block {
+        margin-right: 9%; /* LTR */
+        h2 {
+          background-color: $lightblue;
+          a {
+            color: $blue;
+          }
+        }
+      }
+    }
+  }
+}
+
+#sidebar-second {
+  h2 {
+    height: $h2height;
+    color: $blue;
+    background-color: $lightblue;
+    margin-top: 35px;
+    margin-bottom: $h2marginbottom;
+         a {
+            color: $blue;
+            @include rr_homepage_a(12px, $homepage_sideboxes_fontsize);
+          }
+  }
+}
+/*-----------------------------------------------
+                 Inner Pages
+-----------------------------------------------*/
+.node {
+  .field-name-field-field-image-on-homepage {
+    float: right; /* LTR */
+  }
+}
+
+/* -----  contact us ----- */
+body.page-contact {
+  div#block-block-4 {
+    float: right; /* LTR */
+    width: 50%;   
+    img {
+      width: 100%;
+    }
+  }
+  div#block-system-main {
+    float: left; /* LTR */
+    width: 40%;
+    input {
+      width: 100%;
+    }
+    .form-item-copy {
+      display: none;
+    }
+  }
+}
+
+/* -----  articles ----- */
+body.node-type-article {
+  p.submitted {
+    display: none;
+  }
+  div.content .node-article div.field-name-field-image {
+    float: right; /* LTR */
+    margin-left: 20px; /* LTR */
+  }
+  .comment-wrapper {
+    clear: both;
+  }
+}
+/*-----------------------------------------------
+                   Forms
+-----------------------------------------------*/
+
