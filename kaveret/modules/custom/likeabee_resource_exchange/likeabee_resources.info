@@ -1,0 +1,18 @@
+; $Id:
+name = Likeabee resource exchange
+description = To replace Cforge currencies
+package = Likeabee
+core = "7.x"
+dependencies[] = mcapi
+dependencies[] = mcapi_balance_history
+dependencies[] = mcapi_index_views
+dependencies[] = mcapi_forms
+dependencies[] = mcapi_limits
+dependencies[] = accountant_ui
+dependencies[] = mcapi_signatures
+;dependencies[] = advanced_help
+dependencies[] = text
+
+files[] = likeabee_resources.views_default.inc
+files[] = likeabee_resources.mcapicurrencies_default.inc
+files[] = likeabee_resources.mcapiforms_default.inc
