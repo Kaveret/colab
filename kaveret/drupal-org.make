@@ -26,6 +26,9 @@ projects[entity][version] = "1.0"
 projects[entityreference][subdir] = "contrib"
 projects[entityreference][version] = "1.0"
 
+projects[entityreference_prepopulate][subdir] = "contrib"
+projects[entityreference_prepopulate][version] = "1.x-dev"
+
 projects[facetapi][subdir] = "contrib"
 projects[facetapi][version] = "1.2"
 
@@ -34,6 +37,12 @@ projects[fboauth][version] = "1.6"
 
 projects[features][subdir] = "contrib"
 projects[features][version] = "1.0"
+
+projects[field_group][subdir] = "contrib"
+projects[field_group][version] = "1.1"
+
+projects[flag][subdir] = "contrib"
+projects[flag][version] = "2.0-beta8"
 
 projects[hint][subdir] = "contrib"
 projects[hint][version] = "1.2"
@@ -44,11 +53,25 @@ projects[insert][version] = "1.2"
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "2.0"
 
+projects[mailsystem][version] = 2.34
+projects[mailsystem][subdir] = "contrib"
+
+projects[message][subdir] = "contrib"
+projects[message][version] = "1.7"
+
+projects[message_notify][subdir] = "contrib"
+projects[message_notify][version] = "2.3"
+
 projects[migrate][subdir] = "contrib"
 projects[migrate][version] = "2.5"
 
 projects[migrate_extras][subdir] = "contrib"
 projects[migrate_extras][version] = "2.5"
+
+projects[mimemail][version] = 1.0-alpha1
+projects[mimemail][subdir] = "contrib"
+projects[mimemail][patch][] = "http://drupal.org/files/rules-1585546-1-moving_rules_actions.patch"
+projects[mimemail][patch][] = "http://drupal.org/files/compress_install_missing_value.patch"
 
 projects[module_filter][subdir] = "contrib"
 projects[module_filter][version] = 1.7
@@ -56,8 +79,26 @@ projects[module_filter][version] = 1.7
 projects[nodequeue][subdir] = "contrib"
 projects[nodequeue][version] = "2.0-beta1"
 
+projects[og][subdir] = "contrib"
+projects[og][version] = "2.0-rc3"
+
+projects[og_purl][subdir] = "contrib"
+projects[og_purl][version] = "1.x-dev"
+
+projects[og_vocab][subdir] = "contrib"
+projects[og_vocab][version] = "1.x-dev"
+
 projects[panels][subdir] = "contrib"
 projects[panels][version] = "3.3"
+
+projects[pathauto][subdir] = "contrib"
+projects[pathauto][version] = "1.1"
+
+projects[purl][subdir] = "contrib"
+projects[purl][version] = "1.x-dev"
+
+projects[rules][subdir] = "contrib"
+projects[rules][version] = "2.2"
 
 projects[search_api_db][subdir] = "contrib"
 projects[search_api_db][version] = "1.0-beta4"
