@@ -1,5 +1,5 @@
-name = kaverte
-description = Kaverte profile
+name = HaKaveret
+description = HaKaveret profile
 version = VERSION
 core = 7.x
 
@@ -54,3 +54,8 @@ dependencies[] = views
 dependencies[] = views_ui
 dependencies[] = views_bulk_operations
 
+; Custom modules
+dependencies[] = likeabee
+dependencies[] = likeabee_community
+dependencies[] = likeabee_news
+dependencies[] = likeabee_photo
