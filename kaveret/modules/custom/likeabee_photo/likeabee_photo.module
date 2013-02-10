@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Likeabee Photo feature.
+ */
+
+include_once 'likeabee_photo.features.inc';

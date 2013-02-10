@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Likeabee News feature.
+ */
+
+include_once 'likeabee_news.features.inc';

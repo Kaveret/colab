@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Likeabee Community feature.
+ */
+
+include_once 'likeabee_community.features.inc';
