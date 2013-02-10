@@ -7,26 +7,8 @@
 function kaveret_install() {
   kaveret_standard_install();
 
-  // Disable bartik.
-  theme_disable(array('bartik'));
+  _kaveret_theme_setup();
 
-  // Enable our theme.
-  theme_enable(array('omega', 'kaveret_omega'));
-
-  // Set the default theme.
-  variable_set('theme_default', 'kaveret_omega');
-  variable_set('admin_theme', 'kaveret_omega');
-
-  // Omega settings.
-  $settings = variable_get('theme_kaveret_omega_settings');
-  $settings['omega_dummy_blocks'] = FALSE;
-
-  // Disable omega devel.
-  $settings['omega_toggle_extension_layouts'] = FALSE;
-  // Disable epiqo layout.
-  $settings['omega_toggle_extension_development'] = FALSE;
-
-  variable_set('theme_kaveret_omega_settings', $settings);
 
   // Set required date API variables.
   // See date_api_status().
@@ -38,6 +20,78 @@ function kaveret_install() {
 
   // Set default front page.
   variable_set('site_frontpage', 'home');
+}
+
+/**
+ * Helper function; Setup theme.
+ */
+function _kaveret_theme_setup() {
+  // Disable bartik.
+  theme_disable(array('bartik'));
+
+  variable_set('theme_default', 'beezy');
+  theme_enable(array('beezy'));
+  variable_set('theme_beezy_settings', array (
+    'toggle_logo' => 1,
+    'toggle_name' => 0,
+    'toggle_slogan' => 0,
+    'toggle_node_user_picture' => 1,
+    'toggle_comment_user_picture' => 1,
+    'toggle_comment_user_verification' => 0,
+    'toggle_favicon' => 1,
+    'toggle_main_menu' => 0,
+    'toggle_secondary_menu' => 1,
+    'default_logo' => 1,
+    'logo_path' => '',
+    'logo_upload' => '',
+    'default_favicon' => 1,
+    'favicon_path' => '',
+    'favicon_upload' => '',
+    'sasson_show_grid' => 0,
+    'sasson_grid_width' => '960px',
+    'sasson_columns' => '16',
+    'sasson_gutter_width' => '20px',
+    'sasson_sidebar_first' => '4',
+    'sasson_sidebar_second' => '4',
+    'sasson_responsive' => 1,
+    'sasson_responsive_approach' => 'desktop_first',
+    'sasson_responsive_narrow' => '960px',
+    'sasson_responsive_narrower' => '767px',
+    'sasson_responsive_narrowest' => '480px',
+    'sasson_responsive_mf_small' => '480px',
+    'sasson_responsive_mf_medium' => '767px',
+    'sasson_responsive_mf_large' => '960px',
+    'sasson_responsive_menus_width' => '480px',
+    'sasson_responsive_menus_selectors' => 'ul#main-menu-links, ul#secondary-menu-links',
+    'sasson_responsive_menus_autohide' => 1,
+    'sasson_sass' => 1,
+    'sasson_devel' => 1,
+    'sasson_images_path' => '',
+    'sasson_fonts_path' => '',
+    'sasson_stylesheets_path' => '',
+    'sasson_sass_recompile' => 0,
+    'sasson_sprites_recompile' => 0,
+    'sasson_cssreset' => 'normalize',
+    'sasson_formalize' => 0,
+    'sasson_force_ie' => 1,
+    'sasson_html5shiv' => 1,
+    'sasson_ie_comments' => 1,
+    'sasson_prompt_cf' => 'IE 7',
+    'sasson_font' => '',
+    'sasson_font_fallback' => 'sans-serif',
+    'sasson_font_selectors' => 'body',
+    'sasson_watcher' => 0,
+    'sasson_watch_file' => 'sites/likeabee.net/themes/beezy/styles/beezy.scss',
+    'sasson_instant_watcher' => 1,
+    'sasson_overlay' => 0,
+    'sasson_overlay_url' => '',
+    'sasson_overlay_opacity' => '0.5',
+    'sasson_breadcrumb_hideonlyfront' => 1,
+    'sasson_breadcrumb_showtitle' => 0,
+    'sasson_breadcrumb_separator' => '»',
+    'sasson_feed_icons' => 0,
+    'sasson_settings__active_tab' => 'edit-sasson-general',
+  ));
 }
 
 /**

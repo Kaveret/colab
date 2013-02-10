@@ -127,6 +127,7 @@ projects[views][version] = "3.3"
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.1"
 
+
 ; Libraries.
 libraries[jquery.cycle][type] = "libraries"
 libraries[jquery.cycle][download][type] = "git"
