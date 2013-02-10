@@ -6,7 +6,7 @@ set -xe
 
 # Build the profile itself.
 (
-  cd cadaboo
+  cd kaveret
   $DRUSH make --no-core --contrib-destination drupal-org.make .
   cd ..
 )
@@ -23,7 +23,7 @@ set -xe
   rm -Rf www || true
 
   # Build core.
-  $DRUSH make cadaboo/drupal-org-core.make www
+  $DRUSH make kaveret/drupal-org-core.make www
 
   # Restore the sites directory.
   if [ -d sites-backup ]; then
@@ -32,5 +32,5 @@ set -xe
   fi
 
   # Move the profile in place.
-  ln -s ../../cadaboo www/profiles/cadaboo
+  ln -s ../../kaveret www/profiles/kaveret
 )

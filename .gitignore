@@ -1,0 +1,24 @@
+# Ignore configuration files that may contain sensitive information.
+sites/default/settings.php
+
+# Ignore paths that contain user-generated content.
+sites/*/files
+sites/*/private
+
+# Contribs
+kaveret/modules/contrib/*
+kaveret/themes/contrib/*
+kaveret/libraries
+kaveret/1
+www
+
+# SASS
+kaveret/themes/kaveret_omega/.sass-cache/*
+
+# Aptana And IDEs
+.project
+.settings/*
+.idea/*
+
+# Custom install script.
+install.sh
