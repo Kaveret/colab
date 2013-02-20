@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * kaverte profile.
+ * kaveret profile.
  */
 
 /**
@@ -9,42 +9,41 @@
  *
  * Allows the profile to alter the site configuration form.
  */
-function kaverte_form_install_configure_form_alter(&$form, $form_state) {
+function kaveret_form_install_configure_form_alter(&$form, $form_state) {
   // Pre-populate the site name with the server name.
-  $form['site_information']['site_name']['#default_value'] = $_SERVER['SERVER_NAME'];
+  $form['site_information']['site_name']['#default_value'] = 'kaveret';
 }
 
 /**
  * Implements hook_install_tasks().
  */
-function kaverte_install_tasks() {
+function kaveret_install_tasks() {
   $tasks = array();
 
-  $tasks['kaverte_setup_blocks'] = array(
-    'display_name' => st('Setup Blocks'),
+  $tasks['kaveret_set_permissions'] = array(
+    'display_name' => st('Set Permissions'),
     'display' => FALSE,
   );
 
-  $tasks['kaverte_set_permissions'] = array(
-    'display_name' => st('Grant permissions'),
+  $tasks['kaveret_set_variables'] = array(
+    'display_name' => st('Set Variables'),
+    'display' => FALSE,
+  );
+
+  $tasks['kaveret_setup_blocks'] = array(
+    'display_name' => st('Setup Blocks'),
     'display' => FALSE,
   );
 
   return $tasks;
 }
-
 /**
  * Task callback; Setup blocks.
- *
- * @todo: Add blocks.
  */
-function kaverte_setup_blocks() {
-  return;
-
-  $default_theme = variable_get('theme_default', 'kaverte_omega');
+function kaveret_setup_blocks() {
+  $default_theme = 'bootstrap';
 
   $blocks = array();
-
   $blocks[] = array(
     'module' => 'panels_mini',
     'delta' => 'footer',
@@ -52,6 +51,8 @@ function kaverte_setup_blocks() {
     'status' => 1,
     'weight' => 0,
     'region' => 'footer',
+    'custom' => 0,
+    'visibility' => 0,
     'pages' => '',
     'title' => '<none>',
     'cache' => DRUPAL_NO_CACHE,
@@ -60,38 +61,90 @@ function kaverte_setup_blocks() {
   drupal_static_reset();
   _block_rehash($default_theme);
   foreach ($blocks as $record) {
-    $module = array_shift($record);
-    $delta = array_shift($record);
-    $theme = array_shift($record);
     db_update('block')
       ->fields($record)
-      ->condition('module', $module)
-      ->condition('delta', $delta)
-      ->condition('theme', $theme)
+      ->condition('module', $record['module'])
+      ->condition('delta', $record['delta'])
+      ->condition('theme', $record['theme'])
       ->execute();
   }
 }
 
 /**
- * Task callback; Set user permissions.
+ * Task callback; Set permissions.
  */
-function kaverte_set_permissions() {
+function kaveret_set_permissions() {
+  // Enable default permissions for system roles.
   $permissions = array(
     'access content',
     'access comments',
     'post comments',
     'skip comment approval',
-    'access overlay',
-    'access site-wide contact form',
+    filter_permission_name(variable_get('kaveret_filtered_html_format_id')),
+    //'access overlay',
+    // Rest ws service access.
+    // TODO: Create a new role for the api access.
+    'access resource node',
   );
-  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, $permissions);
-
-  // Enable default permissions for system roles.
-  // @todo: Following permissions don't work.
-  $permissions += array(
-    'create project content',
-    'edit own project content',
-  );
-
+  // Add content permissions.
+  foreach (array_keys(node_type_get_types()) as $content_type) {
+    $permissions += array(
+      'create ' . $content_type . ' content',
+      'edit any ' . $content_type . ' content',
+      'edit own ' . $content_type . ' content',
+      'delete any ' . $content_type . ' content',
+      'delete own ' . $content_type . ' content',
+    );
+  }
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, $permissions);
+
+  // Create a default role for site administrators, with all available permissions assigned.
+  $admin_role = new stdClass();
+  $admin_role->name = 'administrator';
+  $admin_role->weight = 2;
+  user_role_save($admin_role);
+  user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
+  // Set this as the administrator role.
+  variable_set('user_admin_role', $admin_role->rid);
+  // Assign user 1 the "administrator" role.
+  db_insert('users_roles')
+    ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
+    ->execute();
+
+  node_access_rebuild(TRUE);
+}
+
+/**
+ * Task callback; Set variables.
+ */
+function kaveret_set_variables() {
+  $variables = array(
+    // Set the default theme.
+    'theme_default' => 'bootstrap',
+    'admin_theme' => 'seven',
+    // Omega settings.
+    'theme_kaveret_omega_settings' => $settings,
+    // Date/Time settings.
+    'date_default_timezone' => 'Asia/Jerusalem',
+    'date_first_day' => 1,
+    'date_format_medium' => 'D, Y-m-d H:i',
+    'date_format_medium_no_time' => 'D, Y-m-d',
+    // Set default front page.
+    'site_frontpage' => 'home',
+    // Enable user picture support and set the default to a square thumbnail option.
+    'user_pictures' => '1',
+    'user_picture_dimensions' => '1024x1024',
+    'user_picture_file_size' => '800',
+    'user_picture_style' => 'thumbnail',
+    // Allow visitor account creation with administrative approval.
+    'user_register' => USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL,
+    // Update the menu router information.
+    'menu_rebuild_needed' => TRUE,
+    'jquery_update_jquery_version' =>  '1.8',
+  );
+
+  foreach ($variables as $key => $value) {
+    variable_set($key, $value);
+  }
+
 }

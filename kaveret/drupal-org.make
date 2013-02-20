@@ -50,6 +50,9 @@ projects[hint][version] = "1.2"
 projects[insert][subdir] = "contrib"
 projects[insert][version] = "1.2"
 
+projects[jquery_update][subdir] = "contrib"
+projects[jquery_update][version] = "2.x-dev"
+
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "2.0"
 

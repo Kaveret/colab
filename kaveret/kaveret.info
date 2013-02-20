@@ -38,6 +38,7 @@ dependencies[] = entityreference_prepopulate
 dependencies[] = fboauth
 dependencies[] = features
 dependencies[] = hint
+dependencies[] = jquery_update
 dependencies[] = module_filter
 dependencies[] = page_manager
 dependencies[] = panels
