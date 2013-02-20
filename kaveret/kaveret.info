@@ -39,6 +39,7 @@ dependencies[] = fboauth
 dependencies[] = features
 dependencies[] = hint
 dependencies[] = jquery_update
+dependencies[] = migrate_ui
 dependencies[] = module_filter
 dependencies[] = page_manager
 dependencies[] = panels
@@ -56,7 +57,3 @@ dependencies[] = views_ui
 dependencies[] = views_bulk_operations
 
 ; Custom modules
-; dependencies[] = likeabee
-dependencies[] = likeabee_community
-dependencies[] = likeabee_news
-dependencies[] = likeabee_photo

@@ -3,7 +3,7 @@ api = 2
 
 ; Modules
 projects[admin_menu][subdir] = "contrib"
-projects[admin_menu][version] = "3.0-rc3"
+projects[admin_menu][version] = "3.0-rc4"
 
 projects[admin_views][subdir] = "contrib"
 projects[admin_views][version] = "1.1"
@@ -27,7 +27,7 @@ projects[entityreference][subdir] = "contrib"
 projects[entityreference][version] = "1.0"
 
 projects[entityreference_prepopulate][subdir] = "contrib"
-projects[entityreference_prepopulate][version] = "1.x-dev"
+projects[entityreference_prepopulate][version] = "1.2"
 
 projects[facetapi][subdir] = "contrib"
 projects[facetapi][version] = "1.2"
