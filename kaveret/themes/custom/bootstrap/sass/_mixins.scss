@@ -1,0 +1,22 @@
+@mixin rounded-corners($tl, $tr, $br, $bl) {
+  -moz-border-radius: $tl $tr $br $bl;
+  -webkit-border-radius: $tl $tr $br $bl;
+  -khtml-border-radius: $tl $tr $br $bl;
+   border-radius: $tl $tr $br $bl;
+}
+
+@mixin opacity($percent) {
+  opacity: $percent / 100;
+  filter: alpha(opacity=$percent);
+}
+
+@mixin transition($time) {
+  transition: $time;
+  -moz-transition: $time;
+  -webkit-transition: $time;
+  -o-transition: $time;
+}
+
+@mixin franklin {
+  font-family: "Franklin Gothic", Arial, Verdana, Helvetica, sans-serif;
+}

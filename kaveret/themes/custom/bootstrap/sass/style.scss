@@ -1,0 +1,12 @@
+@import "pages";
+@import "header";
+@import "footer";
+@import "mixins";
+@import "form";
+@import "drupal_bootstrap";
+@import "pages/front";
+
+// Replacing core css
+.element-invisible {
+  display: none;
+}
