@@ -1,1 +1,7 @@
 <?php
+
+/**
+ * Implements hook_install().
+ */
+function kaveret_install() {
+}

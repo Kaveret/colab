@@ -80,11 +80,6 @@ function kaveret_set_permissions() {
     'access comments',
     'post comments',
     'skip comment approval',
-    filter_permission_name(variable_get('kaveret_filtered_html_format_id')),
-    //'access overlay',
-    // Rest ws service access.
-    // TODO: Create a new role for the api access.
-    'access resource node',
   );
   // Add content permissions.
   foreach (array_keys(node_type_get_types()) as $content_type) {
@@ -96,6 +91,7 @@ function kaveret_set_permissions() {
       'delete own ' . $content_type . ' content',
     );
   }
+
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, $permissions);
 
   // Create a default role for site administrators, with all available permissions assigned.
@@ -122,15 +118,11 @@ function kaveret_set_variables() {
     // Set the default theme.
     'theme_default' => 'bootstrap',
     'admin_theme' => 'seven',
-    // Omega settings.
-    'theme_kaveret_omega_settings' => $settings,
     // Date/Time settings.
     'date_default_timezone' => 'Asia/Jerusalem',
     'date_first_day' => 1,
     'date_format_medium' => 'D, Y-m-d H:i',
     'date_format_medium_no_time' => 'D, Y-m-d',
-    // Set default front page.
-    'site_frontpage' => 'home',
     // Enable user picture support and set the default to a square thumbnail option.
     'user_pictures' => '1',
     'user_picture_dimensions' => '1024x1024',

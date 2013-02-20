@@ -12,8 +12,5 @@ mkdir sites/default/files
 chmod -R 777 sites/default/files
 
 drush si -y kaveret --account-pass=admin --db-url=mysql://root@localhost/kaveret --db-su=root -v
-drush en migrate_ui migrate_extras -y
+
 drush mi --all --user=1
-
-
-
