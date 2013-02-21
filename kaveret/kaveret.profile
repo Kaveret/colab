@@ -83,16 +83,22 @@ function kaveret_set_permissions() {
   );
   // Add content permissions.
   foreach (array_keys(node_type_get_types()) as $content_type) {
-    $permissions += array(
-      'create ' . $content_type . ' content',
-      'edit any ' . $content_type . ' content',
-      'edit own ' . $content_type . ' content',
-      'delete any ' . $content_type . ' content',
-      'delete own ' . $content_type . ' content',
+    $content_permissions = array(
+      "create $content_type content",
+      "edit own $content_type content",
+      "delete own $content_type content",
     );
+    $permissions = array_merge($permissions, $content_permissions);
   }
-
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, $permissions);
+
+  // Anonymous permissions.
+  $permissions = array(
+    'access content',
+    'access comments',
+  );
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, $permissions);
+
 
   // Create a default role for site administrators, with all available permissions assigned.
   $admin_role = new stdClass();
