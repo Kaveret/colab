@@ -208,7 +208,7 @@ function kaveret_offer_field_default_fields() {
         'allowed_values_function' => '',
       ),
       'translatable' => '0',
-      'type' => 'list_integer',
+      'type' => 'list_text',
     ),
     'field_instance' => array(
       'bundle' => 'offer',
