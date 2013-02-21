@@ -57,3 +57,5 @@ dependencies[] = views_ui
 dependencies[] = views_bulk_operations
 
 ; Custom modules
+dependencies[] = kaveret_migrate
+dependencies[] = kaveret_offer

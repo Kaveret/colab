@@ -1,0 +1,31 @@
+<?php
+/**
+ * @file
+ * Drupal needs this blank file.
+ */
+
+include_once 'kaveret_offer.features.inc';
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function kaveret_offer_form_offer_node_form_alter(&$form, &$form_state) {
+  // Alter offer creation form.
+  $node = $form_state['node'];
+  if (empty($node->nid)) {
+    // Allow overriding the type.
+    $type = !empty($_GET['type']) && $_GET['type'] == 'request' ? 'request' : 'offer';
+
+    drupal_set_title($type == 'request' ? t('I would like to request') : t('I would like to offer'));
+
+    $form['field_type'][LANGUAGE_NONE]['#default_value'] = $type;
+  }
+  // Alter offer edit form.
+  else {
+    $wrapper = entity_metadata_wrapper('node', $node);
+    drupal_set_title(t('Edit @type: @title', array('@type' => strtolower($wrapper->field_type->label()), '@title' => $node->title)));
+  }
+
+  hide($form['field_type']);
+  $form['field_expiry_after']['und']['#options']['_none'] = t('Never');
+}
