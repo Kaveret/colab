@@ -7,25 +7,70 @@
 include_once 'kaveret_offer.features.inc';
 
 /**
- * Implements hook_form_FORM_ID_alter().
+ * Implements hook_ctools_plugin_directory().
  */
-function kaveret_offer_form_offer_node_form_alter(&$form, &$form_state) {
-  // Alter offer creation form.
+function kaveret_offer_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools') {
+    return 'plugins/' . $plugin;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Alter the node form of request and offer.
+ */
+function kaveret_offer_form_alter(&$form, &$form_state, $form_id) {
+  if (!in_array($form_id, array('offer_node_form', 'request_node_form'))) {
+    return;
+  }
+
   $node = $form_state['node'];
   if (empty($node->nid)) {
     // Allow overriding the type.
-    $type = !empty($_GET['type']) && $_GET['type'] == 'request' ? 'request' : 'offer';
-
-    drupal_set_title($type == 'request' ? t('I would like to request') : t('I would like to offer'));
-
-    $form['field_type'][LANGUAGE_NONE]['#default_value'] = $type;
-  }
-  // Alter offer edit form.
-  else {
-    $wrapper = entity_metadata_wrapper('node', $node);
-    drupal_set_title(t('Edit @type: @title', array('@type' => strtolower($wrapper->field_type->label()), '@title' => $node->title)));
+    drupal_set_title($node->type == 'request' ? t('I would like to request') : t('I would like to offer'));
   }
 
-  hide($form['field_type']);
-  $form['field_expiry_after']['und']['#options']['_none'] = t('Never');
+  // The expiry label is different on the node view because there we display a
+  // specific date.
+  $form['field_expiry_after'][LANGUAGE_NONE]['#title'] = t('Delete after');
+  $form['field_expiry_after'][LANGUAGE_NONE]['#options']['_none'] = t('Never');
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function kaveret_offer_field_formatter_info() {
+  return array(
+    'expiry_date' => array(
+      'label' => t('Expiry date'),
+      'field types' => array('list_text'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function kaveret_offer_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+
+  switch ($display['type']) {
+    case 'expiry_date':
+      // Ignore expiry date: "Never".
+      if (empty($items[0]['value'])) {
+        break;
+      }
+
+      // Calculate the expiry date by applying the expiry_after value (E.g.
+      // "+1 day") to the time the node was updated.
+      $expiry_date = strtotime($items[0]['value'], $entity->changed);
+      // Format the date.
+      $expiry_date = date(variable_get('date_format_short'), $expiry_date);
+
+      $element[0] = array('#markup' => $expiry_date);
+      break;
+  }
+
+  return $element;
 }
