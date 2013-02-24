@@ -9,6 +9,8 @@ function kaveret_migrate_migrate_api() {
     'migrations' => array(
       'KaveretOfferCategoriesTerms' => array('class_name' => 'KaveretOfferCategoriesTerms'),
       'KaveretOfferStatusesTerms' => array('class_name' => 'KaveretOfferStatusesTerms'),
+      'KaveretOfferNodes' => array('class_name' => 'KaveretOfferNodes'),
+      'KaveretRequestNodes' => array('class_name' => 'KaveretRequestNodes'),
     ),
   );
 
