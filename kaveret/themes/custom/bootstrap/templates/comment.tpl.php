@@ -4,7 +4,8 @@
     <p class="submitted">
       <?php print $picture; ?>
       <?php print $submitted; ?>
-      <?php print $permalink; ?>
+      <?php print $permalink; ?><br/>
+      <?php print $changed_fields; ?>
     </p>
   </header>
 

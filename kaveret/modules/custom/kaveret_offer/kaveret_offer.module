@@ -18,23 +18,33 @@ function kaveret_offer_ctools_plugin_directory($module, $plugin) {
 /**
  * Implements hook_form_alter().
  *
- * Alter the node form of request and offer.
+ * Alter the node form of request and offer and remove revision ID field from
+ * their comments.
  */
 function kaveret_offer_form_alter(&$form, &$form_state, $form_id) {
-  if (!in_array($form_id, array('offer_node_form', 'request_node_form'))) {
-    return;
-  }
+  // Offer and request node forms.
+  if (in_array($form_id, array('offer_node_form', 'request_node_form'))) {
+    $node = $form_state['node'];
+    if (empty($node->nid)) {
+      // Allow overriding the type.
+      drupal_set_title($node->type == 'request' ? t('I would like to request') : t('I would like to offer'));
+    }
 
-  $node = $form_state['node'];
-  if (empty($node->nid)) {
-    // Allow overriding the type.
-    drupal_set_title($node->type == 'request' ? t('I would like to request') : t('I would like to offer'));
+    // The expiry label is different on the node view because there we display a
+    // specific date.
+    $form['field_expiry_after'][LANGUAGE_NONE]['#title'] = t('Delete after');
+    $form['field_expiry_after'][LANGUAGE_NONE]['#options']['_none'] = t('Never');
   }
+  // Offer and request comments forms.
+  elseif (in_array($form_id, array('comment_node_offer_form', 'comment_node_request_form'))) {
+    $form['field_vid']['#access'] = FALSE;
 
-  // The expiry label is different on the node view because there we display a
-  // specific date.
-  $form['field_expiry_after'][LANGUAGE_NONE]['#title'] = t('Delete after');
-  $form['field_expiry_after'][LANGUAGE_NONE]['#options']['_none'] = t('Never');
+    // Copy the status field into the comment form.
+    $node = $form['#node'];
+    $temp_form = array();
+    field_attach_form('node', $node, $temp_form, $form_state);
+    $form['field_status'] = $temp_form['field_status'];
+  }
 }
 
 /**
@@ -67,10 +77,91 @@ function kaveret_offer_field_formatter_view($entity_type, $entity, $field, $inst
       $expiry_date = strtotime($items[0]['value'], $entity->changed);
       // Format the date.
       $expiry_date = date(variable_get('date_format_short'), $expiry_date);
-
       $element[0] = array('#markup' => $expiry_date);
       break;
   }
 
   return $element;
+}
+
+/**
+ * Implements hook_comment_presave().
+ *
+ * Save update the node status according to the setting on the comment.
+ */
+function kaveret_offer_comment_presave($comment) {
+  $wrapper = entity_metadata_wrapper('comment', $comment);
+  $node = $wrapper->node->value();
+
+  // Set the values from the comment on the offer/ request node.
+  $value = $comment->field_status[LANGUAGE_NONE][0]['target_id'];
+  $original_value = $node->field_status[LANGUAGE_NONE][0]['target_id'];
+
+  // Check if the field was changed on the comment.
+  if ($value != $original_value) {
+    $wrapper->node->field_status->set($value);
+    // Set the revision ID to the node ID before it is saved.
+    $wrapper->field_vid->set($node->vid);
+    $node->revision = TRUE;
+    node_save($node);
+  }
+}
+
+/**
+ * Comment preprocess.
+ *
+ * Add all the fields that have changed from previous comment.
+ */
+function kaveret_offer_preprocess_comment(&$variables) {
+  $comment = $variables['comment'];
+  $node = $variables['node'];
+  $variables['changed_fields'] = '';
+
+  $cache = &drupal_static(__FUNCTION__, array());
+  // Cache all revisions of the current node.
+  if (isset($cache['revisions'])) {
+    $revisions = $cache['revisions'];
+  }
+  else {
+    // Load all node revisions.
+    $revisions = array();
+    foreach (array_keys(node_revision_list($node)) as $vid) {
+      $revisions[$vid] = node_load($node->nid, $vid);
+    }
+    $cache['revisions'] = $revisions;
+  }
+
+  if (isset($cache[$node->nid])) {
+    $thread = $cache[$node->nid];
+  }
+  else {
+    $thread = comment_get_thread($node, COMMENT_MODE_FLAT, 1000);
+    $cache[$node->nid] = $thread;
+  }
+
+  $wrapper = entity_metadata_wrapper('comment', $comment);
+  if (!$comment_vid = $wrapper->field_vid->value()) {
+    return;
+  }
+
+  $node_revision = $revisions[$comment_vid];
+  $wrapper = entity_metadata_wrapper('node', $node_revision);
+
+  // Find the task revision that was created after the comment was saved, in
+  // order to find the changes that were made with the comment.
+  $next_vid = NULL;
+  foreach(array_keys($revisions) as $vid) {
+    if ($vid == $comment_vid) {
+      break;
+    }
+    $next_vid = $vid;
+  }
+
+  $node_next_revision = $revisions[$next_vid];
+  $next_wrapper = entity_metadata_wrapper('node', $node_next_revision);
+
+
+  if ($wrapper->field_status->value() != $next_wrapper->field_status->value()) {
+    $variables['changed_fields'] = t('Status: @previous » @current', array('@previous' => $wrapper->field_status->label(), '@current' => $next_wrapper->field_status->label()));
+  }
 }
