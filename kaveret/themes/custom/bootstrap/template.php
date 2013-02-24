@@ -214,9 +214,7 @@ function bootstrap_menu_local_action($variables) {
  * @see node.tpl.php
  */
 function bootstrap_preprocess_node(&$variables) {
-  if ($variables['teaser']) {
-    $variables['classes_array'][] = 'row-fluid';
-  }
+  $variables['theme_hook_suggestions'][] = 'node__' . $variables['view_mode'];
 }
 
 /**

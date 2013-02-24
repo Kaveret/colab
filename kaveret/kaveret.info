@@ -52,6 +52,7 @@ dependencies[] = strongarm
 dependencies[] = title
 dependencies[] = token
 dependencies[] = views
+dependencies[] = views_content
 dependencies[] = views_ui
 dependencies[] = views_bulk_operations
 

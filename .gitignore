@@ -22,3 +22,6 @@ kaveret/themes/kaveret_omega/.sass-cache/*
 
 # Custom install script.
 install.sh
+
+# Sass
+kaveret/themes/custom/bootstrap/.sass-cache/*
