@@ -51,7 +51,7 @@ projects[insert][subdir] = "contrib"
 projects[insert][version] = "1.2"
 
 projects[jquery_update][subdir] = "contrib"
-projects[jquery_update][version] = "2.x-dev"
+projects[jquery_update][version] = "2.3"
 
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "2.0"
@@ -83,7 +83,7 @@ projects[nodequeue][subdir] = "contrib"
 projects[nodequeue][version] = "2.0-beta1"
 
 projects[og][subdir] = "contrib"
-projects[og][version] = "2.0-rc3"
+projects[og][version] = "2.0"
 
 projects[og_purl][subdir] = "contrib"
 projects[og_purl][version] = "1.x-dev"
@@ -122,10 +122,10 @@ projects[title][subdir] = "contrib"
 projects[title][version] = "1.0-alpha5"
 
 projects[token][subdir] = "contrib"
-projects[token][version] = "1.1"
+projects[token][version] = "1.5"
 
 projects[views][subdir] = "contrib"
-projects[views][version] = "3.3"
+projects[views][version] = "3.5"
 
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.1"
