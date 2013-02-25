@@ -74,10 +74,8 @@ projects[migrate][version] = "2.5"
 projects[migrate_extras][subdir] = "contrib"
 projects[migrate_extras][version] = "2.5"
 
-projects[mimemail][version] = 1.0-alpha1
+projects[mimemail][version] = 1.0-alpha2
 projects[mimemail][subdir] = "contrib"
-projects[mimemail][patch][] = "http://drupal.org/files/rules-1585546-1-moving_rules_actions.patch"
-projects[mimemail][patch][] = "http://drupal.org/files/compress_install_missing_value.patch"
 
 projects[module_filter][subdir] = "contrib"
 projects[module_filter][version] = 1.7

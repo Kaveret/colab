@@ -147,6 +147,9 @@ function kaveret_set_variables() {
     'menu_rebuild_needed' => TRUE,
     'jquery_update_jquery_version' =>  '1.8',
     'page_manager_node_view_disabled' => FALSE,
+    'mimemail_format' => 'full_html',
+    // TODO: Currently, the attached CSS seems to break the email.
+    'mimemail_sitestyle' => FALSE,
   );
 
   foreach ($variables as $key => $value) {
