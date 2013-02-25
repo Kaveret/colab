@@ -30,10 +30,9 @@ function kaveret_offer_form_alter(&$form, &$form_state, $form_id) {
       drupal_set_title($node->type == 'request' ? t('I would like to request') : t('I would like to offer'));
     }
 
-    // The expiry label is different on the node view because there we display a
-    // specific date.
-    $form['field_expiry_after'][LANGUAGE_NONE]['#title'] = t('Delete after');
     $form['field_expiry_after'][LANGUAGE_NONE]['#options']['_none'] = t('Never');
+
+    $form['field_expiry_date']['#access'] = FALSE;
   }
   // Offer and request comments forms.
   elseif (in_array($form_id, array('comment_node_offer_form', 'comment_node_request_form'))) {
@@ -48,63 +47,32 @@ function kaveret_offer_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * Implements hook_field_formatter_info().
- */
-function kaveret_offer_field_formatter_info() {
-  return array(
-    'expiry_date' => array(
-      'label' => t('Expiry date'),
-      'field types' => array('list_text'),
-    ),
-  );
-}
-
-/**
- * Implements hook_field_formatter_view().
- */
-function kaveret_offer_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
-  $element = array();
-
-  switch ($display['type']) {
-    case 'expiry_date':
-      // Ignore expiry date: "Never".
-      if (empty($items[0]['value'])) {
-        break;
-      }
-
-      // Calculate the expiry date by applying the expiry_after value (E.g.
-      // "+1 day") to the time the node was updated.
-      $expiry_date = strtotime($items[0]['value'], $entity->changed);
-      // Format the date.
-      $expiry_date = date(variable_get('date_format_short'), $expiry_date);
-      $element[0] = array('#markup' => $expiry_date);
-      break;
-  }
-
-  return $element;
-}
-
-/**
- * Implements hook_comment_presave().
+ * Implements hook_field_access().
  *
- * Save update the node status according to the setting on the comment.
+ * Hide the "expired" field.
  */
-function kaveret_offer_comment_presave($comment) {
-  $wrapper = entity_metadata_wrapper('comment', $comment);
-  $node = $wrapper->node->value();
-
-  // Set the values from the comment on the offer/ request node.
-  $value = $comment->field_status[LANGUAGE_NONE][0]['target_id'];
-  $original_value = $node->field_status[LANGUAGE_NONE][0]['target_id'];
-
-  // Check if the field was changed on the comment.
-  if ($value != $original_value) {
-    $wrapper->node->field_status->set($value);
-    // Set the revision ID to the node ID before it is saved.
-    $wrapper->field_vid->set($node->vid);
-    $node->revision = TRUE;
-    node_save($node);
+function kaveret_offer_field_access($op, $field, $entity_type, $entity, $account) {
+  if ($field['field_name'] == 'field_expired') {
+    return FALSE;
   }
+}
+
+/**
+ * Implements hook_node_presave().
+ *
+ * Set the expiry date of offers and requests accoring to the "Delete after"
+ * setting.
+ */
+function kaveret_offer_node_presave($node) {
+  $wrapper = entity_metadata_wrapper('node', $node);
+  if (!$wrapper->field_expiry_after->value()) {
+    return;
+  }
+
+  // Calculate the expiry date by applying the expiry_after value (E.g.
+  // "+1 day") to the time the node was updated.
+  $expiry_date = strtotime($wrapper->field_expiry_after->value(), $node->changed);
+  $wrapper->field_expiry_date->set($expiry_date);
 }
 
 /**
@@ -160,8 +128,79 @@ function kaveret_offer_preprocess_comment(&$variables) {
   $node_next_revision = $revisions[$next_vid];
   $next_wrapper = entity_metadata_wrapper('node', $node_next_revision);
 
-
   if ($wrapper->field_status->value() != $next_wrapper->field_status->value()) {
     $variables['changed_fields'] = t('Status: @previous » @current', array('@previous' => $wrapper->field_status->label(), '@current' => $next_wrapper->field_status->label()));
+  }
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * Set nodes as "Expired" when their expiry date is due.
+ */
+function kaveret_offer_cron() {
+  // Find offers and requests with an expiry date in the past.
+  $query = new EntityFieldQuery();
+  $result = $query->entityCondition('entity_type', 'node')
+    ->propertyCondition('type', array('offer', 'request'), 'IN')
+    ->propertyCondition('status', NODE_PUBLISHED)
+    ->fieldCondition('field_expiry_date', 'value', 'now', '<')
+    // Ignore nodes that are already expired.
+    ->fieldCondition('field_expired', 'value', FALSE)
+    ->execute();
+
+  if (empty($result['node'])) {
+    return;
+  }
+
+  foreach(node_load_multiple(array_keys($result['node'])) as $node) {
+    // Set the node as expired.
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $wrapper->field_expired->set(TRUE);
+    $wrapper->save();
+
+    // Post a comment and set the node as expired (Using field_status).
+    $comment = (object)array(
+      'nid' => $node->nid,
+      // TODO: We can create a "System Message" user, like in drupal.org.
+      'uid' => 1,
+      'cid' => 0,
+      'pid' => 0,
+      'is_anonymous' => 0,
+      'status' => COMMENT_PUBLISHED,
+      'language' => LANGUAGE_NONE,
+      'subject' => '',
+      'comment_body' => array(LANGUAGE_NONE => array(array('value' => 'Automatically set as expired.', 'format' => 'plain_text'))),
+    );
+    comment_save($comment);
+  }
+}
+
+/**
+ * Implements hook_comment_presave().
+ *
+ * Save update the node status according to the setting on the comment.
+ */
+function kaveret_offer_comment_presave($comment) {
+  $wrapper = entity_metadata_wrapper('comment', $comment);
+  $node = $wrapper->node->value();
+
+  // Ignore when no status is set on the comment (Happens when the comment is
+  // saved programmatically).
+  if (empty($comment->field_status[LANGUAGE_NONE][0]['target_id'])) {
+    return;
+  }
+
+  // Set the values from the comment on the offer/ request node.
+  $value = $comment->field_status[LANGUAGE_NONE][0]['target_id'];
+  $original_value = $node->field_status[LANGUAGE_NONE][0]['target_id'];
+
+  // Check if the field was changed on the comment.
+  if ($value != $original_value) {
+    $wrapper->node->field_status->set($value);
+    // Set the revision ID to the node ID before it is saved.
+    $wrapper->field_vid->set($node->vid);
+    $node->revision = TRUE;
+    node_save($node);
   }
 }

@@ -178,7 +178,7 @@ function kaveret_offer_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '3',
+          'weight' => '4',
         ),
       ),
       'display' => array(),
