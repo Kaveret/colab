@@ -32,6 +32,16 @@ function kaveret_offer_form_alter(&$form, &$form_state, $form_id) {
 
     $form['field_expiry_after'][LANGUAGE_NONE]['#options']['_none'] = t('Never');
 
+    // Add the broadcast button.
+    $form['actions']['submit_broadcast'] = array(
+      '#type' => 'submit',
+      '#value' => t('Save and broadcast'),
+      // Copy the submit handlers from the "Save" button, and add the broadcast
+      // handler.
+      '#submit' => array_merge($form['actions']['submit']['#submit'], array('kaveret_offer_broadcast_submit')),
+      '#weight' => 10,
+    );
+
     $form['field_expiry_date']['#access'] = FALSE;
   }
   // Offer and request comments forms.
@@ -44,6 +54,33 @@ function kaveret_offer_form_alter(&$form, &$form_state, $form_id) {
     field_attach_form('node', $node, $temp_form, $form_state);
     $form['field_status'] = $temp_form['field_status'];
   }
+}
+
+/**
+ * Submit handler for offer/ request form.
+ *
+ * Send a notification to all users contining the offer/ request details.
+ */
+function kaveret_offer_broadcast_submit($form, &$form_state) {
+  $node = $form_state['node'];
+
+  $message = message_create('broadcast', array('uid' => $node->uid));
+  $wrapper = entity_metadata_wrapper('message', $message);
+  $wrapper->field_node->set($node);
+
+  message_subscribe_process_message('node', $node, $message);
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function kaveret_offer_field_formatter_info() {
+  return array(
+    'expiry_date' => array(
+      'label' => t('Expiry date'),
+      'field types' => array('list_text'),
+    ),
+  );
 }
 
 /**
