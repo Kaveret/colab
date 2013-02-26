@@ -1,2 +1,1 @@
-cadaboo
-=======
+Kaveret installation profile
