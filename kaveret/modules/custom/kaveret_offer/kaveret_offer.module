@@ -101,6 +101,10 @@ function kaveret_offer_field_access($op, $field, $entity_type, $entity, $account
  * setting.
  */
 function kaveret_offer_node_presave($node) {
+  if (!in_array($node->type, array('request', 'offer'))) {
+    return;
+  }
+
   $wrapper = entity_metadata_wrapper('node', $node);
   if (!$wrapper->field_expiry_after->value()) {
     return;

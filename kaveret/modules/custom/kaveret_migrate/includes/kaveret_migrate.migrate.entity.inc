@@ -22,6 +22,16 @@ abstract class KaveretMigration extends Migration {
     if ($this->entityType == 'node') {
       $this->addFieldMapping('title', 'title');
       $class_name = 'MigrateDestinationNode';
+
+      if (og_is_group_content_type('node', $this->bundle)) {
+        $csv_cols[] = array(OG_AUDIENCE_FIELD, 'Community');
+        $this->dependencies[] = 'KaveretCommunityNodes';
+
+        $this
+          ->addFieldMapping(OG_AUDIENCE_FIELD, 'og_group_ref')
+          ->sourceMigration('KaveretCommunityNodes');
+      }
+
       $csv_cols[] = array('title', 'Title');
     }
     elseif ($this->entityType == 'taxonomy_term') {

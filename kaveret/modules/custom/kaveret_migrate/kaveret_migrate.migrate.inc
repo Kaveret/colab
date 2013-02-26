@@ -89,3 +89,23 @@ class KaveretRequestNodes extends KaveretMigration {
       ->sourceMigration('KaveretOfferCategoriesTerms');
   }
 }
+
+/**
+ * Migrate "Community" nodes.
+ */
+class KaveretCommunityNodes extends KaveretMigration {
+  public $entityType = 'node';
+  public $bundle = 'community';
+
+  public function __construct() {
+    parent::__construct();
+    $this->addFieldMapping(OG_GROUP_FIELD)->defaultValue(TRUE);
+  }
+
+  public function complete($entity, $row) {
+    // Set the first community as the default community.
+    if (!variable_get('kaveret_og_default_community')) {
+      variable_set('kaveret_og_default_community', $entity->nid);
+    }
+  }
+}

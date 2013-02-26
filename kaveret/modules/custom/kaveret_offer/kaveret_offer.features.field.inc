@@ -472,7 +472,7 @@ function kaveret_offer_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '6',
+          'weight' => '9',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -547,7 +547,7 @@ function kaveret_offer_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => 7,
+          'weight' => '4',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -620,7 +620,7 @@ function kaveret_offer_field_default_fields() {
           'label' => 'hidden',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '2',
+          'weight' => '6',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -772,7 +772,7 @@ function kaveret_offer_field_default_fields() {
             'image_style' => '',
           ),
           'type' => 'image',
-          'weight' => '3',
+          'weight' => '2',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -874,7 +874,7 @@ function kaveret_offer_field_default_fields() {
             'link' => FALSE,
           ),
           'type' => 'entityreference_label',
-          'weight' => '4',
+          'weight' => '3',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -952,7 +952,7 @@ function kaveret_offer_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '5',
+          'weight' => '7',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -1020,7 +1020,7 @@ function kaveret_offer_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 6,
+          'weight' => '8',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -1185,7 +1185,7 @@ function kaveret_offer_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '5',
+          'weight' => '7',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -1260,7 +1260,7 @@ function kaveret_offer_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => 7,
+          'weight' => '4',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -1333,7 +1333,7 @@ function kaveret_offer_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '4',
+          'weight' => '6',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -1665,7 +1665,7 @@ function kaveret_offer_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '6',
+          'weight' => '9',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -1733,7 +1733,7 @@ function kaveret_offer_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 5,
+          'weight' => '8',
         ),
         'teaser' => array(
           'label' => 'hidden',

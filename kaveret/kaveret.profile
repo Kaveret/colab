@@ -20,6 +20,12 @@ function kaveret_form_install_configure_form_alter(&$form, $form_state) {
 function kaveret_install_tasks() {
   $tasks = array();
 
+  // Allow switching between single and multiple communities.
+  $tasks['kaveret_community_form'] = array(
+    'display_name' => st('Choose between single and multiple communities'),
+    'type' => 'form'
+  );
+
   $tasks['kaveret_set_permissions'] = array(
     'display_name' => st('Set Permissions'),
     'display' => FALSE,
@@ -40,7 +46,52 @@ function kaveret_install_tasks() {
     'display' => FALSE,
   );
 
+  $tasks['kaveret_og_setup'] = array(
+    'display_name' => st('Create OG fields'),
+    'display' => FALSE,
+  );
+
   return $tasks;
+}
+
+/**
+ * Single/ multiple communities form.
+ */
+function kaveret_community_form($form, &$form_state) {
+  $form['kaveret_og_single_community'] = array(
+    '#title' => t('Single community'),
+    '#type' => 'checkbox',
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Next'),
+  );
+
+  return $form;
+}
+
+/**
+ * Submit handler for single/ multiple communities form.
+ */
+function kaveret_community_form_submit($form, &$form_state) {
+  if (!empty($form_state['values']['kaveret_og_single_community'])) {
+    $context_handlers = array(
+      'kaveret_og' => TRUE,
+    );
+  }
+  else {
+    $context_handlers = array(
+      'url' => TRUE,
+      'node' => TRUE,
+      'og_purl' => TRUE,
+    );
+
+    module_enable(array('og_purl'));
+  }
+
+  // Set OG-context handlers.
+  variable_set('og_context_negotiation_group_context', $context_handlers);
 }
 
 /**
@@ -214,4 +265,35 @@ function kaveret_set_text_formats() {
     ),
   );
   filter_format_save($full_html_format);
+}
+
+/**
+ * Profile task; Attach OG related fields.
+ */
+function kaveret_og_setup() {
+  variable_set('og_features_ignore_og_fields', TRUE);
+
+  // Group  type.
+  og_create_field(OG_GROUP_FIELD, 'node', 'community');
+
+  // Group content types.
+  $bundles = array(
+    'offer',
+    'request',
+  );
+
+  foreach ($bundles as $bundle) {
+    $og_field = og_fields_info(OG_AUDIENCE_FIELD);
+    $og_field['instance']['label'] = 'Community';
+      // Enable Entity-reference prepopulate.
+    $og_field['instance']['settings']['behaviors']['prepopulate'] = array(
+      'status' => TRUE,
+      'action' => 'hide',
+      'action_on_edit' => TRUE,
+      'fallback' => 'redirect',
+      'og_context' => TRUE,
+    );
+
+    og_create_field(OG_AUDIENCE_FIELD, 'node', $bundle, $og_field);
+  }
 }

@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * @file
+ * Code for the Kaveret OG feature.
+ */
+
+include_once 'kaveret_og.features.inc';
+
+/**
+ * Implements hook_node_insert().
+ *
+ * Attach every group-content to a community.
+ */
+function kaveret_og_node_insert($node) {
+  if (!og_is_group_content_type('node', $node->type)) {
+    return;
+  }
+
+  // Attach node to a community only if not already attached.
+  $gids = og_get_entity_groups('node', $node);
+  if (!empty($gids)) {
+    return;
+  }
+
+  // No community is set; Attach node to the user's first community.
+  $gids = og_get_entity_groups();
+
+  $nid = FALSE;
+  if (!empty($gids['node'])) {
+    // Get the first community the user belongs to.
+    foreach (node_load_multiple($gids['node']) as $group) {
+      if ($group->type == 'community') {
+        $nid = $group->nid;
+        break;
+      }
+    }
+  }
+
+  if (!$nid) {
+    throw new Exception(t('User does not belong to any community, thus node cannot be attached to a community.'));
+  }
+
+  og_group('node', $nid, array('entity_type' => 'node', 'entity' => $node->nid));
+}
+
+/**
+ * Implements hook_og_context_negotiation_info().
+ */
+function kaveret_og_og_context_negotiation_info() {
+  $providers = array();
+
+  $providers['kaveret_og'] = array(
+    'name' => t('Single community'),
+    'description' => t('Provides default context for a single-community installation.'),
+    'callback' => 'kaveret_og_og_context_handler',
+  );
+
+  return $providers;
+}
+
+/**
+ * OG-context handler.
+ *
+ * Retreive the default community group ID.
+ */
+function kaveret_og_og_context_handler() {
+  return array(
+    'node' => array(variable_get('kaveret_og_default_community')),
+  );
+}

@@ -42,7 +42,7 @@ projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.1"
 
 projects[flag][subdir] = "contrib"
-projects[flag][version] = "2.0-beta8"
+projects[flag][version] = "2.0"
 
 projects[hint][subdir] = "contrib"
 projects[hint][version] = "1.2"
@@ -88,6 +88,7 @@ projects[og][version] = "2.0"
 
 projects[og_purl][subdir] = "contrib"
 projects[og_purl][version] = "1.x-dev"
+projects[og_purl][patch][] = "http://drupal.org/files/og_purl_notice-1926868-1.patch"
 
 projects[og_vocab][subdir] = "contrib"
 projects[og_vocab][version] = "1.x-dev"
