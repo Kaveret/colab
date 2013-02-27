@@ -49,6 +49,7 @@ features[message_type][] = broadcast
 features[node][] = offer
 features[node][] = request
 features[page_manager_handlers][] = node_view_panel_context
+features[page_manager_pages][] = front
 features[page_manager_pages][] = offers
 features[taxonomy][] = offer_categories
 features[taxonomy][] = offer_statuses

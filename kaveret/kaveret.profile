@@ -201,6 +201,7 @@ function kaveret_set_variables() {
     'mimemail_format' => 'full_html',
     // TODO: Currently, the attached CSS seems to break the email.
     'mimemail_sitestyle' => FALSE,
+    'site_frontpage' => 'front',
   );
 
   foreach ($variables as $key => $value) {
