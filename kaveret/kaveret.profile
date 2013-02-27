@@ -131,16 +131,16 @@ function kaveret_setup_blocks() {
 
   $blocks = array();
   $blocks[] = array(
-    'module' => 'panels_mini',
-    'delta' => 'footer',
+    'module' => 'search',
+    'delta' => 'form',
     'theme' => $default_theme,
     'status' => 1,
     'weight' => 0,
-    'region' => 'footer',
+    'region' => 'navigation',
     'custom' => 0,
     'visibility' => 0,
     'pages' => '',
-    'title' => '<none>',
+    'title' => '',
     'cache' => DRUPAL_NO_CACHE,
   );
 
@@ -166,6 +166,7 @@ function kaveret_set_permissions() {
     'access comments',
     'post comments',
     'skip comment approval',
+    'search content',
   );
   // Add content permissions.
   foreach (array_keys(node_type_get_types()) as $content_type) {
@@ -182,6 +183,7 @@ function kaveret_set_permissions() {
   $permissions = array(
     'access content',
     'access comments',
+    'search content',
   );
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, $permissions);
 

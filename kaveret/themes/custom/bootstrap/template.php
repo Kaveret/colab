@@ -110,6 +110,7 @@ function bootstrap_process_html_tag(&$variables) {
  * @see page.tpl.php
  */
 function bootstrap_preprocess_page(&$variables) {
+  global $language;
   // Add information about the number of sidebars.
   if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
     $variables['columns'] = 3;
@@ -142,6 +143,10 @@ function bootstrap_preprocess_page(&$variables) {
     $variables['secondary_nav']['#theme_wrappers'] = array('menu_tree__secondary');
   }
 
+  // Get the logo filename according to the language.
+  $logo = theme('image', array('path' => path_to_theme() . '/images/logo-' . $language->language . '.png'));
+  $class = $language->direction == LANGUAGE_RTL ? 'pull-right' : 'pull-left';
+  $variables['logo'] = l($logo, '', array('html' => TRUE, 'attributes' => array('class' => array($class, 'logo'))));
 }
 
 /**
