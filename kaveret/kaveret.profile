@@ -20,6 +20,11 @@ function kaveret_form_install_configure_form_alter(&$form, $form_state) {
 function kaveret_install_tasks() {
   $tasks = array();
 
+  $tasks['kaveret_setup_languages'] = array(
+    'display_name' => st('Setup languages'),
+    'display' => FALSE,
+  );
+
   // Allow switching between single and multiple communities.
   $tasks['kaveret_community_form'] = array(
     'display_name' => st('Choose between single and multiple communities'),
@@ -52,6 +57,30 @@ function kaveret_install_tasks() {
   );
 
   return $tasks;
+}
+
+/**
+ * Task callback; Setup languages.
+ */
+function kaveret_setup_languages() {
+  locale_add_language('he');
+
+  $language_negotiation = array(
+    'locale-url' => array(
+      'callbacks' => array(
+        'language' => 'locale_language_from_url',
+        'switcher' => 'locale_language_switcher_url',
+        'url_rewrite' => 'locale_language_url_rewrite_url',
+      ),
+      'file' => 'includes/locale.inc',
+    ),
+    'language-default' => array(
+      'callbacks' => array(
+        'language' => 'language_from_default',
+      ),
+    ),
+  );
+  variable_set('language_negotiation_language', $language_negotiation);
 }
 
 /**
