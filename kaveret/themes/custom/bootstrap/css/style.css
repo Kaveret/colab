@@ -278,12 +278,17 @@ e.g. multipage*/
   clear: both;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/style\.scss}line{font-family:\0000310}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/style\.scss}line{font-family:\000039}}
+body {
+  padding-top: 0;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/style\.scss}line{font-family:\0000314}}
 .element-invisible {
   display: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/style\.scss}line{font-family:\0000314}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/style\.scss}line{font-family:\0000318}}
 .node-teaser .field-name-body {
   padding: 0 9px;
 }
