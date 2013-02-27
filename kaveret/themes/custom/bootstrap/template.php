@@ -145,8 +145,7 @@ function bootstrap_preprocess_page(&$variables) {
 
   // Get the logo filename according to the language.
   $logo = theme('image', array('path' => path_to_theme() . '/images/logo-' . $language->language . '.png'));
-  $class = $language->direction == LANGUAGE_RTL ? 'pull-right' : 'pull-left';
-  $variables['logo'] = l($logo, '', array('html' => TRUE, 'attributes' => array('class' => array($class, 'logo'))));
+  $variables['logo'] = l($logo, '', array('html' => TRUE, 'attributes' => array('class' => array(bootstrap_get_pull_class(), 'logo'))));
 }
 
 /**
@@ -160,7 +159,7 @@ function bootstrap_menu_tree__primary(&$variables) {
  * Bootstrap theme wrapper function for the secondary menu links
  */
 function bootstrap_menu_tree__secondary(&$variables) {
-  return '<ul class="menu nav pull-right">' . $variables['tree'] . '</ul>';
+  return '<ul class="menu nav ' . bootstrap_get_pull_class(FALSE) . '">' . $variables['tree'] . '</ul>';
 }
 
 /**
@@ -300,3 +299,23 @@ function bootstrap_bootstrap_search_form_wrapper(&$variables) {
   $output .= '</div>';
   return $output;
  }
+
+/**
+ * Get the default bootstrap pull class, according to the current language.
+ *
+ * @param $default_direction
+ *   When language is RTL, default_direction = TRUE will result in returning
+ *   right, etc.
+ *
+ * @return
+ *   'pull-left' or 'pull-right'.
+ */
+function bootstrap_get_pull_class($default_direction = TRUE) {
+  global $language;
+  if ($language->direction == LANGUAGE_RTL) {
+    return $default_direction ? 'pull-right' : 'pull-left';
+  }
+  else {
+    return $default_direction ? 'pull-left' : 'pull-right';
+  }
+}

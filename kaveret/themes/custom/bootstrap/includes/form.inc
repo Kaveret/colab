@@ -17,14 +17,15 @@ function bootstrap_form_alter(&$form, &$form_state, $form_id) {
   if (isset($form['#form_id']) && !in_array($form['#form_id'], $form_ids) && !isset($form['#node_edit_form'])) {
     $form['actions']['#theme_wrappers'] = array();
   }
-}  
+}
 
 /**
  * Implements hook_form_FORM_ID_alter() for search_form().
  */
 function bootstrap_form_search_form_alter(&$form, &$form_state) {
+
   $form['#attributes']['class'][] = 'form-search';
-  $form['#attributes']['class'][] = 'pull-left';
+  $form['#attributes']['class'][] = bootstrap_get_pull_class();
 
   $form['basic']['keys']['#title'] = '';
   $form['basic']['keys']['#attributes']['class'][] = 'search-query';
@@ -46,7 +47,7 @@ function bootstrap_form_search_form_alter(&$form, &$form_state) {
  */
 function bootstrap_form_search_block_form_alter(&$form, &$form_state) {
   $form['#attributes']['class'][] = 'form-search';
-  $form['#attributes']['class'][] = 'pull-left';
+  $form['#attributes']['class'][] = bootstrap_get_pull_class();
 
   $form['search_block_form']['#title'] = '';
   $form['search_block_form']['#attributes']['class'][] = 'search-query';
