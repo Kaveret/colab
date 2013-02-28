@@ -41,6 +41,11 @@ function kaveret_install_tasks() {
     'display' => FALSE,
   );
 
+  $tasks['kaveret_menus_setup'] = array(
+    'display_name' => st('Create menu items'),
+    'display' => FALSE,
+  );
+
   $tasks['kaveret_setup_blocks'] = array(
     'display_name' => st('Setup Blocks'),
     'display' => FALSE,
@@ -53,11 +58,6 @@ function kaveret_install_tasks() {
 
   $tasks['kaveret_og_setup'] = array(
     'display_name' => st('Create OG fields'),
-    'display' => FALSE,
-  );
-
-  $tasks['kaveret_menus_setup'] = array(
-    'display_name' => st('Create menu items'),
     'display' => FALSE,
   );
 
@@ -135,6 +135,7 @@ function kaveret_setup_blocks() {
   $default_theme = 'bootstrap';
 
   $blocks = array();
+
   $blocks[] = array(
     'module' => 'search',
     'delta' => 'form',
@@ -146,6 +147,20 @@ function kaveret_setup_blocks() {
     'visibility' => 0,
     'pages' => '',
     'title' => '',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  $blocks[] = array(
+    'module' => 'menu',
+    'delta' => 'footer-links',
+    'theme' => $default_theme,
+    'status' => 1,
+    'weight' => 0,
+    'region' => 'footer',
+    'custom' => 0,
+    'visibility' => 0,
+    'pages' => '',
+    'title' => '<none>',
     'cache' => DRUPAL_NO_CACHE,
   );
 
@@ -339,7 +354,7 @@ function kaveret_og_setup() {
  * Profile task; create menu links.
  */
 function kaveret_menus_setup() {
-  // Addd links to user menu.
+  // Add links to user menu.
   $item = array(
     'link_title' => 'Log in',
     'link_path' => 'user/login',
@@ -351,6 +366,34 @@ function kaveret_menus_setup() {
     'link_title' => 'Register',
     'link_path' => 'user/register',
     'menu_name' => 'user-menu',
+  );
+  menu_link_save($item);
+
+  // Create the footer links menu.
+  $menu = array(
+    'menu_name' => 'footer-links',
+    'title' => 'Footer links',
+  );
+  menu_save($menu);
+
+  $item = array(
+    'link_title' => 'Facebook',
+    'link_path' => 'http://facebook.com/',
+    'menu_name' => 'footer-links',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Twitter',
+    'link_path' => 'http://twitter.com/',
+    'menu_name' => 'footer-links',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'RSS',
+    'link_path' => '<front>',
+    'menu_name' => 'footer-links',
   );
   menu_link_save($item);
 }

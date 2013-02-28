@@ -19,9 +19,6 @@
       <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
         <div class="nav-collapse collapse">
           <nav role="navigation">
-            <?php if (!empty($primary_nav)): ?>
-              <?php print render($primary_nav); ?>
-            <?php endif; ?>
             <?php if (!empty($page['navigation'])): ?>
               <?php print render($page['navigation']); ?>
             <?php endif; ?>
@@ -84,7 +81,12 @@
     <?php endif; ?>
 
   </div>
-  <footer class="footer container">
-    <?php print render($page['footer']); ?>
-  </footer>
 </div>
+
+<footer class="footer">
+  <div class="container">
+    <?php print $footer_logo; ?>
+    <?php print render($page['footer']); ?>
+    <?php print $footer_icons; ?>
+  </div>
+</footer>

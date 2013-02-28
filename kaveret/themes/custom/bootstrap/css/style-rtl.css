@@ -50,3 +50,9 @@ div.contextual-links-wrapper {
   filter: FlipH;
   -ms-filter: "FlipH";
 }
+
+.footer #block-menu-footer-links {
+  float: right;
+  margin-right: 40px;
+  margin-left: 0;
+}

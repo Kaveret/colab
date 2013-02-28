@@ -1,0 +1,65 @@
+.footer {
+  background-color: #9f2772;
+
+  ul {
+
+    li {
+      display: inline;
+
+      & > a {
+        display: inline;
+
+        &:hover {
+          background: none;
+        }
+      }
+    }
+  }
+
+  #block-menu-footer-links {
+    float: left; //LTR
+    margin-left: 40px;
+
+    li {
+
+      a {
+        border-right: 1px solid white; //LTR
+        color: white;
+        padding: 0 20px;
+
+      }
+
+      &.last a {
+        border-right: none; //LTR
+      }
+    }
+  }
+
+  .icons {
+
+    a {
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+      margin-left: 10px;
+
+      &.balloons {
+        background-image: url('../images/balloons.png');
+      }
+
+      &.arrows {
+        background-image: url('../images/arrows.png');
+      }
+
+      &.people {
+        background-image: url('../images/people.png');
+      }
+
+      &.stars {
+        background-image: url('../images/stars.png');
+      }
+    }
+  }
+}
+
+

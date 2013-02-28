@@ -146,6 +146,18 @@ function bootstrap_preprocess_page(&$variables) {
   // Get the logo filename according to the language.
   $logo = theme('image', array('path' => path_to_theme() . '/images/logo-' . $language->language . '.png'));
   $variables['logo'] = l($logo, '', array('html' => TRUE, 'attributes' => array('class' => array(bootstrap_get_pull_class(), 'logo'))));
+
+  $footer_logo = theme('image', array('path' => path_to_theme() . '/images/logo-footer-' . $language->language . '.png'));
+  $variables['footer_logo'] = l($footer_logo, '', array('html' => TRUE, 'attributes' => array('class' => array(bootstrap_get_pull_class(), 'logo'))));
+
+  // Build footer icons menu.
+  $items = array(
+    l('', '', array('attributes' => array('class' => array('stars')))),
+    l('', '', array('attributes' => array('class' => array('balloons')))),
+    l('', '', array('attributes' => array('class' => array('people')))),
+    l('', '', array('attributes' => array('class' => array('arrows')))),
+  );
+  $variables['footer_icons'] = theme('item_list', array('items' => $items, 'attributes' => array('class' => array('icons', bootstrap_get_pull_class(FALSE)))));
 }
 
 /**
