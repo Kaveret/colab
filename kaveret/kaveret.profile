@@ -56,6 +56,11 @@ function kaveret_install_tasks() {
     'display' => FALSE,
   );
 
+  $tasks['kaveret_menus_setup'] = array(
+    'display_name' => st('Create menu items'),
+    'display' => FALSE,
+  );
+
   return $tasks;
 }
 
@@ -328,4 +333,24 @@ function kaveret_og_setup() {
 
     og_create_field(OG_AUDIENCE_FIELD, 'node', $bundle, $og_field);
   }
+}
+
+/**
+ * Profile task; create menu links.
+ */
+function kaveret_menus_setup() {
+  // Addd links to user menu.
+  $item = array(
+    'link_title' => 'Log in',
+    'link_path' => 'user/login',
+    'menu_name' => 'user-menu',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Register',
+    'link_path' => 'user/register',
+    'menu_name' => 'user-menu',
+  );
+  menu_link_save($item);
 }
