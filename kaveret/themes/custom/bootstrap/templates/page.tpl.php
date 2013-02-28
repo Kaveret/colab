@@ -32,6 +32,10 @@
   </div>
 </header>
 
+<nav id="main-menu">
+  <?php print render($primary_nav); ?>
+</nav>
+
 <div class="main-container container">
 
   <header role="banner" id="page-header">
