@@ -8,26 +8,33 @@
         <span class="icon-bar"></span>
       </a>
 
-      <?php print $logo; ?>
-
-      <?php if (!empty($site_name)): ?>
-        <h1 id="site-name">
-          <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" class="brand"><?php print $site_name; ?></a>
-        </h1>
+      <?php if (!empty($user_image)): ?>
+        <?php print $user_image; ?>
       <?php endif; ?>
 
-      <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
-        <div class="nav-collapse collapse">
-          <nav role="navigation">
-            <?php if (!empty($page['navigation'])): ?>
-              <?php print render($page['navigation']); ?>
-            <?php endif; ?>
-            <?php if (!empty($secondary_nav)): ?>
-              <?php print render($secondary_nav); ?>
-            <?php endif; ?>
-          </nav>
-        </div>
-      <?php endif; ?>
+      <div class="nav-collapse collapse">
+        <nav role="navigation">
+          <div class="social-links <?php print $pull_class; ?>">
+            <?php print render($social_links); ?>
+          </div>
+
+          <?php if (!empty($page['navigation'])): ?>
+            <?php print render($page['navigation']); ?>
+          <?php endif; ?>
+
+          <div class="logo <?php print $alter_pull_class; ?>">
+            <?php print $logo; ?>
+          </div>
+
+          <div class="space-menu <?php print $alter_pull_class; ?>">
+            <?php print render($space_menu); ?>
+          </div>
+
+          <?php if (!empty($secondary_nav)): ?>
+            <?php //print render($secondary_nav); ?>
+          <?php endif; ?>
+        </nav>
+      </div>
     </div>
   </div>
 </header>
