@@ -475,4 +475,170 @@ function kaveret_menus_setup() {
     'plid' => $mlid,
   );
   menu_link_save($item);
+
+  // Individual/ Community space menu.
+  $menu = array(
+    'menu_name' => 'space-menu',
+    'title' => 'Individual / Community space menu',
+  );
+  menu_save($menu);
+
+  $item = array(
+    'link_title' => 'Community Space',
+    'link_path' => '<front>',
+    'menu_name' => 'space-menu',
+    'expanded' => TRUE,
+  );
+  $mlid = menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Groups',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Blogs',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+  );
+  menu_link_save($item);
+
+    $item = array(
+    'link_title' => 'Individual Space',
+    'link_path' => '<front>',
+    'menu_name' => 'space-menu',
+    'expanded' => TRUE,
+  );
+  $mlid = menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Profile',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Groups',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+  );
+  menu_link_save($item);
+
+  // Navigation menu.
+  $menu = array(
+    'menu_name' => 'navigation',
+    'title' => 'Navigation',
+  );
+  menu_save($menu);
+
+  $item = array(
+    'link_title' => 'My BeeZ',
+    'link_path' => '<front>',
+    'menu_name' => 'navigation',
+    'expanded' => TRUE,
+  );
+  $mlid = menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'item',
+    'link_path' => '<front>',
+    'menu_name' => 'navigation',
+    'plid' => $mlid,
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'BEEZIEST',
+    'link_path' => '<front>',
+    'menu_name' => 'navigation',
+    'expanded' => TRUE,
+  );
+  $mlid = menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'item',
+    'link_path' => '<front>',
+    'menu_name' => 'navigation',
+    'plid' => $mlid,
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Marketplace',
+    'link_path' => '<front>',
+    'menu_name' => 'navigation',
+    'expanded' => TRUE,
+  );
+  $mlid = menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'item',
+    'link_path' => '<front>',
+    'menu_name' => 'navigation',
+    'plid' => $mlid,
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'OFFERS & NEEDS',
+    'link_path' => '<front>',
+    'menu_name' => 'navigation',
+    'expanded' => TRUE,
+    'options' => array('attributes' => array('class' => array('offers'))),
+  );
+  $mlid = menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'item',
+    'link_path' => '<front>',
+    'menu_name' => 'navigation',
+    'plid' => $mlid,
+  );
+  menu_link_save($item);
+
+  // Navigation menu.
+  $menu = array(
+    'menu_name' => 'social-menu',
+    'title' => 'Social links',
+  );
+  menu_save($menu);
+
+  $item = array(
+    'link_title' => 'Facebook',
+    'link_path' => '<front>',
+    'menu_name' => 'social-menu',
+    'options' => array('attributes' => array('class' => array('facebook'))),
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Twitter',
+    'link_path' => '<front>',
+    'menu_name' => 'social-menu',
+    'options' => array('attributes' => array('class' => array('twitter'))),
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Email',
+    'link_path' => '<front>',
+    'menu_name' => 'social-menu',
+    'options' => array('attributes' => array('class' => array('email'))),
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Wordpress',
+    'link_path' => '<front>',
+    'menu_name' => 'social-menu',
+    'options' => array('attributes' => array('class' => array('wordpress'))),
+  );
+  menu_link_save($item);
 }

@@ -1,2 +1,65 @@
 @import "mixins";
 
+#navbar .navbar-inner {
+  padding-top: 30px;
+  background-color: white;
+
+  #search-block-form {
+    margin: 0;
+  }
+
+  .space-menu {
+
+    .dropdown-toggle {
+      margin-left: 10px; //LTR
+      background-color: #f9ab17;
+      padding: 5px;
+      color: white;
+      font-weight: bold;
+      text-transform: none;
+
+      .caret {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .social-links {
+
+    li {
+      padding: 0 5px;
+      border-right: 1px solid #c8c7c7; //LTR
+
+      &.last {
+        border-right: none;
+      }
+    }
+
+    a {
+      margin: 2px 2px;
+      color: transparent;
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      background: url('../images/sprites.png') no-repeat;
+
+
+      &.wordpress {
+        background-position: -75px -100px;
+      }
+
+      &.facebook {
+        background-position: 0 -100px;
+      }
+
+      &.twitter {
+        background-position: -25px -100px;
+      }
+
+      &.email {
+        background-position: -50px -100px;
+      }
+    }
+  }
+}

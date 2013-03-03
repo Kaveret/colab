@@ -1,3 +1,61 @@
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_header\.scss}line{font-family:\000033}}
+#navbar .navbar-inner {
+  padding-top: 30px;
+  background-color: white;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_header\.scss}line{font-family:\000037}}
+#navbar .navbar-inner #search-block-form {
+  margin: 0;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_header\.scss}line{font-family:\0000313}}
+#navbar .navbar-inner .space-menu .dropdown-toggle {
+  margin-left: 10px;
+  background-color: #f9ab17;
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+  text-transform: none;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_header\.scss}line{font-family:\0000321}}
+#navbar .navbar-inner .space-menu .dropdown-toggle .caret {
+  display: block;
+  margin: 0 auto;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_header\.scss}line{font-family:\0000330}}
+#navbar .navbar-inner .social-links li {
+  padding: 0 5px;
+  border-right: 1px solid #c8c7c7;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_header\.scss}line{font-family:\0000334}}
+#navbar .navbar-inner .social-links li.last {
+  border-right: none;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_header\.scss}line{font-family:\0000339}}
+#navbar .navbar-inner .social-links a {
+  margin: 2px 2px;
+  color: transparent;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: url("../images/sprites.png") no-repeat;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_header\.scss}line{font-family:\0000348}}
+#navbar .navbar-inner .social-links a.wordpress {
+  background-position: -75px -100px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_header\.scss}line{font-family:\0000352}}
+#navbar .navbar-inner .social-links a.facebook {
+  background-position: 0 -100px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_header\.scss}line{font-family:\0000356}}
+#navbar .navbar-inner .social-links a.twitter {
+  background-position: -25px -100px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_header\.scss}line{font-family:\0000360}}
+#navbar .navbar-inner .social-links a.email {
+  background-position: -50px -100px;
+}
+
 @media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_footer\.scss}line{font-family:\000031}}
 .footer {
   background-color: #9f2772;
