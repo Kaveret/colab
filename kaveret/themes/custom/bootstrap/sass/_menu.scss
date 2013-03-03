@@ -6,6 +6,7 @@
   li {
     margin-top: 10px;
     left: -120px; //LTR
+    @include transition(0.7s);
 
     &:hover {
       left: 0; //LTR
