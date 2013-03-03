@@ -3,21 +3,36 @@
 #main-menu {
   position: absolute;
 
+  li {
+    margin-top: 10px;
+    left: -120px; //LTR
+
+    &:hover {
+      left: 0; //LTR
+
+      .dropdown-menu {
+        display: block;
+      }
+
+      a.main {
+        color: white;
+      }
+    }
+  }
+
   a.main {
-    position: relative;
     display: inline-block;
     height: 45px;
     line-height: 45px;
     width: 155px;
     padding-left: 20px; //LTR
-    margin-top: 10px;
-    color: white;
+    color: transparent;
     box-shadow: 0 0 8px #716876;
     @include rounded-corners(0, 22px, 22px, 0);
     background-color: #f0ac01;
 
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       right: 3px; //LTR
       top: 3px;
@@ -40,6 +55,18 @@
 
     .caret {
       display: none;
+    }
+  }
+
+  ul.dropdown-menu {
+    position: static;
+    float: none;
+    left: auto;
+    width: 166px;
+    margin-top: -16px;
+
+    a {
+      font-size: 10px;
     }
   }
 }
