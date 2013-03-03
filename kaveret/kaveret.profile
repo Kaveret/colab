@@ -373,6 +373,7 @@ function kaveret_menus_setup() {
   $menu = array(
     'menu_name' => 'footer-links',
     'title' => 'Footer links',
+    'description' => 'Footer links',
   );
   menu_save($menu);
 
@@ -480,6 +481,7 @@ function kaveret_menus_setup() {
   $menu = array(
     'menu_name' => 'space-menu',
     'title' => 'Individual / Community space menu',
+    'description' => 'Individual / Community space menu',
   );
   menu_save($menu);
 
@@ -533,15 +535,16 @@ function kaveret_menus_setup() {
 
   // Navigation menu.
   $menu = array(
-    'menu_name' => 'navigation',
+    'menu_name' => 'navigation-menu',
     'title' => 'Navigation',
+    'description' => 'Navigation',
   );
   menu_save($menu);
 
   $item = array(
     'link_title' => 'My BeeZ',
     'link_path' => '<front>',
-    'menu_name' => 'navigation',
+    'menu_name' => 'navigation-menu',
     'expanded' => TRUE,
   );
   $mlid = menu_link_save($item);
@@ -549,7 +552,7 @@ function kaveret_menus_setup() {
   $item = array(
     'link_title' => 'item',
     'link_path' => '<front>',
-    'menu_name' => 'navigation',
+    'menu_name' => 'navigation-menu',
     'plid' => $mlid,
   );
   menu_link_save($item);
@@ -557,7 +560,7 @@ function kaveret_menus_setup() {
   $item = array(
     'link_title' => 'BEEZIEST',
     'link_path' => '<front>',
-    'menu_name' => 'navigation',
+    'menu_name' => 'navigation-menu',
     'expanded' => TRUE,
   );
   $mlid = menu_link_save($item);
@@ -565,7 +568,7 @@ function kaveret_menus_setup() {
   $item = array(
     'link_title' => 'item',
     'link_path' => '<front>',
-    'menu_name' => 'navigation',
+    'menu_name' => 'navigation-menu',
     'plid' => $mlid,
   );
   menu_link_save($item);
@@ -573,7 +576,7 @@ function kaveret_menus_setup() {
   $item = array(
     'link_title' => 'Marketplace',
     'link_path' => '<front>',
-    'menu_name' => 'navigation',
+    'menu_name' => 'navigation-menu',
     'expanded' => TRUE,
   );
   $mlid = menu_link_save($item);
@@ -581,7 +584,7 @@ function kaveret_menus_setup() {
   $item = array(
     'link_title' => 'item',
     'link_path' => '<front>',
-    'menu_name' => 'navigation',
+    'menu_name' => 'navigation-menu',
     'plid' => $mlid,
   );
   menu_link_save($item);
@@ -589,7 +592,7 @@ function kaveret_menus_setup() {
   $item = array(
     'link_title' => 'OFFERS & NEEDS',
     'link_path' => '<front>',
-    'menu_name' => 'navigation',
+    'menu_name' => 'navigation-menu',
     'expanded' => TRUE,
     'options' => array('attributes' => array('class' => array('offers'))),
   );
@@ -598,7 +601,7 @@ function kaveret_menus_setup() {
   $item = array(
     'link_title' => 'item',
     'link_path' => '<front>',
-    'menu_name' => 'navigation',
+    'menu_name' => 'navigation-menu',
     'plid' => $mlid,
   );
   menu_link_save($item);
@@ -607,6 +610,7 @@ function kaveret_menus_setup() {
   $menu = array(
     'menu_name' => 'social-menu',
     'title' => 'Social links',
+    'description' => 'Social links',
   );
   menu_save($menu);
 

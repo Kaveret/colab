@@ -8,8 +8,10 @@
         <span class="icon-bar"></span>
       </a>
 
-      <?php if (!empty($user_image)): ?>
-        <?php print $user_image; ?>
+      <?php if (!empty($user_picture)): ?>
+        <div class="user-picture <?php print $pull_class; ?>">
+          <?php print $user_picture; ?>
+        </div>
       <?php endif; ?>
 
       <div class="nav-collapse collapse">
@@ -33,6 +35,25 @@
           <?php if (!empty($secondary_nav)): ?>
             <?php //print render($secondary_nav); ?>
           <?php endif; ?>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+<header id="navbar-second" role="banner" class="navbar navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <div class="nav-collapse collapse">
+        <nav role="navigation">
+          <div class="user-details <?php print $pull_class; ?>">
+          </div>
+
+          <div class="navigation-menu <?php print $pull_class; ?>">
+            <?php print render($navigation_menu); ?>
+          </div>
+
+          <?php print render($secondary_nav); ?>
         </nav>
       </div>
     </div>

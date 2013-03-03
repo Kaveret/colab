@@ -137,6 +137,7 @@ function bootstrap_preprocess_page(&$variables) {
   // Header menus.
   $variables['space_menu'] = menu_tree('space-menu');
   $variables['social_links'] = menu_tree('social-menu');
+  $variables['navigation_menu'] = menu_tree('navigation-menu');
 
   // Get the logo filename according to the language.
   $logo = theme('image', array('path' => path_to_theme() . '/images/logo-' . $language->language . '.png'));
@@ -160,9 +161,8 @@ function bootstrap_preprocess_page(&$variables) {
     $image_variables = array(
       'style_name' => 'thumbnail',
       'path' => $picture->uri,
-      'attributes' => array('class' => array(bootstrap_get_pull_class())),
     );
-    $variables['user_image'] = theme('image_style', $image_variables);
+    $variables['user_picture'] = theme('image_style', $image_variables);
   }
 
   $variables['pull_class'] = bootstrap_get_pull_class();
