@@ -56,3 +56,45 @@ div.contextual-links-wrapper {
   margin-right: 40px;
   margin-left: 0;
 }
+
+@import "mixins";
+
+#main-menu li {
+  left: auto;
+  right: -120px;
+  margin-right: 0;
+  padding: 0;
+}
+
+#main-menu li:hover {
+  right: 0;
+}
+
+@media (max-width: 767px) {
+  #main-menu li {
+    right: -150px;
+  }
+
+  #main-menu li:hover {
+    right: -20px;
+  }
+}
+
+#main-menu li a.main {
+  padding-left: 0;
+  padding-right: 20px;
+  -moz-border-radius: 22px 0 0 22px;
+  -webkit-border-radius: 22px 0 0 22px;
+  -khtml-border-radius: 22px 0 0 22px;
+  border-radius: 22px 0 0 22px;
+}
+
+#main-menu li a.main:after {
+  right: auto;
+  left: 3px;
+}
+
+#main-menu li ul.dropdown-menu {
+  right: auto;
+}
+
