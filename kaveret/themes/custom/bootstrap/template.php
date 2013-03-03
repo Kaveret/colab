@@ -110,6 +110,7 @@ function bootstrap_process_html_tag(&$variables) {
  * @see page.tpl.php
  */
 function bootstrap_preprocess_page(&$variables) {
+  global $language;
   // Add information about the number of sidebars.
   if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
     $variables['columns'] = 3;
@@ -142,6 +143,21 @@ function bootstrap_preprocess_page(&$variables) {
     $variables['secondary_nav']['#theme_wrappers'] = array('menu_tree__secondary');
   }
 
+  // Get the logo filename according to the language.
+  $logo = theme('image', array('path' => path_to_theme() . '/images/logo-' . $language->language . '.png'));
+  $variables['logo'] = l($logo, '', array('html' => TRUE, 'attributes' => array('class' => array(bootstrap_get_pull_class(), 'logo'))));
+
+  $footer_logo = theme('image', array('path' => path_to_theme() . '/images/logo-footer-' . $language->language . '.png'));
+  $variables['footer_logo'] = l($footer_logo, '', array('html' => TRUE, 'attributes' => array('class' => array(bootstrap_get_pull_class(), 'logo'))));
+
+  // Build footer icons menu.
+  $items = array(
+    l('', '', array('attributes' => array('class' => array('stars')))),
+    l('', '', array('attributes' => array('class' => array('balloons')))),
+    l('', '', array('attributes' => array('class' => array('people')))),
+    l('', '', array('attributes' => array('class' => array('arrows')))),
+  );
+  $variables['footer_icons'] = theme('item_list', array('items' => $items, 'attributes' => array('class' => array('icons', bootstrap_get_pull_class(FALSE)))));
 }
 
 /**
@@ -155,7 +171,7 @@ function bootstrap_menu_tree__primary(&$variables) {
  * Bootstrap theme wrapper function for the secondary menu links
  */
 function bootstrap_menu_tree__secondary(&$variables) {
-  return '<ul class="menu nav pull-right">' . $variables['tree'] . '</ul>';
+  return '<ul class="menu nav ' . bootstrap_get_pull_class(FALSE) . '">' . $variables['tree'] . '</ul>';
 }
 
 /**
@@ -295,3 +311,23 @@ function bootstrap_bootstrap_search_form_wrapper(&$variables) {
   $output .= '</div>';
   return $output;
  }
+
+/**
+ * Get the default bootstrap pull class, according to the current language.
+ *
+ * @param $default_direction
+ *   When language is RTL, default_direction = TRUE will result in returning
+ *   right, etc.
+ *
+ * @return
+ *   'pull-left' or 'pull-right'.
+ */
+function bootstrap_get_pull_class($default_direction = TRUE) {
+  global $language;
+  if ($language->direction == LANGUAGE_RTL) {
+    return $default_direction ? 'pull-right' : 'pull-left';
+  }
+  else {
+    return $default_direction ? 'pull-left' : 'pull-right';
+  }
+}

@@ -44,9 +44,6 @@ projects[field_group][version] = "1.1"
 projects[flag][subdir] = "contrib"
 projects[flag][version] = "2.0"
 
-projects[hint][subdir] = "contrib"
-projects[hint][version] = "1.2"
-
 projects[insert][subdir] = "contrib"
 projects[insert][version] = "1.2"
 

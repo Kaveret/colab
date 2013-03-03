@@ -28,3 +28,31 @@ div.contextual-links-wrapper {
     margin-right: -20px;
   }
 }
+
+.form-search .input-append .search-query {
+  -webkit-border-radius: 0 14px 14px 0;
+  -moz-border-radius: 0 14px 14px 0;
+  border-radius: 0 14px 14px 0;
+}
+
+.form-search .input-append .btn {
+  -webkit-border-radius: 14px 0 0 14px;
+  -moz-border-radius: 14px 0 0 14px;
+  border-radius: 14px 0 0 14px;
+  margin-right: -1px;
+}
+
+.icon-search {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+
+.footer #block-menu-footer-links {
+  float: right;
+  margin-right: 40px;
+  margin-left: 0;
+}

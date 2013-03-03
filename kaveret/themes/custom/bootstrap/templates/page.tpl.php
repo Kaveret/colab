@@ -8,11 +8,7 @@
         <span class="icon-bar"></span>
       </a>
 
-      <?php if (!empty($logo)): ?>
-        <a class="logo pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-          <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-        </a>
-      <?php endif; ?>
+      <?php print $logo; ?>
 
       <?php if (!empty($site_name)): ?>
         <h1 id="site-name">
@@ -23,9 +19,6 @@
       <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
         <div class="nav-collapse collapse">
           <nav role="navigation">
-            <?php if (!empty($primary_nav)): ?>
-              <?php print render($primary_nav); ?>
-            <?php endif; ?>
             <?php if (!empty($page['navigation'])): ?>
               <?php print render($page['navigation']); ?>
             <?php endif; ?>
@@ -38,6 +31,10 @@
     </div>
   </div>
 </header>
+
+<nav id="main-menu">
+  <?php print render($primary_nav); ?>
+</nav>
 
 <div class="main-container container">
 
@@ -88,7 +85,12 @@
     <?php endif; ?>
 
   </div>
-  <footer class="footer container">
-    <?php print render($page['footer']); ?>
-  </footer>
 </div>
+
+<footer class="footer">
+  <div class="container">
+    <?php print $footer_logo; ?>
+    <?php print render($page['footer']); ?>
+    <?php print $footer_icons; ?>
+  </div>
+</footer>
