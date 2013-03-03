@@ -86,11 +86,38 @@
   box-shadow: none;
 
   .nav > li {
-    border-left: 1px solid #fecf7d; //LTR
+    border-left: 1px solid #fecf7d;
+
+    &.last {
+      border-right: 1px solid #fecf7d;
+    }
 
     a.dropdown-toggle {
       color: #9f2772;
       text-transform: none;
+
+      &.offers {
+        color: #31477f;
+      }
+
+      .caret {
+        display: block;
+        margin: auto;
+        background: url('../images/sprites.png') no-repeat 0 -125px;
+        width: 6px;
+        height: 6px;
+        padding: 0;
+        border: none;
+      }
+
+      &:hover {
+        background-color: white;
+        height: 28px;
+      }
+
+      // &.active {
+
+      // }
     }
   }
 }
