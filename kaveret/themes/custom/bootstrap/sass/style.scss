@@ -1,14 +1,17 @@
+@import "mixins";
+
 @import "pages";
 @import "header";
 @import "footer";
 @import "menu";
-@import "mixins";
 @import "form";
 @import "drupal_bootstrap";
+@import "teaser";
 @import "pages/front";
 
 body {
   padding-top: 0;
+  background-color: #fefefe;
 }
 
 // Replacing core css
