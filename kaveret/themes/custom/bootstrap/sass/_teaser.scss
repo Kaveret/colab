@@ -1,20 +1,38 @@
 article.node-teaser {
+  margin-top: 20px;
   border: 1px solid #feebdd;
   padding: 0;
-  @include rounded-corners(6px, 6px, 6px, 6px);
+  @include rounded-corners(8px, 8px, 8px, 8px);
 
   .border {
     border: 1px solid #feeecf;
-    @include rounded-corners(5px, 5px, 5px, 5px);
+    @include rounded-corners(7px, 7px, 7px, 7px);
 
     .border {
       border: 1px solid #fef6c7;
-      @include rounded-corners(4px, 4px, 4px, 4px);
+      @include rounded-corners(6px, 6px, 6px, 6px);
 
       .border {
         border: 1px solid #e1d9ae;
-        @include rounded-corners(2px, 2px, 2px, 2px);
+        @include rounded-corners(5px, 5px, 5px, 5px);
+        padding: 9px;
+        height: 300px;
       }
     }
+  }
+
+  .caption {
+    padding: 0;
+    line-height: 20px;
+    min-height: 40px;
+
+    a {
+      color: #79232f;
+      line-height: 20px;
+    }
+  }
+
+  .field-name-body {
+    padding: 0;
   }
 }

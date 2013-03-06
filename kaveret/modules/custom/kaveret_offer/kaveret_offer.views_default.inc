@@ -103,7 +103,6 @@ function kaveret_offer_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Offers/ Requests';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -157,7 +156,6 @@ function kaveret_offer_views_default_views() {
   $handler->display->display_options['inherit_panels_path'] = '1';
   $translatables['offers_requests'] = array(
     t('Master'),
-    t('Offers/ Requests'),
     t('more'),
     t('Apply'),
     t('Reset'),
