@@ -167,6 +167,10 @@ function bootstrap_preprocess_page(&$variables) {
 
   $variables['pull_class'] = bootstrap_get_pull_class();
   $variables['alter_pull_class'] = bootstrap_get_pull_class(FALSE);
+
+  if ($user) {
+    $variables['username'] = $user->name;
+  }
 }
 
 /**

@@ -46,8 +46,11 @@
     <div class="container">
       <div class="nav-collapse collapse">
         <nav role="navigation">
-          <div class="user-details <?php print $pull_class; ?>">
-          </div>
+          <?php if (!empty($username)): ?>
+            <div class="user-details <?php print $pull_class; ?>">
+              <div class="username"><?php print $username; ?></div>
+            </div>
+          <?php endif; ?>
 
           <div class="navigation-menu <?php print $pull_class; ?>">
             <?php print render($navigation_menu); ?>
