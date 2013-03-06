@@ -271,6 +271,16 @@
   font-size: 10px;
 }
 
+@media (max-width: 767px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_menu\.scss}line{font-family:\0000376}}
+  #main-menu li {
+    left: -150px;
+  }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_menu\.scss}line{font-family:\0000379}}
+  #main-menu li:hover {
+    left: -20px;
+  }
+}
 @media -sass-debug-info{filename{font-family:file\:\/\/\/home\/itamar\/www\/kaveret\/kaveret\/themes\/custom\/bootstrap\/sass\/_form\.scss}line{font-family:\000036}}
 form .control-group a {
   margin-left: 22px;
