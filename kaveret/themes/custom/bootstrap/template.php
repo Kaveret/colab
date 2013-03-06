@@ -171,6 +171,9 @@ function bootstrap_preprocess_page(&$variables) {
   if ($user) {
     $variables['username'] = $user->name;
   }
+
+  // Build breadcrumbs.
+  $variables['breadcrumbs'] = kaveret_general_get_breadcrumbs();
 }
 
 /**

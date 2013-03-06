@@ -86,7 +86,9 @@
       <?php if (!empty($page['highlighted'])): ?>
         <div class="highlighted hero-unit"><?php print render($page['highlighted']); ?></div>
       <?php endif; ?>
-      <?php if (!empty($breadcrumb)): print $breadcrumb; endif;?>
+
+      <?php print $breadcrumbs; ?>
+
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
 
