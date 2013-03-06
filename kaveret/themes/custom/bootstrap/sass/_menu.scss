@@ -71,3 +71,13 @@
     }
   }
 }
+
+@media (max-width: 767px) {
+  #main-menu li {
+    left: -150px;
+
+    &:hover {
+      left: -20px;
+    }
+  }
+}
