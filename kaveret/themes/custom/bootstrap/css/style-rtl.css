@@ -98,3 +98,6 @@ div.contextual-links-wrapper {
   right: auto;
 }
 
+.breadcrumbs .arrow {
+  background-position: -50px -125px;
+}

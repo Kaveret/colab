@@ -87,7 +87,9 @@
         <div class="highlighted hero-unit"><?php print render($page['highlighted']); ?></div>
       <?php endif; ?>
 
-      <?php print $breadcrumbs; ?>
+      <div class="breadcrumbs">
+        <?php print $breadcrumbs; ?>
+      </div>
 
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>

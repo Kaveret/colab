@@ -141,3 +141,14 @@
     }
   }
 }
+
+.breadcrumbs {
+
+  .arrow {
+     background: url('../images/sprites.png') no-repeat -25px -125px;
+     width: 8px;
+     height: 15px;
+     vertical-align: middle;
+     display: inline-block;
+  }
+}

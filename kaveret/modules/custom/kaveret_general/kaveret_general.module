@@ -11,15 +11,19 @@
  * @TODO: Currently only supports homepage and offers page.
  */
 function kaveret_general_get_breadcrumbs() {
-  $items = array(l(t('Home'), ''));
+  global $language;
+
+  $direction = $language->direction == LANGUAGE_RTL ? 'rtl' : 'ltr';
+
+  $items = array(l(t('Main Page'), ''));
 
   $item = menu_get_item();
   switch ($item['path']) {
     case 'front':
     case 'offers':
-      $items[] = t('Offers/ Requests');
+      $items[] = "<span dir=\"$direction\">" . t('Marketplace') . '</span>';
       break;
   }
 
-  return implode(' <span class="arrow">&gt;</span> ', $items);
+  return implode(' <span class="arrow"></span> ', $items);
 }
