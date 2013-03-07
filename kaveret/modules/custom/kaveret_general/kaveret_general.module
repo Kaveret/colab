@@ -1,0 +1,29 @@
+<?php
+/**
+ * @file
+ * Drupal needs this blank file.
+ */
+
+
+/**
+ * Build page breadcrumbs.
+ *
+ * @TODO: Currently only supports homepage and offers page.
+ */
+function kaveret_general_get_breadcrumbs() {
+  global $language;
+
+  $direction = $language->direction == LANGUAGE_RTL ? 'rtl' : 'ltr';
+
+  $items = array(l(t('Main Page'), ''));
+
+  $item = menu_get_item();
+  switch ($item['path']) {
+    case 'front':
+    case 'offers':
+      $items[] = "<span dir=\"$direction\">" . t('Marketplace') . '</span>';
+      break;
+  }
+
+  return implode(' <span class="arrow"></span> ', $items);
+}

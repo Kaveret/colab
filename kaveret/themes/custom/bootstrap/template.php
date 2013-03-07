@@ -110,7 +110,7 @@ function bootstrap_process_html_tag(&$variables) {
  * @see page.tpl.php
  */
 function bootstrap_preprocess_page(&$variables) {
-  global $language;
+  global $language, $user;
   // Add information about the number of sidebars.
   if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
     $variables['columns'] = 3;
@@ -125,23 +125,19 @@ function bootstrap_preprocess_page(&$variables) {
     $variables['columns'] = 1;
   }
 
-  // Primary nav
-  $variables['primary_nav'] = FALSE;
-  if ($variables['main_menu']) {
-    // Build links
-    $variables['primary_nav'] = menu_tree(variable_get('menu_main_links_source', 'main-menu'));
-    // Provide default theme wrapper function
-    $variables['primary_nav']['#theme_wrappers'] = array('menu_tree__primary');
-  }
+  // Primary nav.
+  $variables['primary_nav'] = menu_tree(variable_get('menu_main_links_source', 'main-menu'));
+  // Provide default theme wrapper function.
+  $variables['primary_nav']['#theme_wrappers'] = array('menu_tree__primary');
 
-  // Secondary nav
-  $variables['secondary_nav'] = FALSE;
-  if ($variables['secondary_menu']) {
-    // Build links
-    $variables['secondary_nav'] = menu_tree(variable_get('menu_secondary_links_source', 'user-menu'));
-    // Provide default theme wrapper function
-    $variables['secondary_nav']['#theme_wrappers'] = array('menu_tree__secondary');
-  }
+  // Secondary nav.
+  $variables['secondary_nav'] = menu_tree(variable_get('menu_secondary_links_source', 'user-menu'));
+  $variables['secondary_nav']['#theme_wrappers'] = array('menu_tree__secondary');
+
+  // Header menus.
+  $variables['space_menu'] = menu_tree('space-menu');
+  $variables['social_links'] = menu_tree('social-menu');
+  $variables['navigation_menu'] = menu_tree('navigation-menu');
 
   // Get the logo filename according to the language.
   $logo = theme('image', array('path' => path_to_theme() . '/images/logo-' . $language->language . '.png'));
@@ -158,6 +154,26 @@ function bootstrap_preprocess_page(&$variables) {
     l('', '', array('attributes' => array('class' => array('arrows')))),
   );
   $variables['footer_icons'] = theme('item_list', array('items' => $items, 'attributes' => array('class' => array('icons', bootstrap_get_pull_class(FALSE)))));
+
+
+  if (!empty($user->picture)) {
+    $picture = file_load($user->picture);
+    $image_variables = array(
+      'style_name' => 'thumbnail',
+      'path' => $picture->uri,
+    );
+    $variables['user_picture'] = theme('image_style', $image_variables);
+  }
+
+  $variables['pull_class'] = bootstrap_get_pull_class();
+  $variables['alter_pull_class'] = bootstrap_get_pull_class(FALSE);
+
+  if ($user->uid) {
+    $variables['username'] = $user->name;
+  }
+
+  // Build breadcrumbs.
+  $variables['breadcrumbs'] = kaveret_general_get_breadcrumbs();
 }
 
 /**

@@ -8,26 +8,54 @@
         <span class="icon-bar"></span>
       </a>
 
-      <?php print $logo; ?>
-
-      <?php if (!empty($site_name)): ?>
-        <h1 id="site-name">
-          <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" class="brand"><?php print $site_name; ?></a>
-        </h1>
-      <?php endif; ?>
-
-      <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
-        <div class="nav-collapse collapse">
-          <nav role="navigation">
-            <?php if (!empty($page['navigation'])): ?>
-              <?php print render($page['navigation']); ?>
-            <?php endif; ?>
-            <?php if (!empty($secondary_nav)): ?>
-              <?php print render($secondary_nav); ?>
-            <?php endif; ?>
-          </nav>
+      <?php if (!empty($user_picture)): ?>
+        <div class="user-picture <?php print $pull_class; ?>">
+          <?php print $user_picture; ?>
         </div>
       <?php endif; ?>
+
+      <div class="nav-collapse collapse">
+        <nav role="navigation">
+          <div class="social-links <?php print $pull_class; ?>">
+            <?php print render($social_links); ?>
+          </div>
+
+          <?php if (!empty($page['navigation'])): ?>
+            <?php print render($page['navigation']); ?>
+          <?php endif; ?>
+
+          <div class="logo <?php print $alter_pull_class; ?>">
+            <?php print $logo; ?>
+          </div>
+
+          <div class="space-menu <?php print $alter_pull_class; ?>">
+            <?php print render($space_menu); ?>
+          </div>
+
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+<header id="navbar-second" role="banner" class="navbar navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <div class="nav-collapse collapse">
+        <nav role="navigation">
+          <?php if (!empty($username)): ?>
+            <div class="user-details <?php print $pull_class; ?>">
+              <div class="username"><?php print $username; ?></div>
+            </div>
+          <?php endif; ?>
+
+          <div class="navigation-menu <?php print $pull_class; ?>">
+            <?php print render($navigation_menu); ?>
+          </div>
+
+          <?php print render($secondary_nav); ?>
+        </nav>
+      </div>
     </div>
   </div>
 </header>
@@ -58,12 +86,14 @@
       <?php if (!empty($page['highlighted'])): ?>
         <div class="highlighted hero-unit"><?php print render($page['highlighted']); ?></div>
       <?php endif; ?>
-      <?php if (!empty($breadcrumb)): print $breadcrumb; endif;?>
+
+      <div class="breadcrumbs">
+        <?php print $breadcrumbs; ?>
+      </div>
+
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
-      <?php if (!empty($title)): ?>
-        <h1 class="page-header"><?php print $title; ?></h1>
-      <?php endif; ?>
+
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>
       <?php if (!empty($tabs)): ?>
