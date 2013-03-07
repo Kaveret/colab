@@ -44,6 +44,9 @@ projects[field_group][version] = "1.1"
 projects[flag][subdir] = "contrib"
 projects[flag][version] = "2.0"
 
+projects[i18n][subdir] = "contrib"
+projects[i18n][version] = "1.8"
+
 projects[insert][subdir] = "contrib"
 projects[insert][version] = "1.2"
 
@@ -122,6 +125,9 @@ projects[title][version] = "1.0-alpha5"
 
 projects[token][subdir] = "contrib"
 projects[token][version] = "1.5"
+
+projects[variable][subdir] = "contrib"
+projects[variable][version] = "2.2"
 
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.5"
