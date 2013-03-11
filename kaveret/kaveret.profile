@@ -170,10 +170,24 @@ function kaveret_setup_blocks() {
     'cache' => DRUPAL_NO_CACHE,
   );
 
+  $blocks[] = array(
+    'module' => 'panels_mini',
+    'delta' => 'sidebar',
+    'theme' => $default_theme,
+    'status' => 1,
+    'weight' => 0,
+    'region' => 'sidebar_second',
+    'custom' => 0,
+    'visibility' => 0,
+    'pages' => '',
+    'title' => '',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
   drupal_static_reset();
   _block_rehash($default_theme);
   foreach ($blocks as $record) {
-    db_update('block')
+    db_merge('block')
       ->fields($record)
       ->condition('module', $record['module'])
       ->condition('delta', $record['delta'])

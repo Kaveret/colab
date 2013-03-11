@@ -588,6 +588,22 @@ e.g. multipage*/
   clear: both;
 }
 
+/* line 3, ../sass/_sidebar.scss */
+.region-sidebar-second a {
+  color: #525252;
+}
+/* line 7, ../sass/_sidebar.scss */
+.region-sidebar-second h2 {
+  font-size: 16px;
+  color: #ab1516;
+  margin: 0;
+  line-height: 20px;
+}
+/* line 13, ../sass/_sidebar.scss */
+.region-sidebar-second h2 a {
+  color: #ab1516;
+}
+
 /* line 1, ../sass/_teaser.scss */
 article.node-teaser {
   margin-top: 20px;
@@ -640,18 +656,18 @@ article.node-teaser .field-name-body {
   padding: 0;
 }
 
-/* line 12, ../sass/style.scss */
+/* line 13, ../sass/style.scss */
 body {
   padding-top: 0;
   background-color: #fefefe;
 }
 
-/* line 18, ../sass/style.scss */
+/* line 19, ../sass/style.scss */
 .element-invisible {
   display: none;
 }
 
-/* line 22, ../sass/style.scss */
+/* line 23, ../sass/style.scss */
 .node-teaser .field-name-body {
   padding: 0 9px;
 }
