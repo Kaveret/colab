@@ -228,34 +228,34 @@
   position: absolute;
 }
 /* line 6, ../sass/_menu.scss */
-#main-menu li {
+#main-menu .menu > li {
+  display: block;
+  position: relative;
   margin-top: 10px;
-  left: -120px;
+  min-height: 45px;
+  width: 195px;
+  left: -150px;
   transition: 0.7s;
   -moz-transition: 0.7s;
   -webkit-transition: 0.7s;
   -o-transition: 0.7s;
 }
-/* line 11, ../sass/_menu.scss */
-#main-menu li:hover {
+/* line 15, ../sass/_menu.scss */
+#main-menu .menu > li:hover {
   left: 0;
 }
-/* line 14, ../sass/_menu.scss */
-#main-menu li:hover .dropdown-menu {
-  display: block;
-}
 /* line 18, ../sass/_menu.scss */
-#main-menu li:hover a.main {
-  color: white;
+#main-menu .menu > li:hover .dropdown-menu {
+  display: block;
 }
 /* line 24, ../sass/_menu.scss */
 #main-menu a.main {
-  display: inline-block;
+  display: block;
   height: 45px;
   line-height: 45px;
-  width: 155px;
-  padding-left: 20px;
-  color: transparent;
+  width: 185px;
+  padding-left: 10px;
+  color: white;
   box-shadow: 0 0 8px #716876;
   -moz-border-radius: 0 22px 22px 0;
   -webkit-border-radius: 0 22px 22px 0;
@@ -279,11 +279,11 @@
 }
 /* line 49, ../sass/_menu.scss */
 #main-menu a.main.dreams:after {
-  background-position: -100px 0;
+  background-position: -150px 0;
 }
 /* line 53, ../sass/_menu.scss */
-#main-menu a.main.resources:after {
-  background-position: -150px 0;
+#main-menu a.main.learning-center:after {
+  background-position: -100px 0;
 }
 /* line 57, ../sass/_menu.scss */
 #main-menu a.main .caret {
@@ -295,20 +295,22 @@
   float: none;
   left: auto;
   width: 166px;
-  margin-top: -16px;
+  background: transparent;
+  border-top: none;
+  margin-top: 0px;
 }
-/* line 69, ../sass/_menu.scss */
+/* line 71, ../sass/_menu.scss */
 #main-menu ul.dropdown-menu a {
   font-size: 10px;
 }
 
 @media (max-width: 767px) {
-  /* line 76, ../sass/_menu.scss */
-  #main-menu li {
-    left: -150px;
-  }
   /* line 79, ../sass/_menu.scss */
-  #main-menu li:hover {
+  #main-menu .menu > li {
+    left: -170px;
+  }
+  /* line 82, ../sass/_menu.scss */
+  #main-menu .menu > li:hover {
     left: -20px;
   }
 }

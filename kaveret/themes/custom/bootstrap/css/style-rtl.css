@@ -61,7 +61,7 @@ div.contextual-links-wrapper {
 
 #main-menu li {
   left: auto;
-  right: -120px;
+  right: -150px;
   margin-right: 0;
   padding: 0;
 }
@@ -72,7 +72,7 @@ div.contextual-links-wrapper {
 
 @media (max-width: 767px) {
   #main-menu li {
-    right: -150px;
+    right: -170px;
   }
 
   #main-menu li:hover {
@@ -82,7 +82,7 @@ div.contextual-links-wrapper {
 
 #main-menu li a.main {
   padding-left: 0;
-  padding-right: 20px;
+  padding-right: 10px;
   -moz-border-radius: 22px 0 0 22px;
   -webkit-border-radius: 22px 0 0 22px;
   -khtml-border-radius: 22px 0 0 22px;
