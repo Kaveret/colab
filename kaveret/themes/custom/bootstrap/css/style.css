@@ -176,29 +176,47 @@
 .footer #block-menu-footer-links li.last a {
   border-right: none;
 }
-/* line 42, ../sass/_footer.scss */
-.footer .icons a {
+/* line 40, ../sass/_footer.scss */
+.footer .menu.nav {
+  margin: 0;
+}
+/* line 43, ../sass/_footer.scss */
+.footer .menu.nav > li {
+  float: left;
+  margin: 0;
+}
+/* line 48, ../sass/_footer.scss */
+.footer .menu.nav a.main {
   width: 24px;
   height: 24px;
   display: inline-block;
   margin-left: 10px;
   background: url("../images/sprites.png") no-repeat;
+  color: transparent;
 }
-/* line 49, ../sass/_footer.scss */
-.footer .icons a.stars {
+/* line 56, ../sass/_footer.scss */
+.footer .menu.nav a.main .caret {
+  display: none;
+}
+/* line 60, ../sass/_footer.scss */
+.footer .menu.nav a.main.resources {
   background-position: 0 -50px;
 }
-/* line 53, ../sass/_footer.scss */
-.footer .icons a.balloons {
+/* line 64, ../sass/_footer.scss */
+.footer .menu.nav a.main.dreams {
   background-position: -24px -50px;
 }
-/* line 57, ../sass/_footer.scss */
-.footer .icons a.arrows {
+/* line 68, ../sass/_footer.scss */
+.footer .menu.nav a.main.learning-center {
   background-position: -72px -50px;
 }
-/* line 61, ../sass/_footer.scss */
-.footer .icons a.people {
+/* line 72, ../sass/_footer.scss */
+.footer .menu.nav a.main.communities {
   background-position: -48px -50px;
+}
+/* line 76, ../sass/_footer.scss */
+.footer .menu.nav a.main .dropdown-menu {
+  position: absolute;
 }
 
 /* line 3, ../sass/_menu.scss */

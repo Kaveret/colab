@@ -37,29 +37,44 @@
     }
   }
 
-  .icons {
+  .menu.nav {
+    margin: 0;
 
-    a {
+    & > li {
+      float: left;
+      margin: 0;
+    }
+
+    a.main {
       width: 24px;
       height: 24px;
       display: inline-block;
       margin-left: 10px;
       background: url('../images/sprites.png') no-repeat;
+      color: transparent;
 
-      &.stars {
+      .caret {
+        display: none;
+      }
+
+      &.resources {
         background-position: 0 -50px;
       }
 
-      &.balloons {
+      &.dreams {
         background-position: -24px -50px;
       }
 
-      &.arrows {
+      &.learning-center {
         background-position: -72px -50px;
       }
 
-      &.people {
+      &.communities {
         background-position: -48px -50px;
+      }
+
+      .dropdown-menu {
+        position: absolute;
       }
     }
   }

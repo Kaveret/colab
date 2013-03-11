@@ -121,6 +121,9 @@
   <div class="container">
     <?php print $footer_logo; ?>
     <?php print render($page['footer']); ?>
-    <?php print $footer_icons; ?>
+
+    <div class="<?php print $alter_pull_class; ?>">
+      <?php print render($primary_nav); ?>
+    </div>
   </div>
 </footer>
