@@ -7,6 +7,7 @@ function kaveret_migrate_migrate_api() {
   $api = array(
     'api' => 2,
     'migrations' => array(
+      'KaveretUsers' => array('class_name' => 'KaveretUsers'),
       'KaveretOfferCategoriesTerms' => array('class_name' => 'KaveretOfferCategoriesTerms'),
       'KaveretOfferStatusesTerms' => array('class_name' => 'KaveretOfferStatusesTerms'),
       'KaveretCommunityNodes' => array('class_name' => 'KaveretCommunityNodes'),
