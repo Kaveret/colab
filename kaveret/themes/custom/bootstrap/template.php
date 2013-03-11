@@ -111,6 +111,9 @@ function bootstrap_process_html_tag(&$variables) {
  */
 function bootstrap_preprocess_page(&$variables) {
   global $language, $user;
+
+  drupal_set_title(variable_get('site_slogan'));
+
   // Add information about the number of sidebars.
   if (!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])) {
     $variables['columns'] = 3;
