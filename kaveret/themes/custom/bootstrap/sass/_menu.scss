@@ -3,9 +3,13 @@
 #main-menu {
   position: absolute;
 
-  li {
+  .menu > li {
+    display: block;
+    position: relative;
     margin-top: 10px;
-    left: -120px; //LTR
+    min-height: 45px;
+    width: 195px;
+    left: -150px; //LTR
     @include transition(0.7s);
 
     &:hover {
@@ -14,20 +18,16 @@
       .dropdown-menu {
         display: block;
       }
-
-      a.main {
-        color: white;
-      }
     }
   }
 
   a.main {
-    display: inline-block;
+    display: block;
     height: 45px;
     line-height: 45px;
-    width: 155px;
-    padding-left: 20px; //LTR
-    color: transparent;
+    width: 185px;
+    padding-left: 10px; //LTR
+    color: white;
     box-shadow: 0 0 8px #716876;
     @include rounded-corners(0, 22px, 22px, 0);
     background-color: #f0ac01;
@@ -47,11 +47,11 @@
     }
 
     &.dreams:after {
-      background-position: -100px 0;
+      background-position: -150px 0;
     }
 
-    &.resources:after {
-      background-position: -150px 0;
+    &.learning-center:after {
+      background-position: -100px 0;
     }
 
     .caret {
@@ -64,17 +64,20 @@
     float: none;
     left: auto;
     width: 166px;
-    margin-top: -16px;
+    background: transparent;
+    border-top: none;
+    margin-top: 0px;
 
     a {
       font-size: 10px;
+
     }
   }
 }
 
 @media (max-width: 767px) {
-  #main-menu li {
-    left: -150px;
+  #main-menu .menu > li {
+    left: -170px;
 
     &:hover {
       left: -20px;

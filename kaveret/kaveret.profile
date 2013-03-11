@@ -421,80 +421,50 @@ function kaveret_menus_setup() {
 
   // Add main menu links.
   $item = array(
+    'link_title' => 'Resource Exchange',
+    'link_path' => '<front>',
+    'menu_name' => 'main-menu',
+    'expanded' => TRUE,
+    'options' => array('attributes' => array('class' => array('main', 'resources'))),
+    'weight' => 10,
+  );
+  $mlid = menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'item',
+    'link_path' => '<front>',
+    'menu_name' => 'main-menu',
+    'plid' => $mlid,
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Dreams Accelerator',
+    'link_path' => '<front>',
+    'menu_name' => 'main-menu',
+    'expanded' => TRUE,
+    'options' => array('attributes' => array('class' => array('main', 'dreams'))),
+    'weight' => 20,
+  );
+  menu_link_save($item);
+
+  $item = array(
     'link_title' => 'Learning center',
     'link_path' => '<front>',
     'menu_name' => 'main-menu',
     'expanded' => TRUE,
     'options' => array('attributes' => array('class' => array('main', 'learning-center'))),
-  );
-  $mlid = menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'Sustainable living',
-    'link_path' => '<front>',
-    'menu_name' => 'footer-links',
-    'plid' => $mlid,
-    'options' => array('attributes' => array('class' => array('sustainable-living'))),
+    'weight' => 30,
   );
   menu_link_save($item);
 
   $item = array(
-    'link_title' => 'Social Renewal & Community',
-    'link_path' => '<front>',
-    'menu_name' => 'footer-links',
-    'plid' => $mlid,
-    'options' => array('attributes' => array('class' => array('social-renewal'))),
-  );
-  menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'Resources',
-    'link_path' => '<front>',
-    'menu_name' => 'main-menu',
-    'expanded' => TRUE,
-    'options' => array('attributes' => array('class' => array('main', 'resources'))),
-  );
-  $mlid = menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'How great',
-    'link_path' => '<front>',
-    'menu_name' => 'footer-links',
-    'plid' => $mlid,
-  );
-  menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'Communities',
+    'link_title' => 'Groups',
     'link_path' => '<front>',
     'menu_name' => 'main-menu',
     'expanded' => TRUE,
     'options' => array('attributes' => array('class' => array('main', 'communities'))),
-  );
-  $mlid = menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'item',
-    'link_path' => '<front>',
-    'menu_name' => 'footer-links',
-    'plid' => $mlid,
-  );
-  menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'Dreams',
-    'link_path' => '<front>',
-    'menu_name' => 'main-menu',
-    'expanded' => TRUE,
-    'options' => array('attributes' => array('class' => array('main', 'dreams'))),
-  );
-  $mlid = menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'item',
-    'link_path' => '<front>',
-    'menu_name' => 'footer-links',
-    'plid' => $mlid,
+    'weight' => 40,
   );
   menu_link_save($item);
 
