@@ -13,11 +13,12 @@ include_once 'kaveret_og.features.inc';
  * Attach new users to the default community.
  */
 function kaveret_og_user_insert($edit, $account) {
-  $nid = variable_get('kaveret_og_default_community');
   // Do nothing in case there's no default community.
-  if (!$nid) {
+  if (!variable_get('kaveret_og_single_community')) {
     return;
   }
+
+  $nid = variable_get('kaveret_og_default_community');
   og_group('node', $nid, array('entity_type' => 'user', 'entity' => $account));
 }
 
