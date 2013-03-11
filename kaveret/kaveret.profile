@@ -611,7 +611,7 @@ function kaveret_menus_setup() {
   menu_link_save($item);
 
   $item = array(
-    'link_title' => 'OFFERS & NEEDS',
+    'link_title' => 'Offers & Requests',
     'link_path' => '<front>',
     'menu_name' => 'navigation-menu',
     'expanded' => TRUE,
