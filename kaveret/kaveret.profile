@@ -100,6 +100,7 @@ function kaveret_community_form($form, &$form_state) {
   $form['kaveret_og_single_community'] = array(
     '#title' => t('Single community'),
     '#type' => 'checkbox',
+    '#default_value' => TRUE,
   );
 
   $form['submit'] = array(
@@ -258,6 +259,7 @@ function kaveret_set_variables() {
     // TODO: Currently, the attached CSS seems to break the email.
     'mimemail_sitestyle' => FALSE,
     'site_frontpage' => 'front',
+    'kaveret_og_single_community' => TRUE,
   );
 
   foreach ($variables as $key => $value) {
