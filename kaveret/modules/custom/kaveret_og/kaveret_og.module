@@ -8,40 +8,17 @@
 include_once 'kaveret_og.features.inc';
 
 /**
- * Implements hook_node_insert().
+ * Implements hook_user_insert().
  *
- * Attach every group-content to a community.
+ * Attach new users to the default community.
  */
-function kaveret_og_node_insert($node) {
-  if (!og_is_group_content_type('node', $node->type)) {
-    return;
-  }
-
-  // Attach node to a community only if not already attached.
-  $gids = og_get_entity_groups('node', $node);
-  if (!empty($gids)) {
-    return;
-  }
-
-  // No community is set; Attach node to the user's first community.
-  $gids = og_get_entity_groups();
-
-  $nid = FALSE;
-  if (!empty($gids['node'])) {
-    // Get the first community the user belongs to.
-    foreach (node_load_multiple($gids['node']) as $group) {
-      if ($group->type == 'community') {
-        $nid = $group->nid;
-        break;
-      }
-    }
-  }
-
+function kaveret_og_user_insert($edit, $account) {
+  $nid = variable_get('kaveret_og_default_community');
+  // Do nothing in case there's no default community.
   if (!$nid) {
-    throw new Exception(t('User does not belong to any community, thus node cannot be attached to a community.'));
+    return;
   }
-
-  og_group('node', $nid, array('entity_type' => 'node', 'entity' => $node->nid));
+  og_group('node', $nid, array('entity_type' => 'user', 'entity' => $account));
 }
 
 /**
