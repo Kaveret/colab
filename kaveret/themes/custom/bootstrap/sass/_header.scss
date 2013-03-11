@@ -123,6 +123,10 @@
       &:hover .dropdown-menu {
         display: block;
       }
+
+      .dropdown-menu {
+        margin-top: -1px;
+      }
     }
   }
 

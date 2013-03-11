@@ -620,8 +620,16 @@ function kaveret_menus_setup() {
   $mlid = menu_link_save($item);
 
   $item = array(
-    'link_title' => 'item',
-    'link_path' => '<front>',
+    'link_title' => 'Add a new Offer',
+    'link_path' => 'node/add/offer',
+    'menu_name' => 'navigation-menu',
+    'plid' => $mlid,
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Add a new Request',
+    'link_path' => 'node/add/request',
     'menu_name' => 'navigation-menu',
     'plid' => $mlid,
   );
