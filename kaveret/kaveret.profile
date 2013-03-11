@@ -61,6 +61,11 @@ function kaveret_install_tasks() {
     'display' => FALSE,
   );
 
+  $tasks['kaveret_i18n_setup'] = array(
+    'display_name' => st('Import language files'),
+    'display' => FALSE,
+  );
+
   return $tasks;
 }
 
@@ -645,4 +650,20 @@ function kaveret_menus_setup() {
     'options' => array('attributes' => array('class' => array('wordpress'))),
   );
   menu_link_save($item);
+}
+
+/**
+ * Profile task; Import language files.
+ */
+function kaveret_i18n_setup() {
+  // Find all po files.
+  $path = drupal_get_path('profile', 'kaveret');
+  $path .= '/localisation';
+  $files = file_scan_directory($path, '/.+\.po/');
+  foreach ($files as $file) {
+    // Extract the langcode from the filename.
+    $langcode = substr($file->name, -2);
+    // Import the file.
+    _locale_import_po($file, $langcode, LOCALE_IMPORT_KEEP, 'default');
+  }
 }
