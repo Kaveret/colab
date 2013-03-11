@@ -1,11 +1,8 @@
 <article id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
-
   <header>
     <?php print render($title_prefix); ?>
-    <?php if (!$page && $title): ?>
-      <h2<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
-    <?php endif; ?>
+    <h2<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
     <?php print render($title_suffix); ?>
 
     <?php if ($display_submitted): ?>
