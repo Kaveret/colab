@@ -97,7 +97,7 @@ function kaveret_offer_field_access($op, $field, $entity_type, $entity, $account
 /**
  * Implements hook_node_presave().
  *
- * Set the expiry date of offers and requests accoring to the "Delete after"
+ * Set the expiry date of offers and requests accoring to the "Obsolete after"
  * setting.
  */
 function kaveret_offer_node_presave($node) {
@@ -194,6 +194,9 @@ function kaveret_offer_cron() {
     return;
   }
 
+  $terms = taxonomy_get_term_by_name('Closed: gave up / obsolete', 'offer_statuses');
+  $tid = key($terms);
+
   foreach(node_load_multiple(array_keys($result['node'])) as $node) {
     // Set the node as expired.
     $wrapper = entity_metadata_wrapper('node', $node);
@@ -212,6 +215,8 @@ function kaveret_offer_cron() {
       'language' => LANGUAGE_NONE,
       'subject' => '',
       'comment_body' => array(LANGUAGE_NONE => array(array('value' => 'Automatically set as expired.', 'format' => 'plain_text'))),
+      // Set the node as "Closed: obsolete".
+      'field_status' => array(LANGUAGE_NONE => array(array('target_id' => $tid))),
     );
     comment_save($comment);
   }
