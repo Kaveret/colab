@@ -631,7 +631,7 @@ function kaveret_offer_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_expiry_after',
-      'label' => 'Delete after',
+      'label' => 'Obsolete after',
       'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
@@ -1344,7 +1344,7 @@ function kaveret_offer_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_expiry_after',
-      'label' => 'Delete after',
+      'label' => 'Obsolete after',
       'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
@@ -1775,11 +1775,11 @@ function kaveret_offer_field_default_fields() {
   t('A field replacing node title.');
   t('Category');
   t('Comment');
-  t('Delete after');
   t('Expired');
   t('Expiring');
   t('Image');
   t('Node reference');
+  t('Obsolete after');
   t('Revison ID');
   t('Status');
   t('Tags');

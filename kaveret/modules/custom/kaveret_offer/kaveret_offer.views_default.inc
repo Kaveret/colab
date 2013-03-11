@@ -149,6 +149,22 @@ function kaveret_offer_views_default_views() {
   $handler->display->display_options['filters']['type']['expose']['required'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
+  /* Filter criterion: Content: Expired (field_expired) */
+  $handler->display->display_options['filters']['field_expired_value']['id'] = 'field_expired_value';
+  $handler->display->display_options['filters']['field_expired_value']['table'] = 'field_data_field_expired';
+  $handler->display->display_options['filters']['field_expired_value']['field'] = 'field_expired_value';
+  $handler->display->display_options['filters']['field_expired_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_expired_value']['value'] = array(
+    1 => '1',
+  );
+  /* Filter criterion: Status not closed */
+  $handler->display->display_options['filters']['field_status_target_id']['id'] = 'field_status_target_id';
+  $handler->display->display_options['filters']['field_status_target_id']['table'] = 'field_data_field_status';
+  $handler->display->display_options['filters']['field_status_target_id']['field'] = 'field_status_target_id';
+  $handler->display->display_options['filters']['field_status_target_id']['ui_name'] = 'Status not closed';
+  $handler->display->display_options['filters']['field_status_target_id']['operator'] = 'not between';
+  $handler->display->display_options['filters']['field_status_target_id']['value']['min'] = '3';
+  $handler->display->display_options['filters']['field_status_target_id']['value']['max'] = '7';
 
   /* Display: Content pane */
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
