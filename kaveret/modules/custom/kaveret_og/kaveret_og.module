@@ -23,6 +23,20 @@ function kaveret_og_user_insert($edit, $account) {
 }
 
 /**
+ * Implements hook_field_access().
+ */
+function kaveret_og_field_access($op, $field, $entity_type, $entity, $account) {
+  // Do nothing in case there's no default community.
+  if (!variable_get('kaveret_og_single_community')) {
+    return;
+  }
+
+  if (!user_access('administer group') && og_is_group_audience_field($field['field_name'])) {
+    return FALSE;
+  }
+}
+
+/**
  * Implements hook_og_context_negotiation_info().
  */
 function kaveret_og_og_context_negotiation_info() {
