@@ -262,5 +262,5 @@ function kaveret_offer_views_pre_render(&$view) {
   }
 
   $uid = $view->argument['uid']->argument;
-  $view->build_info['title'] = l($view->build_info['title'], 'user/' . $uid);
+  $view->set_title(l($view->build_info['title'], 'user/' . $uid));
 }
