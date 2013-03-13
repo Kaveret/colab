@@ -600,6 +600,24 @@ function kaveret_menus_setup() {
 
   $item = array(
     'link_title' => 'Add a new Offer',
+    'link_path' => 'user/login',
+    'menu_name' => 'navigation-menu',
+    'plid' => $mlid,
+    'options' => array('query' => array('destination' => 'node/add/offer')),
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Add a new Request',
+    'link_path' => 'user/login',
+    'menu_name' => 'navigation-menu',
+    'plid' => $mlid,
+    'options' => array('query' => array('destination' => 'node/add/request')),
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Add a new Offer',
     'link_path' => 'node/add/offer',
     'menu_name' => 'navigation-menu',
     'plid' => $mlid,
