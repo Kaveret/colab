@@ -129,7 +129,7 @@ function bootstrap_preprocess_page(&$variables) {
   }
 
   // Primary nav.
-  $variables['primary_nav'] = menu_tree(variable_get('menu_main_links_source', 'main-menu'));
+  $variables['primary_nav'] = menu_tree(variable_get('menu_main_links_source', 'side-menu'));
   // Provide default theme wrapper function.
   $variables['primary_nav']['#theme_wrappers'] = array('menu_tree__primary');
 

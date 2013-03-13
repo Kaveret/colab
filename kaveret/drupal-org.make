@@ -80,6 +80,9 @@ projects[mimemail][subdir] = "contrib"
 projects[module_filter][subdir] = "contrib"
 projects[module_filter][version] = 1.7
 
+projects[mutual_credit][subdir] = "contrib"
+projects[mutual_credit][version] = 3.0-rc6
+
 projects[nodequeue][subdir] = "contrib"
 projects[nodequeue][version] = "2.0-beta1"
 
@@ -125,6 +128,9 @@ projects[title][version] = "1.0-alpha5"
 
 projects[token][subdir] = "contrib"
 projects[token][version] = "1.5"
+
+projects[user_chooser][subdir] = "contrib"
+projects[user_chooser][version] = "1.1"
 
 projects[variable][subdir] = "contrib"
 projects[variable][version] = "2.2"

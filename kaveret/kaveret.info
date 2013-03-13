@@ -41,6 +41,10 @@ dependencies[] = features
 dependencies[] = i18n
 dependencies[] = i18n_menu
 dependencies[] = jquery_update
+dependencies[] = mcapi
+dependencies[] = mcapi_forms
+dependencies[] = mcapi_index_views
+dependencies[] = mcapi_limits
 dependencies[] = message_notify
 dependencies[] = message_subscribe
 dependencies[] = migrate_ui
@@ -63,6 +67,7 @@ dependencies[] = views_ui
 dependencies[] = views_bulk_operations
 
 ; Custom modules
+dependencies[] = kaveret_accounting
 dependencies[] = kaveret_general
 dependencies[] = kaveret_migrate
 dependencies[] = kaveret_offer
