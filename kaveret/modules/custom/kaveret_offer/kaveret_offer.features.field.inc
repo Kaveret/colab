@@ -1057,6 +1057,80 @@ function kaveret_offer_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-offer-worth'.
+  $fields['node-offer-worth'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(
+        0 => 'transaction',
+        1 => 'node',
+        2 => 'user',
+      ),
+      'field_name' => 'worth',
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'mcapi',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'worth_field',
+    ),
+    'field_instance' => array(
+      'bundle' => 'offer',
+      'default_value' => NULL,
+      'default_value_widget' => array(
+        'worth' => array(
+          'und' => array(
+            0 => array(
+              'currcode' => 'credunit',
+              'quantity' => '',
+            ),
+            1 => array(
+              'currcode' => 'escrow',
+              'quantity' => '',
+            ),
+            2 => array(
+              'currcode' => 'bz',
+              'quantity' => '',
+            ),
+          ),
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'mcapi',
+          'settings' => array(),
+          'type' => 'worth_field',
+          'weight' => 12,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '0',
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'worth',
+      'label' => 'Worth',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'mcapi',
+        'settings' => array(),
+        'type' => 'worths_widget',
+        'weight' => '12',
+      ),
+    ),
+  );
+
   // Exported field: 'node-request-body'.
   $fields['node-request-body'] = array(
     'field_config' => array(
@@ -1185,7 +1259,7 @@ function kaveret_offer_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '7',
+          'weight' => '8',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -1333,7 +1407,7 @@ function kaveret_offer_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '6',
+          'weight' => '7',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -1665,7 +1739,7 @@ function kaveret_offer_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '9',
+          'weight' => '10',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -1733,7 +1807,7 @@ function kaveret_offer_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '8',
+          'weight' => '9',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -1770,6 +1844,80 @@ function kaveret_offer_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-request-worth'.
+  $fields['node-request-worth'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(
+        0 => 'transaction',
+        1 => 'node',
+        2 => 'user',
+      ),
+      'field_name' => 'worth',
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'mcapi',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'worth_field',
+    ),
+    'field_instance' => array(
+      'bundle' => 'request',
+      'default_value' => NULL,
+      'default_value_widget' => array(
+        'worth' => array(
+          'und' => array(
+            0 => array(
+              'currcode' => 'credunit',
+              'quantity' => '',
+            ),
+            1 => array(
+              'currcode' => 'escrow',
+              'quantity' => '',
+            ),
+            2 => array(
+              'currcode' => 'bz',
+              'quantity' => '',
+            ),
+          ),
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'mcapi',
+          'settings' => array(),
+          'type' => 'worth_field',
+          'weight' => '5',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'worth',
+      'label' => 'Worth',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'mcapi',
+        'settings' => array(),
+        'type' => 'worths_widget',
+        'weight' => '13',
+      ),
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('A field replacing node title.');
@@ -1786,6 +1934,7 @@ function kaveret_offer_field_default_fields() {
   t('Tell your story');
   t('Time from now after which the item will expire');
   t('Title');
+  t('Worth');
 
   return $fields;
 }
