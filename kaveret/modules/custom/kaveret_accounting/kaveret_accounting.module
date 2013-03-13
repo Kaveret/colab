@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ */
+
+
+/**
+ * Implements hook_mcapicurrencies_default().
+ *
+ * Create the Bees currency.
+ */
+function kaveret_accounting_mcapicurrencies_default_alter(&$currencies) {
+  $mcapicurrency = new stdClass();
+  $mcapicurrency->disabled = FALSE; /* Edit this to true to make a default mcapicurrency disabled initially */
+  $mcapicurrency->api_version = 3;
+  $mcapicurrency->currcode = 'bz';
+  $mcapicurrency->data = (object) array(
+    'info' => array(
+      'currcode' => 'bz',
+    ),
+    'human_name' => 'Bees',
+    'uid' => '1',
+    'reservoir' => '1',
+    'display' => array(
+      'divisions' => '0',
+      'divisions_setting' => '0|/.
+25|1/4
+50|1/2
+75|3/4',
+      'delimiter' => ':',
+      'format' => '[quantity]Bz',
+      'zero' => '',
+    ),
+    'additional_settings' => array(
+      'additional_settings__active_tab' => 'edit-access',
+    ),
+    'access' => array(
+      'membership' => 'user_chooser_segment_perms:transact',
+      'trader_data' => 'user_chooser_segment_perms:transact',
+      'system_data' => 'user_chooser_segment_perms:transact',
+    ),
+    'view_transaction_states' => array(
+      1 => array(
+        'transaction_access_callback_perm_transact' => 'transaction_access_callback_perm_transact',
+        'transaction_access_callback_perm_manage_all' => 'transaction_access_callback_perm_manage_all',
+        'transaction_access_callback_payee' => 0,
+        'transaction_access_callback_payer' => 0,
+        'transaction_access_callback_open' => 0,
+      ),
+      0 => array(
+        'transaction_access_callback_perm_transact' => 0,
+        'transaction_access_callback_perm_manage_all' => 0,
+        'transaction_access_callback_payee' => 0,
+        'transaction_access_callback_payer' => 0,
+        'transaction_access_callback_open' => 0,
+      ),
+    ),
+    'access_operations' => array(
+      'undo' => array(
+        'transaction_access_callback_perm_manage_all' => 'transaction_access_callback_perm_manage_all',
+        'transaction_access_callback_perm_transact' => 0,
+        'transaction_access_callback_payee' => 0,
+        'transaction_access_callback_payer' => 0,
+        'transaction_access_callback_open' => 0,
+      ),
+    ),
+    'buttons' => array(
+      'delete' => 'Delete',
+    ),
+  );
+
+  $currencies[$mcapicurrency->currcode] = $mcapicurrency;
+  return $currencies;
+}

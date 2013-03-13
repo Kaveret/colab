@@ -1,0 +1,5 @@
+name = Kaveret accounting
+core = 7.x
+package = Kaveret
+dependencies[] = mcapi
+features[features_api][] = api:1
