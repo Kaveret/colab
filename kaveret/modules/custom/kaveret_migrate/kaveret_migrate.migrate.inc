@@ -91,6 +91,54 @@ class KaveretRequestNodes extends KaveretMigration {
 }
 
 /**
+ * Migrate Page nodes.
+ */
+class KaveretPageNodes extends KaveretMigration {
+  public $csvColumns = array(
+    array('path', 'Path'),
+    array('link_weight', 'Link weight'),
+    array('body', 'Body'),
+  );
+
+  public $entityType = 'node';
+  public $bundle = 'page';
+
+  public $dependencies = array(
+    'KaveretOfferCategoriesTerms',
+  );
+
+  public function __construct() {
+    parent::__construct();
+
+    $this->addFieldMapping('body', 'body')
+      ->arguments(array('format' => 'full_html'));;
+
+    $this
+      ->addFieldMapping('field_category', 'field_category')
+      ->sourceMigration('KaveretOfferCategoriesTerms');
+
+    $this->addFieldMapping('path', 'path');
+  }
+
+  public function complete($entity, $row) {
+
+    $item = array(
+      'link_title' => $entity->title,
+      'link_path' => 'node/' . $entity->nid,
+      'menu_name' => 'side-menu',
+      'expanded' => TRUE,
+      'options' => array('attributes' => array('class' => array('main', $row->path))),
+      'weight' => $row->link_weight,
+    );
+    menu_link_save($item);
+
+//    dpm(menu_load_links('side_menu'));
+//    dpm($entity->path['alias']);
+//    dpm(menu_get_item($entity->path['alias']));
+  }
+}
+
+/**
  * Migrate "Community" nodes.
  */
 class KaveretCommunityNodes extends KaveretMigration {

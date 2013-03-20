@@ -72,3 +72,4 @@ dependencies[] = kaveret_general
 dependencies[] = kaveret_migrate
 dependencies[] = kaveret_offer
 dependencies[] = kaveret_og
+dependencies[] = kaveret_page
