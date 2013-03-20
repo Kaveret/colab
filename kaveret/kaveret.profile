@@ -274,6 +274,12 @@ function kaveret_set_variables() {
     'mimemail_sitestyle' => FALSE,
     'site_frontpage' => 'front',
     'kaveret_og_single_community' => TRUE,
+
+    // Translation settings.
+    'entity_translation_entity_types' => array(
+      'node' => 'node',
+      'taxonomy_term' => 'taxonomy_term',
+    ),
   );
 
   foreach ($variables as $key => $value) {
