@@ -134,8 +134,12 @@
   font-weight: bold;
   font-size: 16px;
 }
+/* line 148, ../sass/_header.scss */
+#navbar-second .navbar-inner .facebook-connect {
+  margin: 23px 20px 0;
+}
 
-/* line 151, ../sass/_header.scss */
+/* line 155, ../sass/_header.scss */
 .breadcrumbs .arrow {
   background: url("../images/sprites.png") no-repeat -25px -125px;
   width: 8px;
@@ -228,7 +232,7 @@
   position: absolute;
   width: 50px;
 }
-/* line 6, ../sass/_menu.scss */
+/* line 7, ../sass/_menu.scss */
 #main-menu .menu > li {
   display: block;
   position: relative;
@@ -241,15 +245,15 @@
   -webkit-transition: 0.7s;
   -o-transition: 0.7s;
 }
-/* line 15, ../sass/_menu.scss */
+/* line 16, ../sass/_menu.scss */
 #main-menu .menu > li:hover {
   left: 0;
 }
-/* line 18, ../sass/_menu.scss */
+/* line 19, ../sass/_menu.scss */
 #main-menu .menu > li:hover .dropdown-menu {
   display: block;
 }
-/* line 24, ../sass/_menu.scss */
+/* line 25, ../sass/_menu.scss */
 #main-menu a.main {
   display: block;
   height: 45px;
@@ -264,7 +268,7 @@
   border-radius: 0 22px 22px 0;
   background-color: #f0ac01;
 }
-/* line 35, ../sass/_menu.scss */
+/* line 36, ../sass/_menu.scss */
 #main-menu a.main:after {
   content: '';
   position: absolute;
@@ -274,23 +278,23 @@
   height: 40px;
   background: url("../images/sprites.png");
 }
-/* line 45, ../sass/_menu.scss */
+/* line 46, ../sass/_menu.scss */
 #main-menu a.main.communities:after {
   background-position: -50px 0;
 }
-/* line 49, ../sass/_menu.scss */
+/* line 50, ../sass/_menu.scss */
 #main-menu a.main.dreams:after {
   background-position: -150px 0;
 }
-/* line 53, ../sass/_menu.scss */
+/* line 54, ../sass/_menu.scss */
 #main-menu a.main.learning-center:after {
   background-position: -100px 0;
 }
-/* line 57, ../sass/_menu.scss */
+/* line 58, ../sass/_menu.scss */
 #main-menu a.main .caret {
   display: none;
 }
-/* line 62, ../sass/_menu.scss */
+/* line 63, ../sass/_menu.scss */
 #main-menu ul.dropdown-menu {
   position: static;
   float: none;
@@ -300,17 +304,17 @@
   border-top: none;
   margin-top: 0px;
 }
-/* line 71, ../sass/_menu.scss */
+/* line 72, ../sass/_menu.scss */
 #main-menu ul.dropdown-menu a {
   font-size: 10px;
 }
 
 @media (max-width: 767px) {
-  /* line 79, ../sass/_menu.scss */
+  /* line 80, ../sass/_menu.scss */
   #main-menu .menu > li {
     left: -170px;
   }
-  /* line 82, ../sass/_menu.scss */
+  /* line 83, ../sass/_menu.scss */
   #main-menu .menu > li:hover {
     left: -20px;
   }

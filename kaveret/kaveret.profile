@@ -274,6 +274,11 @@ function kaveret_set_variables() {
     'mimemail_sitestyle' => FALSE,
     'site_frontpage' => 'front',
     'kaveret_og_single_community' => TRUE,
+
+    // Facebook OAuth settings.
+    'fboauth_id' => '587884784574938',
+    'fboauth_secret' => 'aa9f158d6e43ef26baee93efba6d5275',
+    'fboauth_user_properties' => array('email'),
   );
 
   foreach ($variables as $key => $value) {
