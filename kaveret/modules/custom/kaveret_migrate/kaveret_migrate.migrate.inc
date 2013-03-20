@@ -121,7 +121,7 @@ class KaveretPageNodes extends KaveretMigration {
   }
 
   public function complete($entity, $row) {
-
+    // Create a menu link in the sidebar menu for each page.
     $item = array(
       'link_title' => $entity->title,
       'link_path' => 'node/' . $entity->nid,
@@ -131,10 +131,6 @@ class KaveretPageNodes extends KaveretMigration {
       'weight' => $row->link_weight,
     );
     menu_link_save($item);
-
-//    dpm(menu_load_links('side_menu'));
-//    dpm($entity->path['alias']);
-//    dpm(menu_get_item($entity->path['alias']));
   }
 }
 
