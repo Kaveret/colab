@@ -226,6 +226,7 @@
 /* line 3, ../sass/_menu.scss */
 #main-menu {
   position: absolute;
+  width: 50px;
 }
 /* line 6, ../sass/_menu.scss */
 #main-menu .menu > li {
