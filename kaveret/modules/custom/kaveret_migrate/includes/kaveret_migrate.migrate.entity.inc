@@ -107,7 +107,8 @@ abstract class KaveretMigration extends Migration {
     entity_save($this->entityType, $entity);
 
     // Update entity_translation table.
-    // TODO: Find a cleaner way to do so. See commented out code below.
+    // TODO: Find a cleaner way to do so. See commented out code below. See
+    // hints under EntityTranslationDefaultHandler::saveTranslations().
     foreach ($this->languages as $language) {
       $wrapper = entity_metadata_wrapper($this->entityType, $entity);
       $fields = array(
@@ -126,10 +127,5 @@ abstract class KaveretMigration extends Migration {
         ->fields($fields)
         ->execute();
     }
-/*
-    $handler = entity_translation_get_handler($this->entityType, $entity);
-    $handler->initPathScheme();
-    $handler->initTranslations();
-    $handler->saveTranslations();*/
   }
 }
