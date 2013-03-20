@@ -203,11 +203,11 @@
   display: none;
 }
 /* line 60, ../sass/_footer.scss */
-.footer .menu.nav a.main.resources {
+.footer .menu.nav a.main.resource-exchange {
   background-position: 0 -50px;
 }
 /* line 64, ../sass/_footer.scss */
-.footer .menu.nav a.main.dreams {
+.footer .menu.nav a.main.dreams-accelerator {
   background-position: -24px -50px;
 }
 /* line 68, ../sass/_footer.scss */
@@ -215,7 +215,7 @@
   background-position: -72px -50px;
 }
 /* line 72, ../sass/_footer.scss */
-.footer .menu.nav a.main.communities {
+.footer .menu.nav a.main.groups {
   background-position: -48px -50px;
 }
 /* line 76, ../sass/_footer.scss */
