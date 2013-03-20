@@ -164,6 +164,9 @@ function bootstrap_preprocess_page(&$variables) {
   if ($user->uid) {
     $variables['username'] = $user->name;
   }
+  else {
+    $variables['facebook_connect'] = fboauth_action_display('connect');
+  }
 
   // Build breadcrumbs.
   $variables['breadcrumbs'] = kaveret_general_get_breadcrumbs();

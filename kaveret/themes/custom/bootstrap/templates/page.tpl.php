@@ -54,6 +54,12 @@
           </div>
 
           <?php print render($secondary_nav); ?>
+
+          <?php if(!empty($facebook_connect)): ?>
+            <div class="facebook-connect <?php print $alter_pull_class; ?>">
+              <?php print $facebook_connect; ?>
+            </div>
+          <?php endif; ?>
         </nav>
       </div>
     </div>
