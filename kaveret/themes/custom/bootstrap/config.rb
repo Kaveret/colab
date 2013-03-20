@@ -41,7 +41,7 @@ relative_assets = true
 
 # To disable debugging comments that display the original location of your
 # selectors. Uncomment:
-# line_comments = false
+line_comments = false
 
 # Add the relative path to the base theme as an import path so that we can
 # easily use assets from the base theme.
