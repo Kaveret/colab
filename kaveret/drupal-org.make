@@ -23,6 +23,9 @@ projects[diff][version] = "3.2"
 projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.0"
 
+projects[entity_translation][subdir] = "contrib"
+projects[entity_translation][version] = "1.0-beta2"
+
 projects[entityreference][subdir] = "contrib"
 projects[entityreference][version] = "1.0"
 
@@ -124,7 +127,7 @@ projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
 
 projects[title][subdir] = "contrib"
-projects[title][version] = "1.0-alpha5"
+projects[title][version] = "1.0-alpha7"
 
 projects[token][subdir] = "contrib"
 projects[token][version] = "1.5"

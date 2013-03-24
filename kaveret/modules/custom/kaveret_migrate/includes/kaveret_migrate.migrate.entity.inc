@@ -36,8 +36,20 @@ abstract class KaveretMigration extends Migration {
     }
     elseif ($this->entityType == 'taxonomy_term') {
       $this->addFieldMapping('name', 'name');
+
+      $this->addFieldMapping('language')
+        ->defaultValue('en');
+
       $class_name = 'MigrateDestinationTerm';
       $csv_cols[] = array('name', 'Name');
+
+      if (!empty($this->languages)) {
+        foreach ($this->languages as $language) {
+          foreach ($this->translated_fields as $field => $title) {
+            $csv_cols[] = array($field . '_' . $language, $title . ' ' . $language);
+          }
+        }
+      }
     }
 
     // Rebuild the csv columns array.
@@ -73,6 +85,47 @@ abstract class KaveretMigration extends Migration {
         );
         $row->{$date_field} = drupal_json_encode($date_data);
       }
+    }
+  }
+
+  /**
+   * Add translated fields values.
+   * We do it in complete() rather than in prepare() because the fields created
+   * by the title module are not appearing on the entity in prepare().
+   */
+  function complete($entity, $row) {
+    if (empty($this->languages)) {
+      return;
+    }
+
+    foreach ($this->languages as $language) {
+      foreach (array_keys($this->translated_fields) as $field) {
+        $entity->{$field}[$language] = array(array('value' => $row->{$field . '_' . $language}));
+      }
+    }
+
+    entity_save($this->entityType, $entity);
+
+    // Update entity_translation table.
+    // TODO: Find a cleaner way to do so. See commented out code below. See
+    // hints under EntityTranslationDefaultHandler::saveTranslations().
+    foreach ($this->languages as $language) {
+      $wrapper = entity_metadata_wrapper($this->entityType, $entity);
+      $fields = array(
+        'entity_type' => $this->entityType,
+        'entity_id' => $wrapper->getIdentifier(),
+        'language' => $language,
+        'source' => 'en',
+        'uid' => 1,
+        'status' => 1,
+        'translate' => 0,
+        'created' => REQUEST_TIME,
+        'changed' => REQUEST_TIME,
+      );
+
+      db_insert('entity_translation')
+        ->fields($fields)
+        ->execute();
     }
   }
 }
