@@ -6,10 +6,6 @@
   margin-bottom: 0;
   border: none;
 
-  .user-picture {
-    margin-top: -15px;
-  }
-
   #search-block-form {
     margin: 0;
   }
@@ -142,6 +138,8 @@
     .username {
       font-weight: bold;
       font-size: 16px;
+      float: left;
+      margin-left: 10px;
     }
   }
 

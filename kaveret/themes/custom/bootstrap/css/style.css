@@ -4,9 +4,6 @@
   margin-bottom: 0;
   border: none;
 }
-#navbar .navbar-inner .user-picture {
-  margin-top: -15px;
-}
 #navbar .navbar-inner #search-block-form {
   margin: 0;
 }
@@ -109,6 +106,8 @@
 #navbar-second .navbar-inner .user-details .username {
   font-weight: bold;
   font-size: 16px;
+  float: left;
+  margin-left: 10px;
 }
 #navbar-second .navbar-inner .facebook-connect {
   margin: 23px 20px 0;
@@ -297,7 +296,7 @@ form .btn {
 .footer {
   margin-top: 45px;
   padding: 35px 0 36px;
-  border-top: 1px solid #E5E5E5;
+  border-top: 1px solid #e5e5e5;
 }
 
 ul.action-links {
@@ -480,7 +479,7 @@ div.form-item div.password-suggestions {
   padding: 0.2em 0.5em;
   margin: 0.7em 0;
   width: 38.5em;
-  border: 1px solid #B4B4B4;
+  border: 1px solid #b4b4b4;
 }
 
 div.password-suggestions ul {

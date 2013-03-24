@@ -8,11 +8,7 @@
         <span class="icon-bar"></span>
       </a>
 
-      <?php if (!empty($user_picture)): ?>
-        <div class="user-picture <?php print $pull_class; ?>">
-          <?php print $user_picture; ?>
-        </div>
-      <?php endif; ?>
+
 
       <div class="nav-collapse collapse">
         <nav role="navigation">
@@ -45,6 +41,11 @@
         <nav role="navigation">
           <?php if (!empty($username)): ?>
             <div class="user-details <?php print $pull_class; ?>">
+              <?php if (!empty($user_picture)): ?>
+                <div class="user-picture <?php print $pull_class; ?>">
+                  <?php print $user_picture; ?>
+                </div>
+              <?php endif; ?>
               <div class="username"><?php print $username; ?></div>
             </div>
           <?php endif; ?>

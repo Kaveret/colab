@@ -152,7 +152,7 @@ function bootstrap_preprocess_page(&$variables) {
   if (!empty($user->picture)) {
     $picture = file_load($user->picture);
     $image_variables = array(
-      'style_name' => 'thumbnail',
+      'style_name' => 'user_picture',
       'path' => $picture->uri,
     );
     $variables['user_picture'] = theme('image_style', $image_variables);

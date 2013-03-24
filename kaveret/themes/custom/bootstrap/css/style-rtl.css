@@ -101,3 +101,9 @@ div.contextual-links-wrapper {
 .breadcrumbs .arrow {
   background-position: -50px -125px;
 }
+
+#navbar-second .navbar-inner .user-details .username {
+  float: right;
+  margin-right: 10px;
+  margin-left: 0;
+}
