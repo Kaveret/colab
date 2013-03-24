@@ -279,6 +279,12 @@ function kaveret_set_variables() {
     'fboauth_id' => '587884784574938',
     'fboauth_secret' => 'aa9f158d6e43ef26baee93efba6d5275',
     'fboauth_user_properties' => array('email'),
+
+    // Translation settings.
+    'entity_translation_entity_types' => array(
+      'node' => 'node',
+      'taxonomy_term' => 'taxonomy_term',
+    ),
   );
 
   foreach ($variables as $key => $value) {
