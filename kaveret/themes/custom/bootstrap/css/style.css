@@ -270,6 +270,9 @@ form .control-group a {
 form .btn {
   margin: 0 5px;
 }
+form .form-required {
+  color: #eb1e23;
+}
 
 @media (min-width: 980px) {
   body {
@@ -296,7 +299,7 @@ form .btn {
 .footer {
   margin-top: 45px;
   padding: 35px 0 36px;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #E5E5E5;
 }
 
 ul.action-links {
@@ -479,7 +482,7 @@ div.form-item div.password-suggestions {
   padding: 0.2em 0.5em;
   margin: 0.7em 0;
   width: 38.5em;
-  border: 1px solid #b4b4b4;
+  border: 1px solid #B4B4B4;
 }
 
 div.password-suggestions ul {
@@ -556,6 +559,98 @@ article.node-teaser .caption a {
 }
 article.node-teaser .field-name-body {
   padding: 0;
+}
+
+.page-my-wallet #my-wallet-panel {
+  margin-top: 10px;
+}
+.page-my-wallet #my-wallet-panel .panel-pane {
+  color: #004b82;
+}
+.page-my-wallet #my-wallet-panel .panel-pane .pane-title, .page-my-wallet #my-wallet-panel .panel-pane .pane-content {
+  border: 1px solid #fddda2;
+  -moz-border-radius: 10px 10px 0 0;
+  -webkit-border-radius: 10px 10px 0 0;
+  -khtml-border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
+  padding: 0 20px;
+}
+.page-my-wallet #my-wallet-panel .panel-pane .pane-title {
+  margin: 0;
+  font-weight: normal;
+  font-size: 22px;
+  background-color: #fdf4e5;
+}
+.page-my-wallet #my-wallet-panel .panel-pane .pane-content {
+  padding: 20px;
+  -moz-border-radius: 0 0 10px 10px;
+  -webkit-border-radius: 0 0 10px 10px;
+  -khtml-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+  border-top: none;
+}
+.page-my-wallet #my-wallet-panel .panel-pane.pane-transfer {
+  width: 374px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form {
+  margin: 0;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .control-label, .page-my-wallet #my-wallet-panel #mcapi-forms-form .controls {
+  display: inline-block;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form input, .page-my-wallet #my-wallet-panel #mcapi-forms-form select {
+  border-color: #fddda2;
+  margin: 0;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form select {
+  width: 208px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-text {
+  width: 194px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction {
+  height: 30px;
+  margin-bottom: 0;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .form-required {
+  display: none;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction * {
+  margin: 0;
+  padding: 0;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .option {
+  margin-right: 10px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction label, .page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .form-type-radio, .page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .controls {
+  float: left;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .controls, .page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction #edit-direction, .page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .form-item-direction {
+  height: 20px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction input {
+  vertical-align: middle;
+  margin: 4px 5px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .worth-widget {
+  height: 30px;
+  line-height: 30px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .worth-widget .form-text {
+  margin: 0;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .control-label {
+  width: 88px;
+  text-align: right;
+  padding-right: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .actions {
+  text-align: right;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .actions .btn.form-submit {
+  margin: 0;
 }
 
 body {

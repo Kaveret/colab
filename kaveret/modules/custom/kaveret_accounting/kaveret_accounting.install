@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the message module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function kaveret_accounting_install() {
+  // Add a "purpose" field to transactions.
+  $field = array(
+    'field_name' => 'transaction_purpose',
+    'type' => 'text',
+    'entity_types' => array('transaction'),
+    'cardinality' => 1,
+    'translatable' => FALSE,
+    'locked' => FALSE,
+  );
+  $field = field_create_field($field);
+  $instance = array(
+    'field_name' => 'transaction_purpose',
+    'bundle' => 'transaction',
+    'entity_type' => 'transaction',
+    'label' => t('Purpose'),
+    'description' => '',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+  );
+  field_create_instance($instance);
+
+  variable_set('transaction_description_field', 'transaction_purpose');
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * Delete the purpose field.
+ */
+function kaveret_accounting_uninstall() {
+  $instance = field_info_instance('transaction', 'transaction_purpose', 'transaction');
+  field_delete_instance($instance);
+  field_delete_field('transaction_purpose');
+}

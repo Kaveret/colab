@@ -8,20 +8,28 @@ include_once 'kaveret_general.features.inc';
 /**
  * Build page breadcrumbs.
  *
- * @TODO: Currently only supports homepage and offers page.
+ * @TODO: Currently only supports homepage, offers page and My-Wallet.
  */
 function kaveret_general_get_breadcrumbs() {
   global $language;
 
-  $direction = $language->direction == LANGUAGE_RTL ? 'rtl' : 'ltr';
+  $dir = $language->direction == LANGUAGE_RTL ? 'rtl' : 'ltr';
 
   $items = array(l(t('Main Page'), ''));
 
   $item = menu_get_item();
   switch ($item['path']) {
     case 'front':
+      $items[] = "<span dir=\"$dir\">" . t('Marketplace') . '</span>';
+      break;
+
     case 'offers':
-      $items[] = "<span dir=\"$direction\">" . t('Marketplace') . '</span>';
+      $items[] = "<span dir=\"$dir\">" . t('Marketplace') . '</span>';
+      break;
+
+    case 'my-wallet':
+      $items[] = "<span dir=\"$dir\">" . l(t('Resource Exchange'), '') . '</span>';
+      $items[] = "<span dir=\"$dir\">" . t('My Wallet') . '</span>';
       break;
   }
 

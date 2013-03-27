@@ -1,0 +1,112 @@
+.page-my-wallet {
+
+  #my-wallet-panel {
+    margin-top: 10px;
+
+    .panel-pane {
+      color: #004b82;
+
+      .pane-title, .pane-content {
+        border: 1px solid #fddda2;
+        @include rounded-corners(10px, 10px, 0, 0);
+        padding: 0 20px;
+      }
+
+      .pane-title {
+        margin: 0;
+        font-weight: normal;
+        font-size: 22px;
+        background-color: #fdf4e5;
+      }
+
+      .pane-content {
+        padding: 20px;
+        @include rounded-corners(0, 0, 10px, 10px);
+        border-top: none;
+      }
+
+      &.pane-transfer {
+        width: 374px;
+      }
+    }
+
+
+    #mcapi-forms-form {
+      margin: 0;
+
+      .control-label, .controls {
+        display: inline-block;
+      }
+
+      input, select {
+        border-color: #fddda2;
+        margin: 0;
+      }
+
+      select {
+        width: 208px;
+      }
+
+      .form-text {
+        width: 194px;
+      }
+
+      .form-item-direction {
+        height: 30px;
+        margin-bottom: 0;
+
+        .form-required {
+          display: none;
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+        }
+
+        .option {
+          margin-right: 10px; //LTR
+        }
+
+        label, .form-type-radio, .controls {
+          float: left; //LTR
+        }
+
+        .controls, #edit-direction, .form-item-direction {
+          height: 20px;
+        }
+
+        input {
+          vertical-align: middle;
+          margin: 4px 5px;
+        }
+      }
+
+      .worth-widget {
+        height: 30px;
+        line-height: 30px;
+
+
+        .form-text {
+          margin: 0;
+        }
+      }
+
+      .control-label {
+        width: 88px;
+        text-align: right; //LTR
+        padding-right: 10px; //LTR
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .actions {
+        text-align: right; //LTR
+
+        .btn.form-submit {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

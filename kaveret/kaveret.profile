@@ -285,6 +285,9 @@ function kaveret_set_variables() {
       'node' => 'node',
       'taxonomy_term' => 'taxonomy_term',
     ),
+
+    // MCAPI settings.
+    'user_chooser_threshhold' => 1,
   );
 
   foreach ($variables as $key => $value) {
@@ -451,10 +454,11 @@ function kaveret_menus_setup() {
   $mlid = menu_link_save($item);
 
   $item = array(
-    'link_title' => 'item',
-    'link_path' => '<front>',
+    'link_title' => 'My Wallet',
+    'link_path' => 'my-wallet',
     'menu_name' => 'side-menu',
     'plid' => $mlid,
+    'customized' => TRUE,
   );
   menu_link_save($item);
 
