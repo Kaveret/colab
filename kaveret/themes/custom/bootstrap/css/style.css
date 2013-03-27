@@ -598,6 +598,9 @@ article.node-teaser .field-name-body {
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .control-label, .page-my-wallet #my-wallet-panel #mcapi-forms-form .controls {
   display: inline-block;
 }
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .controls {
+  float: right;
+}
 .page-my-wallet #my-wallet-panel #mcapi-forms-form input, .page-my-wallet #my-wallet-panel #mcapi-forms-form select {
   border-color: #fddda2;
   margin: 0;
@@ -631,10 +634,16 @@ article.node-teaser .field-name-body {
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction input {
   vertical-align: middle;
   margin: 4px 5px;
+  float: right;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .worth-widget {
   height: 30px;
   line-height: 30px;
+  float: right;
+  margin-top: -5px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .worth-widget .code {
+  margin-right: 3px;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .worth-widget .form-text {
   margin: 0;
@@ -664,4 +673,8 @@ body {
 
 .node-teaser .field-name-body {
   padding: 0 9px;
+}
+
+html.js input.form-autocomplete {
+  background-position: 100% 8px;
 }
