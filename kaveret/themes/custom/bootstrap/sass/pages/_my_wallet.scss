@@ -38,6 +38,10 @@
         display: inline-block;
       }
 
+      .controls {
+        float: right;
+      }
+
       input, select {
         border-color: #fddda2;
         margin: 0;
@@ -79,13 +83,19 @@
         input {
           vertical-align: middle;
           margin: 4px 5px;
+          float: right;
         }
       }
 
       .worth-widget {
         height: 30px;
         line-height: 30px;
+        float: right; // LTR
+        margin-top: -5px;
 
+        .code {
+          margin-right: 3px; // LTR
+        }
 
         .form-text {
           margin: 0;
