@@ -16,6 +16,21 @@ function kaveret_accounting_ctools_plugin_directory($module, $plugin) {
 }
 
 /**
+ * Implements hook_views_data().
+ */
+function kaveret_accounting_views_data() {
+  $data['mcapi_transactions']['description'] = array(
+    'title' => t('Description'),
+    'help' => t('Display a description of a transaction.'),
+    'real field' => 'xid',
+    'field' => array(
+      'handler' => 'kaveret_accounting_transaction_description',
+    ),
+  );
+  return $data;
+}
+
+/**
  * Implements hook_mcapiforms_default_alter().
  */
 function kaveret_accounting_mcapiforms_default_alter($forms) {
