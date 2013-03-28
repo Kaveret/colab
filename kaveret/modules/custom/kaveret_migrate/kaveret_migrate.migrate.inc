@@ -157,3 +157,66 @@ class KaveretUsers extends Migration {
     $this->destination = new MigrateDestinationUser();
   }
 }
+
+/**
+ * Migrate transaction entities.
+ */
+class KaveretTransaction extends KaveretTransactionMigration {
+
+  public $entityType = 'transaction';
+  public $bundle = 'transaction';
+
+  public $csvColumns = array(
+    array('id', 'Unique ID'),
+    array('payer', 'Payer'),
+    array('payee', 'Payee'),
+    array('type', 'Type'),
+    array('creator', 'Creator'),
+    array('created', 'Created'),
+    array('transaction_purpose', 'Purpose'),
+    array('currency', 'Currency'),
+    array('amount', 'Amount'),
+  );
+
+  public $dependencies = array(
+    'KaveretUsers',
+  );
+
+
+  public function __construct() {
+    parent::__construct();
+
+    $this->addFieldMapping('type', 'type');
+    $this->addFieldMapping('created', 'created');
+    $this->addFieldMapping('transaction_purpose', 'transaction_purpose');
+    $this
+      ->addFieldMapping('payer', 'payer')
+      ->sourceMigration('KaveretUsers');
+    $this
+      ->addFieldMapping('payee', 'payee')
+      ->sourceMigration('KaveretUsers');
+    $this
+      ->addFieldMapping('creator', 'creator')
+      ->sourceMigration('KaveretUsers');
+  }
+
+  public function prepare($entity, $row) {
+    // Set the worth value.
+    // TODO: See if it's possible to set it with ('worth:currcode', 'currency').
+    $worth = array(
+      'quantity' => $row->amount,
+      'currcode' => $row->currency,
+    );
+    $entity->worth = array(LANGUAGE_NONE => array($worth));
+  }
+
+
+  public function complete($entity, $row) {
+    // Re-set the created value, because it gets overridden, also when trying to
+    // set it with entity_save.
+    db_update('mcapi_transactions')
+      ->fields(array('created' => $row->created,))
+      ->condition('xid', $entity->xid)
+      ->execute();
+  }
+}
