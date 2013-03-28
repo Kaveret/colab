@@ -10,25 +10,21 @@ class kaveret_accounting_transaction_description extends views_handler_field {
     $transactions = entity_load('transaction', array($values->xid));
     $transaction = reset($transactions);
 
+    // TODO: Support "Suggest" transactions.
+    if ($transaction->type != '1stparty') {
+      return;
+    }
+
     $payer = user_load($transaction->payer);
     $payee = user_load($transaction->payee);
 
-    $variables = array();
-    // TODO: Support "Suggest" transactions.
-    if ($transaction->creator == $transaction->payer) {
-      $variables['@action'] = t('Payment');
-      $variables['@direction'] = t('to');
-      $variables['@name'] = $payee->name;
-    }
-    elseif ($transaction->creator == $transaction->payee) {
-      $variables['@action'] = t('Request');
-      $variables['@direction'] = t('from');
-      $variables['@name'] = $payer->name;
-    }
+    $variables = array(
+      '@payer' => $payer->name,
+      '@payee' => $payee->name,
+      '@quantity' => $values->field_worth[0]['rendered']['#quantity'],
+      '@currency' => $values->field_worth[0]['rendered']['#currcode'],
+    );
 
-    $variables['@amount'] = $values->field_worth[0]['rendered']['#quantity'];
-    $variables['@amount'] .= $values->field_worth[0]['rendered']['#currcode'];
-
-    return t('@action of @amount @direction @name', $variables);
+    return t('@payer payed @quantity@currency to @payee', $variables);
   }
 }
