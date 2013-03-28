@@ -264,7 +264,9 @@ function kaveret_set_variables() {
     'user_picture_file_size' => '800',
     'user_picture_style' => 'thumbnail',
     // Allow visitor account creation with administrative approval.
-    'user_register' => USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL,
+    'user_register' => USER_REGISTER_VISITORS,
+    'user_email_verification' => FALSE,
+
     // Update the menu router information.
     'menu_rebuild_needed' => TRUE,
     'jquery_update_jquery_version' =>  '1.8',
