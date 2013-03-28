@@ -6,3 +6,4 @@ dependencies[] = migrate
 dependencies[] = migrate_extras
 files[] = kaveret_migrate.migrate.inc
 files[] = includes/kaveret_migrate.migrate.entity.inc
+files[] = includes/kaveret_migrate.migrate.transaction.inc
