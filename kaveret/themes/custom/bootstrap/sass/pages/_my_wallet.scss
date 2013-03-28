@@ -39,7 +39,7 @@
       }
 
       .controls {
-        float: right;
+        float: right; // LTR
       }
 
       input, select {
@@ -69,11 +69,11 @@
         }
 
         .option {
-          margin-right: 10px; //LTR
+          margin-right: 10px; // LTR
         }
 
         label, .form-type-radio, .controls {
-          float: left; //LTR
+          float: left; // LTR
         }
 
         .controls, #edit-direction, .form-item-direction {
