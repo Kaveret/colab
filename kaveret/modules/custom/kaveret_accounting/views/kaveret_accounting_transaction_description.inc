@@ -25,6 +25,6 @@ class kaveret_accounting_transaction_description extends views_handler_field {
       '@currency' => $values->field_worth[0]['rendered']['#currcode'],
     );
 
-    return t('@payer payed @quantity@currency to @payee', $variables);
+    return t('@payer paid @quantity@currency to @payee', $variables);
   }
 }
