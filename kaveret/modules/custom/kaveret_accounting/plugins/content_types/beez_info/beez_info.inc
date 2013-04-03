@@ -41,8 +41,7 @@ function kaveret_accounting_beez_info_content_type_render($subtype, $conf, $args
   $items[] = t('Volume: <strong>@volume</strong>', array('@volume' => $totals->volume));
 
   $info = theme('item_list', array('items' => $items));
-
-  $graph = theme('balance_history', $variables);
+  $graph = $totals->count ? theme('balance_history', $variables) : '';
 
   $block->content = theme('beez_info', array('info' => $info, 'graph' => $graph));
 
