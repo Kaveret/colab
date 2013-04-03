@@ -120,3 +120,34 @@
     }
   }
 }
+
+.pane-beez-info {
+
+  ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      line-height: 23px;
+
+      &.first {
+        font-size: 17px;
+      }
+    }
+  }
+
+  .info,
+  .graph {
+    float: left; // LTR
+  }
+
+  .graph {
+    width: 250px;
+    height: 200px;
+    border: 1px solid #fddda2;
+    background: transparent;
+    fill: transparent;
+    margin-left: 20px;
+  }
+}

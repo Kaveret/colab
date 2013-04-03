@@ -662,6 +662,30 @@ article.node-teaser .field-name-body {
   margin: 0;
 }
 
+.pane-beez-info ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pane-beez-info ul li {
+  line-height: 23px;
+}
+.pane-beez-info ul li.first {
+  font-size: 17px;
+}
+.pane-beez-info .info,
+.pane-beez-info .graph {
+  float: left;
+}
+.pane-beez-info .graph {
+  width: 250px;
+  height: 200px;
+  border: 1px solid #fddda2;
+  background: transparent;
+  fill: transparent;
+  margin-left: 20px;
+}
+
 body {
   padding-top: 0;
   background-color: #fefefe;
