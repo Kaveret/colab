@@ -35,7 +35,9 @@ function kaveret_offer_field_default_fields() {
       ),
       'locked' => '0',
       'module' => 'text',
-      'settings' => array(),
+      'settings' => array(
+        'entity_translation_sync' => FALSE,
+      ),
       'translatable' => '0',
       'type' => 'text_long',
     ),
@@ -58,6 +60,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Comment',
       'required' => TRUE,
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'text_processing' => 1,
         'user_register_form' => FALSE,
       ),
@@ -84,7 +87,9 @@ function kaveret_offer_field_default_fields() {
       'indexes' => array(),
       'locked' => '0',
       'module' => 'number',
-      'settings' => array(),
+      'settings' => array(
+        'entity_translation_sync' => FALSE,
+      ),
       'translatable' => '0',
       'type' => 'number_integer',
     ),
@@ -110,6 +115,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Revison ID',
       'required' => 0,
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'max' => '',
         'min' => '',
         'prefix' => '',
@@ -151,7 +157,9 @@ function kaveret_offer_field_default_fields() {
       ),
       'locked' => '0',
       'module' => 'text',
-      'settings' => array(),
+      'settings' => array(
+        'entity_translation_sync' => FALSE,
+      ),
       'translatable' => '0',
       'type' => 'text_long',
     ),
@@ -174,6 +182,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Comment',
       'required' => TRUE,
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'text_processing' => 1,
         'user_register_form' => FALSE,
       ),
@@ -200,7 +209,9 @@ function kaveret_offer_field_default_fields() {
       'indexes' => array(),
       'locked' => '0',
       'module' => 'number',
-      'settings' => array(),
+      'settings' => array(
+        'entity_translation_sync' => FALSE,
+      ),
       'translatable' => '0',
       'type' => 'number_integer',
     ),
@@ -226,6 +237,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Revison ID',
       'required' => 0,
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'max' => '',
         'min' => '',
         'prefix' => '',
@@ -266,6 +278,7 @@ function kaveret_offer_field_default_fields() {
       'locked' => '0',
       'module' => 'entityreference',
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'handler' => 'base',
         'handler_settings' => array(
           'behaviors' => array(
@@ -328,6 +341,7 @@ function kaveret_offer_field_default_fields() {
             'status' => TRUE,
           ),
         ),
+        'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -369,7 +383,9 @@ function kaveret_offer_field_default_fields() {
       ),
       'locked' => '0',
       'module' => 'text',
-      'settings' => array(),
+      'settings' => array(
+        'entity_translation_sync' => FALSE,
+      ),
       'translatable' => '0',
       'type' => 'text_with_summary',
     ),
@@ -402,6 +418,7 @@ function kaveret_offer_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'display_summary' => 1,
+        'entity_translation_sync' => FALSE,
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
@@ -414,94 +431,6 @@ function kaveret_offer_field_default_fields() {
         ),
         'type' => 'text_textarea_with_summary',
         'weight' => '5',
-      ),
-    ),
-  );
-
-  // Exported field: 'node-offer-field_category'.
-  $fields['node-offer-field_category'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_category',
-      'foreign keys' => array(
-        'taxonomy_term_data' => array(
-          'columns' => array(
-            'target_id' => 'tid',
-          ),
-          'table' => 'taxonomy_term_data',
-        ),
-      ),
-      'indexes' => array(
-        'target_id' => array(
-          0 => 'target_id',
-        ),
-      ),
-      'locked' => '0',
-      'module' => 'entityreference',
-      'settings' => array(
-        'handler' => 'base',
-        'handler_settings' => array(
-          'behaviors' => array(
-            'views-select-list' => array(
-              'status' => 0,
-            ),
-          ),
-          'sort' => array(
-            'type' => 'none',
-          ),
-          'target_bundles' => array(
-            'offer_categories' => 'offer_categories',
-          ),
-        ),
-        'target_type' => 'taxonomy_term',
-      ),
-      'translatable' => '0',
-      'type' => 'entityreference',
-    ),
-    'field_instance' => array(
-      'bundle' => 'offer',
-      'default_value' => NULL,
-      'default_value_function' => '',
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '9',
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '9',
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_category',
-      'label' => 'Category',
-      'required' => 1,
-      'settings' => array(
-        'behaviors' => array(
-          'prepopulate' => array(
-            'status' => 0,
-          ),
-          'taxonomy-index' => array(
-            'status' => TRUE,
-          ),
-        ),
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'options',
-        'settings' => array(),
-        'type' => 'options_select',
-        'weight' => '0',
       ),
     ),
   );
@@ -528,6 +457,7 @@ function kaveret_offer_field_default_fields() {
           1 => 'Yes',
         ),
         'allowed_values_function' => '',
+        'entity_translation_sync' => FALSE,
       ),
       'translatable' => '0',
       'type' => 'list_boolean',
@@ -561,6 +491,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Expired',
       'required' => 0,
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -606,6 +537,7 @@ function kaveret_offer_field_default_fields() {
           '+1 year' => '1 year',
         ),
         'allowed_values_function' => '',
+        'entity_translation_sync' => FALSE,
       ),
       'translatable' => '0',
       'type' => 'list_text',
@@ -634,6 +566,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Obsolete after',
       'required' => 0,
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -661,6 +594,7 @@ function kaveret_offer_field_default_fields() {
       'settings' => array(
         'cache_count' => '4',
         'cache_enabled' => 0,
+        'entity_translation_sync' => FALSE,
         'granularity' => array(
           'day' => 'day',
           'hour' => 0,
@@ -710,6 +644,7 @@ function kaveret_offer_field_default_fields() {
         'default_value2' => 'same',
         'default_value_code' => '',
         'default_value_code2' => '',
+        'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -754,6 +689,9 @@ function kaveret_offer_field_default_fields() {
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
+        'entity_translation_sync' => array(
+          0 => 'fid',
+        ),
         'uri_scheme' => 'public',
       ),
       'translatable' => '0',
@@ -792,6 +730,7 @@ function kaveret_offer_field_default_fields() {
       'settings' => array(
         'alt_field' => 0,
         'default_image' => 0,
+        'entity_translation_sync' => FALSE,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
@@ -837,6 +776,7 @@ function kaveret_offer_field_default_fields() {
       'locked' => '0',
       'module' => 'entityreference',
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'handler' => 'base',
         'handler_settings' => array(
           'behaviors' => array(
@@ -896,6 +836,7 @@ function kaveret_offer_field_default_fields() {
             'status' => TRUE,
           ),
         ),
+        'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -938,6 +879,7 @@ function kaveret_offer_field_default_fields() {
             'parent' => '0',
           ),
         ),
+        'entity_translation_sync' => FALSE,
       ),
       'translatable' => '0',
       'type' => 'taxonomy_term_reference',
@@ -966,6 +908,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Tags',
       'required' => 0,
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1005,6 +948,7 @@ function kaveret_offer_field_default_fields() {
       'locked' => '0',
       'module' => 'text',
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'max_length' => 255,
       ),
       'translatable' => '1',
@@ -1039,6 +983,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Title',
       'required' => TRUE,
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'hide_label' => array(
           'entity' => FALSE,
           'page' => FALSE,
@@ -1072,7 +1017,9 @@ function kaveret_offer_field_default_fields() {
       'indexes' => array(),
       'locked' => '0',
       'module' => 'mcapi',
-      'settings' => array(),
+      'settings' => array(
+        'entity_translation_sync' => FALSE,
+      ),
       'translatable' => '0',
       'type' => 'worth_field',
     ),
@@ -1119,6 +1066,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Worth',
       'required' => 0,
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1156,7 +1104,9 @@ function kaveret_offer_field_default_fields() {
       ),
       'locked' => '0',
       'module' => 'text',
-      'settings' => array(),
+      'settings' => array(
+        'entity_translation_sync' => FALSE,
+      ),
       'translatable' => '0',
       'type' => 'text_with_summary',
     ),
@@ -1189,6 +1139,7 @@ function kaveret_offer_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'display_summary' => 0,
+        'entity_translation_sync' => FALSE,
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
@@ -1214,58 +1165,50 @@ function kaveret_offer_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_category',
       'foreign keys' => array(
-        'taxonomy_term_data' => array(
+        'tid' => array(
           'columns' => array(
-            'target_id' => 'tid',
+            'tid' => 'tid',
           ),
           'table' => 'taxonomy_term_data',
         ),
       ),
       'indexes' => array(
-        'target_id' => array(
-          0 => 'target_id',
+        'tid' => array(
+          0 => 'tid',
         ),
       ),
       'locked' => '0',
-      'module' => 'entityreference',
+      'module' => 'taxonomy',
       'settings' => array(
-        'handler' => 'base',
-        'handler_settings' => array(
-          'behaviors' => array(
-            'views-select-list' => array(
-              'status' => 0,
-            ),
-          ),
-          'sort' => array(
-            'type' => 'none',
-          ),
-          'target_bundles' => array(
-            'offer_categories' => 'offer_categories',
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'offer_categories',
+            'parent' => '0',
           ),
         ),
-        'target_type' => 'taxonomy_term',
+        'entity_translation_sync' => FALSE,
       ),
       'translatable' => '0',
-      'type' => 'entityreference',
+      'type' => 'taxonomy_term_reference',
     ),
     'field_instance' => array(
       'bundle' => 'request',
       'default_value' => NULL,
-      'default_value_function' => '',
       'deleted' => '0',
       'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
+          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '8',
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 13,
         ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '9',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
@@ -1273,14 +1216,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Category',
       'required' => 1,
       'settings' => array(
-        'behaviors' => array(
-          'prepopulate' => array(
-            'status' => 0,
-          ),
-          'taxonomy-index' => array(
-            'status' => TRUE,
-          ),
-        ),
+        'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1288,7 +1224,7 @@ function kaveret_offer_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '0',
+        'weight' => '16',
       ),
     ),
   );
@@ -1315,6 +1251,7 @@ function kaveret_offer_field_default_fields() {
           1 => 'Yes',
         ),
         'allowed_values_function' => '',
+        'entity_translation_sync' => FALSE,
       ),
       'translatable' => '0',
       'type' => 'list_boolean',
@@ -1348,6 +1285,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Expired',
       'required' => 0,
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1393,6 +1331,7 @@ function kaveret_offer_field_default_fields() {
           '+1 year' => '1 year',
         ),
         'allowed_values_function' => '',
+        'entity_translation_sync' => FALSE,
       ),
       'translatable' => '0',
       'type' => 'list_text',
@@ -1421,6 +1360,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Obsolete after',
       'required' => 0,
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1448,6 +1388,7 @@ function kaveret_offer_field_default_fields() {
       'settings' => array(
         'cache_count' => '4',
         'cache_enabled' => 0,
+        'entity_translation_sync' => FALSE,
         'granularity' => array(
           'day' => 'day',
           'hour' => 0,
@@ -1497,6 +1438,7 @@ function kaveret_offer_field_default_fields() {
         'default_value2' => 'same',
         'default_value_code' => '',
         'default_value_code2' => '',
+        'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1541,6 +1483,9 @@ function kaveret_offer_field_default_fields() {
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
+        'entity_translation_sync' => array(
+          0 => 'fid',
+        ),
         'uri_scheme' => 'public',
       ),
       'translatable' => '0',
@@ -1579,6 +1524,7 @@ function kaveret_offer_field_default_fields() {
       'settings' => array(
         'alt_field' => 0,
         'default_image' => 0,
+        'entity_translation_sync' => FALSE,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
@@ -1624,6 +1570,7 @@ function kaveret_offer_field_default_fields() {
       'locked' => '0',
       'module' => 'entityreference',
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'handler' => 'base',
         'handler_settings' => array(
           'behaviors' => array(
@@ -1683,6 +1630,7 @@ function kaveret_offer_field_default_fields() {
             'status' => TRUE,
           ),
         ),
+        'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1725,6 +1673,7 @@ function kaveret_offer_field_default_fields() {
             'parent' => '0',
           ),
         ),
+        'entity_translation_sync' => FALSE,
       ),
       'translatable' => '0',
       'type' => 'taxonomy_term_reference',
@@ -1753,6 +1702,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Tags',
       'required' => 0,
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1792,6 +1742,7 @@ function kaveret_offer_field_default_fields() {
       'locked' => '0',
       'module' => 'text',
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'max_length' => 255,
       ),
       'translatable' => '1',
@@ -1826,6 +1777,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Title',
       'required' => TRUE,
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'hide_label' => array(
           'entity' => FALSE,
           'page' => FALSE,
@@ -1859,7 +1811,9 @@ function kaveret_offer_field_default_fields() {
       'indexes' => array(),
       'locked' => '0',
       'module' => 'mcapi',
-      'settings' => array(),
+      'settings' => array(
+        'entity_translation_sync' => FALSE,
+      ),
       'translatable' => '0',
       'type' => 'worth_field',
     ),
@@ -1906,6 +1860,7 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Worth',
       'required' => 0,
       'settings' => array(
+        'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
