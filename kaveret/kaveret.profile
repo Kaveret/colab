@@ -143,8 +143,8 @@ function kaveret_setup_blocks() {
   $blocks = array();
 
   $blocks[] = array(
-    'module' => 'search',
-    'delta' => 'form',
+    'module' => 'panels_mini',
+    'delta' => 'navbar',
     'theme' => $default_theme,
     'status' => 1,
     'weight' => 0,

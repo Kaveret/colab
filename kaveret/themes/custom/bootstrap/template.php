@@ -58,6 +58,11 @@ function bootstrap_theme(&$existing, $type, $theme, $path) {
     'bootstrap_search_form_wrapper' => array(
       'render element' => 'element',
     ),
+
+    'user_login_block' => array(
+      'template' => 'templates/user-login-block',
+      'render element' => 'form',
+    ),
   );
 }
 
@@ -136,11 +141,6 @@ function bootstrap_preprocess_page(&$variables) {
   // Secondary nav.
   $variables['secondary_nav'] = menu_tree(variable_get('menu_secondary_links_source', 'user-menu'));
   $variables['secondary_nav']['#theme_wrappers'] = array('menu_tree__secondary');
-
-  // Header menus.
-  $variables['space_menu'] = menu_tree('space-menu');
-  $variables['social_links'] = menu_tree('social-menu');
-  $variables['navigation_menu'] = menu_tree('navigation-menu');
 
   // Get the logo filename according to the language.
   $logo = theme('image', array('path' => path_to_theme() . '/images/logo-' . $language->language . '.png'));

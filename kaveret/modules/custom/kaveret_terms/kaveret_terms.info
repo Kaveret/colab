@@ -1,6 +1,7 @@
 name = Kaveret terms
 core = 7.x
 package = Kaveret
+php = 5.2.4
 dependencies[] = features
 dependencies[] = field_sql_storage
 dependencies[] = text

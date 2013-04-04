@@ -7,6 +7,7 @@ dependencies[] = date
 dependencies[] = entityreference
 dependencies[] = features
 dependencies[] = image
+dependencies[] = kaveret_terms
 dependencies[] = list
 dependencies[] = mcapi
 dependencies[] = message
