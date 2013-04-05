@@ -2,6 +2,9 @@ core = 7.x
 api = 2
 
 ; Modules
+projects[addressfield][subdir] = "contrib"
+projects[addressfield[version] = "1.0-beta3"
+
 projects[admin_menu][subdir] = "contrib"
 projects[admin_menu][version] = "3.0-rc4"
 
@@ -9,7 +12,10 @@ projects[admin_views][subdir] = "contrib"
 projects[admin_views][version] = "1.1"
 
 projects[ctools][subdir] = "contrib"
-projects[ctools][version] = "1.2"
+projects[ctools][version] = "1.3"
+
+projects[commerce][subdir] = "contrib"
+projects[commerce][version] = "1.5"
 
 projects[date][subdir] = "contrib"
 projects[date][version] = "2.6"
@@ -111,7 +117,7 @@ projects[purl][subdir] = "contrib"
 projects[purl][version] = "1.x-dev"
 
 projects[rules][subdir] = "contrib"
-projects[rules][version] = "2.2"
+projects[rules][version] = "2.3"
 
 projects[search_api_db][subdir] = "contrib"
 projects[search_api_db][version] = "1.0-beta4"
