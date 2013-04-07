@@ -50,9 +50,7 @@ class KaveretOfferNodes extends KaveretMigration {
     $this
       ->addFieldMapping('field_image:source_dir')
       ->defaultValue(drupal_get_path('module', 'kaveret_migrate') . '/images');
-    $this
-      ->addFieldMapping('field_category', 'field_category')
-      ->sourceMigration('KaveretOfferCategoriesTerms');
+    $this->addFieldMapping('field_category', 'field_category');
   }
 }
 
@@ -87,9 +85,7 @@ class KaveretRequestNodes extends KaveretMigration {
     $this
       ->addFieldMapping('field_image:source_dir')
       ->defaultValue(drupal_get_path('module', 'kaveret_migrate') . '/images');
-    $this
-      ->addFieldMapping('field_category', 'field_category')
-      ->sourceMigration('KaveretOfferCategoriesTerms');
+    $this->addFieldMapping('field_category', 'field_category');
   }
 }
 
