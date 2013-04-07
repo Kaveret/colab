@@ -30,6 +30,8 @@ dependencies[] = admin_menu_toolbar
 dependencies[] = admin_views
 dependencies[] = commerce
 dependencies[] = commerce_ui
+dependencies[] = commerce_cart
+dependencies[] = commerce_checkout
 dependencies[] = commerce_customer
 dependencies[] = commerce_customer_ui
 dependencies[] = commerce_line_item
@@ -86,6 +88,7 @@ dependencies[] = views_bulk_operations
 
 ; Custom modules
 dependencies[] = kaveret_accounting
+dependencies[] = kaveret_commerce
 dependencies[] = kaveret_general
 dependencies[] = kaveret_migrate
 dependencies[] = kaveret_offer

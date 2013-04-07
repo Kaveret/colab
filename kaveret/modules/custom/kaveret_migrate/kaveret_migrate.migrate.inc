@@ -224,19 +224,20 @@ class KaveretTransaction extends KaveretTransactionMigration {
  * Migrate products.
  */
 class KaveretProducts extends Migration {
-  private $csvColumns = array(
+  public $csvColumns = array(
     array('id', 'Unique ID'),
-    array('title', 'Title'),
     array('sku', 'SKU'),
     array('price', 'Price'),
+    array('title', 'Title'),
+    array('title_he', 'Title he'),
   );
+
+  public $entityType = 'commerce_product';
+  public $bundle = 'product';
 
   public function __construct() {
     parent::__construct();
 
-    $this->description = t('Import products from CSV file.');
-
-    // Create a map object for tracking the relationships between source rows
     $key = array(
       'sku' => array(
         'type' => 'varchar',
@@ -253,9 +254,12 @@ class KaveretProducts extends Migration {
     $this->addFieldMapping('title', 'title');
     $this->addFieldMapping('sku', 'sku');
     $this->addFieldMapping('commerce_price', 'price');
+    $this->addFieldMapping('language')
+      ->defaultValue('en');
   }
 
-  public function prepareRow($row) {
-    $row->uid = 1;
+  public function complete($entity, $row) {
+    $entity->{'title_field'}['he'] = array(array('value' => $row->title_he));
+    entity_save('commerce_product', $entity);
   }
 }

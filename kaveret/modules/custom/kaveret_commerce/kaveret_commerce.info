@@ -1,0 +1,9 @@
+name = Kaveret Commerce
+description = Modifications for the commerce modules.
+core = 7.x
+package = Kaveret
+dependencies[] = features
+dependencies[] = field_sql_storage
+dependencies[] = text
+features[features_api][] = api:1
+features[field][] = commerce_product-product-title_field
