@@ -31,6 +31,12 @@ function kaveret_general_get_breadcrumbs() {
       $items[] = "<span dir=\"$dir\">" . l(t('Resource Exchange'), '') . '</span>';
       $items[] = "<span dir=\"$dir\">" . t('My Wallet') . '</span>';
       break;
+
+    case 'directory':
+      $items[] = "<span dir=\"$dir\">" . l(t('Resource Exchange'), '') . '</span>';
+      $items[] = "<span dir=\"$dir\">" . l(t('Marketplace'), '') . '</span>';
+      $items[] = "<span dir=\"$dir\">" . t('Full Directory List') . '</span>';
+      break;
   }
 
   return implode(' <span class="arrow"></span> ', $items);

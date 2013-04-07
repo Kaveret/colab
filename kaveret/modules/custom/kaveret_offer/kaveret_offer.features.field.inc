@@ -444,59 +444,50 @@ function kaveret_offer_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_category',
       'foreign keys' => array(
-        'taxonomy_term_data' => array(
+        'tid' => array(
           'columns' => array(
-            'target_id' => 'tid',
+            'tid' => 'tid',
           ),
           'table' => 'taxonomy_term_data',
         ),
       ),
       'indexes' => array(
-        'target_id' => array(
-          0 => 'target_id',
+        'tid' => array(
+          0 => 'tid',
         ),
       ),
       'locked' => '0',
-      'module' => 'entityreference',
+      'module' => 'taxonomy',
       'settings' => array(
-        'entity_translation_sync' => FALSE,
-        'handler' => 'base',
-        'handler_settings' => array(
-          'behaviors' => array(
-            'views-select-list' => array(
-              'status' => 0,
-            ),
-          ),
-          'sort' => array(
-            'type' => 'none',
-          ),
-          'target_bundles' => array(
-            'offer_categories' => 'offer_categories',
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'offer_categories',
+            'parent' => '0',
           ),
         ),
-        'target_type' => 'taxonomy_term',
+        'entity_translation_sync' => FALSE,
       ),
       'translatable' => '0',
-      'type' => 'entityreference',
+      'type' => 'taxonomy_term_reference',
     ),
     'field_instance' => array(
       'bundle' => 'offer',
       'default_value' => NULL,
-      'default_value_function' => '',
       'deleted' => '0',
       'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
+          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '9',
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 15,
         ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '9',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
@@ -504,14 +495,6 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Category',
       'required' => 1,
       'settings' => array(
-        'behaviors' => array(
-          'prepopulate' => array(
-            'status' => 0,
-          ),
-          'taxonomy-index' => array(
-            'status' => TRUE,
-          ),
-        ),
         'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
@@ -520,7 +503,7 @@ function kaveret_offer_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '0',
+        'weight' => '15',
       ),
     ),
   );
@@ -1255,59 +1238,50 @@ function kaveret_offer_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_category',
       'foreign keys' => array(
-        'taxonomy_term_data' => array(
+        'tid' => array(
           'columns' => array(
-            'target_id' => 'tid',
+            'tid' => 'tid',
           ),
           'table' => 'taxonomy_term_data',
         ),
       ),
       'indexes' => array(
-        'target_id' => array(
-          0 => 'target_id',
+        'tid' => array(
+          0 => 'tid',
         ),
       ),
       'locked' => '0',
-      'module' => 'entityreference',
+      'module' => 'taxonomy',
       'settings' => array(
-        'entity_translation_sync' => FALSE,
-        'handler' => 'base',
-        'handler_settings' => array(
-          'behaviors' => array(
-            'views-select-list' => array(
-              'status' => 0,
-            ),
-          ),
-          'sort' => array(
-            'type' => 'none',
-          ),
-          'target_bundles' => array(
-            'offer_categories' => 'offer_categories',
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'offer_categories',
+            'parent' => '0',
           ),
         ),
-        'target_type' => 'taxonomy_term',
+        'entity_translation_sync' => FALSE,
       ),
       'translatable' => '0',
-      'type' => 'entityreference',
+      'type' => 'taxonomy_term_reference',
     ),
     'field_instance' => array(
       'bundle' => 'request',
       'default_value' => NULL,
-      'default_value_function' => '',
       'deleted' => '0',
       'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
+          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '8',
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 13,
         ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '9',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
@@ -1315,14 +1289,6 @@ function kaveret_offer_field_default_fields() {
       'label' => 'Category',
       'required' => 1,
       'settings' => array(
-        'behaviors' => array(
-          'prepopulate' => array(
-            'status' => 0,
-          ),
-          'taxonomy-index' => array(
-            'status' => TRUE,
-          ),
-        ),
         'entity_translation_sync' => FALSE,
         'user_register_form' => FALSE,
       ),
@@ -1331,7 +1297,7 @@ function kaveret_offer_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '0',
+        'weight' => '17',
       ),
     ),
   );

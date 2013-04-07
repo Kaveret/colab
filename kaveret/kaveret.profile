@@ -465,6 +465,15 @@ function kaveret_menus_setup() {
   menu_link_save($item);
 
   $item = array(
+    'link_title' => 'Directory',
+    'link_path' => 'directory',
+    'menu_name' => 'side-menu',
+    'plid' => $mlid,
+    'customized' => TRUE,
+  );
+  menu_link_save($item);
+
+  $item = array(
     'link_title' => 'Dreams Accelerator',
     'link_path' => '<front>',
     'menu_name' => 'side-menu',
