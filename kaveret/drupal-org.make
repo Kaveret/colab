@@ -83,8 +83,8 @@ projects[migrate][version] = "2.5"
 projects[migrate_extras][subdir] = "contrib"
 projects[migrate_extras][version] = "2.5"
 
-projects[mimemail][version] = 1.0-alpha2
 projects[mimemail][subdir] = "contrib"
+projects[mimemail][version] = "1.x-dev"
 
 projects[module_filter][subdir] = "contrib"
 projects[module_filter][version] = 1.7
