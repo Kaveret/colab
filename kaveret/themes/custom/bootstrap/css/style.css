@@ -660,7 +660,17 @@ article.node-teaser .field-name-body {
   border: 1px solid #fddda2;
   background: transparent;
   fill: transparent;
-  margin-left: 20px;
+  margin-left: 60px;
+}
+
+.page-directory .view-directory .views-rows {
+  width: 280px;
+  float: left;
+  margin-left: 10px;
+}
+.page-directory .view-directory .views-rows:nth-child(3n + 1) {
+  clear: left;
+  margin-left: 0;
 }
 
 body {
