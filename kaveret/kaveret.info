@@ -34,6 +34,7 @@ dependencies[] = commerce_customer
 dependencies[] = commerce_customer_ui
 dependencies[] = commerce_line_item
 dependencies[] = commerce_line_item_ui
+dependencies[] = commerce_migrate
 dependencies[] = commerce_order
 dependencies[] = commerce_order_ui
 dependencies[] = commerce_payment

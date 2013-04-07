@@ -182,7 +182,6 @@ class KaveretTransaction extends KaveretTransactionMigration {
     'KaveretUsers',
   );
 
-
   public function __construct() {
     parent::__construct();
 
@@ -218,5 +217,45 @@ class KaveretTransaction extends KaveretTransactionMigration {
       ->fields(array('created' => $row->created,))
       ->condition('xid', $entity->xid)
       ->execute();
+  }
+}
+
+/**
+ * Migrate products.
+ */
+class KaveretProducts extends Migration {
+  private $csvColumns = array(
+    array('id', 'Unique ID'),
+    array('title', 'Title'),
+    array('sku', 'SKU'),
+    array('price', 'Price'),
+  );
+
+  public function __construct() {
+    parent::__construct();
+
+    $this->description = t('Import products from CSV file.');
+
+    // Create a map object for tracking the relationships between source rows
+    $key = array(
+      'sku' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+    );
+    $this->map = new MigrateSQLMap($this->machineName, $key, MigrateDestinationEntityAPI::getKeySchema('commerce_product'));
+
+    // Create a MigrateSource object.
+    $this->source = new MigrateSourceCSV(drupal_get_path('module', 'kaveret_migrate') . '/csv/commerce_product/product.csv', $this->csvColumns, array('header_rows' => 1));
+    $this->destination = new MigrateDestinationEntityAPI('commerce_product', 'product');
+
+    $this->addFieldMapping('title', 'title');
+    $this->addFieldMapping('sku', 'sku');
+    $this->addFieldMapping('commerce_price', 'price');
+  }
+
+  public function prepareRow($row) {
+    $row->uid = 1;
   }
 }

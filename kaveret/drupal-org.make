@@ -17,6 +17,9 @@ projects[ctools][version] = "1.3"
 projects[commerce][subdir] = "contrib"
 projects[commerce][version] = "1.5"
 
+projects[commerce_migrate][subdir] = "contrib"
+projects[commerce_migrate][version] = "1.1"
+
 projects[date][subdir] = "contrib"
 projects[date][version] = "2.6"
 
