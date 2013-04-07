@@ -41,3 +41,15 @@ function kaveret_general_get_breadcrumbs() {
 
   return implode(' <span class="arrow"></span> ', $items);
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function kaveret_general_form_user_login_block_alter(&$form, &$form_state){
+  $items = array();
+  if (variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL)) {
+    $items[] = l(t('Sign Up'), 'user/register', array('attributes' => array('title' => t('Create a new user account.'))));
+  }
+  $items[] = l(t('Forgot your password?'), 'user/password', array('attributes' => array('title' => t('Request new password via e-mail.'))));
+  $form['links'] = array('#markup' => theme('item_list', array('items' => $items)));
+}

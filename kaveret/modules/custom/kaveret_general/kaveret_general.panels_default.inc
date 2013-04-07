@@ -18,7 +18,16 @@ function kaveret_general_default_panels_mini() {
   $mini->admin_title = 'Navbar';
   $mini->admin_description = '';
   $mini->requiredcontexts = array();
-  $mini->contexts = array();
+  $mini->contexts = array(
+    0 => array(
+      'identifier' => 'User',
+      'keyword' => 'user',
+      'name' => 'user',
+      'type' => 'current',
+      'uid' => '',
+      'id' => 1,
+    ),
+  );
   $mini->relationships = array();
   $display = new panels_display();
   $display->layout = 'onecol';
@@ -57,11 +66,12 @@ function kaveret_general_default_panels_mini() {
     $pane = new stdClass();
     $pane->pid = 'new-2';
     $pane->panel = 'middle';
-    $pane->type = 'block';
-    $pane->subtype = 'user-login';
+    $pane->type = 'user_picture';
+    $pane->subtype = 'user_picture';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
+      'context' => 'context_user_1',
       'override_title' => 1,
       'override_title_text' => '',
     );
@@ -77,6 +87,27 @@ function kaveret_general_default_panels_mini() {
     $display->panels['middle'][1] = 'new-2';
     $pane = new stdClass();
     $pane->pid = 'new-3';
+    $pane->panel = 'middle';
+    $pane->type = 'block';
+    $pane->subtype = 'user-login';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $display->content['new-3'] = $pane;
+    $display->panels['middle'][2] = 'new-3';
+    $pane = new stdClass();
+    $pane->pid = 'new-4';
     $pane->panel = 'middle';
     $pane->type = 'block';
     $pane->subtype = 'fboauth-login';
@@ -105,12 +136,12 @@ function kaveret_general_default_panels_mini() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 2;
+    $pane->position = 3;
     $pane->locks = array();
-    $display->content['new-3'] = $pane;
-    $display->panels['middle'][2] = 'new-3';
+    $display->content['new-4'] = $pane;
+    $display->panels['middle'][3] = 'new-4';
     $pane = new stdClass();
-    $pane->pid = 'new-4';
+    $pane->pid = 'new-5';
     $pane->panel = 'middle';
     $pane->type = 'block';
     $pane->subtype = 'menu-space-menu';
@@ -139,12 +170,12 @@ function kaveret_general_default_panels_mini() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 3;
+    $pane->position = 4;
     $pane->locks = array();
-    $display->content['new-4'] = $pane;
-    $display->panels['middle'][3] = 'new-4';
+    $display->content['new-5'] = $pane;
+    $display->panels['middle'][4] = 'new-5';
   $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = 'new-2';
+  $display->title_pane = 'new-3';
   $mini->display = $display;
   $export['navbar'] = $mini;
 
