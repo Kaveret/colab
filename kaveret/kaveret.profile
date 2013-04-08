@@ -452,6 +452,8 @@ function kaveret_menus_setup() {
     'expanded' => TRUE,
     'options' => array('attributes' => array('class' => array('main', 'resources'))),
     'weight' => 10,
+    'language' => 'en',
+
   );
   $mlid = menu_link_save($item);
 
@@ -461,6 +463,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'side-menu',
     'plid' => $mlid,
     'customized' => TRUE,
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -470,6 +473,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'side-menu',
     'plid' => $mlid,
     'customized' => TRUE,
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -480,6 +484,7 @@ function kaveret_menus_setup() {
     'expanded' => TRUE,
     'options' => array('attributes' => array('class' => array('main', 'dreams'))),
     'weight' => 20,
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -490,6 +495,7 @@ function kaveret_menus_setup() {
     'expanded' => TRUE,
     'options' => array('attributes' => array('class' => array('main', 'learning-center'))),
     'weight' => 30,
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -500,6 +506,7 @@ function kaveret_menus_setup() {
     'expanded' => TRUE,
     'options' => array('attributes' => array('class' => array('main', 'communities'))),
     'weight' => 40,
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -508,6 +515,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-menu',
     'title' => 'Individual / Community space menu',
     'description' => 'Individual / Community space menu',
+    'language' => 'en',
   );
   menu_save($menu);
 
@@ -516,6 +524,7 @@ function kaveret_menus_setup() {
     'link_path' => '<front>',
     'menu_name' => 'space-menu',
     'expanded' => TRUE,
+    'language' => 'en',
   );
   $mlid = menu_link_save($item);
 
@@ -524,6 +533,7 @@ function kaveret_menus_setup() {
     'link_path' => '<front>',
     'menu_name' => 'space-links',
     'plid' => $mlid,
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -532,6 +542,7 @@ function kaveret_menus_setup() {
     'link_path' => '<front>',
     'menu_name' => 'space-links',
     'plid' => $mlid,
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -540,6 +551,7 @@ function kaveret_menus_setup() {
     'link_path' => '<front>',
     'menu_name' => 'space-menu',
     'expanded' => TRUE,
+    'language' => 'en',
   );
   $mlid = menu_link_save($item);
 
@@ -548,6 +560,7 @@ function kaveret_menus_setup() {
     'link_path' => '<front>',
     'menu_name' => 'space-links',
     'plid' => $mlid,
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -556,6 +569,7 @@ function kaveret_menus_setup() {
     'link_path' => '<front>',
     'menu_name' => 'space-links',
     'plid' => $mlid,
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -564,6 +578,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'navigation-menu',
     'title' => 'Navigation',
     'description' => 'Navigation',
+    'language' => 'en',
   );
   menu_save($menu);
 
@@ -572,6 +587,7 @@ function kaveret_menus_setup() {
     'link_path' => '<front>',
     'menu_name' => 'navigation-menu',
     'expanded' => TRUE,
+    'language' => 'en',
   );
   $mlid = menu_link_save($item);
 
@@ -580,6 +596,7 @@ function kaveret_menus_setup() {
     'link_path' => '<front>',
     'menu_name' => 'navigation-menu',
     'plid' => $mlid,
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -588,6 +605,7 @@ function kaveret_menus_setup() {
     'link_path' => '<front>',
     'menu_name' => 'navigation-menu',
     'expanded' => TRUE,
+    'language' => 'en',
   );
   $mlid = menu_link_save($item);
 
@@ -596,6 +614,7 @@ function kaveret_menus_setup() {
     'link_path' => '<front>',
     'menu_name' => 'navigation-menu',
     'plid' => $mlid,
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -604,6 +623,7 @@ function kaveret_menus_setup() {
     'link_path' => '<front>',
     'menu_name' => 'navigation-menu',
     'expanded' => TRUE,
+    'language' => 'en',
   );
   $mlid = menu_link_save($item);
 
@@ -612,6 +632,7 @@ function kaveret_menus_setup() {
     'link_path' => '<front>',
     'menu_name' => 'navigation-menu',
     'plid' => $mlid,
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -621,6 +642,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'navigation-menu',
     'expanded' => TRUE,
     'options' => array('attributes' => array('class' => array('offers'))),
+    'language' => 'en',
   );
   $mlid = menu_link_save($item);
 
@@ -630,6 +652,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'navigation-menu',
     'plid' => $mlid,
     'options' => array('query' => array('destination' => 'node/add/offer')),
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -639,6 +662,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'navigation-menu',
     'plid' => $mlid,
     'options' => array('query' => array('destination' => 'node/add/request')),
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -647,6 +671,7 @@ function kaveret_menus_setup() {
     'link_path' => 'node/add/offer',
     'menu_name' => 'navigation-menu',
     'plid' => $mlid,
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -655,6 +680,7 @@ function kaveret_menus_setup() {
     'link_path' => 'node/add/request',
     'menu_name' => 'navigation-menu',
     'plid' => $mlid,
+    'language' => 'en',
   );
   menu_link_save($item);
 
