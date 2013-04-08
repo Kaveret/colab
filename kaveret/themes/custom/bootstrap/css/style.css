@@ -235,7 +235,8 @@ body.not-logged-in #navbar .logo {
   margin-bottom: 0;
   border: none;
 }
-#navbar .navbar-inner .pane-menu-space-menu .dropdown-toggle {
+#navbar .navbar-inner .pane-menu-space-menu .dropdown-toggle,
+#navbar .navbar-inner .pane-menu-space-menu .active {
   margin-left: 10px;
   background-color: #f9ab17;
   padding: 5px;
@@ -243,7 +244,8 @@ body.not-logged-in #navbar .logo {
   font-weight: bold;
   text-transform: none;
 }
-#navbar .navbar-inner .pane-menu-space-menu .dropdown-toggle .caret {
+#navbar .navbar-inner .pane-menu-space-menu .dropdown-toggle .caret,
+#navbar .navbar-inner .pane-menu-space-menu .active .caret {
   display: block;
   margin: 0 auto;
 }

@@ -103,7 +103,8 @@
 
     .pane-menu-space-menu {
 
-      .dropdown-toggle {
+      .dropdown-toggle,
+      .active {
         margin-left: 10px; //LTR
         background-color: #f9ab17;
         padding: 5px;
