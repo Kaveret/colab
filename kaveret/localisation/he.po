@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-04-08 10:55+0300\n"
-"PO-Revision-Date: 2013-04-08 10:55+0300\n"
+"POT-Creation-Date: 2013-04-08 16:05+0300\n"
+"PO-Revision-Date: 2013-04-08 16:05+0300\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -3986,6 +3986,14 @@ msgid "Rebuild"
 msgstr ""
 
 #: /kaveret/www/he
+msgid "Management"
+msgstr ""
+
+#: /kaveret/www/he
+msgid "User menu"
+msgstr ""
+
+#: /kaveret/www/he
 msgid "The source node for this current node's translation set."
 msgstr ""
 
@@ -4957,14 +4965,6 @@ msgid "Maximum file size for pictures, in kB."
 msgstr ""
 
 #: /kaveret/www/he
-msgid "Trading limits (adjusted for the balance)"
-msgstr ""
-
-#: /kaveret/www/he
-msgid "Block settings"
-msgstr ""
-
-#: /kaveret/www/he
 msgid "Languages for content"
 msgstr ""
 
@@ -5109,14 +5109,6 @@ msgstr ""
 
 #: /kaveret/www/he
 msgid "Tokens for lists of @type values."
-msgstr ""
-
-#: /kaveret/www/he
-msgid "Management"
-msgstr ""
-
-#: /kaveret/www/he
-msgid "User menu"
 msgstr ""
 
 #: /kaveret/www/he
@@ -5525,19 +5517,23 @@ msgid "Administer the suite of Organic groups modules."
 msgstr ""
 
 #: /kaveret/www/he
-msgid "OG settings"
-msgstr ""
-
-#: /kaveret/www/he
-msgid "Administer OG settings."
-msgstr ""
-
-#: /kaveret/www/he
 msgid "OG field settings"
 msgstr ""
 
 #: /kaveret/www/he
 msgid "Configure Organic groups fields in bundles."
+msgstr ""
+
+#: /kaveret/www/he
+msgid "OG permissions overview"
+msgstr ""
+
+#: /kaveret/www/he
+msgid "Overview of Organic groups permissions."
+msgstr ""
+
+#: /kaveret/www/he
+msgid "Configure Organic groups group type permissions."
 msgstr ""
 
 #: /kaveret/www/he
@@ -5553,15 +5549,11 @@ msgid "Configure Organic groups group type roles."
 msgstr ""
 
 #: /kaveret/www/he
-msgid "OG permissions overview"
+msgid "OG settings"
 msgstr ""
 
 #: /kaveret/www/he
-msgid "Overview of Organic groups permissions."
-msgstr ""
-
-#: /kaveret/www/he
-msgid "Configure Organic groups group type permissions."
+msgid "Administer OG settings."
 msgstr ""
 
 #: /kaveret/www/he
@@ -5897,6 +5889,10 @@ msgid "token"
 msgstr ""
 
 #: /kaveret/www/he
+msgid "mcapi_balance_history"
+msgstr ""
+
+#: /kaveret/www/he
 msgid "migrate_ui"
 msgstr ""
 
@@ -6074,649 +6070,30 @@ msgstr ""
 msgid "transactions"
 msgstr ""
 
-#: /kaveret/www/he/
-msgid "Connect"
+#: /kaveret/www/he/admin/structure/menu/manage/footer-links/list?destination=front
+msgid "Enable @title menu link"
 msgstr ""
 
-#: /kaveret/www/he/
-msgid "About yourself description"
+#: /kaveret/www/he/admin/structure/menu/manage/footer-links/list?destination=front
+msgid "Weight for @title"
 msgstr ""
 
-#: /kaveret/www/he/
-msgid "Your activities"
+#: /kaveret/www/he/admin/structure/menu/item/491/edit
+msgid "Edit menu link"
 msgstr ""
 
-#: /kaveret/www/he/
-msgid "Your birthday"
+#: /kaveret/www/he/admin/structure/menu/item/491/edit
+msgid "Record transaction"
 msgstr ""
 
-#: /kaveret/www/he/
-msgid "Your education history"
+#: /kaveret/www/he/admin/structure/menu/item/491/edit
+msgid "Log a transaction in the database"
 msgstr ""
 
-#: /kaveret/www/he/
-msgid "Events you're attending"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Your groups"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Your hometown"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Your interests"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Your likes"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Your location"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Your notes"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Your online/offline status"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Photos and videos you've been tagged in"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Photos you've uploaded"
-msgstr ""
-
-#: /kaveret/www/he/
+#: /kaveret/www/he/admin/structure/menu/item/491/edit
 msgid ""
-"Access to your family and personal relationships and relationship "
-"status"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Your relationship preferences"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Your religious and political affiliations"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Your most recent status message"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Videos you've uploaded"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Your website URL"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Your work history"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Your e-mail"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Access your lists of friends"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Access your friend requests"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Access your new feed"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Manage your ads"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Access check-in information"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "About me (a short bio)"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Biography"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Birthday"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Education history"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Hometown"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Relationship status (Single, Married, It's complicated, etc.)"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Interested in (Men, Women)"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Signficant other"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Political view"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Favorite quotes"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Religion"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Website"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Work history"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Full name"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "First name"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Last name"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Gender"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "3rd-party ID"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Updated time"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Verified"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Account pages"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Activities"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "App requests"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Photo albums"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Books liked"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Check-ins"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Events"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "User's wall"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Lists of friends"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "User's news feed"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Inbox threads"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Interests"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Pages liked"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Posted links"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Movies liked"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Music liked"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Notes"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Outbox"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Photos"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Status updates"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Tagged in photos, videos, and posts"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Television liked"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Inbox updates"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Videos"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Deauthorize"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "not yet assigned"
-msgstr ""
-
-#: profiles/kaveret/modules/contrib/module_filter/js/module_filter_tab.js
-msgid "+@count"
-msgstr ""
-
-#: profiles/kaveret/modules/contrib/module_filter/js/module_filter_tab.js
-msgid "-@count"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid ""
-"Helper functions, pages, and blocks to assist Drupal developers. The "
-"devel blocks can be managed via the <a "
-"href=\"/kaveret/www/admin/structure/block\">block administration</a> "
-"page."
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Simple (with optional filter by bundle)"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Balances"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Inline differences"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "User interface text"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Balance over time"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Mini panel: \"@title\""
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Description:"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Transaction form:"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "View: !view: !display"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Execute PHP"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Switch user"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Author textfield"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Subject textfield"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Checkboxes for toggling flags"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "@label @delta partial"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Rendered message text of the @delta partial"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Mime Mail module settings form elements."
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Term name textfield"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Term description textarea"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "User name and password"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "User module account form elements."
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "User module timezone form element."
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "User module history view element."
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Field type(s) in use - see <a href=\"@fields-page\">Field list</a>"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Flag"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Menu items"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "OG Role"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "OG Permissions"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "A field replacing node title."
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Expired"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Expiring"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Node reference"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Obsolete after"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Revison ID"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Tell your story"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Time from now after which the item will expire"
-msgstr ""
-
-#: /kaveret/www/he/
-msgid "Determine if this is an OG group."
-msgstr ""
-
-#: /kaveret/www/he/
-msgid ""
-"Your site is currently configured to send these emails when any "
-"updates are available. To get notified only for security updates, "
-"!url."
-msgstr ""
-
-#: /kaveret/www/he/
-msgid ""
-"Unable to send e-mail. Contact the site administrator if the problem "
-"persists."
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "HTTP response code"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Change general settings for this variant."
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Two column stacked"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Columns: 2"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Left side"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Right side"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Beez info"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Dispaly beez info and graph per user."
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Kaveret"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Transfer form"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Display the transfer form."
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "שם"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "With"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "empty text"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "No transactions"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "My Beez @name"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "<strong>BZ</strong> @balance"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Income: <strong>@gross_in</strong>"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Transactions: <strong>@transactions</strong>"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Volume: <strong>@volume</strong>"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Transfer"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid ""
-"My Beez: <span class=\"symbol\">BZ</span> <span "
-"class=\"amount\">@amount</span>"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Account to be debited"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Account to be credited"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Cleared"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "the last state of the workflow"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "See 'delete mode' settings for more info, !link"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Undone"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "State explanations: @explanations"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Recorded by"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Record"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Other person"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "user ID"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "email"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Accepts @types"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Pay"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "I want to"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "Amount"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "נוצר"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "תיאור"
-msgstr ""
-
-#: /kaveret/www/he/my-wallet
-msgid "@payer paid @quantity@currency to @payee"
-msgstr ""
-
-#: profiles/kaveret/modules/custom/kaveret_accounting/plugins/content_types/transfer/transfer.js
-msgid "From"
+"This item belongs to a multilingual menu. You can set a language for "
+"it."
 msgstr ""
 
 msgid "Home"
@@ -6995,7 +6372,6 @@ msgstr "אפשרויות מתקדמות"
 msgid "Release notes"
 msgstr "הערות מוצר"
 
-#: ; misc/machine-name.js
 msgid "Edit"
 msgstr "עריכה"
 
@@ -7639,7 +7015,6 @@ msgstr "[!category] !subject"
 msgid "Menu link"
 msgstr "קישור תפריט"
 
-#: ; profiles/kaveret/modules/custom/kaveret_accounting/plugins/content_types/transfer/transfer.js
 msgid "To"
 msgstr "אל"
 
@@ -7886,7 +7261,6 @@ msgstr "רוחב"
 msgid "Height"
 msgstr "גובה"
 
-#: ; profiles/kaveret/modules/custom/kaveret_accounting/plugins/content_types/transfer/transfer.js
 msgid "This field is required."
 msgstr "חובה למלא שדה זה."
 
@@ -9719,7 +9093,6 @@ msgstr ""
 msgid "Alternate text"
 msgstr "טקסט חלופי"
 
-#: ; misc/ajax.js
 msgid "Please wait..."
 msgstr "המתן בבקשה..."
 
@@ -19161,11 +18534,9 @@ msgstr "SQLite"
 msgid "Database file"
 msgstr "קובץ מסד נתונים"
 
-#: ; misc/autocomplete.js
 msgid "Autocomplete popup"
 msgstr "חלון השלמה אוטומטית קופץ"
 
-#: ; misc/autocomplete.js
 msgid "Searching for matches..."
 msgstr "מחפש עבור תאימויות..."
 
