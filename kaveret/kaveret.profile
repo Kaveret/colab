@@ -531,10 +531,11 @@ function kaveret_menus_setup() {
   $mlid = menu_link_save($item);
 
   $item = array(
-    'link_title' => 'Fund Transfers1',
+    'link_title' => 'Fund Transfers',
     'link_path' => 'my-wallet',
     'menu_name' => 'space-links',
     'plid' => $mlid,
+    'customized' => TRUE,
     'language' => 'en',
   );
   menu_link_save($item);
