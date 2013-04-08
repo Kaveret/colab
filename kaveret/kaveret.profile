@@ -531,8 +531,8 @@ function kaveret_menus_setup() {
   $mlid = menu_link_save($item);
 
   $item = array(
-    'link_title' => 'Groups',
-    'link_path' => '<front>',
+    'link_title' => 'Fund Transfers',
+    'link_path' => 'my-wallet',
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'language' => 'en',
@@ -540,8 +540,26 @@ function kaveret_menus_setup() {
   menu_link_save($item);
 
   $item = array(
-    'link_title' => 'Blogs',
-    'link_path' => '<front>',
+    'link_title' => 'User',
+    'link_path' => 'user',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Request',
+    'link_path' => 'node/add/request',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Offer',
+    'link_path' => 'node/add/offer',
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'language' => 'en',
