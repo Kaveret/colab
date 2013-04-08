@@ -411,6 +411,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'footer-links',
     'title' => 'Footer links',
     'description' => 'Footer links',
+    'i18n_mode' => I18N_MODE_MULTIPLE,
   );
   menu_save($menu);
 
@@ -441,6 +442,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'side-menu',
     'title' => 'Side menu',
     'description' => 'Side pop-up menu',
+    'i18n_mode' => I18N_MODE_MULTIPLE,
   );
   menu_save($menu);
 
@@ -515,7 +517,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-menu',
     'title' => 'Individual / Community space menu',
     'description' => 'Individual / Community space menu',
-    'language' => 'en',
+    'i18n_mode' => I18N_MODE_MULTIPLE,
   );
   menu_save($menu);
 
@@ -578,7 +580,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'navigation-menu',
     'title' => 'Navigation',
     'description' => 'Navigation',
-    'language' => 'en',
+    'i18n_mode' => I18N_MODE_MULTIPLE,
   );
   menu_save($menu);
 
@@ -689,6 +691,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'social-menu',
     'title' => 'Social links',
     'description' => 'Social links',
+    'i18n_mode' => I18N_MODE_MULTIPLE,
   );
   menu_save($menu);
 
