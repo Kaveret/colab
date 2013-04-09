@@ -86,8 +86,7 @@ projects[module_filter][version] = 1.7
 projects[mutual_credit][subdir] = "contrib"
 projects[mutual_credit][version] = 3.x-dev
 projects[mutual_credit][patch][] = "http://drupal.org/files/default_object-1951306-1.patch"
-projects[mutual_credit][patch][] = "http://drupal.org/files/fix-undefined-variables.patch"
-projects[mutual_credit][patch][] = "http://drupal.org/files/12547933_notice_error.patch"
+projects[mutual_credit][patch][] = "http://drupal.org/files/default_object_and_notices-1965330-1.patch"
 
 projects[nodequeue][subdir] = "contrib"
 projects[nodequeue][version] = "2.0-beta1"
