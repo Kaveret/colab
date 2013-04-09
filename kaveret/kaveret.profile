@@ -440,12 +440,11 @@ function kaveret_menus_setup() {
   menu_link_save($item);
 
 // Hebrew translation.
-
   $item = array(
     'link_title' => 'פייסבוק',
     'link_path' => 'http://facebook.com/',
     'menu_name' => 'footer-links',
-    'weight' => 10,
+    'weight' => 30,
     'language' => 'he',
   );
   menu_link_save($item);
@@ -463,7 +462,7 @@ function kaveret_menus_setup() {
     'link_title' => 'רססי מידע',
     'link_path' => '<front>',
     'menu_name' => 'footer-links',
-    'weight' => 30,
+    'weight' => 10,
     'language' => 'he',
   );
   menu_link_save($item);
