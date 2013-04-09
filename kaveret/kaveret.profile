@@ -521,7 +521,7 @@ function kaveret_menus_setup() {
   );
   menu_save($menu);
 
-/* hebrew demo menu */
+// Hebrew translation
 
   $item = array(
     'link_title' => 'מרחב קהילתי',
@@ -533,7 +533,7 @@ function kaveret_menus_setup() {
   $mlid = menu_link_save($item);
 
   $item = array(
-    'link_title' => 'העברת כספים',
+    'link_title' => 'הצעות',
     'link_path' => 'my-wallet',
     'menu_name' => 'space-links',
     'plid' => $mlid,
@@ -543,7 +543,69 @@ function kaveret_menus_setup() {
   );
   menu_link_save($item);
 
-  /************** hebrew demo menu */
+  $item = array(
+    'link_title' => 'בקשות',
+    'link_path' => 'my-wallet',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'weight' => 20,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'משתמש',
+    'link_path' => 'my-wallet',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'weight' => 30,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'העברת כספים',
+    'link_path' => 'my-wallet',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'weight' => 40,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'מרחב יחיד',
+    'link_path' => '<front>',
+    'menu_name' => 'space-menu',
+    'expanded' => TRUE,
+    'language' => 'he',
+  );
+  $mlid = menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'קבוצות',
+    'link_path' => 'my-wallet',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'weight' => 10,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'פרופיל',
+    'link_path' => 'my-wallet',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'weight' => 20,
+    'language' => 'he',
+  );
+  menu_link_save($item);
 
   $item = array(
     'link_title' => 'Community Space',
