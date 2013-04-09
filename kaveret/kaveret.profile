@@ -512,6 +512,42 @@ function kaveret_menus_setup() {
   );
   menu_link_save($item);
 
+  // Hebrew translation.
+  $item = array(
+    'link_title' => 'החלפת משאבים',
+    'link_path' => '<front>',
+    'menu_name' => 'side-menu',
+    'expanded' => TRUE,
+    'options' => array('attributes' => array('class' => array('main', 'resources'))),
+    'weight' => 10,
+    'language' => 'he',
+
+  );
+  $mlid = menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'תקייה',
+    'link_path' => 'my-wallet',
+    'menu_name' => 'side-menu',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'weight' => 20,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'החשבון שלי',
+    'link_path' => 'my-wallet',
+    'menu_name' => 'side-menu',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'weight' => 30,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+
   // Individual/ Community space menu.
   $menu = array(
     'menu_name' => 'space-menu',
@@ -521,7 +557,7 @@ function kaveret_menus_setup() {
   );
   menu_save($menu);
 
-// Hebrew translation
+// Hebrew translation.
 
   $item = array(
     'link_title' => 'מרחב קהילתי',
