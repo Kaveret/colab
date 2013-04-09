@@ -202,9 +202,7 @@ html.js input.form-autocomplete {
   margin-right: 30px;
 }
 #navbar .pane-fboauth-login {
-  float: left;
-  margin-left: -58px;
-  margin-top: -30px;
+  float: right;
 }
 #navbar .pull-left img {
   width: 106px;
@@ -219,3 +217,9 @@ html.js input.form-autocomplete {
 .navbar .nav > li > .dropdown-menu:after {
   left: 140px;
 }
+
+.region-navigation {
+  margin-left: 0;
+  margin-right: 150px;
+}
+
