@@ -211,7 +211,7 @@ html.js input.form-autocomplete {
   height: 23px;
 }
 
-.dropdown-menu {
+#navbar .dropdown-menu {
   right: 0;
 }
 

@@ -559,7 +559,7 @@ function kaveret_menus_setup() {
 
   $item = array(
     'link_title' => 'תקייה',
-    'link_path' => 'my-wallet',
+    'link_path' => 'directory',
     'menu_name' => 'side-menu',
     'plid' => $mlid,
     'customized' => TRUE,
@@ -635,7 +635,7 @@ function kaveret_menus_setup() {
 
   $item = array(
     'link_title' => 'הצעות',
-    'link_path' => 'my-wallet',
+    'link_path' => 'node/add/offer',
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
@@ -646,7 +646,7 @@ function kaveret_menus_setup() {
 
   $item = array(
     'link_title' => 'בקשות',
-    'link_path' => 'my-wallet',
+    'link_path' => 'node/add/request',
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
@@ -657,7 +657,7 @@ function kaveret_menus_setup() {
 
   $item = array(
     'link_title' => 'משתמש',
-    'link_path' => 'my-wallet',
+    'link_path' => 'user',
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
@@ -687,8 +687,8 @@ function kaveret_menus_setup() {
   $mlid = menu_link_save($item);
 
   $item = array(
-    'link_title' => 'קבוצות',
-    'link_path' => 'my-wallet',
+    'link_title' => 'פרופיל',
+    'link_path' => 'user',
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
@@ -698,12 +698,23 @@ function kaveret_menus_setup() {
   menu_link_save($item);
 
   $item = array(
-    'link_title' => 'פרופיל',
+    'link_title' => 'החשבון שלי',
     'link_path' => 'my-wallet',
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
     'weight' => 20,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'התנתק',
+    'link_path' => 'user/logout',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'weight' => 30,
     'language' => 'he',
   );
   menu_link_save($item);
@@ -768,19 +779,34 @@ function kaveret_menus_setup() {
   $mlid = menu_link_save($item);
 
   $item = array(
-    'link_title' => 'Profile',
-    'link_path' => '<front>',
+    'link_title' => 'Logout',
+    'link_path' => 'user/logout',
     'menu_name' => 'space-links',
     'plid' => $mlid,
+    'customized' => TRUE,
+    'weight' => 30,
     'language' => 'en',
   );
   menu_link_save($item);
 
   $item = array(
-    'link_title' => 'Groups',
-    'link_path' => '<front>',
+    'link_title' => 'Balance',
+    'link_path' => 'my-wallet',
     'menu_name' => 'space-links',
     'plid' => $mlid,
+    'customized' => TRUE,
+    'weight' => 20,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Profile',
+    'link_path' => 'user',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'weight' => 10,
     'language' => 'en',
   );
   menu_link_save($item);
