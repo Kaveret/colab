@@ -218,7 +218,7 @@ html.js input.form-autocomplete {
   left: 140px;
 }
 
-.dropdown-menu .active {
+#navbar .dropdown-menu .active {
   margin-right: 12px;
 }
 
