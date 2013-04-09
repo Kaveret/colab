@@ -218,6 +218,10 @@ html.js input.form-autocomplete {
   left: 140px;
 }
 
+.dropdown-menu .active {
+  margin-right: 12px;
+}
+
 .region-navigation {
   margin-left: 0;
   margin-right: 150px;
