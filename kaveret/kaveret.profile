@@ -521,6 +521,30 @@ function kaveret_menus_setup() {
   );
   menu_save($menu);
 
+/* hebrew demo menu */
+
+  $item = array(
+    'link_title' => 'מרחב קהילתי',
+    'link_path' => '<front>',
+    'menu_name' => 'space-menu',
+    'expanded' => TRUE,
+    'language' => 'he',
+  );
+  $mlid = menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'העברת כספים',
+    'link_path' => 'my-wallet',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'weight' => 10,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  /************** hebrew demo menu */
+
   $item = array(
     'link_title' => 'Community Space',
     'link_path' => '<front>',
