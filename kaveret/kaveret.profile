@@ -419,6 +419,7 @@ function kaveret_menus_setup() {
     'link_title' => 'Facebook',
     'link_path' => 'http://facebook.com/',
     'menu_name' => 'footer-links',
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -426,6 +427,7 @@ function kaveret_menus_setup() {
     'link_title' => 'Twitter',
     'link_path' => 'http://twitter.com/',
     'menu_name' => 'footer-links',
+    'language' => 'en',
   );
   menu_link_save($item);
 
@@ -433,8 +435,39 @@ function kaveret_menus_setup() {
     'link_title' => 'RSS',
     'link_path' => '<front>',
     'menu_name' => 'footer-links',
+    'language' => 'en',
   );
   menu_link_save($item);
+
+// Hebrew translation.
+
+  $item = array(
+    'link_title' => 'פייסבוק',
+    'link_path' => 'http://facebook.com/',
+    'menu_name' => 'footer-links',
+    'weight' => 10,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'טוויטר',
+    'link_path' => 'http://twitter.com/',
+    'menu_name' => 'footer-links',
+    'weight' => 20,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'רססי מידע',
+    'link_path' => '<front>',
+    'menu_name' => 'footer-links',
+    'weight' => 30,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
 
 
   // Create the footer links menu.
