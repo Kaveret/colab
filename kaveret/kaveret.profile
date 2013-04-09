@@ -547,6 +547,39 @@ function kaveret_menus_setup() {
   );
   menu_link_save($item);
 
+  $item = array(
+    'link_title' => 'מאיץ החלומות',
+    'link_path' => '<front>',
+    'menu_name' => 'side-menu',
+    'expanded' => TRUE,
+    'options' => array('attributes' => array('class' => array('main', 'dreams'))),
+    'weight' => 40,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'מרכז המידע',
+    'link_path' => '<front>',
+    'menu_name' => 'side-menu',
+    'expanded' => TRUE,
+    'options' => array('attributes' => array('class' => array('main', 'dreams'))),
+    'weight' => 50,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'קבוצות',
+    'link_path' => '<front>',
+    'menu_name' => 'side-menu',
+    'expanded' => TRUE,
+    'options' => array('attributes' => array('class' => array('main', 'dreams'))),
+    'weight' => 60,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
 
   // Individual/ Community space menu.
   $menu = array(
