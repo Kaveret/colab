@@ -143,17 +143,17 @@ function kaveret_setup_blocks() {
   $blocks = array();
 
   $blocks[] = array(
-    'module' => 'views',
-    'delta' => 'sig_blocks-my_sig_needed',
-    'theme' => $default_theme,
-    'status' => 1,
-    'weight' => 0,
-    'region' => 'content',
-    'custom' => 0,
-    'visibility' => 0,
-    'pages' => '',
-    'title' => '',
-    'cache' => DRUPAL_NO_CACHE,
+     'module' => 'views',
+     'delta' => 'sig_blocks-my_sig_needed',
+     'theme' => $default_theme,
+     'status' => 1,
+     'weight' => 0,
+     'region' => 'content',
+     'custom' => 0,
+     'visibility' => 0,
+     'pages' => '',
+     'title' => '',
+     'cache' => DRUPAL_NO_CACHE,
   );
 
   $blocks[] = array(
@@ -304,6 +304,11 @@ function kaveret_set_variables() {
 
     // MCAPI settings.
     'user_chooser_threshhold' => 1,
+    'mcapi_signatures_1stparty' => array(
+      'participants' => TRUE,
+      'countersignatories' => '',
+      'notify' => TRUE,
+    ),
   );
 
   foreach ($variables as $key => $value) {
