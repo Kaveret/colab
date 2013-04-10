@@ -266,6 +266,10 @@ body.not-logged-in #navbar .logo {
   margin-left: 150px;
 }
 
+.navbar-static-top {
+  margin-bottom: 15px;
+}
+
 form .control-group a {
   margin-left: 22px;
   margin-top: 6px;
