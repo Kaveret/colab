@@ -430,7 +430,7 @@ function kaveret_offer_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '5',
+        'weight' => '7',
       ),
     ),
   );
@@ -503,7 +503,7 @@ function kaveret_offer_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '15',
+        'weight' => '1',
       ),
     ),
   );
@@ -574,7 +574,7 @@ function kaveret_offer_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '8',
+        'weight' => '5',
       ),
     ),
   );
@@ -647,7 +647,7 @@ function kaveret_offer_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '2',
+        'weight' => '4',
       ),
     ),
   );
@@ -820,7 +820,7 @@ function kaveret_offer_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '6',
+        'weight' => '8',
       ),
     ),
   );
@@ -873,7 +873,7 @@ function kaveret_offer_field_default_fields() {
       'bundle' => 'offer',
       'default_value' => array(
         0 => array(
-          'target_id' => '3',
+          'target_id' => '14',
         ),
       ),
       'default_value_function' => '',
@@ -917,7 +917,7 @@ function kaveret_offer_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '7',
+        'weight' => '9',
       ),
     ),
   );
@@ -992,7 +992,7 @@ function kaveret_offer_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '1',
+        'weight' => '10',
       ),
     ),
   );
@@ -1070,7 +1070,7 @@ function kaveret_offer_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'text_textfield',
-        'weight' => '-5',
+        'weight' => '0',
       ),
     ),
   );
@@ -1098,21 +1098,19 @@ function kaveret_offer_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'offer',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'currcode' => 'bz',
+          'quantity' => 1,
+          'main_quant' => '1',
+        ),
+      ),
       'default_value_widget' => array(
         'worth' => array(
           'und' => array(
             0 => array(
-              'currcode' => 'credunit',
-              'quantity' => '',
-            ),
-            1 => array(
-              'currcode' => 'escrow',
-              'quantity' => '',
-            ),
-            2 => array(
               'currcode' => 'bz',
-              'quantity' => '',
+              'quantity' => 1,
             ),
           ),
         ),
@@ -1136,7 +1134,7 @@ function kaveret_offer_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'worth',
-      'label' => 'Worth',
+      'label' => 'Price',
       'required' => 0,
       'settings' => array(
         'entity_translation_sync' => FALSE,
@@ -1147,7 +1145,7 @@ function kaveret_offer_field_default_fields() {
         'module' => 'mcapi',
         'settings' => array(),
         'type' => 'worths_widget',
-        'weight' => '12',
+        'weight' => '2',
       ),
     ),
   );
@@ -1224,7 +1222,7 @@ function kaveret_offer_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '5',
+        'weight' => '7',
       ),
     ),
   );
@@ -1297,7 +1295,7 @@ function kaveret_offer_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '17',
+        'weight' => '1',
       ),
     ),
   );
@@ -1368,7 +1366,7 @@ function kaveret_offer_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '9',
+        'weight' => '5',
       ),
     ),
   );
@@ -1441,7 +1439,7 @@ function kaveret_offer_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '2',
+        'weight' => '4',
       ),
     ),
   );
@@ -1614,7 +1612,7 @@ function kaveret_offer_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '6',
+        'weight' => '8',
       ),
     ),
   );
@@ -1667,7 +1665,7 @@ function kaveret_offer_field_default_fields() {
       'bundle' => 'request',
       'default_value' => array(
         0 => array(
-          'target_id' => '3',
+          'target_id' => '14',
         ),
       ),
       'default_value_function' => '',
@@ -1711,7 +1709,7 @@ function kaveret_offer_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '7',
+        'weight' => '9',
       ),
     ),
   );
@@ -1786,7 +1784,7 @@ function kaveret_offer_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '1',
+        'weight' => '10',
       ),
     ),
   );
@@ -1864,7 +1862,7 @@ function kaveret_offer_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'text_textfield',
-        'weight' => '-5',
+        'weight' => '0',
       ),
     ),
   );
@@ -1892,21 +1890,19 @@ function kaveret_offer_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'request',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'currcode' => 'bz',
+          'quantity' => 1,
+          'main_quant' => '1',
+        ),
+      ),
       'default_value_widget' => array(
         'worth' => array(
           'und' => array(
             0 => array(
-              'currcode' => 'credunit',
-              'quantity' => '',
-            ),
-            1 => array(
-              'currcode' => 'escrow',
-              'quantity' => '',
-            ),
-            2 => array(
               'currcode' => 'bz',
-              'quantity' => '',
+              'quantity' => 1,
             ),
           ),
         ),
@@ -1930,7 +1926,7 @@ function kaveret_offer_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'worth',
-      'label' => 'Worth',
+      'label' => 'Reward',
       'required' => 0,
       'settings' => array(
         'entity_translation_sync' => FALSE,
@@ -1941,7 +1937,7 @@ function kaveret_offer_field_default_fields() {
         'module' => 'mcapi',
         'settings' => array(),
         'type' => 'worths_widget',
-        'weight' => '13',
+        'weight' => '2',
       ),
     ),
   );
@@ -1956,13 +1952,14 @@ function kaveret_offer_field_default_fields() {
   t('Image');
   t('Node reference');
   t('Obsolete after');
+  t('Price');
   t('Revison ID');
+  t('Reward');
   t('Status');
   t('Tags');
   t('Tell your story');
   t('Time from now after which the item will expire');
   t('Title');
-  t('Worth');
 
   return $fields;
 }

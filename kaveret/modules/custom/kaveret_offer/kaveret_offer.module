@@ -27,7 +27,7 @@ function kaveret_offer_form_alter(&$form, &$form_state, $form_id) {
     $node = $form_state['node'];
     if (empty($node->nid)) {
       // Allow overriding the type.
-      drupal_set_title($node->type == 'request' ? t('I would like to request') : t('I would like to offer'));
+      drupal_set_title($node->type == 'request' ? t('Create New request') : t('Create New Offer'));
     }
 
     $form['field_expiry_after'][LANGUAGE_NONE]['#options']['_none'] = t('Never');
