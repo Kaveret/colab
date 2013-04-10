@@ -143,6 +143,20 @@ function kaveret_setup_blocks() {
   $blocks = array();
 
   $blocks[] = array(
+    'module' => 'views',
+    'delta' => 'sig_blocks-my_sig_needed',
+    'theme' => $default_theme,
+    'status' => 1,
+    'weight' => 0,
+    'region' => 'content',
+    'custom' => 0,
+    'visibility' => 0,
+    'pages' => '',
+    'title' => '',
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  $blocks[] = array(
     'module' => 'panels_mini',
     'delta' => 'navbar',
     'theme' => $default_theme,
