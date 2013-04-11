@@ -1,145 +1,3 @@
-/* line 3, ../sass/_header.scss */
-#navbar .navbar-inner {
-  padding-top: 30px;
-  background-color: white;
-  margin-bottom: 0;
-  border: none;
-}
-/* line 9, ../sass/_header.scss */
-#navbar .navbar-inner .user-picture {
-  margin-top: -15px;
-}
-/* line 13, ../sass/_header.scss */
-#navbar .navbar-inner #search-block-form {
-  margin: 0;
-}
-/* line 19, ../sass/_header.scss */
-#navbar .navbar-inner .space-menu .dropdown-toggle {
-  margin-left: 10px;
-  background-color: #f9ab17;
-  padding: 5px;
-  color: white;
-  font-weight: bold;
-  text-transform: none;
-}
-/* line 27, ../sass/_header.scss */
-#navbar .navbar-inner .space-menu .dropdown-toggle .caret {
-  display: block;
-  margin: 0 auto;
-}
-/* line 36, ../sass/_header.scss */
-#navbar .navbar-inner .social-links li {
-  padding: 0 5px;
-  border-right: 1px solid #c8c7c7;
-}
-/* line 40, ../sass/_header.scss */
-#navbar .navbar-inner .social-links li.last {
-  border-right: none;
-}
-/* line 45, ../sass/_header.scss */
-#navbar .navbar-inner .social-links a {
-  margin: 2px 2px;
-  color: transparent;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  background: url("../images/sprites.png") no-repeat;
-}
-/* line 54, ../sass/_header.scss */
-#navbar .navbar-inner .social-links a.wordpress {
-  background-position: -75px -100px;
-}
-/* line 58, ../sass/_header.scss */
-#navbar .navbar-inner .social-links a.facebook {
-  background-position: 0 -100px;
-}
-/* line 62, ../sass/_header.scss */
-#navbar .navbar-inner .social-links a.twitter {
-  background-position: -25px -100px;
-}
-/* line 66, ../sass/_header.scss */
-#navbar .navbar-inner .social-links a.email {
-  background-position: -50px -100px;
-}
-
-/* line 73, ../sass/_header.scss */
-#navbar-second .navbar-inner {
-  background: #fbf5e9;
-  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZiZjVlOSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjIlIiBzdG9wLWNvbG9yPSIjZmRmN2UxIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMyUiIHN0b3AtY29sb3I9IiNmZGY2ZTYiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI3JSIgc3RvcC1jb2xvcj0iI2ZkZjVlOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjI1JSIgc3RvcC1jb2xvcj0iI2ZmZmFmNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQzJSIgc3RvcC1jb2xvcj0iI2ZlZmVmZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjU1JSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjgyJSIgc3RvcC1jb2xvcj0iI2ZlZjlmMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijg1JSIgc3RvcC1jb2xvcj0iI2ZkZjllZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjkzJSIgc3RvcC1jb2xvcj0iI2ZlZjZlOSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijk3JSIgc3RvcC1jb2xvcj0iI2ZjZjVlMyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijk4JSIgc3RvcC1jb2xvcj0iI2ZiZjhlOSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmYzZTMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-  background: -moz-linear-gradient(top, #fbf5e9 0%, #fdf7e1 2%, #fdf6e6 3%, #fdf5e8 7%, #fffaf4 25%, #fefefe 43%, white 55%, #fef9f3 82%, #fdf9ee 85%, #fef6e9 93%, #fcf5e3 97%, #fbf8e9 98%, #fff3e3 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fbf5e9), color-stop(2%, #fdf7e1), color-stop(3%, #fdf6e6), color-stop(7%, #fdf5e8), color-stop(25%, #fffaf4), color-stop(43%, #fefefe), color-stop(55%, white), color-stop(82%, #fef9f3), color-stop(85%, #fdf9ee), color-stop(93%, #fef6e9), color-stop(97%, #fcf5e3), color-stop(98%, #fbf8e9), color-stop(100%, #fff3e3));
-  background: -webkit-linear-gradient(top, #fbf5e9 0%, #fdf7e1 2%, #fdf6e6 3%, #fdf5e8 7%, #fffaf4 25%, #fefefe 43%, white 55%, #fef9f3 82%, #fdf9ee 85%, #fef6e9 93%, #fcf5e3 97%, #fbf8e9 98%, #fff3e3 100%);
-  background: -o-linear-gradient(top, #fbf5e9 0%, #fdf7e1 2%, #fdf6e6 3%, #fdf5e8 7%, #fffaf4 25%, #fefefe 43%, white 55%, #fef9f3 82%, #fdf9ee 85%, #fef6e9 93%, #fcf5e3 97%, #fbf8e9 98%, #fff3e3 100%);
-  background: -ms-linear-gradient(top, #fbf5e9 0%, #fdf7e1 2%, #fdf6e6 3%, #fdf5e8 7%, #fffaf4 25%, #fefefe 43%, white 55%, #fef9f3 82%, #fdf9ee 85%, #fef6e9 93%, #fcf5e3 97%, #fbf8e9 98%, #fff3e3 100%);
-  background: linear-gradient(to bottom, #fbf5e9 0%, #fdf7e1 2%, #fdf6e6 3%, #fdf5e8 7%, #fffaf4 25%, #fefefe 43%, #ffffff 55%, #fef9f3 82%, #fdf9ee 85%, #fef6e9 93%, #fcf5e3 97%, #fbf8e9 98%, #fff3e3 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fbf5e9', endColorstr='#fff3e3',GradientType=0 );
-  border-bottom: 1px solid #fecf7d;
-  height: 60px;
-  box-shadow: none;
-}
-/* line 90, ../sass/_header.scss */
-#navbar-second .navbar-inner .nav > li, #navbar-second .navbar-inner ul.menu > li {
-  border-left: 1px solid #fecf7d;
-  margin: 0;
-  padding: 0;
-}
-/* line 95, ../sass/_header.scss */
-#navbar-second .navbar-inner .nav > li.last, #navbar-second .navbar-inner ul.menu > li.last {
-  border-right: 1px solid #fecf7d;
-}
-/* line 99, ../sass/_header.scss */
-#navbar-second .navbar-inner .nav > li > a, #navbar-second .navbar-inner ul.menu > li > a {
-  color: #9f2772;
-  text-transform: none;
-}
-/* line 103, ../sass/_header.scss */
-#navbar-second .navbar-inner .nav > li > a.offers, #navbar-second .navbar-inner ul.menu > li > a.offers {
-  color: #31477f;
-}
-/* line 107, ../sass/_header.scss */
-#navbar-second .navbar-inner .nav > li > a .caret, #navbar-second .navbar-inner ul.menu > li > a .caret {
-  display: block;
-  margin: auto;
-  background: url("../images/sprites.png") no-repeat 0 -125px;
-  width: 6px;
-  height: 6px;
-  padding: 0;
-  border: none;
-}
-/* line 117, ../sass/_header.scss */
-#navbar-second .navbar-inner .nav > li > a.active, #navbar-second .navbar-inner .nav > li > a:hover, #navbar-second .navbar-inner ul.menu > li > a.active, #navbar-second .navbar-inner ul.menu > li > a:hover {
-  background-color: white;
-  height: 28px;
-}
-/* line 123, ../sass/_header.scss */
-#navbar-second .navbar-inner .nav > li:hover .dropdown-menu, #navbar-second .navbar-inner ul.menu > li:hover .dropdown-menu {
-  display: block;
-}
-/* line 127, ../sass/_header.scss */
-#navbar-second .navbar-inner .nav > li .dropdown-menu, #navbar-second .navbar-inner ul.menu > li .dropdown-menu {
-  margin-top: -1px;
-}
-/* line 133, ../sass/_header.scss */
-#navbar-second .navbar-inner ul.menu > li a {
-  color: #31477f;
-}
-/* line 137, ../sass/_header.scss */
-#navbar-second .navbar-inner .user-details {
-  width: 200px;
-  color: #31477f;
-  padding-top: 10px;
-}
-/* line 142, ../sass/_header.scss */
-#navbar-second .navbar-inner .user-details .username {
-  font-weight: bold;
-  font-size: 16px;
-}
-/* line 148, ../sass/_header.scss */
-#navbar-second .navbar-inner .facebook-connect {
-  margin: 23px 20px 0;
-}
-
-/* line 155, ../sass/_header.scss */
 .breadcrumbs .arrow {
   background: url("../images/sprites.png") no-repeat -25px -125px;
   width: 8px;
@@ -148,52 +6,41 @@
   display: inline-block;
 }
 
-/* line 1, ../sass/_footer.scss */
 .footer {
   background-color: #9f2772;
 }
-/* line 6, ../sass/_footer.scss */
 .footer ul li {
   display: inline;
 }
-/* line 9, ../sass/_footer.scss */
 .footer ul li > a {
   display: inline;
 }
-/* line 12, ../sass/_footer.scss */
 .footer ul li > a:hover {
   background-color: transparent;
 }
-/* line 19, ../sass/_footer.scss */
 .footer #block-menu-footer-links {
   float: left;
   margin-left: 40px;
 }
-/* line 23, ../sass/_footer.scss */
 .footer #block-menu-footer-links li {
   margin: 0;
   padding: 0;
 }
-/* line 27, ../sass/_footer.scss */
 .footer #block-menu-footer-links li a {
   border-right: 1px solid white;
   color: white;
   padding: 0 20px;
 }
-/* line 34, ../sass/_footer.scss */
 .footer #block-menu-footer-links li.last a {
   border-right: none;
 }
-/* line 40, ../sass/_footer.scss */
 .footer .menu.nav {
   margin: 0;
 }
-/* line 43, ../sass/_footer.scss */
 .footer .menu.nav > li {
   float: left;
   margin: 0;
 }
-/* line 48, ../sass/_footer.scss */
 .footer .menu.nav a.main {
   width: 24px;
   height: 24px;
@@ -202,38 +49,30 @@
   background: url("../images/sprites.png") no-repeat;
   color: transparent;
 }
-/* line 56, ../sass/_footer.scss */
 .footer .menu.nav a.main .caret {
   display: none;
 }
-/* line 60, ../sass/_footer.scss */
 .footer .menu.nav a.main.resource-exchange {
   background-position: 0 -50px;
 }
-/* line 64, ../sass/_footer.scss */
 .footer .menu.nav a.main.dreams-accelerator {
   background-position: -24px -50px;
 }
-/* line 68, ../sass/_footer.scss */
 .footer .menu.nav a.main.learning-center {
   background-position: -72px -50px;
 }
-/* line 72, ../sass/_footer.scss */
 .footer .menu.nav a.main.groups {
   background-position: -48px -50px;
 }
-/* line 76, ../sass/_footer.scss */
 .footer .menu.nav a.main .dropdown-menu {
   position: absolute;
 }
 
-/* line 3, ../sass/_menu.scss */
 #main-menu {
   position: absolute;
   width: 50px;
   z-index: 50;
 }
-/* line 8, ../sass/_menu.scss */
 #main-menu .menu > li {
   display: block;
   position: relative;
@@ -246,16 +85,13 @@
   -webkit-transition: 0.7s;
   -o-transition: 0.7s;
 }
-/* line 17, ../sass/_menu.scss */
 #main-menu .menu > li:hover {
   left: 0;
 }
-/* line 20, ../sass/_menu.scss */
 #main-menu .menu > li:hover .dropdown-menu {
   display: block;
   background: white;
 }
-/* line 27, ../sass/_menu.scss */
 #main-menu a.main {
   display: block;
   height: 45px;
@@ -270,7 +106,6 @@
   border-radius: 0 22px 22px 0;
   background-color: #f0ac01;
 }
-/* line 38, ../sass/_menu.scss */
 #main-menu a.main:after {
   content: '';
   position: absolute;
@@ -280,23 +115,18 @@
   height: 40px;
   background: url("../images/sprites.png");
 }
-/* line 48, ../sass/_menu.scss */
 #main-menu a.main.groups:after {
   background-position: -50px 0;
 }
-/* line 52, ../sass/_menu.scss */
 #main-menu a.main.dreams-accelerator:after {
   background-position: -150px 0;
 }
-/* line 56, ../sass/_menu.scss */
 #main-menu a.main.learning-center:after {
   background-position: -100px 0;
 }
-/* line 60, ../sass/_menu.scss */
 #main-menu a.main .caret {
   display: none;
 }
-/* line 65, ../sass/_menu.scss */
 #main-menu ul.dropdown-menu {
   position: static;
   float: none;
@@ -306,50 +136,161 @@
   border-top: none;
   margin-top: 0px;
 }
-/* line 74, ../sass/_menu.scss */
 #main-menu ul.dropdown-menu a {
   font-size: 10px;
 }
 
 @media (max-width: 767px) {
-  /* line 82, ../sass/_menu.scss */
   #main-menu .menu > li {
     left: -170px;
   }
-  /* line 85, ../sass/_menu.scss */
   #main-menu .menu > li:hover {
     left: -20px;
   }
 }
-/* line 6, ../sass/_form.scss */
+#navbar .nav {
+  float: right;
+}
+#navbar .logo {
+  float: left;
+}
+body.not-logged-in #navbar .logo {
+  margin-top: 11px;
+}
+#navbar .content-search #edit-search-block-form--2 {
+  margin-top: -5px;
+  margin-left: 20px;
+  width: 260px;
+  -moz-border-radius: 0 0 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  -khtml-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
+}
+#navbar .content-search .btn {
+  margin-top: -5px;
+}
+#navbar #user-login-form a {
+  color: #143175;
+}
+#navbar #user-login-form .col-first,
+#navbar #user-login-form .col-middle {
+  float: left;
+}
+#navbar #user-login-form .col-middle {
+  width: 205px;
+}
+#navbar #user-login-form .control-group {
+  margin: 0;
+  padding: 0;
+}
+#navbar #user-login-form ul {
+  font-size: 13px;
+  margin-left: 10px;
+  padding: 0;
+  list-style: none;
+}
+#navbar #user-login-form ul li {
+  line-height: 17px;
+}
+#navbar #user-login-form .form-text {
+  margin: 0;
+  width: 180px;
+  height: 20px;
+  -moz-border-radius: 0 0 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  -khtml-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
+}
+#navbar #user-login-form #edit-name,
+#navbar #user-login-form #edit-pass {
+  float: left;
+}
+#navbar #user-login-form #edit-name {
+  margin-left: 30px;
+}
+#navbar #user-login-form #edit-pass {
+  margin-left: 10px;
+}
+#navbar #user-login-form .btn {
+  background: #b11918;
+  color: #fff;
+  margin-top: 0;
+  margin-left: 10px;
+  padding: 0;
+  float: left;
+  width: 70px;
+  height: 30px;
+  border: 1px solid #000000;
+  -moz-border-radius: 0 0 0 0;
+  -webkit-border-radius: 0 0 0 0;
+  -khtml-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
+}
+#navbar .facebook-action-connect {
+  float: left;
+}
+#navbar .navbar-inner {
+  padding-top: 30px;
+  background-color: #fdf4e5;
+  margin-bottom: 0;
+  border: none;
+}
+#navbar .navbar-inner .pane-menu-space-menu .dropdown-toggle,
+#navbar .navbar-inner .pane-menu-space-menu .active {
+  margin-left: 10px;
+  background-color: #f9ab17;
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+  text-transform: none;
+}
+#navbar .navbar-inner .pane-menu-space-menu .dropdown-toggle .caret,
+#navbar .navbar-inner .pane-menu-space-menu .active .caret {
+  display: block;
+  margin: 0 auto;
+}
+#navbar .pane-user-picture {
+  margin-left: -10px;
+  float: right;
+}
+#navbar .pane-user-picture img {
+  width: 37px;
+  height: 37px;
+}
+#navbar .pane-fboauth-login img {
+  width: 100px;
+  height: 30px;
+}
+
+.region-navigation {
+  margin-left: 150px;
+}
+
+.navbar-static-top {
+  margin-bottom: 15px;
+}
+
 form .control-group a {
   margin-left: 22px;
   margin-top: 6px;
 }
-/* line 12, ../sass/_form.scss */
 form .btn {
   margin: 0 5px;
 }
+form .form-required {
+  color: #eb1e23;
+}
 
 @media (min-width: 980px) {
-  /* line 2, ../sass/_drupal_bootstrap.scss */
   body {
     padding-top: 60px;
   }
 }
-/* line 7, ../sass/_drupal_bootstrap.scss */
-.navbar .logo {
-  margin-top: 5px;
-  margin-right: 10px;
-}
-
-/* line 12, ../sass/_drupal_bootstrap.scss */
 #site-name {
   line-height: 1;
   margin: 0;
 }
 
-/* line 17, ../sass/_drupal_bootstrap.scss */
 .submitted {
   margin-bottom: 1em;
   font-style: italic;
@@ -357,25 +298,21 @@ form .btn {
   color: #777;
 }
 
-/* line 24, ../sass/_drupal_bootstrap.scss */
 .footer {
   margin-top: 45px;
   padding: 35px 0 36px;
   border-top: 1px solid #E5E5E5;
 }
 
-/* line 30, ../sass/_drupal_bootstrap.scss */
 ul.action-links {
   margin-bottom: 2em;
 }
 
-/* line 34, ../sass/_drupal_bootstrap.scss */
 ul.action-links li {
   display: inline;
   padding-right: 1.5em;
 }
 
-/* line 40, ../sass/_drupal_bootstrap.scss */
 ul.action-links [class^="icon-"],
 ul.action-links [class*=" icon-"] {
   padding-right: .5em;
@@ -385,28 +322,23 @@ ul.action-links [class*=" icon-"] {
  * Admin Styling
  */
 /* Fix Toolbar for .navbar-fixed-top */
-/* line 49, ../sass/_drupal_bootstrap.scss */
 body.toolbar .navbar-fixed-top {
   top: 30px;
 }
 
-/* line 53, ../sass/_drupal_bootstrap.scss */
 body.toolbar-drawer .navbar-fixed-top {
   top: 65px;
 }
 
 @media (min-width: 980px) {
-  /* line 58, ../sass/_drupal_bootstrap.scss */
   body.toolbar {
     padding-top: 94px !important;
   }
 
-  /* line 62, ../sass/_drupal_bootstrap.scss */
   body.toolbar-drawer {
     padding-top: 129px !important;
   }
 }
-/* line 67, ../sass/_drupal_bootstrap.scss */
 html.overlay-open .navbar-fixed-top {
   z-index: 400;
 }
@@ -414,67 +346,56 @@ html.overlay-open .navbar-fixed-top {
 /**
  * Search form stylings.
  */
-/* line 75, ../sass/_drupal_bootstrap.scss */
 .region-navigation form#search-block-form {
   margin-bottom: 5px;
   margin-top: 5px;
 }
 
 @media (max-width: 979px) {
-  /* line 81, ../sass/_drupal_bootstrap.scss */
   .region-navigation form#search-block-form {
     float: none;
   }
 }
-/* line 86, ../sass/_drupal_bootstrap.scss */
 fieldset.search-advanced {
   padding-bottom: 1.5em;
   margin-top: 1em;
 }
 
 /* Admin toolbar fix */
-/* line 93, ../sass/_drupal_bootstrap.scss */
 body.admin-expanded.admin-vertical.admin-nw .navbar,
 body.admin-expanded.admin-vertical.admin-sw .navbar {
   margin-left: 260px;
 }
 
-/* line 97, ../sass/_drupal_bootstrap.scss */
 div#admin-toolbar {
   z-index: 500;
 }
 
 /* Admin_menu fix */
-/* line 102, ../sass/_drupal_bootstrap.scss */
 #admin-menu {
   z-index: 1100;
   position: fixed;
 }
 
-/* line 107, ../sass/_drupal_bootstrap.scss */
 body.admin-menu .navbar-fixed-top {
   top: 30px;
 }
 
-/* line 111, ../sass/_drupal_bootstrap.scss */
 #admin-menu .dropdown li {
   line-height: normal;
 }
 
 /* System base fix */
-/* line 116, ../sass/_drupal_bootstrap.scss */
 .container-inline div, .container-inline label {
   display: block;
 }
 
 /* Default form fields to auto */
-/* line 121, ../sass/_drupal_bootstrap.scss */
 input, textarea, select, .uneditable-input {
   width: auto;
 }
 
 /* Default textfield styles inside vertical tabs */
-/* line 126, ../sass/_drupal_bootstrap.scss */
 .vertical-tabs .form-type-textfield input {
   -moz-box-sizing: inherit;
   -webkit-box-sizing: inherit;
@@ -483,37 +404,31 @@ input, textarea, select, .uneditable-input {
 }
 
 /* Vertical tabs form elements alighment */
-/* line 134, ../sass/_drupal_bootstrap.scss */
 .vertical-tabs .form-item {
   margin: 1em 0;
 }
 
 /* Collapsible field groups fix */
-/* line 139, ../sass/_drupal_bootstrap.scss */
 html.js fieldset.collapsed {
   height: auto;
 }
 
 /* throbber fix */
-/* line 144, ../sass/_drupal_bootstrap.scss */
 html.js input.form-autocomplete {
   background-position: 100% 7px;
   /* LTR */
   background-repeat: no-repeat;
 }
 
-/* line 149, ../sass/_drupal_bootstrap.scss */
 html.js input.throbbing {
   background-position: 100% -13px;
   /* LTR */
 }
 
-/* line 153, ../sass/_drupal_bootstrap.scss */
 .navbar-search .control-group {
   margin-bottom: 0px;
 }
 
-/* line 157, ../sass/_drupal_bootstrap.scss */
 input.error {
   color: #B94A48;
   border-color: #B94A48;
@@ -522,7 +437,6 @@ input.error {
 /**
  * Password strength indicator.
  */
-/* line 165, ../sass/_drupal_bootstrap.scss */
 .password-strength {
   width: 17em;
   float: right;
@@ -530,40 +444,34 @@ input.error {
   margin-top: 1.4em;
 }
 
-/* line 171, ../sass/_drupal_bootstrap.scss */
 .password-strength-title {
   display: inline;
 }
 
-/* line 175, ../sass/_drupal_bootstrap.scss */
 .password-strength-text {
   float: right;
   /* LTR */
   font-weight: bold;
 }
 
-/* line 180, ../sass/_drupal_bootstrap.scss */
 .password-indicator {
   background-color: #C4C4C4;
   height: 0.3em;
   width: 100%;
 }
 
-/* line 186, ../sass/_drupal_bootstrap.scss */
 .password-indicator div {
   height: 100%;
   width: 0%;
   background-color: #47C965;
 }
 
-/* line 193, ../sass/_drupal_bootstrap.scss */
 input.password-confirm,
 input.password-field {
   width: 16em;
   margin-bottom: 0.4em;
 }
 
-/* line 198, ../sass/_drupal_bootstrap.scss */
 div.password-confirm {
   float: right;
   /* LTR */
@@ -572,7 +480,6 @@ div.password-confirm {
   width: 17em;
 }
 
-/* line 205, ../sass/_drupal_bootstrap.scss */
 div.form-item div.password-suggestions {
   padding: 0.2em 0.5em;
   margin: 0.7em 0;
@@ -580,12 +487,10 @@ div.form-item div.password-suggestions {
   border: 1px solid #B4B4B4;
 }
 
-/* line 212, ../sass/_drupal_bootstrap.scss */
 div.password-suggestions ul {
   margin-bottom: 0;
 }
 
-/* line 217, ../sass/_drupal_bootstrap.scss */
 .confirm-parent,
 .password-parent {
   clear: left;
@@ -596,28 +501,23 @@ div.password-suggestions ul {
 
 /* added an extra clear both in the situation the form actions is preceded by an badly wrapped float element and they overlap
 e.g. multipage*/
-/* line 225, ../sass/_drupal_bootstrap.scss */
 .form-actions {
   clear: both;
 }
 
-/* line 3, ../sass/_sidebar.scss */
 .region-sidebar-second a {
   color: #525252;
 }
-/* line 7, ../sass/_sidebar.scss */
 .region-sidebar-second h2 {
   font-size: 16px;
   color: #ab1516;
   margin: 0;
   line-height: 20px;
 }
-/* line 13, ../sass/_sidebar.scss */
 .region-sidebar-second h2 a {
   color: #ab1516;
 }
 
-/* line 1, ../sass/_teaser.scss */
 article.node-teaser {
   margin-top: 20px;
   border: 1px solid #feebdd;
@@ -627,7 +527,6 @@ article.node-teaser {
   -khtml-border-radius: 8px 8px 8px 8px;
   border-radius: 8px 8px 8px 8px;
 }
-/* line 7, ../sass/_teaser.scss */
 article.node-teaser .border {
   border: 1px solid #feeecf;
   -moz-border-radius: 7px 7px 7px 7px;
@@ -635,7 +534,6 @@ article.node-teaser .border {
   -khtml-border-radius: 7px 7px 7px 7px;
   border-radius: 7px 7px 7px 7px;
 }
-/* line 11, ../sass/_teaser.scss */
 article.node-teaser .border .border {
   border: 1px solid #fef6c7;
   -moz-border-radius: 6px 6px 6px 6px;
@@ -643,7 +541,6 @@ article.node-teaser .border .border {
   -khtml-border-radius: 6px 6px 6px 6px;
   border-radius: 6px 6px 6px 6px;
 }
-/* line 15, ../sass/_teaser.scss */
 article.node-teaser .border .border .border {
   border: 1px solid #e1d9ae;
   -moz-border-radius: 5px 5px 5px 5px;
@@ -653,34 +550,167 @@ article.node-teaser .border .border .border {
   padding: 9px;
   height: 300px;
 }
-/* line 24, ../sass/_teaser.scss */
 article.node-teaser .caption {
   padding: 0;
   line-height: 20px;
   min-height: 40px;
 }
-/* line 29, ../sass/_teaser.scss */
 article.node-teaser .caption a {
   color: #79232f;
   line-height: 20px;
 }
-/* line 35, ../sass/_teaser.scss */
 article.node-teaser .field-name-body {
   padding: 0;
 }
 
-/* line 13, ../sass/style.scss */
+.page-my-wallet #my-wallet-panel {
+  margin-top: 10px;
+}
+.page-my-wallet #my-wallet-panel .panel-pane {
+  color: #004b82;
+}
+.page-my-wallet #my-wallet-panel .panel-pane .pane-title, .page-my-wallet #my-wallet-panel .panel-pane .pane-content {
+  border: 1px solid #fddda2;
+  -moz-border-radius: 10px 10px 0 0;
+  -webkit-border-radius: 10px 10px 0 0;
+  -khtml-border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
+  padding: 0 20px;
+}
+.page-my-wallet #my-wallet-panel .panel-pane .pane-title {
+  margin: 0;
+  font-weight: normal;
+  font-size: 22px;
+  background-color: #fdf4e5;
+}
+.page-my-wallet #my-wallet-panel .panel-pane .pane-content {
+  padding: 20px;
+  -moz-border-radius: 0 0 10px 10px;
+  -webkit-border-radius: 0 0 10px 10px;
+  -khtml-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+  border-top: none;
+}
+.page-my-wallet #my-wallet-panel .panel-pane.pane-transfer {
+  width: 374px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form {
+  margin: 0;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .control-label, .page-my-wallet #my-wallet-panel #mcapi-forms-form .controls {
+  display: inline-block;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .controls {
+  float: right;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form input, .page-my-wallet #my-wallet-panel #mcapi-forms-form select {
+  border-color: #fddda2;
+  margin: 0;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form select {
+  width: 208px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-text {
+  width: 194px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction {
+  height: 30px;
+  margin-bottom: 0;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .form-required {
+  display: none;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction * {
+  margin: 0;
+  padding: 0;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .option {
+  margin-right: 10px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction label, .page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .form-type-radio, .page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .controls {
+  float: left;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .controls, .page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction #edit-direction, .page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .form-item-direction {
+  height: 20px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction input {
+  vertical-align: middle;
+  margin: 4px 5px;
+  float: right;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .worth-widget {
+  height: 30px;
+  line-height: 30px;
+  float: right;
+  margin-top: -5px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .worth-widget .code {
+  margin-right: 3px;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .worth-widget .form-text {
+  margin: 0;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .control-label {
+  width: 88px;
+  text-align: right;
+  padding-right: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .actions {
+  text-align: right;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .actions .btn.form-submit {
+  margin: 0;
+}
+
+.pane-beez-info ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pane-beez-info ul li {
+  line-height: 23px;
+}
+.pane-beez-info ul li.first {
+  font-size: 17px;
+}
+.pane-beez-info .info,
+.pane-beez-info .graph {
+  float: left;
+}
+.pane-beez-info .graph {
+  width: 250px;
+  height: 200px;
+  border: 1px solid #fddda2;
+  background: transparent;
+  fill: transparent;
+  margin-left: 60px;
+}
+
+.page-directory .view-directory .views-rows {
+  width: 280px;
+  float: left;
+  margin-left: 10px;
+}
+.page-directory .view-directory .views-rows:nth-child(3n + 1) {
+  clear: left;
+  margin-left: 0;
+}
+
 body {
   padding-top: 0;
   background-color: #fefefe;
 }
 
-/* line 19, ../sass/style.scss */
 .element-invisible {
   display: none;
 }
 
-/* line 23, ../sass/style.scss */
 .node-teaser .field-name-body {
   padding: 0 9px;
+}
+
+html.js input.form-autocomplete {
+  background-position: 100% 8px;
 }

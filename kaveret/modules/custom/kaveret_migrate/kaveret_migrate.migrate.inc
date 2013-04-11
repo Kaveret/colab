@@ -95,6 +95,7 @@ class KaveretRequestNodes extends KaveretMigration {
  */
 class KaveretPageNodes extends KaveretMigration {
   public $csvColumns = array(
+    array('language', 'Language'),
     array('path', 'Path'),
     array('link_weight', 'Link weight'),
     array('body', 'Body'),
@@ -117,20 +118,8 @@ class KaveretPageNodes extends KaveretMigration {
       ->addFieldMapping('field_category', 'field_category')
       ->sourceMigration('KaveretOfferCategoriesTerms');
 
+    $this->addFieldMapping('language', 'language');
     $this->addFieldMapping('path', 'path');
-  }
-
-  public function complete($entity, $row) {
-    // Create a menu link in the sidebar menu for each page.
-    $item = array(
-      'link_title' => $entity->title,
-      'link_path' => 'node/' . $entity->nid,
-      'menu_name' => 'side-menu',
-      'expanded' => TRUE,
-      'options' => array('attributes' => array('class' => array('main', $row->path))),
-      'weight' => $row->link_weight,
-    );
-    menu_link_save($item);
   }
 }
 
