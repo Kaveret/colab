@@ -86,6 +86,10 @@ class KaveretRequestNodes extends KaveretMigration {
       ->addFieldMapping('field_image:source_dir')
       ->defaultValue(drupal_get_path('module', 'kaveret_migrate') . '/images');
     $this->addFieldMapping('field_category', 'field_category');
+  }
+}
+
+
 /**
  * Migrate Page nodes.
  */
