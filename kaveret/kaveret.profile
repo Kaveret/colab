@@ -500,7 +500,7 @@ function kaveret_menus_setup() {
   // Add main menu links.
   $item = array(
     'link_title' => 'Resource Exchange',
-    'link_path' => 'front',
+    'link_path' => 'resource-exchange',
     'menu_name' => 'side-menu',
     'expanded' => TRUE,
     'options' => array('attributes' => array('class' => array('main', 'resources'))),
