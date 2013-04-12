@@ -4,4 +4,4 @@
  * Drupal needs this blank file.
  */
 
-include_once 'kaveret_commerce.features.field.inc';
+include_once 'kaveret_commerce.features.inc';
