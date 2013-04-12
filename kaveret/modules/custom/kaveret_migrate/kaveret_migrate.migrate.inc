@@ -89,6 +89,40 @@ class KaveretRequestNodes extends KaveretMigration {
   }
 }
 
+
+/**
+ * Migrate Page nodes.
+ */
+class KaveretPageNodes extends KaveretMigration {
+  public $csvColumns = array(
+    array('language', 'Language'),
+    array('path', 'Path'),
+    array('link_weight', 'Link weight'),
+    array('body', 'Body'),
+  );
+
+  public $entityType = 'node';
+  public $bundle = 'page';
+
+  public $dependencies = array(
+    'KaveretOfferCategoriesTerms',
+  );
+
+  public function __construct() {
+    parent::__construct();
+
+    $this->addFieldMapping('body', 'body')
+      ->arguments(array('format' => 'full_html'));;
+
+    $this
+      ->addFieldMapping('field_category', 'field_category')
+      ->sourceMigration('KaveretOfferCategoriesTerms');
+
+    $this->addFieldMapping('language', 'language');
+    $this->addFieldMapping('path', 'path');
+  }
+}
+
 /**
  * Migrate "Community" nodes.
  */

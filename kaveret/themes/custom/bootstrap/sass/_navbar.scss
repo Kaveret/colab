@@ -1,11 +1,27 @@
 #navbar {
 
+  .nav {
+    float: right; // LTR
+  }
+
+  .logo {
+    float: left; //LTR
+
+    body.not-logged-in & {
+      margin-top: 11px;
+    }
+  }
+
   .content-search {
 
     #edit-search-block-form--2 {
-      margin-left: 20px;
+      margin-top: -5px;
+      margin-left: 20px; // LTR
       width: 260px;
       @include rounded-corners(0, 0, 0 ,0);
+    }
+    .btn {
+      margin-top: -5px;
     }
   }
 
@@ -22,7 +38,6 @@
 
     .col-middle {
       width: 205px;
-      height: 70px;
     }
 
     .control-group{
@@ -66,7 +81,7 @@
       background: #b11918;
       color: #fff;
       margin-top: 0;
-      margin-left: 10px;
+      margin-left: 10px; // LTR
       padding: 0;
       float: left;
       width: 70px;
@@ -88,7 +103,8 @@
 
     .pane-menu-space-menu {
 
-      .dropdown-toggle {
+      .dropdown-toggle,
+      .active {
         margin-left: 10px; //LTR
         background-color: #f9ab17;
         padding: 5px;
@@ -103,9 +119,30 @@
       }
     }
   }
-}
-.navbar {
-  .nav {
-    float: right; // LTR
+
+  .pane-user-picture {
+    margin-left: -10px; // LTR
+    float: right;
+
+    img {
+      width: 37px;
+      height: 37px;
+    }
+  }
+  .pane-fboauth-login {
+
+    img {
+      width: 100px;
+      height: 30px;
+    }
   }
 }
+
+.region-navigation {
+  margin-left: 150px;
+}
+
+.navbar-static-top {
+  margin-bottom: 15px;
+}
+

@@ -15,6 +15,7 @@ function kaveret_migrate_migrate_api() {
       'KaveretRequestNodes' => array('class_name' => 'KaveretRequestNodes'),
       'KaveretTransaction' => array('class_name' => 'KaveretTransaction'),
       'KaveretProducts' => array('class_name' => 'KaveretProducts'),
+      'KaveretPageNodes' => array('class_name' => 'KaveretPageNodes'),
     ),
   );
 
