@@ -124,6 +124,38 @@ class KaveretPageNodes extends KaveretMigration {
 }
 
 /**
+ * Migrate product nodes.
+ */
+class KaveretProductNodes extends KaveretMigration {
+  public $csvColumns = array(
+    array('sku', 'SKU'),
+    array('language', 'Language'),
+    array('body', 'Body'),
+  );
+
+  public $entityType = 'node';
+  public $bundle = 'product';
+
+  public $dependencies = array('KaveretProducts');
+
+  public function __construct() {
+    parent::__construct();
+
+    $this->addFieldMapping('body', 'body')
+      ->arguments(array('format' => 'full_html'));;
+    $this->addFieldMapping('field_product', 'sku');
+    $this->addFieldMapping('language', 'language');
+  }
+
+  public function prepareRow($row) {
+    $row->uid = 1;
+
+    $product = commerce_product_load_by_sku($row->sku);
+    $row->sku = $product->product_id;
+  }
+}
+
+/**
  * Migrate "Community" nodes.
  */
 class KaveretCommunityNodes extends KaveretMigration {
@@ -258,6 +290,7 @@ class KaveretProducts extends Migration {
     array('id', 'Unique ID'),
     array('sku', 'SKU'),
     array('price', 'Price'),
+    array('field_image', 'Image'),
     array('title', 'Title'),
     array('title_he', 'Title he'),
   );
@@ -284,6 +317,13 @@ class KaveretProducts extends Migration {
     $this->addFieldMapping('title', 'title');
     $this->addFieldMapping('sku', 'sku');
     $this->addFieldMapping('commerce_price', 'price');
+    $this->addFieldMapping('field_image', 'field_image');
+    $this
+      ->addFieldMapping('field_image:file_replace')
+      ->defaultValue(FILE_EXISTS_REPLACE);
+    $this
+      ->addFieldMapping('field_image:source_dir')
+      ->defaultValue(drupal_get_path('module', 'kaveret_migrate') . '/images');
     $this->addFieldMapping('language')
       ->defaultValue('en');
   }
