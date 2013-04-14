@@ -116,8 +116,16 @@ class KaveretPageNodes extends KaveretMigration {
     $this->addFieldMapping('path', 'path');
   }
 
-
-
+  public function complete($entity, $row) {
+    // update menu items for the page.
+    $menus = i18n_menu_tree_all_data('side-menu');
+    foreach ($menus as $menu) {
+      if ($menu['link']['link_title'] == $row->title) {
+        $menu['link']['link_path'] = 'node/' . $entity->nid;
+        menu_link_save($menu['link']);
+      }
+    }
+  }
 }
 
 /**
