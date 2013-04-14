@@ -127,8 +127,6 @@ class KaveretPageNodes extends KaveretMigration {
         menu_link_save($menu['link']);
       }
     }
-    $menu['link']['hidden'] = FALSE;
-    menu_link_save($menu['link']);
   }
 }
 
