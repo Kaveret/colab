@@ -121,10 +121,12 @@ class KaveretPageNodes extends KaveretMigration {
     $menus = menu_tree_all_data('side-menu');
     foreach ($menus as $menu) {
       if ($menu['link']['link_title'] == $row->title) {
-       /* if ($row->language == 'he') {
+       if ($row->language == 'he') {
           $menu['link']['hidden'] = FALSE;
-        }*/
-        $menu['link']['link_path'] = 'he/node/' . $entity->nid;
+          $menu['link']['link_path'] = 'he/node/' . $entity->nid;
+        } else {
+          $menu['link']['link_path'] = 'node/' . $entity->nid;
+       }
         menu_link_save($menu['link']);
       }
     }
