@@ -115,22 +115,19 @@ class KaveretPageNodes extends KaveretMigration {
     $this->addFieldMapping('language', 'language');
     $this->addFieldMapping('path', 'path');
   }
-
   public function complete($entity, $row) {
-    // update menu items for the page.
-    $menus = menu_tree_all_data('side-menu');
-    foreach ($menus as $menu) {
-      if ($menu['link']['link_title'] == $row->title) {
-       if ($row->language == 'he') {
-          $menu['link']['hidden'] = FALSE;
-          $menu['link']['link_path'] = 'he/node/' . $entity->nid;
-        } else {
-          $menu['link']['link_path'] = 'node/' . $entity->nid;
-       }
-        menu_link_save($menu['link']);
-      }
-    }
+    // Create a menu link in the sidebar menu for each page.
+    $item = array(
+      'link_title' => $entity->title,
+      'link_path' => 'node/' . $entity->nid,
+      'menu_name' => 'side-menu',
+      'expanded' => TRUE,
+      'options' => array('attributes' => array('class' => array('main', $row->path))),
+      'weight' => $row->link_weight,
+    );
+    menu_link_save($item);
   }
+
 }
 
 /**
