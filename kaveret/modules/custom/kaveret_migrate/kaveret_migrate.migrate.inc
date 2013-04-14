@@ -118,7 +118,7 @@ class KaveretPageNodes extends KaveretMigration {
 
   public function complete($entity, $row) {
     // update menu items for the page.
-    $menus = i18n_menu_tree_all_data('side-menu');
+    $menus = menu_tree_all_data($menu_name = 'side-menu', $item = NULL);
     foreach ($menus as $menu) {
       if ($menu['link']['link_title'] == $row->title) {
         $menu['link']['link_path'] = 'node/' . $entity->nid;
