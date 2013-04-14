@@ -535,6 +535,7 @@ function kaveret_menus_setup() {
     'link_title' => 'Dreams Accelerator',
     'link_path' => '<front>',
     'menu_name' => 'side-menu',
+    'customized' => TRUE,
     'expanded' => TRUE,
     'options' => array('attributes' => array('class' => array('main', 'dreams'))),
     'weight' => 20,

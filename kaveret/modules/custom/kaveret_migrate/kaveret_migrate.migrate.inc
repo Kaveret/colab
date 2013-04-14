@@ -123,10 +123,8 @@ class KaveretPageNodes extends KaveretMigration {
 
     foreach ($menus as $menu) {
       if ($menu['link']['link_title'] == $row->title) {
-        $mlid = $menu['link']['mlid'];
         $menu['link']['link_path'] = $row->path;
-        //$candidates = $menu['link']['link_path'];
-        menu_link_save($menu,$mlid);
+        menu_link_save($menu['link']);
       }
     }
   }
