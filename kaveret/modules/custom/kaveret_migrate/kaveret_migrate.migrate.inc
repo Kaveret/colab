@@ -104,9 +104,7 @@ class KaveretPageNodes extends KaveretMigration {
   public $entityType = 'node';
   public $bundle = 'page';
 
-  public $dependencies = array(
-    'KaveretOfferCategoriesTerms',
-  );
+
 
   public function __construct() {
     parent::__construct();
@@ -114,12 +112,21 @@ class KaveretPageNodes extends KaveretMigration {
     $this->addFieldMapping('body', 'body')
       ->arguments(array('format' => 'full_html'));;
 
-    $this
-      ->addFieldMapping('field_category', 'field_category')
-      ->sourceMigration('KaveretOfferCategoriesTerms');
-
     $this->addFieldMapping('language', 'language');
     $this->addFieldMapping('path', 'path');
+  }
+
+
+  public function complete($entity, $row) {
+    // Create or update a menu item for the page.
+    $menus = menu_tree_all_data($menu_name = 'side-menu', $item = NULL);
+
+    foreach ($menus as $menu) {
+      if ($menu['link']['link_title'] == $row->title) {
+        $item['link_path'] = $row->path;
+        menu_link_save($item);
+      }
+    }
   }
 }
 

@@ -497,6 +497,7 @@ function kaveret_menus_setup() {
   );
   menu_save($menu);
 
+
   // Add main menu links.
   $item = array(
     'link_title' => 'Resource Exchange',
@@ -532,7 +533,7 @@ function kaveret_menus_setup() {
 
   $item = array(
     'link_title' => 'Dreams Accelerator',
-    'link_path' => 'dreams-accelerator',
+    'link_path' => '<front>',
     'menu_name' => 'side-menu',
     'expanded' => TRUE,
     'options' => array('attributes' => array('class' => array('main', 'dreams'))),
