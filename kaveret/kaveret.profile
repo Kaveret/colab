@@ -576,7 +576,7 @@ function kaveret_menus_setup() {
     'expanded' => TRUE,
     'customized' => TRUE,
     'options' => array('attributes' => array('class' => array('main', 'resources'))),
-    'weight' => 10,
+    'weight' => 50,
     'language' => 'he',
 
   );
@@ -588,7 +588,6 @@ function kaveret_menus_setup() {
     'menu_name' => 'side-menu',
     'plid' => $mlid,
     'customized' => TRUE,
-    'weight' => 20,
     'language' => 'he',
   );
   menu_link_save($item);
@@ -599,7 +598,6 @@ function kaveret_menus_setup() {
     'menu_name' => 'side-menu',
     'plid' => $mlid,
     'customized' => TRUE,
-    'weight' => 30,
     'language' => 'he',
   );
   menu_link_save($item);
@@ -611,7 +609,7 @@ function kaveret_menus_setup() {
     'expanded' => TRUE,
     'customized' => TRUE,
     'options' => array('attributes' => array('class' => array('main', 'dreams'))),
-    'weight' => 40,
+    'weight' => 60,
     'language' => 'he',
   );
   menu_link_save($item);
@@ -622,8 +620,8 @@ function kaveret_menus_setup() {
     'menu_name' => 'side-menu',
     'expanded' => TRUE,
     'customized' => TRUE,
-    'options' => array('attributes' => array('class' => array('main', 'dreams'))),
-    'weight' => 50,
+    'options' => array('attributes' => array('class' => array('main', 'learning-center'))),
+    'weight' => 70,
     'language' => 'he',
   );
   menu_link_save($item);
@@ -634,8 +632,8 @@ function kaveret_menus_setup() {
     'menu_name' => 'side-menu',
     'expanded' => TRUE,
     'customized' => TRUE,
-    'options' => array('attributes' => array('class' => array('main', 'dreams'))),
-    'weight' => 60,
+    'options' => array('attributes' => array('class' => array('main', 'communities'))),
+    'weight' => 80,
     'language' => 'he',
   );
   menu_link_save($item);
