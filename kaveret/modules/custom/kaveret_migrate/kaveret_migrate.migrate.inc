@@ -115,6 +115,7 @@ class KaveretPageNodes extends KaveretMigration {
     $this->addFieldMapping('language', 'language');
     $this->addFieldMapping('path', 'path');
   }
+  /*
   public function complete($entity, $row) {
     // Create a menu link in the sidebar menu for each page.
     $item = array(
@@ -128,9 +129,46 @@ class KaveretPageNodes extends KaveretMigration {
       'language' => $row->language,
     );
     menu_link_save($item);
-  }
+  } */
 
 }
+
+
+/**
+ * Migrate Menu.
+ */
+class KaveretMenu extends KaveretMigration {
+  public $csvColumns = array(
+    array('language', 'Language'),
+    array('path', 'Path'),
+    array('link_weight', 'Link weight'),
+    array('body', 'Body'),
+  );
+
+  public $entityType = 'node';
+  public $bundle = 'page';
+
+
+
+  public function __construct() {
+    parent::__construct();
+
+    $this->addFieldMapping('body', 'body')
+      ->arguments(array('format' => 'full_html'));;
+
+    $this->addFieldMapping('language', 'language');
+    $this->addFieldMapping('path', 'path');
+  }
+  /*
+  public function complete($entity, $row) {
+
+  } */
+
+}
+
+
+
+
 
 /**
  * Migrate "Community" nodes.

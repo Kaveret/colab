@@ -1,0 +1,3 @@
+Unique ID,Title,Weight,Language,Path,Parent
+1,Resource Exchange,10,en,resource-exchange,
+2,My Wallet,20,en,my-wallet,Resource Exchange
