@@ -122,8 +122,10 @@ class KaveretPageNodes extends KaveretMigration {
       'link_path' => 'node/' . $entity->nid,
       'menu_name' => 'side-menu',
       'expanded' => TRUE,
+      'customized' => TRUE,
       'options' => array('attributes' => array('class' => array('main', $row->path))),
       'weight' => $row->link_weight,
+      'language' => $row->language,
     );
     menu_link_save($item);
   }

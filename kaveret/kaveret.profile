@@ -497,7 +497,7 @@ function kaveret_menus_setup() {
   );
   menu_save($menu);
 
-
+/*
   // Add main menu links.
   $item = array(
     'link_title' => 'Resource Exchange',
@@ -637,7 +637,7 @@ function kaveret_menus_setup() {
     'language' => 'he',
   );
   menu_link_save($item);
-
+*/
 
   // Individual/ Community space menu.
   $menu = array(
