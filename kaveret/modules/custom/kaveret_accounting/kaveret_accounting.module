@@ -38,13 +38,6 @@ function kaveret_accounting_mcapiforms_default_alter($forms) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
- */
-function kaveret_accounting_form_mcapi_forms_form_alter(&$form, &$form_state) {
-  $form['worth'][LANGUAGE_NONE]['#element_validate'] = array('element_validate_integer_positive');
-}
-
-/**
  * Implements hook_mcapicurrencies_default().
  *
  * Create the Bees currency.
