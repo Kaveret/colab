@@ -488,7 +488,7 @@ function kaveret_menus_setup() {
 
 
 
-  // Create the footer links menu.
+  // Create the side links menu.
   $menu = array(
     'menu_name' => 'side-menu',
     'title' => 'Side menu',
