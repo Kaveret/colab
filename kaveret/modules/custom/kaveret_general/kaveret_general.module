@@ -29,13 +29,17 @@ function kaveret_general_get_breadcrumbs() {
 
     case 'my-wallet':
       $items[] = "<span dir=\"$dir\">" . l(t('Resource Exchange'), '') . '</span>';
-      $items[] = "<span dir=\"$dir\">" . t('My Wallet') . '</span>';
+      $items[] = "<span dir=\"$dir\">" . t('My Treasure') . '</span>';
       break;
 
     case 'directory':
       $items[] = "<span dir=\"$dir\">" . l(t('Resource Exchange'), '') . '</span>';
       $items[] = "<span dir=\"$dir\">" . l(t('Marketplace'), '') . '</span>';
       $items[] = "<span dir=\"$dir\">" . t('Full Directory List') . '</span>';
+      break;
+
+    default:
+      $items[] = "<span dir=\"$dir\">" . drupal_get_title() . '</span>';
       break;
   }
 

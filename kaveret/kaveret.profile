@@ -512,7 +512,7 @@ function kaveret_menus_setup() {
   $mlid = menu_link_save($item);
 
   $item = array(
-    'link_title' => 'My Wallet',
+    'link_title' => 'My Treasure',
     'link_path' => 'my-wallet',
     'menu_name' => 'side-menu',
     'plid' => $mlid,

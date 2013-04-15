@@ -43,6 +43,12 @@ function kaveret_offer_form_alter(&$form, &$form_state, $form_id) {
     );
 
     $form['field_expiry_date']['#access'] = FALSE;
+
+    $form['body'][LANGUAGE_NONE][0]['#rows'] = 3;
+
+    $form['#attached']['js'] = array(
+      drupal_get_path('module', 'kaveret_offer') . '/js/offer_form.js',
+    );
   }
   // Offer and request comments forms.
   elseif (in_array($form_id, array('comment_node_offer_form', 'comment_node_request_form'))) {

@@ -193,7 +193,7 @@ function kaveret_offer_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Offers';
+  $handler->display->display_options['title'] = 'Offers/ Requests';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -235,6 +235,7 @@ function kaveret_offer_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'offer' => 'offer',
+    'request' => 'request',
   );
 
   /* Display: Page */
@@ -243,7 +244,7 @@ function kaveret_offer_views_default_views() {
   $handler->display->display_options['path'] = 'user/%/offers';
   $translatables['offers'] = array(
     t('Master'),
-    t('Offers'),
+    t('Offers/ Requests'),
     t('more'),
     t('Apply'),
     t('Reset'),
