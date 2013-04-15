@@ -300,6 +300,7 @@ function kaveret_set_variables() {
     'entity_translation_entity_types' => array(
       'node' => 'node',
       'taxonomy_term' => 'taxonomy_term',
+      'commerce_product' => 'commerce_product',
     ),
 
     // MCAPI settings.

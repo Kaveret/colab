@@ -171,6 +171,38 @@ class KaveretMenu extends KaveretMigration {
 
 
 /**
+ * Migrate product nodes.
+ */
+class KaveretProductNodes extends KaveretMigration {
+  public $csvColumns = array(
+    array('sku', 'SKU'),
+    array('language', 'Language'),
+    array('body', 'Body'),
+  );
+
+  public $entityType = 'node';
+  public $bundle = 'product';
+
+  public $dependencies = array('KaveretProducts');
+
+  public function __construct() {
+    parent::__construct();
+
+    $this->addFieldMapping('body', 'body')
+      ->arguments(array('format' => 'full_html'));;
+    $this->addFieldMapping('field_product', 'sku');
+    $this->addFieldMapping('language', 'language');
+  }
+
+  public function prepareRow($row) {
+    $row->uid = 1;
+
+    $product = commerce_product_load_by_sku($row->sku);
+    $row->sku = $product->product_id;
+  }
+}
+
+/**
  * Migrate "Community" nodes.
  */
 class KaveretCommunityNodes extends KaveretMigration {
@@ -259,7 +291,6 @@ class KaveretTransaction extends KaveretTransactionMigration {
     'KaveretUsers',
   );
 
-
   public function __construct() {
     parent::__construct();
 
@@ -295,5 +326,57 @@ class KaveretTransaction extends KaveretTransactionMigration {
       ->fields(array('created' => $row->created,))
       ->condition('xid', $entity->xid)
       ->execute();
+  }
+}
+
+/**
+ * Migrate products.
+ */
+class KaveretProducts extends Migration {
+  public $csvColumns = array(
+    array('id', 'Unique ID'),
+    array('sku', 'SKU'),
+    array('price', 'Price'),
+    array('field_image', 'Image'),
+    array('title', 'Title'),
+    array('title_he', 'Title he'),
+  );
+
+  public $entityType = 'commerce_product';
+  public $bundle = 'product';
+
+  public function __construct() {
+    parent::__construct();
+
+    $key = array(
+      'sku' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+    );
+    $this->map = new MigrateSQLMap($this->machineName, $key, MigrateDestinationEntityAPI::getKeySchema('commerce_product'));
+
+    // Create a MigrateSource object.
+    $this->source = new MigrateSourceCSV(drupal_get_path('module', 'kaveret_migrate') . '/csv/commerce_product/product.csv', $this->csvColumns, array('header_rows' => 1));
+    $this->destination = new MigrateDestinationEntityAPI('commerce_product', 'product');
+
+    $this->addFieldMapping('title', 'title');
+    $this->addFieldMapping('sku', 'sku');
+    $this->addFieldMapping('commerce_price', 'price');
+    $this->addFieldMapping('field_image', 'field_image');
+    $this
+      ->addFieldMapping('field_image:file_replace')
+      ->defaultValue(FILE_EXISTS_REPLACE);
+    $this
+      ->addFieldMapping('field_image:source_dir')
+      ->defaultValue(drupal_get_path('module', 'kaveret_migrate') . '/images');
+    $this->addFieldMapping('language')
+      ->defaultValue('en');
+  }
+
+  public function complete($entity, $row) {
+    $entity->{'title_field'}['he'] = array(array('value' => $row->title_he));
+    entity_save('commerce_product', $entity);
   }
 }
