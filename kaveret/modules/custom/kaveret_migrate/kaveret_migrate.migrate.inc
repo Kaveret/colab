@@ -137,36 +137,27 @@ class KaveretPageNodes extends KaveretMigration {
 /**
  * Migrate Menu.
  */
-class KaveretMenu extends KaveretMigration {
+/*
+class KaveretMenu extends Migration {
   public $csvColumns = array(
+    array('id', 'Unique ID'),
+    array('title', 'Title'),
+    array('weight', 'Weight'),
     array('language', 'Language'),
     array('path', 'Path'),
-    array('link_weight', 'Link weight'),
-    array('body', 'Body'),
+    array('parent', 'Parent'),
   );
 
-  public $entityType = 'node';
-  public $bundle = 'page';
+ // $this->source = new MigrateSourceCSV(drupal_get_path('module', 'kaveret_migrate') . '/csv/node/menu.csv', $this->csvColumns, array('header_rows' => 1));
 
 
-
-  public function __construct() {
-    parent::__construct();
-
-    $this->addFieldMapping('body', 'body')
-      ->arguments(array('format' => 'full_html'));;
-
-    $this->addFieldMapping('language', 'language');
-    $this->addFieldMapping('path', 'path');
-  }
-  /*
   public function complete($entity, $row) {
-
-  } */
+  dpm($row);
+  }
 
 }
 
-
+*/
 
 
 
