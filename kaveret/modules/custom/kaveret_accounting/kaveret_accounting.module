@@ -47,6 +47,7 @@ function kaveret_accounting_mcapicurrencies_default_alter(&$currencies) {
   $mcapicurrency->disabled = FALSE; /* Edit this to true to make a default mcapicurrency disabled initially */
   $mcapicurrency->api_version = 3;
   $mcapicurrency->currcode = 'bz';
+
   $mcapicurrency->data = (object) array(
     'info' => array(
       'currcode' => 'bz',
@@ -100,9 +101,92 @@ function kaveret_accounting_mcapicurrencies_default_alter(&$currencies) {
     'buttons' => array(
       'delete' => 'Delete',
     ),
+    'limits' => array(
+      'limits_callback' => 'limits_global',
+      'limits_global' => array(
+        'min' => -500,
+      ),
+      'skip' => array(
+        'reservoir' => 'reservoir',
+        'auto' => 'auto',
+        'mass' => FALSE,
+        'user1' => FALSE,
+        'owner' => FALSE,
+      ),
+    )
   );
 
   // Override the other default currencies.
   $currencies = array($mcapicurrency->currcode => $mcapicurrency);
   return $currencies;
+}
+
+/**
+ * Implements hook_user_insert().
+ *
+ * Add Beez to a new user.
+ */
+function kaveret_accounting_user_insert(&$edit, $account, $category) {
+  kaveret_accounting_balances_member($account->uid ,'bz' ,'auto' ,300 ,0);
+}
+
+/**
+ * Credit a user with Beez from the Federal Reservoir.
+ *
+ * @param $uid
+ *   The user ID.
+ * @param $currcode
+ *   The currency code.
+ * @param $type
+ *   The transaction event.
+ * @param $balance
+ *   The credit amount.
+ * @param $gross_income
+ *   The bruto income.
+ */
+function kaveret_accounting_balances_member($uid, $currcode, $type, $balance, $gross_income = 0) {
+  $currency = currency_load($currcode);
+  $transactions = array();
+  $values = array(
+    'type' => $type,
+    'state' => TRANSACTION_STATE_FINISHED,
+    'currcode' => $currcode
+  );
+
+  if ($gross_income) {
+    $gross_expenditure = $gross_income - $balance;
+    $in = $values;
+    $out = clone($values);
+    $in['quantity'] = $gross_expenditure;
+    $in['payer'] = $currency->reservoir;
+    $in['payee'] = $uid;
+    $transactions[] =  entity_create('transaction', $in);
+    $out['quantity'] = $gross_income;
+    $out['payer'] = $uid;
+    $out['payee'] = $currency->reservoir;
+    if ($desc_field = variable_get('transaction_description_field', '')) {
+      $in['description'] = t("Gross income");
+      $out['description'] = t("Gross expenditure");
+    }
+    $transactions[] =  entity_create('transaction', $out);
+  }
+  elseif ($balance != 0) {//if there is only balance, we do one exchange, which is simply + balance
+    if ($balance > 0) {
+      $values['payer'] = $currency->reservoir;
+      $values['payee'] = $uid;
+      $values['quantity'] = $balance;
+    }
+    else {
+      $values['payer'] = $uid;
+      $values['payee'] = $currency->reservoir;
+      $values['quantity'] = -$balance;
+    }
+    if ($desc_field = variable_get('transaction_description_field', '')) {
+      $values['description'] = t("Carried Forward");
+    }
+    $transactions[] = entity_create('transaction', $values);
+  }
+  if ($transactions) {
+    transaction_cluster_write($transactions, TRUE);
+  }
 }
