@@ -155,7 +155,7 @@ function kaveret_accounting_balances_member($uid, $currcode, $type, $balance, $g
   );
 
 
-  $reservoir_account = user_load_by_name('Federal Reservoir');
+  $reservoir_account = user_load_by_name('Federal Reverse');
   $currency->reservoir = $reservoir_account->uid;
 
   if ($gross_income) {
