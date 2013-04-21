@@ -195,3 +195,16 @@ function kaveret_accounting_balances_member($uid, $currcode, $type, $balance, $g
     transaction_cluster_write($transactions, TRUE);
   }
 }
+
+/**
+ * Implements hook_username_alter().
+ *
+ * Change reservoir user name in Hebrew.
+ */
+function kaveret_accounting_username_alter(&$name, $account) {
+  global $language;
+
+  if ($language->language == 'he' && $account->name == 'Federal Reverse') {
+    $name = 'אוצר קהילה';
+  }
+}

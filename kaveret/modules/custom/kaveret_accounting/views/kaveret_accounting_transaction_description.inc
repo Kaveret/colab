@@ -25,8 +25,8 @@ class kaveret_accounting_transaction_description extends views_handler_field {
     $amount = theme('worth_item', $variables);
 
     $variables = array(
-      '@payer' => $payer->name,
-      '@payee' => $payee->name,
+      '@payer' => format_username($payer),
+      '@payee' => format_username($payee),
       '!amount' => $amount,
     );
 
