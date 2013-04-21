@@ -714,3 +714,7 @@ body {
 html.js input.form-autocomplete {
   background-position: 100% 8px;
 }
+
+.pane-offers-requests-panel-pane-1 article.node-teaser {
+  margin: 20px 5px 0;
+}
