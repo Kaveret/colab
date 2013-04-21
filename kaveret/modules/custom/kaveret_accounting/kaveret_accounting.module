@@ -128,6 +128,7 @@ function kaveret_accounting_mcapicurrencies_default_alter(&$currencies) {
  */
 function kaveret_accounting_user_insert(&$edit, $account, $category) {
   kaveret_accounting_balances_member($account->uid ,'bz' ,'auto' ,300 ,0);
+
 }
 
 /**
@@ -152,6 +153,10 @@ function kaveret_accounting_balances_member($uid, $currcode, $type, $balance, $g
     'state' => TRANSACTION_STATE_FINISHED,
     'currcode' => $currcode
   );
+
+
+  $reservoir_account = user_load_by_name('Federal Reverse');
+  $currency->reservoir = $reservoir_account->uid;
 
   if ($gross_income) {
     $gross_expenditure = $gross_income - $balance;
