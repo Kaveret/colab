@@ -17,6 +17,8 @@ function kaveret_migrate_migrate_api() {
       'KaveretTransaction' => array('class_name' => 'KaveretTransaction'),
       'KaveretProducts' => array('class_name' => 'KaveretProducts'),
       'KaveretPageNodes' => array('class_name' => 'KaveretPageNodes'),
+      'KaveretMenu' => array('class_name' => 'KaveretMenu'),
+      'KaveretMenuLinks' => array('class_name' => 'KaveretMenuLinks'),
     ),
   );
 
