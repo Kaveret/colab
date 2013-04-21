@@ -35,10 +35,16 @@ function kaveret_accounting_beez_info_content_type_render($subtype, $conf, $args
 
   $totals = transaction_totals($account->uid, 'bz');
   $items = array();
-  $items[] = t('<strong>BZ</strong> @balance', array('@balance' => $totals->balance));
-  $items[] = t('Income: <strong>@gross_in</strong>', array('@gross_in' => $totals->gross_in));
-  $items[] = t('Transactions: <strong>@transactions</strong>', array('@transactions' => $totals->count));
-  $items[] = t('Volume: <strong>@volume</strong>', array('@volume' => $totals->volume));
+
+  $variables = array(
+    'currcode' => 'bz',
+    'quantity' => $totals->balance,
+  );
+  $items[] = theme('worth_item', $variables);
+  // BZ has no fractions, therefore we display the amounts as integers.
+  $items[] = t('Income: <strong>@gross_in</strong>', array('@gross_in' => round($totals->gross_in)));
+  $items[] = t('Transactions: <strong>@transactions</strong>', array('@transactions' => round($totals->count)));
+  $items[] = t('Volume: <strong>@volume</strong>', array('@volume' => round($totals->volume)));
 
   $info = theme('item_list', array('items' => $items));
   $graph = $totals->count ? theme('balance_history', $variables) : '';

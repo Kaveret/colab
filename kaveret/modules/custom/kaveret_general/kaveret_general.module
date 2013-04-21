@@ -29,13 +29,17 @@ function kaveret_general_get_breadcrumbs() {
 
     case 'my-wallet':
       $items[] = "<span dir=\"$dir\">" . l(t('Resource Exchange'), '') . '</span>';
-      $items[] = "<span dir=\"$dir\">" . t('My Wallet') . '</span>';
+      $items[] = "<span dir=\"$dir\">" . t('My Treasure') . '</span>';
       break;
 
     case 'directory':
       $items[] = "<span dir=\"$dir\">" . l(t('Resource Exchange'), '') . '</span>';
       $items[] = "<span dir=\"$dir\">" . l(t('Marketplace'), '') . '</span>';
       $items[] = "<span dir=\"$dir\">" . t('Full Directory List') . '</span>';
+      break;
+
+    default:
+      $items[] = "<span dir=\"$dir\">" . drupal_get_title() . '</span>';
       break;
   }
 
@@ -52,4 +56,33 @@ function kaveret_general_form_user_login_block_alter(&$form, &$form_state){
   }
   $items[] = l(t('Forgot your password?'), 'user/password', array('attributes' => array('title' => t('Request new password via e-mail.'))));
   $form['links'] = array('#markup' => theme('item_list', array('items' => $items)));
+}
+
+/**
+ * Implements hook_node_update().
+ *
+ * Send mail when status is changed (Offer/Request).
+ */
+function kaveret_general_node_update($node) {
+  if (!in_array($node->type, array('offer', 'request'))) {
+    return;
+  }
+
+  $wrapper = entity_metadata_wrapper('node', $node);
+  $wrapper_original = entity_metadata_wrapper('node', $node->original);
+
+  if ($wrapper->field_status->value(array('identifier' => TRUE)) == $wrapper_original->field_status->value(array('identifier' => TRUE))) {
+    return;
+  }
+
+  $argumemts = array(
+    '@original-status' => $wrapper_original->field_status->label(),
+    '@status' => $wrapper->field_status->label(),
+  );
+
+  $message = message_create('status_changed_in_offer_or_request', array('arguments' => $argumemts, 'uid' => $node->uid));
+  $wrapper = entity_metadata_wrapper('message', $message);
+  $wrapper->field_node->set($node);
+
+  message_notify_send_message($message);
 }

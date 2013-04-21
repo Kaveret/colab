@@ -1,5 +1,5 @@
 Unique ID,Payer,Payee,Type,Creator,Created,Purpose,Currency,Amount
-transaction1,user1,user2,1stparty,user1,1363851877,"Two golden fish",bz,12.6
+transaction1,user1,user2,1stparty,user1,1363851877,"Two golden fish",bz,12
 transaction2,user1,user3,1stparty,user3,1363938277,"Goat cheese",bz,33
 transaction3,user2,user3,1stparty,user2,1364024677,"Baby sitting",bz,54
 transaction4,user3,user1,1stparty,user3,1364111077,"Present",bz,120
