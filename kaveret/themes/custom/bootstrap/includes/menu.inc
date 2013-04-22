@@ -63,7 +63,15 @@ function bootstrap_menu_link(array $variables) {
   if ($element['#below']) {
     // Ad our own wrapper
     unset($element['#below']['#theme_wrappers']);
-    $sub_menu = '<ul class="dropdown-menu">' . drupal_render($element['#below']) . '</ul>';
+
+    // Check if this element is nested within another
+    if ((!empty($element['#original_link']['depth'])) && ($element['#original_link']['depth'] > 1)) {
+     $sub_menu = '<ul>' . drupal_render($element['#below']) . '</ul>';
+    }
+    else {
+     $sub_menu = '<ul class="dropdown-menu">' . drupal_render($element['#below']) . '</ul>';
+    }
+
     $element['#localized_options']['attributes']['class'][] = 'dropdown-toggle';
     $element['#localized_options']['attributes']['data-toggle'] = 'dropdown';
 
