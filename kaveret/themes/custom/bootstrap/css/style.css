@@ -148,6 +148,10 @@
     left: -20px;
   }
 }
+.dropdown-submenu ul {
+  list-style: none;
+}
+
 #navbar .nav {
   float: right;
 }
