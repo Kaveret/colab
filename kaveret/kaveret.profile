@@ -691,6 +691,30 @@ function kaveret_menus_setup() {
   menu_link_save($item);
 
   $item = array(
+    'link_title' => 'Favorites',
+    'link_path' => 'user',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 15,
+    'language' => 'en',
+  );
+  $mlid_favorites = menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'profile',
+    'link_path' => 'user',
+    'menu_name' => 'space-links',
+    'plid' => $mlid_favorites,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 20,
+    'language' => 'en',
+  );
+   menu_link_save($item);
+
+  $item = array(
     'link_title' => 'Profile',
     'link_path' => 'user',
     'menu_name' => 'space-links',
