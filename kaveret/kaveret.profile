@@ -513,6 +513,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 10,
     'language' => 'he',
   );
@@ -524,6 +525,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 20,
     'language' => 'he',
   );
@@ -535,6 +537,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 30,
     'language' => 'he',
   );
@@ -546,6 +549,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 40,
     'language' => 'he',
   );
@@ -566,6 +570,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 10,
     'language' => 'he',
   );
@@ -577,6 +582,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 20,
     'language' => 'he',
   );
@@ -588,6 +594,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 30,
     'language' => 'he',
   );
@@ -608,6 +615,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 40,
     'language' => 'en',
   );
@@ -618,6 +626,8 @@ function kaveret_menus_setup() {
     'link_path' => 'user',
     'menu_name' => 'space-links',
     'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 30,
     'language' => 'en',
   );
@@ -628,6 +638,8 @@ function kaveret_menus_setup() {
     'link_path' => 'node/add/request',
     'menu_name' => 'space-links',
     'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 20,
     'language' => 'en',
   );
@@ -638,6 +650,8 @@ function kaveret_menus_setup() {
     'link_path' => 'node/add/offer',
     'menu_name' => 'space-links',
     'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 10,
     'language' => 'en',
   );
@@ -658,6 +672,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 30,
     'language' => 'en',
   );
@@ -669,6 +684,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 20,
     'language' => 'en',
   );
@@ -680,6 +696,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 10,
     'language' => 'en',
   );
