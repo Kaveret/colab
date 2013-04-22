@@ -723,3 +723,11 @@ html.js input.form-autocomplete {
   padding-left: 10px;
   border-left: 2px solid #999;
 }
+
+.pane-offers-requests-panel-pane-1 .field-items {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.pane-offers-requests-panel-pane-1 .field-items h3 {
+  line-height: 20px;
+}
