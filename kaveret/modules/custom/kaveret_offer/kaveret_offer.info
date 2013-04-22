@@ -95,6 +95,7 @@ features[variable][] = node_preview_request
 features[variable][] = node_submitted_offer
 features[variable][] = node_submitted_request
 features[views_view][] = directory
+features[views_view][] = directory_my_content
 features[views_view][] = my_content
 features[views_view][] = offers
 features[views_view][] = offers_requests

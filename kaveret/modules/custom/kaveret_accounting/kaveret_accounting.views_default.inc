@@ -180,7 +180,7 @@ function kaveret_accounting_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '6';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'table';
-  /* Field: Field: Reward */
+  /* Field: Field: Worth */
   $handler->display->display_options['fields']['worth']['id'] = 'worth';
   $handler->display->display_options['fields']['worth']['table'] = 'field_data_worth';
   $handler->display->display_options['fields']['worth']['field'] = 'worth';

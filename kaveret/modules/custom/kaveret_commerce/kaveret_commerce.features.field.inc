@@ -375,78 +375,71 @@ function kaveret_commerce_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-product-field_product'.
-  $fields['node-product-field_product'] = array(
+  // Exported field: 'node-product-field_category'.
+  $fields['node-product-field_category'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_product',
+      'field_name' => 'field_category',
       'foreign keys' => array(
-        'product_id' => array(
+        'tid' => array(
           'columns' => array(
-            'product_id' => 'product_id',
+            'tid' => 'tid',
           ),
-          'table' => 'commerce_product',
+          'table' => 'taxonomy_term_data',
         ),
       ),
       'indexes' => array(
-        'product_id' => array(
-          0 => 'product_id',
+        'tid' => array(
+          0 => 'tid',
         ),
       ),
       'locked' => '0',
-      'module' => 'commerce_product_reference',
+      'module' => 'taxonomy',
       'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'offer_categories',
+            'parent' => '0',
+          ),
+        ),
         'entity_translation_sync' => FALSE,
       ),
       'translatable' => '0',
-      'type' => 'commerce_product_reference',
+      'type' => 'taxonomy_term_reference',
     ),
     'field_instance' => array(
       'bundle' => 'product',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'tid' => '14',
+        ),
+      ),
       'deleted' => '0',
       'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'commerce_cart',
-          'settings' => array(
-            'combine' => TRUE,
-            'default_quantity' => 1,
-            'line_item_type' => 'product',
-            'show_quantity' => FALSE,
-            'show_single_product_attributes' => FALSE,
-          ),
-          'type' => 'commerce_cart_add_to_cart_form',
-          'weight' => '4',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 8,
         ),
         'teaser' => array(
-          'label' => 'hidden',
-          'module' => 'commerce_cart',
-          'settings' => array(
-            'combine' => TRUE,
-            'default_quantity' => 1,
-            'line_item_type' => 'product',
-            'show_quantity' => FALSE,
-            'show_single_product_attributes' => FALSE,
-          ),
-          'type' => 'commerce_cart_add_to_cart_form',
-          'weight' => '4',
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
-      'field_name' => 'field_product',
-      'label' => 'Product',
+      'field_name' => 'field_category',
+      'label' => 'Category',
       'required' => 1,
       'settings' => array(
         'entity_translation_sync' => FALSE,
-        'field_injection' => 1,
-        'referenceable_types' => array(
-          'product' => 'product',
-        ),
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -454,7 +447,7 @@ function kaveret_commerce_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '-3',
+        'weight' => '-2',
       ),
     ),
   );
@@ -540,9 +533,9 @@ function kaveret_commerce_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
+  t('Category');
   t('Image');
   t('Price');
-  t('Product');
   t('Title');
 
   return $fields;

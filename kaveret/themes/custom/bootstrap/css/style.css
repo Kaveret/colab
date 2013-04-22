@@ -718,3 +718,8 @@ html.js input.form-autocomplete {
 .pane-offers-requests-panel-pane-1 article.node-teaser {
   margin: 20px 5px 0;
 }
+
+.pane-my-content-panel-pane-my-content {
+  padding-left: 10px;
+  border-left: 2px solid #999;
+}

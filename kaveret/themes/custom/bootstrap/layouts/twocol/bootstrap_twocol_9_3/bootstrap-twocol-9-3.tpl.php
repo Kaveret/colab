@@ -1,4 +1,4 @@
-<div class="panel-display row-fluid bootstrap-twocol-9-3" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
+<div class="panel-display row bootstrap-twocol-9-3" <?php if (!empty($css_id)) { print "id=\"$css_id\""; } ?>>
   <div class="panel-panel span9">
     <?php print $content['left']; ?>
   </div>

@@ -231,12 +231,17 @@ function kaveret_offer_default_page_manager_pages() {
     'relationships' => array(),
   );
   $display = new panels_display();
-  $display->layout = 'onecol';
+  $display->layout = 'bootstrap_onecol_9';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
       'middle' => NULL,
+      'left' => NULL,
+      'right' => NULL,
+    ),
+    'left' => array(
+      'style' => '-1',
     ),
   );
   $display->cache = array();
@@ -262,7 +267,7 @@ function kaveret_offer_default_page_manager_pages() {
     $display->content['new-2'] = $pane;
     $display->panels['middle'][0] = 'new-2';
   $display->hide_title = PANELS_TITLE_FIXED;
-  $display->title_pane = 'new-2';
+  $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['full_directory_list'] = $page;
