@@ -87,20 +87,4 @@ function kaveret_general_node_update($node) {
   message_notify_send_message($message);
 }
 
-/**
- * Implements hook_form_alter().
- *
- * Set default value for ckeditor to basic.
- */
-function kaveret_general_form_alter(&$form, &$form_state) {
-  $form['appearance']['toolbar'] = array(
-    '#type' => 'textarea',
-    '#title' => t('Toolbar'),
-    '#default_value' => 'Basic',
-    '#description' => t('Load sample toolbar: !toolbars', array("!toolbars" => '<a href="#" id="cke_toolbar_DrupalBasic" class="cke_load_toolbar">' . t('Basic') . '</a> | <a href="#" id="cke_toolbar_DrupalAdvanced" class="cke_load_toolbar">' . t('Advanced') . '</a> | <a href="#" id="cke_toolbar_DrupalFull" class="cke_load_toolbar">' . t('Full') . '</a>')),
-    '#wysiwyg' => FALSE,
-    '#rows' => 15
-  );
-}
-
 
