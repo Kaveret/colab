@@ -10,7 +10,7 @@
 function kaveret_offer_ckeditor_profile_defaults() {
   $data = array(
     'Advanced' => array(
-      'name' => 'kaveret_profile',
+      'name' => 'Advanced',
       'settings' => array(
         'ss' => '2',
         'default' => 't',
@@ -39,7 +39,7 @@ function kaveret_offer_ckeditor_profile_defaults() {
             'pre_indent' => 0,
           ),
         ),
-        'css_mode' => 'theme',
+        'css_mode' => 'none',
         'css_path' => '',
         'css_style' => 'theme',
         'styles_path' => '',
@@ -70,13 +70,17 @@ function kaveret_offer_ckeditor_profile_defaults() {
       ),
       'input_formats' => array(
         'filtered_html' => 'Filtered HTML',
-        'full_html' => 'Full HTML',
       ),
     ),
-  );
-  $data = array(
+    'CKEditor Global Profile' => array(
+      'name' => 'CKEditor Global Profile',
+      'settings' => array(
+        'ckeditor_path' => '%l/ckeditor',
+      ),
+      'input_formats' => array(),
+    ),
     'Full' => array(
-      'name' => 'kaveret_profile',
+      'name' => 'Full',
       'settings' => array(
         'ss' => '2',
         'default' => 't',
@@ -135,7 +139,6 @@ function kaveret_offer_ckeditor_profile_defaults() {
         ),
       ),
       'input_formats' => array(
-        'filtered_html' => 'Filtered HTML',
         'full_html' => 'Full HTML',
       ),
     ),
