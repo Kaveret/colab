@@ -517,6 +517,31 @@ function kaveret_menus_setup() {
     'weight' => 30,
     'language' => 'en',
   );
+  $mlid_manage_categories = menu_link_save($item);
+
+  // Subs of Manage Categories
+  $item = array(
+    'link_title' => 'Closed List for Offer/Request Topics',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_manage_categories,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 10,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Open List for Offer/Request Topics',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_manage_categories,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 15,
+    'language' => 'en',
+  );
   menu_link_save($item);
 
  // Community Content
@@ -532,7 +557,7 @@ function kaveret_menus_setup() {
   );
   $mlid_community_content = menu_link_save($item);
 
-  // subs of Community Content
+  // Subs of Community Content
   $item = array(
     'link_title' => 'All Offers',
     'link_path' => 'offers',
