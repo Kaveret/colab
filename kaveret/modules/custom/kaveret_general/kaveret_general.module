@@ -86,3 +86,10 @@ function kaveret_general_node_update($node) {
 
   message_notify_send_message($message);
 }
+
+/*
+function kaveret_general_preprocess_link(&$variables) {
+  dpm($variables['text']);
+
+}
+*/

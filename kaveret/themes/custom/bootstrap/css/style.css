@@ -148,6 +148,10 @@
     left: -20px;
   }
 }
+.dropdown-submenu ul {
+  list-style: none;
+}
+
 #navbar .nav {
   float: right;
 }
@@ -503,6 +507,23 @@ div.password-suggestions ul {
 e.g. multipage*/
 .form-actions {
   clear: both;
+}
+
+.dropdown-submenu > a:after {
+  display: block;
+  float: right;
+  width: 0;
+  height: 0;
+  margin: 5px 10px 0px;
+  border-color: transparent;
+  border-left-color: #cccccc;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  content: " ";
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .region-sidebar-second a {
