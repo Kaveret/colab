@@ -585,7 +585,8 @@ article.node-teaser .field-name-body {
 }
 
 .page-my-wallet .control-group {
-  margin-bottom: 15px;
+  clear: both;
+  margin-bottom: 0px;
 }
 .page-my-wallet #my-wallet-panel {
   margin-top: 10px;
@@ -600,6 +601,9 @@ article.node-teaser .field-name-body {
   -khtml-border-radius: 10px 10px 0 0;
   border-radius: 10px 10px 0 0;
   padding: 0 20px;
+}
+.page-my-wallet #my-wallet-panel .panel-pane .field-type-worth-field .control-label, .page-my-wallet #my-wallet-panel .panel-pane .form-type-user-chooser-few .control-label, .page-my-wallet #my-wallet-panel .panel-pane .form-type-textfield .control-label {
+  margin-top: 10px;
 }
 .page-my-wallet #my-wallet-panel .panel-pane .pane-title {
   margin: 0;
@@ -625,6 +629,7 @@ article.node-teaser .field-name-body {
   display: inline-block;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .controls {
+  margin-top: 5px;
   float: right;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form input, .page-my-wallet #my-wallet-panel #mcapi-forms-form select {
@@ -660,13 +665,11 @@ article.node-teaser .field-name-body {
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction input {
   vertical-align: middle;
   margin: 4px 5px;
-  float: right;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .worth-widget {
   height: 30px;
   line-height: 30px;
   float: right;
-  margin-top: -30px;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .worth-widget .code {
   margin-right: 3px;
@@ -675,6 +678,7 @@ article.node-teaser .field-name-body {
   margin: 0;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .control-label {
+  float: left;
   width: 88px;
   text-align: right;
   padding-right: 10px;
@@ -685,7 +689,7 @@ article.node-teaser .field-name-body {
   text-align: right;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .actions .btn.form-submit {
-  margin: 0;
+  margin: 7px 0 0 0;
 }
 
 .pane-beez-info ul {

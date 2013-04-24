@@ -173,16 +173,22 @@ div.contextual-links-wrapper {
   float: right;
 }
 
-.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-type-radios {
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .control-label {
   float: right;
 }
+
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .controls {
   float: left;
 }
 
-.page-my-wallet #my-wallet-panel #mcapi-forms-form .actions {
-  text-align: left;
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-type-radios {
+  float: right;
 }
+
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .actions {
+ margin-right: 215px;
+}
+
 .page-my-wallet #my-wallet-panel .form-autocomplete {
   background-position: 8px 8px;
 }
