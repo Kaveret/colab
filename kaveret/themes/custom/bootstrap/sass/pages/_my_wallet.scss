@@ -1,5 +1,9 @@
 .page-my-wallet {
 
+  .control-group {
+    margin-bottom: 15px;
+  }
+
   #my-wallet-panel {
     margin-top: 10px;
 
@@ -56,7 +60,7 @@
       }
 
       .form-item-direction {
-        height: 30px;
+        height: 40px;
         margin-bottom: 0;
 
         .form-required {
@@ -91,7 +95,7 @@
         height: 30px;
         line-height: 30px;
         float: right; // LTR
-        margin-top: -5px;
+        margin-top: -30px;
 
         .code {
           margin-right: 3px; // LTR

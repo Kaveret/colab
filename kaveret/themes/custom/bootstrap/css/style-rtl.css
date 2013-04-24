@@ -108,69 +108,7 @@ div.contextual-links-wrapper {
   margin-left: 0;
 }
 
-/*
-* My wallet form
-*/
 
-#mcapi-forms-form input,
-#mcapi-forms-form .controls,
-#mcapi-forms-form .worth-widget,
-.page-my-wallet #my-wallet-panel #mcapi-forms-form .controls {
-  float: left;
-}
-
-#mcapi-forms-form label,
-#mcapi-forms-form .form-type-radio,
-#mcapi-forms-form .controls,
-.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction label,
-.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .controls {
-  float: right;
-}
-
-#mcapi-forms-form .control-label {
-  text-align: right;
-  float: right;
-}
-
-#mcapi-forms-form .actions {
-  text-align: left;
-}
-
-#mcapi-forms-form .option {
-  margin-left: 10px;
-}
-
-.page-my-wallet #my-wallet-panel #mcapi-forms-form .worth-widget .code {
-  margin-right: 0;
-  margin-left: 7px;
-}
-
-.page-my-wallet #my-wallet-panel #mcapi-forms-form .actions {
-  clear: both;
-  text-align: left;
-  padding-top: 10px;
-}
-
-
-.control-group.form-type-user-chooser-few.form-item-secondperson.form-item {
-  float: left;
-}
-
-.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .option {
-  margin-right:20px;
-}
-
-html.js input.form-autocomplete {
-  background-position: 5px 8px;
-}
-.panel-2col-stacked .panel-col-first{
-  float: right;
-}
-
-.form-type-user-chooser-few .control-label {
-  width: 85px !important;
-  margin-left: 29px;
-}
 
 /* navigation */
 #navbar .nav {
@@ -229,5 +167,23 @@ html.js input.form-autocomplete {
 
 .dropdown-submenu > a:after {
   float: left;
+}
+
+.panel-2col-stacked .panel-col-first {
+  float: right;
+}
+
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .form-type-radios {
+  float: right;
+}
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .controls {
+  float: left;
+}
+
+.page-my-wallet #my-wallet-panel #mcapi-forms-form .actions {
+  text-align: left;
+}
+.page-my-wallet #my-wallet-panel .form-autocomplete {
+  background-position: 8px 8px;
 }
 
