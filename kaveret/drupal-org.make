@@ -14,6 +14,9 @@ projects[admin_views][version] = "1.1"
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.3"
 
+projects[ckeditor][subdir] = "contrib"
+projects[ckeditor][version] = "1.13"
+
 projects[commerce][subdir] = "contrib"
 projects[commerce][version] = "1.5"
 
@@ -160,4 +163,8 @@ projects[views_bulk_operations][version] = "3.1"
 libraries[jquery.cycle][type] = "libraries"
 libraries[jquery.cycle][download][type] = "git"
 libraries[jquery.cycle][download][url] = "https://github.com/malsup/cycle.git"
+
+libraries[ckeditor][type] = "libraries"
+libraries[ckeditor][download][type] = "git"
+libraries[ckeditor][download][url] = "https://github.com/ckeditor/ckeditor-releases.git"
 

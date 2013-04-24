@@ -166,7 +166,7 @@ function kaveret_accounting_mcapicurrencies_default_alter(&$currencies) {
       ),
     ),
   );
-
+  
   // Override the other default currencies.
   $currencies = array($mcapicurrency->currcode => $mcapicurrency);
   return $currencies;
