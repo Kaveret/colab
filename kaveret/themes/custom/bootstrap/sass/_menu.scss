@@ -93,3 +93,43 @@
     list-style: none;
   }
 }
+
+.pane-right-sidebar-menu {
+  padding-left: 10px; //LTR
+  border-left: 2px solid #ddd; //LTR
+
+  h3 {
+    line-height: 30px;
+    margin: 0;
+    color: #ab1516;
+    font-size: 16px;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+  }
+
+  .icon-plus {
+    background: url("../images/plus_img.png");
+    margin-right: 5px;
+  }
+
+  .right_sidebar_menu-link {
+    color: #0088cc;
+  }
+
+  .right_sidebar_menu-more {
+    color: #0088cc;
+  }
+
+  .right_sidebar_menu-no_result {
+    font-size: 13px;
+    color: #999999;
+  }
+
+  .requests {
+    padding-top: 15px;
+  }
+
+}
