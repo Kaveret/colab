@@ -89,6 +89,30 @@ function kaveret_offer_default_message_type() {
     },
     "rdf_mapping" : []
   }');
+  $items['status_changed_in_offer_or_request'] = entity_import('message_type', '{
+    "name" : "status_changed_in_offer_or_request",
+    "description" : "Status changed in offer or request",
+    "argument_keys" : [],
+    "argument" : [],
+    "category" : "message_type",
+    "data" : { "purge" : { "override" : 0, "enabled" : 0, "quota" : "", "days" : "" } },
+    "language" : "en",
+    "arguments" : null,
+    "message_text" : { "en" : [
+        {
+          "value" : "Status has changed in your \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E[message:field-node]\\u003C\\/a\\u003E",
+          "format" : "full_html",
+          "safe_value" : "\\u003Cp\\u003EStatus has changed in your \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E[message:field-node]\\u003C\\/a\\u003E\\u003C\\/p\\u003E\\n"
+        },
+        {
+          "value" : "Hello [message:user],\\r\\n\\r\\nStatus has changed in your \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E[message:field-node]\\u003C\\/a\\u003E from \\u003Cem\\u003E@original-status\\u003C\\/em\\u003E to \\u003Cem\\u003E@status\\u003C\\/em\\u003E\\r\\n\\r\\nThank you,\\r\\nHaKaveret",
+          "format" : "full_html",
+          "safe_value" : "\\u003Cp\\u003EHello [message:user],\\u003C\\/p\\u003E\\n\\u003Cp\\u003EStatus has changed in your \\u003Ca href=\\u0022[message:field-node:url]\\u0022\\u003E[message:field-node]\\u003C\\/a\\u003E from \\u003Cem\\u003E@original-status\\u003C\\/em\\u003E to \\u003Cem\\u003E@status\\u003C\\/em\\u003E\\u003C\\/p\\u003E\\n\\u003Cp\\u003EThank you,\\u003Cbr \\/\\u003E\\nHaKaveret\\u003C\\/p\\u003E\\n"
+        }
+      ]
+    },
+    "rdf_mapping" : []
+  }');
   return $items;
 }
 

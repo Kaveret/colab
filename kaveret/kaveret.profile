@@ -143,17 +143,17 @@ function kaveret_setup_blocks() {
   $blocks = array();
 
   $blocks[] = array(
-    'module' => 'views',
-    'delta' => 'sig_blocks-my_sig_needed',
-    'theme' => $default_theme,
-    'status' => 1,
-    'weight' => 0,
-    'region' => 'content',
-    'custom' => 0,
-    'visibility' => 0,
-    'pages' => '',
-    'title' => '',
-    'cache' => DRUPAL_NO_CACHE,
+     'module' => 'views',
+     'delta' => 'sig_blocks-my_sig_needed',
+     'theme' => $default_theme,
+     'status' => 1,
+     'weight' => 0,
+     'region' => 'content',
+     'custom' => 0,
+     'visibility' => 0,
+     'pages' => '',
+     'title' => '',
+     'cache' => DRUPAL_NO_CACHE,
   );
 
   $blocks[] = array(
@@ -300,10 +300,16 @@ function kaveret_set_variables() {
     'entity_translation_entity_types' => array(
       'node' => 'node',
       'taxonomy_term' => 'taxonomy_term',
+      'commerce_product' => 'commerce_product',
     ),
 
     // MCAPI settings.
     'user_chooser_threshhold' => 1,
+    'mcapi_signatures_1stparty' => array(
+      'participants' => TRUE,
+      'countersignatories' => '',
+      'notify' => TRUE,
+    ),
   );
 
   foreach ($variables as $key => $value) {
@@ -481,152 +487,6 @@ function kaveret_menus_setup() {
   );
   menu_link_save($item);
 
-
-
-  // Create the footer links menu.
-  $menu = array(
-    'menu_name' => 'side-menu',
-    'title' => 'Side menu',
-    'description' => 'Side pop-up menu',
-    'i18n_mode' => I18N_MODE_MULTIPLE,
-  );
-  menu_save($menu);
-
-  // Add main menu links.
-  $item = array(
-    'link_title' => 'Resource Exchange',
-    'link_path' => '<front>',
-    'menu_name' => 'side-menu',
-    'expanded' => TRUE,
-    'options' => array('attributes' => array('class' => array('main', 'resources'))),
-    'weight' => 10,
-    'language' => 'en',
-
-  );
-  $mlid = menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'My Wallet',
-    'link_path' => 'my-wallet',
-    'menu_name' => 'side-menu',
-    'plid' => $mlid,
-    'customized' => TRUE,
-    'language' => 'en',
-  );
-  menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'Directory',
-    'link_path' => 'directory',
-    'menu_name' => 'side-menu',
-    'plid' => $mlid,
-    'customized' => TRUE,
-    'language' => 'en',
-  );
-  menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'Dreams Accelerator',
-    'link_path' => '<front>',
-    'menu_name' => 'side-menu',
-    'expanded' => TRUE,
-    'options' => array('attributes' => array('class' => array('main', 'dreams'))),
-    'weight' => 20,
-    'language' => 'en',
-  );
-  menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'Learning center',
-    'link_path' => '<front>',
-    'menu_name' => 'side-menu',
-    'expanded' => TRUE,
-    'options' => array('attributes' => array('class' => array('main', 'learning-center'))),
-    'weight' => 30,
-    'language' => 'en',
-  );
-  menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'Groups',
-    'link_path' => '<front>',
-    'menu_name' => 'side-menu',
-    'expanded' => TRUE,
-    'options' => array('attributes' => array('class' => array('main', 'communities'))),
-    'weight' => 40,
-    'language' => 'en',
-  );
-  menu_link_save($item);
-
-  // Hebrew translation.
-  $item = array(
-    'link_title' => 'החלפת משאבים',
-    'link_path' => '<front>',
-    'menu_name' => 'side-menu',
-    'expanded' => TRUE,
-    'options' => array('attributes' => array('class' => array('main', 'resources'))),
-    'weight' => 10,
-    'language' => 'he',
-
-  );
-  $mlid = menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'תקייה',
-    'link_path' => 'directory',
-    'menu_name' => 'side-menu',
-    'plid' => $mlid,
-    'customized' => TRUE,
-    'weight' => 20,
-    'language' => 'he',
-  );
-  menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'החשבון שלי',
-    'link_path' => 'my-wallet',
-    'menu_name' => 'side-menu',
-    'plid' => $mlid,
-    'customized' => TRUE,
-    'weight' => 30,
-    'language' => 'he',
-  );
-  menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'מאיץ החלומות',
-    'link_path' => '<front>',
-    'menu_name' => 'side-menu',
-    'expanded' => TRUE,
-    'options' => array('attributes' => array('class' => array('main', 'dreams'))),
-    'weight' => 40,
-    'language' => 'he',
-  );
-  menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'מרכז המידע',
-    'link_path' => '<front>',
-    'menu_name' => 'side-menu',
-    'expanded' => TRUE,
-    'options' => array('attributes' => array('class' => array('main', 'dreams'))),
-    'weight' => 50,
-    'language' => 'he',
-  );
-  menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'קבוצות',
-    'link_path' => '<front>',
-    'menu_name' => 'side-menu',
-    'expanded' => TRUE,
-    'options' => array('attributes' => array('class' => array('main', 'dreams'))),
-    'weight' => 60,
-    'language' => 'he',
-  );
-  menu_link_save($item);
-
-
   // Individual/ Community space menu.
   $menu = array(
     'menu_name' => 'space-menu',
@@ -636,8 +496,7 @@ function kaveret_menus_setup() {
   );
   menu_save($menu);
 
-// Hebrew translation.
-
+  // Community Space main hebrew
   $item = array(
     'link_title' => 'מרחב קהילתי',
     'link_path' => '<front>',
@@ -648,12 +507,133 @@ function kaveret_menus_setup() {
   $mlid = menu_link_save($item);
 
   $item = array(
-    'link_title' => 'הצעות',
-    'link_path' => 'node/add/offer',
+    'link_title' => 'ארגן קהילות',
+    'link_path' => '<front>',
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 30,
+    'language' => 'he',
+  );
+  $mlid_manage_categories = menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'סגור רשימת נושאים לבקשות והצעות',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_manage_categories,
+    'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 10,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'פתח רשימת נושאים לבקשות והצעות',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_manage_categories,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 15,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'תוכן קהילה',
+    'link_path' => 'node/add/request',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 20,
+    'language' => 'he',
+  );
+  $mlid_community_content = menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'כל ההצעות',
+    'link_path' => 'offers',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_community_content,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 10,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'כל הבקשות',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_community_content,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 15,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'כל המשתמשים',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_community_content,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 20,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'כל הספקים',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_community_content,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 25,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'כל העברות',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_community_content,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 30,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'צור',
+    'link_path' => 'my-wallet',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 10,
+    'language' => 'he',
+  );
+  $mlid_create = menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'הצעות',
+    'link_path' => 'node/add/offer',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_create,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 15,
     'language' => 'he',
   );
   menu_link_save($item);
@@ -662,8 +642,9 @@ function kaveret_menus_setup() {
     'link_title' => 'בקשות',
     'link_path' => 'node/add/request',
     'menu_name' => 'space-links',
-    'plid' => $mlid,
+    'plid' =>  $mlid_create,
     'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 20,
     'language' => 'he',
   );
@@ -673,9 +654,10 @@ function kaveret_menus_setup() {
     'link_title' => 'משתמש',
     'link_path' => 'user',
     'menu_name' => 'space-links',
-    'plid' => $mlid,
+    'plid' =>  $mlid_create,
     'customized' => TRUE,
-    'weight' => 30,
+    'expanded' => TRUE,
+    'weight' => 25,
     'language' => 'he',
   );
   menu_link_save($item);
@@ -684,9 +666,34 @@ function kaveret_menus_setup() {
     'link_title' => 'העברת כספים',
     'link_path' => 'my-wallet',
     'menu_name' => 'space-links',
-    'plid' => $mlid,
+    'plid' =>  $mlid_create,
     'customized' => TRUE,
-    'weight' => 40,
+    'expanded' => TRUE,
+    'weight' => 30,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'מטבע',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_create,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 30,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'פורום העברת כספים',
+    'link_path' => 'my-wallet',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_create,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 35,
     'language' => 'he',
   );
   menu_link_save($item);
@@ -701,23 +708,13 @@ function kaveret_menus_setup() {
   $mlid = menu_link_save($item);
 
   $item = array(
-    'link_title' => 'פרופיל',
-    'link_path' => 'user',
+    'link_title' => 'עזרה',
+    'link_path' => '<front>',
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
-    'weight' => 10,
-    'language' => 'he',
-  );
-  menu_link_save($item);
-
-  $item = array(
-    'link_title' => 'החשבון שלי',
-    'link_path' => 'my-wallet',
-    'menu_name' => 'space-links',
-    'plid' => $mlid,
-    'customized' => TRUE,
-    'weight' => 20,
+    'expanded' => TRUE,
+    'weight' => 60,
     'language' => 'he',
   );
   menu_link_save($item);
@@ -728,11 +725,61 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 50,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'הגדרות פרטיות',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 40,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'שינוי סיסמא',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 30,
     'language' => 'he',
   );
   menu_link_save($item);
 
+  $item = array(
+    'link_title' => 'מצב חשבון',
+    'link_path' => 'my-wallet',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 20,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'פרופיל',
+    'link_path' => 'user',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 10,
+    'language' => 'he',
+  );
+  menu_link_save($item);
+
+  // Community Space main
   $item = array(
     'link_title' => 'Community Space',
     'link_path' => '<front>',
@@ -742,23 +789,140 @@ function kaveret_menus_setup() {
   );
   $mlid = menu_link_save($item);
 
+  // Manage Categories
   $item = array(
-    'link_title' => 'Fund Transfers',
-    'link_path' => 'my-wallet',
+    'link_title' => 'Manage Categories',
+    'link_path' => '<front>',
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
-    'weight' => 40,
+    'expanded' => TRUE,
+    'weight' => 30,
+    'language' => 'en',
+  );
+  $mlid_manage_categories = menu_link_save($item);
+
+  // Subs of Manage Categories
+  $item = array(
+    'link_title' => 'Closed List for Offer/Request Topics',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_manage_categories,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 10,
     'language' => 'en',
   );
   menu_link_save($item);
 
   $item = array(
-    'link_title' => 'User',
-    'link_path' => 'user',
+    'link_title' => 'Open List for Offer/Request Topics',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_manage_categories,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 15,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+ // Community Content
+  $item = array(
+    'link_title' => 'Community Content',
+    'link_path' => 'node/add/request',
     'menu_name' => 'space-links',
     'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 20,
+    'language' => 'en',
+  );
+  $mlid_community_content = menu_link_save($item);
+
+  // Subs of Community Content
+  $item = array(
+    'link_title' => 'All Offers',
+    'link_path' => 'offers',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_community_content,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 10,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'All Requests',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_community_content,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 15,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'All Users',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_community_content,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 20,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'All Suppliers',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_community_content,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 25,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'All Transfers',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_community_content,
+    'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 30,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+ // Create
+  $item = array(
+    'link_title' => 'Create',
+    'link_path' => 'my-wallet',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 10,
+    'language' => 'en',
+  );
+  $mlid_create = menu_link_save($item);
+
+  // Subs of Create
+  $item = array(
+    'link_title' => 'Offer',
+    'link_path' => 'node/add/offer',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_create,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 15,
     'language' => 'en',
   );
   menu_link_save($item);
@@ -767,22 +931,63 @@ function kaveret_menus_setup() {
     'link_title' => 'Request',
     'link_path' => 'node/add/request',
     'menu_name' => 'space-links',
-    'plid' => $mlid,
+    'plid' =>  $mlid_create,
+    'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 20,
     'language' => 'en',
   );
   menu_link_save($item);
 
   $item = array(
-    'link_title' => 'Offer',
-    'link_path' => 'node/add/offer',
+    'link_title' => 'User',
+    'link_path' => 'user',
     'menu_name' => 'space-links',
-    'plid' => $mlid,
-    'weight' => 10,
+    'plid' =>  $mlid_create,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 25,
     'language' => 'en',
   );
   menu_link_save($item);
 
+  $item = array(
+    'link_title' => 'Fund Transfer',
+    'link_path' => 'my-wallet',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_create,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 30,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Coin',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_create,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 30,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Fund Transfer Form',
+    'link_path' => 'my-wallet',
+    'menu_name' => 'space-links',
+    'plid' =>  $mlid_create,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 35,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+  // Individual Space main
     $item = array(
     'link_title' => 'Individual Space',
     'link_path' => '<front>',
@@ -793,11 +998,48 @@ function kaveret_menus_setup() {
   $mlid = menu_link_save($item);
 
   $item = array(
+    'link_title' => 'Help',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 60,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+  $item = array(
     'link_title' => 'Logout',
     'link_path' => 'user/logout',
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 50,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Privacy Settings',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
+    'weight' => 40,
+    'language' => 'en',
+  );
+  menu_link_save($item);
+
+  $item = array(
+    'link_title' => 'Change Password',
+    'link_path' => '<front>',
+    'menu_name' => 'space-links',
+    'plid' => $mlid,
+    'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 30,
     'language' => 'en',
   );
@@ -809,6 +1051,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 20,
     'language' => 'en',
   );
@@ -820,6 +1063,7 @@ function kaveret_menus_setup() {
     'menu_name' => 'space-links',
     'plid' => $mlid,
     'customized' => TRUE,
+    'expanded' => TRUE,
     'weight' => 10,
     'language' => 'en',
   );

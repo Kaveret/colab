@@ -19,12 +19,17 @@ class kaveret_accounting_transaction_description extends views_handler_field {
     $payee = user_load($transaction->payee);
 
     $variables = array(
-      '@payer' => $payer->name,
-      '@payee' => $payee->name,
-      '@quantity' => $values->field_worth[0]['rendered']['#quantity'],
-      '@currency' => $values->field_worth[0]['rendered']['#currcode'],
+      'currcode' => $values->field_worth[0]['rendered']['#currcode'],
+      'quantity' => $values->field_worth[0]['rendered']['#quantity'],
+    );
+    $amount = theme('worth_item', $variables);
+
+    $variables = array(
+      '@payer' => format_username($payer),
+      '@payee' => format_username($payee),
+      '!amount' => $amount,
     );
 
-    return t('@payer paid @quantity@currency to @payee', $variables);
+    return t('@payer paid !amount to @payee', $variables);
   }
 }

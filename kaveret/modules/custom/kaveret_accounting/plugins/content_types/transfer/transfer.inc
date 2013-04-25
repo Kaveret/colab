@@ -24,7 +24,12 @@ function kaveret_accounting_transfer_content_type_render($subtype, $conf, $args,
 
   // Get the Beez balance.
   $totals = transaction_totals($account->uid, 'bz');
-  $block->title = '<span class="title">' . t('Transfer') . '</span> <span class="balance">' . t('My Beez: <span class="symbol">BZ</span> <span class="amount">@amount</span>', array('@amount' => $totals->balance)). '</span>';
+  $variables = array(
+    'currcode' => 'bz',
+    'quantity' => $totals->balance,
+  );
+  $balance = theme('worth_item', $variables);
+  $block->title = '<span class="title">' . t('Transfer') . '</span> <span class="balance">' . t('My Beez: !balance', array('!balance' => $balance)). '</span>';
 
   $form = mcapi_get_form('1stparty');
 

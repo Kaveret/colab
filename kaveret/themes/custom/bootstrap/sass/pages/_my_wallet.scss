@@ -1,5 +1,10 @@
 .page-my-wallet {
 
+  .control-group {
+    clear: both;
+    margin-bottom: 0px;
+  }
+
   #my-wallet-panel {
     margin-top: 10px;
 
@@ -10,6 +15,12 @@
         border: 1px solid #fddda2;
         @include rounded-corners(10px, 10px, 0, 0);
         padding: 0 20px;
+      }
+      .field-type-worth-field, .form-type-user-chooser-few, .form-type-textfield {
+
+        .control-label {
+         margin-top: 10px;
+        }
       }
 
       .pane-title {
@@ -39,6 +50,7 @@
       }
 
       .controls {
+        margin-top: 5px;
         float: right; // LTR
       }
 
@@ -56,7 +68,7 @@
       }
 
       .form-item-direction {
-        height: 30px;
+        height: 40px;
         margin-bottom: 0;
 
         .form-required {
@@ -83,7 +95,6 @@
         input {
           vertical-align: middle;
           margin: 4px 5px;
-          float: right;
         }
       }
 
@@ -91,7 +102,6 @@
         height: 30px;
         line-height: 30px;
         float: right; // LTR
-        margin-top: -5px;
 
         .code {
           margin-right: 3px; // LTR
@@ -103,6 +113,7 @@
       }
 
       .control-label {
+        float: left;
         width: 88px;
         text-align: right; //LTR
         padding-right: 10px; //LTR
@@ -114,7 +125,7 @@
         text-align: right; //LTR
 
         .btn.form-submit {
-          margin: 0;
+          margin: 7px 0 0 0;
         }
       }
     }

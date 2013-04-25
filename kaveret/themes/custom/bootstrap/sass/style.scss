@@ -30,3 +30,22 @@ body {
 html.js input.form-autocomplete {
   background-position: 100% 8px;
 }
+
+.pane-offers-requests-panel-pane-1 {
+  article.node-teaser {
+    margin: 20px 5px 0;
+  }
+}
+.pane-my-content-panel-pane-my-content {
+  padding-left: 10px; // LTR
+  border-left: 2px solid #999; // LTR
+}
+.pane-offers-requests-panel-pane-1 .field-items {
+    margin-bottom: 5px;
+    margin-top: 5px;
+
+    h3 {
+      line-height: 20px;
+    }
+}
+

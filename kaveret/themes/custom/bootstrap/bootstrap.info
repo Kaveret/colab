@@ -17,8 +17,11 @@ stylesheets[all][] = bootstrap/css/app.css
 stylesheets[all][] = bootstrap/css/prettyCheckable.css
 stylesheets[all][] = bootstrap/css/style.css
 stylesheets[all][] = css/style.css
+#stylesheets[all][] = bootstrap/css/docs.css
 
+scripts[] = js/switch.js
 
+plugins[panels][layouts] = layouts
 
 settings[toggle_name] = 0
 settings[toggle_search] = 1

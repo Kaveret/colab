@@ -13,7 +13,7 @@ function kaveret_accounting_default_page_manager_pages() {
   $page->api_version = 1;
   $page->name = 'my_wallet';
   $page->task = 'page';
-  $page->admin_title = 'My Wallet';
+  $page->admin_title = 'My Treasure';
   $page->admin_description = '';
   $page->path = 'my-wallet';
   $page->access = array(

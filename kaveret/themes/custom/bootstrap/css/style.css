@@ -148,6 +148,42 @@
     left: -20px;
   }
 }
+.dropdown-submenu ul {
+  list-style: none;
+}
+
+.pane-right-sidebar-menu {
+  padding-left: 10px;
+  border-left: 2px solid #ddd;
+}
+.pane-right-sidebar-menu h3 {
+  line-height: 30px;
+  margin: 0;
+  color: #ab1516;
+  font-size: 16px;
+}
+.pane-right-sidebar-menu ul {
+  list-style: none;
+  margin: 0;
+}
+.pane-right-sidebar-menu .icon-plus {
+  background: url("../images/plus_img.png");
+  margin-right: 5px;
+}
+.pane-right-sidebar-menu .right_sidebar_menu-link {
+  color: #0088cc;
+}
+.pane-right-sidebar-menu .right_sidebar_menu-more {
+  color: #0088cc;
+}
+.pane-right-sidebar-menu .right_sidebar_menu-no_result {
+  font-size: 13px;
+  color: #999999;
+}
+.pane-right-sidebar-menu .requests {
+  padding-top: 15px;
+}
+
 #navbar .nav {
   float: right;
 }
@@ -264,6 +300,10 @@ body.not-logged-in #navbar .logo {
 
 .region-navigation {
   margin-left: 150px;
+}
+
+.navbar-static-top {
+  margin-bottom: 15px;
 }
 
 form .control-group a {
@@ -501,6 +541,23 @@ e.g. multipage*/
   clear: both;
 }
 
+.dropdown-submenu > a:after {
+  display: block;
+  float: right;
+  width: 0;
+  height: 0;
+  margin: 5px 10px 0px;
+  border-color: transparent;
+  border-left-color: #cccccc;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  content: " ";
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
 .region-sidebar-second a {
   color: #525252;
 }
@@ -559,6 +616,10 @@ article.node-teaser .field-name-body {
   padding: 0;
 }
 
+.page-my-wallet .control-group {
+  clear: both;
+  margin-bottom: 0px;
+}
 .page-my-wallet #my-wallet-panel {
   margin-top: 10px;
 }
@@ -572,6 +633,9 @@ article.node-teaser .field-name-body {
   -khtml-border-radius: 10px 10px 0 0;
   border-radius: 10px 10px 0 0;
   padding: 0 20px;
+}
+.page-my-wallet #my-wallet-panel .panel-pane .field-type-worth-field .control-label, .page-my-wallet #my-wallet-panel .panel-pane .form-type-user-chooser-few .control-label, .page-my-wallet #my-wallet-panel .panel-pane .form-type-textfield .control-label {
+  margin-top: 10px;
 }
 .page-my-wallet #my-wallet-panel .panel-pane .pane-title {
   margin: 0;
@@ -597,6 +661,7 @@ article.node-teaser .field-name-body {
   display: inline-block;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .controls {
+  margin-top: 5px;
   float: right;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form input, .page-my-wallet #my-wallet-panel #mcapi-forms-form select {
@@ -610,7 +675,7 @@ article.node-teaser .field-name-body {
   width: 194px;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction {
-  height: 30px;
+  height: 40px;
   margin-bottom: 0;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction .form-required {
@@ -632,13 +697,11 @@ article.node-teaser .field-name-body {
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .form-item-direction input {
   vertical-align: middle;
   margin: 4px 5px;
-  float: right;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .worth-widget {
   height: 30px;
   line-height: 30px;
   float: right;
-  margin-top: -5px;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .worth-widget .code {
   margin-right: 3px;
@@ -647,6 +710,7 @@ article.node-teaser .field-name-body {
   margin: 0;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .control-label {
+  float: left;
   width: 88px;
   text-align: right;
   padding-right: 10px;
@@ -657,7 +721,7 @@ article.node-teaser .field-name-body {
   text-align: right;
 }
 .page-my-wallet #my-wallet-panel #mcapi-forms-form .actions .btn.form-submit {
-  margin: 0;
+  margin: 7px 0 0 0;
 }
 
 .pane-beez-info ul {
@@ -709,4 +773,21 @@ body {
 
 html.js input.form-autocomplete {
   background-position: 100% 8px;
+}
+
+.pane-offers-requests-panel-pane-1 article.node-teaser {
+  margin: 20px 5px 0;
+}
+
+.pane-my-content-panel-pane-my-content {
+  padding-left: 10px;
+  border-left: 2px solid #999;
+}
+
+.pane-offers-requests-panel-pane-1 .field-items {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.pane-offers-requests-panel-pane-1 .field-items h3 {
+  line-height: 20px;
 }
