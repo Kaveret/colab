@@ -1,0 +1,13 @@
+.page-directory {
+
+  .view-directory .views-rows {
+    width: 280px;
+    float: left; //LTR
+    margin-left: 10px; //LTR
+
+    &:nth-child(3n + 1) {
+      clear: left; //LTR
+      margin-left: 0; //LTR
+    }
+  }
+}

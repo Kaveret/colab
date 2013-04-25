@@ -1,0 +1,17 @@
+<?php
+/**
+ * @file
+ * Code for the Kaveret page feature.
+ */
+
+include_once 'kaveret_page.features.inc';
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function kaveret_page_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools') {
+    return 'plugins/' . $plugin;
+  }
+}
+

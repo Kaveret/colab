@@ -1,0 +1,13 @@
+Unique ID,Menu name,Title,Language,Path,Link weight,Parent,Class
+menuLink1,side-menu,Resource Exchange,en,resource-exchange,10,,main|resources
+menuLink2,side-menu,My Treasure,en,my-wallet,20,menuLink1
+menuLink3,side-menu,Directory,en,directory,30,menuLink1
+menuLink4,side-menu,Dreams Accelerator,en,dreams-accelerator,40,,main|dreams
+menuLink5,side-menu,Learning Center,en,learning-center,50,,main|learning-center
+menuLink6,side-menu,Groups,en,groups,60,,main|communities
+menuLink7,side-menu,החלפת משאבים,he,resource-exchange,10,,main|resources
+menuLink8,side-menu,החשבון שלי,he,my-wallet,20,menuLink7
+menuLink9,side-menu,מדריך מסווג,he,directory,30,menuLink7
+menuLink10,side-menu,מאיץ החלומות,he,dreams-accelerator,40,,main|dreams
+menuLink11,side-menu,Learning Center,he,learning-center,50,,main|learning-center
+menuLink12,side-menu,קבוצות,he,groups,60,,main|communities

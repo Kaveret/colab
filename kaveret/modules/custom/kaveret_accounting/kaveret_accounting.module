@@ -52,20 +52,21 @@ function kaveret_accounting_mcapicurrencies_default_alter(&$currencies) {
       'currcode' => 'bz',
     ),
     'human_name' => 'Bees',
+    'issuance' => 'acknowledgement',
     'uid' => '1',
     'reservoir' => '1',
     'display' => array(
       'divisions' => '0',
+      'delimiter' => ':',
       'divisions_setting' => '0|/.
 25|1/4
 50|1/2
 75|3/4',
-      'delimiter' => ':',
-      'format' => '<span class="code">BZ</span><span class="quantity">[quantity]</span>',
+      'format' => '<span class="code">BZ</span> <span class="quantity">[quantity]</span>',
       'zero' => '',
     ),
     'additional_settings' => array(
-      'additional_settings__active_tab' => 'edit-access',
+      'additional_settings__active_tab' => 'edit-access-operations',
     ),
     'access' => array(
       'membership' => 'user_chooser_segment_perms:transact',
@@ -79,6 +80,9 @@ function kaveret_accounting_mcapicurrencies_default_alter(&$currencies) {
         'transaction_access_callback_payee' => 0,
         'transaction_access_callback_payer' => 0,
         'transaction_access_callback_open' => 0,
+        'transaction_access_callback_creator' => 0,
+        'transaction_access_callback_signatory' => 0,
+        'transaction_access_callback_pending_signatory' => 0,
       ),
       0 => array(
         'transaction_access_callback_perm_transact' => 0,
@@ -86,6 +90,19 @@ function kaveret_accounting_mcapicurrencies_default_alter(&$currencies) {
         'transaction_access_callback_payee' => 0,
         'transaction_access_callback_payer' => 0,
         'transaction_access_callback_open' => 0,
+        'transaction_access_callback_creator' => 0,
+        'transaction_access_callback_signatory' => 0,
+        'transaction_access_callback_pending_signatory' => 0,
+      ),
+      -1 => array(
+        'transaction_access_callback_perm_manage_all' => 'transaction_access_callback_perm_manage_all',
+        'transaction_access_callback_signatory' => 'transaction_access_callback_signatory',
+        'transaction_access_callback_perm_transact' => 0,
+        'transaction_access_callback_payee' => 0,
+        'transaction_access_callback_payer' => 0,
+        'transaction_access_callback_open' => 0,
+        'transaction_access_callback_creator' => 0,
+        'transaction_access_callback_pending_signatory' => 0,
       ),
     ),
     'access_operations' => array(
@@ -95,14 +112,150 @@ function kaveret_accounting_mcapicurrencies_default_alter(&$currencies) {
         'transaction_access_callback_payee' => 0,
         'transaction_access_callback_payer' => 0,
         'transaction_access_callback_open' => 0,
+        'transaction_access_callback_creator' => 0,
+        'transaction_access_callback_signatory' => 0,
+        'transaction_access_callback_pending_signatory' => 0,
+      ),
+      'sign' => array(
+        'transaction_access_callback_payee' => 'transaction_access_callback_payee',
+        'transaction_access_callback_payer' => 'transaction_access_callback_payer',
+        'transaction_access_callback_perm_transact' => 0,
+        'transaction_access_callback_perm_manage_all' => 0,
+        'transaction_access_callback_open' => 0,
+        'transaction_access_callback_creator' => 0,
+        'transaction_access_callback_signatory' => 0,
+        'transaction_access_callback_pending_signatory' => 0,
+      ),
+      'undo_pending' => array(
+        'transaction_access_callback_perm_transact' => 0,
+        'transaction_access_callback_perm_manage_all' => 0,
+        'transaction_access_callback_payee' => 0,
+        'transaction_access_callback_payer' => 0,
+        'transaction_access_callback_open' => 0,
+        'transaction_access_callback_creator' => 0,
+        'transaction_access_callback_signatory' => 0,
+        'transaction_access_callback_pending_signatory' => 0,
+      ),
+      'signoff' => array(
+        'transaction_access_callback_perm_transact' => 0,
+        'transaction_access_callback_perm_manage_all' => 0,
+        'transaction_access_callback_payee' => 0,
+        'transaction_access_callback_payer' => 0,
+        'transaction_access_callback_open' => 0,
+        'transaction_access_callback_creator' => 0,
+        'transaction_access_callback_signatory' => 0,
+        'transaction_access_callback_pending_signatory' => 0,
       ),
     ),
     'buttons' => array(
-      'delete' => 'Delete',
+      'delete' => 'Revert',
+    ),
+    'limits' => array(
+      'limits_callback' => 'limits_global',
+      'limits_global' => array(
+        'min' => '-500',
+        'max' => '',
+      ),
+      'personal' => 0,
+      'skip' => array(
+        'auto' => 'auto',
+        'reservoir' => 'reservoir',
+        'mass' => 0,
+        'user1' => 0,
+        'owner' => 0,
+      ),
     ),
   );
-
+  
   // Override the other default currencies.
   $currencies = array($mcapicurrency->currcode => $mcapicurrency);
   return $currencies;
+}
+
+/**
+ * Implements hook_user_insert().
+ *
+ * Add Beez to a new user.
+ */
+function kaveret_accounting_user_insert(&$edit, $account, $category) {
+  kaveret_accounting_balances_member($account->uid ,'bz' ,'auto' ,300 ,0);
+
+}
+
+/**
+ * Credit a user with Beez from the Federal Reservoir.
+ *
+ * @param $uid
+ *   The user ID.
+ * @param $currcode
+ *   The currency code.
+ * @param $type
+ *   The transaction event.
+ * @param $balance
+ *   The credit amount.
+ * @param $gross_income
+ *   The bruto income.
+ */
+function kaveret_accounting_balances_member($uid, $currcode, $type, $balance, $gross_income = 0) {
+  $currency = currency_load($currcode);
+  $transactions = array();
+  $values = array(
+    'type' => $type,
+    'state' => TRANSACTION_STATE_FINISHED,
+    'currcode' => $currcode
+  );
+
+
+  $reservoir_account = user_load_by_name('Federal Reverse');
+  $currency->reservoir = $reservoir_account->uid;
+
+  if ($gross_income) {
+    $gross_expenditure = $gross_income - $balance;
+    $in = $values;
+    $out = clone($values);
+    $in['quantity'] = $gross_expenditure;
+    $in['payer'] = $currency->reservoir;
+    $in['payee'] = $uid;
+    $transactions[] =  entity_create('transaction', $in);
+    $out['quantity'] = $gross_income;
+    $out['payer'] = $uid;
+    $out['payee'] = $currency->reservoir;
+    if ($desc_field = variable_get('transaction_description_field', '')) {
+      $in['description'] = t("Gross income");
+      $out['description'] = t("Gross expenditure");
+    }
+    $transactions[] =  entity_create('transaction', $out);
+  }
+  elseif ($balance != 0) {//if there is only balance, we do one exchange, which is simply + balance
+    if ($balance > 0) {
+      $values['payer'] = $currency->reservoir;
+      $values['payee'] = $uid;
+      $values['quantity'] = $balance;
+    }
+    else {
+      $values['payer'] = $uid;
+      $values['payee'] = $currency->reservoir;
+      $values['quantity'] = -$balance;
+    }
+    if ($desc_field = variable_get('transaction_description_field', '')) {
+      $values['description'] = t("Carried Forward");
+    }
+    $transactions[] = entity_create('transaction', $values);
+  }
+  if ($transactions) {
+    transaction_cluster_write($transactions, TRUE);
+  }
+}
+
+/**
+ * Implements hook_username_alter().
+ *
+ * Change reservoir user name in Hebrew.
+ */
+function kaveret_accounting_username_alter(&$name, $account) {
+  global $language;
+
+  if ($language->language == 'he' && $account->name == 'Federal Reverse') {
+    $name = 'אוצר קהילה';
+  }
 }

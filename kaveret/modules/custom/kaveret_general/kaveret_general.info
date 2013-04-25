@@ -2,8 +2,9 @@ name = Kaveret general
 core = 7.x
 package = Kaveret
 php = 5.2.4
-
-package = Kaveret
+dependencies[] = ctools
 dependencies[] = image
+dependencies[] = panels_mini
+features[ctools][] = panels_mini:panels_default:1
 features[features_api][] = api:1
-features[image][] = user_picture
+features[panels_mini][] = navbar

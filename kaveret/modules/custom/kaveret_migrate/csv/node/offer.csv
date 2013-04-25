@@ -1,3 +1,3 @@
-Unique ID,Community,Title,Category,Delete after,Body,Image
-offer1,community1,Large amounts of honey,Category1,+1 week,"Will accept payment in bees or more honey. Please contact Tigger",poo.jpg
-offer2,community1,Beehive guards looking for work,Category2,+2 days,"Highly experienced, references from the Queen Bee. Will accept payment in Beez or USD",maya.jpg
+Unique ID,Community,Title,Category,Delete after,Body,Image,Language
+offer1,community1,Large amounts of honey,Miscellaneous,+1 week,"Will accept payment in bees or more honey. Please contact Tigger",poo.jpg,en
+offer2,community1,Beehive guards looking for work,Outdoors,+2 days,"Highly experienced, references from the Queen Bee. Will accept payment in Beez or USD",maya.jpg,en

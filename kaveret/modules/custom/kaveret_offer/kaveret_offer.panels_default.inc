@@ -45,14 +45,13 @@ function kaveret_offer_default_panels_mini() {
     $pane = new stdClass();
     $pane->pid = 'new-1';
     $pane->panel = 'middle';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'my_content-panel_pane_my_content';
+    $pane->type = 'right_sidebar_menu';
+    $pane->subtype = 'right_sidebar_menu';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'context' => array(
-        0 => 'context_user_1',
-      ),
+      'override_title' => 0,
+      'override_title_text' => '',
     );
     $pane->cache = array();
     $pane->style = array(

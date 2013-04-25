@@ -1,0 +1,148 @@
+#navbar {
+
+  .nav {
+    float: right; // LTR
+  }
+
+  .logo {
+    float: left; //LTR
+
+    body.not-logged-in & {
+      margin-top: 11px;
+    }
+  }
+
+  .content-search {
+
+    #edit-search-block-form--2 {
+      margin-top: -5px;
+      margin-left: 20px; // LTR
+      width: 260px;
+      @include rounded-corners(0, 0, 0 ,0);
+    }
+    .btn {
+      margin-top: -5px;
+    }
+  }
+
+  #user-login-form {
+
+    a {
+      color: #143175;
+    }
+
+    .col-first,
+    .col-middle {
+      float: left; // LTR
+    }
+
+    .col-middle {
+      width: 205px;
+    }
+
+    .control-group{
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      font-size: 13px;
+      margin-left: 10px; // LTR
+      padding: 0;
+      list-style: none;
+
+      li {
+        line-height: 17px;
+      }
+    }
+
+    .form-text {
+      margin: 0;
+      width: 180px;
+      height: 20px;
+      @include rounded-corners(0, 0, 0 ,0);
+    }
+
+    #edit-name,
+    #edit-pass {
+      float: left; // LTR
+    }
+
+    #edit-name {
+      margin-left: 30px; // LTR
+    }
+
+    #edit-pass {
+      margin-left: 10px; // LTR
+    }
+
+    // Login button
+    .btn {
+      background: #b11918;
+      color: #fff;
+      margin-top: 0;
+      margin-left: 10px; // LTR
+      padding: 0;
+      float: left;
+      width: 70px;
+      height: 30px;
+      border: 1px solid #000000;
+      @include rounded-corners(0, 0, 0 ,0);
+    }
+  }
+
+  .facebook-action-connect {
+    float: left; // LTR
+  }
+
+  .navbar-inner {
+    padding-top: 30px;
+    background-color: #fdf4e5;
+    margin-bottom: 0;
+    border: none;
+
+    .pane-menu-space-menu {
+
+      .dropdown-toggle,
+      .active {
+        margin-left: 10px; //LTR
+        background-color: #f9ab17;
+        padding: 5px;
+        color: white;
+        font-weight: bold;
+        text-transform: none;
+
+        .caret {
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+  .pane-user-picture {
+    margin-left: -10px; // LTR
+    float: right;
+
+    img {
+      width: 37px;
+      height: 37px;
+    }
+  }
+  .pane-fboauth-login {
+
+    img {
+      width: 100px;
+      height: 30px;
+    }
+  }
+}
+
+.region-navigation {
+  margin-left: 150px;
+}
+
+.navbar-static-top {
+  margin-bottom: 15px;
+}
+

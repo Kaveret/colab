@@ -12,60 +12,19 @@
 
       <div class="nav-collapse collapse">
         <nav role="navigation">
-          <div class="social-links <?php print $pull_class; ?>">
-            <?php print render($social_links); ?>
-          </div>
-
-          <?php if (!empty($page['navigation'])): ?>
-            <?php print render($page['navigation']); ?>
-          <?php endif; ?>
-
           <div class="logo <?php print $alter_pull_class; ?>">
             <?php print $logo; ?>
           </div>
-
-          <div class="space-menu <?php print $alter_pull_class; ?>">
-            <?php print render($space_menu); ?>
-          </div>
-
-        </nav>
-      </div>
-    </div>
-  </div>
-</header>
-
-<header id="navbar-second" role="banner" class="navbar navbar-static-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <div class="nav-collapse collapse">
-        <nav role="navigation">
-          <?php if (!empty($username)): ?>
-            <div class="user-details <?php print $pull_class; ?>">
-              <?php if (!empty($user_picture)): ?>
-                <div class="user-picture <?php print $pull_class; ?>">
-                  <?php print $user_picture; ?>
-                </div>
-              <?php endif; ?>
-              <div class="username"><?php print $username; ?></div>
-            </div>
-          <?php endif; ?>
-
-          <div class="navigation-menu <?php print $pull_class; ?>">
-            <?php print render($navigation_menu); ?>
-          </div>
-
-          <?php print render($secondary_nav); ?>
-
-          <?php if(!empty($facebook_connect)): ?>
-            <div class="facebook-connect <?php print $alter_pull_class; ?>">
-              <?php print $facebook_connect; ?>
-            </div>
+          <?php if (!empty($page['navigation'])): ?>
+            <?php print render($page['navigation']); ?>
           <?php endif; ?>
         </nav>
       </div>
     </div>
   </div>
 </header>
+
+
 
 <nav id="main-menu">
   <?php print render($primary_nav); ?>
@@ -97,6 +56,7 @@
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
 
+      <h1> <?php print $title; ?> </h1>
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>
       <?php if (!empty($tabs)): ?>
