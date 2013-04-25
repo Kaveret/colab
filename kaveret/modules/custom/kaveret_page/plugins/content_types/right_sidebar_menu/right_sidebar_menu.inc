@@ -57,7 +57,7 @@ function kaveret_page_right_sidebar_menu_content_type_render($subtype, $conf, $a
   else {
 
     $output .= '<h3>' . t('My Offers') . '</h3>';
-    $output .= '<p class="right_sidebar_menu-no_result">' . t('You haven\'t created any offer yet.') . ' </p>';
+    $output .= '<p class="right_sidebar_menu-no_result">' . t('You haven\'t created any offers yet.') . ' </p>';
     $output .= l('<span class="icon-plus"></span>' . t('Create a new offer'),'node/add/offer', array('html' => TRUE, 'attributes' => array('class' => array('right_sidebar_menu-link'))));
   }
   $output .= '</div>';
@@ -77,7 +77,7 @@ function kaveret_page_right_sidebar_menu_content_type_render($subtype, $conf, $a
   else {
 
     $output .= '<h3>' . t('My Requests') . '</h3>';
-    $output .= '<p class="right_sidebar_menu-no_result">' . t('You haven\'t created any request yet.') . ' </p>';
+    $output .= '<p class="right_sidebar_menu-no_result">' . t('You haven\'t created any requests yet.') . ' </p>';
     $output .= l('<span class="icon-plus"></span>' . t('Create a new request'),'node/add/request', array('html' => TRUE, 'attributes' => array('class' => array('right_sidebar_menu-link'))));
   }
   $output .= '</div>';
