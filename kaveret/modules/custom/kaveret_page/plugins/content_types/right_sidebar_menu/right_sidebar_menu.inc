@@ -94,7 +94,7 @@ function kaveret_page_right_sidebar_normalize_menu($result) {
   $items = array();
   foreach ($result['node'] as $info) {
     $wrapper = entity_metadata_wrapper('node', $info->nid);
-    $items[] = l( t($wrapper->label()), 'node/' . $info->nid);
+    $items[] = l(t($wrapper->label()), 'node/' . $info->nid);
   }
   return $items;
 }

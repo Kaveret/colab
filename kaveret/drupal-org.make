@@ -125,18 +125,6 @@ projects[purl][version] = "1.x-dev"
 projects[rules][subdir] = "contrib"
 projects[rules][version] = "2.3"
 
-projects[search_api_db][subdir] = "contrib"
-projects[search_api_db][version] = "1.0-beta4"
-projects[search_api_db][patch][] = "http://drupal.org/files/search_api_db-revert-exportables-temporary-fix-1414078-10.patch"
-projects[search_api_db][patch][] = "http://drupal.org/files/fix-indexing-of-removed-fields-1346846-16.patch"
-projects[search_api_db][patch][] = "http://drupal.org/files/search_api_db-unknown_column_value-1805640-9.patch"
-
-projects[search_api][subdir] = "contrib"
-projects[search_api][version] = "1.3"
-
-projects[search_api_solr][subdir] = "contrib"
-projects[search_api_solr][version] = "1.0-beta4"
-
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
 
