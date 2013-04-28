@@ -99,6 +99,7 @@ projects[mutual_credit][subdir] = "contrib"
 projects[mutual_credit][version] = 3.x-dev
 projects[mutual_credit][patch][] = "http://drupal.org/files/default_object-1951306-1.patch"
 projects[mutual_credit][patch][] = "http://drupal.org/files/default_object_and_notices-1965330-1.patch"
+projects[mutual_credit][patch][] = "http://drupal.org/files/missing_php10-1966383-1.patch"
 
 projects[nodequeue][subdir] = "contrib"
 projects[nodequeue][version] = "2.0-beta1"
