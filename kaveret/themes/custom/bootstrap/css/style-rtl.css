@@ -149,20 +149,18 @@ div.contextual-links-wrapper {
 
 #navbar .dropdown-menu {
   right: 0;
+  left: auto;
 }
 
 .navbar .nav > li > .dropdown-menu:before,
 .navbar .nav > li > .dropdown-menu:after {
-  left: 230px;
+  left: auto;
+  right: 5px
 }
 
 .region-navigation {
   margin-left: 0;
   margin-right: 150px;
-}
-
-.dropdown-menu {
-  min-width: 250px;
 }
 
 .dropdown-submenu > a:after {
