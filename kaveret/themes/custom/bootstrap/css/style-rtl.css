@@ -193,3 +193,10 @@ div.contextual-links-wrapper {
   background-position: 8px 8px;
 }
 
+.pane-right-sidebar-menu {
+  padding-left: 0;
+  border-left: 0;
+  padding-right: 10px;
+  border-right: 2px solid #ddd;
+}
+
