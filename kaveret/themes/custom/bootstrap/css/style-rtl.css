@@ -153,11 +153,7 @@ div.contextual-links-wrapper {
 
 .navbar .nav > li > .dropdown-menu:before,
 .navbar .nav > li > .dropdown-menu:after {
-  left: 140px;
-}
-
-#navbar .dropdown-menu .active {
-  margin-right: 12px;
+  left: 230px;
 }
 
 .region-navigation {
@@ -165,8 +161,17 @@ div.contextual-links-wrapper {
   margin-right: 150px;
 }
 
+.dropdown-menu {
+  min-width: 250px;
+}
+
 .dropdown-submenu > a:after {
   float: left;
+}
+
+.dropdown-menu li > a {
+  padding: 3px 10px;
+  display: inline-block;
 }
 
 .panel-2col-stacked .panel-col-first {
