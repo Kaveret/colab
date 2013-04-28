@@ -271,20 +271,6 @@ body.not-logged-in #navbar .logo {
   margin-bottom: 0;
   border: none;
 }
-#navbar .navbar-inner .pane-menu-space-menu .dropdown-toggle,
-#navbar .navbar-inner .pane-menu-space-menu .active {
-  margin-left: 10px;
-  background-color: #f9ab17;
-  padding: 5px;
-  color: white;
-  font-weight: bold;
-  text-transform: none;
-}
-#navbar .navbar-inner .pane-menu-space-menu .dropdown-toggle .caret,
-#navbar .navbar-inner .pane-menu-space-menu .active .caret {
-  display: block;
-  margin: 0 auto;
-}
 #navbar .pane-user-picture {
   margin-left: -10px;
   float: right;
@@ -304,6 +290,47 @@ body.not-logged-in #navbar .logo {
 
 .navbar-static-top {
   margin-bottom: 15px;
+}
+
+.pane-menu-space-menu .dropdown .caret {
+  display: block;
+  margin: 0 auto;
+}
+.pane-menu-space-menu .dropdown .dropdown-toggle:hover {
+  background-color: #f9ab17;
+}
+.pane-menu-space-menu .dropdown-submenu a {
+  font-size: 13px;
+}
+.pane-menu-space-menu .dropdown-menu a {
+  font-size: 13px;
+}
+
+.navbar .nav li.dropdown.open > .dropdown-toggle {
+  background-color: #f9ab17 !important;
+}
+
+.navbar .nav .dropdown-toggle .caret {
+  margin-top: 0px;
+}
+
+.pane-menu-space-menu .pane-content .nav .dropdown-toggle {
+  margin-left: 10px;
+  background-color: #f9ab17;
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+  text-transform: none;
+}
+
+.pane-menu-space-menu .pane-content .dropdown-submenu .dropdown-toggle {
+  margin-left: 10px;
+  background-color: transparent;
+  background: none;
+  padding: 5px;
+  color: #8D8D8D;
+  font-weight: bold;
+  text-transform: none;
 }
 
 form .control-group a {
