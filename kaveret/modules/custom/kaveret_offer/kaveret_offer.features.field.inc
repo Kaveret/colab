@@ -974,7 +974,7 @@ function kaveret_offer_field_default_fields() {
       'bundle' => 'offer',
       'default_value' => array(
         0 => array(
-          'target_id' => '14',
+          'target_id' => '15',
         ),
       ),
       'default_value_function' => '',
@@ -1766,7 +1766,7 @@ function kaveret_offer_field_default_fields() {
       'bundle' => 'request',
       'default_value' => array(
         0 => array(
-          'target_id' => '14',
+          'target_id' => '15',
         ),
       ),
       'default_value_function' => '',
