@@ -167,11 +167,6 @@ div.contextual-links-wrapper {
   float: left;
 }
 
-.dropdown-menu li > a {
-  padding: 3px 10px;
-  display: inline-block;
-}
-
 .panel-2col-stacked .panel-col-first {
   float: right;
 }
